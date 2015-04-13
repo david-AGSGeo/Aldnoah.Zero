@@ -1,0 +1,366 @@
+// Pre-Processor Directives
+#include "initialise.h"
+
+__CONFIG(FOSC_HS &  WDTE_OFF & CP_OFF & BOREN_OFF & PWRTE_ON & WRT_OFF & LVP_OFF & CPD_OFF);
+
+
+#define _XTAL_FREQ 20000000  //Osillator (Hz)
+#define TMR0_VAL 100	     //timer0 start count
+
+//global variables
+
+
+#define LED0 RB0			// Defines the LED that toggles at 1Hz
+
+volatile bit RTC_FLAG_1MS = 0;
+volatile bit RTC_FLAG_10MS = 0;
+volatile bit RTC_FLAG_50MS = 0;
+volatile bit RTC_FLAG_125MS = 0;
+volatile bit RTC_FLAG_500MS = 0;
+
+volatile unsigned int RTC_Counter = 0;
+
+// The Interrupt Routine that toggles the LED
+void interrupt isr1(void) 
+{
+	//The timer used is Timer1
+	if(TMR0IF)
+	{
+		TMR0IF = 0;
+		TMR0 = TMR0_VAL;
+
+		RTC_Counter++;
+		//set clock flags
+		RTC_FLAG_1MS = 1;
+		if(RTC_Counter % 10 == 0) RTC_FLAG_10MS = 1;
+		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
+		if(RTC_Counter % 125 == 0) RTC_FLAG_125MS = 1;
+		if(RTC_Counter % 500 == 0) 
+		{
+			RTC_FLAG_500MS = 1;
+			RTC_Counter = 0;	
+			LED0 ^= 0x01;
+		}
+	}
+}
+
+//Infrared Routine - gets value and converts it
+
+void infrared()
+{
+	double adcVals = 0;
+	double total = 0;
+	int i;
+	i = 0;		
+
+	while (RTC_FLAG_125MS == 0)
+	{
+		i++;
+		total = total + adc_read_channel(0);
+	}
+	
+	RTC_FLAG_125MS = 0;
+	total = total/i;
+	adcValue = total;
+	
+	value = value/202;
+
+	// These IF statements convert the voltage value to distance
+	// Each IF statement corresponds to an averaged section of the graph in lecture slides
+	
+	if (value >= 2.5 && value < 3)
+	{
+		value = 20 - 20*(value - 2.5);
+	}	
+	else if (value >= 2 && value < 2.5)
+	{
+		value = 30 - 20*(value - 2);
+	}
+	else if (value >= 1.5 && value < 2)
+	{
+		value = 40 - 20*(value - 1.5);
+	}	
+	else if (value >= 1.25 && value < 1.5)
+	{
+		value = 50 - 40*(value - 1.25);
+	}	
+	else if (value >= 0.9 && value < 1.25)
+	{
+		value = 70 - 40*(value - 0.9);
+	}	
+	else if (value >= 0.65 && value < 0.9)
+	{
+		value = 100 - (30/0.25)*(value - 0.65);
+	}	
+	else if (value >= 0.5 && value < 0.65)
+	{
+		value = 140 - (40/0.15)*(value - 0.5);
+	}	
+	
+	
+	// Write Distance and value to the LCD
+	
+	RTC_FLAG_500MS = 0;
+	lcd_move_cursor(0);
+	lcd_write_string("Distance: ");
+
+	lcd_move_cursor(10);
+	lcd_write_4_digit_bcd(total);
+
+	//Write ADC and ADC value to LCD
+
+	lcd_move_cursor(0x40);
+	lcd_write_string("ADC: ");
+
+	lcd_move_cursor(0x4A);
+	lcd_write_4_digit_bcd(adcValue);
+}
+
+// Main Program
+
+void main(void)
+{
+	initialise();
+	initialise_adc();
+	lcd_initialise();
+
+	while(1)
+	{
+		infrared();
+	
+	}
+}
+
+#include "adc.h"
+
+//define frequency at 20MHz
+
+#define _XTAL_FREQ 20000000  //Osillator (Hz)
+
+//Switch statements to switch between channels for use with the IR sensor
+unsigned int adc_read_channel(unsigned char channel)
+{
+	switch(channel)
+	{
+		case 0: 
+				CHS0 = 0;
+				CHS1 = 0;
+				CHS2 = 0;
+				break;
+		case 1: 
+				CHS0 = 1;
+				CHS1 = 0;
+				CHS2 = 0;
+				break;
+		case 2: 
+				CHS0 = 0;
+				CHS1 = 1;
+				CHS2 = 0;
+				break;
+		case 3: 
+				CHS0 = 1;
+				CHS1 = 1;
+				CHS2 = 0;
+				break;
+		case 4: 
+				CHS0 = 0;
+				CHS1 = 0;
+				CHS2 = 1;
+				break;
+
+
+		default: 
+				return 0;
+	}
+
+	__delay_us(50);		
+	
+	return adc_read();
+
+}
+
+//initialise ADC
+
+void initialise_adc(void)
+{
+	//Set PORTA to all inputs
+	PORTA = 0;
+	TRISA = 0b00111111;		
+
+	//set control registers
+	ADCON0 = 0b10100001;	//Fosc/32, Channel 4, ADC on
+	ADCON1 = 0b00000010;	//left justified, PortE Digital, PortA Analogue
+
+	__delay_us(50);						// Delay 
+
+}
+
+
+//Start the ADC conversion and return the value at the end
+
+unsigned int adc_read(void)
+{
+	volatile unsigned int adc_value;
+
+	ADRESH	=	0; 	 	
+
+	GO = 1;				  								
+  	while(GO) continue;			   				
+//	asm("nop");
+//	asm("nop");
+//	asm("nop");		
+		
+
+	adc_value	=	 ADRESH;	
+	adc_value <<=2;
+	adc_value |= ADRESL>>6;
+
+
+  	return (adc_value);     				
+}  
+
+#include "lcd.h"
+
+
+void lcd_write_control(unsigned char databyte)
+{
+	EN = 0;
+	RW = 0;
+	RS = 0;
+	LCD_DATA = databyte;
+	EN = 1;
+	EN = 0;
+	__delay_ms(2);
+}
+
+void lcd_write_data(unsigned char databyte)
+{
+	EN = 0;
+	RW = 0;
+	RS = 1;
+	LCD_DATA = databyte;
+	EN = 1;
+	EN = 0;
+	__delay_ms(1);
+}
+
+//move the LCD cursor
+void lcd_move_cursor(unsigned char address)
+{
+	address |= 0b10000000;		
+	lcd_write_control(address);	
+}
+
+//write characters to the LCD
+void lcd_write_string(char * s)
+{
+	
+	while(*s) lcd_write_data(*s++);
+}
+
+//BCD CONVERSION
+
+//2 Digit
+
+void lcd_write_2_digit_bcd(unsigned char data)
+{
+	unsigned char OnesDigit, TensDigit;
+
+	//load number 
+	OnesDigit = data;
+	TensDigit = 0;
+
+	//Convert	
+	while (OnesDigit >= 10)
+	{
+		OnesDigit = OnesDigit - 10;
+		TensDigit++;
+	}
+	
+	lcd_write_data((unsigned char)TensDigit + 48);
+	lcd_write_data((unsigned char)OnesDigit + 48);
+}
+
+//4 Digit
+//Tried with char but it overflowed - use ints instead
+
+void lcd_write_4_digit_bcd(unsigned int data)
+{
+	unsigned int OnesDigit, TensDigit, HunsDigit, ThousDigit;
+
+	//load number
+	OnesDigit = data;
+	TensDigit = 0;
+	HunsDigit = 0;
+	ThousDigit = 0;
+
+	//Convert	
+	while (OnesDigit >= 1000)
+	{
+		OnesDigit = OnesDigit - 1000;
+		ThousDigit++;
+	}
+	
+	while (OnesDigit >= 100)
+	{
+		OnesDigit = OnesDigit - 100;
+		HunsDigit++;
+	}
+	
+	while (OnesDigit >= 10)
+	{
+		OnesDigit = OnesDigit - 10;
+		TensDigit++;
+	}
+	
+	lcd_write_data((unsigned char)ThousDigit + 48);
+	lcd_write_data((unsigned char)HunsDigit + 48);
+	lcd_write_data((unsigned char)TensDigit + 48);
+	lcd_write_data((unsigned char)OnesDigit + 48);
+}
+
+//initialise LCD
+void lcd_init(void)
+{
+
+
+	//setup ADCON1 register to make PortE Digital
+	ADCON1 = 0b00000010;	//left justified, PortE Digital, PortA Analogue
+
+
+	PORTD = 0;				//set all pins on portd low
+	PORTE = 0;				//set all pins on porte low
+
+	TRISD = 0b00000000;		//set all pins to output
+	TRISE = 0b00000000;		//set all pins to output
+
+	//LCD Initialisation
+	lcd_write_control(0b00000001); //clear display
+	lcd_write_control(0b00111000); //set up display
+	lcd_write_control(0b00001100); //turn display on
+	lcd_write_control(0b00000110); //move to first digit
+	lcd_write_control(0b00000010); //entry mode setup
+
+}
+
+#include "initialise.h"
+
+void initialise()
+{
+	//Set PORTB to all outputs
+	TRISB = 0x00;
+	
+
+	
+	OPTION_REG = 0b00000100;
+
+	//enable timer0 interrupt
+	TMR0IE = 1;
+	
+	ei();
+}
+
+
+
+
+

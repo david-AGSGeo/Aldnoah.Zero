@@ -1,0 +1,24 @@
+___ftneg: CODE, 3111 0 14
+_lcd_write_data: CODE, 3125 0 19
+_init: CODE, 3092 0 8
+_lcd_write_4_digit_bcd: CODE, 3803 0 127
+_lcd_write_control: CODE, 3144 0 20
+_infrared: CODE, 893 0 1155
+___ftpack: CODE, 3552 0 125
+_main: CODE, 3186 0 26
+___lwtoft: CODE, 3212 0 27
+___ftadd: CODE, 567 0 326
+_lcd_set_cursor: CODE, 3100 0 11
+_init_adc: CODE, 3164 0 22
+___lwmod: CODE, 61 0 68
+_adc_read: CODE, 3326 0 51
+_isr1: CODE, 3677 0 126
+___ftmul: CODE, 329 0 238
+___awtoft: CODE, 3282 0 44
+_lcd_write_string: CODE, 24 0 37
+_adc_read_channel: CODE, 3377 0 65
+___fttol: CODE, 3930 0 166
+___ftge: CODE, 3442 0 110
+_lcd_init: CODE, 3239 0 43
+___ftdiv: CODE, 129 0 200
+Total: 3028
