@@ -1,7 +1,7 @@
 
 
 HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
-                                                                                               Mon Mar 30 16:48:56 2015
+                                                                                               Mon Apr 13 15:04:55 2015
 
 HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
      1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
@@ -45,9 +45,9 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
     39  0001                     c	equ	1
     40  0000                     z	equ	0
     41  000A                     pclath	equ	10
-    42                           # 29 "E:\Mechatronics 2\Assignment2\Main.c"
+    42                           # 29 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
     43                           	psect config,class=CONFIG,delta=2 ;#
-    44                           # 29 "E:\Mechatronics 2\Assignment2\Main.c"
+    44                           # 29 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
     45  2007  FF32               	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
     46                           	FNCALL	_main,_init
     47                           	FNCALL	_main,_rotate
@@ -80,7 +80,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
     74                           psect	idataBANK1,class=CODE,space=0,delta=2
     75                           global __pidataBANK1
     76  0003                     __pidataBANK1:
-    77                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+    77                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
     78                           	line	70
     79                           
     80                           ;initializer for _current_step
@@ -102,7 +102,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
     95  0755                     __stringbase:
     96  0755  3400               	retlw	0
     97                           psect	strings
-    98                           	file	"C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+    98                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
     99                           	line	350
    100  0756                     _dpowers:
    101  0756  3401               	retlw	01h
@@ -341,7 +341,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
    334                           psect	dataBANK1,class=BANK1,space=1
    335                           global __pdataBANK1
    336  00D6                     __pdataBANK1:
-   337                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+   337                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
    338                           	line	70
    339  00D6                     _current_step:
    340  00D6                            ds      1
@@ -842,7 +842,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
    833                           
    834 ;; *************** function _main *****************
    835 ;; Defined at:
-   836 ;;		line 385 in file "E:\Mechatronics 2\Assignment2\Main.c"
+   836 ;;		line 385 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
    837 ;; Parameters:    Size  Location     Type
    838 ;;		None
    839 ;; Auto vars:     Size  Location     Type
@@ -870,7 +870,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
    861 ;; This function uses a non-reentrant model
    862 ;;
    863                           psect	maintext
-   864                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+   864                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
    865                           	line	385
    866                           	global	__size_of_main
    867  005A                     	__size_of_main	equ	__end_of_main-_main
@@ -1066,7 +1066,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1052                           
   1053 ;; *************** function _init *****************
   1054 ;; Defined at:
-  1055 ;;		line 195 in file "E:\Mechatronics 2\Assignment2\Main.c"
+  1055 ;;		line 195 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   1056 ;; Parameters:    Size  Location     Type
   1057 ;;		None
   1058 ;; Auto vars:     Size  Location     Type
@@ -1095,7 +1095,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1081 ;; This function uses a non-reentrant model
   1082 ;;
   1083                           psect	text457
-  1084                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+  1084                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   1085                           	line	195
   1086                           	global	__size_of_init
   1087  0014                     	__size_of_init	equ	__end_of_init-_init
@@ -1159,7 +1159,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1143                           
   1144 ;; *************** function _lcd_init *****************
   1145 ;; Defined at:
-  1146 ;;		line 101 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+  1146 ;;		line 101 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   1147 ;; Parameters:    Size  Location     Type
   1148 ;;		None
   1149 ;; Auto vars:     Size  Location     Type
@@ -1187,7 +1187,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1171 ;; This function uses a non-reentrant model
   1172 ;;
   1173                           psect	text458
-  1174                           	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+  1174                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   1175                           	line	101
   1176                           	global	__size_of_lcd_init
   1177  002B                     	__size_of_lcd_init	equ	__end_of_lcd_init-_lcd_init
@@ -1279,7 +1279,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1258                           
   1259 ;; *************** function _lcd_write_control *****************
   1260 ;; Defined at:
-  1261 ;;		line 18 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+  1261 ;;		line 18 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   1262 ;; Parameters:    Size  Location     Type
   1263 ;;  databyte        1    wreg     unsigned char 
   1264 ;; Auto vars:     Size  Location     Type
@@ -1308,7 +1308,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1287 ;; This function uses a non-reentrant model
   1288 ;;
   1289                           psect	text459
-  1290                           	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+  1290                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   1291                           	line	18
   1292                           	global	__size_of_lcd_write_control
   1293  001C                     	__size_of_lcd_write_control	equ	__end_of_lcd_write_control-_lcd_write_control
@@ -1387,7 +1387,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1366                           
   1367 ;; *************** function _rotate *****************
   1368 ;; Defined at:
-  1369 ;;		line 217 in file "E:\Mechatronics 2\Assignment2\Main.c"
+  1369 ;;		line 217 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   1370 ;; Parameters:    Size  Location     Type
   1371 ;;  steps           1    wreg     unsigned char 
   1372 ;;  direction       1    0[BANK1 ] unsigned char 
@@ -1416,7 +1416,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1395 ;; This function uses a non-reentrant model
   1396 ;;
   1397                           psect	text460
-  1398                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+  1398                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   1399                           	line	217
   1400                           	global	__size_of_rotate
   1401  012B                     	__size_of_rotate	equ	__end_of_rotate-_rotate
@@ -2005,7 +2005,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1984                           
   1985 ;; *************** function _init_adc *****************
   1986 ;; Defined at:
-  1987 ;;		line 46 in file "E:\Mechatronics 2\Assignment2\adc.c"
+  1987 ;;		line 46 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   1988 ;; Parameters:    Size  Location     Type
   1989 ;;		None
   1990 ;; Auto vars:     Size  Location     Type
@@ -2033,7 +2033,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   2012 ;; This function uses a non-reentrant model
   2013 ;;
   2014                           psect	text461
-  2015                           	file	"E:\Mechatronics 2\Assignment2\adc.c"
+  2015                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   2016                           	line	46
   2017                           	global	__size_of_init_adc
   2018  0014                     	__size_of_init_adc	equ	__end_of_init_adc-_init_adc
@@ -2101,7 +2101,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   2080                           
   2081 ;; *************** function _isr1 *****************
   2082 ;; Defined at:
-  2083 ;;		line 104 in file "E:\Mechatronics 2\Assignment2\Main.c"
+  2083 ;;		line 104 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   2084 ;; Parameters:    Size  Location     Type
   2085 ;;		None
   2086 ;; Auto vars:     Size  Location     Type
@@ -2131,7 +2131,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   2110 ;; This function uses a non-reentrant model
   2111 ;;
   2112                           psect	text462
-  2113                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+  2113                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   2114                           	line	104
   2115                           	global	__size_of_isr1
   2116  00FD                     	__size_of_isr1	equ	__end_of_isr1-_isr1
@@ -2682,7 +2682,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   2655                           
   2656 ;; *************** function _ADCconvert *****************
   2657 ;; Defined at:
-  2658 ;;		line 318 in file "E:\Mechatronics 2\Assignment2\Main.c"
+  2658 ;;		line 318 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   2659 ;; Parameters:    Size  Location     Type
   2660 ;;  adcVal          2   43[BANK0 ] unsigned int 
   2661 ;; Auto vars:     Size  Location     Type
@@ -2714,7 +2714,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   2687 ;; This function uses a non-reentrant model
   2688 ;;
   2689                           psect	text463
-  2690                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+  2690                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   2691                           	line	318
   2692                           	global	__size_of_ADCconvert
   2693  0255                     	__size_of_ADCconvert	equ	__end_of_ADCconvert-_ADCconvert
@@ -3584,7 +3584,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3542                           
   3543 ;; *************** function _readAvgDistance *****************
   3544 ;; Defined at:
-  3545 ;;		line 300 in file "E:\Mechatronics 2\Assignment2\Main.c"
+  3545 ;;		line 300 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   3546 ;; Parameters:    Size  Location     Type
   3547 ;;		None
   3548 ;; Auto vars:     Size  Location     Type
@@ -3620,7 +3620,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3578 ;; This function uses a non-reentrant model
   3579 ;;
   3580                           psect	text464
-  3581                           	file	"E:\Mechatronics 2\Assignment2\Main.c"
+  3581                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
   3582                           	line	300
   3583                           	global	__size_of_readAvgDistance
   3584  0093                     	__size_of_readAvgDistance	equ	__end_of_readAvgDistance-_readAvgDistance
@@ -3846,7 +3846,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3798                           
   3799 ;; *************** function _lcd_write_string *****************
   3800 ;; Defined at:
-  3801 ;;		line 48 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+  3801 ;;		line 48 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   3802 ;; Parameters:    Size  Location     Type
   3803 ;;  s               1    wreg     PTR unsigned char 
   3804 ;;		 -> ADCconvert@adcOutput(16), readAvgDistance@adcOutput(16), readDistance@adcOutput(16), 
@@ -3878,7 +3878,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3830 ;; This function uses a non-reentrant model
   3831 ;;
   3832                           psect	text465
-  3833                           	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+  3833                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   3834                           	line	48
   3835                           	global	__size_of_lcd_write_string
   3836  001A                     	__size_of_lcd_write_string	equ	__end_of_lcd_write_string-_lcd_write_string
@@ -3944,7 +3944,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3895                           
   3896 ;; *************** function _lcd_set_cursor *****************
   3897 ;; Defined at:
-  3898 ;;		line 42 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+  3898 ;;		line 42 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   3899 ;; Parameters:    Size  Location     Type
   3900 ;;  address         1    wreg     unsigned char 
   3901 ;; Auto vars:     Size  Location     Type
@@ -3974,7 +3974,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3925 ;; This function uses a non-reentrant model
   3926 ;;
   3927                           psect	text466
-  3928                           	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+  3928                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   3929                           	line	42
   3930                           	global	__size_of_lcd_set_cursor
   3931  0009                     	__size_of_lcd_set_cursor	equ	__end_of_lcd_set_cursor-_lcd_set_cursor
@@ -4013,7 +4013,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3963                           
   3964 ;; *************** function i1_lcd_write_control *****************
   3965 ;; Defined at:
-  3966 ;;		line 18 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+  3966 ;;		line 18 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   3967 ;; Parameters:    Size  Location     Type
   3968 ;;  lcd_write_co    1    wreg     unsigned char 
   3969 ;; Auto vars:     Size  Location     Type
@@ -4041,7 +4041,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3991 ;; This function uses a non-reentrant model
   3992 ;;
   3993                           psect	text467
-  3994                           	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+  3994                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   3995                           	line	18
   3996                           	global	__size_ofi1_lcd_write_control
   3997  0014                     	__size_ofi1_lcd_write_control	equ	__end_ofi1_lcd_write_control-i1_lcd_write_control
@@ -4112,7 +4112,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4062                           
   4063 ;; *************** function _lcd_write_data *****************
   4064 ;; Defined at:
-  4065 ;;		line 30 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+  4065 ;;		line 30 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   4066 ;; Parameters:    Size  Location     Type
   4067 ;;  databyte        1    wreg     unsigned char 
   4068 ;; Auto vars:     Size  Location     Type
@@ -4141,7 +4141,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4091 ;; This function uses a non-reentrant model
   4092 ;;
   4093                           psect	text468
-  4094                           	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+  4094                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
   4095                           	line	30
   4096                           	global	__size_of_lcd_write_data
   4097  0013                     	__size_of_lcd_write_data	equ	__end_of_lcd_write_data-_lcd_write_data
@@ -4211,7 +4211,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4161                           
   4162 ;; *************** function _sprintf *****************
   4163 ;; Defined at:
-  4164 ;;		line 488 in file "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+  4164 ;;		line 488 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
   4165 ;; Parameters:    Size  Location     Type
   4166 ;;  sp              1    wreg     PTR unsigned char 
   4167 ;;		 -> ADCconvert@adcOutput(16), readAvgDistance@adcOutput(16), readDistance@adcOutput(16), 
@@ -4252,7 +4252,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4202 ;; This function uses a non-reentrant model
   4203 ;;
   4204                           psect	text469
-  4205                           	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c"
+  4205                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c"
   4206                           	line	488
   4207                           	global	__size_of_sprintf
   4208  00FE                     	__size_of_sprintf	equ	__end_of_sprintf-_sprintf
@@ -4677,7 +4677,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4619                           
   4620 ;; *************** function _adc_read_channel *****************
   4621 ;; Defined at:
-  4622 ;;		line 5 in file "E:\Mechatronics 2\Assignment2\adc.c"
+  4622 ;;		line 5 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   4623 ;; Parameters:    Size  Location     Type
   4624 ;;  channel         1    wreg     unsigned char 
   4625 ;; Auto vars:     Size  Location     Type
@@ -4706,7 +4706,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4648 ;; This function uses a non-reentrant model
   4649 ;;
   4650                           psect	text470
-  4651                           	file	"E:\Mechatronics 2\Assignment2\adc.c"
+  4651                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   4652                           	line	5
   4653                           	global	__size_of_adc_read_channel
   4654  0041                     	__size_of_adc_read_channel	equ	__end_of_adc_read_channel-_adc_read_channel
@@ -4909,7 +4909,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4850                           
   4851 ;; *************** function ___lwmod *****************
   4852 ;; Defined at:
-  4853 ;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+  4853 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
   4854 ;; Parameters:    Size  Location     Type
   4855 ;;  divisor         2    8[COMMON] unsigned int 
   4856 ;;  dividend        2   10[COMMON] unsigned int 
@@ -4939,7 +4939,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   4880 ;; This function uses a non-reentrant model
   4881 ;;
   4882                           psect	text471
-  4883                           	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+  4883                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
   4884                           	line	5
   4885                           	global	__size_of___lwmod
   4886  0044                     	__size_of___lwmod	equ	__end_of___lwmod-___lwmod
@@ -5095,7 +5095,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   5036                           
   5037 ;; *************** function ___lwdiv *****************
   5038 ;; Defined at:
-  5039 ;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+  5039 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
   5040 ;; Parameters:    Size  Location     Type
   5041 ;;  divisor         2    0[COMMON] unsigned int 
   5042 ;;  dividend        2    2[COMMON] unsigned int 
@@ -5125,7 +5125,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   5066 ;; This function uses a non-reentrant model
   5067 ;;
   5068                           psect	text472
-  5069                           	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+  5069                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
   5070                           	line	5
   5071                           	global	__size_of___lwdiv
   5072  004E                     	__size_of___lwdiv	equ	__end_of___lwdiv-___lwdiv
@@ -5301,7 +5301,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   5242                           
   5243 ;; *************** function _adc_read *****************
   5244 ;; Defined at:
-  5245 ;;		line 61 in file "E:\Mechatronics 2\Assignment2\adc.c"
+  5245 ;;		line 61 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   5246 ;; Parameters:    Size  Location     Type
   5247 ;;		None
   5248 ;; Auto vars:     Size  Location     Type
@@ -5328,7 +5328,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   5269 ;; This function uses a non-reentrant model
   5270 ;;
   5271                           psect	text473
-  5272                           	file	"E:\Mechatronics 2\Assignment2\adc.c"
+  5272                           	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   5273                           	line	61
   5274                           	global	__size_of_adc_read
   5275  0027                     	__size_of_adc_read	equ	__end_of_adc_read-_adc_read
@@ -5365,13 +5365,13 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   5306                           	
   5307  07B1                     i1l1555:	
   5308                           	line	68
-  5309                           # 68 "E:\Mechatronics 2\Assignment2\adc.c"
+  5309                           # 68 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   5310  07B1  0000               nop ;#
   5311                           	line	69
-  5312                           # 69 "E:\Mechatronics 2\Assignment2\adc.c"
+  5312                           # 69 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   5313  07B2  0000               nop ;#
   5314                           	line	70
-  5315                           # 70 "E:\Mechatronics 2\Assignment2\adc.c"
+  5315                           # 70 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
   5316  07B3  0000               nop ;#
   5317                           psect	text473
   5318                           	line	73
@@ -5439,7 +5439,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
 
 
 HI-TECH Software PICC Macro Assembler V9.83 build 10920 
-Symbol Table                                                                                   Mon Mar 30 16:48:56 2015
+Symbol Table                                                                                   Mon Apr 13 15:04:55 2015
 
    __end_of_lcd_write_control 1000                             pc 0002                            _GO 00FA  
                           _RD 0C60                            _WR 0C61                            fsr 0004  

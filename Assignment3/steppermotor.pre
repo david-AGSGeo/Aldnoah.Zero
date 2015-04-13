@@ -1,7 +1,7 @@
 
-# 1 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
+# 1 "H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c"
 
-# 82 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
+# 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
 
 
@@ -1072,28 +1072,28 @@ unsigned EEPGD : 1;
 volatile unsigned char EECON2 @ 0x18D;
 
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_nop)
 extern void _nop(void);
 
 # 80
 extern unsigned int flash_read(unsigned short addr);
 
-# 41 "C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
+# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
 extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 153 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
+# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+# 7 "H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.h"
 void rotate(unsigned char steps, unsigned char direction);
 
-# 21 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
+# 21 "H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c"
 char current_step = 0b00111100;
 
 

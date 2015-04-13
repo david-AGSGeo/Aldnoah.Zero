@@ -18,9 +18,9 @@ unsigned int readAvgDistance(void)
 }
 	averageval = fullval / NUMREADS;
 	sprintf(adcOutput,"Adc Value: %d", averageval);
-	lcd_set_cursor(0x00);
-	lcd_write_control(0b00000001); //clear display
-	lcd_write_string(adcOutput);
+	//lcd_set_cursor(0x00);
+	//lcd_write_control(0b00000001); //clear display
+	//lcd_write_string(adcOutput);
 	return averageval;
 }
 
@@ -31,7 +31,7 @@ unsigned int readDistance(void)
 	char adcOutput[16] = "";
 
 	fullval = adc_read_channel(0); //channel 0 not reading properly?
-	lcd_write_control(0b00000001); //clear display
+	//lcd_write_control(0b00000001); //clear display
 	sprintf(adcOutput,"Adc Value: %d", fullval);
 	lcd_set_cursor(0x00);
 	lcd_write_string(adcOutput);
@@ -99,7 +99,7 @@ else if (adcVal < 33 )
 
 	
 
-
+	lcd_write_control(0b00000001); //clear display
 	sprintf(adcOutput,"Distance: %dcm", distance);
 	lcd_set_cursor(0x40);
 	

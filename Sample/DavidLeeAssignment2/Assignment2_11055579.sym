@@ -319,12 +319,12 @@ startup.as
 60 0 0 CODE
 69 12 0 CODE
 Assignment2_11055579.obj
-E:\Mechatronics 2\Assignment2\Main.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c
 29 2007 0 CONFIG
 70 3 0 CODE
-C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c
+C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
 350 756 0 STRING
-E:\Mechatronics 2\Assignment2\Main.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c
 70 7CF 0 CODE
 390 623 0 CODE
 392 628 0 CODE
@@ -352,7 +352,7 @@ E:\Mechatronics 2\Assignment2\Main.c
 208 7FD 0 CODE
 211 7FE 0 CODE
 212 7FF 0 CODE
-E:\Mechatronics 2\Assignment2\lcd.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c
 105 77D 0 CODE
 108 781 0 CODE
 109 784 0 CODE
@@ -373,7 +373,7 @@ E:\Mechatronics 2\Assignment2\lcd.c
 24 FF3 0 CODE
 25 FF4 0 CODE
 26 FFF 0 CODE
-E:\Mechatronics 2\Assignment2\Main.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c
 220 26A 0 CODE
 222 274 0 CODE
 224 27A 0 CODE
@@ -427,14 +427,14 @@ E:\Mechatronics 2\Assignment2\Main.c
 220 386 0 CODE
 280 390 0 CODE
 281 394 0 CODE
-E:\Mechatronics 2\Assignment2\adc.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c
 48 FB6 0 CODE
 49 FB9 0 CODE
 52 FBD 0 CODE
 53 FC1 0 CODE
 55 FC5 0 CODE
 57 FC9 0 CODE
-E:\Mechatronics 2\Assignment2\Main.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c
 106 493 0 CODE
 108 497 0 CODE
 109 498 0 CODE
@@ -540,7 +540,7 @@ E:\Mechatronics 2\Assignment2\Main.c
 313 613 0 CODE
 314 619 0 CODE
 315 622 0 CODE
-E:\Mechatronics 2\Assignment2\lcd.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c
 48 FCA 0 CODE
 50 FCB 0 CODE
 51 FE3 0 CODE
@@ -566,7 +566,7 @@ E:\Mechatronics 2\Assignment2\lcd.c
 36 F98 0 CODE
 37 F99 0 CODE
 38 FA1 0 CODE
-C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c
+C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c
 537 395 0 CODE
 540 39C 0 CODE
 542 39D 0 CODE
@@ -598,7 +598,7 @@ C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c
 540 479 0 CODE
 1530 48D 0 CODE
 1533 492 0 CODE
-E:\Mechatronics 2\Assignment2\adc.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c
 5 70F 0 CODE
 6 710 0 CODE
 9 711 0 CODE
@@ -627,7 +627,7 @@ E:\Mechatronics 2\Assignment2\adc.c
 39 744 0 CODE
 41 748 0 CODE
 43 74F 0 CODE
-C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c
+C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
 8 6CB 0 CODE
 9 6D1 0 CODE
 10 6D4 0 CODE
@@ -640,7 +640,7 @@ C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c
 18 6FF 0 CODE
 20 707 0 CODE
 21 70E 0 CODE
-C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c
+C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c
 9 67D 0 CODE
 10 67F 0 CODE
 11 685 0 CODE
@@ -656,7 +656,7 @@ C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c
 23 6BB 0 CODE
 25 6C3 0 CODE
 26 6CA 0 CODE
-E:\Mechatronics 2\Assignment2\adc.c
+H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c
 64 7A8 0 CODE
 66 7AB 0 CODE
 67 7AC 0 CODE

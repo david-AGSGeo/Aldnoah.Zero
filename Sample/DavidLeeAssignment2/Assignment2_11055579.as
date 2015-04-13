@@ -39,9 +39,9 @@ fsr0	equ	4
 c	equ	1
 z	equ	0
 pclath	equ	10
-# 29 "E:\Mechatronics 2\Assignment2\Main.c"
+# 29 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	psect config,class=CONFIG,delta=2 ;#
-# 29 "E:\Mechatronics 2\Assignment2\Main.c"
+# 29 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
 	FNCALL	_main,_init
 	FNCALL	_main,_rotate
@@ -74,7 +74,7 @@ pclath	equ	10
 psect	idataBANK1,class=CODE,space=0,delta=2
 global __pidataBANK1
 __pidataBANK1:
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	70
 
 ;initializer for _current_step
@@ -95,7 +95,7 @@ incf fsr
 __stringbase:
 	retlw	0
 psect	strings
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 	line	350
 _dpowers:
 	retlw	01h
@@ -334,7 +334,7 @@ _current_direction:
 psect	dataBANK1,class=BANK1,space=1
 global __pdataBANK1
 __pdataBANK1:
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	70
 _current_step:
        ds      1
@@ -833,7 +833,7 @@ __pmaintext:
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 385 in file "E:\Mechatronics 2\Assignment2\Main.c"
+;;		line 385 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -861,7 +861,7 @@ __pmaintext:
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	385
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -1052,7 +1052,7 @@ __ptext457:
 
 ;; *************** function _init *****************
 ;; Defined at:
-;;		line 195 in file "E:\Mechatronics 2\Assignment2\Main.c"
+;;		line 195 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -1081,7 +1081,7 @@ __ptext457:
 ;; This function uses a non-reentrant model
 ;;
 psect	text457
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	195
 	global	__size_of_init
 	__size_of_init	equ	__end_of_init-_init
@@ -1143,7 +1143,7 @@ __ptext458:
 
 ;; *************** function _lcd_init *****************
 ;; Defined at:
-;;		line 101 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+;;		line 101 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -1171,7 +1171,7 @@ __ptext458:
 ;; This function uses a non-reentrant model
 ;;
 psect	text458
-	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 	line	101
 	global	__size_of_lcd_init
 	__size_of_lcd_init	equ	__end_of_lcd_init-_lcd_init
@@ -1258,7 +1258,7 @@ __ptext459:
 
 ;; *************** function _lcd_write_control *****************
 ;; Defined at:
-;;		line 18 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+;;		line 18 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  databyte        1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -1287,7 +1287,7 @@ __ptext459:
 ;; This function uses a non-reentrant model
 ;;
 psect	text459
-	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 	line	18
 	global	__size_of_lcd_write_control
 	__size_of_lcd_write_control	equ	__end_of_lcd_write_control-_lcd_write_control
@@ -1366,7 +1366,7 @@ __ptext460:
 
 ;; *************** function _rotate *****************
 ;; Defined at:
-;;		line 217 in file "E:\Mechatronics 2\Assignment2\Main.c"
+;;		line 217 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;  steps           1    wreg     unsigned char 
 ;;  direction       1    0[BANK1 ] unsigned char 
@@ -1395,7 +1395,7 @@ __ptext460:
 ;; This function uses a non-reentrant model
 ;;
 psect	text460
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	217
 	global	__size_of_rotate
 	__size_of_rotate	equ	__end_of_rotate-_rotate
@@ -1984,7 +1984,7 @@ __ptext461:
 
 ;; *************** function _init_adc *****************
 ;; Defined at:
-;;		line 46 in file "E:\Mechatronics 2\Assignment2\adc.c"
+;;		line 46 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2012,7 +2012,7 @@ __ptext461:
 ;; This function uses a non-reentrant model
 ;;
 psect	text461
-	file	"E:\Mechatronics 2\Assignment2\adc.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 	line	46
 	global	__size_of_init_adc
 	__size_of_init_adc	equ	__end_of_init_adc-_init_adc
@@ -2080,7 +2080,7 @@ __ptext462:
 
 ;; *************** function _isr1 *****************
 ;; Defined at:
-;;		line 104 in file "E:\Mechatronics 2\Assignment2\Main.c"
+;;		line 104 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2110,7 +2110,7 @@ __ptext462:
 ;; This function uses a non-reentrant model
 ;;
 psect	text462
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	104
 	global	__size_of_isr1
 	__size_of_isr1	equ	__end_of_isr1-_isr1
@@ -2655,7 +2655,7 @@ __ptext463:
 
 ;; *************** function _ADCconvert *****************
 ;; Defined at:
-;;		line 318 in file "E:\Mechatronics 2\Assignment2\Main.c"
+;;		line 318 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;  adcVal          2   43[BANK0 ] unsigned int 
 ;; Auto vars:     Size  Location     Type
@@ -2687,7 +2687,7 @@ __ptext463:
 ;; This function uses a non-reentrant model
 ;;
 psect	text463
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	318
 	global	__size_of_ADCconvert
 	__size_of_ADCconvert	equ	__end_of_ADCconvert-_ADCconvert
@@ -3542,7 +3542,7 @@ __ptext464:
 
 ;; *************** function _readAvgDistance *****************
 ;; Defined at:
-;;		line 300 in file "E:\Mechatronics 2\Assignment2\Main.c"
+;;		line 300 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -3578,7 +3578,7 @@ __ptext464:
 ;; This function uses a non-reentrant model
 ;;
 psect	text464
-	file	"E:\Mechatronics 2\Assignment2\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\Main.c"
 	line	300
 	global	__size_of_readAvgDistance
 	__size_of_readAvgDistance	equ	__end_of_readAvgDistance-_readAvgDistance
@@ -3798,7 +3798,7 @@ __ptext465:
 
 ;; *************** function _lcd_write_string *****************
 ;; Defined at:
-;;		line 48 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+;;		line 48 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  s               1    wreg     PTR unsigned char 
 ;;		 -> ADCconvert@adcOutput(16), readAvgDistance@adcOutput(16), readDistance@adcOutput(16), 
@@ -3830,7 +3830,7 @@ __ptext465:
 ;; This function uses a non-reentrant model
 ;;
 psect	text465
-	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 	line	48
 	global	__size_of_lcd_write_string
 	__size_of_lcd_write_string	equ	__end_of_lcd_write_string-_lcd_write_string
@@ -3895,7 +3895,7 @@ __ptext466:
 
 ;; *************** function _lcd_set_cursor *****************
 ;; Defined at:
-;;		line 42 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+;;		line 42 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  address         1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -3925,7 +3925,7 @@ __ptext466:
 ;; This function uses a non-reentrant model
 ;;
 psect	text466
-	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 	line	42
 	global	__size_of_lcd_set_cursor
 	__size_of_lcd_set_cursor	equ	__end_of_lcd_set_cursor-_lcd_set_cursor
@@ -3963,7 +3963,7 @@ __ptext467:
 
 ;; *************** function i1_lcd_write_control *****************
 ;; Defined at:
-;;		line 18 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+;;		line 18 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  lcd_write_co    1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -3991,7 +3991,7 @@ __ptext467:
 ;; This function uses a non-reentrant model
 ;;
 psect	text467
-	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 	line	18
 	global	__size_ofi1_lcd_write_control
 	__size_ofi1_lcd_write_control	equ	__end_ofi1_lcd_write_control-i1_lcd_write_control
@@ -4062,7 +4062,7 @@ __ptext468:
 
 ;; *************** function _lcd_write_data *****************
 ;; Defined at:
-;;		line 30 in file "E:\Mechatronics 2\Assignment2\lcd.c"
+;;		line 30 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  databyte        1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -4091,7 +4091,7 @@ __ptext468:
 ;; This function uses a non-reentrant model
 ;;
 psect	text468
-	file	"E:\Mechatronics 2\Assignment2\lcd.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\lcd.c"
 	line	30
 	global	__size_of_lcd_write_data
 	__size_of_lcd_write_data	equ	__end_of_lcd_write_data-_lcd_write_data
@@ -4161,7 +4161,7 @@ __ptext469:
 
 ;; *************** function _sprintf *****************
 ;; Defined at:
-;;		line 488 in file "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+;;		line 488 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 ;; Parameters:    Size  Location     Type
 ;;  sp              1    wreg     PTR unsigned char 
 ;;		 -> ADCconvert@adcOutput(16), readAvgDistance@adcOutput(16), readDistance@adcOutput(16), 
@@ -4202,7 +4202,7 @@ __ptext469:
 ;; This function uses a non-reentrant model
 ;;
 psect	text469
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c"
 	line	488
 	global	__size_of_sprintf
 	__size_of_sprintf	equ	__end_of_sprintf-_sprintf
@@ -4619,7 +4619,7 @@ __ptext470:
 
 ;; *************** function _adc_read_channel *****************
 ;; Defined at:
-;;		line 5 in file "E:\Mechatronics 2\Assignment2\adc.c"
+;;		line 5 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 ;; Parameters:    Size  Location     Type
 ;;  channel         1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -4648,7 +4648,7 @@ __ptext470:
 ;; This function uses a non-reentrant model
 ;;
 psect	text470
-	file	"E:\Mechatronics 2\Assignment2\adc.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 	line	5
 	global	__size_of_adc_read_channel
 	__size_of_adc_read_channel	equ	__end_of_adc_read_channel-_adc_read_channel
@@ -4850,7 +4850,7 @@ __ptext471:
 
 ;; *************** function ___lwmod *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    8[COMMON] unsigned int 
 ;;  dividend        2   10[COMMON] unsigned int 
@@ -4880,7 +4880,7 @@ __ptext471:
 ;; This function uses a non-reentrant model
 ;;
 psect	text471
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 	line	5
 	global	__size_of___lwmod
 	__size_of___lwmod	equ	__end_of___lwmod-___lwmod
@@ -5036,7 +5036,7 @@ __ptext472:
 
 ;; *************** function ___lwdiv *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    0[COMMON] unsigned int 
 ;;  dividend        2    2[COMMON] unsigned int 
@@ -5066,7 +5066,7 @@ __ptext472:
 ;; This function uses a non-reentrant model
 ;;
 psect	text472
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 	line	5
 	global	__size_of___lwdiv
 	__size_of___lwdiv	equ	__end_of___lwdiv-___lwdiv
@@ -5242,7 +5242,7 @@ __ptext473:
 
 ;; *************** function _adc_read *****************
 ;; Defined at:
-;;		line 61 in file "E:\Mechatronics 2\Assignment2\adc.c"
+;;		line 61 in file "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -5269,7 +5269,7 @@ __ptext473:
 ;; This function uses a non-reentrant model
 ;;
 psect	text473
-	file	"E:\Mechatronics 2\Assignment2\adc.c"
+	file	"H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 	line	61
 	global	__size_of_adc_read
 	__size_of_adc_read	equ	__end_of_adc_read-_adc_read
@@ -5306,13 +5306,13 @@ u347_20:
 	
 i1l1555:	
 	line	68
-# 68 "E:\Mechatronics 2\Assignment2\adc.c"
+# 68 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 nop ;#
 	line	69
-# 69 "E:\Mechatronics 2\Assignment2\adc.c"
+# 69 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 nop ;#
 	line	70
-# 70 "E:\Mechatronics 2\Assignment2\adc.c"
+# 70 "H:\Aldnoah.Zero\trunk\Sample\DavidLeeAssignment2\adc.c"
 nop ;#
 psect	text473
 	line	73
