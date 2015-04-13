@@ -9,9 +9,10 @@
 	;
 	; -oAssignment3_AldnoahZero.cof -mAssignment3_AldnoahZero.map \
 	; --summary=default --output=default adc.p1 lcd.p1 Main.p1 infrared.p1 \
-	; steppermotor.p1 --chip=16F877A -P --runtime=default --opt=default \
-	; -D__DEBUG=1 -g --asmlist --errformat=Error   [%n] %f; %l.%c %s \
-	; --msgformat=Advisory[%n] %s --warnformat=Warning [%n] %f; %l.%c %s
+	; steppermotor.p1 ser.p1 --chip=16F877A -P --runtime=default \
+	; --opt=default -D__DEBUG=1 -g --asmlist \
+	; --errformat=Error   [%n] %f; %l.%c %s --msgformat=Advisory[%n] %s \
+	; --warnformat=Warning [%n] %f; %l.%c %s
 	;
 
 

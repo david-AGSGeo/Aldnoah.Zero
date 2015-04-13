@@ -23,6 +23,7 @@
 #include "lcd.h"
 #include "infrared.h"
 #include "steppermotor.h"
+#include "ser.h"
 //check htc.h version
 
 #if (_HTC_VER_MAJOR_ < 9 && _HTC_VER_MINOR_ < 81)
@@ -87,6 +88,8 @@ volatile unsigned int RTC_Counter = 0;
 void interrupt isr1(void) 
 {
 	//Timer 1
+	ser_int();
+
 	if(TMR0IF)  //interrupt from timer0
 	{
 		TMR0IF = 0;		//reset interrupt flag
@@ -179,11 +182,12 @@ void init()
 {
 	init_adc();
 	lcd_init();
+	ser_init(); 
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
 
 	//PortC all Output
-	TRISC = 0x00;
+	//TRISC = 0x00;
 
 	//timer0 prescalar set
 	OPTION_REG = 0b00000100;
@@ -210,10 +214,41 @@ void main(void)
 	
 	//initialise function
 	init();
+			ser_putch(128); 
+		__delay_ms(100);
+		ser_putch(132); 
+		__delay_ms(100);
+		ser_putch(140); 
+		__delay_ms(100);
+		ser_putch(0); 
+		__delay_ms(100);
+		ser_putch(4); 
+		__delay_ms(100);
+		ser_putch(62); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(66); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(69); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(74); 
+		__delay_ms(100);
+		ser_putch(36); 
+		__delay_ms(100);
+		ser_putch(141); 
+		__delay_ms(100);
+		ser_putch(0); 
+		__delay_ms(10000);
 	//initialise stepper motor to known winding
-	rotate(8, CLOCKWISE);
+	//rotate(8, CLOCKWISE);
 
 	//Loop forever
+
 	while(1)
 	{
 		if(pb0Pressed) //toggle LED0
@@ -222,7 +257,36 @@ void main(void)
 			
 			
 			LED0 ^= 0x01;
-						
+			ser_putch(128); 
+		__delay_ms(100);
+		ser_putch(132); 
+		__delay_ms(100);
+		ser_putch(140); 
+		__delay_ms(100);
+		ser_putch(0); 
+		__delay_ms(100);
+		ser_putch(4); 
+		__delay_ms(100);
+		ser_putch(62); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(66); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(69); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(74); 
+		__delay_ms(100);
+		ser_putch(36); 
+		__delay_ms(100);
+		ser_putch(141); 
+		__delay_ms(100);
+		ser_putch(0); 
+		__delay_ms(100);		
 			
 		}
 
@@ -230,21 +294,21 @@ void main(void)
 		{
 			pb1Pressed = 0;
 			
-			rotate(2, COUNTERCLOCKWISE);
+			//rotate(2, COUNTERCLOCKWISE);
 		}
 
 		if(pb2Pressed) // 2 half steps Clockwise
 		{
 			pb2Pressed = 0;
 			
-			rotate(2, CLOCKWISE);
+			//rotate(2, CLOCKWISE);
 		}
 
 		if(pb3Pressed) //180 degree sweep (reverse direction each time button is pressed)
 		{
 			pb3Pressed = 0;
 			
-			rotate(STEPS180, current_direction);
+			//rotate(STEPS180, current_direction);
 			current_direction ^= 0x01;
 		}
 	}

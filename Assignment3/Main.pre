@@ -1189,10 +1189,26 @@ void ADCconvert(unsigned int adcVal);
 # 7 "H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.h"
 void rotate(unsigned char steps, unsigned char direction);
 
-# 31 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+# 55 "H:\Aldnoah.Zero\trunk\Assignment3\ser.h"
+bit ser_isrx(void);
+unsigned char ser_getch(void);
+void ser_putch(unsigned char byte);
+void ser_puts(const char * s);
+void ser_puts2(unsigned char * s);
+void ser_puthex(unsigned char v);
+void ser_init(void);
+
+
+extern unsigned char rxfifo[16];
+extern volatile unsigned char rxiptr, rxoptr;
+extern bank1 unsigned char txfifo[16];
+extern volatile unsigned char txiptr, txoptr;
+extern unsigned char ser_tmp;
+
+# 32 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
-# 55
+# 56
 unsigned char current_direction = 0;
 
 
@@ -1227,6 +1243,8 @@ volatile unsigned int RTC_Counter = 0;
 
 void interrupt isr1(void)
 {
+
+if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
 
 if(TMR0IF)
 {
@@ -1320,13 +1338,11 @@ void init()
 {
 init_adc();
 lcd_init();
+ser_init();
 
 TRISB = 0b11111100;
 
-
-TRISC = 0x00;
-
-
+# 193
 OPTION_REG = 0b00000100;
 
 
@@ -1336,7 +1352,7 @@ TMR0IE = 1;
 (GIE = 1);
 }
 
-# 206
+# 210
 void main(void)
 {
 
@@ -1344,10 +1360,38 @@ void main(void)
 
 
 init();
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(132);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(140);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(4);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(62);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(12);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(66);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(12);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(69);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(12);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(74);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(36);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(141);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((10000)*(20000000/4000.0)));
 
-rotate(8, 0);
-
-
+# 252
 while(1)
 {
 if(pb0Pressed)
@@ -1356,7 +1400,36 @@ pb0Pressed = 0;
 
 
 RB1 ^= 0x01;
-
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(132);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(140);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(4);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(62);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(12);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(66);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(12);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(69);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(12);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(74);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(36);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(141);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
 
 }
 
@@ -1364,21 +1437,21 @@ if(pb1Pressed)
 {
 pb1Pressed = 0;
 
-rotate(2, 1);
+
 }
 
 if(pb2Pressed)
 {
 pb2Pressed = 0;
 
-rotate(2, 0);
+
 }
 
 if(pb3Pressed)
 {
 pb3Pressed = 0;
 
-rotate(200, current_direction);
+
 current_direction ^= 0x01;
 }
 }
