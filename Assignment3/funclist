@@ -1,0 +1,19 @@
+_lcd_write_data: CODE, 3983 0 19
+_init: CODE, 2028 0 20
+i1_lcd_write_control: CODE, 4002 0 20
+_lcd_write_control: CODE, 4068 0 28
+_main: CODE, 1571 0 90
+_readAvgDistance: CODE, 1424 0 147
+_lcd_set_cursor: CODE, 3974 0 9
+___lwdiv: CODE, 1661 0 78
+_init_adc: CODE, 4022 0 20
+_sprintf: CODE, 917 0 254
+_rotate: CODE, 618 0 299
+___lwmod: CODE, 1739 0 68
+_ADCconvert: CODE, 21 0 597
+_adc_read: CODE, 1960 0 39
+_isr1: CODE, 1171 0 253
+_lcd_write_string: CODE, 4042 0 26
+_adc_read_channel: CODE, 1807 0 65
+_lcd_init: CODE, 1917 0 43
+Total: 2075
