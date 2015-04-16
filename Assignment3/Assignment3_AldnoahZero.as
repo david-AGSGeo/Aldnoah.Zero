@@ -39,9 +39,9 @@ fsr0	equ	4
 c	equ	1
 z	equ	0
 pclath	equ	10
-# 32 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+# 32 "E:\Aldnoah.Zero\Assignment3\Main.c"
 	psect config,class=CONFIG,delta=2 ;#
-# 32 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+# 32 "E:\Aldnoah.Zero\Assignment3\Main.c"
 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
 	FNCALL	_main,_init
 	FNCALL	_main,_ser_putch
@@ -73,7 +73,7 @@ pclath	equ	10
 psect	idataBANK1,class=CODE,space=0,delta=2
 global __pidataBANK1
 __pidataBANK1:
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c"
+	file	"E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 	line	21
 
 ;initializer for _current_step
@@ -94,7 +94,7 @@ incf fsr
 __stringbase:
 	retlw	0
 psect	strings
-	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+	file	"C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 	line	350
 _dpowers:
 	retlw	01h
@@ -388,7 +388,7 @@ _ser_tmp:
 psect	dataBANK1,class=BANK1,space=1
 global __pdataBANK1
 __pdataBANK1:
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c"
+	file	"E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 	line	21
 _current_step:
        ds      1
@@ -894,7 +894,7 @@ __pmaintext:
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 211 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+;;		line 211 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -922,7 +922,7 @@ __pmaintext:
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
 	line	211
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -1913,7 +1913,7 @@ __ptext496:
 
 ;; *************** function _init *****************
 ;; Defined at:
-;;		line 182 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+;;		line 182 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -1943,7 +1943,7 @@ __ptext496:
 ;; This function uses a non-reentrant model
 ;;
 psect	text496
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
 	line	182
 	global	__size_of_init
 	__size_of_init	equ	__end_of_init-_init
@@ -2003,7 +2003,7 @@ __ptext497:
 
 ;; *************** function _lcd_init *****************
 ;; Defined at:
-;;		line 101 in file "H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+;;		line 101 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2031,7 +2031,7 @@ __ptext497:
 ;; This function uses a non-reentrant model
 ;;
 psect	text497
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	101
 	global	__size_of_lcd_init
 	__size_of_lcd_init	equ	__end_of_lcd_init-_lcd_init
@@ -2118,7 +2118,7 @@ __ptext498:
 
 ;; *************** function _lcd_write_control *****************
 ;; Defined at:
-;;		line 18 in file "H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+;;		line 18 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  databyte        1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -2146,7 +2146,7 @@ __ptext498:
 ;; This function uses a non-reentrant model
 ;;
 psect	text498
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	18
 	global	__size_of_lcd_write_control
 	__size_of_lcd_write_control	equ	__end_of_lcd_write_control-_lcd_write_control
@@ -2225,7 +2225,7 @@ __ptext499:
 
 ;; *************** function _init_adc *****************
 ;; Defined at:
-;;		line 46 in file "H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+;;		line 46 in file "E:\Aldnoah.Zero\Assignment3\adc.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2253,7 +2253,7 @@ __ptext499:
 ;; This function uses a non-reentrant model
 ;;
 psect	text499
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+	file	"E:\Aldnoah.Zero\Assignment3\adc.c"
 	line	46
 	global	__size_of_init_adc
 	__size_of_init_adc	equ	__end_of_init_adc-_init_adc
@@ -2321,7 +2321,7 @@ __ptext500:
 
 ;; *************** function _ser_putch *****************
 ;; Defined at:
-;;		line 70 in file "H:\Aldnoah.Zero\trunk\Assignment3\ser.c"
+;;		line 70 in file "E:\Aldnoah.Zero\Assignment3\ser.c"
 ;; Parameters:    Size  Location     Type
 ;;  c               1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -2352,7 +2352,7 @@ __ptext500:
 ;; This function uses a non-reentrant model
 ;;
 psect	text500
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\ser.c"
+	file	"E:\Aldnoah.Zero\Assignment3\ser.c"
 	line	70
 	global	__size_of_ser_putch
 	__size_of_ser_putch	equ	__end_of_ser_putch-_ser_putch
@@ -2458,7 +2458,7 @@ __ptext501:
 
 ;; *************** function _ser_init *****************
 ;; Defined at:
-;;		line 113 in file "H:\Aldnoah.Zero\trunk\Assignment3\ser.c"
+;;		line 113 in file "E:\Aldnoah.Zero\Assignment3\ser.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2486,7 +2486,7 @@ __ptext501:
 ;; This function uses a non-reentrant model
 ;;
 psect	text501
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\ser.c"
+	file	"E:\Aldnoah.Zero\Assignment3\ser.c"
 	line	113
 	global	__size_of_ser_init
 	__size_of_ser_init	equ	__end_of_ser_init-_ser_init
@@ -2602,7 +2602,7 @@ __ptext502:
 
 ;; *************** function _isr1 *****************
 ;; Defined at:
-;;		line 89 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+;;		line 89 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2632,7 +2632,7 @@ __ptext502:
 ;; This function uses a non-reentrant model
 ;;
 psect	text502
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
 	line	89
 	global	__size_of_isr1
 	__size_of_isr1	equ	__end_of_isr1-_isr1
@@ -3330,7 +3330,7 @@ __ptext503:
 
 ;; *************** function _ADCconvert *****************
 ;; Defined at:
-;;		line 44 in file "H:\Aldnoah.Zero\trunk\Assignment3\infrared.c"
+;;		line 44 in file "E:\Aldnoah.Zero\Assignment3\infrared.c"
 ;; Parameters:    Size  Location     Type
 ;;  adcVal          2   43[BANK0 ] unsigned int 
 ;; Auto vars:     Size  Location     Type
@@ -3363,7 +3363,7 @@ __ptext503:
 ;; This function uses a non-reentrant model
 ;;
 psect	text503
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\infrared.c"
+	file	"E:\Aldnoah.Zero\Assignment3\infrared.c"
 	line	44
 	global	__size_of_ADCconvert
 	__size_of_ADCconvert	equ	__end_of_ADCconvert-_ADCconvert
@@ -4226,7 +4226,7 @@ __ptext504:
 
 ;; *************** function _readAvgDistance *****************
 ;; Defined at:
-;;		line 10 in file "H:\Aldnoah.Zero\trunk\Assignment3\infrared.c"
+;;		line 10 in file "E:\Aldnoah.Zero\Assignment3\infrared.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -4259,7 +4259,7 @@ __ptext504:
 ;; This function uses a non-reentrant model
 ;;
 psect	text504
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\infrared.c"
+	file	"E:\Aldnoah.Zero\Assignment3\infrared.c"
 	line	10
 	global	__size_of_readAvgDistance
 	__size_of_readAvgDistance	equ	__end_of_readAvgDistance-_readAvgDistance
@@ -4461,7 +4461,7 @@ __ptext505:
 
 ;; *************** function _lcd_write_string *****************
 ;; Defined at:
-;;		line 48 in file "H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+;;		line 48 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  s               1    wreg     PTR unsigned char 
 ;;		 -> ADCconvert@adcOutput(16), readDistance@adcOutput(16), 
@@ -4492,7 +4492,7 @@ __ptext505:
 ;; This function uses a non-reentrant model
 ;;
 psect	text505
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	48
 	global	__size_of_lcd_write_string
 	__size_of_lcd_write_string	equ	__end_of_lcd_write_string-_lcd_write_string
@@ -4557,7 +4557,7 @@ __ptext506:
 
 ;; *************** function _lcd_set_cursor *****************
 ;; Defined at:
-;;		line 42 in file "H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+;;		line 42 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  address         1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -4586,7 +4586,7 @@ __ptext506:
 ;; This function uses a non-reentrant model
 ;;
 psect	text506
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	42
 	global	__size_of_lcd_set_cursor
 	__size_of_lcd_set_cursor	equ	__end_of_lcd_set_cursor-_lcd_set_cursor
@@ -4624,7 +4624,7 @@ __ptext507:
 
 ;; *************** function i1_lcd_write_control *****************
 ;; Defined at:
-;;		line 18 in file "H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+;;		line 18 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  lcd_write_co    1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -4652,7 +4652,7 @@ __ptext507:
 ;; This function uses a non-reentrant model
 ;;
 psect	text507
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	18
 	global	__size_ofi1_lcd_write_control
 	__size_ofi1_lcd_write_control	equ	__end_ofi1_lcd_write_control-i1_lcd_write_control
@@ -4723,7 +4723,7 @@ __ptext508:
 
 ;; *************** function _sprintf *****************
 ;; Defined at:
-;;		line 488 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+;;		line 488 in file "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 ;; Parameters:    Size  Location     Type
 ;;  sp              1    wreg     PTR unsigned char 
 ;;		 -> ADCconvert@adcOutput(16), readDistance@adcOutput(16), readAvgDistance@adcOutput(16), 
@@ -4764,7 +4764,7 @@ __ptext508:
 ;; This function uses a non-reentrant model
 ;;
 psect	text508
-	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c"
+	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c"
 	line	488
 	global	__size_of_sprintf
 	__size_of_sprintf	equ	__end_of_sprintf-_sprintf
@@ -5181,7 +5181,7 @@ __ptext509:
 
 ;; *************** function _lcd_write_data *****************
 ;; Defined at:
-;;		line 30 in file "H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+;;		line 30 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
 ;;  databyte        1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -5210,7 +5210,7 @@ __ptext509:
 ;; This function uses a non-reentrant model
 ;;
 psect	text509
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\lcd.c"
+	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	30
 	global	__size_of_lcd_write_data
 	__size_of_lcd_write_data	equ	__end_of_lcd_write_data-_lcd_write_data
@@ -5280,7 +5280,7 @@ __ptext510:
 
 ;; *************** function _adc_read_channel *****************
 ;; Defined at:
-;;		line 5 in file "H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+;;		line 5 in file "E:\Aldnoah.Zero\Assignment3\adc.c"
 ;; Parameters:    Size  Location     Type
 ;;  channel         1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -5309,7 +5309,7 @@ __ptext510:
 ;; This function uses a non-reentrant model
 ;;
 psect	text510
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+	file	"E:\Aldnoah.Zero\Assignment3\adc.c"
 	line	5
 	global	__size_of_adc_read_channel
 	__size_of_adc_read_channel	equ	__end_of_adc_read_channel-_adc_read_channel
@@ -5511,7 +5511,7 @@ __ptext511:
 
 ;; *************** function ___lwmod *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    8[COMMON] unsigned int 
 ;;  dividend        2   10[COMMON] unsigned int 
@@ -5541,7 +5541,7 @@ __ptext511:
 ;; This function uses a non-reentrant model
 ;;
 psect	text511
-	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 	line	5
 	global	__size_of___lwmod
 	__size_of___lwmod	equ	__end_of___lwmod-___lwmod
@@ -5697,7 +5697,7 @@ __ptext512:
 
 ;; *************** function ___lwdiv *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    0[COMMON] unsigned int 
 ;;  dividend        2    2[COMMON] unsigned int 
@@ -5727,7 +5727,7 @@ __ptext512:
 ;; This function uses a non-reentrant model
 ;;
 psect	text512
-	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 	line	5
 	global	__size_of___lwdiv
 	__size_of___lwdiv	equ	__end_of___lwdiv-___lwdiv
@@ -5903,7 +5903,7 @@ __ptext513:
 
 ;; *************** function _adc_read *****************
 ;; Defined at:
-;;		line 61 in file "H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+;;		line 61 in file "E:\Aldnoah.Zero\Assignment3\adc.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -5930,7 +5930,7 @@ __ptext513:
 ;; This function uses a non-reentrant model
 ;;
 psect	text513
-	file	"H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+	file	"E:\Aldnoah.Zero\Assignment3\adc.c"
 	line	61
 	global	__size_of_adc_read
 	__size_of_adc_read	equ	__end_of_adc_read-_adc_read
@@ -5967,13 +5967,13 @@ u304_20:
 	
 i1l705:	
 	line	68
-# 68 "H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+# 68 "E:\Aldnoah.Zero\Assignment3\adc.c"
 nop ;#
 	line	69
-# 69 "H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+# 69 "E:\Aldnoah.Zero\Assignment3\adc.c"
 nop ;#
 	line	70
-# 70 "H:\Aldnoah.Zero\trunk\Assignment3\adc.c"
+# 70 "E:\Aldnoah.Zero\Assignment3\adc.c"
 nop ;#
 psect	text513
 	line	73

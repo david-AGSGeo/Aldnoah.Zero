@@ -2,7 +2,7 @@ HI-TECH Software C Compiler
 
 Linker command line:
 
---edf=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\dat\en_msgs.txt -cs \
+--edf=C:\Program Files\HI-TECH Software\PICC\9.83\dat\en_msgs.txt -cs \
   -h+Assignment3_AldnoahZero.sym -z -Q16F877A -ol.obj \
   -MAssignment3_AldnoahZero.map -E1 -ACONST=00h-0FFhx32 -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -AENTRY=00h-0FFhx32 -ASTRING=00h-0FFhx32 \

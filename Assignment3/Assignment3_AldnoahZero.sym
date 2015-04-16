@@ -358,15 +358,15 @@ startup.as
 61 0 0 CODE
 70 12 0 CODE
 Assignment3_AldnoahZero.obj
-H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+E:\Aldnoah.Zero\Assignment3\Main.c
 32 2007 0 CONFIG
-H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
+E:\Aldnoah.Zero\Assignment3\steppermotor.c
 21 7FF 0 CODE
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
+C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c
 350 806 0 STRING
-H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
+E:\Aldnoah.Zero\Assignment3\steppermotor.c
 21 E5F 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+E:\Aldnoah.Zero\Assignment3\Main.c
 216 15 0 CODE
 217 1A 0 CODE
 218 20 0 CODE
@@ -449,7 +449,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 196 E26 0 CODE
 199 E27 0 CODE
 200 E28 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\lcd.c
+E:\Aldnoah.Zero\Assignment3\lcd.c
 105 ED4 0 CODE
 108 ED8 0 CODE
 109 EDB 0 CODE
@@ -470,14 +470,14 @@ H:\Aldnoah.Zero\trunk\Assignment3\lcd.c
 24 E52 0 CODE
 25 E53 0 CODE
 26 E5E 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\adc.c
+E:\Aldnoah.Zero\Assignment3\adc.c
 48 DFD 0 CODE
 49 E00 0 CODE
 52 E04 0 CODE
 53 E08 0 CODE
 55 E0C 0 CODE
 57 E10 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\ser.c
+E:\Aldnoah.Zero\Assignment3\ser.c
 70 EFF 0 CODE
 71 F02 0 CODE
 72 F03 0 CODE
@@ -502,7 +502,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\ser.c
 129 EC5 0 CODE
 132 EC6 0 CODE
 133 ED3 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+E:\Aldnoah.Zero\Assignment3\Main.c
 91 514 0 CODE
 93 55E 0 CODE
 95 562 0 CODE
@@ -553,7 +553,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 177 673 0 CODE
 179 674 0 CODE
 89 4 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
+E:\Aldnoah.Zero\Assignment3\infrared.c
 45 2B7 0 CODE
 47 2CF 0 CODE
 49 2D8 0 CODE
@@ -608,7 +608,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
 20 7E5 0 CODE
 24 7F5 0 CODE
 25 7FE 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\lcd.c
+E:\Aldnoah.Zero\Assignment3\lcd.c
 48 E29 0 CODE
 50 E2A 0 CODE
 51 E42 0 CODE
@@ -625,7 +625,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\lcd.c
 24 DF2 0 CODE
 25 DF3 0 CODE
 26 DFC 0 CODE
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c
+C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c
 537 680 0 CODE
 540 687 0 CODE
 542 688 0 CODE
@@ -657,7 +657,7 @@ C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c
 540 764 0 CODE
 1530 778 0 CODE
 1533 77D 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\lcd.c
+E:\Aldnoah.Zero\Assignment3\lcd.c
 30 DD6 0 CODE
 31 DD7 0 CODE
 32 DDA 0 CODE
@@ -667,7 +667,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\lcd.c
 36 DDF 0 CODE
 37 DE0 0 CODE
 38 DE8 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\adc.c
+E:\Aldnoah.Zero\Assignment3\adc.c
 5 F2D 0 CODE
 6 F2E 0 CODE
 9 F2F 0 CODE
@@ -696,7 +696,7 @@ H:\Aldnoah.Zero\trunk\Assignment3\adc.c
 39 F62 0 CODE
 41 F66 0 CODE
 43 F6D 0 CODE
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
+C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c
 8 F6E 0 CODE
 9 F74 0 CODE
 10 F77 0 CODE
@@ -709,7 +709,7 @@ C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
 18 FA2 0 CODE
 20 FAA 0 CODE
 21 FB1 0 CODE
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c
+C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c
 9 FB2 0 CODE
 10 FB4 0 CODE
 11 FBA 0 CODE
@@ -725,7 +725,7 @@ C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c
 23 FF0 0 CODE
 25 FF8 0 CODE
 26 FFF 0 CODE
-H:\Aldnoah.Zero\trunk\Assignment3\adc.c
+E:\Aldnoah.Zero\Assignment3\adc.c
 64 E85 0 CODE
 66 E88 0 CODE
 67 E89 0 CODE
