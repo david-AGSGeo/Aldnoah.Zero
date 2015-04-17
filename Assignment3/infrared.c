@@ -30,67 +30,38 @@ unsigned int readDistance(void)
 }
 
 void ADCconvert(void)
-{
-	
-	if (adcVal > 250)
-	{
-		distance = 20;
-	}
-	else if (adcVal < 250 && adcVal >= 190)
-	{
-distance = 20+ (adcVal%100) ;
-	}
-	else if (adcVal < 190 && adcVal >= 96)
-	{
-		distance = 30+ (adcVal%100) ;
-	}
-else if (adcVal < 190 && adcVal >= 96)
-	{
-		distance = 40+ (adcVal%100) ;
-	}
-else if (adcVal < 115 && adcVal >= 96)
-	{
-		distance = 50+ (adcVal%100) ;
-	}
-else if (adcVal < 96 && adcVal >= 82)
-	{
-		distance = 60+ (adcVal%100) ;
-	}
-else if (adcVal < 82 && adcVal >= 70)
-	{
-		distance = 70+ (adcVal%100) ;
-	}
-else if (adcVal < 70 && adcVal >= 64)
-	{
-		distance = 80+ (adcVal%100) ;
-	}
-else if (adcVal < 64 && adcVal >= 56)
-	{
-		distance = 90+ (adcVal%100) ;
-	}
-else if (adcVal < 56 && adcVal >= 45)
-	{
-		distance = 100+ (adcVal%100) ;
-	}
-else if (adcVal < 45 && adcVal >= 40)
-	{
-		distance = 110+ (adcVal%100) ;
-	}
-else if (adcVal < 40 && adcVal >= 33)
-	{
-		distance = 120+ (adcVal%100) ;
-	}
-else if (adcVal < 33 )
-	{
-		distance = 130 + (adcVal%100) ;
-	}
+{	
+//No room for error included
+//Errors evolve with increasing distance
+// limited to voltage range: 0.5<v<0.75, 
+// corresponding distance range: 0.15m<dist<1.3m
 
-	
-
-	//lcd_write_control(0b00000001); //clear display
-	//lcd_set_cursor(0x00);
-//	lcd_write_string("                ");
-//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
-//	lcd_set_cursor(0x00);	
-//	lcd_write_string(adcOutput);
+if (adcVal >= 2.5 && adcVal < 2.75)
+	{
+		distance = 15 + ((20-15)*(2.75-adcVal))/(20-15);
+	}	
+	else if (adcVal >= 2 && adcVal < 2.5)
+	{
+		distance = 20 + ((30-20)*(2.5-adcVal))/(30-20);
+	}
+	else if (adcVal >= 1.5 && adcVal < 2)
+	{
+		distance = 30 + ((40-30)*(2-adcVal))/(40-30);
+	}	
+	else if (adcVal >= 1.25 && adcVal < 1.5)
+	{
+		distance = 40 + ((50-40)*(1.5-adcVal))/(50-40);
+	}	
+	else if (adcVal >= 0.9 && adcVal < 1.25)
+	{
+		distance = 50 + ((60-50)*(1.25-adcVal))/(30-20);
+	}	
+	else if (adcVal >= 0.65 && adcVal < 0.9)
+	{
+		distance = 60 + ((70-60)*(0.9-adcVal))/(30-20);
+	}	
+	else if (adcVal >= 0.5 && adcVal < 0.65)
+	{
+		distance = 70 + ((80-70)*(0.65-adcVal))/(30-20);
+	}
 }

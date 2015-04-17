@@ -251,11 +251,3 @@ void UpdateDisplay(void)
 				lcd_write_string(shortMenuStrings[(pos + 1) % MENUITEMS]);
 }
 
-//lcd_set_cursor(MENULEFT);	
-//				lcd_write_string("                    ");
-//				lcd_set_cursor(MENULEFT);	
-//				lcd_write_string(shortMenuStrings[(pos - 1) % MENUITEMS]);
-//				lcd_set_cursor(MENUCENTER);	
-//				lcd_write_string(menuStrings[pos]);
-//				lcd_set_cursor(MENURIGHT);	
-//				lcd_write_string(shortMenuStrings[(pos + 1) % MENUITEMS]);

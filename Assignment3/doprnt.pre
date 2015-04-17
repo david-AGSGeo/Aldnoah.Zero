@@ -1,12 +1,12 @@
 
-# 1 "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+# 1 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 
-# 12 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 typedef int ptrdiff_t;
 typedef unsigned size_t;
 typedef unsigned short wchar_t;
 
-# 31 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h"
+# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma inline(__va_start)
@@ -15,7 +15,7 @@ extern void * __va_start(void);
 #pragma inline(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int errno;
 
 # 58
@@ -25,7 +25,7 @@ char * ptr;
 void (* func)(char);
 };
 
-# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h"
 extern int errno;
 
 
@@ -42,7 +42,7 @@ extern bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 103 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -65,7 +65,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 3 "C:\Program Files\HI-TECH Software\PICC\9.83\include\ctype.h"
+# 3 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\ctype.h"
 extern bit isalpha(char);
 extern bit isupper(char);
 extern bit islower(char);
@@ -81,7 +81,7 @@ extern bit iscntrl(char);
 extern char toupper(char);
 extern char tolower(char);
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdlib.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdlib.h"
 typedef struct {
 int rem;
 int quot;
@@ -142,7 +142,7 @@ extern char * utoa(char * buf, unsigned val, int base);
 extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
-# 22 "C:\Program Files\HI-TECH Software\PICC\9.83\include\string.h"
+# 22 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\string.h"
 extern void * memcpy(void *, const void *, size_t);
 extern void * memmove(void *, const void *, size_t);
 extern void * memset(void *, int, size_t);
@@ -174,7 +174,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h"
 extern int errno;
 
 
@@ -191,7 +191,7 @@ extern bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\sys.h"
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\sys.h"
 extern int errno;
 
 # 30
@@ -231,7 +231,7 @@ extern void brk(void *);
 extern int _pnum(unsigned long, signed char, signed char, unsigned char, unsigned char, struct __prbuf *, unsigned char);
 extern int _fnum(double, short, short, short, struct __prbuf *, short);
 
-# 3 "C:\Program Files\HI-TECH Software\PICC\9.83\include\math.h"
+# 3 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\math.h"
 extern double fabs(double);
 extern double floor(double);
 extern double ceil(double);
@@ -259,7 +259,7 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 350 "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+# 350 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 const static unsigned int dpowers[] = {1, 10, 100, 1000, 10000,
 
 # 355
