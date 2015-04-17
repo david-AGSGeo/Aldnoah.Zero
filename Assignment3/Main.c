@@ -24,6 +24,8 @@
 #include "infrared.h"
 #include "steppermotor.h"
 #include "ser.h"
+#include "HMI.h"
+
 //check htc.h version
 
 #if (_HTC_VER_MAJOR_ < 9 && _HTC_VER_MINOR_ < 81)
@@ -37,12 +39,12 @@
 
 #define HBLED RB0 //Heartbeat LED
 #define LED0 RB1 //led for toggling
-#define PB0 !RB2 //button 0 pin	
-#define PB1 !RB3 //button 1 pin	
-#define PB2 !RB4 //button 2 pin	
-#define PB3 !RB5 //button 3 pin	
-#define DEBOUNCE_REQ_COUNT 10  //10ms debounce time
 
+#define UP 1
+#define DOWN 2
+#define LEFT 3
+#define RIGHT 4
+#define CENTER 5
 
 #define STEPS180  200	//half steps for a 180 degree rotation (using 200 step/rev steppermotor)
 
@@ -56,23 +58,7 @@
 unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
 
 
-//set up debounce variables 
-
-volatile bit pb0Pressed = 0;
-volatile bit pb0Released = 0;
-volatile unsigned char pb0DebounceCount = 0;
-
-volatile bit pb1Pressed = 0;
-volatile bit pb1Released = 0;
-volatile unsigned char pb1DebounceCount = 0;
-
-volatile bit pb2Pressed = 0;
-volatile bit pb2Released = 0;
-volatile unsigned char pb2DebounceCount = 0;
-
-volatile bit pb3Pressed = 0;
-volatile bit pb3Released = 0;
-volatile unsigned char pb3DebounceCount = 0;
+volatile unsigned char buttonPressed = 0;
 
 //set up flags for timer0 (currently not used))
 volatile bit RTC_FLAG_1MS = 0;
@@ -114,67 +100,7 @@ void interrupt isr1(void)
 			HBLED ^= 0x01;		//toggle heartbeat LED
 		}
 
-		//Debounce PB0
-		if(PB0)
-		{
-			pb0DebounceCount++; //count 10 ms, and then wait for release 
-			if(pb0DebounceCount >= DEBOUNCE_REQ_COUNT & pb0Released)
-			{
-				pb0Pressed = 1;			
-				pb0Released = 0;
-			}
-		}
-		else
-		{
-			pb0DebounceCount = 0;
-			pb0Released = 1;
-		}
-
-		//Debounce PB1
-		if(PB1)
-		{
-			pb1DebounceCount++;
-			if(pb1DebounceCount >= DEBOUNCE_REQ_COUNT & pb1Released)
-			{
-				pb1Pressed = 1;			
-				pb1Released = 0;
-			}
-		}
-		else
-		{
-			pb1DebounceCount = 0;
-			pb1Released = 1;
-		}
-		//Debounce PB2
-		if(PB2)
-		{
-			pb2DebounceCount++;
-			if(pb2DebounceCount >= DEBOUNCE_REQ_COUNT & pb2Released)
-			{
-				pb2Pressed = 1;			
-				pb2Released = 0;
-			}
-		}
-		else
-		{
-			pb2DebounceCount = 0;
-			pb2Released = 1;
-		}
-		//Debounce PB3
-		if(PB3)
-		{
-			pb3DebounceCount++;
-			if(pb3DebounceCount >= DEBOUNCE_REQ_COUNT & pb3Released)
-			{
-				pb3Pressed = 1;			
-				pb3Released = 0;
-			}
-		}
-		else
-		{
-			pb3DebounceCount = 0;
-			pb3Released = 1;
-		}
+		buttonPressed = ReadButtons();
 	}
 }
 
@@ -214,36 +140,6 @@ void main(void)
 	
 	//initialise function
 	init();
-			ser_putch(128); 
-		__delay_ms(100);
-		ser_putch(132); 
-		__delay_ms(100);
-		ser_putch(140); 
-		__delay_ms(100);
-		ser_putch(0); 
-		__delay_ms(100);
-		ser_putch(4); 
-		__delay_ms(100);
-		ser_putch(62); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(66); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(69); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(74); 
-		__delay_ms(100);
-		ser_putch(36); 
-		__delay_ms(100);
-		ser_putch(141); 
-		__delay_ms(100);
-		ser_putch(0); 
-		__delay_ms(10000);
 	//initialise stepper motor to known winding
 	//rotate(8, CLOCKWISE);
 
@@ -251,7 +147,37 @@ void main(void)
 
 	while(1)
 	{
-		if(pb0Pressed) //toggle LED0
+
+		switch (buttonPressed)
+		{
+			case UP:
+			LED0 ^= 0x01;
+			buttonPressed = 0;
+			break;
+			case DOWN:
+			LED0 ^= 0x01;
+			buttonPressed = 0;
+			break;
+			case LEFT:
+			LED0 ^= 0x01;
+			buttonPressed = 0;
+			break;
+			case RIGHT:
+			LED0 ^= 0x01;
+			buttonPressed = 0;
+			break;
+			case CENTER:
+			LED0 ^= 0x01;
+			buttonPressed = 0;
+			break;
+			default:
+			
+			break;
+		}
+		
+
+
+/*		if(pb0Pressed) //toggle LED0
 		{
 			pb0Pressed = 0;
 			
@@ -311,5 +237,6 @@ void main(void)
 			//rotate(STEPS180, current_direction);
 			current_direction ^= 0x01;
 		}
+		*/
 	}
 }

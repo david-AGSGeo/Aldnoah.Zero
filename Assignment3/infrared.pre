@@ -1194,14 +1194,10 @@ char adcOutput[16] = "";
 
 for (int i = 0; i < 10; i++)
 {
-fullval += adc_read_channel(0);
+fullval += readDistance();
 
 }
 averageval = fullval / 10;
-sprintf(adcOutput,"Adc Value: %d", averageval);
-
-
-
 return averageval;
 }
 
@@ -1209,15 +1205,8 @@ unsigned int readDistance(void)
 {
 unsigned int fullval ;
 
-char adcOutput[16] = "";
-
 fullval = adc_read_channel(0);
 
-sprintf(adcOutput,"Adc Value: %d", fullval);
-lcd_set_cursor(0x00);
-lcd_write_string(adcOutput);
-lcd_set_cursor(0x40);
-lcd_write_3_digit_bcd(fullval);
 return fullval;
 }
 
@@ -1281,8 +1270,7 @@ distance = 130 + (adcVal%100) ;
 
 
 lcd_write_control(0b00000001);
-sprintf(adcOutput,"Distance: %dcm", distance);
-lcd_set_cursor(0x40);
-
+sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+lcd_set_cursor(0x00);
 lcd_write_string(adcOutput);
 }
