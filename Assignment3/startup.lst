@@ -1,7 +1,7 @@
 
 
 HI-TECH Software PIC Macro Assembler V9.83 build 10920 
-                                                                                                           Fri Apr 17 12:32:36 2015
+                                                                                                           Fri Apr 17 14:21:00 2015
 
 
      1                           
@@ -15,8 +15,8 @@ HI-TECH Software PIC Macro Assembler V9.83 build 10920
      9                           	;
     10                           	; -oAssignment3_AldnoahZero.cof -mAssignment3_AldnoahZero.map \
     11                           	; --summary=default --output=default adc.p1 lcd.p1 Main.p1 infrared.p1 \
-    12                           	; steppermotor.p1 ser.p1 HMI.p1 --chip=16F877A -P --runtime=default \
-    13                           	; --opt=default -D__DEBUG=1 -g --asmlist \
+    12                           	; steppermotor.p1 ser.p1 HMI.p1 AT25256A.p1 --chip=16F877A -P \
+    13                           	; --runtime=default --opt=default -D__DEBUG=1 -g --asmlist \
     14                           	; --errformat=Error   [%n] %f; %l.%c %s --msgformat=Advisory[%n] %s \
     15                           	; --warnformat=Warning [%n] %f; %l.%c %s
     16                           	;
@@ -73,12 +73,12 @@ HI-TECH Software PIC Macro Assembler V9.83 build 10920
     67  0012                     _exit
     68                           	psect	end_init
     69                           	global start_initialization
-    70  0012  160A  118A  2EE0   	ljmp start_initialization	;jump to C runtime clear & initialization
+    70  0012  160A  118A  2E5F   	ljmp start_initialization	;jump to C runtime clear & initialization
 
 
 HI-TECH Software PICC Macro Assembler V9.83 build 10920 
-Symbol Table                                                                                               Fri Apr 17 12:32:36 2015
+Symbol Table                                                                                               Fri Apr 17 14:21:00 2015
 
-               _main 0A66                 _exit 0012                 start 0012  start_initialization 16E0  
+               _main 051E                 _exit 0012                 start 0012  start_initialization 165F  
            intlevel0 0000             intlevel1 0000             intlevel2 0000             intlevel3 0000  
            intlevel4 0000             intlevel5 0000             reset_vec 0000  

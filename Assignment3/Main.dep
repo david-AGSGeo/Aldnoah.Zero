@@ -1,14 +1,14 @@
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h
-H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
-H:\Aldnoah.Zero\trunk\Assignment3\ser.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\htc.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\chip_select.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h
-C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
-H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
-H:\Aldnoah.Zero\trunk\Assignment3\HMI.h
-H:\Aldnoah.Zero\trunk\Assignment3\adc.h
-H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h
+E:\Aldnoah.Zero\Assignment3\infrared.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+E:\Aldnoah.Zero\Assignment3\ser.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\htc.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\chip_select.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h
+C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
+E:\Aldnoah.Zero\Assignment3\lcd.h
+E:\Aldnoah.Zero\Assignment3\HMI.h
+E:\Aldnoah.Zero\Assignment3\adc.h
+E:\Aldnoah.Zero\Assignment3\steppermotor.h

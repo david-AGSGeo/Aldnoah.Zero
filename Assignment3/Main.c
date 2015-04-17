@@ -54,6 +54,12 @@
 #define COUNTERCLOCKWISE 1
 
 
+#define		SELECT_NONE()	RC0 = 0; RC1 = 0;
+#define		SELECT_EEPROM()	RC0 = 0; RC1 = 1;
+#define		SELECT_RF()		RC0 = 1; RC1 = 0;
+#define		SELECT_SM()		RC0 = 1; RC1 = 1;
+#define 	SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
+
 
 unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
 
@@ -84,7 +90,11 @@ void interrupt isr1(void)
 		RTC_Counter++;		//increase the count
 		//set clock flags (unused0
 		RTC_FLAG_1MS = 1;	
-		if(RTC_Counter % 10 == 0) RTC_FLAG_10MS = 1;	
+		if(RTC_Counter % 10 == 0) 
+		{
+			RTC_FLAG_10MS = 1;
+			//SM_STEP();
+		}
 		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
 		{
@@ -115,12 +125,14 @@ void init()
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
 
-	//PortC all Output
-	//TRISC = 0x00;
+	TRISC &= 0b10010000;	//set pin 6 to output for USART TX, pins for SPI and CS pins
 
+	SSPSTAT = 0b01000000;
+	SSPCON = 0b10100001; 
+	SELECT_NONE()	
 	//timer0 prescalar set
 	OPTION_REG = 0b00000100;
-
+	
 	//enable timer0 interrupt
 	TMR0IE = 1;
 	
@@ -130,7 +142,19 @@ void init()
 
 
 
+unsigned char spi_transfer(unsigned char data)
+{
+	unsigned char temp = 0;
 
+	SSPIF = 0;
+	SSPBUF = data;
+	
+	while (SSPIF == 0);  	
+	temp = SSPBUF;
+	SSPIF = 0;
+
+	return temp;
+}
 
 
 
@@ -150,7 +174,8 @@ void main(void)
 
 	while(1)
 	{
-
+		unsigned char choice = 255;
+		
 		switch (buttonPressed)
 		{
 			case UP:
@@ -178,7 +203,7 @@ void main(void)
 			
 			break;
 			case CENTER:
-			Menu(CENTER);
+			choice = Menu(CENTER);
 			LED0 ^= 0x01;
 			buttonPressed = 0;
 			
@@ -187,9 +212,59 @@ void main(void)
 			
 			break;
 		}
-	
-		
 
+		////////  THIS IS THE MENU ITEM SELECTIONS
+		switch (choice)
+		{
+			case 0:			
+				SELECT_SM();			// SPI select the Stepper M
+				spi_transfer(0b00001011);	//for clockwise rotation 
+				SELECT_NONE();
+				SM_STEP();
+			break;
+			case 1:
+			  
+				SELECT_SM();			// SPI select the Stepper M
+				spi_transfer(0b00001001);	//for clockwise rotation 
+				SELECT_NONE();
+				SM_STEP();
+			break;
+			case 2:
+				SELECT_SM();			// SPI select the Stepper M
+				spi_transfer(0b00001111);	//for clockwise rotation 
+				SELECT_NONE();
+				SM_STEP();
+			
+			break;
+			case 3:
+				SELECT_SM();			// SPI select the Stepper M
+				spi_transfer(0b00001101);	//for clockwise rotation 
+				SELECT_NONE();
+				SM_STEP();
+			
+			break;
+			case 4:
+				ser_putch(128); 
+				__delay_ms(100);
+				ser_putch(132); 
+				__delay_ms(100);
+ser_putch(137); 
+				__delay_ms(100);
+
+ser_putch(0); 
+				__delay_ms(100);
+ser_putch(0); 
+				__delay_ms(100);
+ser_putch(255); 
+				__delay_ms(100);
+ser_putch(255); 
+				__delay_ms(100);
+			break;
+			default:
+			
+			break;
+		}
+		choice = 255;
 
 /*		if(pb0Pressed) //toggle LED0
 		{

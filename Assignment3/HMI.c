@@ -178,7 +178,7 @@ unsigned char ReadButtons(void)
 	return 0;
 }
 
-void Menu(unsigned char input)
+unsigned char Menu(unsigned char input)
 {
 	switch (input)
 		{
@@ -201,32 +201,14 @@ void Menu(unsigned char input)
 			
 			break;
 			case CENTER:
-			switch (pos)
-			{
-				case 0:
-
-				break;
-				case 1:
-
-				break;
-				case 2:
-
-				break;
-				case 3:
-
-				break;
-				case 4:
-
-				break;
-				default:
-				break;
-			}			
+			return pos;
 			break;
 
 			default:
 			
 			break;
 		}
+	return 255; //no choice selected
 }
 
 void UpdateDisplay(void)

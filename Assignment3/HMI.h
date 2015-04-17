@@ -6,7 +6,7 @@
 
 
 unsigned char ReadButtons(void);
-void Menu(unsigned char input);
+unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
 
