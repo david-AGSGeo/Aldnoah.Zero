@@ -44,6 +44,7 @@ pclath	equ	10
 # 34 "E:\Aldnoah.Zero\Assignment3\Main.c"
 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
 	FNCALL	_main,_init
+	FNCALL	_main,_Menu
 	FNCALL	_init,_init_adc
 	FNCALL	_init,_lcd_init
 	FNCALL	_init,_ser_init
@@ -51,29 +52,50 @@ pclath	equ	10
 	FNROOT	_main
 	FNCALL	_isr1,___lwmod
 	FNCALL	_isr1,_readAvgDistance
-	FNCALL	_isr1,_ADCconvert
+	FNCALL	_isr1,_UpdateDisplay
 	FNCALL	_isr1,_ReadButtons
-	FNCALL	_ADCconvert,___lwmod
-	FNCALL	_ADCconvert,i1_lcd_write_control
-	FNCALL	_ADCconvert,_sprintf
-	FNCALL	_ADCconvert,_lcd_set_cursor
-	FNCALL	_ADCconvert,_lcd_write_string
+	FNCALL	_UpdateDisplay,i1_lcd_write_control
+	FNCALL	_UpdateDisplay,_sprintf
+	FNCALL	_UpdateDisplay,_lcd_set_cursor
+	FNCALL	_UpdateDisplay,_lcd_write_string
+	FNCALL	_UpdateDisplay,___awmod
 	FNCALL	_readAvgDistance,_readDistance
 	FNCALL	_readAvgDistance,___lwdiv
+	FNCALL	_readAvgDistance,_ADCconvert
 	FNCALL	_readDistance,_adc_read_channel
 	FNCALL	_lcd_write_string,_lcd_write_data
 	FNCALL	_lcd_set_cursor,i1_lcd_write_control
 	FNCALL	_sprintf,___lwdiv
 	FNCALL	_sprintf,___lwmod
+	FNCALL	_ADCconvert,___lwmod
 	FNCALL	_ReadButtons,_Debounce
 	FNCALL	_adc_read_channel,_adc_read
 	FNCALL	intlevel1,_isr1
 	global	intlevel1
 	FNROOT	intlevel1
+	global	_menuStrings
+	global	_shortMenuStrings
 	global	_current_step
 psect	idataBANK0,class=CODE,space=0,delta=2
 global __pidataBANK0
 __pidataBANK0:
+	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	line	34
+
+;initializer for _menuStrings
+	retlw	(STR_1-__stringbase)&0ffh
+	retlw	(STR_2-__stringbase)&0ffh
+	retlw	(STR_3-__stringbase)&0ffh
+	retlw	(STR_4-__stringbase)&0ffh
+	retlw	(STR_5-__stringbase)&0ffh
+	line	35
+
+;initializer for _shortMenuStrings
+	retlw	(STR_6-__stringbase)&0ffh
+	retlw	(STR_7-__stringbase)&0ffh
+	retlw	(STR_8-__stringbase)&0ffh
+	retlw	(STR_9-__stringbase)&0ffh
+	retlw	(STR_10-__stringbase)&0ffh
 	file	"E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 	line	21
 
@@ -86,6 +108,16 @@ __pstrings:
 ;	global	stringdir,stringtab,__stringbase
 stringtab:
 ;	String table - string pointers are 1 byte each
+	btfsc	(btemp+1),7
+	ljmp	stringcode
+	bcf	status,7
+	btfsc	(btemp+1),0
+	bsf	status,7
+	movf	indf,w
+	incf fsr
+skipnz
+incf btemp+1
+	return
 stringcode:stringdir:
 movlw high(stringdir)
 movwf pclath
@@ -115,6 +147,9 @@ _dpowers:
 
 	global	_dpowers
 	global	_RTC_Counter
+	global	_adcVal
+	global	_distance
+	global	_pos
 	global	_CenterDebounceCount
 	global	_DownDebounceCount
 	global	_LeftDebounceCount
@@ -142,10 +177,9 @@ _dpowers:
 	global	_RightReleased
 	global	_UpPressed
 	global	_UpReleased
-	global	ADCconvert@F1190
+	global	UpdateDisplay@F1206
 	global	_rxfifo
 	global	_txfifo
-	global	readAvgDistance@F1184
 	global	_ADCON0
 _ADCON0	set	31
 	global	_ADRESH
@@ -257,7 +291,7 @@ _WR	set	3169
 	global	_WREN
 _WREN	set	3170
 	
-STR_1:	
+STR_11:	
 	retlw	65	;'A'
 	retlw	68	;'D'
 	retlw	67	;'C'
@@ -272,6 +306,91 @@ STR_1:
 	retlw	58	;':'
 	retlw	37	;'%'
 	retlw	100	;'d'
+	retlw	0
+psect	strings
+	
+STR_1:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	105	;'i'
+	retlw	110	;'n'
+	retlw	103	;'g'
+	retlw	49	;'1'
+	retlw	0
+psect	strings
+	
+STR_2:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	105	;'i'
+	retlw	110	;'n'
+	retlw	103	;'g'
+	retlw	50	;'2'
+	retlw	0
+psect	strings
+	
+STR_3:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	105	;'i'
+	retlw	110	;'n'
+	retlw	103	;'g'
+	retlw	51	;'3'
+	retlw	0
+psect	strings
+	
+STR_4:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	105	;'i'
+	retlw	110	;'n'
+	retlw	103	;'g'
+	retlw	52	;'4'
+	retlw	0
+psect	strings
+	
+STR_5:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	105	;'i'
+	retlw	110	;'n'
+	retlw	103	;'g'
+	retlw	53	;'5'
+	retlw	0
+psect	strings
+	
+STR_6:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	49	;'1'
+	retlw	0
+psect	strings
+	
+STR_7:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	50	;'2'
+	retlw	0
+psect	strings
+	
+STR_8:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	51	;'3'
+	retlw	0
+psect	strings
+	
+STR_9:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	52	;'4'
+	retlw	0
+psect	strings
+	
+STR_10:	
+	retlw	84	;'T'
+	retlw	104	;'h'
+	retlw	53	;'5'
 	retlw	0
 psect	strings
 	file	"Assignment3_AldnoahZero.as"
@@ -334,6 +453,15 @@ __pbssBANK0:
 _RTC_Counter:
        ds      2
 
+_adcVal:
+       ds      2
+
+_distance:
+       ds      2
+
+_pos:
+       ds      2
+
 _CenterDebounceCount:
        ds      1
 
@@ -373,6 +501,18 @@ _txoptr:
 psect	dataBANK0,class=BANK0,space=1
 global __pdataBANK0
 __pdataBANK0:
+	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	line	34
+_menuStrings:
+       ds      5
+
+psect	dataBANK0
+	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	line	35
+_shortMenuStrings:
+       ds      5
+
+psect	dataBANK0
 	file	"E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 	line	21
 _current_step:
@@ -381,16 +521,13 @@ _current_step:
 psect	bssBANK1,class=BANK1,space=1
 global __pbssBANK1
 __pbssBANK1:
-ADCconvert@F1190:
+UpdateDisplay@F1206:
        ds      16
 
 _rxfifo:
        ds      16
 
 _txfifo:
-       ds      16
-
-readAvgDistance@F1184:
        ds      16
 
 psect clrtext,class=CODE,delta=2
@@ -417,19 +554,53 @@ psect cinit,class=CODE,delta=2
 	bcf	status, 7	;select IRP bank0
 	movlw	low(__pbssBANK0)
 	movwf	fsr
-	movlw	low((__pbssBANK0)+0Eh)
+	movlw	low((__pbssBANK0)+014h)
 	fcall	clear_ram
 ; Clear objects allocated to BANK1
 psect cinit,class=CODE,delta=2
 	movlw	low(__pbssBANK1)
 	movwf	fsr
-	movlw	low((__pbssBANK1)+040h)
+	movlw	low((__pbssBANK1)+030h)
 	fcall	clear_ram
+global btemp
+psect inittext,class=CODE,delta=2
+global init_fetch,btemp
+;	Called with low address in FSR and high address in W
+init_fetch:
+	movf btemp,w
+	movwf pclath
+	movf btemp+1,w
+	movwf pc
+global init_ram
+;Called with:
+;	high address of idata address in btemp 
+;	low address of idata address in btemp+1 
+;	low address of data in FSR
+;	high address + 1 of data in btemp-1
+init_ram:
+	fcall init_fetch
+	movwf indf,f
+	incf fsr,f
+	movf fsr,w
+	xorwf btemp-1,w
+	btfsc status,2
+	retlw 0
+	incf btemp+1,f
+	btfsc status,2
+	incf btemp,f
+	goto init_ram
 ; Initialize objects allocated to BANK0
-	global __pidataBANK0
 psect cinit,class=CODE,delta=2
-	fcall	__pidataBANK0+0		;fetch initializer
-	movwf	__pdataBANK0+0&07fh		
+global init_ram, __pidataBANK0
+	movlw low(__pdataBANK0+11)
+	movwf btemp-1,f
+	movlw high(__pidataBANK0)
+	movwf btemp,f
+	movlw low(__pidataBANK0)
+	movwf btemp+1,f
+	movlw low(__pdataBANK0)
+	movwf fsr,f
+	fcall init_ram
 psect cinit,class=CODE,delta=2
 global end_of_initialization
 
@@ -443,10 +614,14 @@ global __pcstackBANK1
 __pcstackBANK1:
 	global	??_ser_init
 ??_ser_init:	; 0 bytes @ 0x0
+	global	??_Menu
+??_Menu:	; 0 bytes @ 0x0
 	global	??_init_adc
 ??_init_adc:	; 0 bytes @ 0x0
 	global	??_lcd_write_control
 ??_lcd_write_control:	; 0 bytes @ 0x0
+	global	Menu@input
+Menu@input:	; 1 bytes @ 0x0
 	ds	2
 	global	lcd_write_control@databyte
 lcd_write_control@databyte:	; 1 bytes @ 0x2
@@ -460,8 +635,16 @@ lcd_write_control@databyte:	; 1 bytes @ 0x2
 psect	cstackCOMMON,class=COMMON,space=1
 global __pcstackCOMMON
 __pcstackCOMMON:
+	global	?_readAvgDistance
+?_readAvgDistance:	; 0 bytes @ 0x0
+	global	?_UpdateDisplay
+?_UpdateDisplay:	; 0 bytes @ 0x0
 	global	?_ser_init
 ?_ser_init:	; 0 bytes @ 0x0
+	global	?_Menu
+?_Menu:	; 0 bytes @ 0x0
+	global	?_ADCconvert
+?_ADCconvert:	; 0 bytes @ 0x0
 	global	?_init_adc
 ?_init_adc:	; 0 bytes @ 0x0
 	global	?_lcd_write_control
@@ -472,8 +655,6 @@ __pcstackCOMMON:
 ??_lcd_write_data:	; 0 bytes @ 0x0
 	global	?_lcd_set_cursor
 ?_lcd_set_cursor:	; 0 bytes @ 0x0
-	global	?_lcd_write_string
-?_lcd_write_string:	; 0 bytes @ 0x0
 	global	?_lcd_init
 ?_lcd_init:	; 0 bytes @ 0x0
 	global	?_isr1
@@ -498,8 +679,12 @@ __pcstackCOMMON:
 ?_adc_read:	; 2 bytes @ 0x0
 	global	?___lwdiv
 ?___lwdiv:	; 2 bytes @ 0x0
+	global	?___awmod
+?___awmod:	; 2 bytes @ 0x0
 	global	___lwdiv@divisor
 ___lwdiv@divisor:	; 2 bytes @ 0x0
+	global	___awmod@divisor
+___awmod@divisor:	; 2 bytes @ 0x0
 	ds	1
 	global	??_ReadButtons
 ??_ReadButtons:	; 0 bytes @ 0x1
@@ -512,31 +697,39 @@ lcd_write_data@databyte:	; 1 bytes @ 0x2
 i1lcd_write_control@databyte:	; 1 bytes @ 0x2
 	global	___lwdiv@dividend
 ___lwdiv@dividend:	; 2 bytes @ 0x2
+	global	___awmod@dividend
+___awmod@dividend:	; 2 bytes @ 0x2
 	ds	1
 	global	??_lcd_set_cursor
 ??_lcd_set_cursor:	; 0 bytes @ 0x3
-	global	??_lcd_write_string
-??_lcd_write_string:	; 0 bytes @ 0x3
 	global	lcd_set_cursor@address
 lcd_set_cursor@address:	; 1 bytes @ 0x3
 	ds	1
 	global	??___lwdiv
 ??___lwdiv:	; 0 bytes @ 0x4
-	global	lcd_write_string@s
-lcd_write_string@s:	; 1 bytes @ 0x4
+	global	??___awmod
+??___awmod:	; 0 bytes @ 0x4
 	global	adc_read@adc_value
 adc_read@adc_value:	; 2 bytes @ 0x4
 	ds	1
+	global	___awmod@counter
+___awmod@counter:	; 1 bytes @ 0x5
 	global	___lwdiv@quotient
 ___lwdiv@quotient:	; 2 bytes @ 0x5
 	ds	1
 	global	??_adc_read_channel
 ??_adc_read_channel:	; 0 bytes @ 0x6
+	global	___awmod@sign
+___awmod@sign:	; 1 bytes @ 0x6
 	ds	1
+	global	?_lcd_write_string
+?_lcd_write_string:	; 0 bytes @ 0x7
 	global	adc_read_channel@channel
 adc_read_channel@channel:	; 1 bytes @ 0x7
 	global	___lwdiv@counter
 ___lwdiv@counter:	; 1 bytes @ 0x7
+	global	lcd_write_string@s
+lcd_write_string@s:	; 2 bytes @ 0x7
 	ds	1
 	global	?_readDistance
 ?_readDistance:	; 2 bytes @ 0x8
@@ -544,7 +737,10 @@ ___lwdiv@counter:	; 1 bytes @ 0x7
 ?___lwmod:	; 2 bytes @ 0x8
 	global	___lwmod@divisor
 ___lwmod@divisor:	; 2 bytes @ 0x8
-	ds	2
+	ds	1
+	global	??_lcd_write_string
+??_lcd_write_string:	; 0 bytes @ 0x9
+	ds	1
 	global	??_readDistance
 ??_readDistance:	; 0 bytes @ 0xA
 	global	___lwmod@dividend
@@ -558,25 +754,26 @@ readDistance@fullval:	; 2 bytes @ 0xC
 	global	___lwmod@counter
 ___lwmod@counter:	; 1 bytes @ 0xD
 	ds	1
+	global	??_readAvgDistance
+??_readAvgDistance:	; 0 bytes @ 0xE
+	global	??_ADCconvert
+??_ADCconvert:	; 0 bytes @ 0xE
 psect	cstackBANK0,class=BANK0,space=1
 global __pcstackBANK0
 __pcstackBANK0:
-	global	?_readAvgDistance
-?_readAvgDistance:	; 2 bytes @ 0x0
 	global	?_sprintf
 ?_sprintf:	; 2 bytes @ 0x0
 	global	sprintf@f
 sprintf@f:	; 1 bytes @ 0x0
+	global	readAvgDistance@fullval
+readAvgDistance@fullval:	; 2 bytes @ 0x0
 	ds	2
-	global	??_readAvgDistance
-??_readAvgDistance:	; 0 bytes @ 0x2
+	global	readAvgDistance@i
+readAvgDistance@i:	; 2 bytes @ 0x2
 	ds	3
 	global	??_sprintf
 ??_sprintf:	; 0 bytes @ 0x5
-	ds	1
-	global	readAvgDistance@adcOutput
-readAvgDistance@adcOutput:	; 16 bytes @ 0x6
-	ds	2
+	ds	3
 	global	sprintf@ap
 sprintf@ap:	; 1 bytes @ 0x8
 	ds	1
@@ -594,47 +791,30 @@ sprintf@sp:	; 1 bytes @ 0xF
 	ds	1
 	global	sprintf@c
 sprintf@c:	; 1 bytes @ 0x10
-	ds	6
-	global	readAvgDistance@averageval
-readAvgDistance@averageval:	; 2 bytes @ 0x16
-	ds	2
-	global	readAvgDistance@fullval
-readAvgDistance@fullval:	; 2 bytes @ 0x18
-	ds	2
-	global	readAvgDistance@i
-readAvgDistance@i:	; 2 bytes @ 0x1A
-	ds	2
-	global	?_ADCconvert
-?_ADCconvert:	; 0 bytes @ 0x1C
-	global	ADCconvert@adcVal
-ADCconvert@adcVal:	; 2 bytes @ 0x1C
-	ds	2
-	global	??_ADCconvert
-??_ADCconvert:	; 0 bytes @ 0x1E
+	ds	1
+	global	??_UpdateDisplay
+??_UpdateDisplay:	; 0 bytes @ 0x11
 	ds	4
-	global	ADCconvert@adcOutput
-ADCconvert@adcOutput:	; 16 bytes @ 0x22
+	global	UpdateDisplay@adcOutput
+UpdateDisplay@adcOutput:	; 16 bytes @ 0x15
 	ds	16
-	global	ADCconvert@distance
-ADCconvert@distance:	; 2 bytes @ 0x32
-	ds	2
 	global	??_isr1
-??_isr1:	; 0 bytes @ 0x34
+??_isr1:	; 0 bytes @ 0x25
 	ds	5
-;;Data sizes: Strings 15, constant 10, data 1, bss 78, persistent 0 stack 0
+;;Data sizes: Strings 70, constant 10, data 11, bss 68, persistent 0 stack 0
 ;;Auto spaces:   Size  Autos    Used
 ;; COMMON          14     14      14
-;; BANK0           80     57      74
-;; BANK1           80      3      67
+;; BANK0           80     42      75
+;; BANK1           80      3      51
 ;; BANK3           96      0       0
 ;; BANK2           96      0       0
 
 ;;
 ;; Pointer list with targets:
 
-;; ?_readDistance	unsigned int  size(1) Largest target is 0
+;; ?___awmod	int  size(1) Largest target is 0
 ;;
-;; ?_readAvgDistance	unsigned int  size(1) Largest target is 0
+;; ?_readDistance	unsigned int  size(1) Largest target is 0
 ;;
 ;; ?___lwdiv	unsigned int  size(1) Largest target is 0
 ;;
@@ -643,22 +823,32 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;; ?_adc_read	unsigned int  size(1) Largest target is 0
 ;;
 ;; sprintf@f	PTR const unsigned char  size(1) Largest target is 15
-;;		 -> STR_1(CODE[15]), 
+;;		 -> STR_11(CODE[15]), 
 ;;
 ;; sprintf@sp	PTR unsigned char  size(1) Largest target is 16
-;;		 -> ADCconvert@adcOutput(BANK0[16]), 
+;;		 -> UpdateDisplay@adcOutput(BANK0[16]), 
 ;;
 ;; ?_sprintf	int  size(1) Largest target is 0
 ;;
 ;; sprintf@ap	PTR void [1] size(1) Largest target is 2
 ;;		 -> ?_sprintf(BANK0[2]), 
 ;;
-;; S6328$_cp	PTR const unsigned char  size(1) Largest target is 0
+;; S6353$_cp	PTR const unsigned char  size(1) Largest target is 0
 ;;
 ;; _val._str._cp	PTR const unsigned char  size(1) Largest target is 0
 ;;
-;; lcd_write_string@s	PTR unsigned char  size(1) Largest target is 16
-;;		 -> ADCconvert@adcOutput(BANK0[16]), 
+;; shortMenuStrings	PTR const unsigned char [5] size(1) Largest target is 4
+;;		 -> STR_10(CODE[4]), STR_9(CODE[4]), STR_8(CODE[4]), STR_7(CODE[4]), 
+;;		 -> STR_6(CODE[4]), 
+;;
+;; menuStrings	PTR const unsigned char [5] size(1) Largest target is 7
+;;		 -> STR_5(CODE[7]), STR_4(CODE[7]), STR_3(CODE[7]), STR_2(CODE[7]), 
+;;		 -> STR_1(CODE[7]), 
+;;
+;; lcd_write_string@s	PTR unsigned char  size(2) Largest target is 16
+;;		 -> UpdateDisplay@adcOutput(BANK0[16]), STR_10(CODE[4]), STR_9(CODE[4]), STR_8(CODE[4]), 
+;;		 -> STR_7(CODE[4]), STR_6(CODE[4]), STR_5(CODE[7]), STR_4(CODE[7]), 
+;;		 -> STR_3(CODE[7]), STR_2(CODE[7]), STR_1(CODE[7]), 
 ;;
 
 
@@ -670,12 +860,12 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;; Critical Paths under _isr1 in COMMON
 ;;
 ;;   _isr1->___lwmod
-;;   _ADCconvert->___lwmod
 ;;   _readAvgDistance->_readDistance
 ;;   _readDistance->_adc_read_channel
-;;   _lcd_write_string->_lcd_write_data
+;;   _lcd_write_string->___awmod
 ;;   _lcd_set_cursor->i1_lcd_write_control
 ;;   _sprintf->___lwmod
+;;   _ADCconvert->___lwmod
 ;;   _ReadButtons->_Debounce
 ;;   _adc_read_channel->_adc_read
 ;;   ___lwmod->___lwdiv
@@ -686,8 +876,8 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;;
 ;; Critical Paths under _isr1 in BANK0
 ;;
-;;   _isr1->_ADCconvert
-;;   _ADCconvert->_readAvgDistance
+;;   _isr1->_UpdateDisplay
+;;   _UpdateDisplay->_sprintf
 ;;
 ;; Critical Paths under _main in BANK1
 ;;
@@ -723,8 +913,9 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;; ---------------------------------------------------------------------------------
 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;; ---------------------------------------------------------------------------------
-;; (0) _main                                                 0     0      0      22
+;; (0) _main                                                 0     0      0      44
 ;;                               _init
+;;                               _Menu
 ;; ---------------------------------------------------------------------------------
 ;; (1) _init                                                 0     0      0      22
 ;;                           _init_adc
@@ -740,6 +931,9 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;; (2) _init_adc                                             1     1      0       0
 ;;                                              0 BANK1      1     1      0
 ;; ---------------------------------------------------------------------------------
+;; (1) _Menu                                                 1     1      0      22
+;;                                              0 BANK1      1     1      0
+;; ---------------------------------------------------------------------------------
 ;; (2) _ser_init                                             1     1      0       0
 ;;                                              0 BANK1      1     1      0
 ;; ---------------------------------------------------------------------------------
@@ -747,34 +941,35 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;; ---------------------------------------------------------------------------------
 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;; ---------------------------------------------------------------------------------
-;; (4) _isr1                                                 5     5      0    2581
-;;                                             52 BANK0      5     5      0
+;; (4) _isr1                                                 5     5      0    2004
+;;                                             37 BANK0      5     5      0
 ;;                            ___lwmod
 ;;                    _readAvgDistance
-;;                         _ADCconvert
+;;                      _UpdateDisplay
 ;;                        _ReadButtons
 ;; ---------------------------------------------------------------------------------
-;; (5) _ADCconvert                                          24    22      2    2097
-;;                                             28 BANK0     24    22      2
-;;                            ___lwmod
+;; (5) _UpdateDisplay                                       20    20      0    1385
+;;                                             17 BANK0     20    20      0
 ;;                i1_lcd_write_control
 ;;                            _sprintf
 ;;                     _lcd_set_cursor
 ;;                   _lcd_write_string
-;;                    _readAvgDistance (ARG)
+;;                            ___awmod
 ;; ---------------------------------------------------------------------------------
-;; (5) _readAvgDistance                                     28    26      2     325
-;;                                              0 BANK0     28    26      2
+;; (5) _readAvgDistance                                      4     4      0     460
+;;                                              0 BANK0      4     4      0
 ;;                       _readDistance
 ;;                            ___lwdiv
+;;                         _ADCconvert
 ;; ---------------------------------------------------------------------------------
 ;; (6) _readDistance                                         6     4      2      69
 ;;                                              8 COMMON     6     4      2
 ;;                   _adc_read_channel
 ;; ---------------------------------------------------------------------------------
-;; (6) _lcd_write_string                                     2     2      0      67
-;;                                              3 COMMON     2     2      0
+;; (6) _lcd_write_string                                     2     0      2      67
+;;                                              7 COMMON     2     0      2
 ;;                     _lcd_write_data
+;;                            ___awmod (ARG)
 ;; ---------------------------------------------------------------------------------
 ;; (6) _lcd_set_cursor                                       1     1      0      96
 ;;                                              3 COMMON     1     1      0
@@ -788,6 +983,9 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;;                            ___lwdiv
 ;;                            ___lwmod
 ;; ---------------------------------------------------------------------------------
+;; (6) _ADCconvert                                           0     0      0     159
+;;                            ___lwmod
+;; ---------------------------------------------------------------------------------
 ;; (5) _ReadButtons                                          0     0      0       0
 ;;                           _Debounce
 ;; ---------------------------------------------------------------------------------
@@ -797,6 +995,9 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;; (7) _adc_read_channel                                     2     2      0      46
 ;;                                              6 COMMON     2     2      0
 ;;                           _adc_read
+;; ---------------------------------------------------------------------------------
+;; (6) ___awmod                                              7     3      4     296
+;;                                              0 COMMON     7     3      4
 ;; ---------------------------------------------------------------------------------
 ;; (7) ___lwmod                                              6     2      4     159
 ;;                                              8 COMMON     6     2      4
@@ -822,6 +1023,7 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;;     _lcd_init
 ;;       _lcd_write_control
 ;;     _ser_init
+;;   _Menu
 ;;
 ;; _isr1 (ROOT)
 ;;   ___lwmod
@@ -831,9 +1033,10 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;;       _adc_read_channel
 ;;         _adc_read
 ;;     ___lwdiv
-;;   _ADCconvert
-;;     ___lwmod
-;;       ___lwdiv (ARG)
+;;     _ADCconvert
+;;       ___lwmod
+;;         ___lwdiv (ARG)
+;;   _UpdateDisplay
 ;;     i1_lcd_write_control
 ;;     _sprintf
 ;;       ___lwdiv
@@ -843,11 +1046,8 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;;       i1_lcd_write_control
 ;;     _lcd_write_string
 ;;       _lcd_write_data
-;;     _readAvgDistance (ARG)
-;;       _readDistance
-;;         _adc_read_channel
-;;           _adc_read
-;;       ___lwdiv
+;;       ___awmod (ARG)
+;;     ___awmod
 ;;   _ReadButtons
 ;;     _Debounce
 ;;
@@ -865,14 +1065,14 @@ ADCconvert@distance:	; 2 bytes @ 0x32
 ;;BITSFR2              0      0       0       5        0.0%
 ;;SFR1                 0      0       0       2        0.0%
 ;;BITSFR1              0      0       0       2        0.0%
-;;BANK1               50      3      43       7       83.8%
+;;BANK1               50      3      33       7       63.8%
 ;;BITBANK1            50      0       0       6        0.0%
 ;;CODE                 0      0       0       0        0.0%
-;;DATA                 0      0      A8      12        0.0%
-;;ABS                  0      0      9B       3        0.0%
+;;DATA                 0      0      99      12        0.0%
+;;ABS                  0      0      8C       3        0.0%
 ;;NULL                 0      0       0       0        0.0%
 ;;STACK                0      0       D       2        0.0%
-;;BANK0               50     39      4A       5       92.5%
+;;BANK0               50     2A      4B       5       93.8%
 ;;BITBANK0            50      0       2       4        2.5%
 ;;SFR0                 0      0       0       1        0.0%
 ;;BITSFR0              0      0       0       1        0.0%
@@ -887,7 +1087,7 @@ __pmaintext:
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 137 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
+;;		line 140 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -909,143 +1109,182 @@ __pmaintext:
 ;; Hardware stack levels required when called:    8
 ;; This function calls:
 ;;		_init
+;;		_Menu
 ;; This function is called by:
 ;;		Startup code after reset
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext
 	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
-	line	137
+	line	140
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
 	
 _main:	
 	opt	stack 0
 ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
-	line	142
+	line	145
 	
-l8640:	
-;Main.c: 142: init();
+l8827:	
+;Main.c: 145: init();
 	fcall	_init
-	goto	l8664
-	line	148
-;Main.c: 148: while(1)
-	
-l2165:	
+	goto	l8861
 	line	151
-;Main.c: 149: {
-;Main.c: 151: switch (buttonPressed)
-	goto	l8664
-	line	153
-;Main.c: 152: {
-;Main.c: 153: case 1:
+;Main.c: 151: while(1)
 	
-l2167:	
+l2172:	
 	line	154
+;Main.c: 152: {
+;Main.c: 154: switch (buttonPressed)
+	goto	l8861
+	line	156
+;Main.c: 155: {
+;Main.c: 156: case 1:
 	
-l8642:	
-;Main.c: 154: RB1 ^= 0x01;
+l2174:	
+	line	157
+	
+l8829:	
+;Main.c: 157: Menu(1);
+	movlw	(01h)
+	fcall	_Menu
+	line	158
+	
+l8831:	
+;Main.c: 158: RB1 ^= 0x01;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movlw	1<<((49)&7)
 	xorwf	((49)/8),f
-	line	155
-	
-l8644:	
-;Main.c: 155: buttonPressed = 0;
-	clrf	(_buttonPressed)	;volatile
-	line	156
-;Main.c: 156: break;
-	goto	l8664
-	line	157
-;Main.c: 157: case 2:
-	
-l2169:	
-	line	158
-	
-l8646:	
-;Main.c: 158: RB1 ^= 0x01;
-	movlw	1<<((49)&7)
-	xorwf	((49)/8),f
 	line	159
 	
-l8648:	
+l8833:	
 ;Main.c: 159: buttonPressed = 0;
 	clrf	(_buttonPressed)	;volatile
-	line	160
-;Main.c: 160: break;
-	goto	l8664
 	line	161
-;Main.c: 161: case 3:
-	
-l2170:	
+;Main.c: 161: break;
+	goto	l8861
 	line	162
+;Main.c: 162: case 2:
 	
-l8650:	
-;Main.c: 162: RB1 ^= 0x01;
-	movlw	1<<((49)&7)
-	xorwf	((49)/8),f
+l2176:	
 	line	163
 	
-l8652:	
-;Main.c: 163: buttonPressed = 0;
-	clrf	(_buttonPressed)	;volatile
+l8835:	
+;Main.c: 163: Menu(2);
+	movlw	(02h)
+	fcall	_Menu
 	line	164
-;Main.c: 164: break;
-	goto	l8664
-	line	165
-;Main.c: 165: case 4:
 	
-l2171:	
-	line	166
-	
-l8654:	
-;Main.c: 166: RB1 ^= 0x01;
+l8837:	
+;Main.c: 164: RB1 ^= 0x01;
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
 	movlw	1<<((49)&7)
 	xorwf	((49)/8),f
-	line	167
+	line	165
 	
-l8656:	
-;Main.c: 167: buttonPressed = 0;
+l8839:	
+;Main.c: 165: buttonPressed = 0;
 	clrf	(_buttonPressed)	;volatile
+	line	167
+;Main.c: 167: break;
+	goto	l8861
 	line	168
-;Main.c: 168: break;
-	goto	l8664
-	line	169
-;Main.c: 169: case 5:
+;Main.c: 168: case 3:
 	
-l2172:	
+l2177:	
+	line	169
+	
+l8841:	
+;Main.c: 169: Menu(3);
+	movlw	(03h)
+	fcall	_Menu
 	line	170
 	
-l8658:	
+l8843:	
 ;Main.c: 170: RB1 ^= 0x01;
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
 	movlw	1<<((49)&7)
 	xorwf	((49)/8),f
 	line	171
 	
-l8660:	
+l8845:	
 ;Main.c: 171: buttonPressed = 0;
 	clrf	(_buttonPressed)	;volatile
-	line	172
-;Main.c: 172: break;
-	goto	l8664
 	line	173
-;Main.c: 173: default:
+;Main.c: 173: break;
+	goto	l8861
+	line	174
+;Main.c: 174: case 4:
 	
-l2173:	
+l2178:	
 	line	175
-;Main.c: 175: break;
-	goto	l8664
+	
+l8847:	
+;Main.c: 175: Menu(4);
+	movlw	(04h)
+	fcall	_Menu
 	line	176
 	
-l8662:	
-;Main.c: 176: }
-	goto	l8664
-	line	151
+l8849:	
+;Main.c: 176: RB1 ^= 0x01;
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movlw	1<<((49)&7)
+	xorwf	((49)/8),f
+	line	177
 	
-l2166:	
+l8851:	
+;Main.c: 177: buttonPressed = 0;
+	clrf	(_buttonPressed)	;volatile
+	line	179
+;Main.c: 179: break;
+	goto	l8861
+	line	180
+;Main.c: 180: case 5:
 	
-l8664:	
+l2179:	
+	line	181
+	
+l8853:	
+;Main.c: 181: Menu(5);
+	movlw	(05h)
+	fcall	_Menu
+	line	182
+	
+l8855:	
+;Main.c: 182: RB1 ^= 0x01;
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movlw	1<<((49)&7)
+	xorwf	((49)/8),f
+	line	183
+	
+l8857:	
+;Main.c: 183: buttonPressed = 0;
+	clrf	(_buttonPressed)	;volatile
+	line	185
+;Main.c: 185: break;
+	goto	l8861
+	line	186
+;Main.c: 186: default:
+	
+l2180:	
+	line	188
+;Main.c: 188: break;
+	goto	l8861
+	line	189
+	
+l8859:	
+;Main.c: 189: }
+	goto	l8861
+	line	154
+	
+l2173:	
+	
+l8861:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_buttonPressed),w	;volatile
@@ -1061,36 +1300,36 @@ l8664:
 	opt asmopt_off
 	xorlw	1^0	; case 1
 	skipnz
-	goto	l8642
+	goto	l8829
 	xorlw	2^1	; case 2
 	skipnz
-	goto	l8646
+	goto	l8835
 	xorlw	3^2	; case 3
 	skipnz
-	goto	l8650
+	goto	l8841
 	xorlw	4^3	; case 4
 	skipnz
-	goto	l8654
+	goto	l8847
 	xorlw	5^4	; case 5
 	skipnz
-	goto	l8658
-	goto	l8664
+	goto	l8853
+	goto	l8861
 	opt asmopt_on
 
-	line	176
-	
-l2168:	
-	goto	l8664
-	line	241
-	
-l2174:	
-	line	148
-	goto	l8664
+	line	189
 	
 l2175:	
-	line	242
+	goto	l8861
+	line	255
 	
-l2176:	
+l2181:	
+	line	151
+	goto	l8861
+	
+l2182:	
+	line	256
+	
+l2183:	
 	global	start
 	ljmp	start
 	opt stack 0
@@ -1100,13 +1339,13 @@ GLOBAL	__end_of_main
 
 	signat	_main,88
 	global	_init
-psect	text532,local,class=CODE,delta=2
-global __ptext532
-__ptext532:
+psect	text579,local,class=CODE,delta=2
+global __ptext579
+__ptext579:
 
 ;; *************** function _init *****************
 ;; Defined at:
-;;		line 108 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
+;;		line 111 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -1135,53 +1374,53 @@ __ptext532:
 ;;		_main
 ;; This function uses a non-reentrant model
 ;;
-psect	text532
+psect	text579
 	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
-	line	108
+	line	111
 	global	__size_of_init
 	__size_of_init	equ	__end_of_init-_init
 	
 _init:	
 	opt	stack 0
 ; Regs used in _init: [wreg+status,2+status,0+pclath+cstack]
-	line	109
+	line	112
 	
-l8630:	
-;Main.c: 109: init_adc();
+l8817:	
+;Main.c: 112: init_adc();
 	fcall	_init_adc
-	line	110
-;Main.c: 110: lcd_init();
-	fcall	_lcd_init
-	line	111
-;Main.c: 111: ser_init();
-	fcall	_ser_init
 	line	113
+;Main.c: 113: lcd_init();
+	fcall	_lcd_init
+	line	114
+;Main.c: 114: ser_init();
+	fcall	_ser_init
+	line	116
 	
-l8632:	
-;Main.c: 113: TRISB = 0b11111100;
+l8819:	
+;Main.c: 116: TRISB = 0b11111100;
 	movlw	(0FCh)
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(134)^080h	;volatile
-	line	119
-	
-l8634:	
-;Main.c: 119: OPTION_REG = 0b00000100;
-	movlw	(04h)
-	movwf	(129)^080h	;volatile
 	line	122
 	
-l8636:	
-;Main.c: 122: TMR0IE = 1;
-	bsf	(93/8),(93)&7
+l8821:	
+;Main.c: 122: OPTION_REG = 0b00000100;
+	movlw	(04h)
+	movwf	(129)^080h	;volatile
 	line	125
 	
-l8638:	
-;Main.c: 125: (GIE = 1);
-	bsf	(95/8),(95)&7
-	line	126
+l8823:	
+;Main.c: 125: TMR0IE = 1;
+	bsf	(93/8),(93)&7
+	line	128
 	
-l2162:	
+l8825:	
+;Main.c: 128: (GIE = 1);
+	bsf	(95/8),(95)&7
+	line	129
+	
+l2169:	
 	return
 	opt stack 0
 GLOBAL	__end_of_init
@@ -1190,9 +1429,9 @@ GLOBAL	__end_of_init
 
 	signat	_init,88
 	global	_lcd_init
-psect	text533,local,class=CODE,delta=2
-global __ptext533
-__ptext533:
+psect	text580,local,class=CODE,delta=2
+global __ptext580
+__ptext580:
 
 ;; *************** function _lcd_init *****************
 ;; Defined at:
@@ -1223,7 +1462,7 @@ __ptext533:
 ;;		_init
 ;; This function uses a non-reentrant model
 ;;
-psect	text533
+psect	text580
 	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	101
 	global	__size_of_lcd_init
@@ -1234,7 +1473,7 @@ _lcd_init:
 ; Regs used in _lcd_init: [wreg+status,2+status,0+pclath+cstack]
 	line	105
 	
-l8610:	
+l8797:	
 ;lcd.c: 105: ADCON1 = 0b00000010;
 	movlw	(02h)
 	bsf	status, 5	;RP0=1, select bank1
@@ -1242,55 +1481,55 @@ l8610:
 	movwf	(159)^080h	;volatile
 	line	108
 	
-l8612:	
+l8799:	
 ;lcd.c: 108: PORTD = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(8)	;volatile
 	line	109
 	
-l8614:	
+l8801:	
 ;lcd.c: 109: PORTE = 0;
 	clrf	(9)	;volatile
 	line	111
 	
-l8616:	
+l8803:	
 ;lcd.c: 111: TRISD = 0b00000000;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(136)^080h	;volatile
 	line	112
 	
-l8618:	
+l8805:	
 ;lcd.c: 112: TRISE = 0b00000000;
 	clrf	(137)^080h	;volatile
 	line	115
 	
-l8620:	
+l8807:	
 ;lcd.c: 115: lcd_write_control(0b00000001);
 	movlw	(01h)
 	fcall	_lcd_write_control
 	line	116
 	
-l8622:	
+l8809:	
 ;lcd.c: 116: lcd_write_control(0b00111000);
 	movlw	(038h)
 	fcall	_lcd_write_control
 	line	117
 	
-l8624:	
+l8811:	
 ;lcd.c: 117: lcd_write_control(0b00001100);
 	movlw	(0Ch)
 	fcall	_lcd_write_control
 	line	118
 	
-l8626:	
+l8813:	
 ;lcd.c: 118: lcd_write_control(0b00000110);
 	movlw	(06h)
 	fcall	_lcd_write_control
 	line	119
 	
-l8628:	
+l8815:	
 ;lcd.c: 119: lcd_write_control(0b00000010);
 	movlw	(02h)
 	fcall	_lcd_write_control
@@ -1305,9 +1544,9 @@ GLOBAL	__end_of_lcd_init
 
 	signat	_lcd_init,88
 	global	_lcd_write_control
-psect	text534,local,class=CODE,delta=2
-global __ptext534
-__ptext534:
+psect	text581,local,class=CODE,delta=2
+global __ptext581
+__ptext581:
 
 ;; *************** function _lcd_write_control *****************
 ;; Defined at:
@@ -1338,7 +1577,7 @@ __ptext534:
 ;;		_lcd_init
 ;; This function uses a non-reentrant model
 ;;
-psect	text534
+psect	text581
 	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	18
 	global	__size_of_lcd_write_control
@@ -1353,7 +1592,7 @@ _lcd_write_control:
 	movwf	(lcd_write_control@databyte)^080h
 	line	19
 	
-l8602:	
+l8789:	
 ;lcd.c: 19: RE2 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
@@ -1366,7 +1605,7 @@ l8602:
 	bcf	(72/8),(72)&7
 	line	22
 	
-l8604:	
+l8791:	
 ;lcd.c: 22: PORTD = databyte;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
@@ -1376,12 +1615,12 @@ l8604:
 	movwf	(8)	;volatile
 	line	23
 	
-l8606:	
+l8793:	
 ;lcd.c: 23: RE2 = 1;
 	bsf	(74/8),(74)&7
 	line	24
 	
-l8608:	
+l8795:	
 ;lcd.c: 24: RE2 = 0;
 	bcf	(74/8),(74)&7
 	line	25
@@ -1393,11 +1632,11 @@ movlw	13
 movwf	((??_lcd_write_control+0)^080h+0+1),f
 	movlw	251
 movwf	((??_lcd_write_control+0)^080h+0),f
-u4057:
+u4207:
 	decfsz	((??_lcd_write_control+0)^080h+0),f
-	goto	u4057
+	goto	u4207
 	decfsz	((??_lcd_write_control+0)^080h+0+1),f
-	goto	u4057
+	goto	u4207
 	nop2
 opt asmopt_on
 
@@ -1412,9 +1651,9 @@ GLOBAL	__end_of_lcd_write_control
 
 	signat	_lcd_write_control,4216
 	global	_init_adc
-psect	text535,local,class=CODE,delta=2
-global __ptext535
-__ptext535:
+psect	text582,local,class=CODE,delta=2
+global __ptext582
+__ptext582:
 
 ;; *************** function _init_adc *****************
 ;; Defined at:
@@ -1445,7 +1684,7 @@ __ptext535:
 ;;		_init
 ;; This function uses a non-reentrant model
 ;;
-psect	text535
+psect	text582
 	file	"E:\Aldnoah.Zero\Assignment3\adc.c"
 	line	46
 	global	__size_of_init_adc
@@ -1456,14 +1695,14 @@ _init_adc:
 ; Regs used in _init_adc: [wreg+status,2]
 	line	48
 	
-l8592:	
+l8779:	
 ;adc.c: 48: PORTA = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(5)	;volatile
 	line	49
 	
-l8594:	
+l8781:	
 ;adc.c: 49: TRISA = 0b00111111;
 	movlw	(03Fh)
 	bsf	status, 5	;RP0=1, select bank1
@@ -1471,7 +1710,7 @@ l8594:
 	movwf	(133)^080h	;volatile
 	line	52
 	
-l8596:	
+l8783:	
 ;adc.c: 52: ADCON0 = 0b10100001;
 	movlw	(0A1h)
 	bcf	status, 5	;RP0=0, select bank0
@@ -1479,7 +1718,7 @@ l8596:
 	movwf	(31)	;volatile
 	line	53
 	
-l8598:	
+l8785:	
 ;adc.c: 53: ADCON1 = 0b0000010;
 	movlw	(02h)
 	bsf	status, 5	;RP0=1, select bank1
@@ -1487,14 +1726,14 @@ l8598:
 	movwf	(159)^080h	;volatile
 	line	55
 	
-l8600:	
+l8787:	
 ;adc.c: 55: _delay((unsigned long)((50)*(20000000/4000000.0)));
 	opt asmopt_off
 movlw	83
 movwf	(??_init_adc+0)^080h+0,f
-u4067:
+u4217:
 decfsz	(??_init_adc+0)^080h+0,f
-	goto	u4067
+	goto	u4217
 opt asmopt_on
 
 	line	57
@@ -1507,10 +1746,337 @@ GLOBAL	__end_of_init_adc
 ;; =============== function _init_adc ends ============
 
 	signat	_init_adc,88
+	global	_Menu
+psect	text583,local,class=CODE,delta=2
+global __ptext583
+__ptext583:
+
+;; *************** function _Menu *****************
+;; Defined at:
+;;		line 182 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;; Parameters:    Size  Location     Type
+;;  input           1    wreg     unsigned char 
+;; Auto vars:     Size  Location     Type
+;;  input           1    0[BANK1 ] unsigned char 
+;; Return value:  Size  Location     Type
+;;		None               void
+;; Registers used:
+;;		wreg, fsr0l, fsr0h, status,2, status,0
+;; Tracked objects:
+;;		On entry : 0/0
+;;		On exit  : 0/0
+;;		Unchanged: 0/0
+;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+;;      Params:         0       0       0       0       0
+;;      Locals:         0       0       1       0       0
+;;      Temps:          0       0       0       0       0
+;;      Totals:         0       0       1       0       0
+;;Total ram usage:        1 bytes
+;; Hardware stack levels used:    1
+;; Hardware stack levels required when called:    5
+;; This function calls:
+;;		Nothing
+;; This function is called by:
+;;		_main
+;; This function uses a non-reentrant model
+;;
+psect	text583
+	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	line	182
+	global	__size_of_Menu
+	__size_of_Menu	equ	__end_of_Menu-_Menu
+	
+_Menu:	
+	opt	stack 2
+; Regs used in _Menu: [wreg-fsr0h+status,2+status,0]
+;Menu@input stored from wreg
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	movwf	(Menu@input)^080h
+	line	183
+	
+l8349:	
+;HMI.c: 183: switch (input)
+	goto	l8367
+	line	185
+;HMI.c: 184: {
+;HMI.c: 185: case 1:
+	
+l5122:	
+	line	187
+;HMI.c: 187: break;
+	goto	l5139
+	line	188
+;HMI.c: 188: case 2:
+	
+l5124:	
+	line	190
+;HMI.c: 190: break;
+	goto	l5139
+	line	191
+;HMI.c: 191: case 3:
+	
+l5125:	
+	line	192
+	
+l8351:	
+;HMI.c: 192: pos--;
+	movlw	low(-1)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	addwf	(_pos),f
+	skipnc
+	incf	(_pos+1),f
+	movlw	high(-1)
+	addwf	(_pos+1),f
+	line	193
+	
+l8353:	
+;HMI.c: 193: if (pos < 0)
+	btfss	(_pos+1),7
+	goto	u3361
+	goto	u3360
+u3361:
+	goto	l5139
+u3360:
+	line	194
+	
+l8355:	
+;HMI.c: 194: pos = 5 - 1;
+	movlw	low(04h)
+	movwf	(_pos)
+	movlw	high(04h)
+	movwf	((_pos))+1
+	goto	l5139
+	
+l5126:	
+	line	196
+;HMI.c: 196: break;
+	goto	l5139
+	line	197
+;HMI.c: 197: case 4:
+	
+l5127:	
+	line	198
+	
+l8357:	
+;HMI.c: 198: pos++;
+	movlw	low(01h)
+	bcf	status, 5	;RP0=0, select bank0
+	addwf	(_pos),f
+	skipnc
+	incf	(_pos+1),f
+	movlw	high(01h)
+	addwf	(_pos+1),f
+	line	199
+;HMI.c: 199: if (pos == 5)
+	movlw	05h
+	xorwf	(_pos),w
+	iorwf	(_pos+1),w
+	skipz
+	goto	u3371
+	goto	u3370
+u3371:
+	goto	l5139
+u3370:
+	line	200
+	
+l8359:	
+;HMI.c: 200: pos = 0;
+	clrf	(_pos)
+	clrf	(_pos+1)
+	goto	l5139
+	
+l5128:	
+	line	202
+;HMI.c: 202: break;
+	goto	l5139
+	line	203
+;HMI.c: 203: case 5:
+	
+l5129:	
+	line	204
+;HMI.c: 204: switch (pos)
+	goto	l8363
+	line	206
+;HMI.c: 205: {
+;HMI.c: 206: case 0:
+	
+l5131:	
+	line	208
+;HMI.c: 208: break;
+	goto	l5139
+	line	209
+;HMI.c: 209: case 1:
+	
+l5133:	
+	line	211
+;HMI.c: 211: break;
+	goto	l5139
+	line	212
+;HMI.c: 212: case 2:
+	
+l5134:	
+	line	214
+;HMI.c: 214: break;
+	goto	l5139
+	line	215
+;HMI.c: 215: case 3:
+	
+l5135:	
+	line	217
+;HMI.c: 217: break;
+	goto	l5139
+	line	218
+;HMI.c: 218: case 4:
+	
+l5136:	
+	line	220
+;HMI.c: 220: break;
+	goto	l5139
+	line	221
+;HMI.c: 221: default:
+	
+l5137:	
+	line	222
+;HMI.c: 222: break;
+	goto	l5139
+	line	223
+	
+l8361:	
+;HMI.c: 223: }
+	goto	l5139
+	line	204
+	
+l5130:	
+	
+l8363:	
+	; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-switches
+; Switch size 1, requested type "space"
+; Number of cases is 1, Range of values is 0 to 0
+; switch strategies available:
+; Name         Instructions Cycles
+; simple_byte            4     3 (average)
+; direct_byte           11     8 (fixed)
+; jumptable            260     6 (fixed)
+; rangetable             5     6 (fixed)
+; spacedrange            8     9 (fixed)
+; locatedrange           1     3 (fixed)
+;	Chosen strategy is simple_byte
+
+	bcf	status, 5	;RP0=0, select bank0
+	movf (_pos+1),w
+	opt asmopt_off
+	xorlw	0^0	; case 0
+	skipnz
+	goto	l8883
+	goto	l5139
+	opt asmopt_on
+	
+l8883:	
+; Switch size 1, requested type "space"
+; Number of cases is 5, Range of values is 0 to 4
+; switch strategies available:
+; Name         Instructions Cycles
+; simple_byte           16     9 (average)
+; direct_byte           23     8 (fixed)
+; jumptable            260     6 (fixed)
+; rangetable             9     6 (fixed)
+; spacedrange           16     9 (fixed)
+; locatedrange           5     3 (fixed)
+;	Chosen strategy is simple_byte
+
+	movf (_pos),w
+	opt asmopt_off
+	xorlw	0^0	; case 0
+	skipnz
+	goto	l5139
+	xorlw	1^0	; case 1
+	skipnz
+	goto	l5139
+	xorlw	2^1	; case 2
+	skipnz
+	goto	l5139
+	xorlw	3^2	; case 3
+	skipnz
+	goto	l5139
+	xorlw	4^3	; case 4
+	skipnz
+	goto	l5139
+	goto	l5139
+	opt asmopt_on
+
+	line	223
+	
+l5132:	
+	line	224
+;HMI.c: 224: break;
+	goto	l5139
+	line	226
+;HMI.c: 226: default:
+	
+l5138:	
+	line	228
+;HMI.c: 228: break;
+	goto	l5139
+	line	229
+	
+l8365:	
+;HMI.c: 229: }
+	goto	l5139
+	line	183
+	
+l5121:	
+	
+l8367:	
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	movf	(Menu@input)^080h,w
+	; Switch size 1, requested type "space"
+; Number of cases is 5, Range of values is 1 to 5
+; switch strategies available:
+; Name         Instructions Cycles
+; simple_byte           16     9 (average)
+; direct_byte           26    11 (fixed)
+; jumptable            263     9 (fixed)
+;	Chosen strategy is simple_byte
+
+	opt asmopt_off
+	xorlw	1^0	; case 1
+	skipnz
+	goto	l5139
+	xorlw	2^1	; case 2
+	skipnz
+	goto	l5139
+	xorlw	3^2	; case 3
+	skipnz
+	goto	l8351
+	xorlw	4^3	; case 4
+	skipnz
+	goto	l8357
+	xorlw	5^4	; case 5
+	skipnz
+	goto	l8363
+	goto	l5139
+	opt asmopt_on
+
+	line	229
+	
+l5123:	
+	line	230
+	
+l5139:	
+	return
+	opt stack 0
+GLOBAL	__end_of_Menu
+	__end_of_Menu:
+;; =============== function _Menu ends ============
+
+	signat	_Menu,4216
 	global	_ser_init
-psect	text536,local,class=CODE,delta=2
-global __ptext536
-__ptext536:
+psect	text584,local,class=CODE,delta=2
+global __ptext584
+__ptext584:
 
 ;; *************** function _ser_init *****************
 ;; Defined at:
@@ -1541,7 +2107,7 @@ __ptext536:
 ;;		_init
 ;; This function uses a non-reentrant model
 ;;
-psect	text536
+psect	text584
 	file	"E:\Aldnoah.Zero\Assignment3\ser.c"
 	line	113
 	global	__size_of_ser_init
@@ -1552,14 +2118,14 @@ _ser_init:
 ; Regs used in _ser_init: [wreg+status,2+status,0]
 	line	114
 	
-l8268:	
+l8323:	
 ;ser.c: 114: TRISC |= 0b10000000;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bsf	(135)^080h+(7/8),(7)&7	;volatile
 	line	115
 	
-l8270:	
+l8325:	
 ;ser.c: 115: TRISC &= 0b10111111;
 	movlw	(0BFh)
 	movwf	(??_ser_init+0)^080h+0
@@ -1567,66 +2133,66 @@ l8270:
 	andwf	(135)^080h,f	;volatile
 	line	116
 	
-l8272:	
+l8327:	
 ;ser.c: 116: BRGH=1;
 	bsf	(1218/8)^080h,(1218)&7
 	line	118
 	
-l8274:	
+l8329:	
 ;ser.c: 118: SPBRG=20;
 	movlw	(014h)
 	movwf	(153)^080h	;volatile
 	line	121
 	
-l8276:	
+l8331:	
 ;ser.c: 121: TX9=0;
 	bcf	(1222/8)^080h,(1222)&7
 	line	122
 	
-l8278:	
+l8333:	
 ;ser.c: 122: RX9=0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bcf	(198/8),(198)&7
 	line	124
 	
-l8280:	
+l8335:	
 ;ser.c: 124: SYNC=0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bcf	(1220/8)^080h,(1220)&7
 	line	125
 	
-l8282:	
+l8337:	
 ;ser.c: 125: SPEN=1;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(199/8),(199)&7
 	line	126
 	
-l8284:	
+l8339:	
 ;ser.c: 126: CREN=1;
 	bsf	(196/8),(196)&7
 	line	127
 	
-l8286:	
+l8341:	
 ;ser.c: 127: TXIE=0;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bcf	(1124/8)^080h,(1124)&7
 	line	128
 	
-l8288:	
+l8343:	
 ;ser.c: 128: RCIE=1;
 	bsf	(1125/8)^080h,(1125)&7
 	line	129
 	
-l8290:	
+l8345:	
 ;ser.c: 129: TXEN=1;
 	bsf	(1221/8)^080h,(1221)&7
 	line	132
 	
-l8292:	
+l8347:	
 ;ser.c: 132: rxiptr=rxoptr=txiptr=txoptr=0;
 	movlw	(0)
 	bcf	status, 5	;RP0=0, select bank0
@@ -1643,7 +2209,7 @@ l8292:
 	movwf	(_rxiptr)	;volatile
 	line	133
 	
-l4361:	
+l4362:	
 	return
 	opt stack 0
 GLOBAL	__end_of_ser_init
@@ -1652,9 +2218,9 @@ GLOBAL	__end_of_ser_init
 
 	signat	_ser_init,88
 	global	_isr1
-psect	text537,local,class=CODE,delta=2
-global __ptext537
-__ptext537:
+psect	text585,local,class=CODE,delta=2
+global __ptext585
+__ptext585:
 
 ;; *************** function _isr1 *****************
 ;; Defined at:
@@ -1682,13 +2248,13 @@ __ptext537:
 ;; This function calls:
 ;;		___lwmod
 ;;		_readAvgDistance
-;;		_ADCconvert
+;;		_UpdateDisplay
 ;;		_ReadButtons
 ;; This function is called by:
 ;;		Interrupt level 1
 ;; This function uses a non-reentrant model
 ;;
-psect	text537
+psect	text585
 	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
 	line	75
 	global	__size_of_isr1
@@ -1716,19 +2282,19 @@ interrupt_function:
 	movf	btemp+1,w
 	movwf	(??_isr1+4)
 	ljmp	_isr1
-psect	text537
+psect	text585
 	line	77
 	
-i1l8072:	
+i1l8189:	
 ;Main.c: 77: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
 	btfss	(101/8),(101)&7
-	goto	u313_21
-	goto	u313_20
-u313_21:
-	goto	i1l8082
-u313_20:
+	goto	u316_21
+	goto	u316_20
+u316_21:
+	goto	i1l8199
+u316_20:
 	
-i1l8074:	
+i1l8191:	
 	movf	(26),w	;volatile
 	movwf	(??_isr1+0)+0
 	movf	(_rxiptr),w
@@ -1738,7 +2304,7 @@ i1l8074:
 	bcf	status, 7	;select IRP bank1
 	movwf	indf
 	
-i1l8076:	
+i1l8193:	
 	movf	(_rxiptr),w	;volatile
 	addlw	01h
 	andlw	0Fh
@@ -1746,47 +2312,47 @@ i1l8076:
 	movf	(??_isr1+0)+0,w
 	movwf	(_ser_tmp)
 	
-i1l8078:	
+i1l8195:	
 	movf	(_ser_tmp),w
 	xorwf	(_rxoptr),w	;volatile
 	skipnz
-	goto	u314_21
-	goto	u314_20
-u314_21:
-	goto	i1l8082
-u314_20:
+	goto	u317_21
+	goto	u317_20
+u317_21:
+	goto	i1l8199
+u317_20:
 	
-i1l8080:	
+i1l8197:	
 	movf	(_ser_tmp),w
 	movwf	(??_isr1+0)+0
 	movf	(??_isr1+0)+0,w
 	movwf	(_rxiptr)	;volatile
-	goto	i1l8082
+	goto	i1l8199
 	
-i1l2151:	
-	goto	i1l8082
+i1l2157:	
+	goto	i1l8199
 	
-i1l2150:	
+i1l2156:	
 	
-i1l8082:	
+i1l8199:	
 	btfss	(100/8),(100)&7
-	goto	u315_21
-	goto	u315_20
-u315_21:
-	goto	i1l2152
-u315_20:
+	goto	u318_21
+	goto	u318_20
+u318_21:
+	goto	i1l2158
+u318_20:
 	
-i1l8084:	
+i1l8201:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	btfss	(1124/8)^080h,(1124)&7
-	goto	u316_21
-	goto	u316_20
-u316_21:
-	goto	i1l2152
-u316_20:
+	goto	u319_21
+	goto	u319_20
+u319_21:
+	goto	i1l2158
+u319_20:
 	
-i1l8086:	
+i1l8203:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_txoptr),w
@@ -1796,54 +2362,54 @@ i1l8086:
 	movf	indf,w
 	movwf	(25)	;volatile
 	
-i1l8088:	
+i1l8205:	
 	movlw	(01h)
 	movwf	(??_isr1+0)+0
 	movf	(??_isr1+0)+0,w
 	addwf	(_txoptr),f	;volatile
 	
-i1l8090:	
+i1l8207:	
 	movlw	(0Fh)
 	movwf	(??_isr1+0)+0
 	movf	(??_isr1+0)+0,w
 	andwf	(_txoptr),f	;volatile
 	
-i1l8092:	
+i1l8209:	
 	movf	(_txoptr),w	;volatile
 	xorwf	(_txiptr),w	;volatile
 	skipz
-	goto	u317_21
-	goto	u317_20
-u317_21:
-	goto	i1l2152
-u317_20:
+	goto	u320_21
+	goto	u320_20
+u320_21:
+	goto	i1l2158
+u320_20:
 	
-i1l8094:	
+i1l8211:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bcf	(1124/8)^080h,(1124)&7
-	goto	i1l2152
+	goto	i1l2158
 	
-i1l2153:	
+i1l2159:	
 	
-i1l2152:	
+i1l2158:	
 	line	79
 ;Main.c: 79: if(TMR0IF)
 	btfss	(90/8),(90)&7
-	goto	u318_21
-	goto	u318_20
-u318_21:
-	goto	i1l2159
-u318_20:
+	goto	u321_21
+	goto	u321_20
+u321_21:
+	goto	i1l2166
+u321_20:
 	line	81
 	
-i1l8096:	
+i1l8213:	
 ;Main.c: 80: {
 ;Main.c: 81: TMR0IF = 0;
 	bcf	(90/8),(90)&7
 	line	82
 	
-i1l8098:	
+i1l8215:	
 ;Main.c: 82: TMR0 = 100;
 	movlw	(064h)
 	bcf	status, 5	;RP0=0, select bank0
@@ -1858,12 +2424,12 @@ i1l8098:
 	addwf	(_RTC_Counter+1),f	;volatile
 	line	86
 	
-i1l8100:	
+i1l8217:	
 ;Main.c: 86: RTC_FLAG_1MS = 1;
 	bsf	(_RTC_FLAG_1MS/8),(_RTC_FLAG_1MS)&7
 	line	87
 	
-i1l8102:	
+i1l8219:	
 ;Main.c: 87: if(RTC_Counter % 10 == 0) RTC_FLAG_10MS = 1;
 	movlw	low(0Ah)
 	movwf	(?___lwmod)
@@ -1880,22 +2446,22 @@ i1l8102:
 	movf	((1+(?___lwmod))),w
 	iorwf	((0+(?___lwmod))),w
 	skipz
-	goto	u319_21
-	goto	u319_20
-u319_21:
-	goto	i1l8106
-u319_20:
+	goto	u322_21
+	goto	u322_20
+u322_21:
+	goto	i1l8223
+u322_20:
 	
-i1l8104:	
+i1l8221:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(_RTC_FLAG_10MS/8),(_RTC_FLAG_10MS)&7
-	goto	i1l8106
+	goto	i1l8223
 	
-i1l2155:	
+i1l2161:	
 	line	88
 	
-i1l8106:	
+i1l8223:	
 ;Main.c: 88: if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 	movlw	low(032h)
 	movwf	(?___lwmod)
@@ -1914,22 +2480,22 @@ i1l8106:
 	movf	((1+(?___lwmod))),w
 	iorwf	((0+(?___lwmod))),w
 	skipz
-	goto	u320_21
-	goto	u320_20
-u320_21:
-	goto	i1l8110
-u320_20:
+	goto	u323_21
+	goto	u323_20
+u323_21:
+	goto	i1l8227
+u323_20:
 	
-i1l8108:	
+i1l8225:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(_RTC_FLAG_50MS/8),(_RTC_FLAG_50MS)&7
-	goto	i1l8110
+	goto	i1l8227
 	
-i1l2156:	
+i1l2162:	
 	line	89
 	
-i1l8110:	
+i1l8227:	
 ;Main.c: 89: if(RTC_Counter % 250 == 0)
 	movlw	low(0FAh)
 	movwf	(?___lwmod)
@@ -1948,41 +2514,34 @@ i1l8110:
 	movf	((1+(?___lwmod))),w
 	iorwf	((0+(?___lwmod))),w
 	skipz
-	goto	u321_21
-	goto	u321_20
-u321_21:
-	goto	i1l8116
-u321_20:
+	goto	u324_21
+	goto	u324_20
+u324_21:
+	goto	i1l8233
+u324_20:
 	line	91
 	
-i1l8112:	
+i1l8229:	
 ;Main.c: 90: {
-;Main.c: 91: ADCconvert(readAvgDistance());
+;Main.c: 91: readAvgDistance();
 	fcall	_readAvgDistance
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movf	(1+(?_readAvgDistance)),w
-	clrf	(?_ADCconvert+1)
-	addwf	(?_ADCconvert+1)
-	movf	(0+(?_readAvgDistance)),w
-	clrf	(?_ADCconvert)
-	addwf	(?_ADCconvert)
-
-	fcall	_ADCconvert
+	line	92
+;Main.c: 92: UpdateDisplay();
+	fcall	_UpdateDisplay
 	line	93
 	
-i1l8114:	
+i1l8231:	
 ;Main.c: 93: RTC_FLAG_250MS = 1;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(_RTC_FLAG_250MS/8),(_RTC_FLAG_250MS)&7
-	goto	i1l8116
+	goto	i1l8233
 	line	95
 	
-i1l2157:	
+i1l2163:	
 	line	96
 	
-i1l8116:	
+i1l8233:	
 ;Main.c: 95: }
 ;Main.c: 96: if(RTC_Counter % 500 == 0)
 	movlw	low(01F4h)
@@ -2002,14 +2561,14 @@ i1l8116:
 	movf	((1+(?___lwmod))),w
 	iorwf	((0+(?___lwmod))),w
 	skipz
-	goto	u322_21
-	goto	u322_20
-u322_21:
-	goto	i1l8124
-u322_20:
+	goto	u325_21
+	goto	u325_20
+u325_21:
+	goto	i1l8241
+u325_20:
 	line	98
 	
-i1l8118:	
+i1l8235:	
 ;Main.c: 97: {
 ;Main.c: 98: RTC_FLAG_500MS = 1;
 	bcf	status, 5	;RP0=0, select bank0
@@ -2017,38 +2576,56 @@ i1l8118:
 	bsf	(_RTC_FLAG_500MS/8),(_RTC_FLAG_500MS)&7
 	line	99
 	
-i1l8120:	
+i1l8237:	
 ;Main.c: 99: RTC_Counter = 0;
 	clrf	(_RTC_Counter)	;volatile
 	clrf	(_RTC_Counter+1)	;volatile
 	line	100
 	
-i1l8122:	
+i1l8239:	
 ;Main.c: 100: RB0 ^= 0x01;
 	movlw	1<<((48)&7)
 	xorwf	((48)/8),f
-	goto	i1l8124
+	goto	i1l8241
 	line	101
 	
-i1l2158:	
+i1l2164:	
 	line	103
 	
-i1l8124:	
+i1l8241:	
 ;Main.c: 101: }
-;Main.c: 103: buttonPressed = ReadButtons();
+;Main.c: 103: if (buttonPressed == 0)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(_buttonPressed),f
+	skipz	;volatile
+	goto	u326_21
+	goto	u326_20
+u326_21:
+	goto	i1l2166
+u326_20:
+	line	105
+	
+i1l8243:	
+;Main.c: 104: {
+;Main.c: 105: buttonPressed = ReadButtons();
 	fcall	_ReadButtons
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(??_isr1+0)+0
 	movf	(??_isr1+0)+0,w
 	movwf	(_buttonPressed)	;volatile
-	goto	i1l2159
-	line	104
+	goto	i1l2166
+	line	106
 	
-i1l2154:	
-	line	105
+i1l2165:	
+	goto	i1l2166
+	line	107
 	
-i1l2159:	
+i1l2160:	
+	line	108
+	
+i1l2166:	
 	bcf	status, 5	;RP0=0, select bank0
 	movf	(??_isr1+4),w
 	movwf	btemp+1
@@ -2067,19 +2644,18 @@ GLOBAL	__end_of_isr1
 ;; =============== function _isr1 ends ============
 
 	signat	_isr1,88
-	global	_ADCconvert
-psect	text538,local,class=CODE,delta=2
-global __ptext538
-__ptext538:
+	global	_UpdateDisplay
+psect	text586,local,class=CODE,delta=2
+global __ptext586
+__ptext586:
 
-;; *************** function _ADCconvert *****************
+;; *************** function _UpdateDisplay *****************
 ;; Defined at:
-;;		line 33 in file "E:\Aldnoah.Zero\Assignment3\infrared.c"
+;;		line 233 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
-;;  adcVal          2   28[BANK0 ] unsigned int 
+;;		None
 ;; Auto vars:     Size  Location     Type
-;;  adcOutput      16   34[BANK0 ] unsigned char [16]
-;;  distance        2   50[BANK0 ] unsigned int 
+;;  adcOutput      16   21[BANK0 ] unsigned char [16]
 ;; Return value:  Size  Location     Type
 ;;		None               void
 ;; Registers used:
@@ -2089,890 +2665,245 @@ __ptext538:
 ;;		On exit  : 0/0
 ;;		Unchanged: 0/0
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-;;      Params:         0       2       0       0       0
-;;      Locals:         0      18       0       0       0
+;;      Params:         0       0       0       0       0
+;;      Locals:         0      16       0       0       0
 ;;      Temps:          0       4       0       0       0
-;;      Totals:         0      24       0       0       0
-;;Total ram usage:       24 bytes
+;;      Totals:         0      20       0       0       0
+;;Total ram usage:       20 bytes
 ;; Hardware stack levels used:    1
 ;; Hardware stack levels required when called:    2
 ;; This function calls:
-;;		___lwmod
 ;;		i1_lcd_write_control
 ;;		_sprintf
 ;;		_lcd_set_cursor
 ;;		_lcd_write_string
+;;		___awmod
 ;; This function is called by:
 ;;		_isr1
 ;; This function uses a non-reentrant model
 ;;
-psect	text538
-	file	"E:\Aldnoah.Zero\Assignment3\infrared.c"
-	line	33
-	global	__size_of_ADCconvert
-	__size_of_ADCconvert	equ	__end_of_ADCconvert-_ADCconvert
+psect	text586
+	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	line	233
+	global	__size_of_UpdateDisplay
+	__size_of_UpdateDisplay	equ	__end_of_UpdateDisplay-_UpdateDisplay
 	
-_ADCconvert:	
+_UpdateDisplay:	
 	opt	stack 1
-; Regs used in _ADCconvert: [allreg]
-	line	34
+; Regs used in _UpdateDisplay: [allreg]
+	line	234
 	
-i1l8148:	
-;infrared.c: 34: char adcOutput[16] = "";
-	movlw	(ADCconvert@adcOutput)&0ffh
+i1l8261:	
+;HMI.c: 234: char adcOutput[16] = "";
+	movlw	(UpdateDisplay@adcOutput)&0ffh
 	movwf	fsr0
-	movlw	low(ADCconvert@F1190)
+	movlw	low(UpdateDisplay@F1206)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
-	movwf	(??_ADCconvert+0)+0
+	movwf	(??_UpdateDisplay+0)+0
 	movf	fsr0,w
-	movwf	((??_ADCconvert+0)+0+1)
+	movwf	((??_UpdateDisplay+0)+0+1)
 	movlw	16
-	movwf	((??_ADCconvert+0)+0+2)
-u326_20:
-	movf	(??_ADCconvert+0)+0,w
+	movwf	((??_UpdateDisplay+0)+0+2)
+u329_20:
+	movf	(??_UpdateDisplay+0)+0,w
 	movwf	fsr0
 	bcf	status, 7	;select IRP bank1
 	
 	movf	indf,w
-	movwf	((??_ADCconvert+0)+0+3)
-	incf	(??_ADCconvert+0)+0,f
-	movf	((??_ADCconvert+0)+0+1),w
+	movwf	((??_UpdateDisplay+0)+0+3)
+	incf	(??_UpdateDisplay+0)+0,f
+	movf	((??_UpdateDisplay+0)+0+1),w
 	movwf	fsr0
 	
-	movf	((??_ADCconvert+0)+0+3),w
+	movf	((??_UpdateDisplay+0)+0+3),w
 	movwf	indf
-	incf	((??_ADCconvert+0)+0+1),f
-	decfsz	((??_ADCconvert+0)+0+2),f
-	goto	u326_20
-	line	36
-	
-i1l8150:	
-;infrared.c: 35: unsigned int distance;
-;infrared.c: 36: if (adcVal > 250)
-	movlw	high(0FBh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(0FBh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u327_21
-	goto	u327_20
-u327_21:
-	goto	i1l8154
-u327_20:
-	line	38
-	
-i1l8152:	
-;infrared.c: 37: {
-;infrared.c: 38: distance = 20;
-	movlw	low(014h)
-	movwf	(ADCconvert@distance)
-	movlw	high(014h)
-	movwf	((ADCconvert@distance))+1
-	line	39
-;infrared.c: 39: }
-	goto	i1l2886
-	line	40
-	
-i1l2885:	
-	
-i1l8154:	
-;infrared.c: 40: else if (adcVal < 250 && adcVal >= 190)
-	movlw	high(0FAh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(0FAh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u328_21
-	goto	u328_20
-u328_21:
-	goto	i1l8160
-u328_20:
-	
-i1l8156:	
-	movlw	high(0BEh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(0BEh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u329_21
+	incf	((??_UpdateDisplay+0)+0+1),f
+	decfsz	((??_UpdateDisplay+0)+0+2),f
 	goto	u329_20
-u329_21:
-	goto	i1l8160
-u329_20:
-	line	42
+	line	235
 	
-i1l8158:	
-;infrared.c: 41: {
-;infrared.c: 42: distance = 20+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(014h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(014h)
-	movwf	1+(ADCconvert@distance)
-	line	43
-;infrared.c: 43: }
-	goto	i1l2886
-	line	44
-	
-i1l2887:	
-	
-i1l8160:	
-;infrared.c: 44: else if (adcVal < 190 && adcVal >= 96)
-	movlw	high(0BEh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(0BEh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u330_21
-	goto	u330_20
-u330_21:
-	goto	i1l8166
-u330_20:
-	
-i1l8162:	
-	movlw	high(060h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(060h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u331_21
-	goto	u331_20
-u331_21:
-	goto	i1l8166
-u331_20:
-	line	46
-	
-i1l8164:	
-;infrared.c: 45: {
-;infrared.c: 46: distance = 30+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(01Eh)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(01Eh)
-	movwf	1+(ADCconvert@distance)
-	line	47
-;infrared.c: 47: }
-	goto	i1l2886
-	line	48
-	
-i1l2889:	
-	
-i1l8166:	
-;infrared.c: 48: else if (adcVal < 190 && adcVal >= 96)
-	movlw	high(0BEh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(0BEh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u332_21
-	goto	u332_20
-u332_21:
-	goto	i1l8172
-u332_20:
-	
-i1l8168:	
-	movlw	high(060h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(060h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u333_21
-	goto	u333_20
-u333_21:
-	goto	i1l8172
-u333_20:
-	line	50
-	
-i1l8170:	
-;infrared.c: 49: {
-;infrared.c: 50: distance = 40+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(028h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(028h)
-	movwf	1+(ADCconvert@distance)
-	line	51
-;infrared.c: 51: }
-	goto	i1l2886
-	line	52
-	
-i1l2891:	
-	
-i1l8172:	
-;infrared.c: 52: else if (adcVal < 115 && adcVal >= 96)
-	movlw	high(073h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(073h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u334_21
-	goto	u334_20
-u334_21:
-	goto	i1l8178
-u334_20:
-	
-i1l8174:	
-	movlw	high(060h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(060h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u335_21
-	goto	u335_20
-u335_21:
-	goto	i1l8178
-u335_20:
-	line	54
-	
-i1l8176:	
-;infrared.c: 53: {
-;infrared.c: 54: distance = 50+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(032h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(032h)
-	movwf	1+(ADCconvert@distance)
-	line	55
-;infrared.c: 55: }
-	goto	i1l2886
-	line	56
-	
-i1l2893:	
-	
-i1l8178:	
-;infrared.c: 56: else if (adcVal < 96 && adcVal >= 82)
-	movlw	high(060h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(060h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u336_21
-	goto	u336_20
-u336_21:
-	goto	i1l8184
-u336_20:
-	
-i1l8180:	
-	movlw	high(052h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(052h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u337_21
-	goto	u337_20
-u337_21:
-	goto	i1l8184
-u337_20:
-	line	58
-	
-i1l8182:	
-;infrared.c: 57: {
-;infrared.c: 58: distance = 60+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(03Ch)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(03Ch)
-	movwf	1+(ADCconvert@distance)
-	line	59
-;infrared.c: 59: }
-	goto	i1l2886
-	line	60
-	
-i1l2895:	
-	
-i1l8184:	
-;infrared.c: 60: else if (adcVal < 82 && adcVal >= 70)
-	movlw	high(052h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(052h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u338_21
-	goto	u338_20
-u338_21:
-	goto	i1l8190
-u338_20:
-	
-i1l8186:	
-	movlw	high(046h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(046h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u339_21
-	goto	u339_20
-u339_21:
-	goto	i1l8190
-u339_20:
-	line	62
-	
-i1l8188:	
-;infrared.c: 61: {
-;infrared.c: 62: distance = 70+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(046h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(046h)
-	movwf	1+(ADCconvert@distance)
-	line	63
-;infrared.c: 63: }
-	goto	i1l2886
-	line	64
-	
-i1l2897:	
-	
-i1l8190:	
-;infrared.c: 64: else if (adcVal < 70 && adcVal >= 64)
-	movlw	high(046h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(046h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u340_21
-	goto	u340_20
-u340_21:
-	goto	i1l8196
-u340_20:
-	
-i1l8192:	
-	movlw	high(040h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(040h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u341_21
-	goto	u341_20
-u341_21:
-	goto	i1l8196
-u341_20:
-	line	66
-	
-i1l8194:	
-;infrared.c: 65: {
-;infrared.c: 66: distance = 80+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(050h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(050h)
-	movwf	1+(ADCconvert@distance)
-	line	67
-;infrared.c: 67: }
-	goto	i1l2886
-	line	68
-	
-i1l2899:	
-	
-i1l8196:	
-;infrared.c: 68: else if (adcVal < 64 && adcVal >= 56)
-	movlw	high(040h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(040h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u342_21
-	goto	u342_20
-u342_21:
-	goto	i1l8202
-u342_20:
-	
-i1l8198:	
-	movlw	high(038h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(038h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u343_21
-	goto	u343_20
-u343_21:
-	goto	i1l8202
-u343_20:
-	line	70
-	
-i1l8200:	
-;infrared.c: 69: {
-;infrared.c: 70: distance = 90+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(05Ah)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(05Ah)
-	movwf	1+(ADCconvert@distance)
-	line	71
-;infrared.c: 71: }
-	goto	i1l2886
-	line	72
-	
-i1l2901:	
-	
-i1l8202:	
-;infrared.c: 72: else if (adcVal < 56 && adcVal >= 45)
-	movlw	high(038h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(038h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u344_21
-	goto	u344_20
-u344_21:
-	goto	i1l8208
-u344_20:
-	
-i1l8204:	
-	movlw	high(02Dh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(02Dh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u345_21
-	goto	u345_20
-u345_21:
-	goto	i1l8208
-u345_20:
-	line	74
-	
-i1l8206:	
-;infrared.c: 73: {
-;infrared.c: 74: distance = 100+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(064h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(064h)
-	movwf	1+(ADCconvert@distance)
-	line	75
-;infrared.c: 75: }
-	goto	i1l2886
-	line	76
-	
-i1l2903:	
-	
-i1l8208:	
-;infrared.c: 76: else if (adcVal < 45 && adcVal >= 40)
-	movlw	high(02Dh)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(02Dh)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u346_21
-	goto	u346_20
-u346_21:
-	goto	i1l8214
-u346_20:
-	
-i1l8210:	
-	movlw	high(028h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(028h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u347_21
-	goto	u347_20
-u347_21:
-	goto	i1l8214
-u347_20:
-	line	78
-	
-i1l8212:	
-;infrared.c: 77: {
-;infrared.c: 78: distance = 110+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(06Eh)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(06Eh)
-	movwf	1+(ADCconvert@distance)
-	line	79
-;infrared.c: 79: }
-	goto	i1l2886
-	line	80
-	
-i1l2905:	
-	
-i1l8214:	
-;infrared.c: 80: else if (adcVal < 40 && adcVal >= 33)
-	movlw	high(028h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(028h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u348_21
-	goto	u348_20
-u348_21:
-	goto	i1l8220
-u348_20:
-	
-i1l8216:	
-	movlw	high(021h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(021h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipc
-	goto	u349_21
-	goto	u349_20
-u349_21:
-	goto	i1l8220
-u349_20:
-	line	82
-	
-i1l8218:	
-;infrared.c: 81: {
-;infrared.c: 82: distance = 120+ (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(078h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(078h)
-	movwf	1+(ADCconvert@distance)
-	line	83
-;infrared.c: 83: }
-	goto	i1l2886
-	line	84
-	
-i1l2907:	
-	
-i1l8220:	
-;infrared.c: 84: else if (adcVal < 33 )
-	movlw	high(021h)
-	subwf	(ADCconvert@adcVal+1),w
-	movlw	low(021h)
-	skipnz
-	subwf	(ADCconvert@adcVal),w
-	skipnc
-	goto	u350_21
-	goto	u350_20
-u350_21:
-	goto	i1l2886
-u350_20:
-	line	86
-	
-i1l8222:	
-;infrared.c: 85: {
-;infrared.c: 86: distance = 130 + (adcVal%100) ;
-	movlw	low(064h)
-	movwf	(?___lwmod)
-	movlw	high(064h)
-	movwf	((?___lwmod))+1
-	movf	(ADCconvert@adcVal+1),w
-	clrf	1+(?___lwmod)+02h
-	addwf	1+(?___lwmod)+02h
-	movf	(ADCconvert@adcVal),w
-	clrf	0+(?___lwmod)+02h
-	addwf	0+(?___lwmod)+02h
-
-	fcall	___lwmod
-	movf	(0+(?___lwmod)),w
-	addlw	low(082h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(ADCconvert@distance)
-	movf	(1+(?___lwmod)),w
-	skipnc
-	addlw	1
-	addlw	high(082h)
-	movwf	1+(ADCconvert@distance)
-	goto	i1l2886
-	line	87
-	
-i1l2909:	
-	goto	i1l2886
-	line	91
-	
-i1l2908:	
-	goto	i1l2886
-	
-i1l2906:	
-	goto	i1l2886
-	
-i1l2904:	
-	goto	i1l2886
-	
-i1l2902:	
-	goto	i1l2886
-	
-i1l2900:	
-	goto	i1l2886
-	
-i1l2898:	
-	goto	i1l2886
-	
-i1l2896:	
-	goto	i1l2886
-	
-i1l2894:	
-	goto	i1l2886
-	
-i1l2892:	
-	goto	i1l2886
-	
-i1l2890:	
-	goto	i1l2886
-	
-i1l2888:	
-	
-i1l2886:	
-;infrared.c: 87: }
-;infrared.c: 91: lcd_write_control(0b00000001);
+i1l8263:	
+;HMI.c: 235: lcd_write_control(0b00000001);
 	movlw	(01h)
 	fcall	i1_lcd_write_control
-	line	92
+	line	236
 	
-i1l8224:	
-;infrared.c: 92: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
-	movlw	((STR_1-__stringbase))&0ffh
+i1l8265:	
+;HMI.c: 236: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+	movlw	((STR_11-__stringbase))&0ffh
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
-	movwf	(??_ADCconvert+0)+0
-	movf	(??_ADCconvert+0)+0,w
+	movwf	(??_UpdateDisplay+0)+0
+	movf	(??_UpdateDisplay+0)+0,w
 	movwf	(?_sprintf)
-	movf	(ADCconvert@adcVal+1),w
+	movf	(_adcVal+1),w	;volatile
 	clrf	1+(?_sprintf)+01h
 	addwf	1+(?_sprintf)+01h
-	movf	(ADCconvert@adcVal),w
+	movf	(_adcVal),w	;volatile
 	clrf	0+(?_sprintf)+01h
 	addwf	0+(?_sprintf)+01h
 
-	movf	(ADCconvert@distance+1),w
+	movf	(_distance+1),w	;volatile
 	clrf	1+(?_sprintf)+03h
 	addwf	1+(?_sprintf)+03h
-	movf	(ADCconvert@distance),w
+	movf	(_distance),w	;volatile
 	clrf	0+(?_sprintf)+03h
 	addwf	0+(?_sprintf)+03h
 
-	movlw	(ADCconvert@adcOutput)&0ffh
+	movlw	(UpdateDisplay@adcOutput)&0ffh
 	fcall	_sprintf
-	line	93
+	line	237
 	
-i1l8226:	
-;infrared.c: 93: lcd_set_cursor(0x00);
+i1l8267:	
+;HMI.c: 237: lcd_set_cursor(0x00);
 	movlw	(0)
 	fcall	_lcd_set_cursor
-	line	94
+	line	238
 	
-i1l8228:	
-;infrared.c: 94: lcd_write_string(adcOutput);
-	movlw	(ADCconvert@adcOutput)&0ffh
+i1l8269:	
+;HMI.c: 238: lcd_write_string(adcOutput);
+	movlw	(UpdateDisplay@adcOutput&0ffh)
+	movwf	(?_lcd_write_string)
+	movlw	(0x0/2)
+	movwf	(?_lcd_write_string+1)
 	fcall	_lcd_write_string
-	line	95
+	line	243
 	
-i1l2910:	
+i1l8271:	
+;HMI.c: 243: lcd_set_cursor(0x40);
+	movlw	(040h)
+	fcall	_lcd_set_cursor
+	line	244
+	
+i1l8273:	
+;HMI.c: 244: if (pos > 0)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(_pos+1),w
+	xorlw	80h
+	movwf	btemp+1
+	movlw	(high(01h))^80h
+	subwf	btemp+1,w
+	skipz
+	goto	u330_25
+	movlw	low(01h)
+	subwf	(_pos),w
+u330_25:
+
+	skipc
+	goto	u330_21
+	goto	u330_20
+u330_21:
+	goto	i1l8277
+u330_20:
+	line	245
+	
+i1l8275:	
+;HMI.c: 245: lcd_write_string(shortMenuStrings[pos - 1]);
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(_pos),w
+	addlw	0FFh
+	addlw	_shortMenuStrings&0ffh
+	movwf	fsr0
+	bcf	status, 7	;select IRP bank0
+	movf	indf,w
+	movwf	(?_lcd_write_string)
+	movlw	80h
+	movwf	(?_lcd_write_string+1)
+	fcall	_lcd_write_string
+	goto	i1l8279
+	line	246
+	
+i1l5144:	
+	line	247
+	
+i1l8277:	
+;HMI.c: 246: else
+;HMI.c: 247: lcd_write_string(shortMenuStrings[pos + 5 - 1]);
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(_pos),w
+	addlw	04h
+	addlw	_shortMenuStrings&0ffh
+	movwf	fsr0
+	bcf	status, 7	;select IRP bank0
+	movf	indf,w
+	movwf	(?_lcd_write_string)
+	movlw	80h
+	movwf	(?_lcd_write_string+1)
+	fcall	_lcd_write_string
+	goto	i1l8279
+	
+i1l5145:	
+	line	248
+	
+i1l8279:	
+;HMI.c: 248: lcd_set_cursor(0x44);
+	movlw	(044h)
+	fcall	_lcd_set_cursor
+	line	249
+	
+i1l8281:	
+;HMI.c: 249: lcd_write_string(menuStrings[pos]);
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(_pos),w
+	addlw	_menuStrings&0ffh
+	movwf	fsr0
+	bcf	status, 7	;select IRP bank0
+	movf	indf,w
+	movwf	(?_lcd_write_string)
+	movlw	80h
+	movwf	(?_lcd_write_string+1)
+	fcall	_lcd_write_string
+	line	250
+;HMI.c: 250: lcd_set_cursor(0x4D);
+	movlw	(04Dh)
+	fcall	_lcd_set_cursor
+	line	251
+	
+i1l8283:	
+;HMI.c: 251: lcd_write_string(shortMenuStrings[(pos + 1) % 5]);
+	movlw	low(05h)
+	movwf	(?___awmod)
+	movlw	high(05h)
+	movwf	((?___awmod))+1
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movf	(_pos),w
+	addlw	low(01h)
+	movwf	0+(?___awmod)+02h
+	movf	(_pos+1),w
+	skipnc
+	addlw	1
+	addlw	high(01h)
+	movwf	1+0+(?___awmod)+02h
+	fcall	___awmod
+	movf	(0+(?___awmod)),w
+	addlw	_shortMenuStrings&0ffh
+	movwf	fsr0
+	bcf	status, 7	;select IRP bank0
+	movf	indf,w
+	movwf	(?_lcd_write_string)
+	movlw	80h
+	movwf	(?_lcd_write_string+1)
+	fcall	_lcd_write_string
+	line	252
+	
+i1l5146:	
 	return
 	opt stack 0
-GLOBAL	__end_of_ADCconvert
-	__end_of_ADCconvert:
-;; =============== function _ADCconvert ends ============
+GLOBAL	__end_of_UpdateDisplay
+	__end_of_UpdateDisplay:
+;; =============== function _UpdateDisplay ends ============
 
-	signat	_ADCconvert,4216
+	signat	_UpdateDisplay,88
 	global	_readAvgDistance
-psect	text539,local,class=CODE,delta=2
-global __ptext539
-__ptext539:
+psect	text587,local,class=CODE,delta=2
+global __ptext587
+__ptext587:
 
 ;; *************** function _readAvgDistance *****************
 ;; Defined at:
@@ -2980,12 +2911,10 @@ __ptext539:
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
-;;  i               2   26[BANK0 ] int 
-;;  adcOutput      16    6[BANK0 ] unsigned char [16]
-;;  fullval         2   24[BANK0 ] unsigned int 
-;;  averageval      2   22[BANK0 ] unsigned int 
+;;  i               2    2[BANK0 ] int 
+;;  fullval         2    0[BANK0 ] unsigned int 
 ;; Return value:  Size  Location     Type
-;;                  2    0[BANK0 ] unsigned int 
+;;		None               void
 ;; Registers used:
 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, btemp+1, pclath, cstack
 ;; Tracked objects:
@@ -2993,21 +2922,22 @@ __ptext539:
 ;;		On exit  : 0/0
 ;;		Unchanged: 0/0
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-;;      Params:         0       2       0       0       0
-;;      Locals:         0      22       0       0       0
-;;      Temps:          0       4       0       0       0
-;;      Totals:         0      28       0       0       0
-;;Total ram usage:       28 bytes
+;;      Params:         0       0       0       0       0
+;;      Locals:         0       4       0       0       0
+;;      Temps:          0       0       0       0       0
+;;      Totals:         0       4       0       0       0
+;;Total ram usage:        4 bytes
 ;; Hardware stack levels used:    1
 ;; Hardware stack levels required when called:    3
 ;; This function calls:
 ;;		_readDistance
 ;;		___lwdiv
+;;		_ADCconvert
 ;; This function is called by:
 ;;		_isr1
 ;; This function uses a non-reentrant model
 ;;
-psect	text539
+psect	text587
 	file	"E:\Aldnoah.Zero\Assignment3\infrared.c"
 	line	10
 	global	__size_of_readAvgDistance
@@ -3018,75 +2948,45 @@ _readAvgDistance:
 ; Regs used in _readAvgDistance: [allreg]
 	line	11
 	
-i1l8126:	
-;infrared.c: 11: unsigned int fullval = 0, averageval;
+i1l8245:	
+;infrared.c: 11: unsigned int fullval = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(readAvgDistance@fullval)
 	clrf	(readAvgDistance@fullval+1)
-	line	12
-	
-i1l8128:	
-;infrared.c: 12: char adcOutput[16] = "";
-	movlw	(readAvgDistance@adcOutput)&0ffh
-	movwf	fsr0
-	movlw	low(readAvgDistance@F1184)
-	movwf	(??_readAvgDistance+0)+0
-	movf	fsr0,w
-	movwf	((??_readAvgDistance+0)+0+1)
-	movlw	16
-	movwf	((??_readAvgDistance+0)+0+2)
-u323_20:
-	movf	(??_readAvgDistance+0)+0,w
-	movwf	fsr0
-	bcf	status, 7	;select IRP bank1
-	
-	movf	indf,w
-	movwf	((??_readAvgDistance+0)+0+3)
-	incf	(??_readAvgDistance+0)+0,f
-	movf	((??_readAvgDistance+0)+0+1),w
-	movwf	fsr0
-	
-	movf	((??_readAvgDistance+0)+0+3),w
-	movwf	indf
-	incf	((??_readAvgDistance+0)+0+1),f
-	decfsz	((??_readAvgDistance+0)+0+2),f
-	goto	u323_20
 	line	14
-	
-i1l8130:	
 ;infrared.c: 14: for (int i = 0; i < 10; i++)
 	clrf	(readAvgDistance@i)
 	clrf	(readAvgDistance@i+1)
 	
-i1l8132:	
+i1l8247:	
 	movf	(readAvgDistance@i+1),w
 	xorlw	80h
 	movwf	btemp+1
 	movlw	(high(0Ah))^80h
 	subwf	btemp+1,w
 	skipz
-	goto	u324_25
+	goto	u327_25
 	movlw	low(0Ah)
 	subwf	(readAvgDistance@i),w
-u324_25:
+u327_25:
 
 	skipc
-	goto	u324_21
-	goto	u324_20
-u324_21:
-	goto	i1l8136
-u324_20:
-	goto	i1l8142
+	goto	u327_21
+	goto	u327_20
+u327_21:
+	goto	i1l8251
+u327_20:
+	goto	i1l8257
 	
-i1l8134:	
-	goto	i1l8142
+i1l8249:	
+	goto	i1l8257
 	line	15
 	
-i1l2875:	
+i1l2878:	
 	line	16
 	
-i1l8136:	
+i1l8251:	
 ;infrared.c: 15: {
 ;infrared.c: 16: fullval += readDistance();
 	fcall	_readDistance
@@ -3100,7 +3000,7 @@ i1l8136:
 	addwf	(readAvgDistance@fullval+1),f
 	line	14
 	
-i1l8138:	
+i1l8253:	
 	movlw	low(01h)
 	addwf	(readAvgDistance@i),f
 	skipnc
@@ -3108,32 +3008,32 @@ i1l8138:
 	movlw	high(01h)
 	addwf	(readAvgDistance@i+1),f
 	
-i1l8140:	
+i1l8255:	
 	movf	(readAvgDistance@i+1),w
 	xorlw	80h
 	movwf	btemp+1
 	movlw	(high(0Ah))^80h
 	subwf	btemp+1,w
 	skipz
-	goto	u325_25
+	goto	u328_25
 	movlw	low(0Ah)
 	subwf	(readAvgDistance@i),w
-u325_25:
+u328_25:
 
 	skipc
-	goto	u325_21
-	goto	u325_20
-u325_21:
-	goto	i1l8136
-u325_20:
-	goto	i1l8142
+	goto	u328_21
+	goto	u328_20
+u328_21:
+	goto	i1l8251
+u328_20:
+	goto	i1l8257
 	
-i1l2876:	
+i1l2879:	
 	line	19
 	
-i1l8142:	
+i1l8257:	
 ;infrared.c: 18: }
-;infrared.c: 19: averageval = fullval / 10;
+;infrared.c: 19: adcVal = fullval / 10;
 	movlw	low(0Ah)
 	movwf	(?___lwdiv)
 	movlw	high(0Ah)
@@ -3151,40 +3051,31 @@ i1l8142:
 	movf	(1+(?___lwdiv)),w
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
-	clrf	(readAvgDistance@averageval+1)
-	addwf	(readAvgDistance@averageval+1)
+	clrf	(_adcVal+1)	;volatile
+	addwf	(_adcVal+1)	;volatile
 	movf	(0+(?___lwdiv)),w
-	clrf	(readAvgDistance@averageval)
-	addwf	(readAvgDistance@averageval)
+	clrf	(_adcVal)	;volatile
+	addwf	(_adcVal)	;volatile
 
 	line	20
 	
-i1l8144:	
-;infrared.c: 20: return averageval;
-	movf	(readAvgDistance@averageval+1),w
-	clrf	(?_readAvgDistance+1)
-	addwf	(?_readAvgDistance+1)
-	movf	(readAvgDistance@averageval),w
-	clrf	(?_readAvgDistance)
-	addwf	(?_readAvgDistance)
-
-	goto	i1l2877
-	
-i1l8146:	
+i1l8259:	
+;infrared.c: 20: ADCconvert();
+	fcall	_ADCconvert
 	line	21
 	
-i1l2877:	
+i1l2880:	
 	return
 	opt stack 0
 GLOBAL	__end_of_readAvgDistance
 	__end_of_readAvgDistance:
 ;; =============== function _readAvgDistance ends ============
 
-	signat	_readAvgDistance,90
+	signat	_readAvgDistance,88
 	global	_readDistance
-psect	text540,local,class=CODE,delta=2
-global __ptext540
-__ptext540:
+psect	text588,local,class=CODE,delta=2
+global __ptext588
+__ptext588:
 
 ;; *************** function _readDistance *****************
 ;; Defined at:
@@ -3215,7 +3106,7 @@ __ptext540:
 ;;		_readAvgDistance
 ;; This function uses a non-reentrant model
 ;;
-psect	text540
+psect	text588
 	file	"E:\Aldnoah.Zero\Assignment3\infrared.c"
 	line	24
 	global	__size_of_readDistance
@@ -3226,7 +3117,7 @@ _readDistance:
 ; Regs used in _readDistance: [wreg-fsr0h+status,2+status,0+pclath+cstack]
 	line	27
 	
-i1l8294:	
+i1l8373:	
 ;infrared.c: 25: unsigned int fullval ;
 ;infrared.c: 27: fullval = adc_read_channel(0);
 	movlw	(0)
@@ -3239,7 +3130,7 @@ i1l8294:
 	movwf	(readDistance@fullval+1)
 	line	29
 	
-i1l8296:	
+i1l8375:	
 ;infrared.c: 29: return fullval;
 	movf	(readDistance@fullval+1),w
 	clrf	(?_readDistance+1)
@@ -3248,12 +3139,12 @@ i1l8296:
 	clrf	(?_readDistance)
 	addwf	(?_readDistance)
 
-	goto	i1l2880
+	goto	i1l2883
 	
-i1l8298:	
+i1l8377:	
 	line	30
 	
-i1l2880:	
+i1l2883:	
 	return
 	opt stack 0
 GLOBAL	__end_of_readDistance
@@ -3262,31 +3153,32 @@ GLOBAL	__end_of_readDistance
 
 	signat	_readDistance,90
 	global	_lcd_write_string
-psect	text541,local,class=CODE,delta=2
-global __ptext541
-__ptext541:
+psect	text589,local,class=CODE,delta=2
+global __ptext589
+__ptext589:
 
 ;; *************** function _lcd_write_string *****************
 ;; Defined at:
 ;;		line 48 in file "E:\Aldnoah.Zero\Assignment3\lcd.c"
 ;; Parameters:    Size  Location     Type
-;;  s               1    wreg     PTR unsigned char 
-;;		 -> ADCconvert@adcOutput(16), 
+;;  s               2    7[COMMON] PTR unsigned char 
+;;		 -> UpdateDisplay@adcOutput(16), STR_10(4), STR_9(4), STR_8(4), 
+;;		 -> STR_7(4), STR_6(4), STR_5(7), STR_4(7), 
+;;		 -> STR_3(7), STR_2(7), STR_1(7), 
 ;; Auto vars:     Size  Location     Type
-;;  s               1    4[COMMON] PTR unsigned char 
-;;		 -> ADCconvert@adcOutput(16), 
+;;		None
 ;; Return value:  Size  Location     Type
 ;;		None               void
 ;; Registers used:
-;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
 ;; Tracked objects:
 ;;		On entry : 0/0
 ;;		On exit  : 0/0
 ;;		Unchanged: 0/0
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-;;      Params:         0       0       0       0       0
-;;      Locals:         1       0       0       0       0
-;;      Temps:          1       0       0       0       0
+;;      Params:         2       0       0       0       0
+;;      Locals:         0       0       0       0       0
+;;      Temps:          0       0       0       0       0
 ;;      Totals:         2       0       0       0       0
 ;;Total ram usage:        2 bytes
 ;; Hardware stack levels used:    1
@@ -3294,10 +3186,10 @@ __ptext541:
 ;; This function calls:
 ;;		_lcd_write_data
 ;; This function is called by:
-;;		_ADCconvert
+;;		_UpdateDisplay
 ;; This function uses a non-reentrant model
 ;;
-psect	text541
+psect	text589
 	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	48
 	global	__size_of_lcd_write_string
@@ -3305,44 +3197,51 @@ psect	text541
 	
 _lcd_write_string:	
 	opt	stack 1
-; Regs used in _lcd_write_string: [wreg-fsr0h+status,2+status,0+pclath+cstack]
-;lcd_write_string@s stored from wreg
-	movwf	(lcd_write_string@s)
+; Regs used in _lcd_write_string: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
 	line	50
 	
-i1l8038:	
+i1l8155:	
 ;lcd.c: 50: while(*s) lcd_write_data(*s++);
-	goto	i1l8044
+	goto	i1l8161
 	
 i1l1403:	
 	
-i1l8040:	
+i1l8157:	
+	movf	(lcd_write_string@s+1),w
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	btemp+1
 	movf	(lcd_write_string@s),w
 	movwf	fsr0
-	bcf	status, 7	;select IRP bank0
-	movf	indf,w
+	fcall	stringtab
 	fcall	_lcd_write_data
 	
-i1l8042:	
-	movlw	(01h)
-	movwf	(??_lcd_write_string+0)+0
-	movf	(??_lcd_write_string+0)+0,w
+i1l8159:	
+	movlw	low(01h)
 	addwf	(lcd_write_string@s),f
-	goto	i1l8044
+	skipnc
+	incf	(lcd_write_string@s+1),f
+	movlw	high(01h)
+	addwf	(lcd_write_string@s+1),f
+	goto	i1l8161
 	
 i1l1402:	
 	
-i1l8044:	
+i1l8161:	
+	movf	(lcd_write_string@s+1),w
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	btemp+1
 	movf	(lcd_write_string@s),w
 	movwf	fsr0
-	bcf	status, 7	;select IRP bank0
-	movf	indf,f
+	fcall	stringtab
+	iorlw	0
 	skipz
-	goto	u309_21
-	goto	u309_20
-u309_21:
-	goto	i1l8040
-u309_20:
+	goto	u312_21
+	goto	u312_20
+u312_21:
+	goto	i1l8157
+u312_20:
 	goto	i1l1405
 	
 i1l1404:	
@@ -3357,9 +3256,9 @@ GLOBAL	__end_of_lcd_write_string
 
 	signat	_lcd_write_string,4216
 	global	_lcd_set_cursor
-psect	text542,local,class=CODE,delta=2
-global __ptext542
-__ptext542:
+psect	text590,local,class=CODE,delta=2
+global __ptext590
+__ptext590:
 
 ;; *************** function _lcd_set_cursor *****************
 ;; Defined at:
@@ -3387,10 +3286,10 @@ __ptext542:
 ;; This function calls:
 ;;		i1_lcd_write_control
 ;; This function is called by:
-;;		_ADCconvert
+;;		_UpdateDisplay
 ;; This function uses a non-reentrant model
 ;;
-psect	text542
+psect	text590
 	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	42
 	global	__size_of_lcd_set_cursor
@@ -3403,12 +3302,12 @@ _lcd_set_cursor:
 	movwf	(lcd_set_cursor@address)
 	line	43
 	
-i1l8034:	
+i1l8151:	
 ;lcd.c: 43: address |= 0b10000000;
 	bsf	(lcd_set_cursor@address)+(7/8),(7)&7
 	line	44
 	
-i1l8036:	
+i1l8153:	
 ;lcd.c: 44: lcd_write_control(address);
 	movf	(lcd_set_cursor@address),w
 	fcall	i1_lcd_write_control
@@ -3423,9 +3322,9 @@ GLOBAL	__end_of_lcd_set_cursor
 
 	signat	_lcd_set_cursor,4216
 	global	i1_lcd_write_control
-psect	text543,local,class=CODE,delta=2
-global __ptext543
-__ptext543:
+psect	text591,local,class=CODE,delta=2
+global __ptext591
+__ptext591:
 
 ;; *************** function i1_lcd_write_control *****************
 ;; Defined at:
@@ -3453,10 +3352,10 @@ __ptext543:
 ;;		Nothing
 ;; This function is called by:
 ;;		_lcd_set_cursor
-;;		_ADCconvert
+;;		_UpdateDisplay
 ;; This function uses a non-reentrant model
 ;;
-psect	text543
+psect	text591
 	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	18
 	global	__size_ofi1_lcd_write_control
@@ -3469,7 +3368,7 @@ i1_lcd_write_control:
 	movwf	(i1lcd_write_control@databyte)
 	line	19
 	
-i1l8584:	
+i1l8771:	
 ;lcd.c: 19: RE2 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
@@ -3482,18 +3381,18 @@ i1l8584:
 	bcf	(72/8),(72)&7
 	line	22
 	
-i1l8586:	
+i1l8773:	
 ;lcd.c: 22: PORTD = databyte;
 	movf	(i1lcd_write_control@databyte),w
 	movwf	(8)	;volatile
 	line	23
 	
-i1l8588:	
+i1l8775:	
 ;lcd.c: 23: RE2 = 1;
 	bsf	(74/8),(74)&7
 	line	24
 	
-i1l8590:	
+i1l8777:	
 ;lcd.c: 24: RE2 = 0;
 	bcf	(74/8),(74)&7
 	line	25
@@ -3503,11 +3402,11 @@ movlw	13
 movwf	((??i1_lcd_write_control+0)+0+1),f
 	movlw	251
 movwf	((??i1_lcd_write_control+0)+0),f
-u407_27:
+u422_27:
 	decfsz	((??i1_lcd_write_control+0)+0),f
-	goto	u407_27
+	goto	u422_27
 	decfsz	((??i1_lcd_write_control+0)+0+1),f
-	goto	u407_27
+	goto	u422_27
 	nop2
 opt asmopt_on
 
@@ -3522,21 +3421,21 @@ GLOBAL	__end_ofi1_lcd_write_control
 
 	signat	i1_lcd_write_control,88
 	global	_sprintf
-psect	text544,local,class=CODE,delta=2
-global __ptext544
-__ptext544:
+psect	text592,local,class=CODE,delta=2
+global __ptext592
+__ptext592:
 
 ;; *************** function _sprintf *****************
 ;; Defined at:
 ;;		line 488 in file "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 ;; Parameters:    Size  Location     Type
 ;;  sp              1    wreg     PTR unsigned char 
-;;		 -> ADCconvert@adcOutput(16), 
+;;		 -> UpdateDisplay@adcOutput(16), 
 ;;  f               1    0[BANK0 ] PTR const unsigned char 
-;;		 -> STR_1(15), 
+;;		 -> STR_11(15), 
 ;; Auto vars:     Size  Location     Type
 ;;  sp              1   15[BANK0 ] PTR unsigned char 
-;;		 -> ADCconvert@adcOutput(16), 
+;;		 -> UpdateDisplay@adcOutput(16), 
 ;;  _val            4   11[BANK0 ] struct .
 ;;  c               1   16[BANK0 ] char 
 ;;  prec            1   10[BANK0 ] char 
@@ -3563,10 +3462,10 @@ __ptext544:
 ;;		___lwdiv
 ;;		___lwmod
 ;; This function is called by:
-;;		_ADCconvert
+;;		_UpdateDisplay
 ;; This function uses a non-reentrant model
 ;;
-psect	text544
+psect	text592
 	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c"
 	line	488
 	global	__size_of_sprintf
@@ -3581,29 +3480,29 @@ _sprintf:
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(sprintf@sp)
 	
-i1l8300:	
+i1l8631:	
 	movlw	(?_sprintf+01h)&0ffh
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	movwf	(sprintf@ap)
 	line	540
-	goto	i1l8352
+	goto	i1l8683
 	
-i1l5109:	
+i1l5156:	
 	line	542
 	
-i1l8302:	
+i1l8633:	
 	movf	(sprintf@c),w
 	xorlw	025h
 	skipnz
-	goto	u356_21
-	goto	u356_20
-u356_21:
-	goto	i1l5110
-u356_20:
+	goto	u390_21
+	goto	u390_20
+u390_21:
+	goto	i1l5157
+u390_20:
 	line	545
 	
-i1l8304:	
+i1l8635:	
 	movf	(sprintf@c),w
 	movwf	(??_sprintf+0)+0
 	movf	(sprintf@sp),w
@@ -3612,48 +3511,48 @@ i1l8304:
 	bcf	status, 7	;select IRP bank0
 	movwf	indf
 	
-i1l8306:	
+i1l8637:	
 	movlw	(01h)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	addwf	(sprintf@sp),f
 	line	546
-	goto	i1l8352
+	goto	i1l8683
 	line	547
 	
-i1l5110:	
+i1l5157:	
 	line	552
 	clrf	(sprintf@flag)
 	line	638
-	goto	i1l8310
+	goto	i1l8641
 	line	640
 	
-i1l5112:	
+i1l5159:	
 	line	641
-	goto	i1l8354
+	goto	i1l8685
 	line	700
 	
-i1l5114:	
-	goto	i1l8312
+i1l5161:	
+	goto	i1l8643
 	line	701
 	
-i1l5115:	
+i1l5162:	
 	line	702
-	goto	i1l8312
+	goto	i1l8643
 	line	805
 	
-i1l5117:	
+i1l5164:	
 	line	816
-	goto	i1l8352
+	goto	i1l8683
 	line	825
 	
-i1l8308:	
-	goto	i1l8312
+i1l8639:	
+	goto	i1l8643
 	line	638
 	
-i1l5111:	
+i1l5158:	
 	
-i1l8310:	
+i1l8641:	
 	movlw	01h
 	addwf	(sprintf@f),f
 	movlw	-01h
@@ -3675,22 +3574,22 @@ i1l8310:
 	opt asmopt_off
 	xorlw	0^0	; case 0
 	skipnz
-	goto	i1l8354
+	goto	i1l8685
 	xorlw	100^0	; case 100
 	skipnz
-	goto	i1l8312
+	goto	i1l8643
 	xorlw	105^100	; case 105
 	skipnz
-	goto	i1l8312
-	goto	i1l8352
+	goto	i1l8643
+	goto	i1l8683
 	opt asmopt_on
 
 	line	825
 	
-i1l5116:	
+i1l5163:	
 	line	1254
 	
-i1l8312:	
+i1l8643:	
 	movf	(sprintf@ap),w
 	movwf	fsr0
 	bcf	status, 7	;select IRP bank0
@@ -3700,64 +3599,64 @@ i1l8312:
 	movf	indf,w
 	movwf	(sprintf@_val+1)
 	
-i1l8314:	
+i1l8645:	
 	movlw	(02h)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	addwf	(sprintf@ap),f
 	line	1256
 	
-i1l8316:	
+i1l8647:	
 	btfss	(sprintf@_val+1),7
-	goto	u357_21
-	goto	u357_20
-u357_21:
-	goto	i1l8322
-u357_20:
+	goto	u391_21
+	goto	u391_20
+u391_21:
+	goto	i1l8653
+u391_20:
 	line	1257
 	
-i1l8318:	
+i1l8649:	
 	movlw	(03h)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	iorwf	(sprintf@flag),f
 	line	1258
 	
-i1l8320:	
+i1l8651:	
 	comf	(sprintf@_val),f
 	comf	(sprintf@_val+1),f
 	incf	(sprintf@_val),f
 	skipnz
 	incf	(sprintf@_val+1),f
-	goto	i1l8322
+	goto	i1l8653
 	line	1259
 	
-i1l5118:	
+i1l5165:	
 	line	1300
 	
-i1l8322:	
+i1l8653:	
 	clrf	(sprintf@c)
 	bsf	status,0
 	rlf	(sprintf@c),f
 	
-i1l8324:	
+i1l8655:	
 	movf	(sprintf@c),w
 	xorlw	05h
 	skipz
-	goto	u358_21
-	goto	u358_20
-u358_21:
-	goto	i1l8328
-u358_20:
-	goto	i1l8336
+	goto	u392_21
+	goto	u392_20
+u392_21:
+	goto	i1l8659
+u392_20:
+	goto	i1l8667
 	
-i1l8326:	
-	goto	i1l8336
+i1l8657:	
+	goto	i1l8667
 	line	1301
 	
-i1l5119:	
+i1l5166:	
 	
-i1l8328:	
+i1l8659:	
 	movf	(sprintf@c),w
 	movwf	(??_sprintf+0)+0
 	addwf	(??_sprintf+0)+0,w
@@ -3770,57 +3669,57 @@ i1l8328:
 	movf	1+(??_sprintf+1)+0,w
 	subwf	(sprintf@_val+1),w
 	skipz
-	goto	u359_25
+	goto	u393_25
 	movf	0+(??_sprintf+1)+0,w
 	subwf	(sprintf@_val),w
-u359_25:
+u393_25:
 	skipnc
-	goto	u359_21
-	goto	u359_20
-u359_21:
-	goto	i1l8332
-u359_20:
-	goto	i1l8336
+	goto	u393_21
+	goto	u393_20
+u393_21:
+	goto	i1l8663
+u393_20:
+	goto	i1l8667
 	line	1302
 	
-i1l8330:	
-	goto	i1l8336
+i1l8661:	
+	goto	i1l8667
 	
-i1l5121:	
+i1l5168:	
 	line	1300
 	
-i1l8332:	
+i1l8663:	
 	movlw	(01h)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	addwf	(sprintf@c),f
 	
-i1l8334:	
+i1l8665:	
 	movf	(sprintf@c),w
 	xorlw	05h
 	skipz
-	goto	u360_21
-	goto	u360_20
-u360_21:
-	goto	i1l8328
-u360_20:
-	goto	i1l8336
+	goto	u394_21
+	goto	u394_20
+u394_21:
+	goto	i1l8659
+u394_20:
+	goto	i1l8667
 	
-i1l5120:	
+i1l5167:	
 	line	1433
 	
-i1l8336:	
+i1l8667:	
 	movf	(sprintf@flag),w
 	andlw	03h
 	btfsc	status,2
-	goto	u361_21
-	goto	u361_20
-u361_21:
-	goto	i1l8342
-u361_20:
+	goto	u395_21
+	goto	u395_20
+u395_21:
+	goto	i1l8673
+u395_20:
 	line	1434
 	
-i1l8338:	
+i1l8669:	
 	movlw	(02Dh)
 	movwf	(??_sprintf+0)+0
 	movf	(sprintf@sp),w
@@ -3829,28 +3728,28 @@ i1l8338:
 	bcf	status, 7	;select IRP bank0
 	movwf	indf
 	
-i1l8340:	
+i1l8671:	
 	movlw	(01h)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	addwf	(sprintf@sp),f
-	goto	i1l8342
+	goto	i1l8673
 	
-i1l5122:	
+i1l5169:	
 	line	1467
 	
-i1l8342:	
+i1l8673:	
 	movf	(sprintf@c),w
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	movwf	(sprintf@prec)
 	line	1469
-	goto	i1l8350
+	goto	i1l8681
 	
-i1l5124:	
+i1l5171:	
 	line	1484
 	
-i1l8344:	
+i1l8675:	
 	movlw	low(0Ah)
 	movwf	(?___lwmod)
 	movlw	high(0Ah)
@@ -3889,7 +3788,7 @@ i1l8344:
 	movwf	(sprintf@c)
 	line	1516
 	
-i1l8346:	
+i1l8677:	
 	movf	(sprintf@c),w
 	movwf	(??_sprintf+0)+0
 	movf	(sprintf@sp),w
@@ -3898,18 +3797,18 @@ i1l8346:
 	bcf	status, 7	;select IRP bank0
 	movwf	indf
 	
-i1l8348:	
+i1l8679:	
 	movlw	(01h)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
 	addwf	(sprintf@sp),f
-	goto	i1l8350
+	goto	i1l8681
 	line	1517
 	
-i1l5123:	
+i1l5170:	
 	line	1469
 	
-i1l8350:	
+i1l8681:	
 	movlw	(-1)
 	movwf	(??_sprintf+0)+0
 	movf	(??_sprintf+0)+0,w
@@ -3917,21 +3816,21 @@ i1l8350:
 	movf	((sprintf@prec)),w
 	xorlw	-1
 	skipz
-	goto	u362_21
-	goto	u362_20
-u362_21:
-	goto	i1l8344
-u362_20:
-	goto	i1l8352
+	goto	u396_21
+	goto	u396_20
+u396_21:
+	goto	i1l8675
+u396_20:
+	goto	i1l8683
 	
-i1l5125:	
-	goto	i1l8352
+i1l5172:	
+	goto	i1l8683
 	line	1525
 	
-i1l5108:	
+i1l5155:	
 	line	540
 	
-i1l8352:	
+i1l8683:	
 	movlw	01h
 	addwf	(sprintf@f),f
 	movlw	-01h
@@ -3943,33 +3842,33 @@ i1l8352:
 	movwf	(sprintf@c)
 	movf	((sprintf@c)),f
 	skipz
-	goto	u363_21
-	goto	u363_20
-u363_21:
-	goto	i1l8302
-u363_20:
-	goto	i1l8354
+	goto	u397_21
+	goto	u397_20
+u397_21:
+	goto	i1l8633
+u397_20:
+	goto	i1l8685
 	
-i1l5126:	
-	goto	i1l8354
+i1l5173:	
+	goto	i1l8685
 	line	1527
 	
-i1l5113:	
+i1l5160:	
 	line	1530
 	
-i1l8354:	
+i1l8685:	
 	movf	(sprintf@sp),w
 	movwf	fsr0
 	bcf	status, 7	;select IRP bank0
 	clrf	indf
-	goto	i1l5127
+	goto	i1l5174
 	line	1532
 	
-i1l8356:	
+i1l8687:	
 	line	1533
 ;	Return value of _sprintf is never used
 	
-i1l5127:	
+i1l5174:	
 	return
 	opt stack 0
 GLOBAL	__end_of_sprintf
@@ -3977,14 +3876,840 @@ GLOBAL	__end_of_sprintf
 ;; =============== function _sprintf ends ============
 
 	signat	_sprintf,4698
+	global	_ADCconvert
+psect	text593,local,class=CODE,delta=2
+global __ptext593
+__ptext593:
+
+;; *************** function _ADCconvert *****************
+;; Defined at:
+;;		line 33 in file "E:\Aldnoah.Zero\Assignment3\infrared.c"
+;; Parameters:    Size  Location     Type
+;;		None
+;; Auto vars:     Size  Location     Type
+;;		None
+;; Return value:  Size  Location     Type
+;;		None               void
+;; Registers used:
+;;		wreg, status,2, status,0, pclath, cstack
+;; Tracked objects:
+;;		On entry : 0/0
+;;		On exit  : 0/0
+;;		Unchanged: 0/0
+;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+;;      Params:         0       0       0       0       0
+;;      Locals:         0       0       0       0       0
+;;      Temps:          0       0       0       0       0
+;;      Totals:         0       0       0       0       0
+;;Total ram usage:        0 bytes
+;; Hardware stack levels used:    1
+;; Hardware stack levels required when called:    1
+;; This function calls:
+;;		___lwmod
+;; This function is called by:
+;;		_readAvgDistance
+;; This function uses a non-reentrant model
+;;
+psect	text593
+	file	"E:\Aldnoah.Zero\Assignment3\infrared.c"
+	line	33
+	global	__size_of_ADCconvert
+	__size_of_ADCconvert	equ	__end_of_ADCconvert-_ADCconvert
+	
+_ADCconvert:	
+	opt	stack 1
+; Regs used in _ADCconvert: [wreg+status,2+status,0+pclath+cstack]
+	line	35
+	
+i1l8379:	
+;infrared.c: 35: if (adcVal > 250)
+	movlw	high(0FBh)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(0FBh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u338_21
+	goto	u338_20
+u338_21:
+	goto	i1l8383
+u338_20:
+	line	37
+	
+i1l8381:	
+;infrared.c: 36: {
+;infrared.c: 37: distance = 20;
+	movlw	low(014h)
+	movwf	(_distance)	;volatile
+	movlw	high(014h)
+	movwf	((_distance))+1	;volatile
+	line	38
+;infrared.c: 38: }
+	goto	i1l2911
+	line	39
+	
+i1l2886:	
+	
+i1l8383:	
+;infrared.c: 39: else if (adcVal < 250 && adcVal >= 190)
+	movlw	high(0FAh)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(0FAh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u339_21
+	goto	u339_20
+u339_21:
+	goto	i1l8389
+u339_20:
+	
+i1l8385:	
+	movlw	high(0BEh)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(0BEh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u340_21
+	goto	u340_20
+u340_21:
+	goto	i1l8389
+u340_20:
+	line	41
+	
+i1l8387:	
+;infrared.c: 40: {
+;infrared.c: 41: distance = 20+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(014h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(014h)
+	movwf	1+(_distance)	;volatile
+	line	42
+;infrared.c: 42: }
+	goto	i1l2911
+	line	43
+	
+i1l2888:	
+	
+i1l8389:	
+;infrared.c: 43: else if (adcVal < 190 && adcVal >= 96)
+	movlw	high(0BEh)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(0BEh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u341_21
+	goto	u341_20
+u341_21:
+	goto	i1l8395
+u341_20:
+	
+i1l8391:	
+	movlw	high(060h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(060h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u342_21
+	goto	u342_20
+u342_21:
+	goto	i1l8395
+u342_20:
+	line	45
+	
+i1l8393:	
+;infrared.c: 44: {
+;infrared.c: 45: distance = 30+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(01Eh)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(01Eh)
+	movwf	1+(_distance)	;volatile
+	line	46
+;infrared.c: 46: }
+	goto	i1l2911
+	line	47
+	
+i1l2890:	
+	
+i1l8395:	
+;infrared.c: 47: else if (adcVal < 190 && adcVal >= 96)
+	movlw	high(0BEh)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(0BEh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u343_21
+	goto	u343_20
+u343_21:
+	goto	i1l8401
+u343_20:
+	
+i1l8397:	
+	movlw	high(060h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(060h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u344_21
+	goto	u344_20
+u344_21:
+	goto	i1l8401
+u344_20:
+	line	49
+	
+i1l8399:	
+;infrared.c: 48: {
+;infrared.c: 49: distance = 40+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(028h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(028h)
+	movwf	1+(_distance)	;volatile
+	line	50
+;infrared.c: 50: }
+	goto	i1l2911
+	line	51
+	
+i1l2892:	
+	
+i1l8401:	
+;infrared.c: 51: else if (adcVal < 115 && adcVal >= 96)
+	movlw	high(073h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(073h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u345_21
+	goto	u345_20
+u345_21:
+	goto	i1l8407
+u345_20:
+	
+i1l8403:	
+	movlw	high(060h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(060h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u346_21
+	goto	u346_20
+u346_21:
+	goto	i1l8407
+u346_20:
+	line	53
+	
+i1l8405:	
+;infrared.c: 52: {
+;infrared.c: 53: distance = 50+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(032h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(032h)
+	movwf	1+(_distance)	;volatile
+	line	54
+;infrared.c: 54: }
+	goto	i1l2911
+	line	55
+	
+i1l2894:	
+	
+i1l8407:	
+;infrared.c: 55: else if (adcVal < 96 && adcVal >= 82)
+	movlw	high(060h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(060h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u347_21
+	goto	u347_20
+u347_21:
+	goto	i1l8413
+u347_20:
+	
+i1l8409:	
+	movlw	high(052h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(052h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u348_21
+	goto	u348_20
+u348_21:
+	goto	i1l8413
+u348_20:
+	line	57
+	
+i1l8411:	
+;infrared.c: 56: {
+;infrared.c: 57: distance = 60+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(03Ch)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(03Ch)
+	movwf	1+(_distance)	;volatile
+	line	58
+;infrared.c: 58: }
+	goto	i1l2911
+	line	59
+	
+i1l2896:	
+	
+i1l8413:	
+;infrared.c: 59: else if (adcVal < 82 && adcVal >= 70)
+	movlw	high(052h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(052h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u349_21
+	goto	u349_20
+u349_21:
+	goto	i1l8419
+u349_20:
+	
+i1l8415:	
+	movlw	high(046h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(046h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u350_21
+	goto	u350_20
+u350_21:
+	goto	i1l8419
+u350_20:
+	line	61
+	
+i1l8417:	
+;infrared.c: 60: {
+;infrared.c: 61: distance = 70+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(046h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(046h)
+	movwf	1+(_distance)	;volatile
+	line	62
+;infrared.c: 62: }
+	goto	i1l2911
+	line	63
+	
+i1l2898:	
+	
+i1l8419:	
+;infrared.c: 63: else if (adcVal < 70 && adcVal >= 64)
+	movlw	high(046h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(046h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u351_21
+	goto	u351_20
+u351_21:
+	goto	i1l8425
+u351_20:
+	
+i1l8421:	
+	movlw	high(040h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(040h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u352_21
+	goto	u352_20
+u352_21:
+	goto	i1l8425
+u352_20:
+	line	65
+	
+i1l8423:	
+;infrared.c: 64: {
+;infrared.c: 65: distance = 80+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(050h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(050h)
+	movwf	1+(_distance)	;volatile
+	line	66
+;infrared.c: 66: }
+	goto	i1l2911
+	line	67
+	
+i1l2900:	
+	
+i1l8425:	
+;infrared.c: 67: else if (adcVal < 64 && adcVal >= 56)
+	movlw	high(040h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(040h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u353_21
+	goto	u353_20
+u353_21:
+	goto	i1l8431
+u353_20:
+	
+i1l8427:	
+	movlw	high(038h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(038h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u354_21
+	goto	u354_20
+u354_21:
+	goto	i1l8431
+u354_20:
+	line	69
+	
+i1l8429:	
+;infrared.c: 68: {
+;infrared.c: 69: distance = 90+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(05Ah)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(05Ah)
+	movwf	1+(_distance)	;volatile
+	line	70
+;infrared.c: 70: }
+	goto	i1l2911
+	line	71
+	
+i1l2902:	
+	
+i1l8431:	
+;infrared.c: 71: else if (adcVal < 56 && adcVal >= 45)
+	movlw	high(038h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(038h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u355_21
+	goto	u355_20
+u355_21:
+	goto	i1l8437
+u355_20:
+	
+i1l8433:	
+	movlw	high(02Dh)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(02Dh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u356_21
+	goto	u356_20
+u356_21:
+	goto	i1l8437
+u356_20:
+	line	73
+	
+i1l8435:	
+;infrared.c: 72: {
+;infrared.c: 73: distance = 100+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(064h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(064h)
+	movwf	1+(_distance)	;volatile
+	line	74
+;infrared.c: 74: }
+	goto	i1l2911
+	line	75
+	
+i1l2904:	
+	
+i1l8437:	
+;infrared.c: 75: else if (adcVal < 45 && adcVal >= 40)
+	movlw	high(02Dh)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(02Dh)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u357_21
+	goto	u357_20
+u357_21:
+	goto	i1l8443
+u357_20:
+	
+i1l8439:	
+	movlw	high(028h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(028h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u358_21
+	goto	u358_20
+u358_21:
+	goto	i1l8443
+u358_20:
+	line	77
+	
+i1l8441:	
+;infrared.c: 76: {
+;infrared.c: 77: distance = 110+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(06Eh)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(06Eh)
+	movwf	1+(_distance)	;volatile
+	line	78
+;infrared.c: 78: }
+	goto	i1l2911
+	line	79
+	
+i1l2906:	
+	
+i1l8443:	
+;infrared.c: 79: else if (adcVal < 40 && adcVal >= 33)
+	movlw	high(028h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(028h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u359_21
+	goto	u359_20
+u359_21:
+	goto	i1l8449
+u359_20:
+	
+i1l8445:	
+	movlw	high(021h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(021h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipc
+	goto	u360_21
+	goto	u360_20
+u360_21:
+	goto	i1l8449
+u360_20:
+	line	81
+	
+i1l8447:	
+;infrared.c: 80: {
+;infrared.c: 81: distance = 120+ (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(078h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(078h)
+	movwf	1+(_distance)	;volatile
+	line	82
+;infrared.c: 82: }
+	goto	i1l2911
+	line	83
+	
+i1l2908:	
+	
+i1l8449:	
+;infrared.c: 83: else if (adcVal < 33 )
+	movlw	high(021h)
+	subwf	(_adcVal+1),w	;volatile
+	movlw	low(021h)
+	skipnz
+	subwf	(_adcVal),w	;volatile
+	skipnc
+	goto	u361_21
+	goto	u361_20
+u361_21:
+	goto	i1l2911
+u361_20:
+	line	85
+	
+i1l8451:	
+;infrared.c: 84: {
+;infrared.c: 85: distance = 130 + (adcVal%100) ;
+	movlw	low(064h)
+	movwf	(?___lwmod)
+	movlw	high(064h)
+	movwf	((?___lwmod))+1
+	movf	(_adcVal+1),w	;volatile
+	clrf	1+(?___lwmod)+02h
+	addwf	1+(?___lwmod)+02h
+	movf	(_adcVal),w	;volatile
+	clrf	0+(?___lwmod)+02h
+	addwf	0+(?___lwmod)+02h
+
+	fcall	___lwmod
+	movf	(0+(?___lwmod)),w
+	addlw	low(082h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(_distance)	;volatile
+	movf	(1+(?___lwmod)),w
+	skipnc
+	addlw	1
+	addlw	high(082h)
+	movwf	1+(_distance)	;volatile
+	goto	i1l2911
+	line	86
+	
+i1l2910:	
+	goto	i1l2911
+	line	96
+	
+i1l2909:	
+	goto	i1l2911
+	
+i1l2907:	
+	goto	i1l2911
+	
+i1l2905:	
+	goto	i1l2911
+	
+i1l2903:	
+	goto	i1l2911
+	
+i1l2901:	
+	goto	i1l2911
+	
+i1l2899:	
+	goto	i1l2911
+	
+i1l2897:	
+	goto	i1l2911
+	
+i1l2895:	
+	goto	i1l2911
+	
+i1l2893:	
+	goto	i1l2911
+	
+i1l2891:	
+	goto	i1l2911
+	
+i1l2889:	
+	goto	i1l2911
+	
+i1l2887:	
+	
+i1l2911:	
+	return
+	opt stack 0
+GLOBAL	__end_of_ADCconvert
+	__end_of_ADCconvert:
+;; =============== function _ADCconvert ends ============
+
+	signat	_ADCconvert,88
 	global	_ReadButtons
-psect	text545,local,class=CODE,delta=2
-global __ptext545
-__ptext545:
+psect	text594,local,class=CODE,delta=2
+global __ptext594
+__ptext594:
 
 ;; *************** function _ReadButtons *****************
 ;; Defined at:
-;;		line 116 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;;		line 143 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -4011,170 +4736,170 @@ __ptext545:
 ;;		_isr1
 ;; This function uses a non-reentrant model
 ;;
-psect	text545
+psect	text594
 	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
-	line	116
+	line	143
 	global	__size_of_ReadButtons
 	__size_of_ReadButtons	equ	__end_of_ReadButtons-_ReadButtons
 	
 _ReadButtons:	
 	opt	stack 2
 ; Regs used in _ReadButtons: [wreg+status,2+status,0+pclath+cstack]
-	line	117
+	line	144
 	
-i1l8230:	
-;HMI.c: 117: Debounce();
+i1l8285:	
+;HMI.c: 144: Debounce();
 	fcall	_Debounce
-	line	119
+	line	146
 	
-i1l8232:	
-;HMI.c: 119: if(UpPressed)
+i1l8287:	
+;HMI.c: 146: if(UpPressed)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	btfss	(_UpPressed/8),(_UpPressed)&7
-	goto	u351_21
-	goto	u351_20
-u351_21:
-	goto	i1l5094
-u351_20:
-	line	121
-	
-i1l8234:	
-;HMI.c: 120: {
-;HMI.c: 121: UpPressed = 0;
-	bcf	(_UpPressed/8),(_UpPressed)&7
-	line	122
-	
-i1l8236:	
-;HMI.c: 122: return 1;
-	movlw	(01h)
-	goto	i1l5095
-	
-i1l8238:	
-	goto	i1l5095
-	line	124
-	
-i1l5094:	
-	line	126
-;HMI.c: 124: }
-;HMI.c: 126: if(DownPressed)
-	btfss	(_DownPressed/8),(_DownPressed)&7
-	goto	u352_21
-	goto	u352_20
-u352_21:
-	goto	i1l5096
-u352_20:
-	line	128
-	
-i1l8240:	
-;HMI.c: 127: {
-;HMI.c: 128: DownPressed = 0;
-	bcf	(_DownPressed/8),(_DownPressed)&7
-	line	129
-	
-i1l8242:	
-;HMI.c: 129: return 2;
-	movlw	(02h)
-	goto	i1l5095
-	
-i1l8244:	
-	goto	i1l5095
-	line	131
-	
-i1l5096:	
-	line	132
-;HMI.c: 131: }
-;HMI.c: 132: if(LeftPressed)
-	btfss	(_LeftPressed/8),(_LeftPressed)&7
-	goto	u353_21
-	goto	u353_20
-u353_21:
-	goto	i1l5097
-u353_20:
-	line	134
-	
-i1l8246:	
-;HMI.c: 133: {
-;HMI.c: 134: LeftPressed = 0;
-	bcf	(_LeftPressed/8),(_LeftPressed)&7
-	line	135
-	
-i1l8248:	
-;HMI.c: 135: return 3;
-	movlw	(03h)
-	goto	i1l5095
-	
-i1l8250:	
-	goto	i1l5095
-	line	137
-	
-i1l5097:	
-	line	138
-;HMI.c: 137: }
-;HMI.c: 138: if(RightPressed)
-	btfss	(_RightPressed/8),(_RightPressed)&7
-	goto	u354_21
-	goto	u354_20
-u354_21:
-	goto	i1l5098
-u354_20:
-	line	140
-	
-i1l8252:	
-;HMI.c: 139: {
-;HMI.c: 140: RightPressed = 0;
-	bcf	(_RightPressed/8),(_RightPressed)&7
-	line	141
-	
-i1l8254:	
-;HMI.c: 141: return 4;
-	movlw	(04h)
-	goto	i1l5095
-	
-i1l8256:	
-	goto	i1l5095
-	line	143
-	
-i1l5098:	
-	line	145
-;HMI.c: 143: }
-;HMI.c: 145: if(CenterPressed)
-	btfss	(_CenterPressed/8),(_CenterPressed)&7
-	goto	u355_21
-	goto	u355_20
-u355_21:
-	goto	i1l8264
-u355_20:
-	line	147
-	
-i1l8258:	
-;HMI.c: 146: {
-;HMI.c: 147: CenterPressed = 0;
-	bcf	(_CenterPressed/8),(_CenterPressed)&7
+	goto	u331_21
+	goto	u331_20
+u331_21:
+	goto	i1l5113
+u331_20:
 	line	148
 	
-i1l8260:	
-;HMI.c: 148: return 5;
-	movlw	(05h)
-	goto	i1l5095
+i1l8289:	
+;HMI.c: 147: {
+;HMI.c: 148: UpPressed = 0;
+	bcf	(_UpPressed/8),(_UpPressed)&7
+	line	149
 	
-i1l8262:	
-	goto	i1l5095
-	line	150
+i1l8291:	
+;HMI.c: 149: return 1;
+	movlw	(01h)
+	goto	i1l5114
 	
-i1l5099:	
+i1l8293:	
+	goto	i1l5114
 	line	151
 	
-i1l8264:	
-;HMI.c: 150: }
-;HMI.c: 151: return 0;
+i1l5113:	
+	line	153
+;HMI.c: 151: }
+;HMI.c: 153: if(DownPressed)
+	btfss	(_DownPressed/8),(_DownPressed)&7
+	goto	u332_21
+	goto	u332_20
+u332_21:
+	goto	i1l5115
+u332_20:
+	line	155
+	
+i1l8295:	
+;HMI.c: 154: {
+;HMI.c: 155: DownPressed = 0;
+	bcf	(_DownPressed/8),(_DownPressed)&7
+	line	156
+	
+i1l8297:	
+;HMI.c: 156: return 2;
+	movlw	(02h)
+	goto	i1l5114
+	
+i1l8299:	
+	goto	i1l5114
+	line	158
+	
+i1l5115:	
+	line	159
+;HMI.c: 158: }
+;HMI.c: 159: if(LeftPressed)
+	btfss	(_LeftPressed/8),(_LeftPressed)&7
+	goto	u333_21
+	goto	u333_20
+u333_21:
+	goto	i1l5116
+u333_20:
+	line	161
+	
+i1l8301:	
+;HMI.c: 160: {
+;HMI.c: 161: LeftPressed = 0;
+	bcf	(_LeftPressed/8),(_LeftPressed)&7
+	line	162
+	
+i1l8303:	
+;HMI.c: 162: return 3;
+	movlw	(03h)
+	goto	i1l5114
+	
+i1l8305:	
+	goto	i1l5114
+	line	164
+	
+i1l5116:	
+	line	165
+;HMI.c: 164: }
+;HMI.c: 165: if(RightPressed)
+	btfss	(_RightPressed/8),(_RightPressed)&7
+	goto	u334_21
+	goto	u334_20
+u334_21:
+	goto	i1l5117
+u334_20:
+	line	167
+	
+i1l8307:	
+;HMI.c: 166: {
+;HMI.c: 167: RightPressed = 0;
+	bcf	(_RightPressed/8),(_RightPressed)&7
+	line	168
+	
+i1l8309:	
+;HMI.c: 168: return 4;
+	movlw	(04h)
+	goto	i1l5114
+	
+i1l8311:	
+	goto	i1l5114
+	line	170
+	
+i1l5117:	
+	line	172
+;HMI.c: 170: }
+;HMI.c: 172: if(CenterPressed)
+	btfss	(_CenterPressed/8),(_CenterPressed)&7
+	goto	u335_21
+	goto	u335_20
+u335_21:
+	goto	i1l8319
+u335_20:
+	line	174
+	
+i1l8313:	
+;HMI.c: 173: {
+;HMI.c: 174: CenterPressed = 0;
+	bcf	(_CenterPressed/8),(_CenterPressed)&7
+	line	175
+	
+i1l8315:	
+;HMI.c: 175: return 5;
+	movlw	(05h)
+	goto	i1l5114
+	
+i1l8317:	
+	goto	i1l5114
+	line	177
+	
+i1l5118:	
+	line	178
+	
+i1l8319:	
+;HMI.c: 177: }
+;HMI.c: 178: return 0;
 	movlw	(0)
-	goto	i1l5095
+	goto	i1l5114
 	
-i1l8266:	
-	line	152
+i1l8321:	
+	line	179
 	
-i1l5095:	
+i1l5114:	
 	return
 	opt stack 0
 GLOBAL	__end_of_ReadButtons
@@ -4183,9 +4908,9 @@ GLOBAL	__end_of_ReadButtons
 
 	signat	_ReadButtons,89
 	global	_lcd_write_data
-psect	text546,local,class=CODE,delta=2
-global __ptext546
-__ptext546:
+psect	text595,local,class=CODE,delta=2
+global __ptext595
+__ptext595:
 
 ;; *************** function _lcd_write_data *****************
 ;; Defined at:
@@ -4217,7 +4942,7 @@ __ptext546:
 ;;		_lcd_write_3_digit_bcd
 ;; This function uses a non-reentrant model
 ;;
-psect	text546
+psect	text595
 	file	"E:\Aldnoah.Zero\Assignment3\lcd.c"
 	line	30
 	global	__size_of_lcd_write_data
@@ -4230,7 +4955,7 @@ _lcd_write_data:
 	movwf	(lcd_write_data@databyte)
 	line	31
 	
-i1l8026:	
+i1l8143:	
 ;lcd.c: 31: RE2 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
@@ -4243,18 +4968,18 @@ i1l8026:
 	bsf	(72/8),(72)&7
 	line	34
 	
-i1l8028:	
+i1l8145:	
 ;lcd.c: 34: PORTD = databyte;
 	movf	(lcd_write_data@databyte),w
 	movwf	(8)	;volatile
 	line	35
 	
-i1l8030:	
+i1l8147:	
 ;lcd.c: 35: RE2 = 1;
 	bsf	(74/8),(74)&7
 	line	36
 	
-i1l8032:	
+i1l8149:	
 ;lcd.c: 36: RE2 = 0;
 	bcf	(74/8),(74)&7
 	line	37
@@ -4264,11 +4989,11 @@ movlw	7
 movwf	((??_lcd_write_data+0)+0+1),f
 	movlw	125
 movwf	((??_lcd_write_data+0)+0),f
-u408_27:
+u423_27:
 	decfsz	((??_lcd_write_data+0)+0),f
-	goto	u408_27
+	goto	u423_27
 	decfsz	((??_lcd_write_data+0)+0+1),f
-	goto	u408_27
+	goto	u423_27
 opt asmopt_on
 
 	line	38
@@ -4282,9 +5007,9 @@ GLOBAL	__end_of_lcd_write_data
 
 	signat	_lcd_write_data,4216
 	global	_adc_read_channel
-psect	text547,local,class=CODE,delta=2
-global __ptext547
-__ptext547:
+psect	text596,local,class=CODE,delta=2
+global __ptext596
+__ptext596:
 
 ;; *************** function _adc_read_channel *****************
 ;; Defined at:
@@ -4315,7 +5040,7 @@ __ptext547:
 ;;		_readDistance
 ;; This function uses a non-reentrant model
 ;;
-psect	text547
+psect	text596
 	file	"E:\Aldnoah.Zero\Assignment3\adc.c"
 	line	5
 	global	__size_of_adc_read_channel
@@ -4328,9 +5053,9 @@ _adc_read_channel:
 	movwf	(adc_read_channel@channel)
 	line	6
 	
-i1l8000:	
+i1l8117:	
 ;adc.c: 6: switch(channel)
-	goto	i1l8008
+	goto	i1l8125
 	line	8
 ;adc.c: 7: {
 ;adc.c: 8: case 0:
@@ -4349,7 +5074,7 @@ i1l690:
 	bcf	(253/8),(253)&7
 	line	12
 ;adc.c: 12: break;
-	goto	i1l8010
+	goto	i1l8127
 	line	13
 ;adc.c: 13: case 1:
 	
@@ -4367,7 +5092,7 @@ i1l692:
 	bcf	(253/8),(253)&7
 	line	17
 ;adc.c: 17: break;
-	goto	i1l8010
+	goto	i1l8127
 	line	18
 ;adc.c: 18: case 2:
 	
@@ -4385,7 +5110,7 @@ i1l693:
 	bcf	(253/8),(253)&7
 	line	22
 ;adc.c: 22: break;
-	goto	i1l8010
+	goto	i1l8127
 	line	23
 ;adc.c: 23: case 3:
 	
@@ -4403,7 +5128,7 @@ i1l694:
 	bcf	(253/8),(253)&7
 	line	27
 ;adc.c: 27: break;
-	goto	i1l8010
+	goto	i1l8127
 	line	28
 ;adc.c: 28: case 4:
 	
@@ -4421,30 +5146,30 @@ i1l695:
 	bsf	(253/8),(253)&7
 	line	32
 ;adc.c: 32: break;
-	goto	i1l8010
+	goto	i1l8127
 	line	35
 ;adc.c: 35: default:
 	
 i1l696:	
 	line	36
 	
-i1l8002:	
+i1l8119:	
 ;adc.c: 36: return 0;
 	movlw	(0)
 	goto	i1l697
 	
-i1l8004:	
+i1l8121:	
 	goto	i1l697
 	line	37
 	
-i1l8006:	
+i1l8123:	
 ;adc.c: 37: }
-	goto	i1l8010
+	goto	i1l8127
 	line	6
 	
 i1l689:	
 	
-i1l8008:	
+i1l8125:	
 	movf	(adc_read_channel@channel),w
 	; Switch size 1, requested type "space"
 ; Number of cases is 5, Range of values is 0 to 4
@@ -4474,7 +5199,7 @@ i1l8008:
 	xorlw	4^3	; case 4
 	skipnz
 	goto	i1l695
-	goto	i1l8002
+	goto	i1l8119
 	opt asmopt_on
 
 	line	37
@@ -4482,25 +5207,25 @@ i1l8008:
 i1l691:	
 	line	39
 	
-i1l8010:	
+i1l8127:	
 ;adc.c: 39: _delay((unsigned long)((50)*(20000000/4000000.0)));
 	opt asmopt_off
 movlw	83
 movwf	(??_adc_read_channel+0)+0,f
-u409_27:
+u424_27:
 decfsz	(??_adc_read_channel+0)+0,f
-	goto	u409_27
+	goto	u424_27
 opt asmopt_on
 
 	line	41
 	
-i1l8012:	
+i1l8129:	
 ;adc.c: 41: return adc_read();
 	fcall	_adc_read
 	movf	(0+(?_adc_read)),w
 	goto	i1l697
 	
-i1l8014:	
+i1l8131:	
 	line	43
 	
 i1l697:	
@@ -4511,10 +5236,261 @@ GLOBAL	__end_of_adc_read_channel
 ;; =============== function _adc_read_channel ends ============
 
 	signat	_adc_read_channel,4217
+	global	___awmod
+psect	text597,local,class=CODE,delta=2
+global __ptext597
+__ptext597:
+
+;; *************** function ___awmod *****************
+;; Defined at:
+;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\awmod.c"
+;; Parameters:    Size  Location     Type
+;;  divisor         2    0[COMMON] int 
+;;  dividend        2    2[COMMON] int 
+;; Auto vars:     Size  Location     Type
+;;  sign            1    6[COMMON] unsigned char 
+;;  counter         1    5[COMMON] unsigned char 
+;; Return value:  Size  Location     Type
+;;                  2    0[COMMON] int 
+;; Registers used:
+;;		wreg, status,2, status,0
+;; Tracked objects:
+;;		On entry : 0/0
+;;		On exit  : 0/0
+;;		Unchanged: 0/0
+;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+;;      Params:         4       0       0       0       0
+;;      Locals:         2       0       0       0       0
+;;      Temps:          1       0       0       0       0
+;;      Totals:         7       0       0       0       0
+;;Total ram usage:        7 bytes
+;; Hardware stack levels used:    1
+;; This function calls:
+;;		Nothing
+;; This function is called by:
+;;		_UpdateDisplay
+;; This function uses a non-reentrant model
+;;
+psect	text597
+	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\awmod.c"
+	line	5
+	global	__size_of___awmod
+	__size_of___awmod	equ	__end_of___awmod-___awmod
+	
+___awmod:	
+	opt	stack 2
+; Regs used in ___awmod: [wreg+status,2+status,0]
+	line	8
+	
+i1l8737:	
+	clrf	(___awmod@sign)
+	line	9
+	btfss	(___awmod@dividend+1),7
+	goto	u411_21
+	goto	u411_20
+u411_21:
+	goto	i1l8741
+u411_20:
+	line	10
+	
+i1l8739:	
+	comf	(___awmod@dividend),f
+	comf	(___awmod@dividend+1),f
+	incf	(___awmod@dividend),f
+	skipnz
+	incf	(___awmod@dividend+1),f
+	line	11
+	clrf	(___awmod@sign)
+	bsf	status,0
+	rlf	(___awmod@sign),f
+	goto	i1l8741
+	line	12
+	
+i1l6065:	
+	line	13
+	
+i1l8741:	
+	btfss	(___awmod@divisor+1),7
+	goto	u412_21
+	goto	u412_20
+u412_21:
+	goto	i1l8745
+u412_20:
+	line	14
+	
+i1l8743:	
+	comf	(___awmod@divisor),f
+	comf	(___awmod@divisor+1),f
+	incf	(___awmod@divisor),f
+	skipnz
+	incf	(___awmod@divisor+1),f
+	goto	i1l8745
+	
+i1l6066:	
+	line	15
+	
+i1l8745:	
+	movf	(___awmod@divisor+1),w
+	iorwf	(___awmod@divisor),w
+	skipnz
+	goto	u413_21
+	goto	u413_20
+u413_21:
+	goto	i1l8763
+u413_20:
+	line	16
+	
+i1l8747:	
+	clrf	(___awmod@counter)
+	bsf	status,0
+	rlf	(___awmod@counter),f
+	line	17
+	goto	i1l8753
+	
+i1l6069:	
+	line	18
+	
+i1l8749:	
+	movlw	01h
+	
+u414_25:
+	clrc
+	rlf	(___awmod@divisor),f
+	rlf	(___awmod@divisor+1),f
+	addlw	-1
+	skipz
+	goto	u414_25
+	line	19
+	
+i1l8751:	
+	movlw	(01h)
+	movwf	(??___awmod+0)+0
+	movf	(??___awmod+0)+0,w
+	addwf	(___awmod@counter),f
+	goto	i1l8753
+	line	20
+	
+i1l6068:	
+	line	17
+	
+i1l8753:	
+	btfss	(___awmod@divisor+1),(15)&7
+	goto	u415_21
+	goto	u415_20
+u415_21:
+	goto	i1l8749
+u415_20:
+	goto	i1l8755
+	
+i1l6070:	
+	goto	i1l8755
+	line	21
+	
+i1l6071:	
+	line	22
+	
+i1l8755:	
+	movf	(___awmod@divisor+1),w
+	subwf	(___awmod@dividend+1),w
+	skipz
+	goto	u416_25
+	movf	(___awmod@divisor),w
+	subwf	(___awmod@dividend),w
+u416_25:
+	skipc
+	goto	u416_21
+	goto	u416_20
+u416_21:
+	goto	i1l8759
+u416_20:
+	line	23
+	
+i1l8757:	
+	movf	(___awmod@divisor),w
+	subwf	(___awmod@dividend),f
+	movf	(___awmod@divisor+1),w
+	skipc
+	decf	(___awmod@dividend+1),f
+	subwf	(___awmod@dividend+1),f
+	goto	i1l8759
+	
+i1l6072:	
+	line	24
+	
+i1l8759:	
+	movlw	01h
+	
+u417_25:
+	clrc
+	rrf	(___awmod@divisor+1),f
+	rrf	(___awmod@divisor),f
+	addlw	-1
+	skipz
+	goto	u417_25
+	line	25
+	
+i1l8761:	
+	movlw	low(01h)
+	subwf	(___awmod@counter),f
+	btfss	status,2
+	goto	u418_21
+	goto	u418_20
+u418_21:
+	goto	i1l8755
+u418_20:
+	goto	i1l8763
+	
+i1l6073:	
+	goto	i1l8763
+	line	26
+	
+i1l6067:	
+	line	27
+	
+i1l8763:	
+	movf	(___awmod@sign),w
+	skipz
+	goto	u419_20
+	goto	i1l8767
+u419_20:
+	line	28
+	
+i1l8765:	
+	comf	(___awmod@dividend),f
+	comf	(___awmod@dividend+1),f
+	incf	(___awmod@dividend),f
+	skipnz
+	incf	(___awmod@dividend+1),f
+	goto	i1l8767
+	
+i1l6074:	
+	line	29
+	
+i1l8767:	
+	movf	(___awmod@dividend+1),w
+	clrf	(?___awmod+1)
+	addwf	(?___awmod+1)
+	movf	(___awmod@dividend),w
+	clrf	(?___awmod)
+	addwf	(?___awmod)
+
+	goto	i1l6075
+	
+i1l8769:	
+	line	30
+	
+i1l6075:	
+	return
+	opt stack 0
+GLOBAL	__end_of___awmod
+	__end_of___awmod:
+;; =============== function ___awmod ends ============
+
+	signat	___awmod,8314
 	global	___lwmod
-psect	text548,local,class=CODE,delta=2
-global __ptext548
-__ptext548:
+psect	text598,local,class=CODE,delta=2
+global __ptext598
+__ptext598:
 
 ;; *************** function ___lwmod *****************
 ;; Defined at:
@@ -4547,7 +5523,7 @@ __ptext548:
 ;;		_sprintf
 ;; This function uses a non-reentrant model
 ;;
-psect	text548
+psect	text598
 	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 	line	5
 	global	__size_of___lwmod
@@ -4558,125 +5534,125 @@ ___lwmod:
 ; Regs used in ___lwmod: [wreg+status,2+status,0]
 	line	8
 	
-i1l8562:	
+i1l8715:	
 	movf	(___lwmod@divisor+1),w
 	iorwf	(___lwmod@divisor),w
 	skipnz
-	goto	u399_21
-	goto	u399_20
-u399_21:
-	goto	i1l8580
-u399_20:
+	goto	u405_21
+	goto	u405_20
+u405_21:
+	goto	i1l8733
+u405_20:
 	line	9
 	
-i1l8564:	
+i1l8717:	
 	clrf	(___lwmod@counter)
 	bsf	status,0
 	rlf	(___lwmod@counter),f
 	line	10
-	goto	i1l8570
+	goto	i1l8723
 	
-i1l5828:	
+i1l5875:	
 	line	11
 	
-i1l8566:	
+i1l8719:	
 	movlw	01h
 	
-u400_25:
+u406_25:
 	clrc
 	rlf	(___lwmod@divisor),f
 	rlf	(___lwmod@divisor+1),f
 	addlw	-1
 	skipz
-	goto	u400_25
+	goto	u406_25
 	line	12
 	
-i1l8568:	
+i1l8721:	
 	movlw	(01h)
 	movwf	(??___lwmod+0)+0
 	movf	(??___lwmod+0)+0,w
 	addwf	(___lwmod@counter),f
-	goto	i1l8570
+	goto	i1l8723
 	line	13
 	
-i1l5827:	
+i1l5874:	
 	line	10
 	
-i1l8570:	
+i1l8723:	
 	btfss	(___lwmod@divisor+1),(15)&7
-	goto	u401_21
-	goto	u401_20
-u401_21:
-	goto	i1l8566
-u401_20:
-	goto	i1l8572
+	goto	u407_21
+	goto	u407_20
+u407_21:
+	goto	i1l8719
+u407_20:
+	goto	i1l8725
 	
-i1l5829:	
-	goto	i1l8572
+i1l5876:	
+	goto	i1l8725
 	line	14
 	
-i1l5830:	
+i1l5877:	
 	line	15
 	
-i1l8572:	
+i1l8725:	
 	movf	(___lwmod@divisor+1),w
 	subwf	(___lwmod@dividend+1),w
 	skipz
-	goto	u402_25
+	goto	u408_25
 	movf	(___lwmod@divisor),w
 	subwf	(___lwmod@dividend),w
-u402_25:
+u408_25:
 	skipc
-	goto	u402_21
-	goto	u402_20
-u402_21:
-	goto	i1l8576
-u402_20:
+	goto	u408_21
+	goto	u408_20
+u408_21:
+	goto	i1l8729
+u408_20:
 	line	16
 	
-i1l8574:	
+i1l8727:	
 	movf	(___lwmod@divisor),w
 	subwf	(___lwmod@dividend),f
 	movf	(___lwmod@divisor+1),w
 	skipc
 	decf	(___lwmod@dividend+1),f
 	subwf	(___lwmod@dividend+1),f
-	goto	i1l8576
+	goto	i1l8729
 	
-i1l5831:	
+i1l5878:	
 	line	17
 	
-i1l8576:	
+i1l8729:	
 	movlw	01h
 	
-u403_25:
+u409_25:
 	clrc
 	rrf	(___lwmod@divisor+1),f
 	rrf	(___lwmod@divisor),f
 	addlw	-1
 	skipz
-	goto	u403_25
+	goto	u409_25
 	line	18
 	
-i1l8578:	
+i1l8731:	
 	movlw	low(01h)
 	subwf	(___lwmod@counter),f
 	btfss	status,2
-	goto	u404_21
-	goto	u404_20
-u404_21:
-	goto	i1l8572
-u404_20:
-	goto	i1l8580
+	goto	u410_21
+	goto	u410_20
+u410_21:
+	goto	i1l8725
+u410_20:
+	goto	i1l8733
 	
-i1l5832:	
-	goto	i1l8580
+i1l5879:	
+	goto	i1l8733
 	line	19
 	
-i1l5826:	
+i1l5873:	
 	line	20
 	
-i1l8580:	
+i1l8733:	
 	movf	(___lwmod@dividend+1),w
 	clrf	(?___lwmod+1)
 	addwf	(?___lwmod+1)
@@ -4684,12 +5660,12 @@ i1l8580:
 	clrf	(?___lwmod)
 	addwf	(?___lwmod)
 
-	goto	i1l5833
+	goto	i1l5880
 	
-i1l8582:	
+i1l8735:	
 	line	21
 	
-i1l5833:	
+i1l5880:	
 	return
 	opt stack 0
 GLOBAL	__end_of___lwmod
@@ -4698,9 +5674,9 @@ GLOBAL	__end_of___lwmod
 
 	signat	___lwmod,8314
 	global	___lwdiv
-psect	text549,local,class=CODE,delta=2
-global __ptext549
-__ptext549:
+psect	text599,local,class=CODE,delta=2
+global __ptext599
+__ptext599:
 
 ;; *************** function ___lwdiv *****************
 ;; Defined at:
@@ -4733,7 +5709,7 @@ __ptext549:
 ;;		_sprintf
 ;; This function uses a non-reentrant model
 ;;
-psect	text549
+psect	text599
 	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 	line	5
 	global	__size_of___lwdiv
@@ -4744,98 +5720,98 @@ ___lwdiv:
 ; Regs used in ___lwdiv: [wreg+status,2+status,0]
 	line	9
 	
-i1l8536:	
+i1l8689:	
 	clrf	(___lwdiv@quotient)
 	clrf	(___lwdiv@quotient+1)
 	line	10
 	
-i1l8538:	
+i1l8691:	
 	movf	(___lwdiv@divisor+1),w
 	iorwf	(___lwdiv@divisor),w
 	skipnz
-	goto	u392_21
-	goto	u392_20
-u392_21:
-	goto	i1l8558
-u392_20:
+	goto	u398_21
+	goto	u398_20
+u398_21:
+	goto	i1l8711
+u398_20:
 	line	11
 	
-i1l8540:	
+i1l8693:	
 	clrf	(___lwdiv@counter)
 	bsf	status,0
 	rlf	(___lwdiv@counter),f
 	line	12
-	goto	i1l8546
+	goto	i1l8699
 	
-i1l5818:	
+i1l5865:	
 	line	13
 	
-i1l8542:	
+i1l8695:	
 	movlw	01h
 	
-u393_25:
+u399_25:
 	clrc
 	rlf	(___lwdiv@divisor),f
 	rlf	(___lwdiv@divisor+1),f
 	addlw	-1
 	skipz
-	goto	u393_25
+	goto	u399_25
 	line	14
 	
-i1l8544:	
+i1l8697:	
 	movlw	(01h)
 	movwf	(??___lwdiv+0)+0
 	movf	(??___lwdiv+0)+0,w
 	addwf	(___lwdiv@counter),f
-	goto	i1l8546
+	goto	i1l8699
 	line	15
 	
-i1l5817:	
+i1l5864:	
 	line	12
 	
-i1l8546:	
+i1l8699:	
 	btfss	(___lwdiv@divisor+1),(15)&7
-	goto	u394_21
-	goto	u394_20
-u394_21:
-	goto	i1l8542
-u394_20:
-	goto	i1l8548
+	goto	u400_21
+	goto	u400_20
+u400_21:
+	goto	i1l8695
+u400_20:
+	goto	i1l8701
 	
-i1l5819:	
-	goto	i1l8548
+i1l5866:	
+	goto	i1l8701
 	line	16
 	
-i1l5820:	
+i1l5867:	
 	line	17
 	
-i1l8548:	
+i1l8701:	
 	movlw	01h
 	
-u395_25:
+u401_25:
 	clrc
 	rlf	(___lwdiv@quotient),f
 	rlf	(___lwdiv@quotient+1),f
 	addlw	-1
 	skipz
-	goto	u395_25
+	goto	u401_25
 	line	18
 	movf	(___lwdiv@divisor+1),w
 	subwf	(___lwdiv@dividend+1),w
 	skipz
-	goto	u396_25
+	goto	u402_25
 	movf	(___lwdiv@divisor),w
 	subwf	(___lwdiv@dividend),w
-u396_25:
+u402_25:
 	skipc
-	goto	u396_21
-	goto	u396_20
-u396_21:
-	goto	i1l8554
-u396_20:
+	goto	u402_21
+	goto	u402_20
+u402_21:
+	goto	i1l8707
+u402_20:
 	line	19
 	
-i1l8550:	
+i1l8703:	
 	movf	(___lwdiv@divisor),w
 	subwf	(___lwdiv@dividend),f
 	movf	(___lwdiv@divisor+1),w
@@ -4844,45 +5820,45 @@ i1l8550:
 	subwf	(___lwdiv@dividend+1),f
 	line	20
 	
-i1l8552:	
+i1l8705:	
 	bsf	(___lwdiv@quotient)+(0/8),(0)&7
-	goto	i1l8554
+	goto	i1l8707
 	line	21
 	
-i1l5821:	
+i1l5868:	
 	line	22
 	
-i1l8554:	
+i1l8707:	
 	movlw	01h
 	
-u397_25:
+u403_25:
 	clrc
 	rrf	(___lwdiv@divisor+1),f
 	rrf	(___lwdiv@divisor),f
 	addlw	-1
 	skipz
-	goto	u397_25
+	goto	u403_25
 	line	23
 	
-i1l8556:	
+i1l8709:	
 	movlw	low(01h)
 	subwf	(___lwdiv@counter),f
 	btfss	status,2
-	goto	u398_21
-	goto	u398_20
-u398_21:
-	goto	i1l8548
-u398_20:
-	goto	i1l8558
+	goto	u404_21
+	goto	u404_20
+u404_21:
+	goto	i1l8701
+u404_20:
+	goto	i1l8711
 	
-i1l5822:	
-	goto	i1l8558
+i1l5869:	
+	goto	i1l8711
 	line	24
 	
-i1l5816:	
+i1l5863:	
 	line	25
 	
-i1l8558:	
+i1l8711:	
 	movf	(___lwdiv@quotient+1),w
 	clrf	(?___lwdiv+1)
 	addwf	(?___lwdiv+1)
@@ -4890,12 +5866,12 @@ i1l8558:
 	clrf	(?___lwdiv)
 	addwf	(?___lwdiv)
 
-	goto	i1l5823
+	goto	i1l5870
 	
-i1l8560:	
+i1l8713:	
 	line	26
 	
-i1l5823:	
+i1l5870:	
 	return
 	opt stack 0
 GLOBAL	__end_of___lwdiv
@@ -4904,13 +5880,13 @@ GLOBAL	__end_of___lwdiv
 
 	signat	___lwdiv,8314
 	global	_Debounce
-psect	text550,local,class=CODE,delta=2
-global __ptext550
-__ptext550:
+psect	text600,local,class=CODE,delta=2
+global __ptext600
+__ptext600:
 
 ;; *************** function _Debounce *****************
 ;; Defined at:
-;;		line 36 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;;		line 63 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -4936,367 +5912,367 @@ __ptext550:
 ;;		_ReadButtons
 ;; This function uses a non-reentrant model
 ;;
-psect	text550
+psect	text600
 	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
-	line	36
+	line	63
 	global	__size_of_Debounce
 	__size_of_Debounce	equ	__end_of_Debounce-_Debounce
 	
 _Debounce:	
 	opt	stack 2
 ; Regs used in _Debounce: [wreg+status,2+status,0]
-	line	38
+	line	65
 	
-i1l8494:	
-;HMI.c: 38: if(!RB2)
+i1l8589:	
+;HMI.c: 65: if(!RB2)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	btfsc	(50/8),(50)&7
-	goto	u377_21
-	goto	u377_20
-u377_21:
-	goto	i1l5076
-u377_20:
-	line	40
+	goto	u375_21
+	goto	u375_20
+u375_21:
+	goto	i1l5095
+u375_20:
+	line	67
 	
-i1l8496:	
-;HMI.c: 39: {
-;HMI.c: 40: UpDebounceCount++;
+i1l8591:	
+;HMI.c: 66: {
+;HMI.c: 67: UpDebounceCount++;
 	movlw	(01h)
 	movwf	(??_Debounce+0)+0
 	movf	(??_Debounce+0)+0,w
 	addwf	(_UpDebounceCount),f	;volatile
-	line	41
+	line	68
 	
-i1l8498:	
-;HMI.c: 41: if(UpDebounceCount >= 10 & UpReleased)
+i1l8593:	
+;HMI.c: 68: if(UpDebounceCount >= 10 & UpReleased)
 	movlw	(0Ah)
 	subwf	(_UpDebounceCount),w	;volatile
 	skipc
+	goto	u376_21
+	goto	u376_20
+u376_21:
+	goto	i1l5097
+u376_20:
+	
+i1l8595:	
+	btfss	(_UpReleased/8),(_UpReleased)&7
+	goto	u377_21
+	goto	u377_20
+u377_21:
+	goto	i1l5097
+u377_20:
+	line	70
+	
+i1l8597:	
+;HMI.c: 69: {
+;HMI.c: 70: UpPressed = 1;
+	bsf	(_UpPressed/8),(_UpPressed)&7
+	line	71
+;HMI.c: 71: UpReleased = 0;
+	bcf	(_UpReleased/8),(_UpReleased)&7
+	goto	i1l5097
+	line	72
+	
+i1l5096:	
+	line	73
+;HMI.c: 72: }
+;HMI.c: 73: }
+	goto	i1l5097
+	line	74
+	
+i1l5095:	
+	line	76
+;HMI.c: 74: else
+;HMI.c: 75: {
+;HMI.c: 76: UpDebounceCount = 0;
+	clrf	(_UpDebounceCount)	;volatile
+	line	77
+;HMI.c: 77: UpReleased = 1;
+	bsf	(_UpReleased/8),(_UpReleased)&7
+	line	78
+	
+i1l5097:	
+	line	81
+;HMI.c: 78: }
+;HMI.c: 81: if(!RB3)
+	btfsc	(51/8),(51)&7
 	goto	u378_21
 	goto	u378_20
 u378_21:
-	goto	i1l5078
+	goto	i1l5098
 u378_20:
+	line	83
 	
-i1l8500:	
-	btfss	(_UpReleased/8),(_UpReleased)&7
-	goto	u379_21
-	goto	u379_20
-u379_21:
-	goto	i1l5078
-u379_20:
-	line	43
-	
-i1l8502:	
-;HMI.c: 42: {
-;HMI.c: 43: UpPressed = 1;
-	bsf	(_UpPressed/8),(_UpPressed)&7
-	line	44
-;HMI.c: 44: UpReleased = 0;
-	bcf	(_UpReleased/8),(_UpReleased)&7
-	goto	i1l5078
-	line	45
-	
-i1l5077:	
-	line	46
-;HMI.c: 45: }
-;HMI.c: 46: }
-	goto	i1l5078
-	line	47
-	
-i1l5076:	
-	line	49
-;HMI.c: 47: else
-;HMI.c: 48: {
-;HMI.c: 49: UpDebounceCount = 0;
-	clrf	(_UpDebounceCount)	;volatile
-	line	50
-;HMI.c: 50: UpReleased = 1;
-	bsf	(_UpReleased/8),(_UpReleased)&7
-	line	51
-	
-i1l5078:	
-	line	54
-;HMI.c: 51: }
-;HMI.c: 54: if(!RB3)
-	btfsc	(51/8),(51)&7
-	goto	u380_21
-	goto	u380_20
-u380_21:
-	goto	i1l5079
-u380_20:
-	line	56
-	
-i1l8504:	
-;HMI.c: 55: {
-;HMI.c: 56: DownDebounceCount++;
+i1l8599:	
+;HMI.c: 82: {
+;HMI.c: 83: DownDebounceCount++;
 	movlw	(01h)
 	movwf	(??_Debounce+0)+0
 	movf	(??_Debounce+0)+0,w
 	addwf	(_DownDebounceCount),f	;volatile
-	line	57
+	line	84
 	
-i1l8506:	
-;HMI.c: 57: if(DownDebounceCount >= 10 & DownReleased)
+i1l8601:	
+;HMI.c: 84: if(DownDebounceCount >= 10 & DownReleased)
 	movlw	(0Ah)
 	subwf	(_DownDebounceCount),w	;volatile
 	skipc
+	goto	u379_21
+	goto	u379_20
+u379_21:
+	goto	i1l5100
+u379_20:
+	
+i1l8603:	
+	btfss	(_DownReleased/8),(_DownReleased)&7
+	goto	u380_21
+	goto	u380_20
+u380_21:
+	goto	i1l5100
+u380_20:
+	line	86
+	
+i1l8605:	
+;HMI.c: 85: {
+;HMI.c: 86: DownPressed = 1;
+	bsf	(_DownPressed/8),(_DownPressed)&7
+	line	87
+;HMI.c: 87: DownReleased = 0;
+	bcf	(_DownReleased/8),(_DownReleased)&7
+	goto	i1l5100
+	line	88
+	
+i1l5099:	
+	line	89
+;HMI.c: 88: }
+;HMI.c: 89: }
+	goto	i1l5100
+	line	90
+	
+i1l5098:	
+	line	92
+;HMI.c: 90: else
+;HMI.c: 91: {
+;HMI.c: 92: DownDebounceCount = 0;
+	clrf	(_DownDebounceCount)	;volatile
+	line	93
+;HMI.c: 93: DownReleased = 1;
+	bsf	(_DownReleased/8),(_DownReleased)&7
+	line	94
+	
+i1l5100:	
+	line	96
+;HMI.c: 94: }
+;HMI.c: 96: if(!RB4)
+	btfsc	(52/8),(52)&7
 	goto	u381_21
 	goto	u381_20
 u381_21:
-	goto	i1l5081
+	goto	i1l5101
 u381_20:
+	line	98
 	
-i1l8508:	
-	btfss	(_DownReleased/8),(_DownReleased)&7
-	goto	u382_21
-	goto	u382_20
-u382_21:
-	goto	i1l5081
-u382_20:
-	line	59
-	
-i1l8510:	
-;HMI.c: 58: {
-;HMI.c: 59: DownPressed = 1;
-	bsf	(_DownPressed/8),(_DownPressed)&7
-	line	60
-;HMI.c: 60: DownReleased = 0;
-	bcf	(_DownReleased/8),(_DownReleased)&7
-	goto	i1l5081
-	line	61
-	
-i1l5080:	
-	line	62
-;HMI.c: 61: }
-;HMI.c: 62: }
-	goto	i1l5081
-	line	63
-	
-i1l5079:	
-	line	65
-;HMI.c: 63: else
-;HMI.c: 64: {
-;HMI.c: 65: DownDebounceCount = 0;
-	clrf	(_DownDebounceCount)	;volatile
-	line	66
-;HMI.c: 66: DownReleased = 1;
-	bsf	(_DownReleased/8),(_DownReleased)&7
-	line	67
-	
-i1l5081:	
-	line	69
-;HMI.c: 67: }
-;HMI.c: 69: if(!RB4)
-	btfsc	(52/8),(52)&7
-	goto	u383_21
-	goto	u383_20
-u383_21:
-	goto	i1l5082
-u383_20:
-	line	71
-	
-i1l8512:	
-;HMI.c: 70: {
-;HMI.c: 71: LeftDebounceCount++;
+i1l8607:	
+;HMI.c: 97: {
+;HMI.c: 98: LeftDebounceCount++;
 	movlw	(01h)
 	movwf	(??_Debounce+0)+0
 	movf	(??_Debounce+0)+0,w
 	addwf	(_LeftDebounceCount),f	;volatile
-	line	72
+	line	99
 	
-i1l8514:	
-;HMI.c: 72: if(LeftDebounceCount >= 10 & LeftReleased)
+i1l8609:	
+;HMI.c: 99: if(LeftDebounceCount >= 10 & LeftReleased)
 	movlw	(0Ah)
 	subwf	(_LeftDebounceCount),w	;volatile
 	skipc
+	goto	u382_21
+	goto	u382_20
+u382_21:
+	goto	i1l5103
+u382_20:
+	
+i1l8611:	
+	btfss	(_LeftReleased/8),(_LeftReleased)&7
+	goto	u383_21
+	goto	u383_20
+u383_21:
+	goto	i1l5103
+u383_20:
+	line	101
+	
+i1l8613:	
+;HMI.c: 100: {
+;HMI.c: 101: LeftPressed = 1;
+	bsf	(_LeftPressed/8),(_LeftPressed)&7
+	line	102
+;HMI.c: 102: LeftReleased = 0;
+	bcf	(_LeftReleased/8),(_LeftReleased)&7
+	goto	i1l5103
+	line	103
+	
+i1l5102:	
+	line	104
+;HMI.c: 103: }
+;HMI.c: 104: }
+	goto	i1l5103
+	line	105
+	
+i1l5101:	
+	line	107
+;HMI.c: 105: else
+;HMI.c: 106: {
+;HMI.c: 107: LeftDebounceCount = 0;
+	clrf	(_LeftDebounceCount)	;volatile
+	line	108
+;HMI.c: 108: LeftReleased = 1;
+	bsf	(_LeftReleased/8),(_LeftReleased)&7
+	line	109
+	
+i1l5103:	
+	line	111
+;HMI.c: 109: }
+;HMI.c: 111: if(!RB5)
+	btfsc	(53/8),(53)&7
 	goto	u384_21
 	goto	u384_20
 u384_21:
-	goto	i1l5084
+	goto	i1l5104
 u384_20:
+	line	113
 	
-i1l8516:	
-	btfss	(_LeftReleased/8),(_LeftReleased)&7
-	goto	u385_21
-	goto	u385_20
-u385_21:
-	goto	i1l5084
-u385_20:
-	line	74
-	
-i1l8518:	
-;HMI.c: 73: {
-;HMI.c: 74: LeftPressed = 1;
-	bsf	(_LeftPressed/8),(_LeftPressed)&7
-	line	75
-;HMI.c: 75: LeftReleased = 0;
-	bcf	(_LeftReleased/8),(_LeftReleased)&7
-	goto	i1l5084
-	line	76
-	
-i1l5083:	
-	line	77
-;HMI.c: 76: }
-;HMI.c: 77: }
-	goto	i1l5084
-	line	78
-	
-i1l5082:	
-	line	80
-;HMI.c: 78: else
-;HMI.c: 79: {
-;HMI.c: 80: LeftDebounceCount = 0;
-	clrf	(_LeftDebounceCount)	;volatile
-	line	81
-;HMI.c: 81: LeftReleased = 1;
-	bsf	(_LeftReleased/8),(_LeftReleased)&7
-	line	82
-	
-i1l5084:	
-	line	84
-;HMI.c: 82: }
-;HMI.c: 84: if(!RB5)
-	btfsc	(53/8),(53)&7
-	goto	u386_21
-	goto	u386_20
-u386_21:
-	goto	i1l5085
-u386_20:
-	line	86
-	
-i1l8520:	
-;HMI.c: 85: {
-;HMI.c: 86: RightDebounceCount++;
+i1l8615:	
+;HMI.c: 112: {
+;HMI.c: 113: RightDebounceCount++;
 	movlw	(01h)
 	movwf	(??_Debounce+0)+0
 	movf	(??_Debounce+0)+0,w
 	addwf	(_RightDebounceCount),f	;volatile
-	line	87
+	line	114
 	
-i1l8522:	
-;HMI.c: 87: if(RightDebounceCount >= 10 & RightReleased)
+i1l8617:	
+;HMI.c: 114: if(RightDebounceCount >= 10 & RightReleased)
 	movlw	(0Ah)
 	subwf	(_RightDebounceCount),w	;volatile
 	skipc
+	goto	u385_21
+	goto	u385_20
+u385_21:
+	goto	i1l5106
+u385_20:
+	
+i1l8619:	
+	btfss	(_RightReleased/8),(_RightReleased)&7
+	goto	u386_21
+	goto	u386_20
+u386_21:
+	goto	i1l5106
+u386_20:
+	line	116
+	
+i1l8621:	
+;HMI.c: 115: {
+;HMI.c: 116: RightPressed = 1;
+	bsf	(_RightPressed/8),(_RightPressed)&7
+	line	117
+;HMI.c: 117: RightReleased = 0;
+	bcf	(_RightReleased/8),(_RightReleased)&7
+	goto	i1l5106
+	line	118
+	
+i1l5105:	
+	line	119
+;HMI.c: 118: }
+;HMI.c: 119: }
+	goto	i1l5106
+	line	120
+	
+i1l5104:	
+	line	122
+;HMI.c: 120: else
+;HMI.c: 121: {
+;HMI.c: 122: RightDebounceCount = 0;
+	clrf	(_RightDebounceCount)	;volatile
+	line	123
+;HMI.c: 123: RightReleased = 1;
+	bsf	(_RightReleased/8),(_RightReleased)&7
+	line	124
+	
+i1l5106:	
+	line	126
+;HMI.c: 124: }
+;HMI.c: 126: if(!RB6)
+	btfsc	(54/8),(54)&7
 	goto	u387_21
 	goto	u387_20
 u387_21:
-	goto	i1l5087
+	goto	i1l5107
 u387_20:
+	line	128
 	
-i1l8524:	
-	btfss	(_RightReleased/8),(_RightReleased)&7
-	goto	u388_21
-	goto	u388_20
-u388_21:
-	goto	i1l5087
-u388_20:
-	line	89
-	
-i1l8526:	
-;HMI.c: 88: {
-;HMI.c: 89: RightPressed = 1;
-	bsf	(_RightPressed/8),(_RightPressed)&7
-	line	90
-;HMI.c: 90: RightReleased = 0;
-	bcf	(_RightReleased/8),(_RightReleased)&7
-	goto	i1l5087
-	line	91
-	
-i1l5086:	
-	line	92
-;HMI.c: 91: }
-;HMI.c: 92: }
-	goto	i1l5087
-	line	93
-	
-i1l5085:	
-	line	95
-;HMI.c: 93: else
-;HMI.c: 94: {
-;HMI.c: 95: RightDebounceCount = 0;
-	clrf	(_RightDebounceCount)	;volatile
-	line	96
-;HMI.c: 96: RightReleased = 1;
-	bsf	(_RightReleased/8),(_RightReleased)&7
-	line	97
-	
-i1l5087:	
-	line	99
-;HMI.c: 97: }
-;HMI.c: 99: if(!RB6)
-	btfsc	(54/8),(54)&7
-	goto	u389_21
-	goto	u389_20
-u389_21:
-	goto	i1l5088
-u389_20:
-	line	101
-	
-i1l8528:	
-;HMI.c: 100: {
-;HMI.c: 101: CenterDebounceCount++;
+i1l8623:	
+;HMI.c: 127: {
+;HMI.c: 128: CenterDebounceCount++;
 	movlw	(01h)
 	movwf	(??_Debounce+0)+0
 	movf	(??_Debounce+0)+0,w
 	addwf	(_CenterDebounceCount),f	;volatile
-	line	102
+	line	129
 	
-i1l8530:	
-;HMI.c: 102: if(CenterDebounceCount >= 10 & CenterReleased)
+i1l8625:	
+;HMI.c: 129: if(CenterDebounceCount >= 10 & CenterReleased)
 	movlw	(0Ah)
 	subwf	(_CenterDebounceCount),w	;volatile
 	skipc
-	goto	u390_21
-	goto	u390_20
-u390_21:
-	goto	i1l5091
-u390_20:
+	goto	u388_21
+	goto	u388_20
+u388_21:
+	goto	i1l5110
+u388_20:
 	
-i1l8532:	
+i1l8627:	
 	btfss	(_CenterReleased/8),(_CenterReleased)&7
-	goto	u391_21
-	goto	u391_20
-u391_21:
-	goto	i1l5091
-u391_20:
-	line	104
+	goto	u389_21
+	goto	u389_20
+u389_21:
+	goto	i1l5110
+u389_20:
+	line	131
 	
-i1l8534:	
-;HMI.c: 103: {
-;HMI.c: 104: CenterPressed = 1;
+i1l8629:	
+;HMI.c: 130: {
+;HMI.c: 131: CenterPressed = 1;
 	bsf	(_CenterPressed/8),(_CenterPressed)&7
-	line	105
-;HMI.c: 105: CenterReleased = 0;
+	line	132
+;HMI.c: 132: CenterReleased = 0;
 	bcf	(_CenterReleased/8),(_CenterReleased)&7
-	goto	i1l5091
-	line	106
+	goto	i1l5110
+	line	133
 	
-i1l5089:	
-	line	107
-;HMI.c: 106: }
-;HMI.c: 107: }
-	goto	i1l5091
-	line	108
+i1l5108:	
+	line	134
+;HMI.c: 133: }
+;HMI.c: 134: }
+	goto	i1l5110
+	line	135
 	
-i1l5088:	
-	line	110
-;HMI.c: 108: else
-;HMI.c: 109: {
-;HMI.c: 110: CenterDebounceCount = 0;
+i1l5107:	
+	line	137
+;HMI.c: 135: else
+;HMI.c: 136: {
+;HMI.c: 137: CenterDebounceCount = 0;
 	clrf	(_CenterDebounceCount)	;volatile
-	line	111
-;HMI.c: 111: CenterReleased = 1;
+	line	138
+;HMI.c: 138: CenterReleased = 1;
 	bsf	(_CenterReleased/8),(_CenterReleased)&7
-	goto	i1l5091
-	line	112
+	goto	i1l5110
+	line	139
 	
-i1l5090:	
-	line	113
+i1l5109:	
+	line	140
 	
-i1l5091:	
+i1l5110:	
 	return
 	opt stack 0
 GLOBAL	__end_of_Debounce
@@ -5305,9 +6281,9 @@ GLOBAL	__end_of_Debounce
 
 	signat	_Debounce,88
 	global	_adc_read
-psect	text551,local,class=CODE,delta=2
-global __ptext551
-__ptext551:
+psect	text601,local,class=CODE,delta=2
+global __ptext601
+__ptext601:
 
 ;; *************** function _adc_read *****************
 ;; Defined at:
@@ -5337,7 +6313,7 @@ __ptext551:
 ;;		_adc_read_channel
 ;; This function uses a non-reentrant model
 ;;
-psect	text551
+psect	text601
 	file	"E:\Aldnoah.Zero\Assignment3\adc.c"
 	line	61
 	global	__size_of_adc_read
@@ -5348,7 +6324,7 @@ _adc_read:
 ; Regs used in _adc_read: [wreg+status,2+status,0]
 	line	64
 	
-i1l8016:	
+i1l8133:	
 ;adc.c: 62: volatile unsigned int adc_value;
 ;adc.c: 64: ADRESH = 0;
 	bcf	status, 5	;RP0=0, select bank0
@@ -5356,7 +6332,7 @@ i1l8016:
 	clrf	(30)	;volatile
 	line	66
 	
-i1l8018:	
+i1l8135:	
 ;adc.c: 66: GO = 1;
 	bsf	(250/8),(250)&7
 	line	67
@@ -5367,11 +6343,11 @@ i1l704:
 	
 i1l703:	
 	btfsc	(250/8),(250)&7
-	goto	u307_21
-	goto	u307_20
-u307_21:
+	goto	u310_21
+	goto	u310_20
+u310_21:
 	goto	i1l703
-u307_20:
+u310_20:
 	
 i1l705:	
 	line	68
@@ -5383,10 +6359,10 @@ nop ;#
 	line	70
 # 70 "E:\Aldnoah.Zero\Assignment3\adc.c"
 nop ;#
-psect	text551
+psect	text601
 	line	73
 	
-i1l8020:	
+i1l8137:	
 ;adc.c: 73: adc_value = ADRESH;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
@@ -5401,13 +6377,13 @@ i1l8020:
 ;adc.c: 74: adc_value <<= 1;
 	movlw	01h
 	
-u308_25:
+u311_25:
 	clrc
 	rlf	(adc_read@adc_value),f	;volatile
 	rlf	(adc_read@adc_value+1),f	;volatile
 	addlw	-1
 	skipz
-	goto	u308_25
+	goto	u311_25
 	line	75
 ;adc.c: 75: adc_value |= (ADRESL >> 15);
 	bsf	status, 5	;RP0=1, select bank1
@@ -5415,7 +6391,7 @@ u308_25:
 	movf	(158)^080h,w	;volatile
 	line	78
 	
-i1l8022:	
+i1l8139:	
 ;adc.c: 78: return (adc_value);
 	movf	(adc_read@adc_value+1),w	;volatile
 	clrf	(?_adc_read+1)
@@ -5426,7 +6402,7 @@ i1l8022:
 
 	goto	i1l706
 	
-i1l8024:	
+i1l8141:	
 	line	79
 	
 i1l706:	
@@ -5437,9 +6413,9 @@ GLOBAL	__end_of_adc_read
 ;; =============== function _adc_read ends ============
 
 	signat	_adc_read,90
-psect	text552,local,class=CODE,delta=2
-global __ptext552
-__ptext552:
+psect	text602,local,class=CODE,delta=2
+global __ptext602
+__ptext602:
 	global	btemp
 	btemp set 07Eh
 

@@ -1,5 +1,18 @@
 #include <htc.h>
+#include <stdio.h>
 #include "HMI.h"
+#include "lcd.h"
+#include "infrared.h"
+
+
+#define UP 1
+#define DOWN 2
+#define LEFT 3
+#define RIGHT 4
+#define CENTER 5
+
+
+
 
 
 #define PB_UP !RB2 //button 0 pin	
@@ -8,6 +21,18 @@
 #define PB_RIGHT !RB5 //button 3 pin	
 #define PB_CENTER !RB6 //button 4 pin	
 #define DEBOUNCE_REQ_COUNT 10  //10ms debounce time
+
+#define MENULEFT 0x40
+#define MENUCENTER 0x44
+#define MENURIGHT 0x4D
+
+#define MENUITEMS 5  //number of items on the menu: change if items added or removed
+
+//menu position
+int pos = 0;
+
+const char* menuStrings[] = {"Thing1", "Thing2", "Thing3", "Thing4", "Thing5"}; 
+const char* shortMenuStrings[] = {"Th1", "Th2", "Th3", "Th4", "Th5"};
 
 //set up debounce variables 
 
@@ -30,6 +55,8 @@ volatile unsigned char RightDebounceCount = 0;
 volatile bit CenterPressed = 0;
 volatile bit CenterReleased = 0;
 volatile unsigned char CenterDebounceCount = 0;
+
+
 
 
 void Debounce(void)
@@ -151,3 +178,84 @@ unsigned char ReadButtons(void)
 	return 0;
 }
 
+void Menu(unsigned char input)
+{
+	switch (input)
+		{
+			case UP:
+			
+			break;
+			case DOWN:
+			
+			break;
+			case LEFT:
+			pos--;
+			if (pos < 0)
+				pos = MENUITEMS - 1;
+				
+			break;
+			case RIGHT:
+			pos++;		
+			if (pos == MENUITEMS)
+				pos = 0;	
+			
+			break;
+			case CENTER:
+			switch (pos)
+			{
+				case 0:
+
+				break;
+				case 1:
+
+				break;
+				case 2:
+
+				break;
+				case 3:
+
+				break;
+				case 4:
+
+				break;
+				default:
+				break;
+			}			
+			break;
+
+			default:
+			
+			break;
+		}
+}
+
+void UpdateDisplay(void)
+{
+	char adcOutput[16] = "";				
+	lcd_write_control(0b00000001); //clear display	
+				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+				lcd_set_cursor(0x00);	
+				lcd_write_string(adcOutput);				
+				
+
+				//lcd_set_cursor(MENULEFT);	
+				//lcd_write_string("                    ");
+				lcd_set_cursor(MENULEFT);	
+				if (pos > 0)
+					lcd_write_string(shortMenuStrings[pos - 1]);
+				else
+					lcd_write_string(shortMenuStrings[pos + MENUITEMS - 1]);
+				lcd_set_cursor(MENUCENTER);	
+				lcd_write_string(menuStrings[pos]);
+				lcd_set_cursor(MENURIGHT);	
+				lcd_write_string(shortMenuStrings[(pos + 1) % MENUITEMS]);
+}
+
+//lcd_set_cursor(MENULEFT);	
+//				lcd_write_string("                    ");
+//				lcd_set_cursor(MENULEFT);	
+//				lcd_write_string(shortMenuStrings[(pos - 1) % MENUITEMS]);
+//				lcd_set_cursor(MENUCENTER);	
+//				lcd_write_string(menuStrings[pos]);
+//				lcd_set_cursor(MENURIGHT);	
+//				lcd_write_string(shortMenuStrings[(pos + 1) % MENUITEMS]);

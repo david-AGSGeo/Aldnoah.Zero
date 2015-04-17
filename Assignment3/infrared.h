@@ -3,11 +3,12 @@
 
 #include <htc.h>
 
-
+volatile unsigned int adcVal;
+volatile unsigned int distance;
 
 unsigned int readDistance(void);
-unsigned int readAvgDistance(void);
-void ADCconvert(unsigned int adcVal);
+void readAvgDistance(void);
+void ADCconvert(void);
 
 
 #endif 

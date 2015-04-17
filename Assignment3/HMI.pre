@@ -1090,10 +1090,110 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
+# 12 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+typedef int ptrdiff_t;
+typedef unsigned size_t;
+typedef unsigned short wchar_t;
+
+# 31 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma inline(__va_start)
+extern void * __va_start(void);
+
+#pragma inline(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+extern int errno;
+
+# 58
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
+extern int errno;
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern bit kbhit(void);
+
+# 31
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 103 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+# 195
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...);
+extern int sscanf(const char *, const char *, ...);
+extern int vprintf(const char *, va_list);
+extern int vsprintf(char *, const char *, va_list);
+extern int vscanf(const char *, va_list ap);
+extern int vsscanf(const char *, const char *, va_list);
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
 # 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 unsigned char ReadButtons(void);
+void Menu(unsigned char input);
+void UpdateDisplay(void);
 
-# 14 "E:\Aldnoah.Zero\Assignment3\HMI.c"
+# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+void lcd_write_control(unsigned char databyte);
+
+
+void lcd_write_data(unsigned char databyte);
+
+
+void lcd_set_cursor(unsigned char address);
+
+void lcd_write_string(char * s);
+
+
+void lcd_write_2_digit_bcd(unsigned char data);
+
+
+void lcd_init(void);
+
+void lcd_write_3_digit_bcd(unsigned int data);
+
+# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+volatile unsigned int adcVal;
+volatile unsigned int distance;
+
+unsigned int readDistance(void);
+void readAvgDistance(void);
+void ADCconvert(void);
+
+# 32 "E:\Aldnoah.Zero\Assignment3\HMI.c"
+int pos = 0;
+
+const char* menuStrings[] = {"Thing1", "Thing2", "Thing3", "Thing4", "Thing5"};
+const char* shortMenuStrings[] = {"Th1", "Th2", "Th3", "Th4", "Th5"};
+
+
+
 volatile bit UpPressed = 0;
 volatile bit UpReleased = 0;
 volatile unsigned char UpDebounceCount = 0;
@@ -1113,6 +1213,8 @@ volatile unsigned char RightDebounceCount = 0;
 volatile bit CenterPressed = 0;
 volatile bit CenterReleased = 0;
 volatile unsigned char CenterDebounceCount = 0;
+
+
 
 
 void Debounce(void)
@@ -1232,5 +1334,78 @@ return 5;
 
 }
 return 0;
+}
+
+void Menu(unsigned char input)
+{
+switch (input)
+{
+case 1:
+
+break;
+case 2:
+
+break;
+case 3:
+pos--;
+if (pos < 0)
+pos = 5 - 1;
+
+break;
+case 4:
+pos++;
+if (pos == 5)
+pos = 0;
+
+break;
+case 5:
+switch (pos)
+{
+case 0:
+
+break;
+case 1:
+
+break;
+case 2:
+
+break;
+case 3:
+
+break;
+case 4:
+
+break;
+default:
+break;
+}
+break;
+
+default:
+
+break;
+}
+}
+
+void UpdateDisplay(void)
+{
+char adcOutput[16] = "";
+lcd_write_control(0b00000001);
+sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+lcd_set_cursor(0x00);
+lcd_write_string(adcOutput);
+
+
+
+
+lcd_set_cursor(0x40);
+if (pos > 0)
+lcd_write_string(shortMenuStrings[pos - 1]);
+else
+lcd_write_string(shortMenuStrings[pos + 5 - 1]);
+lcd_set_cursor(0x44);
+lcd_write_string(menuStrings[pos]);
+lcd_set_cursor(0x4D);
+lcd_write_string(shortMenuStrings[(pos + 1) % 5]);
 }
 

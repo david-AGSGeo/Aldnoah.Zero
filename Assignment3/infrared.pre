@@ -1154,10 +1154,13 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 8 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+volatile unsigned int adcVal;
+volatile unsigned int distance;
+
 unsigned int readDistance(void);
-unsigned int readAvgDistance(void);
-void ADCconvert(unsigned int adcVal);
+void readAvgDistance(void);
+void ADCconvert(void);
 
 # 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
 void init_adc(void);
@@ -1187,18 +1190,18 @@ void lcd_init(void);
 void lcd_write_3_digit_bcd(unsigned int data);
 
 # 9 "E:\Aldnoah.Zero\Assignment3\infrared.c"
-unsigned int readAvgDistance(void)
+void readAvgDistance(void)
 {
-unsigned int fullval = 0, averageval;
-char adcOutput[16] = "";
+unsigned int fullval = 0;
+
 
 for (int i = 0; i < 10; i++)
 {
 fullval += readDistance();
 
 }
-averageval = fullval / 10;
-return averageval;
+adcVal = fullval / 10;
+ADCconvert();
 }
 
 unsigned int readDistance(void)
@@ -1210,10 +1213,9 @@ fullval = adc_read_channel(0);
 return fullval;
 }
 
-void ADCconvert(unsigned int adcVal)
+void ADCconvert(void)
 {
-char adcOutput[16] = "";
-unsigned int distance;
+
 if (adcVal > 250)
 {
 distance = 20;
@@ -1267,10 +1269,5 @@ else if (adcVal < 33 )
 distance = 130 + (adcVal%100) ;
 }
 
-
-
-lcd_write_control(0b00000001);
-sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
-lcd_set_cursor(0x00);
-lcd_write_string(adcOutput);
+# 96
 }

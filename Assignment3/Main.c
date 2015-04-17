@@ -1,5 +1,5 @@
 /*********************************************************************************
-	Description: Assignment 1 submission. 
+	Description: Assignment 3 submission. 
 		-2Hz heartbeat
 		-Toggleabe LED with debounced button
 		-steppermotor initialisation and control with 
@@ -11,7 +11,7 @@
 	Ports B2-B5 - buttons PB0-3
 	Port C - Steppermotor Controller         																 
 																				 
-	Author: David LEE 
+	Authors: David LEE 
 	S/N 11055579
 	Email: David@lee42.com         																 
 																				 
@@ -88,8 +88,8 @@ void interrupt isr1(void)
 		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
 		{
-			ADCconvert(readAvgDistance());
-			//readDistance();
+			readAvgDistance();
+			UpdateDisplay();
 			RTC_FLAG_250MS = 1;
 
 		}
@@ -99,8 +99,11 @@ void interrupt isr1(void)
 			RTC_Counter = 0;	//reset RTC Counter
 			HBLED ^= 0x01;		//toggle heartbeat LED
 		}
-
-		buttonPressed = ReadButtons();
+		
+		if (buttonPressed == 0)
+			{
+			buttonPressed = ReadButtons();
+			}
 	}
 }
 
@@ -142,7 +145,7 @@ void main(void)
 	init();
 	//initialise stepper motor to known winding
 	//rotate(8, CLOCKWISE);
-
+		
 	//Loop forever
 
 	while(1)
@@ -151,29 +154,40 @@ void main(void)
 		switch (buttonPressed)
 		{
 			case UP:
+			Menu(UP);
 			LED0 ^= 0x01;
 			buttonPressed = 0;
+			
 			break;
 			case DOWN:
+			Menu(DOWN);
 			LED0 ^= 0x01;
 			buttonPressed = 0;
+			
 			break;
 			case LEFT:
+			Menu(LEFT);
 			LED0 ^= 0x01;
 			buttonPressed = 0;
+			
 			break;
 			case RIGHT:
+			Menu(RIGHT);
 			LED0 ^= 0x01;
 			buttonPressed = 0;
+			
 			break;
 			case CENTER:
+			Menu(CENTER);
 			LED0 ^= 0x01;
 			buttonPressed = 0;
+			
 			break;
 			default:
 			
 			break;
 		}
+	
 		
 
 

@@ -6,18 +6,18 @@
 
 #define NUMREADS 10 //number of adc reads to average for IR sensor
 
-unsigned int readAvgDistance(void)
+void readAvgDistance(void)
 {
-	unsigned int fullval = 0, averageval;
-	char adcOutput[16] = "";
+	unsigned int fullval = 0; 
+	
 	
 	for (int i = 0; i < NUMREADS; i++)
 {
 	fullval += readDistance();
 	
 }
-	averageval = fullval / NUMREADS;
-	return averageval;
+	adcVal = fullval / NUMREADS;
+	ADCconvert();
 }
 
 unsigned int readDistance(void)
@@ -29,10 +29,9 @@ unsigned int readDistance(void)
 	return fullval;
 }
 
-void ADCconvert(unsigned int adcVal)
+void ADCconvert(void)
 {
-	char adcOutput[16] = "";
-	unsigned int distance;
+	
 	if (adcVal > 250)
 	{
 		distance = 20;
@@ -88,8 +87,10 @@ else if (adcVal < 33 )
 
 	
 
-	lcd_write_control(0b00000001); //clear display
-	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
-	lcd_set_cursor(0x00);	
-	lcd_write_string(adcOutput);
+	//lcd_write_control(0b00000001); //clear display
+	//lcd_set_cursor(0x00);
+//	lcd_write_string("                ");
+//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+//	lcd_set_cursor(0x00);	
+//	lcd_write_string(adcOutput);
 }

@@ -881,6 +881,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
+"6 E:\Aldnoah.Zero\Assignment3\infrared.h
+[v _adcVal `Vui  1 e ]
+"7 E:\Aldnoah.Zero\Assignment3\infrared.h
+[v _distance `Vui  1 e ]
 "58 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _current_direction `uc  1 e ]
 "61 E:\Aldnoah.Zero\Assignment3\Main.c
@@ -912,9 +916,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _txiptr `Vuc  0 e ]
 "10 E:\Aldnoah.Zero\Assignment3\infrared.h
-[v _ADCconvert `(v  0 ef1`ui ]
-"9 E:\Aldnoah.Zero\Assignment3\infrared.h
-[v _readAvgDistance `(ui  0 ef ]
+[v _readAvgDistance `(v  0 ef ]
+"10 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _UpdateDisplay `(v  0 ef ]
 "8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
 "7 E:\Aldnoah.Zero\Assignment3\adc.h
@@ -924,6 +928,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "61 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_init `(v  0 ef ]
 [p mainexit ]
+"9 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _Menu `(v  0 ef1`uc ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f877a.h: 90: volatile unsigned char PCL @ 0x002;
@@ -1798,9 +1804,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
 [; ;lcd.h: 31: void lcd_init(void);
 [; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
-[; ;infrared.h: 8: unsigned int readDistance(void);
-[; ;infrared.h: 9: unsigned int readAvgDistance(void);
-[; ;infrared.h: 10: void ADCconvert(unsigned int adcVal);
+[; ;infrared.h: 6: volatile unsigned int adcVal;
+[; ;infrared.h: 7: volatile unsigned int distance;
+[; ;infrared.h: 9: unsigned int readDistance(void);
+[; ;infrared.h: 10: void readAvgDistance(void);
+[; ;infrared.h: 11: void ADCconvert(void);
 [; ;steppermotor.h: 7: void rotate(unsigned char steps, unsigned char direction);
 [; ;ser.h: 55: bit ser_isrx(void);
 [; ;ser.h: 56: unsigned char ser_getch(void);
@@ -1815,6 +1823,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
 [; ;ser.h: 68: extern unsigned char ser_tmp;
 [; ;HMI.h: 8: unsigned char ReadButtons(void);
+[; ;HMI.h: 9: void Menu(unsigned char input);
+[; ;HMI.h: 10: void UpdateDisplay(void);
 "34 E:\Aldnoah.Zero\Assignment3\Main.c
 [; ;Main.c: 34: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
@@ -1860,8 +1870,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;Main.c: 71: volatile unsigned int RTC_Counter = 0;
 "75
-[v F1216 `(v  1 tf ]
-[v _isr1 `IF1216  1 e ]
+[v F1222 `(v  1 tf ]
+[v _isr1 `IF1222  1 e ]
 {
 [; ;Main.c: 74: void interrupt isr1(void)
 [; ;Main.c: 75: {
@@ -1924,9 +1934,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 90: {
 "90
 {
-[; ;Main.c: 91: ADCconvert(readAvgDistance());
+[; ;Main.c: 91: readAvgDistance();
 "91
-[e ( _ADCconvert (1 ( _readAvgDistance ..  ]
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 92: UpdateDisplay();
+"92
+[e ( _UpdateDisplay ..  ]
 [; ;Main.c: 93: RTC_FLAG_250MS = 1;
 "93
 [e = _RTC_FLAG_250MS -> -> 1 `i `b ]
@@ -1953,159 +1966,184 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 111 ]
 [; ;Main.c: 101: }
-[; ;Main.c: 103: buttonPressed = ReadButtons();
+[; ;Main.c: 103: if (buttonPressed == 0)
 "103
-[e = _buttonPressed ( _ReadButtons ..  ]
+[e $ ! == -> _buttonPressed `i -> 0 `i 112  ]
+[; ;Main.c: 104: {
 "104
+{
+[; ;Main.c: 105: buttonPressed = ReadButtons();
+"105
+[e = _buttonPressed ( _ReadButtons ..  ]
+"106
+}
+[e :U 112 ]
+"107
 }
 [e :U 107 ]
-[; ;Main.c: 104: }
-[; ;Main.c: 105: }
-"105
+[; ;Main.c: 106: }
+[; ;Main.c: 107: }
+[; ;Main.c: 108: }
+"108
 [e :UE 102 ]
 }
-"108
+"111
 [v _init `(v  1 ef ]
 {
-[; ;Main.c: 107: void init()
-[; ;Main.c: 108: {
+[; ;Main.c: 110: void init()
+[; ;Main.c: 111: {
 [e :U _init ]
 [f ]
-[; ;Main.c: 109: init_adc();
-"109
+[; ;Main.c: 112: init_adc();
+"112
 [e ( _init_adc ..  ]
-[; ;Main.c: 110: lcd_init();
-"110
-[e ( _lcd_init ..  ]
-[; ;Main.c: 111: ser_init();
-"111
-[e ( _ser_init ..  ]
-[; ;Main.c: 113: TRISB = 0b11111100;
+[; ;Main.c: 113: lcd_init();
 "113
+[e ( _lcd_init ..  ]
+[; ;Main.c: 114: ser_init();
+"114
+[e ( _ser_init ..  ]
+[; ;Main.c: 116: TRISB = 0b11111100;
+"116
 [e = _TRISB -> -> 252 `i `uc ]
-[; ;Main.c: 119: OPTION_REG = 0b00000100;
-"119
-[e = _OPTION_REG -> -> 4 `i `uc ]
-[; ;Main.c: 122: TMR0IE = 1;
+[; ;Main.c: 122: OPTION_REG = 0b00000100;
 "122
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;Main.c: 125: (GIE = 1);
+[e = _OPTION_REG -> -> 4 `i `uc ]
+[; ;Main.c: 125: TMR0IE = 1;
 "125
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;Main.c: 128: (GIE = 1);
+"128
 [e = _GIE -> -> 1 `i `b ]
-[; ;Main.c: 126: }
-"126
-[e :UE 112 ]
+[; ;Main.c: 129: }
+"129
+[e :UE 113 ]
 }
-"137
+"140
 [v _main `(v  1 ef ]
 {
-[; ;Main.c: 136: void main(void)
-[; ;Main.c: 137: {
+[; ;Main.c: 139: void main(void)
+[; ;Main.c: 140: {
 [e :U _main ]
 [f ]
-[; ;Main.c: 142: init();
-"142
+[; ;Main.c: 145: init();
+"145
 [e ( _init ..  ]
-[; ;Main.c: 148: while(1)
-"148
-[e :U 115 ]
-[; ;Main.c: 149: {
-"149
-{
-[; ;Main.c: 151: switch (buttonPressed)
+[; ;Main.c: 151: while(1)
 "151
-[e $U 118  ]
+[e :U 116 ]
 [; ;Main.c: 152: {
 "152
 {
-[; ;Main.c: 153: case 1:
-"153
-[e :U 119 ]
-[; ;Main.c: 154: RB1 ^= 0x01;
+[; ;Main.c: 154: switch (buttonPressed)
 "154
-[e =^ _RB1 -> -> 1 `i `b ]
-[; ;Main.c: 155: buttonPressed = 0;
+[e $U 119  ]
+[; ;Main.c: 155: {
 "155
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 156: break;
+{
+[; ;Main.c: 156: case 1:
 "156
-[e $U 117  ]
-[; ;Main.c: 157: case 2:
-"157
 [e :U 120 ]
+[; ;Main.c: 157: Menu(1);
+"157
+[e ( _Menu (1 -> -> 1 `i `uc ]
 [; ;Main.c: 158: RB1 ^= 0x01;
 "158
 [e =^ _RB1 -> -> 1 `i `b ]
 [; ;Main.c: 159: buttonPressed = 0;
 "159
 [e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 160: break;
-"160
-[e $U 117  ]
-[; ;Main.c: 161: case 3:
+[; ;Main.c: 161: break;
 "161
-[e :U 121 ]
-[; ;Main.c: 162: RB1 ^= 0x01;
+[e $U 118  ]
+[; ;Main.c: 162: case 2:
 "162
-[e =^ _RB1 -> -> 1 `i `b ]
-[; ;Main.c: 163: buttonPressed = 0;
+[e :U 121 ]
+[; ;Main.c: 163: Menu(2);
 "163
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 164: break;
+[e ( _Menu (1 -> -> 2 `i `uc ]
+[; ;Main.c: 164: RB1 ^= 0x01;
 "164
-[e $U 117  ]
-[; ;Main.c: 165: case 4:
-"165
-[e :U 122 ]
-[; ;Main.c: 166: RB1 ^= 0x01;
-"166
 [e =^ _RB1 -> -> 1 `i `b ]
-[; ;Main.c: 167: buttonPressed = 0;
-"167
+[; ;Main.c: 165: buttonPressed = 0;
+"165
 [e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 168: break;
+[; ;Main.c: 167: break;
+"167
+[e $U 118  ]
+[; ;Main.c: 168: case 3:
 "168
-[e $U 117  ]
-[; ;Main.c: 169: case 5:
+[e :U 122 ]
+[; ;Main.c: 169: Menu(3);
 "169
-[e :U 123 ]
+[e ( _Menu (1 -> -> 3 `i `uc ]
 [; ;Main.c: 170: RB1 ^= 0x01;
 "170
 [e =^ _RB1 -> -> 1 `i `b ]
 [; ;Main.c: 171: buttonPressed = 0;
 "171
 [e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 172: break;
-"172
-[e $U 117  ]
-[; ;Main.c: 173: default:
+[; ;Main.c: 173: break;
 "173
-[e :U 124 ]
-[; ;Main.c: 175: break;
+[e $U 118  ]
+[; ;Main.c: 174: case 4:
+"174
+[e :U 123 ]
+[; ;Main.c: 175: Menu(4);
 "175
-[e $U 117  ]
+[e ( _Menu (1 -> -> 4 `i `uc ]
+[; ;Main.c: 176: RB1 ^= 0x01;
 "176
+[e =^ _RB1 -> -> 1 `i `b ]
+[; ;Main.c: 177: buttonPressed = 0;
+"177
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 179: break;
+"179
+[e $U 118  ]
+[; ;Main.c: 180: case 5:
+"180
+[e :U 124 ]
+[; ;Main.c: 181: Menu(5);
+"181
+[e ( _Menu (1 -> -> 5 `i `uc ]
+[; ;Main.c: 182: RB1 ^= 0x01;
+"182
+[e =^ _RB1 -> -> 1 `i `b ]
+[; ;Main.c: 183: buttonPressed = 0;
+"183
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 185: break;
+"185
+[e $U 118  ]
+[; ;Main.c: 186: default:
+"186
+[e :U 125 ]
+[; ;Main.c: 188: break;
+"188
+[e $U 118  ]
+"189
 }
-[; ;Main.c: 176: }
-[e $U 117  ]
-"151
+[; ;Main.c: 189: }
+[e $U 118  ]
+"154
+[e :U 119 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 120
+ , $ -> -> 2 `i `uc 121
+ , $ -> -> 3 `i `uc 122
+ , $ -> -> 4 `i `uc 123
+ , $ -> -> 5 `i `uc 124
+ 125 ]
+"189
 [e :U 118 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 119
- , $ -> -> 2 `i `uc 120
- , $ -> -> 3 `i `uc 121
- , $ -> -> 4 `i `uc 122
- , $ -> -> 5 `i `uc 123
- 124 ]
-"176
-[e :U 117 ]
-"241
+"255
 }
-[e :U 114 ]
-"148
-[e $U 115  ]
-[e :U 116 ]
-[; ;Main.c: 241: }
-[; ;Main.c: 242: }
-"242
-[e :UE 113 ]
+[e :U 115 ]
+"151
+[e $U 116  ]
+[e :U 117 ]
+[; ;Main.c: 255: }
+[; ;Main.c: 256: }
+"256
+[e :UE 114 ]
 }
