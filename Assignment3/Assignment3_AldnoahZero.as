@@ -39,9 +39,9 @@ fsr0	equ	4
 c	equ	1
 z	equ	0
 pclath	equ	10
-# 34 "E:\Aldnoah.Zero\Assignment3\Main.c"
+# 34 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 	psect config,class=CONFIG,delta=2 ;#
-# 34 "E:\Aldnoah.Zero\Assignment3\Main.c"
+# 34 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
 	FNCALL	_main,_init
 	FNCALL	_main,_Menu
@@ -93,7 +93,7 @@ pclath	equ	10
 psect	idataBANK1,class=CODE,space=0,delta=2
 global __pidataBANK1
 __pidataBANK1:
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	34
 
 ;initializer for _menuStrings
@@ -141,7 +141,7 @@ incf fsr
 __stringbase:
 	retlw	0
 psect	strings
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 	line	350
 _dpowers:
 	retlw	01h
@@ -542,13 +542,13 @@ _txoptr:
 psect	dataBANK1,class=BANK1,space=1
 global __pdataBANK1
 __pdataBANK1:
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	34
 _menuStrings:
        ds      5
 
 psect	dataBANK1
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	35
 _shortMenuStrings:
        ds      5
@@ -1529,7 +1529,7 @@ __pmaintext:
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 164 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
+;;		line 164 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -1559,7 +1559,7 @@ __pmaintext:
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext
-	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 	line	164
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -2250,7 +2250,7 @@ __ptext806:
 
 ;; *************** function _init *****************
 ;; Defined at:
-;;		line 121 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
+;;		line 121 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -2280,7 +2280,7 @@ __ptext806:
 ;; This function uses a non-reentrant model
 ;;
 psect	text806
-	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 	line	121
 	global	__size_of_init
 	__size_of_init	equ	__end_of_init-_init
@@ -2828,7 +2828,7 @@ __ptext811:
 
 ;; *************** function _Menu *****************
 ;; Defined at:
-;;		line 182 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;;		line 182 in file "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
 ;;  input           1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -2856,7 +2856,7 @@ __ptext811:
 ;; This function uses a non-reentrant model
 ;;
 psect	text811
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	182
 	global	__size_of_Menu
 	__size_of_Menu	equ	__end_of_Menu-_Menu
@@ -3055,7 +3055,7 @@ __ptext812:
 
 ;; *************** function _spi_transfer *****************
 ;; Defined at:
-;;		line 146 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
+;;		line 146 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;  data            1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -3084,7 +3084,7 @@ __ptext812:
 ;; This function uses a non-reentrant model
 ;;
 psect	text812
-	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 	line	146
 	global	__size_of_spi_transfer
 	__size_of_spi_transfer	equ	__end_of_spi_transfer-_spi_transfer
@@ -3316,7 +3316,7 @@ __ptext814:
 
 ;; *************** function _isr1 *****************
 ;; Defined at:
-;;		line 81 in file "E:\Aldnoah.Zero\Assignment3\Main.c"
+;;		line 81 in file "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -3347,7 +3347,7 @@ __ptext814:
 ;; This function uses a non-reentrant model
 ;;
 psect	text814
-	file	"E:\Aldnoah.Zero\Assignment3\Main.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 	line	81
 	global	__size_of_isr1
 	__size_of_isr1	equ	__end_of_isr1-_isr1
@@ -3799,7 +3799,7 @@ __ptext815:
 
 ;; *************** function _UpdateDisplay *****************
 ;; Defined at:
-;;		line 215 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;;		line 215 in file "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -3831,7 +3831,7 @@ __ptext815:
 ;; This function uses a non-reentrant model
 ;;
 psect	text815
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	215
 	global	__size_of_UpdateDisplay
 	__size_of_UpdateDisplay	equ	__end_of_UpdateDisplay-_UpdateDisplay
@@ -4283,7 +4283,7 @@ _ADCconvert:
 	line	39
 	
 i1l10328:	
-;infrared.c: 39: if (adcVal >= 2.5 && adcVal < 2.75)
+;infrared.c: 39: if (adcVal >= 212.5 && adcVal < 233.75)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_adcVal+1),w	;volatile
@@ -4302,11 +4302,11 @@ i1l10328:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x0
+	movlw	0x80
 	movwf	0+(?___ftge)+03h
-	movlw	0x20
+	movlw	0x54
 	movwf	1+(?___ftge)+03h
-	movlw	0x40
+	movlw	0x43
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfss	status,0
@@ -4335,11 +4335,11 @@ i1l10330:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x0
+	movlw	0xc0
 	movwf	0+(?___ftge)+03h
-	movlw	0x30
+	movlw	0x69
 	movwf	1+(?___ftge)+03h
-	movlw	0x40
+	movlw	0x43
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfsc	status,0
@@ -4464,12 +4464,12 @@ i1l10332:
 i1l2906:	
 	
 i1l10334:	
-;infrared.c: 43: else if (adcVal >= 2 && adcVal < 2.5)
-	movlw	high(02h)
+;infrared.c: 43: else if (adcVal >= 170 && adcVal < 212.5)
+	movlw	high(0AAh)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	subwf	(_adcVal+1),w	;volatile
-	movlw	low(02h)
+	movlw	low(0AAh)
 	skipnz
 	subwf	(_adcVal),w	;volatile
 	skipc
@@ -4496,11 +4496,11 @@ i1l10336:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x0
+	movlw	0x80
 	movwf	0+(?___ftge)+03h
-	movlw	0x20
+	movlw	0x54
 	movwf	1+(?___ftge)+03h
-	movlw	0x40
+	movlw	0x43
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfsc	status,0
@@ -4625,7 +4625,7 @@ i1l10338:
 i1l2908:	
 	
 i1l10340:	
-;infrared.c: 47: else if (adcVal >= 1.5 && adcVal < 2)
+;infrared.c: 47: else if (adcVal >= 127.5 && adcVal < 170)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_adcVal+1),w	;volatile
@@ -4646,9 +4646,9 @@ i1l10340:
 	movwf	(?___ftge+2)
 	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0xc0
+	movlw	0xff
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfss	status,0
@@ -4659,11 +4659,11 @@ u348_21:
 u348_20:
 	
 i1l10342:	
-	movlw	high(02h)
+	movlw	high(0AAh)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	subwf	(_adcVal+1),w	;volatile
-	movlw	low(02h)
+	movlw	low(0AAh)
 	skipnz
 	subwf	(_adcVal),w	;volatile
 	skipnc
@@ -4727,7 +4727,7 @@ i1l10344:
 i1l2910:	
 	
 i1l10346:	
-;infrared.c: 51: else if (adcVal >= 1.25 && adcVal < 1.5)
+;infrared.c: 51: else if (adcVal >= 106.25 && adcVal < 127.5)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_adcVal+1),w	;volatile
@@ -4746,11 +4746,11 @@ i1l10346:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x0
+	movlw	0x80
 	movwf	0+(?___ftge)+03h
-	movlw	0xa0
+	movlw	0xd4
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfss	status,0
@@ -4781,9 +4781,9 @@ i1l10348:
 	movwf	(?___ftge+2)
 	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0xc0
+	movlw	0xff
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfsc	status,0
@@ -4908,7 +4908,7 @@ i1l10350:
 i1l2912:	
 	
 i1l10352:	
-;infrared.c: 55: else if (adcVal >= 0.9 && adcVal < 1.25)
+;infrared.c: 55: else if (adcVal >= 76.5 && adcVal < 106.25)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_adcVal+1),w	;volatile
@@ -4927,11 +4927,11 @@ i1l10352:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x66
+	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0x66
+	movlw	0x99
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfss	status,0
@@ -4960,11 +4960,11 @@ i1l10354:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x0
+	movlw	0x80
 	movwf	0+(?___ftge)+03h
-	movlw	0xa0
+	movlw	0xd4
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfsc	status,0
@@ -5089,7 +5089,7 @@ i1l10356:
 i1l2914:	
 	
 i1l10358:	
-;infrared.c: 59: else if (adcVal >= 0.65 && adcVal < 0.9)
+;infrared.c: 59: else if (adcVal >= 55.25 && adcVal < 76.5)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_adcVal+1),w	;volatile
@@ -5108,11 +5108,11 @@ i1l10358:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x66
+	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0x26
+	movlw	0x5d
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfss	status,0
@@ -5141,11 +5141,11 @@ i1l10360:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x66
+	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0x66
+	movlw	0x99
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfsc	status,0
@@ -5270,7 +5270,7 @@ i1l10362:
 i1l2916:	
 	
 i1l10364:	
-;infrared.c: 63: else if (adcVal >= 0.5 && adcVal < 0.65)
+;infrared.c: 63: else if (adcVal >= 42.5 && adcVal < 55.25)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(_adcVal+1),w	;volatile
@@ -5291,9 +5291,9 @@ i1l10364:
 	movwf	(?___ftge+2)
 	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0x0
+	movlw	0x2a
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfss	status,0
@@ -5322,11 +5322,11 @@ i1l10366:
 	movwf	(?___ftge+1)
 	movf	(2+(?___lwtoft)),w
 	movwf	(?___ftge+2)
-	movlw	0x66
+	movlw	0x0
 	movwf	0+(?___ftge)+03h
-	movlw	0x26
+	movlw	0x5d
 	movwf	1+(?___ftge)+03h
-	movlw	0x3f
+	movlw	0x42
 	movwf	2+(?___ftge)+03h
 	fcall	___ftge
 	btfsc	status,0
@@ -5830,7 +5830,7 @@ __ptext822:
 
 ;; *************** function ___lwtoft *****************
 ;; Defined at:
-;;		line 29 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwtoft.c"
+;;		line 29 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwtoft.c"
 ;; Parameters:    Size  Location     Type
 ;;  c               2   14[BANK0 ] unsigned int 
 ;; Auto vars:     Size  Location     Type
@@ -5858,7 +5858,7 @@ __ptext822:
 ;; This function uses a non-reentrant model
 ;;
 psect	text822
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwtoft.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwtoft.c"
 	line	29
 	global	__size_of___lwtoft
 	__size_of___lwtoft	equ	__end_of___lwtoft-___lwtoft
@@ -5910,7 +5910,7 @@ __ptext823:
 
 ;; *************** function ___ftmul *****************
 ;; Defined at:
-;;		line 52 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftmul.c"
+;;		line 52 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftmul.c"
 ;; Parameters:    Size  Location     Type
 ;;  f1              3   31[BANK0 ] float 
 ;;  f2              3   34[BANK0 ] float 
@@ -5942,7 +5942,7 @@ __ptext823:
 ;; This function uses a non-reentrant model
 ;;
 psect	text823
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftmul.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftmul.c"
 	line	52
 	global	__size_of___ftmul
 	__size_of___ftmul	equ	__end_of___ftmul-___ftmul
@@ -6322,7 +6322,7 @@ __ptext824:
 
 ;; *************** function ___ftdiv *****************
 ;; Defined at:
-;;		line 50 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftdiv.c"
+;;		line 50 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftdiv.c"
 ;; Parameters:    Size  Location     Type
 ;;  f2              3   47[BANK0 ] float 
 ;;  f1              3   50[BANK0 ] float 
@@ -6354,7 +6354,7 @@ __ptext824:
 ;; This function uses a non-reentrant model
 ;;
 psect	text824
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftdiv.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftdiv.c"
 	line	50
 	global	__size_of___ftdiv
 	__size_of___ftdiv	equ	__end_of___ftdiv-___ftdiv
@@ -6664,7 +6664,7 @@ __ptext825:
 
 ;; *************** function ___ftadd *****************
 ;; Defined at:
-;;		line 87 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftadd.c"
+;;		line 87 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftadd.c"
 ;; Parameters:    Size  Location     Type
 ;;  f1              3   18[BANK0 ] float 
 ;;  f2              3   21[BANK0 ] float 
@@ -6696,7 +6696,7 @@ __ptext825:
 ;; This function uses a non-reentrant model
 ;;
 psect	text825
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftadd.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftadd.c"
 	line	87
 	global	__size_of___ftadd
 	__size_of___ftadd	equ	__end_of___ftadd-___ftadd
@@ -7257,7 +7257,7 @@ __ptext826:
 
 ;; *************** function _sprintf *****************
 ;; Defined at:
-;;		line 488 in file "C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+;;		line 488 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c"
 ;; Parameters:    Size  Location     Type
 ;;  sp              1    wreg     PTR unsigned char 
 ;;		 -> UpdateDisplay@adcOutput(16), 
@@ -7296,7 +7296,7 @@ __ptext826:
 ;; This function uses a non-reentrant model
 ;;
 psect	text826
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c"
 	line	488
 	global	__size_of_sprintf
 	__size_of_sprintf	equ	__end_of_sprintf-_sprintf
@@ -7715,7 +7715,7 @@ __ptext827:
 
 ;; *************** function _ReadButtons *****************
 ;; Defined at:
-;;		line 143 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;;		line 143 in file "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -7743,7 +7743,7 @@ __ptext827:
 ;; This function uses a non-reentrant model
 ;;
 psect	text827
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	143
 	global	__size_of_ReadButtons
 	__size_of_ReadButtons	equ	__end_of_ReadButtons-_ReadButtons
@@ -8249,7 +8249,7 @@ __ptext830:
 
 ;; *************** function ___awmod *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\awmod.c"
+;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awmod.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    0[COMMON] int 
 ;;  dividend        2    2[COMMON] int 
@@ -8278,7 +8278,7 @@ __ptext830:
 ;; This function uses a non-reentrant model
 ;;
 psect	text830
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\awmod.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awmod.c"
 	line	5
 	global	__size_of___awmod
 	__size_of___awmod	equ	__end_of___awmod-___awmod
@@ -8500,7 +8500,7 @@ __ptext831:
 
 ;; *************** function ___ftge *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftge.c"
+;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c"
 ;; Parameters:    Size  Location     Type
 ;;  ff1             3    8[COMMON] float 
 ;;  ff2             3   11[COMMON] float 
@@ -8528,7 +8528,7 @@ __ptext831:
 ;; This function uses a non-reentrant model
 ;;
 psect	text831
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftge.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c"
 	line	5
 	global	__size_of___ftge
 	__size_of___ftge	equ	__end_of___ftge-___ftge
@@ -8720,7 +8720,7 @@ __ptext832:
 
 ;; *************** function ___ftneg *****************
 ;; Defined at:
-;;		line 16 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftneg.c"
+;;		line 16 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftneg.c"
 ;; Parameters:    Size  Location     Type
 ;;  f1              3    8[COMMON] float 
 ;; Auto vars:     Size  Location     Type
@@ -8747,7 +8747,7 @@ __ptext832:
 ;; This function uses a non-reentrant model
 ;;
 psect	text832
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftneg.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftneg.c"
 	line	16
 	global	__size_of___ftneg
 	__size_of___ftneg	equ	__end_of___ftneg-___ftneg
@@ -8798,7 +8798,7 @@ __ptext833:
 
 ;; *************** function ___fttol *****************
 ;; Defined at:
-;;		line 45 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\fttol.c"
+;;		line 45 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\fttol.c"
 ;; Parameters:    Size  Location     Type
 ;;  f1              3    0[BANK0 ] float 
 ;; Auto vars:     Size  Location     Type
@@ -8827,7 +8827,7 @@ __ptext833:
 ;; This function uses a non-reentrant model
 ;;
 psect	text833
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\fttol.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\fttol.c"
 	line	45
 	global	__size_of___fttol
 	__size_of___fttol	equ	__end_of___fttol-___fttol
@@ -9130,7 +9130,7 @@ __ptext834:
 
 ;; *************** function ___ftpack *****************
 ;; Defined at:
-;;		line 63 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\float.c"
+;;		line 63 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c"
 ;; Parameters:    Size  Location     Type
 ;;  arg             3    0[COMMON] unsigned um
 ;;  exp             1    3[COMMON] unsigned char 
@@ -9169,7 +9169,7 @@ __ptext834:
 ;; This function uses a non-reentrant model
 ;;
 psect	text834
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\float.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c"
 	line	63
 	global	__size_of___ftpack
 	__size_of___ftpack	equ	__end_of___ftpack-___ftpack
@@ -9417,7 +9417,7 @@ __ptext835:
 
 ;; *************** function ___lwmod *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    0[BANK0 ] unsigned int 
 ;;  dividend        2    2[BANK0 ] unsigned int 
@@ -9446,7 +9446,7 @@ __ptext835:
 ;; This function uses a non-reentrant model
 ;;
 psect	text835
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c"
 	line	5
 	global	__size_of___lwmod
 	__size_of___lwmod	equ	__end_of___lwmod-___lwmod
@@ -9604,7 +9604,7 @@ __ptext836:
 
 ;; *************** function ___lwdiv *****************
 ;; Defined at:
-;;		line 5 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 ;; Parameters:    Size  Location     Type
 ;;  divisor         2    6[COMMON] unsigned int 
 ;;  dividend        2    8[COMMON] unsigned int 
@@ -9635,7 +9635,7 @@ __ptext836:
 ;; This function uses a non-reentrant model
 ;;
 psect	text836
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c"
 	line	5
 	global	__size_of___lwdiv
 	__size_of___lwdiv	equ	__end_of___lwdiv-___lwdiv
@@ -9811,7 +9811,7 @@ __ptext837:
 
 ;; *************** function ___wmul *****************
 ;; Defined at:
-;;		line 3 in file "C:\Program Files\HI-TECH Software\PICC\9.83\sources\wmul.c"
+;;		line 3 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\wmul.c"
 ;; Parameters:    Size  Location     Type
 ;;  multiplier      2    0[COMMON] unsigned int 
 ;;  multiplicand    2    2[COMMON] unsigned int 
@@ -9839,7 +9839,7 @@ __ptext837:
 ;; This function uses a non-reentrant model
 ;;
 psect	text837
-	file	"C:\Program Files\HI-TECH Software\PICC\9.83\sources\wmul.c"
+	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\wmul.c"
 	line	3
 	global	__size_of___wmul
 	__size_of___wmul	equ	__end_of___wmul-___wmul
@@ -9940,7 +9940,7 @@ __ptext838:
 
 ;; *************** function _Debounce *****************
 ;; Defined at:
-;;		line 63 in file "E:\Aldnoah.Zero\Assignment3\HMI.c"
+;;		line 63 in file "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -9967,7 +9967,7 @@ __ptext838:
 ;; This function uses a non-reentrant model
 ;;
 psect	text838
-	file	"E:\Aldnoah.Zero\Assignment3\HMI.c"
+	file	"H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 	line	63
 	global	__size_of_Debounce
 	__size_of_Debounce	equ	__end_of_Debounce-_Debounce

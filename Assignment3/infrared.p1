@@ -1842,9 +1842,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;infrared.c: 33: {
 [e :U _ADCconvert ]
 [f ]
-[; ;infrared.c: 39: if (adcVal >= 2.5 && adcVal < 2.75)
+[; ;infrared.c: 39: if (adcVal >= 212.5 && adcVal < 233.75)
 "39
-[e $ ! && >= -> _adcVal `d .2.5 < -> _adcVal `d .2.75 108  ]
+[e $ ! && >= -> _adcVal `d .212.5 < -> _adcVal `d .233.75 108  ]
 [; ;infrared.c: 40: {
 "40
 {
@@ -1857,8 +1857,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 109  ]
 "43
 [e :U 108 ]
-[; ;infrared.c: 43: else if (adcVal >= 2 && adcVal < 2.5)
-[e $ ! && >= _adcVal -> -> 2 `i `ui < -> _adcVal `d .2.5 110  ]
+[; ;infrared.c: 43: else if (adcVal >= 170 && adcVal < 212.5)
+[e $ ! && >= _adcVal -> -> 170 `i `ui < -> _adcVal `d .212.5 110  ]
 [; ;infrared.c: 44: {
 "44
 {
@@ -1871,8 +1871,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 111  ]
 "47
 [e :U 110 ]
-[; ;infrared.c: 47: else if (adcVal >= 1.5 && adcVal < 2)
-[e $ ! && >= -> _adcVal `d .1.5 < _adcVal -> -> 2 `i `ui 112  ]
+[; ;infrared.c: 47: else if (adcVal >= 127.5 && adcVal < 170)
+[e $ ! && >= -> _adcVal `d .127.5 < _adcVal -> -> 170 `i `ui 112  ]
 [; ;infrared.c: 48: {
 "48
 {
@@ -1885,8 +1885,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 113  ]
 "51
 [e :U 112 ]
-[; ;infrared.c: 51: else if (adcVal >= 1.25 && adcVal < 1.5)
-[e $ ! && >= -> _adcVal `d .1.25 < -> _adcVal `d .1.5 114  ]
+[; ;infrared.c: 51: else if (adcVal >= 106.25 && adcVal < 127.5)
+[e $ ! && >= -> _adcVal `d .106.25 < -> _adcVal `d .127.5 114  ]
 [; ;infrared.c: 52: {
 "52
 {
@@ -1899,8 +1899,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 115  ]
 "55
 [e :U 114 ]
-[; ;infrared.c: 55: else if (adcVal >= 0.9 && adcVal < 1.25)
-[e $ ! && >= -> _adcVal `d .0.9 < -> _adcVal `d .1.25 116  ]
+[; ;infrared.c: 55: else if (adcVal >= 76.5 && adcVal < 106.25)
+[e $ ! && >= -> _adcVal `d .76.5 < -> _adcVal `d .106.25 116  ]
 [; ;infrared.c: 56: {
 "56
 {
@@ -1913,8 +1913,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 117  ]
 "59
 [e :U 116 ]
-[; ;infrared.c: 59: else if (adcVal >= 0.65 && adcVal < 0.9)
-[e $ ! && >= -> _adcVal `d .0.65 < -> _adcVal `d .0.9 118  ]
+[; ;infrared.c: 59: else if (adcVal >= 55.25 && adcVal < 76.5)
+[e $ ! && >= -> _adcVal `d .55.25 < -> _adcVal `d .76.5 118  ]
 [; ;infrared.c: 60: {
 "60
 {
@@ -1927,8 +1927,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 119  ]
 "63
 [e :U 118 ]
-[; ;infrared.c: 63: else if (adcVal >= 0.5 && adcVal < 0.65)
-[e $ ! && >= -> _adcVal `d .0.5 < -> _adcVal `d .0.65 120  ]
+[; ;infrared.c: 63: else if (adcVal >= 42.5 && adcVal < 55.25)
+[e $ ! && >= -> _adcVal `d .42.5 < -> _adcVal `d .55.25 120  ]
 [; ;infrared.c: 64: {
 "64
 {

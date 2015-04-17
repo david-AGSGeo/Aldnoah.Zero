@@ -36,31 +36,31 @@ void ADCconvert(void)
 // limited to voltage range: 0.5<v<0.75, 
 // corresponding distance range: 0.15m<dist<1.3m
 
-if (adcVal >= 2.5 && adcVal < 2.75)
+if (adcVal >= 212.5 && adcVal < 233.75)
 	{
 		distance = 15 + ((20-15)*(2.75-adcVal))/(20-15);
 	}	
-	else if (adcVal >= 2 && adcVal < 2.5)
+	else if (adcVal >= 170 && adcVal < 212.5)
 	{
 		distance = 20 + ((30-20)*(2.5-adcVal))/(30-20);
 	}
-	else if (adcVal >= 1.5 && adcVal < 2)
+	else if (adcVal >= 127.5 && adcVal < 170)
 	{
 		distance = 30 + ((40-30)*(2-adcVal))/(40-30);
 	}	
-	else if (adcVal >= 1.25 && adcVal < 1.5)
+	else if (adcVal >= 106.25 && adcVal < 127.5)
 	{
 		distance = 40 + ((50-40)*(1.5-adcVal))/(50-40);
 	}	
-	else if (adcVal >= 0.9 && adcVal < 1.25)
+	else if (adcVal >= 76.5 && adcVal < 106.25)
 	{
 		distance = 50 + ((60-50)*(1.25-adcVal))/(30-20);
 	}	
-	else if (adcVal >= 0.65 && adcVal < 0.9)
+	else if (adcVal >= 55.25 && adcVal < 76.5)
 	{
 		distance = 60 + ((70-60)*(0.9-adcVal))/(30-20);
 	}	
-	else if (adcVal >= 0.5 && adcVal < 0.65)
+	else if (adcVal >= 42.5 && adcVal < 55.25)
 	{
 		distance = 70 + ((80-70)*(0.65-adcVal))/(30-20);
 	}

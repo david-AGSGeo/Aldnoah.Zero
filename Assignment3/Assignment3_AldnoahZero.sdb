@@ -908,7 +908,7 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S2060 . 1 `S1208 1 . 1 0 ]
-"103
+"103 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [s S2095 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
@@ -1361,7 +1361,7 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S2903 . 1 `S1208 1 . 1 0 ]
-"81 E:\Aldnoah.Zero\Assignment3\Main.c
+"81 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v F1222 `(v  1 t 0 ]
 "103 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [s S2977 . 1 `uc 1 C 1 0 :1:0 
@@ -2722,7 +2722,7 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S5455 . 1 `S1208 1 . 1 0 ]
-"103
+"103 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [s S5491 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
@@ -3628,82 +3628,82 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S7170 . 1 `S1208 1 . 1 0 ]
-"528 C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c
+"528 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
 [s S7214 . 4 `*DCuc 1 _cp 2 0 `ui 1 _len 2 2 ]
 [u S7217 . 4 `ui 1 _val 2 0 `S7214 1 _str 4 0 ]
 "488
 [v _sprintf `(i  1 e 2 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\abdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\abdiv.c
 [v ___abdiv `(c  1 e 1 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\abmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\abmod.c
 [v ___abmod `(c  1 e 1 0 ]
-"34 C:\Program Files\HI-TECH Software\PICC\9.83\sources\abtoft.c
+"34 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\abtoft.c
 [v ___abtoft `(f  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\aldiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\aldiv.c
 [v ___aldiv `(l  1 e 4 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\almod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\almod.c
 [v ___almod `(l  1 e 4 0 ]
-"43 C:\Program Files\HI-TECH Software\PICC\9.83\sources\altoft.c
+"43 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\altoft.c
 [v ___altoft `(f  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\atdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\atdiv.c
 [v ___atdiv `(m  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\atmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\atmod.c
 [v ___atmod `(m  1 e 3 0 ]
-"38 C:\Program Files\HI-TECH Software\PICC\9.83\sources\attoft.c
+"38 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\attoft.c
 [v ___attoft `(f  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\awdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awdiv.c
 [v ___awdiv `(i  1 e 2 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\awmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awmod.c
 [v ___awmod `(i  1 e 2 0 ]
-"33 C:\Program Files\HI-TECH Software\PICC\9.83\sources\awtoft.c
+"33 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awtoft.c
 [v ___awtoft `(f  1 e 3 0 ]
-"3 C:\Program Files\HI-TECH Software\PICC\9.83\sources\bmul.c
+"3 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\bmul.c
 [v ___bmul `(uc  1 e 1 0 ]
-"63 C:\Program Files\HI-TECH Software\PICC\9.83\sources\float.c
+"63 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c
 [v ___ftpack `(f  1 e 3 0 ]
-"87 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftadd.c
+"87 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftadd.c
 [v ___ftadd `(f  1 e 3 0 ]
-"50 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftdiv.c
+"50 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftdiv.c
 [v ___ftdiv `(f  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftge.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c
 [v ___ftge `(b  1 e 0 0 ]
-"52 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftmul.c
+"52 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftmul.c
 [v ___ftmul `(f  1 e 3 0 ]
-"16 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftneg.c
+"16 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftneg.c
 [v ___ftneg `(f  1 e 3 0 ]
-"17 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftsub.c
+"17 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftsub.c
 [v ___ftsub `(f  1 e 3 0 ]
-"45 C:\Program Files\HI-TECH Software\PICC\9.83\sources\fttol.c
+"45 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\fttol.c
 [v ___fttol `(l  1 e 4 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lbdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lbdiv.c
 [v ___lbdiv `(uc  1 e 1 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lbmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lbmod.c
 [v ___lbmod `(uc  1 e 1 0 ]
-"28 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lbtoft.c
+"28 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lbtoft.c
 [v ___lbtoft `(f  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lldiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lldiv.c
 [v ___lldiv `(ul  1 e 4 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\llmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\llmod.c
 [v ___llmod `(ul  1 e 4 0 ]
-"36 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lltoft.c
+"36 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lltoft.c
 [v ___lltoft `(f  1 e 3 0 ]
-"3 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lmul.c
+"3 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lmul.c
 [v ___lmul `(ul  1 e 4 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ltdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ltdiv.c
 [v ___ltdiv `(um  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ltmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ltmod.c
 [v ___ltmod `(um  1 e 3 0 ]
-"31 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lttoft.c
+"31 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lttoft.c
 [v ___lttoft `(f  1 e 3 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c
 [v ___lwdiv `(ui  1 e 2 0 ]
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
 [v ___lwmod `(ui  1 e 2 0 ]
-"29 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwtoft.c
+"29 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwtoft.c
 [v ___lwtoft `(f  1 e 3 0 ]
-"3 C:\Program Files\HI-TECH Software\PICC\9.83\sources\tmul.c
+"3 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\tmul.c
 [v ___tmul `(um  1 e 3 0 ]
-"3 C:\Program Files\HI-TECH Software\PICC\9.83\sources\wmul.c
+"3 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\wmul.c
 [v ___wmul `(ui  1 e 2 0 ]
 "5 E:\Aldnoah.Zero\Assignment3\adc.c
 [v _adc_read_channel `(uc  1 e 1 0 ]
@@ -3711,24 +3711,6 @@
 [v _init_adc `(v  1 e 0 0 ]
 "61
 [v _adc_read `(ui  1 e 2 0 ]
-"6 E:\Aldnoah.Zero\Assignment3\AT25256A.c
-[v _ee_write_byte `(v  1 e 0 0 ]
-"55
-[v _ee_read_byte `(uc  1 e 1 0 ]
-"104
-[v _ee_write_enable `(v  1 e 0 0 ]
-"125
-[v _ee_write_disable `(v  1 e 0 0 ]
-"146
-[v _ee_read_status `(uc  1 e 1 0 ]
-"63 E:\Aldnoah.Zero\Assignment3\HMI.c
-[v _Debounce `(v  1 e 0 0 ]
-"143
-[v _ReadButtons `(uc  1 e 1 0 ]
-"182
-[v _Menu `(uc  1 e 1 0 ]
-"215
-[v _UpdateDisplay `(v  1 e 0 0 ]
 "10 E:\Aldnoah.Zero\Assignment3\infrared.c
 [v _readAvgDistance `(v  1 e 0 0 ]
 "24
@@ -3751,14 +3733,6 @@
 [v _lcd_write_3_digit_bcd `(v  1 e 0 0 ]
 "101
 [v _lcd_init `(v  1 e 0 0 ]
-"81 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _isr1 `I(v  1 e 0 0 ]
-"121
-[v _init `(v  1 e 0 0 ]
-"146
-[v _spi_transfer `(uc  1 e 1 0 ]
-"164
-[v _main `(v  1 e 0 0 ]
 "45 E:\Aldnoah.Zero\Assignment3\ser.c
 [v _ser_isrx `(b  1 e 0 0 ]
 "55
@@ -3803,6 +3777,32 @@
 [v ___fttoee `(f  1 e 3 0 ]
 "132
 [v ___fltoee `(d  1 e 3 0 ]
+"6 H:\Aldnoah.Zero\trunk\Assignment3\AT25256A.c
+[v _ee_write_byte `(v  1 e 0 0 ]
+"55
+[v _ee_read_byte `(uc  1 e 1 0 ]
+"104
+[v _ee_write_enable `(v  1 e 0 0 ]
+"125
+[v _ee_write_disable `(v  1 e 0 0 ]
+"146
+[v _ee_read_status `(uc  1 e 1 0 ]
+"63 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
+[v _Debounce `(v  1 e 0 0 ]
+"143
+[v _ReadButtons `(uc  1 e 1 0 ]
+"182
+[v _Menu `(uc  1 e 1 0 ]
+"215
+[v _UpdateDisplay `(v  1 e 0 0 ]
+"81 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+[v _isr1 `I(v  1 e 0 0 ]
+"121
+[v _init `(v  1 e 0 0 ]
+"146
+[v _spi_transfer `(uc  1 e 1 0 ]
+"164
+[v _main `(v  1 e 0 0 ]
 "82 /hitech/products/compilers/pic/pro/9.83/dist/linux/include/pic16f877a.h
 [v _INDF `VEuc  1 e 1 @0 ]
 "86
@@ -4415,7 +4415,7 @@
 [v _EEPGD `VEb  1 e 0 @3175 ]
 "1167
 [v _EECON2 `VEuc  1 e 1 @397 ]
-"120 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"120 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _STATUSbits `VES43  1 e 1 @3 ]
 "146
 [v _PORTAbits `VES74  1 e 1 @5 ]
@@ -4485,13 +4485,27 @@
 [v _EEADRHbits `VES192  1 e 1 @271 ]
 "1163
 [v _EECON1bits `VES1215  1 e 1 @396 ]
-"350 C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c
+"350 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
 [v _dpowers `DC[5]ui  1 s 10 dpowers ]
-"10 E:\Aldnoah.Zero\Assignment3\AT25256A.h
+"38 E:\Aldnoah.Zero\Assignment3\ser.c
+[v _rxfifo `[16]uc  1 e 16 0 ]
+"39
+[v _rxiptr `VEuc  1 e 1 0 ]
+[v _rxoptr `VEuc  1 e 1 0 ]
+"40
+[v _txfifo `X[16]uc  1 e 16 0 ]
+"41
+[v _txoptr `VEuc  1 e 1 0 ]
+[v _txiptr `VEuc  1 e 1 0 ]
+"42
+[v _ser_tmp `uc  1 e 1 0 ]
+"21 E:\Aldnoah.Zero\Assignment3\steppermotor.c
+[v _current_step `uc  1 e 1 0 ]
+"10 H:\Aldnoah.Zero\trunk\Assignment3\AT25256A.h
 [v _CS0 `VEb  1 s 0 CS0 ]
 "11
 [v _CS1 `VEb  1 s 0 CS1 ]
-"32 E:\Aldnoah.Zero\Assignment3\HMI.c
+"32 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _pos `i  1 e 2 0 ]
 "34
 [v _menuStrings `[5]*DCuc  1 e 5 0 ]
@@ -4527,11 +4541,11 @@
 [v _CenterReleased `VEb  1 e 0 0 ]
 "57
 [v _CenterDebounceCount `VEuc  1 e 1 0 ]
-"6 E:\Aldnoah.Zero\Assignment3\infrared.h
+"6 H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
 [v _adcVal `VEui  1 e 2 0 ]
 "7
 [v _distance `VEui  1 e 2 0 ]
-"64 E:\Aldnoah.Zero\Assignment3\Main.c
+"64 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _current_direction `uc  1 e 1 0 ]
 "67
 [v _buttonPressed `VEuc  1 e 1 0 ]
@@ -4547,21 +4561,7 @@
 [v _RTC_FLAG_500MS `VEb  1 e 0 0 ]
 "77
 [v _RTC_Counter `VEui  1 e 2 0 ]
-"38 E:\Aldnoah.Zero\Assignment3\ser.c
-[v _rxfifo `[16]uc  1 e 16 0 ]
-"39
-[v _rxiptr `VEuc  1 e 1 0 ]
-[v _rxoptr `VEuc  1 e 1 0 ]
-"40
-[v _txfifo `X[16]uc  1 e 16 0 ]
-"41
-[v _txoptr `VEuc  1 e 1 0 ]
-[v _txiptr `VEuc  1 e 1 0 ]
-"42
-[v _ser_tmp `uc  1 e 1 0 ]
-"21 E:\Aldnoah.Zero\Assignment3\steppermotor.c
-[v _current_step `uc  1 e 1 0 ]
-"164 E:\Aldnoah.Zero\Assignment3\Main.c
+"164
 [v _main `(v  1 e 0 0 ]
 {
 "177
@@ -4597,14 +4597,14 @@
 [v ser_putch@c `uc  1 a 1 wreg ]
 "78
 } 0
-"182 E:\Aldnoah.Zero\Assignment3\HMI.c
+"182 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _Menu `(uc  1 e 1 0 ]
 {
 [v Menu@input `uc  1 a 1 wreg ]
 [v Menu@input `uc  1 a 1 wreg ]
 "212
 } 0
-"146 E:\Aldnoah.Zero\Assignment3\Main.c
+"146 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _spi_transfer `(uc  1 e 1 0 ]
 {
 [v spi_transfer@data `uc  1 a 1 wreg ]
@@ -4619,12 +4619,12 @@
 {
 "133
 } 0
-"81 E:\Aldnoah.Zero\Assignment3\Main.c
+"81 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _isr1 `I(v  1 e 0 0 ]
 {
 "118
 } 0
-"215 E:\Aldnoah.Zero\Assignment3\HMI.c
+"215 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _UpdateDisplay `(v  1 e 0 0 ]
 {
 "216
@@ -4673,13 +4673,13 @@
 [v i1lcd_write_control@databyte `uc  1 a 1 wreg ]
 "26
 } 0
-"29 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwtoft.c
+"29 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwtoft.c
 [v ___lwtoft `(f  1 e 3 0 ]
 {
 [v ___lwtoft@c `ui  1 p 2 14 ]
 "31
 } 0
-"52 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftmul.c
+"52 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftmul.c
 [v ___ftmul `(f  1 e 3 0 ]
 {
 "54
@@ -4693,7 +4693,7 @@
 [v ___ftmul@f2 `f  1 p 3 34 ]
 "84
 } 0
-"50 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftdiv.c
+"50 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftdiv.c
 [v ___ftdiv `(f  1 e 3 0 ]
 {
 "52
@@ -4707,7 +4707,7 @@
 [v ___ftdiv@f1 `f  1 p 3 50 ]
 "78
 } 0
-"87 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftadd.c
+"87 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftadd.c
 [v ___ftadd `(f  1 e 3 0 ]
 {
 "88
@@ -4719,7 +4719,7 @@
 [v ___ftadd@f2 `f  1 p 3 21 ]
 "148
 } 0
-"488 C:\Program Files\HI-TECH Software\PICC\9.83\sources\doprnt.c
+"488 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c
 [v _sprintf `(i  1 e 2 0 ]
 {
 [v sprintf@sp `*.0uc  1 a 1 wreg ]
@@ -4738,7 +4738,7 @@
 [v sprintf@f `*.cDCuc  1 p 1 6 ]
 "1533
 } 0
-"143 E:\Aldnoah.Zero\Assignment3\HMI.c
+"143 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _ReadButtons `(uc  1 e 1 0 ]
 {
 "179
@@ -4757,7 +4757,7 @@
 [v adc_read_channel@channel `uc  1 a 1 wreg ]
 "43
 } 0
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\awmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awmod.c
 [v ___awmod `(i  1 e 2 0 ]
 {
 "6
@@ -4768,20 +4768,20 @@
 [v ___awmod@dividend `i  1 p 2 2 ]
 "30
 } 0
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftge.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c
 [v ___ftge `(b  1 e 0 0 ]
 {
 [v ___ftge@ff1 `f  1 p 3 8 ]
 [v ___ftge@ff2 `f  1 p 3 11 ]
 "13
 } 0
-"16 C:\Program Files\HI-TECH Software\PICC\9.83\sources\ftneg.c
+"16 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftneg.c
 [v ___ftneg `(f  1 e 3 0 ]
 {
 [v ___ftneg@f1 `f  1 p 3 8 ]
 "20
 } 0
-"45 C:\Program Files\HI-TECH Software\PICC\9.83\sources\fttol.c
+"45 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\fttol.c
 [v ___fttol `(l  1 e 4 0 ]
 {
 "47
@@ -4793,7 +4793,7 @@
 [v ___fttol@f1 `f  1 p 3 0 ]
 "73
 } 0
-"63 C:\Program Files\HI-TECH Software\PICC\9.83\sources\float.c
+"63 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c
 [v ___ftpack `(f  1 e 3 0 ]
 {
 [v ___ftpack@arg `um  1 p 3 0 ]
@@ -4801,7 +4801,7 @@
 [v ___ftpack@sign `uc  1 p 1 4 ]
 "86
 } 0
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
 [v ___lwmod `(ui  1 e 2 0 ]
 {
 "6
@@ -4811,7 +4811,7 @@
 [v ___lwmod@dividend `ui  1 p 2 2 ]
 "21
 } 0
-"5 C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwdiv.c
 [v ___lwdiv `(ui  1 e 2 0 ]
 {
 "6
@@ -4823,7 +4823,7 @@
 [v ___lwdiv@dividend `ui  1 p 2 8 ]
 "26
 } 0
-"3 C:\Program Files\HI-TECH Software\PICC\9.83\sources\wmul.c
+"3 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\wmul.c
 [v ___wmul `(ui  1 e 2 0 ]
 {
 "4
@@ -4833,7 +4833,7 @@
 [v ___wmul@multiplicand `ui  1 p 2 2 ]
 "13
 } 0
-"63 E:\Aldnoah.Zero\Assignment3\HMI.c
+"63 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _Debounce `(v  1 e 0 0 ]
 {
 "140
