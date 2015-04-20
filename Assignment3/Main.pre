@@ -1213,10 +1213,14 @@ unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 34 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+# 6 "H:\Aldnoah.Zero\trunk\Assignment3\robot.h"
+void robotMove(int distance);
+unsigned char highByte = 0, lowByte = 0;
+
+# 35 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
-# 64
+# 65
 unsigned char current_direction = 0;
 
 
@@ -1312,7 +1316,7 @@ SSPIF = 0;
 return temp;
 }
 
-# 163
+# 164
 void main(void)
 {
 
@@ -1321,7 +1325,7 @@ void main(void)
 
 init();
 
-# 175
+# 176
 while(1)
 {
 unsigned char choice = 255;
@@ -1373,36 +1377,7 @@ RC0 = 0; RC1 = 0;;
 RC2 = 1; _nop(); RC2 = 0;;
 break;
 case 1:
-
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-
-ser_putch(1);
-
-ser_putch(44);
-
-ser_putch(128);
-
-ser_putch(0);
-
-ser_putch(156);
-
-ser_putch(0);
-
-ser_putch(200);
-
-ser_putch(137);
-
-ser_putch(0);
-
-ser_putch(0);
-
-ser_putch(0);
-
-ser_putch(0);
+robotMove(2000);
 
 break;
 case 2:
@@ -1503,6 +1478,6 @@ break;
 }
 choice = 255;
 
-# 504
+# 476
 }
 }

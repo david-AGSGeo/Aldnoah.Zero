@@ -25,6 +25,7 @@
 #include "steppermotor.h"
 #include "ser.h"
 #include "HMI.h"
+#include "robot.h"
 
 //check htc.h version
 
@@ -223,37 +224,8 @@ void main(void)
 				SM_STEP();
 			break;
 			case 1:
-			  
-						ser_putch(128); 
-		__delay_ms(100);
-		ser_putch(132); 
-		__delay_ms(100);
-ser_putch(137); //drive - opcode 1
-				//__delay_ms(10);
-				ser_putch(1); // 
-				//__delay_ms(10);
-				ser_putch(44); 
-				//__delay_ms(10);
-				ser_putch(128); 
-				//__delay_ms(10);
-				ser_putch(0); 
-				//__delay_ms(10);
-				ser_putch(156); //distance travelled - opcode 2 
-				//__delay_ms(10);
-				ser_putch(0); 
-				//__delay_ms(10);
-				ser_putch(200); 
-				//__delay_ms(10);
-				ser_putch(137); //drive - opcode 3
-				//__delay_ms(10);
-				ser_putch(0); 
-				//__delay_ms(10);
-				ser_putch(0); 
-				//__delay_ms(10);
-				ser_putch(0); 
-				//__delay_ms(10);
-				ser_putch(0); 
-				//__delay_ms(10);
+			  robotMove(2000);
+
 			break;
 			case 2:
 LED0 ^= 0x01;

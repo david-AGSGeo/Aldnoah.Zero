@@ -3,6 +3,7 @@
 #include "HMI.h"
 #include "lcd.h"
 #include "infrared.h"
+#include "robot.h"
 
 
 #define UP 1
@@ -215,7 +216,9 @@ void UpdateDisplay(void)
 {
 	char adcOutput[16] = "";				
 	lcd_write_control(0b00000001); //clear display	
-				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+			//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+				sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+				
 				lcd_set_cursor(0x00);	
 				lcd_write_string(adcOutput);				
 				
