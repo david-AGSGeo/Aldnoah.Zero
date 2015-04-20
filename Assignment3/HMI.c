@@ -4,7 +4,7 @@
 #include "lcd.h"
 #include "infrared.h"
 #include "robot.h"
-
+#include <limits.h>
 
 #define UP 1
 #define DOWN 2

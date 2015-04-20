@@ -1091,8 +1091,10 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 extern void _delay(unsigned long);
 
 # 6 "H:\Aldnoah.Zero\trunk\Assignment3\robot.h"
+void robo_init(void);
 void robotMove(int distance);
-unsigned char highByte = 0, lowByte = 0;
+void robotTurn(int distance);
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
 # 55 "H:\Aldnoah.Zero\trunk\Assignment3\ser.h"
 bit ser_isrx(void);
@@ -1129,31 +1131,97 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
-# 7 "H:\Aldnoah.Zero\trunk\Assignment3\robot.c"
+# 8 "H:\Aldnoah.Zero\trunk\Assignment3\robot.c"
+void robo_init(void)
+{
+ser_putch(128);
+
+ser_putch(132);
+}
+
 void robotMove(int distance)
 {
 
 
-lowByte = (unsigned char) distance ;
+lowByte = (unsigned char) (distance) ;
 highByte = (unsigned char) (distance >> 8);
-ser_putch(128);
-
-ser_putch(132);
+if (distance >= 0)
+{
 ser_putch(137);
 
-ser_putch(1);
+ser_putch(0);
 
-ser_putch(44);
+ser_putch(200);
 
 ser_putch(128);
 
 ser_putch(0);
+}
+else
+{
+ser_putch(137);
 
+ser_putch(0xff);
+
+ser_putch(0x38);
+
+ser_putch(128);
+
+ser_putch(0);
+}
 ser_putch(156);
 
 ser_putch(highByte);
 
 ser_putch(lowByte);
+
+ser_putch(137);
+
+ser_putch(0);
+
+ser_putch(0);
+
+ser_putch(0);
+
+ser_putch(0);
+
+}
+
+void robotTurn(int distance)
+{
+
+
+turnlowByte = (unsigned char) (distance) ;
+turnhighByte = (unsigned char) (distance >> 8);
+if (distance >= 0)
+{
+ser_putch(137);
+
+ser_putch(0);
+
+ser_putch(100);
+
+ser_putch(0);
+
+ser_putch(1);
+}
+else
+{
+ser_putch(137);
+
+ser_putch(0);
+
+ser_putch(100);
+
+ser_putch(255);
+
+ser_putch(255);
+}
+ser_putch(157);
+
+ser_putch(turnhighByte);
+
+ser_putch(turnlowByte);
 
 ser_putch(137);
 

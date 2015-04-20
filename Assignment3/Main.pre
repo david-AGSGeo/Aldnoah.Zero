@@ -1214,8 +1214,10 @@ unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
 # 6 "H:\Aldnoah.Zero\trunk\Assignment3\robot.h"
+void robo_init(void);
 void robotMove(int distance);
-unsigned char highByte = 0, lowByte = 0;
+void robotTurn(int distance);
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
 # 35 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
@@ -1282,6 +1284,7 @@ void init()
 init_adc();
 lcd_init();
 ser_init();
+robo_init();
 
 TRISB = 0b11111100;
 
@@ -1316,7 +1319,7 @@ SSPIF = 0;
 return temp;
 }
 
-# 164
+# 165
 void main(void)
 {
 
@@ -1325,7 +1328,7 @@ void main(void)
 
 init();
 
-# 176
+# 177
 while(1)
 {
 unsigned char choice = 255;
@@ -1377,41 +1380,40 @@ RC0 = 0; RC1 = 0;;
 RC2 = 1; _nop(); RC2 = 0;;
 break;
 case 1:
-robotMove(2000);
+robotMove(500);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(90);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotMove(500);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(90);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotMove(500);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(90);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotMove(500);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(90);
 
 break;
 case 2:
-RB1 ^= 0x01;
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(1);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(44);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(156);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(1);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(144);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
+
+robotMove(-200);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(-90);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotMove(-200);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(-90);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotMove(-200);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(-90);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotMove(-200);
+_delay((unsigned long)((2000)*(20000000/4000.0)));
+robotTurn(-90);
 
 break;
 case 3:
@@ -1454,21 +1456,11 @@ _delay((unsigned long)((100)*(20000000/4000.0)));
 
 break;
 case 4:
+robotTurn(90);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+robotTurn(-90);
 
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(256);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(38);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
+# 323
 break;
 
 
@@ -1478,6 +1470,6 @@ break;
 }
 choice = 255;
 
-# 476
+# 480
 }
 }

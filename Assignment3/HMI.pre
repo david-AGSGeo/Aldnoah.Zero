@@ -1187,8 +1187,10 @@ void readAvgDistance(void);
 void ADCconvert(void);
 
 # 6 "H:\Aldnoah.Zero\trunk\Assignment3\robot.h"
+void robo_init(void);
 void robotMove(int distance);
-unsigned char highByte = 0, lowByte = 0;
+void robotTurn(int distance);
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
 # 33 "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 int pos = 0;

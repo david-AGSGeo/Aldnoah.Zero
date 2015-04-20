@@ -885,10 +885,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _adcVal `Vui  1 e ]
 "7 H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
 [v _distance `Vui  1 e ]
-"7 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"7 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
+"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _turnhighByte `uc  1 e ]
+"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _turnlowByte `uc  1 e ]
 "33 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _pos `i  1 e ]
 "35 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
@@ -1813,15 +1817,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;infrared.h: 9: unsigned int readDistance(void);
 [; ;infrared.h: 10: void readAvgDistance(void);
 [; ;infrared.h: 11: void ADCconvert(void);
-[; ;robot.h: 6: void robotMove(int distance);
-"7 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[; ;robot.h: 6: void robo_init(void);
+[; ;robot.h: 7: void robotMove(int distance);
+[; ;robot.h: 8: void robotTurn(int distance);
+"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
 [i _lowByte
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 7: unsigned char highByte = 0, lowByte = 0;
+[i _turnhighByte
+-> -> 0 `i `uc
+]
+[i _turnlowByte
+-> -> 0 `i `uc
+]
+[; ;robot.h: 9: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 "33 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [i _pos
 -> 0 `i
@@ -2367,15 +2379,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UpdateDisplay ]
 [f ]
 "217
-[v F1210 `uc  -> 16 `i s ]
-[i F1210
+[v F1216 `uc  -> 16 `i s ]
+[i F1216
 :U ..
 -> 0 `c
 ..
 ]
 [v _adcOutput `uc  -> 16 `i a ]
 [; ;HMI.c: 217: char adcOutput[16] = "";
-[e = _adcOutput F1210 ]
+[e = _adcOutput F1216 ]
 [; ;HMI.c: 218: lcd_write_control(0b00000001);
 "218
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]

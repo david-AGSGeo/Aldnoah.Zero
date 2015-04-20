@@ -122,7 +122,8 @@ void init()
 {
 	init_adc();
 	lcd_init();
-	ser_init(); 
+	ser_init();
+	robo_init();
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
 
@@ -224,41 +225,40 @@ void main(void)
 				SM_STEP();
 			break;
 			case 1:
-			  robotMove(2000);
-
+				robotMove(500);
+				__delay_ms(2000);
+				robotTurn(90);
+				__delay_ms(2000);
+				robotMove(500);
+				__delay_ms(2000);
+				robotTurn(90);
+				__delay_ms(2000);
+				robotMove(500);
+				__delay_ms(2000);
+				robotTurn(90);
+				__delay_ms(2000);
+				robotMove(500);
+				__delay_ms(2000);
+				robotTurn(90);
+				
 			break;
 			case 2:
-LED0 ^= 0x01;
-						ser_putch(128); 
-		__delay_ms(100);
-		ser_putch(132); 
-		__delay_ms(100);
-ser_putch(137); //drive - opcode 1
-				__delay_ms(100);
-				ser_putch(1); // 
-				__delay_ms(100);
-				ser_putch(44); 
-				__delay_ms(100);
-				ser_putch(128); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(156); //distance travelled - opcode 2 
-				__delay_ms(100);
-				ser_putch(1); 
-				__delay_ms(100);
-				ser_putch(144); 
-				__delay_ms(100);
-				ser_putch(137); //drive - opcode 3
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);	
+				
+				robotMove(-200);
+				__delay_ms(2000);
+				robotTurn(-90);
+				__delay_ms(2000);
+				robotMove(-200);
+				__delay_ms(2000);
+				robotTurn(-90);
+				__delay_ms(2000);
+				robotMove(-200);
+				__delay_ms(2000);
+				robotTurn(-90);
+				__delay_ms(2000);
+				robotMove(-200);
+				__delay_ms(2000);
+				robotTurn(-90);
 			
 			break;
 			case 3:
@@ -301,8 +301,11 @@ ser_putch(137); //drive - opcode 1
 			
 			break;
 			case 4:
-	
-				ser_putch(128); 
+				robotTurn(90);
+				__delay_ms(1000);
+				robotTurn(-90);	
+
+/*				ser_putch(128); 
 				__delay_ms(100);
 				ser_putch(132); 
 				__delay_ms(100);
@@ -316,6 +319,7 @@ ser_putch(137); //drive - opcode 1
 				__delay_ms(100);
 				ser_putch(0); 
 				__delay_ms(100);
+*/
 			break;		
 			
 
