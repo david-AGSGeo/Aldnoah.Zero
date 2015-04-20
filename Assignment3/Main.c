@@ -180,31 +180,31 @@ void main(void)
 		{
 			case UP:
 			Menu(UP);
-			LED0 ^= 0x01;
+			
 			buttonPressed = 0;
 			
 			break;
 			case DOWN:
 			Menu(DOWN);
-			LED0 ^= 0x01;
+			
 			buttonPressed = 0;
 			
 			break;
 			case LEFT:
 			Menu(LEFT);
-			LED0 ^= 0x01;
+			
 			buttonPressed = 0;
 			
 			break;
 			case RIGHT:
 			Menu(RIGHT);
-			LED0 ^= 0x01;
+			
 			buttonPressed = 0;
 			
 			break;
 			case CENTER:
 			choice = Menu(CENTER);
-			LED0 ^= 0x01;
+			
 			buttonPressed = 0;
 			
 			break;
@@ -215,6 +215,242 @@ void main(void)
 
 		////////  THIS IS THE MENU ITEM SELECTIONS
 		switch (choice)
+		{
+			case 0:			
+				SELECT_SM();			// SPI select the Stepper M
+				spi_transfer(0b00001011);	//for clockwise rotation 
+				SELECT_NONE();
+				SM_STEP();
+			break;
+			case 1:
+			  
+						ser_putch(128); 
+		__delay_ms(100);
+		ser_putch(132); 
+		__delay_ms(100);
+ser_putch(137); //drive - opcode 1
+				//__delay_ms(10);
+				ser_putch(1); // 
+				//__delay_ms(10);
+				ser_putch(44); 
+				//__delay_ms(10);
+				ser_putch(128); 
+				//__delay_ms(10);
+				ser_putch(0); 
+				//__delay_ms(10);
+				ser_putch(156); //distance travelled - opcode 2 
+				//__delay_ms(10);
+				ser_putch(0); 
+				//__delay_ms(10);
+				ser_putch(200); 
+				//__delay_ms(10);
+				ser_putch(137); //drive - opcode 3
+				//__delay_ms(10);
+				ser_putch(0); 
+				//__delay_ms(10);
+				ser_putch(0); 
+				//__delay_ms(10);
+				ser_putch(0); 
+				//__delay_ms(10);
+				ser_putch(0); 
+				//__delay_ms(10);
+			break;
+			case 2:
+LED0 ^= 0x01;
+						ser_putch(128); 
+		__delay_ms(100);
+		ser_putch(132); 
+		__delay_ms(100);
+ser_putch(137); //drive - opcode 1
+				__delay_ms(100);
+				ser_putch(1); // 
+				__delay_ms(100);
+				ser_putch(44); 
+				__delay_ms(100);
+				ser_putch(128); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(156); //distance travelled - opcode 2 
+				__delay_ms(100);
+				ser_putch(1); 
+				__delay_ms(100);
+				ser_putch(144); 
+				__delay_ms(100);
+				ser_putch(137); //drive - opcode 3
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);	
+			
+			break;
+			case 3:
+								ser_putch(128);  // Start
+				__delay_ms(100);
+				ser_putch(132); // Full mode
+				__delay_ms(100);
+				//ser_putch(152); // drive
+				__delay_ms(100);
+				//ser_putch(13); // script length
+				__delay_ms(100); 
+				ser_putch(137); //drive - opcode 1
+				__delay_ms(100);
+				ser_putch(1); // 
+				__delay_ms(100);
+				ser_putch(44); 
+				__delay_ms(100);
+				ser_putch(128); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(156); //distance travelled - opcode 2 
+				__delay_ms(100);
+				ser_putch(1); 
+				__delay_ms(100);
+				ser_putch(144); 
+				__delay_ms(100);
+				ser_putch(137); //drive - opcode 3
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				//ser_putch(153); 
+				__delay_ms(100);				
+			
+			break;
+			case 4:
+	
+				ser_putch(128); 
+				__delay_ms(100);
+				ser_putch(132); 
+				__delay_ms(100);
+				ser_putch(137); 	//drive
+				__delay_ms(100);
+				ser_putch(256); 		
+				__delay_ms(100);
+				ser_putch(38); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+			break;		
+			
+
+			default:
+			
+			break;
+		}
+		choice = 255;
+
+/*		if(pb0Pressed) //toggle LED0
+		{
+			pb0Pressed = 0;
+			
+			
+			LED0 ^= 0x01;
+			ser_putch(128); 
+		__delay_ms(100);
+		ser_putch(132); 
+		__delay_ms(100);
+		ser_putch(140); 
+		__delay_ms(100);
+		ser_putch(0); 
+		__delay_ms(100);
+		ser_putch(4); 
+		__delay_ms(100);
+		ser_putch(62); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(66); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(69); 
+		__delay_ms(100);
+		ser_putch(12); 
+		__delay_ms(100);
+		ser_putch(74); 
+		__delay_ms(100);
+		ser_putch(36); 
+		__delay_ms(100);
+		ser_putch(141); 
+		__delay_ms(100);
+		ser_putch(0); 
+		__delay_ms(100);		
+			
+//***************
+				ser_putch(128);  // Start
+				__delay_ms(100);
+				ser_putch(132); // Full mode
+				__delay_ms(100);
+				ser_putch(152); // drive
+				__delay_ms(100);
+				ser_putch(13); // script length
+				__delay_ms(100); 
+				ser_putch(137); //drive - opcode 1
+				__delay_ms(100);
+				ser_putch(1); // 
+				__delay_ms(100);
+				ser_putch(44); 
+				__delay_ms(100);
+				ser_putch(128); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(156); //distance travelled - opcode 2 
+				__delay_ms(100);
+				ser_putch(1); 
+				__delay_ms(100);
+				ser_putch(144); 
+				__delay_ms(100);
+				ser_putch(137); drive - opcode 3
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+				ser_putch(0); 
+				__delay_ms(100);
+		}
+
+		if(pb1Pressed) // 2 half steps CounterClockwise
+		{
+			pb1Pressed = 0;
+			
+			//rotate(2, COUNTERCLOCKWISE);
+		}
+
+		if(pb2Pressed) // 2 half steps Clockwise
+		{
+			pb2Pressed = 0;
+			
+			//rotate(2, CLOCKWISE);
+		}
+
+		if(pb3Pressed) //180 degree sweep (reverse direction each time button is pressed)
+		{
+			pb3Pressed = 0;
+			
+			//rotate(STEPS180, current_direction);
+			current_direction ^= 0x01;
+		}
+
+
+	switch (choice)
 		{
 			case 0:			
 				SELECT_SM();			// SPI select the Stepper M
@@ -263,68 +499,6 @@ ser_putch(255);
 			default:
 			
 			break;
-		}
-		choice = 255;
-
-/*		if(pb0Pressed) //toggle LED0
-		{
-			pb0Pressed = 0;
-			
-			
-			LED0 ^= 0x01;
-			ser_putch(128); 
-		__delay_ms(100);
-		ser_putch(132); 
-		__delay_ms(100);
-		ser_putch(140); 
-		__delay_ms(100);
-		ser_putch(0); 
-		__delay_ms(100);
-		ser_putch(4); 
-		__delay_ms(100);
-		ser_putch(62); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(66); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(69); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(74); 
-		__delay_ms(100);
-		ser_putch(36); 
-		__delay_ms(100);
-		ser_putch(141); 
-		__delay_ms(100);
-		ser_putch(0); 
-		__delay_ms(100);		
-			
-		}
-
-		if(pb1Pressed) // 2 half steps CounterClockwise
-		{
-			pb1Pressed = 0;
-			
-			//rotate(2, COUNTERCLOCKWISE);
-		}
-
-		if(pb2Pressed) // 2 half steps Clockwise
-		{
-			pb2Pressed = 0;
-			
-			//rotate(2, CLOCKWISE);
-		}
-
-		if(pb3Pressed) //180 degree sweep (reverse direction each time button is pressed)
-		{
-			pb3Pressed = 0;
-			
-			//rotate(STEPS180, current_direction);
-			current_direction ^= 0x01;
 		}
 		*/
 	}

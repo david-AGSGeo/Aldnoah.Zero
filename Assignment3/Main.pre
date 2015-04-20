@@ -1330,31 +1330,31 @@ switch (buttonPressed)
 {
 case 1:
 Menu(1);
-RB1 ^= 0x01;
+
 buttonPressed = 0;
 
 break;
 case 2:
 Menu(2);
-RB1 ^= 0x01;
+
 buttonPressed = 0;
 
 break;
 case 3:
 Menu(3);
-RB1 ^= 0x01;
+
 buttonPressed = 0;
 
 break;
 case 4:
 Menu(4);
-RB1 ^= 0x01;
+
 buttonPressed = 0;
 
 break;
 case 5:
 choice = Menu(5);
-RB1 ^= 0x01;
+
 buttonPressed = 0;
 
 break;
@@ -1374,48 +1374,135 @@ RC2 = 1; _nop(); RC2 = 0;;
 break;
 case 1:
 
-RC0 = 1; RC1 = 1;;
-spi_transfer(0b00001001);
-RC0 = 0; RC1 = 0;;
-RC2 = 1; _nop(); RC2 = 0;;
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(132);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(137);
+
+ser_putch(1);
+
+ser_putch(44);
+
+ser_putch(128);
+
+ser_putch(0);
+
+ser_putch(156);
+
+ser_putch(0);
+
+ser_putch(200);
+
+ser_putch(137);
+
+ser_putch(0);
+
+ser_putch(0);
+
+ser_putch(0);
+
+ser_putch(0);
+
 break;
 case 2:
-RC0 = 1; RC1 = 1;;
-spi_transfer(0b00001111);
-RC0 = 0; RC1 = 0;;
-RC2 = 1; _nop(); RC2 = 0;;
-
-break;
-case 3:
-RC0 = 1; RC1 = 1;;
-spi_transfer(0b00001101);
-RC0 = 0; RC1 = 0;;
-RC2 = 1; _nop(); RC2 = 0;;
-
-break;
-case 4:
+RB1 ^= 0x01;
 ser_putch(128);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 ser_putch(132);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 ser_putch(137);
 _delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(1);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(44);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(156);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(1);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(144);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(137);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
 
+break;
+case 3:
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(132);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+
+_delay((unsigned long)((100)*(20000000/4000.0)));
+
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(137);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(1);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(44);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(156);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(1);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(144);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(137);
+_delay((unsigned long)((100)*(20000000/4000.0)));
 ser_putch(0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 ser_putch(0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(255);
+ser_putch(0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(255);
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+
+_delay((unsigned long)((100)*(20000000/4000.0)));
+
+break;
+case 4:
+
+ser_putch(128);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(132);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(137);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(256);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(38);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
+_delay((unsigned long)((100)*(20000000/4000.0)));
+ser_putch(0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 break;
+
+
 default:
 
 break;
 }
 choice = 255;
 
-# 330
+# 504
 }
 }

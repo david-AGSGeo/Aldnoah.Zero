@@ -36,32 +36,32 @@ void ADCconvert(void)
 // limited to voltage range: 0.5<v<0.75, 
 // corresponding distance range: 0.15m<dist<1.3m
 
-if (adcVal >= 212.5 && adcVal < 233.75)
+if (adcVal >= 213 && adcVal < 234)
 	{
-		distance = 15 + ((20-15)*(2.75-adcVal))/(20-15);
+		distance = 15 + ((20-15)*(234-adcVal))/(234-213);
 	}	
-	else if (adcVal >= 170 && adcVal < 212.5)
+	else if (adcVal >= 170 && adcVal < 213)
 	{
-		distance = 20 + ((30-20)*(2.5-adcVal))/(30-20);
+		distance = 20 + ((30-20)*(213-adcVal))/(213-170);
 	}
-	else if (adcVal >= 127.5 && adcVal < 170)
+	else if (adcVal >= 128 && adcVal < 170)
 	{
-		distance = 30 + ((40-30)*(2-adcVal))/(40-30);
+		distance = 30 + ((40-30)*(170-adcVal))/(170-128);
 	}	
-	else if (adcVal >= 106.25 && adcVal < 127.5)
+	else if (adcVal >= 107 && adcVal < 128)
 	{
-		distance = 40 + ((50-40)*(1.5-adcVal))/(50-40);
+		distance = 40 + ((50-40)*(128-adcVal))/(128-107);
 	}	
-	else if (adcVal >= 76.5 && adcVal < 106.25)
+	else if (adcVal >= 77 && adcVal < 107)
 	{
-		distance = 50 + ((60-50)*(1.25-adcVal))/(30-20);
+		distance = 50 + ((60-50)*(107-adcVal))/(107-77);
 	}	
-	else if (adcVal >= 55.25 && adcVal < 76.5)
+	else if (adcVal >= 56 && adcVal < 77)
 	{
-		distance = 60 + ((70-60)*(0.9-adcVal))/(30-20);
+		distance = 60 + ((70-60)*(77-adcVal))/(77-56);
 	}	
-	else if (adcVal >= 42.5 && adcVal < 55.25)
+	else if (adcVal >= 43 && adcVal < 56)
 	{
-		distance = 70 + ((80-70)*(0.65-adcVal))/(30-20);
+		distance = 70 + ((80-70)*(56-adcVal))/(56-43);
 	}
 }

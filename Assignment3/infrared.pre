@@ -1,7 +1,7 @@
 
-# 1 "E:\Aldnoah.Zero\Assignment3\infrared.c"
+# 1 "H:\Aldnoah.Zero\trunk\Assignment3\infrared.c"
 
-# 82 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
+# 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
 
 
@@ -1072,30 +1072,30 @@ unsigned EEPGD : 1;
 volatile unsigned char EECON2 @ 0x18D;
 
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_nop)
 extern void _nop(void);
 
 # 80
 extern unsigned int flash_read(unsigned short addr);
 
-# 41 "C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
+# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
 extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 153 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
+# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 12 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 typedef int ptrdiff_t;
 typedef unsigned size_t;
 typedef unsigned short wchar_t;
 
-# 31 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h"
+# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma inline(__va_start)
@@ -1104,7 +1104,7 @@ extern void * __va_start(void);
 #pragma inline(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int errno;
 
 # 58
@@ -1114,7 +1114,7 @@ char * ptr;
 void (* func)(char);
 };
 
-# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h"
 extern int errno;
 
 
@@ -1131,7 +1131,7 @@ extern bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 103 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+# 6 "H:\Aldnoah.Zero\trunk\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 
@@ -1162,7 +1162,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
+# 7 "H:\Aldnoah.Zero\trunk\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1170,7 +1170,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero\trunk\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1189,7 +1189,7 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
-# 9 "E:\Aldnoah.Zero\Assignment3\infrared.c"
+# 9 "H:\Aldnoah.Zero\trunk\Assignment3\infrared.c"
 void readAvgDistance(void)
 {
 unsigned int fullval = 0;
@@ -1217,32 +1217,32 @@ void ADCconvert(void)
 {
 
 # 39
-if (adcVal >= 212.5 && adcVal < 233.75)
+if (adcVal >= 213 && adcVal < 234)
 {
-distance = 15 + ((20-15)*(2.75-adcVal))/(20-15);
+distance = 15 + ((20-15)*(234-adcVal))/(234-213);
 }
-else if (adcVal >= 170 && adcVal < 212.5)
+else if (adcVal >= 170 && adcVal < 213)
 {
-distance = 20 + ((30-20)*(2.5-adcVal))/(30-20);
+distance = 20 + ((30-20)*(213-adcVal))/(213-170);
 }
-else if (adcVal >= 127.5 && adcVal < 170)
+else if (adcVal >= 128 && adcVal < 170)
 {
-distance = 30 + ((40-30)*(2-adcVal))/(40-30);
+distance = 30 + ((40-30)*(170-adcVal))/(170-128);
 }
-else if (adcVal >= 106.25 && adcVal < 127.5)
+else if (adcVal >= 107 && adcVal < 128)
 {
-distance = 40 + ((50-40)*(1.5-adcVal))/(50-40);
+distance = 40 + ((50-40)*(128-adcVal))/(128-107);
 }
-else if (adcVal >= 76.5 && adcVal < 106.25)
+else if (adcVal >= 77 && adcVal < 107)
 {
-distance = 50 + ((60-50)*(1.25-adcVal))/(30-20);
+distance = 50 + ((60-50)*(107-adcVal))/(107-77);
 }
-else if (adcVal >= 55.25 && adcVal < 76.5)
+else if (adcVal >= 56 && adcVal < 77)
 {
-distance = 60 + ((70-60)*(0.9-adcVal))/(30-20);
+distance = 60 + ((70-60)*(77-adcVal))/(77-56);
 }
-else if (adcVal >= 42.5 && adcVal < 55.25)
+else if (adcVal >= 43 && adcVal < 56)
 {
-distance = 70 + ((80-70)*(0.65-adcVal))/(30-20);
+distance = 70 + ((80-70)*(56-adcVal))/(56-43);
 }
 }

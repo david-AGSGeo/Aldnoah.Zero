@@ -1363,7 +1363,7 @@
 [u S2903 . 1 `S1208 1 . 1 0 ]
 "81 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v F1222 `(v  1 t 0 ]
-"103 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"103 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [s S2977 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
@@ -1816,7 +1816,7 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S3785 . 1 `S1208 1 . 1 0 ]
-"103
+"103 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [s S3818 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
@@ -3711,12 +3711,6 @@
 [v _init_adc `(v  1 e 0 0 ]
 "61
 [v _adc_read `(ui  1 e 2 0 ]
-"10 E:\Aldnoah.Zero\Assignment3\infrared.c
-[v _readAvgDistance `(v  1 e 0 0 ]
-"24
-[v _readDistance `(ui  1 e 2 0 ]
-"33
-[v _ADCconvert `(v  1 e 0 0 ]
 "18 E:\Aldnoah.Zero\Assignment3\lcd.c
 [v _lcd_write_control `(v  1 e 0 0 ]
 [v i1_lcd_write_control `(v  1 e 0 0 ]
@@ -3795,6 +3789,12 @@
 [v _Menu `(uc  1 e 1 0 ]
 "215
 [v _UpdateDisplay `(v  1 e 0 0 ]
+"10 H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
+[v _readAvgDistance `(v  1 e 0 0 ]
+"24
+[v _readDistance `(ui  1 e 2 0 ]
+"33
+[v _ADCconvert `(v  1 e 0 0 ]
 "81 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _isr1 `I(v  1 e 0 0 ]
 "121
@@ -4566,7 +4566,7 @@
 {
 "177
 [v main@choice `uc  1 a 1 7 ]
-"331
+"505
 } 0
 "121
 [v _init `(v  1 e 0 0 ]
@@ -4632,19 +4632,14 @@
 [v UpdateDisplay@F1206 `[16]uc  1 s 16 F1206 ]
 "234
 } 0
-"10 E:\Aldnoah.Zero\Assignment3\infrared.c
+"10 H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
 [v _readAvgDistance `(v  1 e 0 0 ]
 {
 "14
-[v readAvgDistance@i `i  1 a 2 67 ]
+[v readAvgDistance@i `i  1 a 2 4 ]
 "11
-[v readAvgDistance@fullval `ui  1 a 2 65 ]
+[v readAvgDistance@fullval `ui  1 a 2 2 ]
 "21
-} 0
-"33
-[v _ADCconvert `(v  1 e 0 0 ]
-{
-"67
 } 0
 "24
 [v _readDistance `(ui  1 e 2 0 ]
@@ -4673,52 +4668,6 @@
 [v i1lcd_write_control@databyte `uc  1 a 1 wreg ]
 "26
 } 0
-"29 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwtoft.c
-[v ___lwtoft `(f  1 e 3 0 ]
-{
-[v ___lwtoft@c `ui  1 p 2 14 ]
-"31
-} 0
-"52 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftmul.c
-[v ___ftmul `(f  1 e 3 0 ]
-{
-"54
-[v ___ftmul@f3_as_product `um  1 a 3 42 ]
-"53
-[v ___ftmul@sign `uc  1 a 1 46 ]
-[v ___ftmul@cntr `uc  1 a 1 45 ]
-[v ___ftmul@exp `uc  1 a 1 41 ]
-"52
-[v ___ftmul@f1 `f  1 p 3 31 ]
-[v ___ftmul@f2 `f  1 p 3 34 ]
-"84
-} 0
-"50 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftdiv.c
-[v ___ftdiv `(f  1 e 3 0 ]
-{
-"52
-[v ___ftdiv@f3 `f  1 a 3 58 ]
-"51
-[v ___ftdiv@sign `uc  1 a 1 62 ]
-[v ___ftdiv@exp `uc  1 a 1 61 ]
-[v ___ftdiv@cntr `uc  1 a 1 57 ]
-"50
-[v ___ftdiv@f2 `f  1 p 3 47 ]
-[v ___ftdiv@f1 `f  1 p 3 50 ]
-"78
-} 0
-"87 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftadd.c
-[v ___ftadd `(f  1 e 3 0 ]
-{
-"88
-[v ___ftadd@exp1 `uc  1 a 1 30 ]
-[v ___ftadd@exp2 `uc  1 a 1 29 ]
-[v ___ftadd@sign `uc  1 a 1 28 ]
-"87
-[v ___ftadd@f1 `f  1 p 3 18 ]
-[v ___ftadd@f2 `f  1 p 3 21 ]
-"148
-} 0
 "488 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c
 [v _sprintf `(i  1 e 2 0 ]
 {
@@ -4737,6 +4686,11 @@
 [v sprintf@sp `*.0uc  1 a 1 wreg ]
 [v sprintf@f `*.cDCuc  1 p 1 6 ]
 "1533
+} 0
+"33 H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
+[v _ADCconvert `(v  1 e 0 0 ]
+{
+"67
 } 0
 "143 H:\Aldnoah.Zero\trunk\Assignment3\HMI.c
 [v _ReadButtons `(uc  1 e 1 0 ]
@@ -4767,39 +4721,6 @@
 [v ___awmod@divisor `i  1 p 2 0 ]
 [v ___awmod@dividend `i  1 p 2 2 ]
 "30
-} 0
-"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftge.c
-[v ___ftge `(b  1 e 0 0 ]
-{
-[v ___ftge@ff1 `f  1 p 3 8 ]
-[v ___ftge@ff2 `f  1 p 3 11 ]
-"13
-} 0
-"16 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftneg.c
-[v ___ftneg `(f  1 e 3 0 ]
-{
-[v ___ftneg@f1 `f  1 p 3 8 ]
-"20
-} 0
-"45 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\fttol.c
-[v ___fttol `(l  1 e 4 0 ]
-{
-"47
-[v ___fttol@lval `ul  1 a 4 9 ]
-"46
-[v ___fttol@exp1 `uc  1 a 1 13 ]
-[v ___fttol@sign1 `uc  1 a 1 8 ]
-"45
-[v ___fttol@f1 `f  1 p 3 0 ]
-"73
-} 0
-"63 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c
-[v ___ftpack `(f  1 e 3 0 ]
-{
-[v ___ftpack@arg `um  1 p 3 0 ]
-[v ___ftpack@exp `uc  1 p 1 3 ]
-[v ___ftpack@sign `uc  1 p 1 4 ]
-"86
 } 0
 "5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
 [v ___lwmod `(ui  1 e 2 0 ]
