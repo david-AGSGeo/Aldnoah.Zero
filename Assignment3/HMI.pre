@@ -1157,7 +1157,7 @@ extern int printf(const char *, ...);
 # 8 "H:\Aldnoah.Zero\trunk\Assignment3\HMI.h"
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
-void UpdateDisplay(void);
+void UpdateDisplay(unsigned char serialInput);
 
 # 17 "H:\Aldnoah.Zero\trunk\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
@@ -1178,6 +1178,11 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
+void LCD_display_distance(void);
+int total;
+int dist_high;
+int dist_low;
+
 # 6 "H:\Aldnoah.Zero\trunk\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
@@ -1190,9 +1195,10 @@ void ADCconvert(void);
 void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
+
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
-# 33 "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
+# 30 "H:\Aldnoah.Zero\trunk\Assignment3\HMI.c"
 int pos = 0;
 
 const char* menuStrings[] = {"Thing1", "Thing2", "Thing3", "Thing4", "Thing5"};
@@ -1375,7 +1381,9 @@ break;
 return 255;
 }
 
-void UpdateDisplay(void)
+
+
+void UpdateDisplay(unsigned char serialInput)
 {
 char adcOutput[16] = "";
 lcd_write_control(0b00000001);

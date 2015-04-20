@@ -1094,6 +1094,7 @@ extern void _delay(unsigned long);
 void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
+
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
 # 55 "H:\Aldnoah.Zero\trunk\Assignment3\ser.h"
@@ -1131,17 +1132,32 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
+void LCD_display_distance(void);
+int total;
+int dist_high;
+int dist_low;
+
 # 8 "H:\Aldnoah.Zero\trunk\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
-
 ser_putch(132);
+
+
+ser_putch (142);
+ser_putch (19);
+}
+
+void robot_distance(void)
+{
+serialInput=ser_getch();
+total = dist_high;
+total = total << 8;
+total = total || dist_low ;
 }
 
 void robotMove(int distance)
 {
-
 
 lowByte = (unsigned char) (distance) ;
 highByte = (unsigned char) (distance >> 8);

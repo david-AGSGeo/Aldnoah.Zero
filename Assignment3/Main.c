@@ -66,6 +66,7 @@ unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
 
 
 volatile unsigned char buttonPressed = 0;
+volatile unsigned char serialInput = 0;
 
 //set up flags for timer0 (currently not used))
 volatile bit RTC_FLAG_1MS = 0;
@@ -82,6 +83,7 @@ void interrupt isr1(void)
 {
 	//Timer 1
 	ser_int();
+	
 
 	if(TMR0IF)  //interrupt from timer0
 	{
@@ -94,13 +96,14 @@ void interrupt isr1(void)
 		if(RTC_Counter % 10 == 0) 
 		{
 			RTC_FLAG_10MS = 1;
-			//SM_STEP();
+		
+			
 		}
 		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
 		{
 			readAvgDistance();
-			UpdateDisplay();
+			UpdateDisplay(serialInput);
 			RTC_FLAG_250MS = 1;
 
 		}

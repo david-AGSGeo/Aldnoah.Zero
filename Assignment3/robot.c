@@ -8,14 +8,24 @@
 void robo_init(void)
 {
 		ser_putch(128); //start
-				
 		ser_putch(132); //full mode
+
+		//iRobot Distance Sensor Setup
+		ser_putch (142); // Sensor Setup
+		ser_putch (19);  // Distance Sensor Packet ID
+}
+
+void robot_distance(void)
+{
+	serialInput=ser_getch(); 	
+	total = dist_high;
+	total = total << 8;
+	total = total || dist_low ;
 }
 
 void robotMove(int distance)
 {
 	
-
 	lowByte = (unsigned char) (distance) ;
 	highByte = (unsigned char) (distance >> 8);
 			if (distance >= 0)

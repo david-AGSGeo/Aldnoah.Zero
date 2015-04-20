@@ -881,33 +881,41 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
+"36 H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
+[v _total `i  1 e ]
+"37 H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"38 H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
+[v _dist_low `i  1 e ]
 "6 H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
 "7 H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
 [v _distance `Vui  1 e ]
-"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
 "65 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _current_direction `uc  1 e ]
 "68 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _buttonPressed `Vuc  1 e ]
-"71 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
-[v _RTC_FLAG_1MS `Vb  1 e ]
+"69 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+[v _serialInput `Vuc  1 e ]
 "72 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
-[v _RTC_FLAG_10MS `Vb  1 e ]
+[v _RTC_FLAG_1MS `Vb  1 e ]
 "73 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
-[v _RTC_FLAG_50MS `Vb  1 e ]
+[v _RTC_FLAG_10MS `Vb  1 e ]
 "74 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
-[v _RTC_FLAG_250MS `Vb  1 e ]
+[v _RTC_FLAG_50MS `Vb  1 e ]
 "75 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+[v _RTC_FLAG_250MS `Vb  1 e ]
+"76 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _RTC_FLAG_500MS `Vb  1 e ]
-"78 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+"79 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
 "64 H:\Aldnoah.Zero\trunk\Assignment3\ser.h
 [v _rxfifo `uc  -> 0 `x e ]
@@ -926,7 +934,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "10 H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
 "10 H:\Aldnoah.Zero\trunk\Assignment3\HMI.h
-[v _UpdateDisplay `(v  0 ef ]
+[v _UpdateDisplay `(v  0 ef1`uc ]
 "8 H:\Aldnoah.Zero\trunk\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
 "7 H:\Aldnoah.Zero\trunk\Assignment3\adc.h
@@ -1826,6 +1834,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
 [; ;lcd.h: 31: void lcd_init(void);
 [; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 35: void LCD_display_distance(void);
+[; ;lcd.h: 36: int total;
+[; ;lcd.h: 37: int dist_high;
+[; ;lcd.h: 38: int dist_low;
 [; ;infrared.h: 6: volatile unsigned int adcVal;
 [; ;infrared.h: 7: volatile unsigned int distance;
 [; ;infrared.h: 9: unsigned int readDistance(void);
@@ -1846,11 +1858,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 68: extern unsigned char ser_tmp;
 [; ;HMI.h: 8: unsigned char ReadButtons(void);
 [; ;HMI.h: 9: unsigned char Menu(unsigned char input);
-[; ;HMI.h: 10: void UpdateDisplay(void);
+[; ;HMI.h: 10: void UpdateDisplay(unsigned char serialInput);
 [; ;robot.h: 6: void robo_init(void);
 [; ;robot.h: 7: void robotMove(int distance);
 [; ;robot.h: 8: void robotTurn(int distance);
-"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1863,7 +1875,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _turnlowByte
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 9: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
+[; ;robot.h: 10: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 "35 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [; ;Main.c: 35: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
@@ -1878,46 +1890,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;Main.c: 68: volatile unsigned char buttonPressed = 0;
-"71
+"69
+[i _serialInput
+-> -> 0 `i `uc
+]
+[; ;Main.c: 69: volatile unsigned char serialInput = 0;
+"72
 [i _RTC_FLAG_1MS
 -> 0 `i
 ]
-[; ;Main.c: 71: volatile bit RTC_FLAG_1MS = 0;
-"72
+[; ;Main.c: 72: volatile bit RTC_FLAG_1MS = 0;
+"73
 [i _RTC_FLAG_10MS
 -> 0 `i
 ]
-[; ;Main.c: 72: volatile bit RTC_FLAG_10MS = 0;
-"73
+[; ;Main.c: 73: volatile bit RTC_FLAG_10MS = 0;
+"74
 [i _RTC_FLAG_50MS
 -> 0 `i
 ]
-[; ;Main.c: 73: volatile bit RTC_FLAG_50MS = 0;
-"74
+[; ;Main.c: 74: volatile bit RTC_FLAG_50MS = 0;
+"75
 [i _RTC_FLAG_250MS
 -> 0 `i
 ]
-[; ;Main.c: 74: volatile bit RTC_FLAG_250MS = 0;
-"75
+[; ;Main.c: 75: volatile bit RTC_FLAG_250MS = 0;
+"76
 [i _RTC_FLAG_500MS
 -> 0 `i
 ]
-[; ;Main.c: 75: volatile bit RTC_FLAG_500MS = 0;
-"78
+[; ;Main.c: 76: volatile bit RTC_FLAG_500MS = 0;
+"79
 [i _RTC_Counter
 -> -> 0 `i `ui
 ]
-[; ;Main.c: 78: volatile unsigned int RTC_Counter = 0;
-"82
-[v F1232 `(v  1 tf ]
-[v _isr1 `IF1232  1 e ]
+[; ;Main.c: 79: volatile unsigned int RTC_Counter = 0;
+"83
+[v F1238 `(v  1 tf ]
+[v _isr1 `IF1238  1 e ]
 {
-[; ;Main.c: 81: void interrupt isr1(void)
-[; ;Main.c: 82: {
+[; ;Main.c: 82: void interrupt isr1(void)
+[; ;Main.c: 83: {
 [e :U _isr1 ]
 [f ]
-[; ;Main.c: 84: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
-"84
+[; ;Main.c: 85: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
+"85
 [e $ ! _RCIF 103  ]
 {
 [e = *U + &U _rxfifo * -> _rxiptr `ux -> -> # *U &U _rxfifo `ui `ux _RCREG ]
@@ -1939,285 +1956,285 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 106 ]
 }
 [e :U 105 ]
-[; ;Main.c: 86: if(TMR0IF)
-"86
-[e $ ! _TMR0IF 107  ]
-[; ;Main.c: 87: {
-"87
-{
-[; ;Main.c: 88: TMR0IF = 0;
+[; ;Main.c: 88: if(TMR0IF)
 "88
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;Main.c: 89: TMR0 = 100;
+[e $ ! _TMR0IF 107  ]
+[; ;Main.c: 89: {
 "89
-[e = _TMR0 -> -> 100 `i `uc ]
-[; ;Main.c: 91: RTC_Counter++;
-"91
-[e ++ _RTC_Counter -> -> 1 `i `ui ]
-[; ;Main.c: 93: RTC_FLAG_1MS = 1;
-"93
-[e = _RTC_FLAG_1MS -> -> 1 `i `b ]
-[; ;Main.c: 94: if(RTC_Counter % 10 == 0)
-"94
-[e $ ! == % _RTC_Counter -> -> 10 `i `ui -> -> 0 `i `ui 108  ]
-[; ;Main.c: 95: {
-"95
 {
-[; ;Main.c: 96: RTC_FLAG_10MS = 1;
+[; ;Main.c: 90: TMR0IF = 0;
+"90
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;Main.c: 91: TMR0 = 100;
+"91
+[e = _TMR0 -> -> 100 `i `uc ]
+[; ;Main.c: 93: RTC_Counter++;
+"93
+[e ++ _RTC_Counter -> -> 1 `i `ui ]
+[; ;Main.c: 95: RTC_FLAG_1MS = 1;
+"95
+[e = _RTC_FLAG_1MS -> -> 1 `i `b ]
+[; ;Main.c: 96: if(RTC_Counter % 10 == 0)
 "96
-[e = _RTC_FLAG_10MS -> -> 1 `i `b ]
+[e $ ! == % _RTC_Counter -> -> 10 `i `ui -> -> 0 `i `ui 108  ]
+[; ;Main.c: 97: {
+"97
+{
+[; ;Main.c: 98: RTC_FLAG_10MS = 1;
 "98
+[e = _RTC_FLAG_10MS -> -> 1 `i `b ]
+"101
 }
 [e :U 108 ]
-[; ;Main.c: 98: }
-[; ;Main.c: 99: if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
-"99
+[; ;Main.c: 101: }
+[; ;Main.c: 102: if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
+"102
 [e $ ! == % _RTC_Counter -> -> 50 `i `ui -> -> 0 `i `ui 109  ]
 [e = _RTC_FLAG_50MS -> -> 1 `i `b ]
 [e :U 109 ]
-[; ;Main.c: 100: if(RTC_Counter % 250 == 0)
-"100
-[e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 110  ]
-[; ;Main.c: 101: {
-"101
-{
-[; ;Main.c: 102: readAvgDistance();
-"102
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 103: UpdateDisplay();
+[; ;Main.c: 103: if(RTC_Counter % 250 == 0)
 "103
-[e ( _UpdateDisplay ..  ]
-[; ;Main.c: 104: RTC_FLAG_250MS = 1;
+[e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 110  ]
+[; ;Main.c: 104: {
 "104
-[e = _RTC_FLAG_250MS -> -> 1 `i `b ]
+{
+[; ;Main.c: 105: readAvgDistance();
+"105
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 106: UpdateDisplay(serialInput);
 "106
+[e ( _UpdateDisplay (1 _serialInput ]
+[; ;Main.c: 107: RTC_FLAG_250MS = 1;
+"107
+[e = _RTC_FLAG_250MS -> -> 1 `i `b ]
+"109
 }
 [e :U 110 ]
-[; ;Main.c: 106: }
-[; ;Main.c: 107: if(RTC_Counter % 500 == 0)
-"107
-[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 111  ]
-[; ;Main.c: 108: {
-"108
-{
-[; ;Main.c: 109: RTC_FLAG_500MS = 1;
-"109
-[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
-[; ;Main.c: 110: RTC_Counter = 0;
+[; ;Main.c: 109: }
+[; ;Main.c: 110: if(RTC_Counter % 500 == 0)
 "110
-[e = _RTC_Counter -> -> 0 `i `ui ]
-[; ;Main.c: 111: RB0 ^= 0x01;
+[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 111  ]
+[; ;Main.c: 111: {
 "111
-[e =^ _RB0 -> -> 1 `i `b ]
+{
+[; ;Main.c: 112: RTC_FLAG_500MS = 1;
 "112
+[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
+[; ;Main.c: 113: RTC_Counter = 0;
+"113
+[e = _RTC_Counter -> -> 0 `i `ui ]
+[; ;Main.c: 114: RB0 ^= 0x01;
+"114
+[e =^ _RB0 -> -> 1 `i `b ]
+"115
 }
 [e :U 111 ]
-[; ;Main.c: 112: }
-[; ;Main.c: 114: if (buttonPressed == 0)
-"114
-[e $ ! == -> _buttonPressed `i -> 0 `i 112  ]
-[; ;Main.c: 115: {
-"115
-{
-[; ;Main.c: 116: buttonPressed = ReadButtons();
-"116
-[e = _buttonPressed ( _ReadButtons ..  ]
+[; ;Main.c: 115: }
+[; ;Main.c: 117: if (buttonPressed == 0)
 "117
+[e $ ! == -> _buttonPressed `i -> 0 `i 112  ]
+[; ;Main.c: 118: {
+"118
+{
+[; ;Main.c: 119: buttonPressed = ReadButtons();
+"119
+[e = _buttonPressed ( _ReadButtons ..  ]
+"120
 }
 [e :U 112 ]
-"118
+"121
 }
 [e :U 107 ]
-[; ;Main.c: 117: }
-[; ;Main.c: 118: }
-[; ;Main.c: 119: }
-"119
+[; ;Main.c: 120: }
+[; ;Main.c: 121: }
+[; ;Main.c: 122: }
+"122
 [e :UE 102 ]
 }
-"122
+"125
 [v _init `(v  1 ef ]
 {
-[; ;Main.c: 121: void init()
-[; ;Main.c: 122: {
+[; ;Main.c: 124: void init()
+[; ;Main.c: 125: {
 [e :U _init ]
 [f ]
-[; ;Main.c: 123: init_adc();
-"123
-[e ( _init_adc ..  ]
-[; ;Main.c: 124: lcd_init();
-"124
-[e ( _lcd_init ..  ]
-[; ;Main.c: 125: ser_init();
-"125
-[e ( _ser_init ..  ]
-[; ;Main.c: 126: robo_init();
+[; ;Main.c: 126: init_adc();
 "126
-[e ( _robo_init ..  ]
-[; ;Main.c: 128: TRISB = 0b11111100;
+[e ( _init_adc ..  ]
+[; ;Main.c: 127: lcd_init();
+"127
+[e ( _lcd_init ..  ]
+[; ;Main.c: 128: ser_init();
 "128
+[e ( _ser_init ..  ]
+[; ;Main.c: 129: robo_init();
+"129
+[e ( _robo_init ..  ]
+[; ;Main.c: 131: TRISB = 0b11111100;
+"131
 [e = _TRISB -> -> 252 `i `uc ]
-[; ;Main.c: 130: TRISC &= 0b10010000;
-"130
-[e =& _TRISC -> -> 144 `i `uc ]
-[; ;Main.c: 132: SSPSTAT = 0b01000000;
-"132
-[e = _SSPSTAT -> -> 64 `i `uc ]
-[; ;Main.c: 133: SSPCON = 0b10100001;
+[; ;Main.c: 133: TRISC &= 0b10010000;
 "133
+[e =& _TRISC -> -> 144 `i `uc ]
+[; ;Main.c: 135: SSPSTAT = 0b01000000;
+"135
+[e = _SSPSTAT -> -> 64 `i `uc ]
+[; ;Main.c: 136: SSPCON = 0b10100001;
+"136
 [e = _SSPCON -> -> 161 `i `uc ]
-[; ;Main.c: 134: RC0 = 0; RC1 = 0;
-"134
+[; ;Main.c: 137: RC0 = 0; RC1 = 0;
+"137
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
-[; ;Main.c: 136: OPTION_REG = 0b00000100;
-"136
-[e = _OPTION_REG -> -> 4 `i `uc ]
-[; ;Main.c: 139: TMR0IE = 1;
+[; ;Main.c: 139: OPTION_REG = 0b00000100;
 "139
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;Main.c: 142: (GIE = 1);
+[e = _OPTION_REG -> -> 4 `i `uc ]
+[; ;Main.c: 142: TMR0IE = 1;
 "142
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;Main.c: 145: (GIE = 1);
+"145
 [e = _GIE -> -> 1 `i `b ]
-[; ;Main.c: 143: }
-"143
+[; ;Main.c: 146: }
+"146
 [e :UE 113 ]
 }
-"148
+"151
 [v _spi_transfer `(uc  1 ef1`uc ]
 {
-[; ;Main.c: 147: unsigned char spi_transfer(unsigned char data)
-[; ;Main.c: 148: {
+[; ;Main.c: 150: unsigned char spi_transfer(unsigned char data)
+[; ;Main.c: 151: {
 [e :U _spi_transfer ]
 [v _data `uc  1 r1 ]
 [f ]
-"149
-[v _temp `uc  1 a ]
-[; ;Main.c: 149: unsigned char temp = 0;
-[e = _temp -> -> 0 `i `uc ]
-[; ;Main.c: 151: SSPIF = 0;
-"151
-[e = _SSPIF -> -> 0 `i `b ]
-[; ;Main.c: 152: SSPBUF = data;
 "152
-[e = _SSPBUF _data ]
-[; ;Main.c: 154: while (SSPIF == 0);
+[v _temp `uc  1 a ]
+[; ;Main.c: 152: unsigned char temp = 0;
+[e = _temp -> -> 0 `i `uc ]
+[; ;Main.c: 154: SSPIF = 0;
 "154
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;Main.c: 155: SSPBUF = data;
+"155
+[e = _SSPBUF _data ]
+[; ;Main.c: 157: while (SSPIF == 0);
+"157
 [e $U 115  ]
 [e :U 116 ]
 [e :U 115 ]
 [e $ == -> _SSPIF `i -> 0 `i 116  ]
 [e :U 117 ]
-[; ;Main.c: 155: temp = SSPBUF;
-"155
-[e = _temp _SSPBUF ]
-[; ;Main.c: 156: SSPIF = 0;
-"156
-[e = _SSPIF -> -> 0 `i `b ]
-[; ;Main.c: 158: return temp;
+[; ;Main.c: 158: temp = SSPBUF;
 "158
+[e = _temp _SSPBUF ]
+[; ;Main.c: 159: SSPIF = 0;
+"159
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;Main.c: 161: return temp;
+"161
 [e ) _temp ]
 [e $UE 114  ]
-[; ;Main.c: 159: }
-"159
+[; ;Main.c: 162: }
+"162
 [e :UE 114 ]
 }
-"166
+"169
 [v _main `(v  1 ef ]
 {
-[; ;Main.c: 165: void main(void)
-[; ;Main.c: 166: {
+[; ;Main.c: 168: void main(void)
+[; ;Main.c: 169: {
 [e :U _main ]
 [f ]
-[; ;Main.c: 171: init();
-"171
+[; ;Main.c: 174: init();
+"174
 [e ( _init ..  ]
-[; ;Main.c: 177: while(1)
-"177
+[; ;Main.c: 180: while(1)
+"180
 [e :U 120 ]
-[; ;Main.c: 178: {
-"178
-{
-"179
-[v _choice `uc  1 a ]
-[; ;Main.c: 179: unsigned char choice = 255;
-[e = _choice -> -> 255 `i `uc ]
-[; ;Main.c: 181: switch (buttonPressed)
+[; ;Main.c: 181: {
 "181
-[e $U 123  ]
-[; ;Main.c: 182: {
-"182
 {
-[; ;Main.c: 183: case 1:
-"183
-[e :U 124 ]
-[; ;Main.c: 184: Menu(1);
+"182
+[v _choice `uc  1 a ]
+[; ;Main.c: 182: unsigned char choice = 255;
+[e = _choice -> -> 255 `i `uc ]
+[; ;Main.c: 184: switch (buttonPressed)
 "184
-[e ( _Menu (1 -> -> 1 `i `uc ]
-[; ;Main.c: 186: buttonPressed = 0;
+[e $U 123  ]
+[; ;Main.c: 185: {
+"185
+{
+[; ;Main.c: 186: case 1:
 "186
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 188: break;
-"188
-[e $U 122  ]
-[; ;Main.c: 189: case 2:
+[e :U 124 ]
+[; ;Main.c: 187: Menu(1);
+"187
+[e ( _Menu (1 -> -> 1 `i `uc ]
+[; ;Main.c: 189: buttonPressed = 0;
 "189
-[e :U 125 ]
-[; ;Main.c: 190: Menu(2);
-"190
-[e ( _Menu (1 -> -> 2 `i `uc ]
-[; ;Main.c: 192: buttonPressed = 0;
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 191: break;
+"191
+[e $U 122  ]
+[; ;Main.c: 192: case 2:
 "192
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 194: break;
-"194
-[e $U 122  ]
-[; ;Main.c: 195: case 3:
+[e :U 125 ]
+[; ;Main.c: 193: Menu(2);
+"193
+[e ( _Menu (1 -> -> 2 `i `uc ]
+[; ;Main.c: 195: buttonPressed = 0;
 "195
-[e :U 126 ]
-[; ;Main.c: 196: Menu(3);
-"196
-[e ( _Menu (1 -> -> 3 `i `uc ]
-[; ;Main.c: 198: buttonPressed = 0;
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 197: break;
+"197
+[e $U 122  ]
+[; ;Main.c: 198: case 3:
 "198
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 200: break;
-"200
-[e $U 122  ]
-[; ;Main.c: 201: case 4:
+[e :U 126 ]
+[; ;Main.c: 199: Menu(3);
+"199
+[e ( _Menu (1 -> -> 3 `i `uc ]
+[; ;Main.c: 201: buttonPressed = 0;
 "201
-[e :U 127 ]
-[; ;Main.c: 202: Menu(4);
-"202
-[e ( _Menu (1 -> -> 4 `i `uc ]
-[; ;Main.c: 204: buttonPressed = 0;
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 203: break;
+"203
+[e $U 122  ]
+[; ;Main.c: 204: case 4:
 "204
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 206: break;
-"206
-[e $U 122  ]
-[; ;Main.c: 207: case 5:
+[e :U 127 ]
+[; ;Main.c: 205: Menu(4);
+"205
+[e ( _Menu (1 -> -> 4 `i `uc ]
+[; ;Main.c: 207: buttonPressed = 0;
 "207
-[e :U 128 ]
-[; ;Main.c: 208: choice = Menu(5);
-"208
-[e = _choice ( _Menu (1 -> -> 5 `i `uc ]
-[; ;Main.c: 210: buttonPressed = 0;
-"210
 [e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 212: break;
-"212
+[; ;Main.c: 209: break;
+"209
 [e $U 122  ]
-[; ;Main.c: 213: default:
+[; ;Main.c: 210: case 5:
+"210
+[e :U 128 ]
+[; ;Main.c: 211: choice = Menu(5);
+"211
+[e = _choice ( _Menu (1 -> -> 5 `i `uc ]
+[; ;Main.c: 213: buttonPressed = 0;
 "213
-[e :U 129 ]
+[e = _buttonPressed -> -> 0 `i `uc ]
 [; ;Main.c: 215: break;
 "215
 [e $U 122  ]
+[; ;Main.c: 216: default:
 "216
-}
-[; ;Main.c: 216: }
+[e :U 129 ]
+[; ;Main.c: 218: break;
+"218
 [e $U 122  ]
-"181
+"219
+}
+[; ;Main.c: 219: }
+[e $U 122  ]
+"184
 [e :U 123 ]
 [e [\ _buttonPressed , $ -> -> 1 `i `uc 124
  , $ -> -> 2 `i `uc 125
@@ -2225,269 +2242,269 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 127
  , $ -> -> 5 `i `uc 128
  129 ]
-"216
-[e :U 122 ]
-[; ;Main.c: 219: switch (choice)
 "219
-[e $U 131  ]
-[; ;Main.c: 220: {
-"220
-{
-[; ;Main.c: 221: case 0:
-"221
-[e :U 132 ]
-[; ;Main.c: 222: RC0 = 1; RC1 = 1;;
+[e :U 122 ]
+[; ;Main.c: 222: switch (choice)
 "222
+[e $U 131  ]
+[; ;Main.c: 223: {
+"223
+{
+[; ;Main.c: 224: case 0:
+"224
+[e :U 132 ]
+[; ;Main.c: 225: RC0 = 1; RC1 = 1;;
+"225
 [e = _RC0 -> -> 1 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
-[; ;Main.c: 223: spi_transfer(0b00001011);
-"223
+[; ;Main.c: 226: spi_transfer(0b00001011);
+"226
 [e ( _spi_transfer (1 -> -> 11 `i `uc ]
-[; ;Main.c: 224: RC0 = 0; RC1 = 0;;
-"224
+[; ;Main.c: 227: RC0 = 0; RC1 = 0;;
+"227
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
-[; ;Main.c: 225: RC2 = 1; _nop(); RC2 = 0;;
-"225
+[; ;Main.c: 228: RC2 = 1; _nop(); RC2 = 0;;
+"228
 [e = _RC2 -> -> 1 `i `b ]
 [e ( __nop ..  ]
 [e = _RC2 -> -> 0 `i `b ]
-[; ;Main.c: 226: break;
-"226
-[e $U 130  ]
-[; ;Main.c: 227: case 1:
-"227
-[e :U 133 ]
-[; ;Main.c: 228: robotMove(500);
-"228
-[e ( _robotMove (1 -> 500 `i ]
-[; ;Main.c: 229: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[; ;Main.c: 229: break;
 "229
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 230: robotTurn(90);
+[e $U 130  ]
+[; ;Main.c: 230: case 1:
 "230
-[e ( _robotTurn (1 -> 90 `i ]
-[; ;Main.c: 231: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[e :U 133 ]
+[; ;Main.c: 231: robotMove(500);
 "231
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 232: robotMove(500);
+[e ( _robotMove (1 -> 500 `i ]
+[; ;Main.c: 232: _delay((unsigned long)((2000)*(20000000/4000.0)));
 "232
-[e ( _robotMove (1 -> 500 `i ]
-[; ;Main.c: 233: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 233: robotTurn(90);
 "233
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 234: robotTurn(90);
+[e ( _robotTurn (1 -> 90 `i ]
+[; ;Main.c: 234: _delay((unsigned long)((2000)*(20000000/4000.0)));
 "234
-[e ( _robotTurn (1 -> 90 `i ]
-[; ;Main.c: 235: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 235: robotMove(500);
 "235
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 236: robotMove(500);
+[e ( _robotMove (1 -> 500 `i ]
+[; ;Main.c: 236: _delay((unsigned long)((2000)*(20000000/4000.0)));
 "236
-[e ( _robotMove (1 -> 500 `i ]
-[; ;Main.c: 237: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 237: robotTurn(90);
 "237
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 238: robotTurn(90);
+[e ( _robotTurn (1 -> 90 `i ]
+[; ;Main.c: 238: _delay((unsigned long)((2000)*(20000000/4000.0)));
 "238
-[e ( _robotTurn (1 -> 90 `i ]
-[; ;Main.c: 239: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 239: robotMove(500);
 "239
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 240: robotMove(500);
-"240
 [e ( _robotMove (1 -> 500 `i ]
-[; ;Main.c: 241: _delay((unsigned long)((2000)*(20000000/4000.0)));
+[; ;Main.c: 240: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"240
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 241: robotTurn(90);
 "241
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 242: robotTurn(90);
+[e ( _robotTurn (1 -> 90 `i ]
+[; ;Main.c: 242: _delay((unsigned long)((2000)*(20000000/4000.0)));
 "242
-[e ( _robotTurn (1 -> 90 `i ]
-[; ;Main.c: 244: break;
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 243: robotMove(500);
+"243
+[e ( _robotMove (1 -> 500 `i ]
+[; ;Main.c: 244: _delay((unsigned long)((2000)*(20000000/4000.0)));
 "244
-[e $U 130  ]
-[; ;Main.c: 245: case 2:
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 245: robotTurn(90);
 "245
-[e :U 134 ]
-[; ;Main.c: 247: robotMove(-200);
-"247
-[e ( _robotMove (1 -U -> 200 `i ]
-[; ;Main.c: 248: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"248
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 249: robotTurn(-90);
-"249
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 250: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"250
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 251: robotMove(-200);
-"251
-[e ( _robotMove (1 -U -> 200 `i ]
-[; ;Main.c: 252: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"252
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 253: robotTurn(-90);
-"253
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 254: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"254
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 255: robotMove(-200);
-"255
-[e ( _robotMove (1 -U -> 200 `i ]
-[; ;Main.c: 256: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"256
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 257: robotTurn(-90);
-"257
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 258: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"258
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 259: robotMove(-200);
-"259
-[e ( _robotMove (1 -U -> 200 `i ]
-[; ;Main.c: 260: _delay((unsigned long)((2000)*(20000000/4000.0)));
-"260
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 261: robotTurn(-90);
-"261
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 263: break;
-"263
-[e $U 130  ]
-[; ;Main.c: 264: case 3:
-"264
-[e :U 135 ]
-[; ;Main.c: 265: ser_putch(128);
-"265
-[e ( _ser_putch (1 -> -> 128 `i `uc ]
-[; ;Main.c: 266: _delay((unsigned long)((100)*(20000000/4000.0)));
-"266
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 267: ser_putch(132);
-"267
-[e ( _ser_putch (1 -> -> 132 `i `uc ]
-[; ;Main.c: 268: _delay((unsigned long)((100)*(20000000/4000.0)));
-"268
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 270: _delay((unsigned long)((100)*(20000000/4000.0)));
-"270
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 272: _delay((unsigned long)((100)*(20000000/4000.0)));
-"272
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 273: ser_putch(137);
-"273
-[e ( _ser_putch (1 -> -> 137 `i `uc ]
-[; ;Main.c: 274: _delay((unsigned long)((100)*(20000000/4000.0)));
-"274
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 275: ser_putch(1);
-"275
-[e ( _ser_putch (1 -> -> 1 `i `uc ]
-[; ;Main.c: 276: _delay((unsigned long)((100)*(20000000/4000.0)));
-"276
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 277: ser_putch(44);
-"277
-[e ( _ser_putch (1 -> -> 44 `i `uc ]
-[; ;Main.c: 278: _delay((unsigned long)((100)*(20000000/4000.0)));
-"278
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 279: ser_putch(128);
-"279
-[e ( _ser_putch (1 -> -> 128 `i `uc ]
-[; ;Main.c: 280: _delay((unsigned long)((100)*(20000000/4000.0)));
-"280
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 281: ser_putch(0);
-"281
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;Main.c: 282: _delay((unsigned long)((100)*(20000000/4000.0)));
-"282
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 283: ser_putch(156);
-"283
-[e ( _ser_putch (1 -> -> 156 `i `uc ]
-[; ;Main.c: 284: _delay((unsigned long)((100)*(20000000/4000.0)));
-"284
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 285: ser_putch(1);
-"285
-[e ( _ser_putch (1 -> -> 1 `i `uc ]
-[; ;Main.c: 286: _delay((unsigned long)((100)*(20000000/4000.0)));
-"286
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 287: ser_putch(144);
-"287
-[e ( _ser_putch (1 -> -> 144 `i `uc ]
-[; ;Main.c: 288: _delay((unsigned long)((100)*(20000000/4000.0)));
-"288
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 289: ser_putch(137);
-"289
-[e ( _ser_putch (1 -> -> 137 `i `uc ]
-[; ;Main.c: 290: _delay((unsigned long)((100)*(20000000/4000.0)));
-"290
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 291: ser_putch(0);
-"291
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;Main.c: 292: _delay((unsigned long)((100)*(20000000/4000.0)));
-"292
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 293: ser_putch(0);
-"293
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;Main.c: 294: _delay((unsigned long)((100)*(20000000/4000.0)));
-"294
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 295: ser_putch(0);
-"295
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;Main.c: 296: _delay((unsigned long)((100)*(20000000/4000.0)));
-"296
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 297: ser_putch(0);
-"297
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;Main.c: 298: _delay((unsigned long)((100)*(20000000/4000.0)));
-"298
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 300: _delay((unsigned long)((100)*(20000000/4000.0)));
-"300
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 302: break;
-"302
-[e $U 130  ]
-[; ;Main.c: 303: case 4:
-"303
-[e :U 136 ]
-[; ;Main.c: 304: robotTurn(90);
-"304
 [e ( _robotTurn (1 -> 90 `i ]
-[; ;Main.c: 305: _delay((unsigned long)((1000)*(20000000/4000.0)));
-"305
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 306: robotTurn(-90);
-"306
+[; ;Main.c: 247: break;
+"247
+[e $U 130  ]
+[; ;Main.c: 248: case 2:
+"248
+[e :U 134 ]
+[; ;Main.c: 250: robotMove(-200);
+"250
+[e ( _robotMove (1 -U -> 200 `i ]
+[; ;Main.c: 251: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"251
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 252: robotTurn(-90);
+"252
 [e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 323: break;
-"323
+[; ;Main.c: 253: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"253
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 254: robotMove(-200);
+"254
+[e ( _robotMove (1 -U -> 200 `i ]
+[; ;Main.c: 255: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"255
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 256: robotTurn(-90);
+"256
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 257: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"257
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 258: robotMove(-200);
+"258
+[e ( _robotMove (1 -U -> 200 `i ]
+[; ;Main.c: 259: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"259
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 260: robotTurn(-90);
+"260
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 261: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"261
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 262: robotMove(-200);
+"262
+[e ( _robotMove (1 -U -> 200 `i ]
+[; ;Main.c: 263: _delay((unsigned long)((2000)*(20000000/4000.0)));
+"263
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 264: robotTurn(-90);
+"264
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 266: break;
+"266
 [e $U 130  ]
-[; ;Main.c: 326: default:
+[; ;Main.c: 267: case 3:
+"267
+[e :U 135 ]
+[; ;Main.c: 268: ser_putch(128);
+"268
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;Main.c: 269: _delay((unsigned long)((100)*(20000000/4000.0)));
+"269
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 270: ser_putch(132);
+"270
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;Main.c: 271: _delay((unsigned long)((100)*(20000000/4000.0)));
+"271
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 273: _delay((unsigned long)((100)*(20000000/4000.0)));
+"273
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 275: _delay((unsigned long)((100)*(20000000/4000.0)));
+"275
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 276: ser_putch(137);
+"276
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;Main.c: 277: _delay((unsigned long)((100)*(20000000/4000.0)));
+"277
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 278: ser_putch(1);
+"278
+[e ( _ser_putch (1 -> -> 1 `i `uc ]
+[; ;Main.c: 279: _delay((unsigned long)((100)*(20000000/4000.0)));
+"279
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 280: ser_putch(44);
+"280
+[e ( _ser_putch (1 -> -> 44 `i `uc ]
+[; ;Main.c: 281: _delay((unsigned long)((100)*(20000000/4000.0)));
+"281
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 282: ser_putch(128);
+"282
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;Main.c: 283: _delay((unsigned long)((100)*(20000000/4000.0)));
+"283
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 284: ser_putch(0);
+"284
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;Main.c: 285: _delay((unsigned long)((100)*(20000000/4000.0)));
+"285
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 286: ser_putch(156);
+"286
+[e ( _ser_putch (1 -> -> 156 `i `uc ]
+[; ;Main.c: 287: _delay((unsigned long)((100)*(20000000/4000.0)));
+"287
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 288: ser_putch(1);
+"288
+[e ( _ser_putch (1 -> -> 1 `i `uc ]
+[; ;Main.c: 289: _delay((unsigned long)((100)*(20000000/4000.0)));
+"289
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 290: ser_putch(144);
+"290
+[e ( _ser_putch (1 -> -> 144 `i `uc ]
+[; ;Main.c: 291: _delay((unsigned long)((100)*(20000000/4000.0)));
+"291
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 292: ser_putch(137);
+"292
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;Main.c: 293: _delay((unsigned long)((100)*(20000000/4000.0)));
+"293
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 294: ser_putch(0);
+"294
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;Main.c: 295: _delay((unsigned long)((100)*(20000000/4000.0)));
+"295
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 296: ser_putch(0);
+"296
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;Main.c: 297: _delay((unsigned long)((100)*(20000000/4000.0)));
+"297
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 298: ser_putch(0);
+"298
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;Main.c: 299: _delay((unsigned long)((100)*(20000000/4000.0)));
+"299
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 300: ser_putch(0);
+"300
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;Main.c: 301: _delay((unsigned long)((100)*(20000000/4000.0)));
+"301
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 303: _delay((unsigned long)((100)*(20000000/4000.0)));
+"303
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 305: break;
+"305
+[e $U 130  ]
+[; ;Main.c: 306: case 4:
+"306
+[e :U 136 ]
+[; ;Main.c: 307: robotTurn(90);
+"307
+[e ( _robotTurn (1 -> 90 `i ]
+[; ;Main.c: 308: _delay((unsigned long)((1000)*(20000000/4000.0)));
+"308
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 309: robotTurn(-90);
+"309
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 326: break;
 "326
-[e :U 137 ]
-[; ;Main.c: 328: break;
-"328
 [e $U 130  ]
+[; ;Main.c: 329: default:
 "329
-}
-[; ;Main.c: 329: }
+[e :U 137 ]
+[; ;Main.c: 331: break;
+"331
 [e $U 130  ]
-"219
+"332
+}
+[; ;Main.c: 332: }
+[e $U 130  ]
+"222
 [e :U 131 ]
 [e [\ _choice , $ -> -> 0 `i `uc 132
  , $ -> -> 1 `i `uc 133
@@ -2495,19 +2512,19 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 3 `i `uc 135
  , $ -> -> 4 `i `uc 136
  137 ]
-"329
+"332
 [e :U 130 ]
-[; ;Main.c: 330: choice = 255;
-"330
+[; ;Main.c: 333: choice = 255;
+"333
 [e = _choice -> -> 255 `i `uc ]
-"480
+"483
 }
 [e :U 119 ]
-"177
+"180
 [e $U 120  ]
 [e :U 121 ]
-[; ;Main.c: 480: }
-[; ;Main.c: 481: }
-"481
+[; ;Main.c: 483: }
+[; ;Main.c: 484: }
+"484
 [e :UE 118 ]
 }

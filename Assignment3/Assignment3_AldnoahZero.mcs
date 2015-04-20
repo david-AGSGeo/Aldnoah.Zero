@@ -22,7 +22,7 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
@@ -35,7 +35,7 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
@@ -48,7 +48,7 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
@@ -87,7 +87,7 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
@@ -106,6 +106,19 @@ ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
 [File008]
+Location=H:\Aldnoah.Zero\trunk\Assignment3\robot.p1
+Folder=Intermediary
+DeviceName=PIC16F877A
+LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
+LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
+LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=C9=1
+TraceCmdString=
+DebugOptions=
+[File009]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.cof
 Folder=Output
 DeviceName=PIC16F877A
@@ -113,12 +126,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File009]
+[File010]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.hex
 Folder=Output
 DeviceName=PIC16F877A
@@ -126,12 +139,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File010]
+[File011]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.sym
 Folder=Output
 DeviceName=PIC16F877A
@@ -139,12 +152,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File011]
+[File012]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.map
 Folder=Output
 DeviceName=PIC16F877A
@@ -152,12 +165,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File012]
+[File013]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.hxl
 Folder=Output
 DeviceName=PIC16F877A
@@ -165,12 +178,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File013]
+[File014]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\startup.lst
 Folder=Output
 DeviceName=PIC16F877A
@@ -178,12 +191,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File014]
+[File015]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\startup.rlf
 Folder=Output
 DeviceName=PIC16F877A
@@ -191,12 +204,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File015]
+[File016]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\doprnt.p1
 Folder=Output
 DeviceName=PIC16F877A
@@ -204,12 +217,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File016]
+[File017]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\doprnt.pre
 Folder=Output
 DeviceName=PIC16F877A
@@ -217,12 +230,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File017]
+[File018]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.obj
 Folder=Output
 DeviceName=PIC16F877A
@@ -230,12 +243,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File018]
+[File019]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.lst
 Folder=Output
 DeviceName=PIC16F877A
@@ -243,12 +256,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File019]
+[File020]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.rlf
 Folder=Output
 DeviceName=PIC16F877A
@@ -256,12 +269,12 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
 DebugOptions=
-[File020]
+[File021]
 Location=H:\Aldnoah.Zero\trunk\Assignment3\Assignment3_AldnoahZero.sdb
 Folder=Output
 DeviceName=PIC16F877A
@@ -269,7 +282,7 @@ LanguageToolSuiteID={507D93FD-16F1-4270-980F-0C7C0207E6D3}
 LanguageToolID={0F51667C-2BAF-4EF8-A2C9-AB83788A793D}
 LanguageToolLocation=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\bin\picc.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|adc.c|lcd.c|Main.c|infrared.c|steppermotor.c|ser.c|HMI.c|AT25256A.c|robot.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=C9=1
 TraceCmdString=
