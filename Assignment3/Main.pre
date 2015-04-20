@@ -1,7 +1,7 @@
 
-# 1 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+# 1 "E:\Aldnoah.Zero\Assignment3\Main.c"
 
-# 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
+# 82 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
 
 
@@ -1072,30 +1072,30 @@ unsigned EEPGD : 1;
 volatile unsigned char EECON2 @ 0x18D;
 
 
-# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_nop)
 extern void _nop(void);
 
 # 80
 extern unsigned int flash_read(unsigned short addr);
 
-# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
+# 41 "C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
 extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
+# 153 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 12 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
 typedef int ptrdiff_t;
 typedef unsigned size_t;
 typedef unsigned short wchar_t;
 
-# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h"
+# 31 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma inline(__va_start)
@@ -1104,7 +1104,7 @@ extern void * __va_start(void);
 #pragma inline(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int errno;
 
 # 58
@@ -1114,7 +1114,7 @@ char * ptr;
 void (* func)(char);
 };
 
-# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h"
+# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
 extern int errno;
 
 
@@ -1131,7 +1131,7 @@ extern bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 103 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 7 "H:\Aldnoah.Zero\trunk\Assignment3\adc.h"
+# 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1162,7 +1162,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "H:\Aldnoah.Zero\trunk\Assignment3\lcd.h"
+# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1181,7 +1181,7 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
-# 6 "H:\Aldnoah.Zero\trunk\Assignment3\infrared.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 
@@ -1189,10 +1189,12 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 7 "H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned char steps, unsigned char direction);
+void rotateOld(unsigned char steps, unsigned char direction);
 
-# 55 "H:\Aldnoah.Zero\trunk\Assignment3\ser.h"
+# 55 "E:\Aldnoah.Zero\Assignment3\ser.h"
 bit ser_isrx(void);
 unsigned char ser_getch(void);
 void ser_putch(unsigned char byte);
@@ -1208,21 +1210,25 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 8 "H:\Aldnoah.Zero\trunk\Assignment3\HMI.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+unsigned char currentMenu = 0;
+
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 6 "H:\Aldnoah.Zero\trunk\Assignment3\robot.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robotMove(int distance);
 unsigned char highByte = 0, lowByte = 0;
 
-# 35 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
+# 35 "E:\Aldnoah.Zero\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
 # 65
-unsigned char current_direction = 0;
+void calibrateIR(void);
 
+unsigned char current_direction = 0;
+int totalSteps = 0;
 
 volatile unsigned char buttonPressed = 0;
 
@@ -1281,16 +1287,12 @@ void init()
 {
 init_adc();
 lcd_init();
-ser_init();
+
 
 TRISB = 0b11111100;
+TRISC = 0x00;
 
-TRISC &= 0b10010000;
-
-SSPSTAT = 0b01000000;
-SSPCON = 0b10100001;
-RC0 = 0; RC1 = 0;
-
+# 138
 OPTION_REG = 0b00000100;
 
 
@@ -1302,21 +1304,51 @@ TMR0IE = 1;
 
 
 
-unsigned char spi_transfer(unsigned char data)
+void calibrateIR(void)
 {
-unsigned char temp = 0;
+rotateOld(8, 0);
+while (1)
+{
+switch (buttonPressed)
+{
+case 1:
 
-SSPIF = 0;
-SSPBUF = data;
 
-while (SSPIF == 0);
-temp = SSPBUF;
-SSPIF = 0;
+buttonPressed = 0;
 
-return temp;
+break;
+case 2:
+
+
+buttonPressed = 0;
+
+break;
+case 3:
+rotateOld(1, 1);
+
+buttonPressed = 0;
+
+break;
+case 4:
+rotateOld(1, 0);
+
+buttonPressed = 0;
+
+break;
+case 5:
+totalSteps = 0;
+
+buttonPressed = 0;
+return;
+break;
+default:
+
+break;
+}
+}
 }
 
-# 164
+# 197
 void main(void)
 {
 
@@ -1325,7 +1357,7 @@ void main(void)
 
 init();
 
-# 176
+# 209
 while(1)
 {
 unsigned char choice = 255;
@@ -1371,104 +1403,23 @@ break;
 switch (choice)
 {
 case 0:
-RC0 = 1; RC1 = 1;;
-spi_transfer(0b00001011);
-RC0 = 0; RC1 = 0;;
-RC2 = 1; _nop(); RC2 = 0;;
+calibrateIR();
 break;
 case 1:
-robotMove(2000);
+rotateOld(100, 1);
 
 break;
 case 2:
-RB1 ^= 0x01;
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(1);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(44);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(156);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(1);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(144);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
+
+
 
 break;
 case 3:
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((100)*(20000000/4000.0)));
 
-_delay((unsigned long)((100)*(20000000/4000.0)));
-
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(1);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(44);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(156);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(1);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(144);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-
-_delay((unsigned long)((100)*(20000000/4000.0)));
 
 break;
 case 4:
 
-ser_putch(128);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(137);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(256);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(38);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-ser_putch(0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
 break;
 
 
@@ -1478,6 +1429,6 @@ break;
 }
 choice = 255;
 
-# 476
+# 428
 }
 }

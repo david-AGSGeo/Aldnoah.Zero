@@ -62,8 +62,10 @@
 #define 	SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
 
 
-unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
+void calibrateIR(void);
 
+unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
+int totalSteps = 0; 
 
 volatile unsigned char buttonPressed = 0;
 
@@ -122,15 +124,16 @@ void init()
 {
 	init_adc();
 	lcd_init();
-	ser_init(); 
+	//////////ser_init(); 
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
+	TRISC = 0x00;//get rid of this!
+	
+	//////////TRISC &= 0b10010000;	//set pin 6 to output for USART TX, pins for SPI and CS pins
 
-	TRISC &= 0b10010000;	//set pin 6 to output for USART TX, pins for SPI and CS pins
-
-	SSPSTAT = 0b01000000;
-	SSPCON = 0b10100001; 
-	SELECT_NONE()	
+	//////////SSPSTAT = 0b01000000;
+	//////////SSPCON = 0b10100001; 
+	//////////SELECT_NONE()	
 	//timer0 prescalar set
 	OPTION_REG = 0b00000100;
 	
@@ -143,18 +146,48 @@ void init()
 
 
 
-unsigned char spi_transfer(unsigned char data)
+void calibrateIR(void)
 {
-	unsigned char temp = 0;
-
-	SSPIF = 0;
-	SSPBUF = data;
-	
-	while (SSPIF == 0);  	
-	temp = SSPBUF;
-	SSPIF = 0;
-
-	return temp;
+rotateOld(8, CLOCKWISE);
+	while (1)
+	{
+	switch (buttonPressed)
+		{
+			case UP:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case DOWN:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case LEFT:
+			rotateOld(1, COUNTERCLOCKWISE);
+			
+			buttonPressed = 0;
+			
+			break;
+			case RIGHT:
+			rotateOld(1, CLOCKWISE);
+			
+			buttonPressed = 0;
+			
+			break;
+			case CENTER:
+			totalSteps = 0;
+			
+			buttonPressed = 0;
+			return;
+			break;
+			default:
+			
+			break;
+		}
+	}
 }
 
 
@@ -217,105 +250,24 @@ void main(void)
 		////////  THIS IS THE MENU ITEM SELECTIONS
 		switch (choice)
 		{
-			case 0:			
-				SELECT_SM();			// SPI select the Stepper M
-				spi_transfer(0b00001011);	//for clockwise rotation 
-				SELECT_NONE();
-				SM_STEP();
+			case 0:		//Calibrate IR	
+				calibrateIR();
 			break;
-			case 1:
-			  robotMove(2000);
+			case 1:		//Scan 360 degrees
+			  rotateOld(100, COUNTERCLOCKWISE);
 
 			break;
-			case 2:
-LED0 ^= 0x01;
-						ser_putch(128); 
-		__delay_ms(100);
-		ser_putch(132); 
-		__delay_ms(100);
-ser_putch(137); //drive - opcode 1
-				__delay_ms(100);
-				ser_putch(1); // 
-				__delay_ms(100);
-				ser_putch(44); 
-				__delay_ms(100);
-				ser_putch(128); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(156); //distance travelled - opcode 2 
-				__delay_ms(100);
-				ser_putch(1); 
-				__delay_ms(100);
-				ser_putch(144); 
-				__delay_ms(100);
-				ser_putch(137); //drive - opcode 3
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);	
+			case 2:		//Drive forward 2 meters
+
+
 			
 			break;
-			case 3:
-								ser_putch(128);  // Start
-				__delay_ms(100);
-				ser_putch(132); // Full mode
-				__delay_ms(100);
-				//ser_putch(152); // drive
-				__delay_ms(100);
-				//ser_putch(13); // script length
-				__delay_ms(100); 
-				ser_putch(137); //drive - opcode 1
-				__delay_ms(100);
-				ser_putch(1); // 
-				__delay_ms(100);
-				ser_putch(44); 
-				__delay_ms(100);
-				ser_putch(128); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(156); //distance travelled - opcode 2 
-				__delay_ms(100);
-				ser_putch(1); 
-				__delay_ms(100);
-				ser_putch(144); 
-				__delay_ms(100);
-				ser_putch(137); //drive - opcode 3
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				//ser_putch(153); 
-				__delay_ms(100);				
+			case 3:		//Drive in an L shape
+				
 			
 			break;
-			case 4:
-	
-				ser_putch(128); 
-				__delay_ms(100);
-				ser_putch(132); 
-				__delay_ms(100);
-				ser_putch(137); 	//drive
-				__delay_ms(100);
-				ser_putch(256); 		
-				__delay_ms(100);
-				ser_putch(38); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
+			case 4:		//Follow wall
+
 			break;		
 			
 

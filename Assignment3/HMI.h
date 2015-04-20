@@ -3,7 +3,7 @@
 
 #include <htc.h>
 
-
+unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);

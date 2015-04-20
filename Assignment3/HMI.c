@@ -32,8 +32,8 @@
 //menu position
 int pos = 0;
 
-const char* menuStrings[] = {"Thing1", "Thing2", "Thing3", "Thing4", "Thing5"}; 
-const char* shortMenuStrings[] = {"Th1", "Th2", "Th3", "Th4", "Th5"};
+const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall"}; 
+const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw"};
 
 //set up debounce variables 
 

@@ -1,5 +1,7 @@
 #include <htc.h>
 #include "steppermotor.h"
+#include "AT25256A.h"
+
 
 #define _XTAL_FREQ 20000000  //Oscillator (20MHz)
 //define stepping sequence
@@ -15,14 +17,51 @@
 
 #define STEP_OFF 0b00111001 //all winding deenergised
 
+
+#define		SELECT_NONE()	RC0 = 0; RC1 = 0;
+#define		SELECT_EEPROM()	RC0 = 0; RC1 = 1;
+#define		SELECT_RF()		RC0 = 1; RC1 = 0;
+#define		SELECT_SM()		RC0 = 1; RC1 = 1;
+#define 	SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
+
 #define CLOCKWISE 0
 #define COUNTERCLOCKWISE 1
 
 char current_step = STEP0;		//stores current step
 
 
+unsigned char spi_transfer(unsigned char data)
+{
+	unsigned char temp = 0;
 
-void rotate(unsigned char steps, unsigned char direction)  //rotate "steps" half steps in "direction" direction - each half step is .9 degrees
+	SSPIF = 0;
+	SSPBUF = data;
+	
+	while (SSPIF == 0);  	
+	temp = SSPBUF;
+	SSPIF = 0;
+
+	return temp;
+}
+
+void rotate(unsigned char steps, unsigned char direction)
+{
+	int i;
+				SELECT_SM();			// SPI select the Stepper M
+				if (direction == 0)
+					spi_transfer(0b00001111);	//for clockwise rotation 
+				else
+					spi_transfer(0b00001101);	//for clockwise rotation 		
+				SELECT_NONE();
+				for (i = 0; i++; i <= steps)
+				{
+					SM_STEP();
+					__delay_ms(10);  //give motor time to respond
+				}
+}
+
+
+void rotateOld(unsigned char steps, unsigned char direction)  //rotate "steps" half steps in "direction" direction - each half step is .9 degrees
 {
 
 	

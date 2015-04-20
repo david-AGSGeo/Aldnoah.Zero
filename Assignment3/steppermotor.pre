@@ -1090,15 +1090,60 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned char steps, unsigned char direction);
+void rotateOld(unsigned char steps, unsigned char direction);
 
-# 21 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
+# 10 "E:\Aldnoah.Zero\Assignment3\AT25256A.h"
+static volatile bit CS0 @ (unsigned)&PORTC*8+0;
+static volatile bit CS1 @ (unsigned)&PORTC*8+1;
+
+
+
+
+unsigned char ee_read_status (void);
+void ee_write_disable(void);
+void ee_write_enable(void);
+unsigned char ee_read_byte (unsigned int);
+void ee_write_byte( unsigned int, unsigned char);
+
+# 30 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 char current_step = 0b00111100;
 
 
+unsigned char spi_transfer(unsigned char data)
+{
+unsigned char temp = 0;
+
+SSPIF = 0;
+SSPBUF = data;
+
+while (SSPIF == 0);
+temp = SSPBUF;
+SSPIF = 0;
+
+return temp;
+}
 
 void rotate(unsigned char steps, unsigned char direction)
+{
+int i;
+RC0 = 1; RC1 = 1;;
+if (direction == 0)
+spi_transfer(0b00001111);
+else
+spi_transfer(0b00001101);
+RC0 = 0; RC1 = 0;;
+for (i = 0; i++; i <= steps)
+{
+RC2 = 1; _nop(); RC2 = 0;;
+_delay((unsigned long)((10)*(20000000/4000.0)));
+}
+}
+
+
+void rotateOld(unsigned char steps, unsigned char direction)
 {
 
 
