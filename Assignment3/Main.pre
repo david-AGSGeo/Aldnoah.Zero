@@ -1181,6 +1181,11 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
+void LCD_display_distance(void);
+int total;
+int dist_high;
+int dist_low;
+
 # 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
@@ -1215,11 +1220,14 @@ unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
-void UpdateDisplay(void);
+void UpdateDisplay(unsigned char serialInput);
 
 # 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
+void robo_init(void);
 void robotMove(int distance);
-unsigned char highByte = 0, lowByte = 0;
+void robotTurn(int distance);
+
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
 # 35 "E:\Aldnoah.Zero\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
@@ -1231,6 +1239,7 @@ unsigned char current_direction = 0;
 int totalSteps = 0;
 
 volatile unsigned char buttonPressed = 0;
+volatile unsigned char serialInput = 0;
 
 
 volatile bit RTC_FLAG_1MS = 0;
@@ -1248,6 +1257,7 @@ void interrupt isr1(void)
 
 if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
 
+
 if(TMR0IF)
 {
 TMR0IF = 0;
@@ -1260,12 +1270,13 @@ if(RTC_Counter % 10 == 0)
 {
 RTC_FLAG_10MS = 1;
 
+
 }
 if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 if(RTC_Counter % 250 == 0)
 {
 readAvgDistance();
-UpdateDisplay();
+UpdateDisplay(serialInput);
 RTC_FLAG_250MS = 1;
 
 }
@@ -1287,12 +1298,12 @@ void init()
 {
 init_adc();
 lcd_init();
-
+ser_init();
+robo_init();
 
 TRISB = 0b11111100;
-TRISC = 0x00;
 
-# 138
+
 OPTION_REG = 0b00000100;
 
 
@@ -1306,6 +1317,8 @@ TMR0IE = 1;
 
 void calibrateIR(void)
 {
+
+
 rotateOld(8, 0);
 while (1)
 {

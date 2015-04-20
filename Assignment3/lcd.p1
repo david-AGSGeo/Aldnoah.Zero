@@ -881,6 +881,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
+"36 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _total `i  1 e ]
+"37 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"38 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_low `i  1 e ]
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
@@ -1722,6 +1728,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
 [; ;lcd.h: 31: void lcd_init(void);
 [; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 35: void LCD_display_distance(void);
+[; ;lcd.h: 36: int total;
+[; ;lcd.h: 37: int dist_high;
+[; ;lcd.h: 38: int dist_low;
 "18 E:\Aldnoah.Zero\Assignment3\lcd.c
 [v _lcd_write_control `(v  1 ef1`uc ]
 {

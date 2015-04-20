@@ -32,4 +32,9 @@ void lcd_init(void);
 
 void lcd_write_3_digit_bcd(unsigned int data);
 
+void LCD_display_distance(void);
+int total;
+int dist_high;
+int dist_low;
+
 #endif //LCD_H

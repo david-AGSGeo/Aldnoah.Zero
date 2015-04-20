@@ -883,49 +883,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON2 `Vuc  1 e@397 ]
 "6 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `uc  1 e ]
+"36 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _total `i  1 e ]
+"37 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"38 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_low `i  1 e ]
 "6 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
 "7 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _distance `Vui  1 e ]
-"7 E:\Aldnoah.Zero\Assignment3\robot.h
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"7 E:\Aldnoah.Zero\Assignment3\robot.h
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"33 E:\Aldnoah.Zero\Assignment3\HMI.c
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _turnhighByte `uc  1 e ]
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _turnlowByte `uc  1 e ]
+"30 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _pos `i  1 e ]
-"35 E:\Aldnoah.Zero\Assignment3\HMI.c
+"32 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _menuStrings `*Cuc  -> 0 `x e ]
-"36 E:\Aldnoah.Zero\Assignment3\HMI.c
+"33 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _shortMenuStrings `*Cuc  -> 0 `x e ]
-"40 E:\Aldnoah.Zero\Assignment3\HMI.c
+"37 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _UpPressed `Vb  1 e ]
-"41 E:\Aldnoah.Zero\Assignment3\HMI.c
+"38 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _UpReleased `Vb  1 e ]
-"42 E:\Aldnoah.Zero\Assignment3\HMI.c
+"39 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _UpDebounceCount `Vuc  1 e ]
-"44 E:\Aldnoah.Zero\Assignment3\HMI.c
+"41 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _DownPressed `Vb  1 e ]
-"45 E:\Aldnoah.Zero\Assignment3\HMI.c
+"42 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _DownReleased `Vb  1 e ]
-"46 E:\Aldnoah.Zero\Assignment3\HMI.c
+"43 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _DownDebounceCount `Vuc  1 e ]
-"48 E:\Aldnoah.Zero\Assignment3\HMI.c
+"45 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _LeftPressed `Vb  1 e ]
-"49 E:\Aldnoah.Zero\Assignment3\HMI.c
+"46 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _LeftReleased `Vb  1 e ]
-"50 E:\Aldnoah.Zero\Assignment3\HMI.c
+"47 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _LeftDebounceCount `Vuc  1 e ]
-"52 E:\Aldnoah.Zero\Assignment3\HMI.c
+"49 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _RightPressed `Vb  1 e ]
-"53 E:\Aldnoah.Zero\Assignment3\HMI.c
+"50 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _RightReleased `Vb  1 e ]
-"54 E:\Aldnoah.Zero\Assignment3\HMI.c
+"51 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _RightDebounceCount `Vuc  1 e ]
-"56 E:\Aldnoah.Zero\Assignment3\HMI.c
+"53 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _CenterPressed `Vb  1 e ]
-"57 E:\Aldnoah.Zero\Assignment3\HMI.c
+"54 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _CenterReleased `Vb  1 e ]
-"58 E:\Aldnoah.Zero\Assignment3\HMI.c
+"55 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _CenterDebounceCount `Vuc  1 e ]
 "17 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _lcd_write_control `(v  0 ef1`uc ]
@@ -1807,7 +1817,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.h: 6: unsigned char currentMenu = 0;
 [; ;HMI.h: 8: unsigned char ReadButtons(void);
 [; ;HMI.h: 9: unsigned char Menu(unsigned char input);
-[; ;HMI.h: 10: void UpdateDisplay(void);
+[; ;HMI.h: 10: void UpdateDisplay(unsigned char serialInput);
 [; ;lcd.h: 17: void lcd_write_control(unsigned char databyte);
 [; ;lcd.h: 20: void lcd_write_data(unsigned char databyte);
 [; ;lcd.h: 23: void lcd_set_cursor(unsigned char address);
@@ -1815,26 +1825,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
 [; ;lcd.h: 31: void lcd_init(void);
 [; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 35: void LCD_display_distance(void);
+[; ;lcd.h: 36: int total;
+[; ;lcd.h: 37: int dist_high;
+[; ;lcd.h: 38: int dist_low;
 [; ;infrared.h: 6: volatile unsigned int adcVal;
 [; ;infrared.h: 7: volatile unsigned int distance;
 [; ;infrared.h: 9: unsigned int readDistance(void);
 [; ;infrared.h: 10: void readAvgDistance(void);
 [; ;infrared.h: 11: void ADCconvert(void);
-[; ;robot.h: 6: void robotMove(int distance);
-"7 E:\Aldnoah.Zero\Assignment3\robot.h
+[; ;robot.h: 6: void robo_init(void);
+[; ;robot.h: 7: void robotMove(int distance);
+[; ;robot.h: 8: void robotTurn(int distance);
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
 [i _lowByte
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 7: unsigned char highByte = 0, lowByte = 0;
-"33 E:\Aldnoah.Zero\Assignment3\HMI.c
+[i _turnhighByte
+-> -> 0 `i `uc
+]
+[i _turnlowByte
+-> -> 0 `i `uc
+]
+[; ;robot.h: 10: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
+"30 E:\Aldnoah.Zero\Assignment3\HMI.c
 [i _pos
 -> 0 `i
 ]
-[; ;HMI.c: 33: int pos = 0;
-"35
+[; ;HMI.c: 30: int pos = 0;
+"32
 [i _menuStrings
 :U ..
 :s 1C
@@ -1844,8 +1866,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 :s 5C
 ..
 ]
-[; ;HMI.c: 35: const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall"};
-"36
+[; ;HMI.c: 32: const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall"};
+"33
 [i _shortMenuStrings
 :U ..
 :s 6C
@@ -1855,500 +1877,500 @@ Version 3.2 HI-TECH Software Intermediate Code
 :s 10C
 ..
 ]
-[; ;HMI.c: 36: const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw"};
-"40
+[; ;HMI.c: 33: const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw"};
+"37
 [i _UpPressed
 -> 0 `i
 ]
-[; ;HMI.c: 40: volatile bit UpPressed = 0;
-"41
+[; ;HMI.c: 37: volatile bit UpPressed = 0;
+"38
 [i _UpReleased
 -> 0 `i
 ]
-[; ;HMI.c: 41: volatile bit UpReleased = 0;
-"42
+[; ;HMI.c: 38: volatile bit UpReleased = 0;
+"39
 [i _UpDebounceCount
 -> -> 0 `i `uc
 ]
-[; ;HMI.c: 42: volatile unsigned char UpDebounceCount = 0;
-"44
+[; ;HMI.c: 39: volatile unsigned char UpDebounceCount = 0;
+"41
 [i _DownPressed
 -> 0 `i
 ]
-[; ;HMI.c: 44: volatile bit DownPressed = 0;
-"45
+[; ;HMI.c: 41: volatile bit DownPressed = 0;
+"42
 [i _DownReleased
 -> 0 `i
 ]
-[; ;HMI.c: 45: volatile bit DownReleased = 0;
-"46
+[; ;HMI.c: 42: volatile bit DownReleased = 0;
+"43
 [i _DownDebounceCount
 -> -> 0 `i `uc
 ]
-[; ;HMI.c: 46: volatile unsigned char DownDebounceCount = 0;
-"48
+[; ;HMI.c: 43: volatile unsigned char DownDebounceCount = 0;
+"45
 [i _LeftPressed
 -> 0 `i
 ]
-[; ;HMI.c: 48: volatile bit LeftPressed = 0;
-"49
+[; ;HMI.c: 45: volatile bit LeftPressed = 0;
+"46
 [i _LeftReleased
 -> 0 `i
 ]
-[; ;HMI.c: 49: volatile bit LeftReleased = 0;
-"50
+[; ;HMI.c: 46: volatile bit LeftReleased = 0;
+"47
 [i _LeftDebounceCount
 -> -> 0 `i `uc
 ]
-[; ;HMI.c: 50: volatile unsigned char LeftDebounceCount = 0;
-"52
+[; ;HMI.c: 47: volatile unsigned char LeftDebounceCount = 0;
+"49
 [i _RightPressed
 -> 0 `i
 ]
-[; ;HMI.c: 52: volatile bit RightPressed = 0;
-"53
+[; ;HMI.c: 49: volatile bit RightPressed = 0;
+"50
 [i _RightReleased
 -> 0 `i
 ]
-[; ;HMI.c: 53: volatile bit RightReleased = 0;
-"54
+[; ;HMI.c: 50: volatile bit RightReleased = 0;
+"51
 [i _RightDebounceCount
 -> -> 0 `i `uc
 ]
-[; ;HMI.c: 54: volatile unsigned char RightDebounceCount = 0;
-"56
+[; ;HMI.c: 51: volatile unsigned char RightDebounceCount = 0;
+"53
 [i _CenterPressed
 -> 0 `i
 ]
-[; ;HMI.c: 56: volatile bit CenterPressed = 0;
-"57
+[; ;HMI.c: 53: volatile bit CenterPressed = 0;
+"54
 [i _CenterReleased
 -> 0 `i
 ]
-[; ;HMI.c: 57: volatile bit CenterReleased = 0;
-"58
+[; ;HMI.c: 54: volatile bit CenterReleased = 0;
+"55
 [i _CenterDebounceCount
 -> -> 0 `i `uc
 ]
-[; ;HMI.c: 58: volatile unsigned char CenterDebounceCount = 0;
-"64
+[; ;HMI.c: 55: volatile unsigned char CenterDebounceCount = 0;
+"61
 [v _Debounce `(v  1 ef ]
 {
-[; ;HMI.c: 63: void Debounce(void)
-[; ;HMI.c: 64: {
+[; ;HMI.c: 60: void Debounce(void)
+[; ;HMI.c: 61: {
 [e :U _Debounce ]
 [f ]
-[; ;HMI.c: 66: if(!RB2)
-"66
+[; ;HMI.c: 63: if(!RB2)
+"63
 [e $ ! ! _RB2 103  ]
+[; ;HMI.c: 64: {
+"64
+{
+[; ;HMI.c: 65: UpDebounceCount++;
+"65
+[e ++ _UpDebounceCount -> -> 1 `i `uc ]
+[; ;HMI.c: 66: if(UpDebounceCount >= 10 & UpReleased)
+"66
+[e $ ! & >= -> _UpDebounceCount `i -> 10 `i _UpReleased 104  ]
 [; ;HMI.c: 67: {
 "67
 {
-[; ;HMI.c: 68: UpDebounceCount++;
+[; ;HMI.c: 68: UpPressed = 1;
 "68
-[e ++ _UpDebounceCount -> -> 1 `i `uc ]
-[; ;HMI.c: 69: if(UpDebounceCount >= 10 & UpReleased)
-"69
-[e $ ! & >= -> _UpDebounceCount `i -> 10 `i _UpReleased 104  ]
-[; ;HMI.c: 70: {
-"70
-{
-[; ;HMI.c: 71: UpPressed = 1;
-"71
 [e = _UpPressed -> -> 1 `i `b ]
-[; ;HMI.c: 72: UpReleased = 0;
-"72
+[; ;HMI.c: 69: UpReleased = 0;
+"69
 [e = _UpReleased -> -> 0 `i `b ]
-"73
+"70
 }
 [e :U 104 ]
-"74
+"71
 }
-[; ;HMI.c: 73: }
-[; ;HMI.c: 74: }
+[; ;HMI.c: 70: }
+[; ;HMI.c: 71: }
 [e $U 105  ]
-"75
+"72
 [e :U 103 ]
-[; ;HMI.c: 75: else
-[; ;HMI.c: 76: {
-"76
+[; ;HMI.c: 72: else
+[; ;HMI.c: 73: {
+"73
 {
-[; ;HMI.c: 77: UpDebounceCount = 0;
-"77
+[; ;HMI.c: 74: UpDebounceCount = 0;
+"74
 [e = _UpDebounceCount -> -> 0 `i `uc ]
-[; ;HMI.c: 78: UpReleased = 1;
-"78
+[; ;HMI.c: 75: UpReleased = 1;
+"75
 [e = _UpReleased -> -> 1 `i `b ]
-"79
+"76
 }
 [e :U 105 ]
-[; ;HMI.c: 79: }
-[; ;HMI.c: 82: if(!RB3)
-"82
+[; ;HMI.c: 76: }
+[; ;HMI.c: 79: if(!RB3)
+"79
 [e $ ! ! _RB3 106  ]
+[; ;HMI.c: 80: {
+"80
+{
+[; ;HMI.c: 81: DownDebounceCount++;
+"81
+[e ++ _DownDebounceCount -> -> 1 `i `uc ]
+[; ;HMI.c: 82: if(DownDebounceCount >= 10 & DownReleased)
+"82
+[e $ ! & >= -> _DownDebounceCount `i -> 10 `i _DownReleased 107  ]
 [; ;HMI.c: 83: {
 "83
 {
-[; ;HMI.c: 84: DownDebounceCount++;
+[; ;HMI.c: 84: DownPressed = 1;
 "84
-[e ++ _DownDebounceCount -> -> 1 `i `uc ]
-[; ;HMI.c: 85: if(DownDebounceCount >= 10 & DownReleased)
-"85
-[e $ ! & >= -> _DownDebounceCount `i -> 10 `i _DownReleased 107  ]
-[; ;HMI.c: 86: {
-"86
-{
-[; ;HMI.c: 87: DownPressed = 1;
-"87
 [e = _DownPressed -> -> 1 `i `b ]
-[; ;HMI.c: 88: DownReleased = 0;
-"88
+[; ;HMI.c: 85: DownReleased = 0;
+"85
 [e = _DownReleased -> -> 0 `i `b ]
-"89
+"86
 }
 [e :U 107 ]
-"90
+"87
 }
-[; ;HMI.c: 89: }
-[; ;HMI.c: 90: }
+[; ;HMI.c: 86: }
+[; ;HMI.c: 87: }
 [e $U 108  ]
-"91
+"88
 [e :U 106 ]
-[; ;HMI.c: 91: else
-[; ;HMI.c: 92: {
-"92
+[; ;HMI.c: 88: else
+[; ;HMI.c: 89: {
+"89
 {
-[; ;HMI.c: 93: DownDebounceCount = 0;
-"93
+[; ;HMI.c: 90: DownDebounceCount = 0;
+"90
 [e = _DownDebounceCount -> -> 0 `i `uc ]
-[; ;HMI.c: 94: DownReleased = 1;
-"94
+[; ;HMI.c: 91: DownReleased = 1;
+"91
 [e = _DownReleased -> -> 1 `i `b ]
-"95
+"92
 }
 [e :U 108 ]
-[; ;HMI.c: 95: }
-[; ;HMI.c: 97: if(!RB4)
-"97
+[; ;HMI.c: 92: }
+[; ;HMI.c: 94: if(!RB4)
+"94
 [e $ ! ! _RB4 109  ]
+[; ;HMI.c: 95: {
+"95
+{
+[; ;HMI.c: 96: LeftDebounceCount++;
+"96
+[e ++ _LeftDebounceCount -> -> 1 `i `uc ]
+[; ;HMI.c: 97: if(LeftDebounceCount >= 10 & LeftReleased)
+"97
+[e $ ! & >= -> _LeftDebounceCount `i -> 10 `i _LeftReleased 110  ]
 [; ;HMI.c: 98: {
 "98
 {
-[; ;HMI.c: 99: LeftDebounceCount++;
+[; ;HMI.c: 99: LeftPressed = 1;
 "99
-[e ++ _LeftDebounceCount -> -> 1 `i `uc ]
-[; ;HMI.c: 100: if(LeftDebounceCount >= 10 & LeftReleased)
-"100
-[e $ ! & >= -> _LeftDebounceCount `i -> 10 `i _LeftReleased 110  ]
-[; ;HMI.c: 101: {
-"101
-{
-[; ;HMI.c: 102: LeftPressed = 1;
-"102
 [e = _LeftPressed -> -> 1 `i `b ]
-[; ;HMI.c: 103: LeftReleased = 0;
-"103
+[; ;HMI.c: 100: LeftReleased = 0;
+"100
 [e = _LeftReleased -> -> 0 `i `b ]
-"104
+"101
 }
 [e :U 110 ]
-"105
+"102
 }
-[; ;HMI.c: 104: }
-[; ;HMI.c: 105: }
+[; ;HMI.c: 101: }
+[; ;HMI.c: 102: }
 [e $U 111  ]
-"106
+"103
 [e :U 109 ]
-[; ;HMI.c: 106: else
-[; ;HMI.c: 107: {
-"107
+[; ;HMI.c: 103: else
+[; ;HMI.c: 104: {
+"104
 {
-[; ;HMI.c: 108: LeftDebounceCount = 0;
-"108
+[; ;HMI.c: 105: LeftDebounceCount = 0;
+"105
 [e = _LeftDebounceCount -> -> 0 `i `uc ]
-[; ;HMI.c: 109: LeftReleased = 1;
-"109
+[; ;HMI.c: 106: LeftReleased = 1;
+"106
 [e = _LeftReleased -> -> 1 `i `b ]
-"110
+"107
 }
 [e :U 111 ]
-[; ;HMI.c: 110: }
-[; ;HMI.c: 112: if(!RB5)
-"112
+[; ;HMI.c: 107: }
+[; ;HMI.c: 109: if(!RB5)
+"109
 [e $ ! ! _RB5 112  ]
+[; ;HMI.c: 110: {
+"110
+{
+[; ;HMI.c: 111: RightDebounceCount++;
+"111
+[e ++ _RightDebounceCount -> -> 1 `i `uc ]
+[; ;HMI.c: 112: if(RightDebounceCount >= 10 & RightReleased)
+"112
+[e $ ! & >= -> _RightDebounceCount `i -> 10 `i _RightReleased 113  ]
 [; ;HMI.c: 113: {
 "113
 {
-[; ;HMI.c: 114: RightDebounceCount++;
+[; ;HMI.c: 114: RightPressed = 1;
 "114
-[e ++ _RightDebounceCount -> -> 1 `i `uc ]
-[; ;HMI.c: 115: if(RightDebounceCount >= 10 & RightReleased)
-"115
-[e $ ! & >= -> _RightDebounceCount `i -> 10 `i _RightReleased 113  ]
-[; ;HMI.c: 116: {
-"116
-{
-[; ;HMI.c: 117: RightPressed = 1;
-"117
 [e = _RightPressed -> -> 1 `i `b ]
-[; ;HMI.c: 118: RightReleased = 0;
-"118
+[; ;HMI.c: 115: RightReleased = 0;
+"115
 [e = _RightReleased -> -> 0 `i `b ]
-"119
+"116
 }
 [e :U 113 ]
-"120
+"117
 }
-[; ;HMI.c: 119: }
-[; ;HMI.c: 120: }
+[; ;HMI.c: 116: }
+[; ;HMI.c: 117: }
 [e $U 114  ]
-"121
+"118
 [e :U 112 ]
-[; ;HMI.c: 121: else
-[; ;HMI.c: 122: {
-"122
+[; ;HMI.c: 118: else
+[; ;HMI.c: 119: {
+"119
 {
-[; ;HMI.c: 123: RightDebounceCount = 0;
-"123
+[; ;HMI.c: 120: RightDebounceCount = 0;
+"120
 [e = _RightDebounceCount -> -> 0 `i `uc ]
-[; ;HMI.c: 124: RightReleased = 1;
-"124
+[; ;HMI.c: 121: RightReleased = 1;
+"121
 [e = _RightReleased -> -> 1 `i `b ]
-"125
+"122
 }
 [e :U 114 ]
-[; ;HMI.c: 125: }
-[; ;HMI.c: 127: if(!RB6)
-"127
+[; ;HMI.c: 122: }
+[; ;HMI.c: 124: if(!RB6)
+"124
 [e $ ! ! _RB6 115  ]
+[; ;HMI.c: 125: {
+"125
+{
+[; ;HMI.c: 126: CenterDebounceCount++;
+"126
+[e ++ _CenterDebounceCount -> -> 1 `i `uc ]
+[; ;HMI.c: 127: if(CenterDebounceCount >= 10 & CenterReleased)
+"127
+[e $ ! & >= -> _CenterDebounceCount `i -> 10 `i _CenterReleased 116  ]
 [; ;HMI.c: 128: {
 "128
 {
-[; ;HMI.c: 129: CenterDebounceCount++;
+[; ;HMI.c: 129: CenterPressed = 1;
 "129
-[e ++ _CenterDebounceCount -> -> 1 `i `uc ]
-[; ;HMI.c: 130: if(CenterDebounceCount >= 10 & CenterReleased)
-"130
-[e $ ! & >= -> _CenterDebounceCount `i -> 10 `i _CenterReleased 116  ]
-[; ;HMI.c: 131: {
-"131
-{
-[; ;HMI.c: 132: CenterPressed = 1;
-"132
 [e = _CenterPressed -> -> 1 `i `b ]
-[; ;HMI.c: 133: CenterReleased = 0;
-"133
+[; ;HMI.c: 130: CenterReleased = 0;
+"130
 [e = _CenterReleased -> -> 0 `i `b ]
-"134
+"131
 }
 [e :U 116 ]
-"135
+"132
 }
-[; ;HMI.c: 134: }
-[; ;HMI.c: 135: }
+[; ;HMI.c: 131: }
+[; ;HMI.c: 132: }
 [e $U 117  ]
-"136
+"133
 [e :U 115 ]
-[; ;HMI.c: 136: else
-[; ;HMI.c: 137: {
-"137
+[; ;HMI.c: 133: else
+[; ;HMI.c: 134: {
+"134
 {
-[; ;HMI.c: 138: CenterDebounceCount = 0;
-"138
+[; ;HMI.c: 135: CenterDebounceCount = 0;
+"135
 [e = _CenterDebounceCount -> -> 0 `i `uc ]
-[; ;HMI.c: 139: CenterReleased = 1;
-"139
+[; ;HMI.c: 136: CenterReleased = 1;
+"136
 [e = _CenterReleased -> -> 1 `i `b ]
-"140
+"137
 }
 [e :U 117 ]
-[; ;HMI.c: 140: }
-[; ;HMI.c: 141: }
-"141
+[; ;HMI.c: 137: }
+[; ;HMI.c: 138: }
+"138
 [e :UE 102 ]
 }
-"144
+"141
 [v _ReadButtons `(uc  1 ef ]
 {
-[; ;HMI.c: 143: unsigned char ReadButtons(void)
-[; ;HMI.c: 144: {
+[; ;HMI.c: 140: unsigned char ReadButtons(void)
+[; ;HMI.c: 141: {
 [e :U _ReadButtons ]
 [f ]
-[; ;HMI.c: 145: Debounce();
-"145
+[; ;HMI.c: 142: Debounce();
+"142
 [e ( _Debounce ..  ]
-[; ;HMI.c: 147: if(UpPressed)
-"147
+[; ;HMI.c: 144: if(UpPressed)
+"144
 [e $ ! _UpPressed 119  ]
-[; ;HMI.c: 148: {
-"148
+[; ;HMI.c: 145: {
+"145
 {
-[; ;HMI.c: 149: UpPressed = 0;
-"149
+[; ;HMI.c: 146: UpPressed = 0;
+"146
 [e = _UpPressed -> -> 0 `i `b ]
-[; ;HMI.c: 150: return 1;
-"150
+[; ;HMI.c: 147: return 1;
+"147
 [e ) -> -> 1 `i `uc ]
 [e $UE 118  ]
-"152
+"149
 }
 [e :U 119 ]
-[; ;HMI.c: 152: }
-[; ;HMI.c: 154: if(DownPressed)
-"154
+[; ;HMI.c: 149: }
+[; ;HMI.c: 151: if(DownPressed)
+"151
 [e $ ! _DownPressed 120  ]
-[; ;HMI.c: 155: {
-"155
+[; ;HMI.c: 152: {
+"152
 {
-[; ;HMI.c: 156: DownPressed = 0;
-"156
+[; ;HMI.c: 153: DownPressed = 0;
+"153
 [e = _DownPressed -> -> 0 `i `b ]
-[; ;HMI.c: 157: return 2;
-"157
+[; ;HMI.c: 154: return 2;
+"154
 [e ) -> -> 2 `i `uc ]
 [e $UE 118  ]
-"159
+"156
 }
 [e :U 120 ]
-[; ;HMI.c: 159: }
-[; ;HMI.c: 160: if(LeftPressed)
-"160
+[; ;HMI.c: 156: }
+[; ;HMI.c: 157: if(LeftPressed)
+"157
 [e $ ! _LeftPressed 121  ]
-[; ;HMI.c: 161: {
-"161
+[; ;HMI.c: 158: {
+"158
 {
-[; ;HMI.c: 162: LeftPressed = 0;
-"162
+[; ;HMI.c: 159: LeftPressed = 0;
+"159
 [e = _LeftPressed -> -> 0 `i `b ]
-[; ;HMI.c: 163: return 3;
-"163
+[; ;HMI.c: 160: return 3;
+"160
 [e ) -> -> 3 `i `uc ]
 [e $UE 118  ]
-"165
+"162
 }
 [e :U 121 ]
-[; ;HMI.c: 165: }
-[; ;HMI.c: 166: if(RightPressed)
-"166
+[; ;HMI.c: 162: }
+[; ;HMI.c: 163: if(RightPressed)
+"163
 [e $ ! _RightPressed 122  ]
-[; ;HMI.c: 167: {
-"167
+[; ;HMI.c: 164: {
+"164
 {
-[; ;HMI.c: 168: RightPressed = 0;
-"168
+[; ;HMI.c: 165: RightPressed = 0;
+"165
 [e = _RightPressed -> -> 0 `i `b ]
-[; ;HMI.c: 169: return 4;
-"169
+[; ;HMI.c: 166: return 4;
+"166
 [e ) -> -> 4 `i `uc ]
 [e $UE 118  ]
-"171
+"168
 }
 [e :U 122 ]
-[; ;HMI.c: 171: }
-[; ;HMI.c: 173: if(CenterPressed)
-"173
+[; ;HMI.c: 168: }
+[; ;HMI.c: 170: if(CenterPressed)
+"170
 [e $ ! _CenterPressed 123  ]
-[; ;HMI.c: 174: {
-"174
+[; ;HMI.c: 171: {
+"171
 {
-[; ;HMI.c: 175: CenterPressed = 0;
-"175
+[; ;HMI.c: 172: CenterPressed = 0;
+"172
 [e = _CenterPressed -> -> 0 `i `b ]
-[; ;HMI.c: 176: return 5;
-"176
+[; ;HMI.c: 173: return 5;
+"173
 [e ) -> -> 5 `i `uc ]
 [e $UE 118  ]
-"178
+"175
 }
 [e :U 123 ]
-[; ;HMI.c: 178: }
-[; ;HMI.c: 179: return 0;
-"179
+[; ;HMI.c: 175: }
+[; ;HMI.c: 176: return 0;
+"176
 [e ) -> -> 0 `i `uc ]
 [e $UE 118  ]
-[; ;HMI.c: 180: }
-"180
+[; ;HMI.c: 177: }
+"177
 [e :UE 118 ]
 }
-"183
+"180
 [v _Menu `(uc  1 ef1`uc ]
 {
-[; ;HMI.c: 182: unsigned char Menu(unsigned char input)
-[; ;HMI.c: 183: {
+[; ;HMI.c: 179: unsigned char Menu(unsigned char input)
+[; ;HMI.c: 180: {
 [e :U _Menu ]
 [v _input `uc  1 r1 ]
 [f ]
-[; ;HMI.c: 184: switch (input)
-"184
+[; ;HMI.c: 181: switch (input)
+"181
 [e $U 126  ]
-[; ;HMI.c: 185: {
-"185
+[; ;HMI.c: 182: {
+"182
 {
-[; ;HMI.c: 186: case 1:
-"186
+[; ;HMI.c: 183: case 1:
+"183
 [e :U 127 ]
+[; ;HMI.c: 185: break;
+"185
+[e $U 125  ]
+[; ;HMI.c: 186: case 2:
+"186
+[e :U 128 ]
 [; ;HMI.c: 188: break;
 "188
 [e $U 125  ]
-[; ;HMI.c: 189: case 2:
+[; ;HMI.c: 189: case 3:
 "189
-[e :U 128 ]
-[; ;HMI.c: 191: break;
-"191
-[e $U 125  ]
-[; ;HMI.c: 192: case 3:
-"192
 [e :U 129 ]
-[; ;HMI.c: 193: pos--;
-"193
+[; ;HMI.c: 190: pos--;
+"190
 [e -- _pos -> 1 `i ]
-[; ;HMI.c: 194: if (pos < 0)
-"194
+[; ;HMI.c: 191: if (pos < 0)
+"191
 [e $ ! < _pos -> 0 `i 130  ]
-[; ;HMI.c: 195: pos = 5 - 1;
-"195
+[; ;HMI.c: 192: pos = 5 - 1;
+"192
 [e = _pos - -> 5 `i -> 1 `i ]
 [e :U 130 ]
-[; ;HMI.c: 197: break;
-"197
+[; ;HMI.c: 194: break;
+"194
 [e $U 125  ]
-[; ;HMI.c: 198: case 4:
-"198
+[; ;HMI.c: 195: case 4:
+"195
 [e :U 131 ]
-[; ;HMI.c: 199: pos++;
-"199
+[; ;HMI.c: 196: pos++;
+"196
 [e ++ _pos -> 1 `i ]
-[; ;HMI.c: 200: if (pos == 5)
-"200
+[; ;HMI.c: 197: if (pos == 5)
+"197
 [e $ ! == _pos -> 5 `i 132  ]
-[; ;HMI.c: 201: pos = 0;
-"201
+[; ;HMI.c: 198: pos = 0;
+"198
 [e = _pos -> 0 `i ]
 [e :U 132 ]
+[; ;HMI.c: 200: break;
+"200
+[e $U 125  ]
+[; ;HMI.c: 201: case 5:
+"201
+[e :U 133 ]
+[; ;HMI.c: 202: return pos;
+"202
+[e ) -> _pos `uc ]
+[e $UE 124  ]
 [; ;HMI.c: 203: break;
 "203
 [e $U 125  ]
-[; ;HMI.c: 204: case 5:
-"204
-[e :U 133 ]
-[; ;HMI.c: 205: return pos;
+[; ;HMI.c: 205: default:
 "205
-[e ) -> _pos `uc ]
-[e $UE 124  ]
-[; ;HMI.c: 206: break;
-"206
-[e $U 125  ]
-[; ;HMI.c: 208: default:
-"208
 [e :U 134 ]
-[; ;HMI.c: 210: break;
-"210
+[; ;HMI.c: 207: break;
+"207
 [e $U 125  ]
-"211
+"208
 }
-[; ;HMI.c: 211: }
+[; ;HMI.c: 208: }
 [e $U 125  ]
-"184
+"181
 [e :U 126 ]
 [e [\ _input , $ -> -> 1 `i `uc 127
  , $ -> -> 2 `i `uc 128
@@ -2356,76 +2378,77 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 131
  , $ -> -> 5 `i `uc 133
  134 ]
-"211
+"208
 [e :U 125 ]
-[; ;HMI.c: 212: return 255;
-"212
+[; ;HMI.c: 209: return 255;
+"209
 [e ) -> -> 255 `i `uc ]
 [e $UE 124  ]
-[; ;HMI.c: 213: }
-"213
+[; ;HMI.c: 210: }
+"210
 [e :UE 124 ]
 }
-"216
-[v _UpdateDisplay `(v  1 ef ]
+"215
+[v _UpdateDisplay `(v  1 ef1`uc ]
 {
-[; ;HMI.c: 215: void UpdateDisplay(void)
-[; ;HMI.c: 216: {
+[; ;HMI.c: 214: void UpdateDisplay(unsigned char serialInput)
+[; ;HMI.c: 215: {
 [e :U _UpdateDisplay ]
+[v _serialInput `uc  1 r1 ]
 [f ]
-"217
-[v F1211 `uc  -> 16 `i s ]
-[i F1211
+"216
+[v F1222 `uc  -> 16 `i s ]
+[i F1222
 :U ..
 -> 0 `c
 ..
 ]
 [v _adcOutput `uc  -> 16 `i a ]
-[; ;HMI.c: 217: char adcOutput[16] = "";
-[e = _adcOutput F1211 ]
-[; ;HMI.c: 218: lcd_write_control(0b00000001);
-"218
+[; ;HMI.c: 216: char adcOutput[16] = "";
+[e = _adcOutput F1222 ]
+[; ;HMI.c: 217: lcd_write_control(0b00000001);
+"217
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 220: sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
-"220
+[; ;HMI.c: 219: sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+"219
 [e ( _sprintf (1 , , (. , &U _adcOutput :s 11C -> _highByte `i -> _lowByte `i ]
-[; ;HMI.c: 222: lcd_set_cursor(0x00);
-"222
+[; ;HMI.c: 221: lcd_set_cursor(0x00);
+"221
 [e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
-[; ;HMI.c: 223: lcd_write_string(adcOutput);
-"223
+[; ;HMI.c: 222: lcd_write_string(adcOutput);
+"222
 [e ( _lcd_write_string (1 &U _adcOutput ]
-[; ;HMI.c: 228: lcd_set_cursor(0x40);
-"228
+[; ;HMI.c: 227: lcd_set_cursor(0x40);
+"227
 [e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
-[; ;HMI.c: 229: if (pos > 0)
-"229
+[; ;HMI.c: 228: if (pos > 0)
+"228
 [e $ ! > _pos -> 0 `i 136  ]
-[; ;HMI.c: 230: lcd_write_string(shortMenuStrings[pos - 1]);
-"230
+[; ;HMI.c: 229: lcd_write_string(shortMenuStrings[pos - 1]);
+"229
 [e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> - _pos -> 1 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
 [e $U 137  ]
-"231
+"230
 [e :U 136 ]
-[; ;HMI.c: 231: else
-[; ;HMI.c: 232: lcd_write_string(shortMenuStrings[pos + 5 - 1]);
-"232
+[; ;HMI.c: 230: else
+[; ;HMI.c: 231: lcd_write_string(shortMenuStrings[pos + 5 - 1]);
+"231
 [e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> - + _pos -> 5 `i -> 1 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
 [e :U 137 ]
-[; ;HMI.c: 233: lcd_set_cursor(0x44);
-"233
+[; ;HMI.c: 232: lcd_set_cursor(0x44);
+"232
 [e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 234: lcd_write_string(menuStrings[pos]);
-"234
+[; ;HMI.c: 233: lcd_write_string(menuStrings[pos]);
+"233
 [e ( _lcd_write_string (1 -> *U + &U _menuStrings * -> -> _pos `ui `ux -> -> # *U &U _menuStrings `ui `ux `*uc ]
-[; ;HMI.c: 235: lcd_set_cursor(0x4D);
-"235
+[; ;HMI.c: 234: lcd_set_cursor(0x4D);
+"234
 [e ( _lcd_set_cursor (1 -> -> 77 `i `uc ]
-[; ;HMI.c: 236: lcd_write_string(shortMenuStrings[(pos + 1) % 5]);
-"236
+[; ;HMI.c: 235: lcd_write_string(shortMenuStrings[(pos + 1) % 5]);
+"235
 [e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> % + _pos -> 1 `i -> 5 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
-[; ;HMI.c: 237: }
-"237
+[; ;HMI.c: 236: }
+"236
 [e :UE 135 ]
 }
 [a 10C 70 108 119 0 ]

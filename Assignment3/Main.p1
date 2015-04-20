@@ -881,33 +881,45 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
+"36 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _total `i  1 e ]
+"37 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"38 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_low `i  1 e ]
 "6 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
 "7 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _distance `Vui  1 e ]
 "6 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `uc  1 e ]
-"7 E:\Aldnoah.Zero\Assignment3\robot.h
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"7 E:\Aldnoah.Zero\Assignment3\robot.h
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _turnhighByte `uc  1 e ]
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _turnlowByte `uc  1 e ]
 "67 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _current_direction `uc  1 e ]
 "68 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _totalSteps `i  1 e ]
 "70 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _buttonPressed `Vuc  1 e ]
-"73 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _RTC_FLAG_1MS `Vb  1 e ]
+"71 E:\Aldnoah.Zero\Assignment3\Main.c
+[v _serialInput `Vuc  1 e ]
 "74 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _RTC_FLAG_10MS `Vb  1 e ]
+[v _RTC_FLAG_1MS `Vb  1 e ]
 "75 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _RTC_FLAG_50MS `Vb  1 e ]
+[v _RTC_FLAG_10MS `Vb  1 e ]
 "76 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _RTC_FLAG_250MS `Vb  1 e ]
+[v _RTC_FLAG_50MS `Vb  1 e ]
 "77 E:\Aldnoah.Zero\Assignment3\Main.c
+[v _RTC_FLAG_250MS `Vb  1 e ]
+"78 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_500MS `Vb  1 e ]
-"80 E:\Aldnoah.Zero\Assignment3\Main.c
+"81 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
 "64 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _rxfifo `uc  -> 0 `x e ]
@@ -926,13 +938,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "10 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
 "10 E:\Aldnoah.Zero\Assignment3\HMI.h
-[v _UpdateDisplay `(v  0 ef ]
+[v _UpdateDisplay `(v  0 ef1`uc ]
 "8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
 "7 E:\Aldnoah.Zero\Assignment3\adc.h
 [v _init_adc `(v  0 ef ]
 "31 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _lcd_init `(v  0 ef ]
+"61 E:\Aldnoah.Zero\Assignment3\ser.h
+[v _ser_init `(v  0 ef ]
+"6 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _robo_init `(v  0 ef ]
 "8 E:\Aldnoah.Zero\Assignment3\steppermotor.h
 [v _rotateOld `(v  0 ef2`uc`uc ]
 [p mainexit ]
@@ -1812,6 +1828,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
 [; ;lcd.h: 31: void lcd_init(void);
 [; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 35: void LCD_display_distance(void);
+[; ;lcd.h: 36: int total;
+[; ;lcd.h: 37: int dist_high;
+[; ;lcd.h: 38: int dist_low;
 [; ;infrared.h: 6: volatile unsigned int adcVal;
 [; ;infrared.h: 7: volatile unsigned int distance;
 [; ;infrared.h: 9: unsigned int readDistance(void);
@@ -1839,16 +1859,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.h: 6: unsigned char currentMenu = 0;
 [; ;HMI.h: 8: unsigned char ReadButtons(void);
 [; ;HMI.h: 9: unsigned char Menu(unsigned char input);
-[; ;HMI.h: 10: void UpdateDisplay(void);
-[; ;robot.h: 6: void robotMove(int distance);
-"7 E:\Aldnoah.Zero\Assignment3\robot.h
+[; ;HMI.h: 10: void UpdateDisplay(unsigned char serialInput);
+[; ;robot.h: 6: void robo_init(void);
+[; ;robot.h: 7: void robotMove(int distance);
+[; ;robot.h: 8: void robotTurn(int distance);
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
 [i _lowByte
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 7: unsigned char highByte = 0, lowByte = 0;
+[i _turnhighByte
+-> -> 0 `i `uc
+]
+[i _turnlowByte
+-> -> 0 `i `uc
+]
+[; ;robot.h: 10: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 "35 E:\Aldnoah.Zero\Assignment3\Main.c
 [; ;Main.c: 35: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
@@ -1869,46 +1897,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;Main.c: 70: volatile unsigned char buttonPressed = 0;
-"73
+"71
+[i _serialInput
+-> -> 0 `i `uc
+]
+[; ;Main.c: 71: volatile unsigned char serialInput = 0;
+"74
 [i _RTC_FLAG_1MS
 -> 0 `i
 ]
-[; ;Main.c: 73: volatile bit RTC_FLAG_1MS = 0;
-"74
+[; ;Main.c: 74: volatile bit RTC_FLAG_1MS = 0;
+"75
 [i _RTC_FLAG_10MS
 -> 0 `i
 ]
-[; ;Main.c: 74: volatile bit RTC_FLAG_10MS = 0;
-"75
+[; ;Main.c: 75: volatile bit RTC_FLAG_10MS = 0;
+"76
 [i _RTC_FLAG_50MS
 -> 0 `i
 ]
-[; ;Main.c: 75: volatile bit RTC_FLAG_50MS = 0;
-"76
+[; ;Main.c: 76: volatile bit RTC_FLAG_50MS = 0;
+"77
 [i _RTC_FLAG_250MS
 -> 0 `i
 ]
-[; ;Main.c: 76: volatile bit RTC_FLAG_250MS = 0;
-"77
+[; ;Main.c: 77: volatile bit RTC_FLAG_250MS = 0;
+"78
 [i _RTC_FLAG_500MS
 -> 0 `i
 ]
-[; ;Main.c: 77: volatile bit RTC_FLAG_500MS = 0;
-"80
+[; ;Main.c: 78: volatile bit RTC_FLAG_500MS = 0;
+"81
 [i _RTC_Counter
 -> -> 0 `i `ui
 ]
-[; ;Main.c: 80: volatile unsigned int RTC_Counter = 0;
-"84
-[v F1235 `(v  1 tf ]
-[v _isr1 `IF1235  1 e ]
+[; ;Main.c: 81: volatile unsigned int RTC_Counter = 0;
+"85
+[v F1247 `(v  1 tf ]
+[v _isr1 `IF1247  1 e ]
 {
-[; ;Main.c: 83: void interrupt isr1(void)
-[; ;Main.c: 84: {
+[; ;Main.c: 84: void interrupt isr1(void)
+[; ;Main.c: 85: {
 [e :U _isr1 ]
 [f ]
-[; ;Main.c: 86: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
-"86
+[; ;Main.c: 87: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
+"87
 [e $ ! _RCIF 103  ]
 {
 [e = *U + &U _rxfifo * -> _rxiptr `ux -> -> # *U &U _rxfifo `ui `ux _RCREG ]
@@ -1930,138 +1963,141 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 106 ]
 }
 [e :U 105 ]
-[; ;Main.c: 88: if(TMR0IF)
-"88
-[e $ ! _TMR0IF 107  ]
-[; ;Main.c: 89: {
-"89
-{
-[; ;Main.c: 90: TMR0IF = 0;
+[; ;Main.c: 90: if(TMR0IF)
 "90
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;Main.c: 91: TMR0 = 100;
+[e $ ! _TMR0IF 107  ]
+[; ;Main.c: 91: {
 "91
-[e = _TMR0 -> -> 100 `i `uc ]
-[; ;Main.c: 93: RTC_Counter++;
-"93
-[e ++ _RTC_Counter -> -> 1 `i `ui ]
-[; ;Main.c: 95: RTC_FLAG_1MS = 1;
-"95
-[e = _RTC_FLAG_1MS -> -> 1 `i `b ]
-[; ;Main.c: 96: if(RTC_Counter % 10 == 0)
-"96
-[e $ ! == % _RTC_Counter -> -> 10 `i `ui -> -> 0 `i `ui 108  ]
-[; ;Main.c: 97: {
-"97
 {
-[; ;Main.c: 98: RTC_FLAG_10MS = 1;
+[; ;Main.c: 92: TMR0IF = 0;
+"92
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;Main.c: 93: TMR0 = 100;
+"93
+[e = _TMR0 -> -> 100 `i `uc ]
+[; ;Main.c: 95: RTC_Counter++;
+"95
+[e ++ _RTC_Counter -> -> 1 `i `ui ]
+[; ;Main.c: 97: RTC_FLAG_1MS = 1;
+"97
+[e = _RTC_FLAG_1MS -> -> 1 `i `b ]
+[; ;Main.c: 98: if(RTC_Counter % 10 == 0)
 "98
-[e = _RTC_FLAG_10MS -> -> 1 `i `b ]
+[e $ ! == % _RTC_Counter -> -> 10 `i `ui -> -> 0 `i `ui 108  ]
+[; ;Main.c: 99: {
+"99
+{
+[; ;Main.c: 100: RTC_FLAG_10MS = 1;
 "100
+[e = _RTC_FLAG_10MS -> -> 1 `i `b ]
+"103
 }
 [e :U 108 ]
-[; ;Main.c: 100: }
-[; ;Main.c: 101: if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
-"101
+[; ;Main.c: 103: }
+[; ;Main.c: 104: if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
+"104
 [e $ ! == % _RTC_Counter -> -> 50 `i `ui -> -> 0 `i `ui 109  ]
 [e = _RTC_FLAG_50MS -> -> 1 `i `b ]
 [e :U 109 ]
-[; ;Main.c: 102: if(RTC_Counter % 250 == 0)
-"102
-[e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 110  ]
-[; ;Main.c: 103: {
-"103
-{
-[; ;Main.c: 104: readAvgDistance();
-"104
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 105: UpdateDisplay();
+[; ;Main.c: 105: if(RTC_Counter % 250 == 0)
 "105
-[e ( _UpdateDisplay ..  ]
-[; ;Main.c: 106: RTC_FLAG_250MS = 1;
+[e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 110  ]
+[; ;Main.c: 106: {
 "106
-[e = _RTC_FLAG_250MS -> -> 1 `i `b ]
+{
+[; ;Main.c: 107: readAvgDistance();
+"107
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 108: UpdateDisplay(serialInput);
 "108
+[e ( _UpdateDisplay (1 _serialInput ]
+[; ;Main.c: 109: RTC_FLAG_250MS = 1;
+"109
+[e = _RTC_FLAG_250MS -> -> 1 `i `b ]
+"111
 }
 [e :U 110 ]
-[; ;Main.c: 108: }
-[; ;Main.c: 109: if(RTC_Counter % 500 == 0)
-"109
-[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 111  ]
-[; ;Main.c: 110: {
-"110
-{
-[; ;Main.c: 111: RTC_FLAG_500MS = 1;
-"111
-[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
-[; ;Main.c: 112: RTC_Counter = 0;
+[; ;Main.c: 111: }
+[; ;Main.c: 112: if(RTC_Counter % 500 == 0)
 "112
-[e = _RTC_Counter -> -> 0 `i `ui ]
-[; ;Main.c: 113: RB0 ^= 0x01;
+[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 111  ]
+[; ;Main.c: 113: {
 "113
-[e =^ _RB0 -> -> 1 `i `b ]
+{
+[; ;Main.c: 114: RTC_FLAG_500MS = 1;
 "114
+[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
+[; ;Main.c: 115: RTC_Counter = 0;
+"115
+[e = _RTC_Counter -> -> 0 `i `ui ]
+[; ;Main.c: 116: RB0 ^= 0x01;
+"116
+[e =^ _RB0 -> -> 1 `i `b ]
+"117
 }
 [e :U 111 ]
-[; ;Main.c: 114: }
-[; ;Main.c: 116: if (buttonPressed == 0)
-"116
-[e $ ! == -> _buttonPressed `i -> 0 `i 112  ]
-[; ;Main.c: 117: {
-"117
-{
-[; ;Main.c: 118: buttonPressed = ReadButtons();
-"118
-[e = _buttonPressed ( _ReadButtons ..  ]
+[; ;Main.c: 117: }
+[; ;Main.c: 119: if (buttonPressed == 0)
 "119
+[e $ ! == -> _buttonPressed `i -> 0 `i 112  ]
+[; ;Main.c: 120: {
+"120
+{
+[; ;Main.c: 121: buttonPressed = ReadButtons();
+"121
+[e = _buttonPressed ( _ReadButtons ..  ]
+"122
 }
 [e :U 112 ]
-"120
+"123
 }
 [e :U 107 ]
-[; ;Main.c: 119: }
-[; ;Main.c: 120: }
-[; ;Main.c: 121: }
-"121
+[; ;Main.c: 122: }
+[; ;Main.c: 123: }
+[; ;Main.c: 124: }
+"124
 [e :UE 102 ]
 }
-"124
+"127
 [v _init `(v  1 ef ]
 {
-[; ;Main.c: 123: void init()
-[; ;Main.c: 124: {
+[; ;Main.c: 126: void init()
+[; ;Main.c: 127: {
 [e :U _init ]
 [f ]
-[; ;Main.c: 125: init_adc();
-"125
+[; ;Main.c: 128: init_adc();
+"128
 [e ( _init_adc ..  ]
-[; ;Main.c: 126: lcd_init();
-"126
-[e ( _lcd_init ..  ]
-[; ;Main.c: 129: TRISB = 0b11111100;
+[; ;Main.c: 129: lcd_init();
 "129
-[e = _TRISB -> -> 252 `i `uc ]
-[; ;Main.c: 130: TRISC = 0x00;
+[e ( _lcd_init ..  ]
+[; ;Main.c: 130: ser_init();
 "130
-[e = _TRISC -> -> 0 `i `uc ]
-[; ;Main.c: 138: OPTION_REG = 0b00000100;
-"138
+[e ( _ser_init ..  ]
+[; ;Main.c: 131: robo_init();
+"131
+[e ( _robo_init ..  ]
+[; ;Main.c: 133: TRISB = 0b11111100;
+"133
+[e = _TRISB -> -> 252 `i `uc ]
+[; ;Main.c: 136: OPTION_REG = 0b00000100;
+"136
 [e = _OPTION_REG -> -> 4 `i `uc ]
-[; ;Main.c: 141: TMR0IE = 1;
-"141
+[; ;Main.c: 139: TMR0IE = 1;
+"139
 [e = _TMR0IE -> -> 1 `i `b ]
-[; ;Main.c: 144: (GIE = 1);
-"144
+[; ;Main.c: 142: (GIE = 1);
+"142
 [e = _GIE -> -> 1 `i `b ]
-[; ;Main.c: 145: }
-"145
+[; ;Main.c: 143: }
+"143
 [e :UE 113 ]
 }
-"150
+"148
 [v _calibrateIR `(v  1 ef ]
 {
-[; ;Main.c: 149: void calibrateIR(void)
-[; ;Main.c: 150: {
+[; ;Main.c: 147: void calibrateIR(void)
+[; ;Main.c: 148: {
 [e :U _calibrateIR ]
 [f ]
 [; ;Main.c: 151: rotateOld(8, 0);

@@ -4,16 +4,13 @@
 #include "lcd.h"
 #include "infrared.h"
 #include "robot.h"
-
+#include <limits.h>
 
 #define UP 1
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
 #define CENTER 5
-
-
-
 
 
 #define PB_UP !RB2 //button 0 pin	
@@ -212,7 +209,9 @@ unsigned char Menu(unsigned char input)
 	return 255; //no choice selected
 }
 
-void UpdateDisplay(void)
+
+
+void UpdateDisplay(unsigned char serialInput)
 {
 	char adcOutput[16] = "";				
 	lcd_write_control(0b00000001); //clear display	
@@ -220,10 +219,10 @@ void UpdateDisplay(void)
 				sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
 				
 				lcd_set_cursor(0x00);	
-				lcd_write_string(adcOutput);				
+				lcd_write_string(adcOutput);
+								
 				
-
-				//lcd_set_cursor(MENULEFT);	
+								//lcd_set_cursor(MENULEFT);	
 				//lcd_write_string("                    ");
 				lcd_set_cursor(MENULEFT);	
 				if (pos > 0)
