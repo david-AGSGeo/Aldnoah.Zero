@@ -131,7 +131,11 @@ void init()
 	robo_init();
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
+	
+	TRISC &= 0b10010000;			//set pin 6 to output for USART TX, pins for SPI and CS pins
 
+	SSPSTAT = 0b01000000;
+	SSPCON = 0b10100001; 
 	//timer0 prescalar set
 	OPTION_REG = 0b00000100;
 	
@@ -148,7 +152,7 @@ void calibrateIR(void)
 {
 	
 
-rotateOld(8, CLOCKWISE);
+	rotate(8, CLOCKWISE);
 	while (1)
 	{
 	switch (buttonPressed)
@@ -166,13 +170,13 @@ rotateOld(8, CLOCKWISE);
 			
 			break;
 			case LEFT:
-			rotateOld(1, COUNTERCLOCKWISE);
+			rotate(1, COUNTERCLOCKWISE);
 			
 			buttonPressed = 0;
 			
 			break;
 			case RIGHT:
-			rotateOld(1, CLOCKWISE);
+			rotate(1, CLOCKWISE);
 			
 			buttonPressed = 0;
 			
@@ -254,11 +258,14 @@ void main(void)
 				calibrateIR();
 			break;
 			case 1:		//Scan 360 degrees
-			  rotateOld(100, COUNTERCLOCKWISE);
+			  rotate(100, COUNTERCLOCKWISE);
 
 			break;
 			case 2:		//Drive forward 2 meters
-
+				SELECT_SM();			// SPI select the Stepper M
+				spi_transfer(0b00001011);	//for clockwise rotation 
+				SELECT_NONE();
+				SM_STEP();
 
 			
 			break;

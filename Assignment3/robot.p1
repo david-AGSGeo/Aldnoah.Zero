@@ -881,18 +881,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"10 H:\Aldnoah.Zero\trunk\Assignment3\AT25256A.h
-[v _CS0 `Vb  1 s@56 ]
-"11 H:\Aldnoah.Zero\trunk\Assignment3\AT25256A.h
-[v _CS1 `Vb  1 s@57 ]
-"30 H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
-[v _current_step `uc  1 e ]
-"28 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
-[v __nop `(v  0 ef ]
-[p i __nop ]
-"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
-[v __delay `(v  0 ef1`ul ]
-[p i __delay ]
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _highByte `uc  1 e ]
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _lowByte `uc  1 e ]
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _turnhighByte `uc  1 e ]
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _turnlowByte `uc  1 e ]
+"36 H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
+[v _total `i  1 e ]
+"37 H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"38 H:\Aldnoah.Zero\trunk\Assignment3\lcd.h
+[v _dist_low `i  1 e ]
+"57 H:\Aldnoah.Zero\trunk\Assignment3\ser.h
+[v _ser_putch `(v  0 ef1`uc ]
+"56 H:\Aldnoah.Zero\trunk\Assignment3\ser.h
+[v _ser_getch `(uc  0 ef ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f877a.h: 90: volatile unsigned char PCL @ 0x002;
@@ -1724,377 +1730,276 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-[; ;steppermotor.h: 6: unsigned char spi_transfer(unsigned char data);
-[; ;steppermotor.h: 7: void rotate(unsigned char steps, unsigned char direction);
-[; ;steppermotor.h: 8: void rotateOld(unsigned char steps, unsigned char direction);
-[; ;AT25256A.h: 10: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
-[; ;AT25256A.h: 11: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
-[; ;AT25256A.h: 16: unsigned char ee_read_status (void);
-[; ;AT25256A.h: 17: void ee_write_disable(void);
-[; ;AT25256A.h: 18: void ee_write_enable(void);
-[; ;AT25256A.h: 19: unsigned char ee_read_byte (unsigned int);
-[; ;AT25256A.h: 20: void ee_write_byte( unsigned int, unsigned char);
-"30 H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
-[i _current_step
--> -> 60 `i `uc
+[; ;robot.h: 6: void robo_init(void);
+[; ;robot.h: 7: void robotMove(int distance);
+[; ;robot.h: 8: void robotTurn(int distance);
+"10 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[i _highByte
+-> -> 0 `i `uc
 ]
-[; ;steppermotor.c: 30: char current_step = 0b00111100;
-"34
-[v _spi_transfer `(uc  1 ef1`uc ]
+[i _lowByte
+-> -> 0 `i `uc
+]
+[i _turnhighByte
+-> -> 0 `i `uc
+]
+[i _turnlowByte
+-> -> 0 `i `uc
+]
+[; ;robot.h: 10: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
+[; ;ser.h: 55: bit ser_isrx(void);
+[; ;ser.h: 56: unsigned char ser_getch(void);
+[; ;ser.h: 57: void ser_putch(unsigned char byte);
+[; ;ser.h: 58: void ser_puts(const char * s);
+[; ;ser.h: 59: void ser_puts2(unsigned char * s);
+[; ;ser.h: 60: void ser_puthex(unsigned char v);
+[; ;ser.h: 61: void ser_init(void);
+[; ;ser.h: 64: extern unsigned char rxfifo[16];
+[; ;ser.h: 65: extern volatile unsigned char rxiptr, rxoptr;
+[; ;ser.h: 66: extern bank1 unsigned char txfifo[16];
+[; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
+[; ;ser.h: 68: extern unsigned char ser_tmp;
+[; ;lcd.h: 17: void lcd_write_control(unsigned char databyte);
+[; ;lcd.h: 20: void lcd_write_data(unsigned char databyte);
+[; ;lcd.h: 23: void lcd_set_cursor(unsigned char address);
+[; ;lcd.h: 25: void lcd_write_string(char * s);
+[; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
+[; ;lcd.h: 31: void lcd_init(void);
+[; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 35: void LCD_display_distance(void);
+[; ;lcd.h: 36: int total;
+[; ;lcd.h: 37: int dist_high;
+[; ;lcd.h: 38: int dist_low;
+"9 H:\Aldnoah.Zero\trunk\Assignment3\robot.c
+[v _robo_init `(v  1 ef ]
 {
-[; ;steppermotor.c: 33: unsigned char spi_transfer(unsigned char data)
-[; ;steppermotor.c: 34: {
-[e :U _spi_transfer ]
-[v _data `uc  1 r1 ]
+[; ;robot.c: 8: void robo_init(void)
+[; ;robot.c: 9: {
+[e :U _robo_init ]
 [f ]
-"35
-[v _temp `uc  1 a ]
-[; ;steppermotor.c: 35: unsigned char temp = 0;
-[e = _temp -> -> 0 `i `uc ]
-[; ;steppermotor.c: 37: SSPIF = 0;
-"37
-[e = _SSPIF -> -> 0 `i `b ]
-[; ;steppermotor.c: 38: SSPBUF = data;
-"38
-[e = _SSPBUF _data ]
-[; ;steppermotor.c: 40: while (SSPIF == 0);
-"40
-[e $U 102  ]
-[e :U 103 ]
-[e :U 102 ]
-[e $ == -> _SSPIF `i -> 0 `i 103  ]
-[e :U 104 ]
-[; ;steppermotor.c: 41: temp = SSPBUF;
-"41
-[e = _temp _SSPBUF ]
-[; ;steppermotor.c: 42: SSPIF = 0;
-"42
-[e = _SSPIF -> -> 0 `i `b ]
-[; ;steppermotor.c: 44: return temp;
-"44
-[e ) _temp ]
-[e $UE 101  ]
-[; ;steppermotor.c: 45: }
-"45
+[; ;robot.c: 10: ser_putch(128);
+"10
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;robot.c: 11: ser_putch(132);
+"11
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;robot.c: 14: ser_putch (142);
+"14
+[e ( _ser_putch (1 -> -> 142 `i `uc ]
+[; ;robot.c: 15: ser_putch (19);
+"15
+[e ( _ser_putch (1 -> -> 19 `i `uc ]
+[; ;robot.c: 16: }
+"16
 [e :UE 101 ]
 }
+"19
+[v _robot_get_distance `(i  1 ef ]
+{
+[; ;robot.c: 18: int robot_get_distance(void)
+[; ;robot.c: 19: {
+[e :U _robot_get_distance ]
+[f ]
+"20
+[v _serialInput `uc  1 a ]
+[; ;robot.c: 20: unsigned char serialInput;
+[; ;robot.c: 21: serialInput = ser_getch();
+"21
+[e = _serialInput ( _ser_getch ..  ]
+[; ;robot.c: 22: total = dist_high;
+"22
+[e = _total _dist_high ]
+[; ;robot.c: 23: total = total << 8;
+"23
+[e = _total << _total -> 8 `i ]
+[; ;robot.c: 24: total = total || dist_low ;
+"24
+[e = _total -> || != _total -> 0 `i != _dist_low -> 0 `i `i ]
+[; ;robot.c: 25: }
+"25
+[e :UE 102 ]
+}
+"28
+[v _robotMove `(v  1 ef1`i ]
+{
+[; ;robot.c: 27: void robotMove(int distance)
+[; ;robot.c: 28: {
+[e :U _robotMove ]
+[v _distance `i  1 r1 ]
+[f ]
+[; ;robot.c: 30: lowByte = (unsigned char) (distance) ;
+"30
+[e = _lowByte -> _distance `uc ]
+[; ;robot.c: 31: highByte = (unsigned char) (distance >> 8);
+"31
+[e = _highByte -> >> _distance -> 8 `i `uc ]
+[; ;robot.c: 32: if (distance >= 0)
+"32
+[e $ ! >= _distance -> 0 `i 104  ]
+[; ;robot.c: 33: {
+"33
+{
+[; ;robot.c: 34: ser_putch(137);
+"34
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;robot.c: 36: ser_putch(0);
+"36
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 38: ser_putch(200);
+"38
+[e ( _ser_putch (1 -> -> 200 `i `uc ]
+[; ;robot.c: 40: ser_putch(128);
+"40
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;robot.c: 42: ser_putch(0);
+"42
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+"43
+}
+[; ;robot.c: 43: }
+[e $U 105  ]
+"44
+[e :U 104 ]
+[; ;robot.c: 44: else
+[; ;robot.c: 45: {
+"45
+{
+[; ;robot.c: 46: ser_putch(137);
+"46
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;robot.c: 48: ser_putch(0xff);
 "48
-[v _rotate `(v  1 ef2`uc`uc ]
-{
-[; ;steppermotor.c: 47: void rotate(unsigned char steps, unsigned char direction)
-[; ;steppermotor.c: 48: {
-[e :U _rotate ]
-[v _steps `uc  1 r1 ]
-[v _direction `uc  1 r2 ]
-[f ]
-[; ;steppermotor.c: 50: RC0 = 1; RC1 = 1;;
+[e ( _ser_putch (1 -> -> 255 `i `uc ]
+[; ;robot.c: 50: ser_putch(0x38);
 "50
-[e = _RC0 -> -> 1 `i `b ]
-[e = _RC1 -> -> 1 `i `b ]
-[; ;steppermotor.c: 51: if (direction == 0)
-"51
-[e $ ! == -> _direction `i -> 0 `i 106  ]
-[; ;steppermotor.c: 52: spi_transfer(0b00001111);
+[e ( _ser_putch (1 -> -> 56 `i `uc ]
+[; ;robot.c: 52: ser_putch(128);
 "52
-[e ( _spi_transfer (1 -> -> 15 `i `uc ]
-[e $U 107  ]
-"53
-[e :U 106 ]
-[; ;steppermotor.c: 53: else
-[; ;steppermotor.c: 54: spi_transfer(0b00001101);
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;robot.c: 54: ser_putch(0);
 "54
-[e ( _spi_transfer (1 -> -> 13 `i `uc ]
-[e :U 107 ]
-[; ;steppermotor.c: 55: RC0 = 0; RC1 = 0;;
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
 "55
-[e = _RC0 -> -> 0 `i `b ]
-[e = _RC1 -> -> 0 `i `b ]
-[; ;steppermotor.c: 56: for (unsigned char i = 0; i <= steps; i++)
+}
+[e :U 105 ]
+[; ;robot.c: 55: }
+[; ;robot.c: 56: ser_putch(156);
 "56
-{
-[v _i `uc  1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $U 111  ]
-"57
-[e :U 108 ]
-[; ;steppermotor.c: 57: {
-{
-[; ;steppermotor.c: 58: RC2 = 1; _nop(); RC2 = 0;;
+[e ( _ser_putch (1 -> -> 156 `i `uc ]
+[; ;robot.c: 58: ser_putch(highByte);
 "58
-[e = _RC2 -> -> 1 `i `b ]
-[e ( __nop ..  ]
-[e = _RC2 -> -> 0 `i `b ]
-[; ;steppermotor.c: 59: _delay((unsigned long)((10)*(20000000/4000.0)));
-"59
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[e ( _ser_putch (1 _highByte ]
+[; ;robot.c: 60: ser_putch(lowByte);
 "60
-}
-"56
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 111 ]
-[e $ <= -> _i `i -> _steps `i 108  ]
-[e :U 109 ]
-"60
-}
-[; ;steppermotor.c: 60: }
-[; ;steppermotor.c: 61: }
-"61
-[e :UE 105 ]
-}
-"65
-[v _rotateOld `(v  1 ef2`uc`uc ]
-{
-[; ;steppermotor.c: 64: void rotateOld(unsigned char steps, unsigned char direction)
-[; ;steppermotor.c: 65: {
-[e :U _rotateOld ]
-[v _steps `uc  1 r1 ]
-[v _direction `uc  1 r2 ]
-[f ]
-[; ;steppermotor.c: 68: for(;steps!=0;--steps)
+[e ( _ser_putch (1 _lowByte ]
+[; ;robot.c: 62: ser_putch(137);
+"62
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;robot.c: 64: ser_putch(0);
+"64
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 66: ser_putch(0);
+"66
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 68: ser_putch(0);
 "68
-{
-[e $ != -> _steps `i -> 0 `i 113  ]
-[e $U 114  ]
-"69
-[e :U 113 ]
-[; ;steppermotor.c: 69: {
-{
-[; ;steppermotor.c: 70: if (direction == 0)
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 70: ser_putch(0);
 "70
-[e $ ! == -> _direction `i -> 0 `i 116  ]
-[; ;steppermotor.c: 71: {
-"71
-{
-[; ;steppermotor.c: 72: switch(current_step)
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 72: }
 "72
-[e $U 118  ]
-[; ;steppermotor.c: 73: {
-"73
-{
-[; ;steppermotor.c: 74: case 0b00111100: PORTC = 0b00101110; current_step = 0b00101110;
-"74
-[e :U 119 ]
-[e = _PORTC -> -> 46 `i `uc ]
-[e = _current_step -> -> 46 `i `uc ]
-[; ;steppermotor.c: 75: break;
+[e :UE 103 ]
+}
 "75
-[e $U 117  ]
-[; ;steppermotor.c: 76: case 0b00101110: PORTC = 0b00101011; current_step = 0b00101011;
-"76
-[e :U 120 ]
-[e = _PORTC -> -> 43 `i `uc ]
-[e = _current_step -> -> 43 `i `uc ]
-[; ;steppermotor.c: 77: break;
-"77
-[e $U 117  ]
-[; ;steppermotor.c: 78: case 0b00101011: PORTC = 0b00100111; current_step = 0b00100111;
+[v _robotTurn `(v  1 ef1`i ]
+{
+[; ;robot.c: 74: void robotTurn(int distance)
+[; ;robot.c: 75: {
+[e :U _robotTurn ]
+[v _distance `i  1 r1 ]
+[f ]
+[; ;robot.c: 78: turnlowByte = (unsigned char) (distance) ;
 "78
-[e :U 121 ]
-[e = _PORTC -> -> 39 `i `uc ]
-[e = _current_step -> -> 39 `i `uc ]
-[; ;steppermotor.c: 79: break;
+[e = _turnlowByte -> _distance `uc ]
+[; ;robot.c: 79: turnhighByte = (unsigned char) (distance >> 8);
 "79
-[e $U 117  ]
-[; ;steppermotor.c: 80: case 0b00100111: PORTC = 0b00110101; current_step = 0b00110101;
+[e = _turnhighByte -> >> _distance -> 8 `i `uc ]
+[; ;robot.c: 80: if (distance >= 0)
 "80
-[e :U 122 ]
-[e = _PORTC -> -> 53 `i `uc ]
-[e = _current_step -> -> 53 `i `uc ]
-[; ;steppermotor.c: 81: break;
+[e $ ! >= _distance -> 0 `i 107  ]
+[; ;robot.c: 81: {
 "81
-[e $U 117  ]
-[; ;steppermotor.c: 82: case 0b00110101: PORTC = 0b00010111; current_step = 0b00010111;
+{
+[; ;robot.c: 82: ser_putch(137);
 "82
-[e :U 123 ]
-[e = _PORTC -> -> 23 `i `uc ]
-[e = _current_step -> -> 23 `i `uc ]
-[; ;steppermotor.c: 83: break;
-"83
-[e $U 117  ]
-[; ;steppermotor.c: 84: case 0b00010111: PORTC = 0b00011011; current_step = 0b00011011;
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;robot.c: 84: ser_putch(0);
 "84
-[e :U 124 ]
-[e = _PORTC -> -> 27 `i `uc ]
-[e = _current_step -> -> 27 `i `uc ]
-[; ;steppermotor.c: 85: break;
-"85
-[e $U 117  ]
-[; ;steppermotor.c: 86: case 0b00011011: PORTC = 0b00011110; current_step = 0b00011110;
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 86: ser_putch(100);
 "86
-[e :U 125 ]
-[e = _PORTC -> -> 30 `i `uc ]
-[e = _current_step -> -> 30 `i `uc ]
-[; ;steppermotor.c: 87: break;
-"87
-[e $U 117  ]
-[; ;steppermotor.c: 88: case 0b00011110: PORTC = 0b00111100; current_step = 0b00111100;
+[e ( _ser_putch (1 -> -> 100 `i `uc ]
+[; ;robot.c: 88: ser_putch(0);
 "88
-[e :U 126 ]
-[e = _PORTC -> -> 60 `i `uc ]
-[e = _current_step -> -> 60 `i `uc ]
-[; ;steppermotor.c: 89: break;
-"89
-[e $U 117  ]
-[; ;steppermotor.c: 91: default: PORTC = 0b00111001;
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 90: ser_putch(1);
+"90
+[e ( _ser_putch (1 -> -> 1 `i `uc ]
 "91
-[e :U 127 ]
-[e = _PORTC -> -> 57 `i `uc ]
-[; ;steppermotor.c: 92: break;
+}
+[; ;robot.c: 91: }
+[e $U 108  ]
 "92
-[e $U 117  ]
+[e :U 107 ]
+[; ;robot.c: 92: else
+[; ;robot.c: 93: {
 "93
-}
-[; ;steppermotor.c: 93: }
-[e $U 117  ]
-"72
-[e :U 118 ]
-[e [\ _current_step , $ -> -> 60 `i `uc 119
- , $ -> -> 46 `i `uc 120
- , $ -> -> 43 `i `uc 121
- , $ -> -> 39 `i `uc 122
- , $ -> -> 53 `i `uc 123
- , $ -> -> 23 `i `uc 124
- , $ -> -> 27 `i `uc 125
- , $ -> -> 30 `i `uc 126
- 127 ]
-"93
-[e :U 117 ]
+{
+[; ;robot.c: 94: ser_putch(137);
 "94
-}
-[; ;steppermotor.c: 94: }
-[e $U 128  ]
-"95
-[e :U 116 ]
-[; ;steppermotor.c: 95: else if (direction == 1)
-[e $ ! == -> _direction `i -> 1 `i 129  ]
-[; ;steppermotor.c: 96: {
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;robot.c: 96: ser_putch(0);
 "96
-{
-[; ;steppermotor.c: 97: switch(current_step)
-"97
-[e $U 131  ]
-[; ;steppermotor.c: 98: {
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 98: ser_putch(100);
 "98
-{
-[; ;steppermotor.c: 99: case 0b00111100: PORTC = 0b00011110; current_step = 0b00011110;
-"99
-[e :U 132 ]
-[e = _PORTC -> -> 30 `i `uc ]
-[e = _current_step -> -> 30 `i `uc ]
-[; ;steppermotor.c: 100: break;
+[e ( _ser_putch (1 -> -> 100 `i `uc ]
+[; ;robot.c: 100: ser_putch(255);
 "100
-[e $U 130  ]
-[; ;steppermotor.c: 101: case 0b00101110: PORTC = 0b00111100; current_step = 0b00111100;
-"101
-[e :U 133 ]
-[e = _PORTC -> -> 60 `i `uc ]
-[e = _current_step -> -> 60 `i `uc ]
-[; ;steppermotor.c: 102: break;
+[e ( _ser_putch (1 -> -> 255 `i `uc ]
+[; ;robot.c: 102: ser_putch(255);
 "102
-[e $U 130  ]
-[; ;steppermotor.c: 103: case 0b00101011: PORTC = 0b00101110; current_step = 0b00101110;
+[e ( _ser_putch (1 -> -> 255 `i `uc ]
 "103
-[e :U 134 ]
-[e = _PORTC -> -> 46 `i `uc ]
-[e = _current_step -> -> 46 `i `uc ]
-[; ;steppermotor.c: 104: break;
+}
+[e :U 108 ]
+[; ;robot.c: 103: }
+[; ;robot.c: 104: ser_putch(157);
 "104
-[e $U 130  ]
-[; ;steppermotor.c: 105: case 0b00100111: PORTC = 0b00101011; current_step = 0b00101011;
-"105
-[e :U 135 ]
-[e = _PORTC -> -> 43 `i `uc ]
-[e = _current_step -> -> 43 `i `uc ]
-[; ;steppermotor.c: 106: break;
+[e ( _ser_putch (1 -> -> 157 `i `uc ]
+[; ;robot.c: 106: ser_putch(turnhighByte);
 "106
-[e $U 130  ]
-[; ;steppermotor.c: 107: case 0b00110101: PORTC = 0b00100111; current_step = 0b00100111;
-"107
-[e :U 136 ]
-[e = _PORTC -> -> 39 `i `uc ]
-[e = _current_step -> -> 39 `i `uc ]
-[; ;steppermotor.c: 108: break;
+[e ( _ser_putch (1 _turnhighByte ]
+[; ;robot.c: 108: ser_putch(turnlowByte);
 "108
-[e $U 130  ]
-[; ;steppermotor.c: 109: case 0b00010111: PORTC = 0b00110101; current_step = 0b00110101;
-"109
-[e :U 137 ]
-[e = _PORTC -> -> 53 `i `uc ]
-[e = _current_step -> -> 53 `i `uc ]
-[; ;steppermotor.c: 110: break;
+[e ( _ser_putch (1 _turnlowByte ]
+[; ;robot.c: 110: ser_putch(137);
 "110
-[e $U 130  ]
-[; ;steppermotor.c: 111: case 0b00011011: PORTC = 0b00010111; current_step = 0b00010111;
-"111
-[e :U 138 ]
-[e = _PORTC -> -> 23 `i `uc ]
-[e = _current_step -> -> 23 `i `uc ]
-[; ;steppermotor.c: 112: break;
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;robot.c: 112: ser_putch(0);
 "112
-[e $U 130  ]
-[; ;steppermotor.c: 113: case 0b00011110: PORTC = 0b00011011; current_step = 0b00011011;
-"113
-[e :U 139 ]
-[e = _PORTC -> -> 27 `i `uc ]
-[e = _current_step -> -> 27 `i `uc ]
-[; ;steppermotor.c: 114: break;
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 114: ser_putch(0);
 "114
-[e $U 130  ]
-[; ;steppermotor.c: 116: default: PORTC = 0b00111001;
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 116: ser_putch(0);
 "116
-[e :U 140 ]
-[e = _PORTC -> -> 57 `i `uc ]
-[; ;steppermotor.c: 117: break;
-"117
-[e $U 130  ]
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 118: ser_putch(0);
 "118
-}
-[; ;steppermotor.c: 118: }
-[e $U 130  ]
-"97
-[e :U 131 ]
-[e [\ _current_step , $ -> -> 60 `i `uc 132
- , $ -> -> 46 `i `uc 133
- , $ -> -> 43 `i `uc 134
- , $ -> -> 39 `i `uc 135
- , $ -> -> 53 `i `uc 136
- , $ -> -> 23 `i `uc 137
- , $ -> -> 27 `i `uc 138
- , $ -> -> 30 `i `uc 139
- 140 ]
-"118
-[e :U 130 ]
-"119
-}
-[; ;steppermotor.c: 119: }
-[e $U 141  ]
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 120: }
 "120
-[e :U 129 ]
-[; ;steppermotor.c: 120: else
-[; ;steppermotor.c: 121: {
-"121
-{
-"123
-}
-[e :U 141 ]
-[e :U 128 ]
-[; ;steppermotor.c: 123: }
-[; ;steppermotor.c: 125: _delay((unsigned long)((15)*(20000000/4000.0)));
-"125
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"126
-}
-"68
-[e =- _steps -> -> 1 `i `uc ]
-[e $ != -> _steps `i -> 0 `i 113  ]
-[e :U 114 ]
-"126
-}
-[; ;steppermotor.c: 126: }
-[; ;steppermotor.c: 128: PORTC = 0b00111001;
-"128
-[e = _PORTC -> -> 57 `i `uc ]
-[; ;steppermotor.c: 129: }
-"129
-[e :UE 112 ]
+[e :UE 106 ]
 }

@@ -46,14 +46,14 @@ unsigned char spi_transfer(unsigned char data)
 
 void rotate(unsigned char steps, unsigned char direction)
 {
-	int i;
+
 				SELECT_SM();			// SPI select the Stepper M
 				if (direction == 0)
 					spi_transfer(0b00001111);	//for clockwise rotation 
 				else
 					spi_transfer(0b00001101);	//for clockwise rotation 		
 				SELECT_NONE();
-				for (i = 0; i++; i <= steps)
+				for (unsigned char i = 0; i <= steps; i++)
 				{
 					SM_STEP();
 					__delay_ms(10);  //give motor time to respond
