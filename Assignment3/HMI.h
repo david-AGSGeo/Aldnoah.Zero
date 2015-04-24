@@ -7,7 +7,7 @@ unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
-void UpdateDisplay(unsigned char serialInput);
+void UpdateDisplay(void);
 
 
 #endif 

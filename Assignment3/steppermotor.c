@@ -44,7 +44,7 @@ unsigned char spi_transfer(unsigned char data)
 	return temp;
 }
 
-void rotate(unsigned char steps, unsigned char direction)
+void rotate(unsigned int numsteps, unsigned char direction)
 {
 
 				SELECT_SM();			// SPI select the Stepper M
@@ -53,11 +53,11 @@ void rotate(unsigned char steps, unsigned char direction)
 				else
 					spi_transfer(0b00001101);	//for clockwise rotation 		
 				SELECT_NONE();
-				for (unsigned char i = 0; i < steps; i++)
+				for (unsigned int i = 0; i < numsteps; i++)
 			{
 					SM_STEP();
 					__delay_ms(15);  //give motor time to respond
-				}
+			}
 				SELECT_SM();			// SPI select the Stepper M
 					spi_transfer(0b00000000);	//for clockwise rotation 		
 				SELECT_NONE();

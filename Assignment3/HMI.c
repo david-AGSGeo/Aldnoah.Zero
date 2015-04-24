@@ -211,23 +211,23 @@ unsigned char Menu(unsigned char input)
 
 
 
-void UpdateDisplay(unsigned char serialInput)
+void UpdateDisplay(void)
 {
 	char adcOutput[16] = "";				
 	switch (currentMenu)
 		{
 
 						case 0: //main menu
-					lcd_write_control(0b00000001); //clear display	
+					
+				
+				lcd_write_control(0b00000001); //clear display	
+				
 				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, test);
 			//	sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
 				
 				lcd_set_cursor(0x00);	
-				lcd_write_string(adcOutput);
-								
+				lcd_write_string(adcOutput);				
 				
-								//lcd_set_cursor(MENULEFT);	
-				//lcd_write_string("                    ");
 				lcd_set_cursor(MENULEFT);	
 				if (pos > 0)
 					lcd_write_string(shortMenuStrings[pos - 1]);

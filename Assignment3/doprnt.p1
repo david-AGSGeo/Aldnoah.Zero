@@ -1,10 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"350 C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c
+"350 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
 [v _dpowers `Cui  -> 0 `x s ]
-"34 C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h
+"34 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h
 [v ___va_start `(*v  0 ef ]
 [p i ___va_start ]
-"37 C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h
+"37 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h
 [v ___va_arg `(*v  0 ev`*v ]
 [p i ___va_arg ]
 [; ;stdio.h: 12: typedef int ptrdiff_t;
@@ -193,7 +193,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;math.h: 26: extern double fmod(double, double);
 [; ;math.h: 27: extern double trunc(double);
 [; ;math.h: 28: extern double round(double);
-"350 C:\Program Files\HI-TECH Software\PICC\9.83\lib\doprnt.c
+"350 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
 [i _dpowers
 :U ..
 -> -> 1 `i `ui

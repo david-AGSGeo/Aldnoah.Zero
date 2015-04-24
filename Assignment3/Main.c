@@ -72,6 +72,7 @@ unsigned char SCAN_FLAG = 0;
 volatile unsigned char buttonPressed = 0;
 volatile unsigned char serialInput = 0;
 
+
 //set up flags for timer0 (currently not used))
 volatile bit RTC_FLAG_1MS = 0;
 volatile bit RTC_FLAG_10MS = 0;
@@ -106,11 +107,7 @@ void interrupt isr1(void)
 		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
 		{
-			if (SCAN_FLAG == 0)
-			{
-				readAvgDistance();
-				UpdateDisplay(serialInput);
-			}
+			
 			RTC_FLAG_250MS = 1;
 
 		}
@@ -119,6 +116,7 @@ void interrupt isr1(void)
 			RTC_FLAG_500MS = 1;
 			RTC_Counter = 0;	//reset RTC Counter
 			HBLED ^= 0x01;		//toggle heartbeat LED
+
 		}
 		
 		if (buttonPressed == 0)
@@ -130,6 +128,7 @@ void interrupt isr1(void)
 
 void init()
 {
+	GIE=0;
 	init_adc();
 	lcd_init();
 	ser_init();
@@ -148,6 +147,7 @@ void init()
 	TMR0IE = 1;
 	
 	//Enable all interrupts
+	GIE=1;
 	ei();
 }
 
@@ -160,7 +160,12 @@ void calibrateIR(void)
 	rotate(8, CLOCKWISE);
 	while (1)
 	{
-	switch (buttonPressed)
+		if (RTC_FLAG_250MS == 1)
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
 		{
 			case UP:
 			
@@ -190,6 +195,7 @@ void calibrateIR(void)
 			totalSteps = 0;
 			
 			buttonPressed = 0;
+			currentMenu = 0;
 			return;
 			break;
 			default:
@@ -213,7 +219,7 @@ int scan360(void)
 			
 		}
 		rotate(1, COUNTERCLOCKWISE);
-		UpdateDisplay(serialInput);
+		UpdateDisplay();
 		test = lowestSteps;
 	} 
 	SCAN_FLAG = 0;
@@ -230,8 +236,7 @@ void main(void)
 	
 	//initialise function
 	init();
-	//initialise stepper motor to known winding
-	//rotate(8, CLOCKWISE);
+	
 		
 	//Loop forever
 
@@ -239,7 +244,15 @@ void main(void)
 	{
 		unsigned char choice = 255;
 		int shortwall = 0;
-		currentMenu = 0;
+
+		if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
+			{
+				RTC_FLAG_250MS = 0;
+				//robot_distance();	
+				readAvgDistance();
+				UpdateDisplay();
+			}
+		
 		switch (buttonPressed)
 		{
 			case UP:
@@ -300,7 +313,7 @@ void main(void)
 				robotMove(1000);
 			break;
 			case 4:		//Follow wall
-
+				robot_distance();
 			break;		
 			
 

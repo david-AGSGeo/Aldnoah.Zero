@@ -11,16 +11,20 @@ void robo_init(void)
 		ser_putch(132); //full mode
 
 		//iRobot Distance Sensor Setup
-		ser_putch (142); // Sensor Setup
-		ser_putch (19);  // Distance Sensor Packet ID
+
 }
 
+void robot_read(int packet)
+{
+	ser_putch (142); // Sensor Setup
+	ser_putch (packet);  // Distance Sensor Packet ID
+}
 void robot_distance(void)
 {
-	//serialInput=ser_getch(); 	
-	total = dist_high;
-	total = total << 8;
-	total = total || dist_low ;
+	robot_read(19);
+	distTravelled = ser_getch(); 	
+	distTravelled << 8;
+	distTravelled |= ser_getch();
 }
 
 void robotMove(int distance)
@@ -115,5 +119,4 @@ else
 				ser_putch(0); 
 			
 				ser_putch(0); 
-			
-}
+}			

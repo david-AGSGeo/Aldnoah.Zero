@@ -1,7 +1,7 @@
 
-# 1 "E:\Aldnoah.Zero\Assignment3\Main.c"
+# 1 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 
-# 82 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
+# 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
 
 
@@ -1072,30 +1072,30 @@ unsigned EEPGD : 1;
 volatile unsigned char EECON2 @ 0x18D;
 
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_nop)
 extern void _nop(void);
 
 # 80
 extern unsigned int flash_read(unsigned short addr);
 
-# 41 "C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
+# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
 extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 153 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
+# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 12 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 typedef int ptrdiff_t;
 typedef unsigned size_t;
 typedef unsigned short wchar_t;
 
-# 31 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h"
+# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma inline(__va_start)
@@ -1104,7 +1104,7 @@ extern void * __va_start(void);
 #pragma inline(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int errno;
 
 # 58
@@ -1114,7 +1114,7 @@ char * ptr;
 void (* func)(char);
 };
 
-# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h"
 extern int errno;
 
 
@@ -1131,7 +1131,7 @@ extern bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 103 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
+# 7 "H:\Aldnoah.Zero\trunk\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1162,7 +1162,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero\trunk\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1186,7 +1186,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+# 6 "H:\Aldnoah.Zero\trunk\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 volatile unsigned int test = 0;
@@ -1196,12 +1196,12 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+# 6 "H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
-void rotate(unsigned char steps, unsigned char direction);
+void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
 
-# 55 "E:\Aldnoah.Zero\Assignment3\ser.h"
+# 55 "H:\Aldnoah.Zero\trunk\Assignment3\ser.h"
 bit ser_isrx(void);
 unsigned char ser_getch(void);
 void ser_putch(unsigned char byte);
@@ -1217,21 +1217,25 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+# 6 "H:\Aldnoah.Zero\trunk\Assignment3\HMI.h"
 unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
-void UpdateDisplay(unsigned char serialInput);
+void UpdateDisplay(void);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 6 "H:\Aldnoah.Zero\trunk\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
+void robot_distance(void);
+void robot_read(int packet);
+unsigned char distTravelled = 10;
+
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
-# 35 "E:\Aldnoah.Zero\Assignment3\Main.c"
+# 35 "H:\Aldnoah.Zero\trunk\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
 # 65
@@ -1244,6 +1248,7 @@ unsigned char SCAN_FLAG = 0;
 
 volatile unsigned char buttonPressed = 0;
 volatile unsigned char serialInput = 0;
+
 
 
 volatile bit RTC_FLAG_1MS = 0;
@@ -1279,11 +1284,7 @@ RTC_FLAG_10MS = 1;
 if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 if(RTC_Counter % 250 == 0)
 {
-if (SCAN_FLAG == 0)
-{
-readAvgDistance();
-UpdateDisplay(serialInput);
-}
+
 RTC_FLAG_250MS = 1;
 
 }
@@ -1292,6 +1293,7 @@ if(RTC_Counter % 500 == 0)
 RTC_FLAG_500MS = 1;
 RTC_Counter = 0;
 RB0 ^= 0x01;
+
 }
 
 if (buttonPressed == 0)
@@ -1303,6 +1305,7 @@ buttonPressed = ReadButtons();
 
 void init()
 {
+GIE=0;
 init_adc();
 lcd_init();
 ser_init();
@@ -1321,6 +1324,7 @@ OPTION_REG = 0b00000100;
 TMR0IE = 1;
 
 
+GIE=1;
 (GIE = 1);
 }
 
@@ -1333,6 +1337,11 @@ currentMenu = 1;
 rotate(8, 0);
 while (1)
 {
+if (RTC_FLAG_250MS == 1)
+{
+RTC_FLAG_250MS = 0;
+UpdateDisplay();
+}
 switch (buttonPressed)
 {
 case 1:
@@ -1363,6 +1372,7 @@ case 5:
 totalSteps = 0;
 
 buttonPressed = 0;
+currentMenu = 0;
 return;
 break;
 default:
@@ -1386,7 +1396,7 @@ lowestSteps = steps;
 
 }
 rotate(1, 1);
-UpdateDisplay(serialInput);
+UpdateDisplay();
 test = lowestSteps;
 }
 SCAN_FLAG = 0;
@@ -1404,12 +1414,22 @@ void main(void)
 
 init();
 
-# 238
+
+
+
 while(1)
 {
 unsigned char choice = 255;
 int shortwall = 0;
-currentMenu = 0;
+
+if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
+{
+RTC_FLAG_250MS = 0;
+
+readAvgDistance();
+UpdateDisplay();
+}
+
 switch (buttonPressed)
 {
 case 1:
@@ -1470,7 +1490,7 @@ robotTurn(-90);
 robotMove(1000);
 break;
 case 4:
-
+robot_distance();
 break;
 
 
@@ -1480,6 +1500,6 @@ break;
 }
 choice = 255;
 
-# 461
+# 474
 }
 }
