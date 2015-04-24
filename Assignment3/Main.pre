@@ -1229,8 +1229,8 @@ void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
 void robot_distance(void);
-void robot_read(int packet);
-unsigned char distTravelled = 10;
+void robot_read(unsigned char packet);
+int distTravelled = 11;
 
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
@@ -1313,8 +1313,6 @@ robo_init();
 
 TRISB = 0b11111100;
 
-TRISC &= 0b10010000;
-
 SSPSTAT = 0b01000000;
 SSPCON = 0b10100001;
 
@@ -1322,7 +1320,7 @@ OPTION_REG = 0b00000100;
 
 
 TMR0IE = 1;
-
+PEIE=1;
 
 GIE=1;
 (GIE = 1);
@@ -1500,6 +1498,6 @@ break;
 }
 choice = 255;
 
-# 474
+# 472
 }
 }

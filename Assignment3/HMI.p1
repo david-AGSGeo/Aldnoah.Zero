@@ -896,7 +896,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "8 H:\Aldnoah.Zero\trunk\Assignment3\infrared.h
 [v _test `Vui  1 e ]
 "11 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
-[v _distTravelled `uc  1 e ]
+[v _distTravelled `i  1 e ]
 "14 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [v _highByte `uc  1 e ]
 "14 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
@@ -1847,12 +1847,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.h: 7: void robotMove(int distance);
 [; ;robot.h: 8: void robotTurn(int distance);
 [; ;robot.h: 9: void robot_distance(void);
-[; ;robot.h: 10: void robot_read(int packet);
+[; ;robot.h: 10: void robot_read(unsigned char packet);
 "11 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
 [i _distTravelled
--> -> 10 `i `uc
+-> 11 `i
 ]
-[; ;robot.h: 11: unsigned char distTravelled = 10;
+[; ;robot.h: 11: int distTravelled = 11;
 "14
 [i _highByte
 -> -> 0 `i `uc
@@ -2430,9 +2430,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.c: 223: lcd_write_control(0b00000001);
 "223
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 225: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, test);
+[; ;HMI.c: 225: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
 "225
-[e ( _sprintf (1 , , (. , &U _adcOutput :s 11C _adcVal _test ]
+[e ( _sprintf (1 , , (. , &U _adcOutput :s 11C _adcVal _distTravelled ]
 [; ;HMI.c: 228: lcd_set_cursor(0x00);
 "228
 [e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]

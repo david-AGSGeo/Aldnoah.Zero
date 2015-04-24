@@ -222,7 +222,7 @@ void UpdateDisplay(void)
 				
 				lcd_write_control(0b00000001); //clear display	
 				
-				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, test);
+				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
 			//	sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
 				
 				lcd_set_cursor(0x00);	

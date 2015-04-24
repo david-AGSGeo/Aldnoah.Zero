@@ -2269,7 +2269,7 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S4664 . 1 `S1208 1 . 1 0 ]
-"103 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"103
 [s S4698 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
@@ -2722,7 +2722,7 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 [u S5506 . 1 `S1208 1 . 1 0 ]
-"103 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"103
 [s S5542 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
@@ -4180,20 +4180,6 @@
 [v _lcd_write_3_digit_bcd `(v  1 e 0 0 ]
 "101
 [v _lcd_init `(v  1 e 0 0 ]
-"45 E:\Aldnoah.Zero\Assignment3\ser.c
-[v _ser_isrx `(b  1 e 0 0 ]
-"55
-[v _ser_getch `(uc  1 e 1 0 ]
-"70
-[v _ser_putch `(v  1 e 0 0 ]
-"81
-[v _ser_puts `(v  1 e 0 0 ]
-"87
-[v _ser_puts2 `(v  1 e 0 0 ]
-"93
-[v _ser_puthex `(v  1 e 0 0 ]
-"113
-[v _ser_init `(v  1 e 0 0 ]
 "7 eeprom.c
 [v _eecpymem `(v  1 e 0 0 ]
 "25
@@ -4250,11 +4236,11 @@
 [v _isr1 `I(v  1 e 0 0 ]
 "130
 [v _init `(v  1 e 0 0 ]
-"157
+"155
 [v _calibrateIR `(v  1 e 0 0 ]
-"209
+"207
 [v _scan360 `(i  1 e 2 0 ]
-"233
+"231
 [v _main `(v  1 e 0 0 ]
 "9 H:\Aldnoah.Zero\trunk\Assignment3\robot.c
 [v _robo_init `(v  1 e 0 0 ]
@@ -4262,10 +4248,24 @@
 [v _robot_read `(v  1 e 0 0 ]
 "23
 [v _robot_distance `(v  1 e 0 0 ]
-"31
+"37
 [v _robotMove `(v  1 e 0 0 ]
-"78
+"84
 [v _robotTurn `(v  1 e 0 0 ]
+"45 H:\Aldnoah.Zero\trunk\Assignment3\ser.c
+[v _ser_isrx `(b  1 e 0 0 ]
+"55
+[v _ser_getch `(uc  1 e 1 0 ]
+"70
+[v _ser_putch `(v  1 e 0 0 ]
+"81
+[v _ser_puts `(v  1 e 0 0 ]
+"87
+[v _ser_puts2 `(v  1 e 0 0 ]
+"93
+[v _ser_puthex `(v  1 e 0 0 ]
+"113
+[v _ser_init `(v  1 e 0 0 ]
 "34 H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
 [v _spi_transfer `(uc  1 e 1 0 ]
 "48
@@ -4956,18 +4956,6 @@
 [v _EECON1bits `VES1215  1 e 1 @396 ]
 "350 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\lib\doprnt.c
 [v _dpowers `DC[5]ui  1 s 10 dpowers ]
-"38 E:\Aldnoah.Zero\Assignment3\ser.c
-[v _rxfifo `[16]uc  1 e 16 0 ]
-"39
-[v _rxiptr `VEuc  1 e 1 0 ]
-[v _rxoptr `VEuc  1 e 1 0 ]
-"40
-[v _txfifo `X[16]uc  1 e 16 0 ]
-"41
-[v _txoptr `VEuc  1 e 1 0 ]
-[v _txiptr `VEuc  1 e 1 0 ]
-"42
-[v _ser_tmp `uc  1 e 1 0 ]
 "10 H:\Aldnoah.Zero\trunk\Assignment3\AT25256A.h
 [v _CS0 `VEb  1 s 0 CS0 ]
 [v AT25256A@CS0 `VEb  1 s 0 CS0 ]
@@ -5047,37 +5035,49 @@
 "84
 [v _RTC_Counter `VEui  1 e 2 0 ]
 "11 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
-[v _distTravelled `uc  1 e 1 0 ]
+[v _distTravelled `i  1 e 2 0 ]
 "14
 [v _highByte `uc  1 e 1 0 ]
 [v _lowByte `uc  1 e 1 0 ]
 [v _turnhighByte `uc  1 e 1 0 ]
 [v _turnlowByte `uc  1 e 1 0 ]
+"38 H:\Aldnoah.Zero\trunk\Assignment3\ser.c
+[v _rxfifo `[16]uc  1 e 16 0 ]
+"39
+[v _rxiptr `VEuc  1 e 1 0 ]
+[v _rxoptr `VEuc  1 e 1 0 ]
+"40
+[v _txfifo `X[16]uc  1 e 16 0 ]
+"41
+[v _txoptr `VEuc  1 e 1 0 ]
+[v _txiptr `VEuc  1 e 1 0 ]
+"42
+[v _ser_tmp `uc  1 e 1 0 ]
 "30 H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
 [v _current_step `uc  1 e 1 0 ]
-"233 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
+"231 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _main `(v  1 e 0 0 ]
 {
-"246
+"244
 [v main@shortwall `i  1 a 2 69 ]
-"245
+"243
 [v main@choice `uc  1 a 1 71 ]
-"475
+"473
 } 0
-"209
+"207
 [v _scan360 `(i  1 e 2 0 ]
 {
-"212
-[v scan360@steps `i  1 a 2 64 ]
 "210
+[v scan360@steps `i  1 a 2 64 ]
+"208
 [v scan360@lowestSteps `i  1 a 2 62 ]
 [v scan360@lowestVal `i  1 a 2 60 ]
-"227
+"225
 } 0
-"157
+"155
 [v _calibrateIR `(v  1 e 0 0 ]
 {
-"206
+"204
 } 0
 "10 H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
 [v _readAvgDistance `(v  1 e 0 0 ]
@@ -5099,7 +5099,7 @@
 "130 H:\Aldnoah.Zero\trunk\Assignment3\Main.c
 [v _init `(v  1 e 0 0 ]
 {
-"152
+"150
 } 0
 "24 H:\Aldnoah.Zero\trunk\Assignment3\infrared.c
 [v _readDistance `(ui  1 e 2 0 ]
@@ -5111,7 +5111,7 @@
 "23 H:\Aldnoah.Zero\trunk\Assignment3\robot.c
 [v _robot_distance `(v  1 e 0 0 ]
 {
-"28
+"34
 } 0
 "101 E:\Aldnoah.Zero\Assignment3\lcd.c
 [v _lcd_init `(v  1 e 0 0 ]
@@ -5134,7 +5134,8 @@
 "18 H:\Aldnoah.Zero\trunk\Assignment3\robot.c
 [v _robot_read `(v  1 e 0 0 ]
 {
-[v robot_read@packet `i  1 p 2 2 ]
+[v robot_read@packet `uc  1 a 1 wreg ]
+[v robot_read@packet `uc  1 a 1 wreg ]
 "21
 } 0
 "488 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\doprnt.c
@@ -5156,7 +5157,7 @@
 [v sprintf@f `*.cDCuc  1 p 1 20 ]
 "1533
 } 0
-"55 E:\Aldnoah.Zero\Assignment3\ser.c
+"55 H:\Aldnoah.Zero\trunk\Assignment3\ser.c
 [v _ser_getch `(uc  1 e 1 0 ]
 {
 "56
@@ -5168,17 +5169,17 @@
 {
 "67
 } 0
-"78 H:\Aldnoah.Zero\trunk\Assignment3\robot.c
+"84 H:\Aldnoah.Zero\trunk\Assignment3\robot.c
 [v _robotTurn `(v  1 e 0 0 ]
 {
 [v robotTurn@distance `i  1 p 2 2 ]
-"122
+"128
 } 0
-"31
+"37
 [v _robotMove `(v  1 e 0 0 ]
 {
 [v robotMove@distance `i  1 p 2 2 ]
-"75
+"81
 } 0
 "48 H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.c
 [v _rotate `(v  1 e 0 0 ]
@@ -5264,7 +5265,7 @@
 [v ___wmul@multiplicand `ui  1 p 2 2 ]
 "13
 } 0
-"70 E:\Aldnoah.Zero\Assignment3\ser.c
+"70 H:\Aldnoah.Zero\trunk\Assignment3\ser.c
 [v _ser_putch `(v  1 e 0 0 ]
 {
 [v ser_putch@c `uc  1 a 1 wreg ]
@@ -5293,7 +5294,7 @@
 [v Menu@input `uc  1 a 1 wreg ]
 "210
 } 0
-"113 E:\Aldnoah.Zero\Assignment3\ser.c
+"113 H:\Aldnoah.Zero\trunk\Assignment3\ser.c
 [v _ser_init `(v  1 e 0 0 ]
 {
 "133

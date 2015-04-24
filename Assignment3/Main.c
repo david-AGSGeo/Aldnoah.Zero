@@ -135,8 +135,6 @@ void init()
 	robo_init();
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
-	
-	TRISC &= 0b10010000;			//set pin 6 to output for USART TX, pins for SPI and CS pins
 
 	SSPSTAT = 0b01000000;
 	SSPCON = 0b10100001; 
@@ -145,7 +143,7 @@ void init()
 	
 	//enable timer0 interrupt
 	TMR0IE = 1;
-	
+	PEIE=1;		//enable peripheral interrupts 
 	//Enable all interrupts
 	GIE=1;
 	ei();

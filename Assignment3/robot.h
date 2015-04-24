@@ -7,8 +7,8 @@ void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
 void robot_distance(void);
-void robot_read(int packet);
-unsigned char distTravelled = 10;
+void robot_read(unsigned char packet);
+int distTravelled = 11;
 
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;

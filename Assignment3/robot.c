@@ -14,7 +14,7 @@ void robo_init(void)
 
 }
 
-void robot_read(int packet)
+void robot_read(unsigned char packet)
 {
 	ser_putch (142); // Sensor Setup
 	ser_putch (packet);  // Distance Sensor Packet ID
@@ -22,9 +22,15 @@ void robot_read(int packet)
 void robot_distance(void)
 {
 	robot_read(19);
-	distTravelled = ser_getch(); 	
-	distTravelled << 8;
-	distTravelled |= ser_getch();
+	
+	distTravelled = ser_getch(); 
+	//ser_putch(139);
+	//ser_putch(8);	
+	//distTravelled << 8;
+	//distTravelled |= ser_getch();
+//	ser_putch(139);
+//	ser_putch(8);
+	
 }
 
 void robotMove(int distance)
