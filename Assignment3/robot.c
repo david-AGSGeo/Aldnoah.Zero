@@ -17,7 +17,7 @@ void robo_init(void)
 
 void robot_distance(void)
 {
-	serialInput=ser_getch(); 	
+	//serialInput=ser_getch(); 	
 	total = dist_high;
 	total = total << 8;
 	total = total || dist_low ;

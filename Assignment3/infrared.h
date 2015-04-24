@@ -5,6 +5,8 @@
 
 volatile unsigned int adcVal;
 volatile unsigned int distance;
+volatile unsigned int test = 0;
+
 
 unsigned int readDistance(void);
 void readAvgDistance(void);

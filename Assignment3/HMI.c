@@ -200,7 +200,7 @@ unsigned char Menu(unsigned char input)
 			break;
 			case CENTER:
 			return pos;
-			break;
+			
 
 			default:
 			
@@ -219,8 +219,8 @@ void UpdateDisplay(unsigned char serialInput)
 
 						case 0: //main menu
 					lcd_write_control(0b00000001); //clear display	
-			//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
-				sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, test);
+			//	sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
 				
 				lcd_set_cursor(0x00);	
 				lcd_write_string(adcOutput);

@@ -63,9 +63,11 @@
 
 
 void calibrateIR(void);
+int scan360(void);
 
 unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
 int totalSteps = 0; 
+unsigned char SCAN_FLAG = 0;
 
 volatile unsigned char buttonPressed = 0;
 volatile unsigned char serialInput = 0;
@@ -104,8 +106,11 @@ void interrupt isr1(void)
 		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
 		{
-			readAvgDistance();
-			UpdateDisplay(serialInput);
+			if (SCAN_FLAG == 0)
+			{
+				readAvgDistance();
+				UpdateDisplay(serialInput);
+			}
 			RTC_FLAG_250MS = 1;
 
 		}
@@ -194,6 +199,26 @@ void calibrateIR(void)
 	}
 }
 
+int scan360(void)
+{
+	int lowestVal = 0, lowestSteps = 0;
+	SCAN_FLAG = 1;
+	for (int steps = 0; steps < 400; steps++)
+	{
+		readAvgDistance();
+		if (adcVal > lowestVal)
+		{
+			lowestVal = adcVal;
+			lowestSteps = steps;
+			
+		}
+		rotate(1, COUNTERCLOCKWISE);
+		UpdateDisplay(serialInput);
+		test = lowestSteps;
+	} 
+	SCAN_FLAG = 0;
+	return lowestSteps;
+}
 
 
 
@@ -213,6 +238,7 @@ void main(void)
 	while(1)
 	{
 		unsigned char choice = 255;
+		int shortwall = 0;
 		currentMenu = 0;
 		switch (buttonPressed)
 		{
@@ -258,8 +284,8 @@ void main(void)
 				calibrateIR();
 			break;
 			case 1:		//Scan 360 degrees
-			  rotate(100, COUNTERCLOCKWISE);
-
+			 	shortwall = scan360();
+				rotate((400 - shortwall), CLOCKWISE);
 			break;
 			case 2:		//Drive forward 2 meters
 				__delay_ms(100);
