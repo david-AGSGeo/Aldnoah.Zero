@@ -1388,6 +1388,10 @@ return 255;
 void UpdateDisplay(unsigned char serialInput)
 {
 char adcOutput[16] = "";
+switch (currentMenu)
+{
+
+case 0:
 lcd_write_control(0b00000001);
 
 sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
@@ -1407,5 +1411,34 @@ lcd_set_cursor(0x44);
 lcd_write_string(menuStrings[pos]);
 lcd_set_cursor(0x4D);
 lcd_write_string(shortMenuStrings[(pos + 1) % 5]);
+break;
+case 1:
+lcd_write_control(0b00000001);
+
+sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+
+lcd_set_cursor(0x00);
+lcd_write_string(adcOutput);
+
+
+
+
+lcd_set_cursor(0x40);
+
+lcd_write_string("<<<");
+
+
+lcd_set_cursor(0x44);
+lcd_write_string("CONFIRM");
+lcd_set_cursor(0x4D);
+lcd_write_string(">>>");
+break;
+
+default:
+
+break;
+
+
+}
 }
 

@@ -954,11 +954,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
 "9 H:\Aldnoah.Zero\trunk\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
-"6 H:\Aldnoah.Zero\trunk\Assignment3\steppermotor.h
-[v _spi_transfer `(uc  0 ef1`uc ]
-"28 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
-[v __nop `(v  0 ef ]
-[p i __nop ]
+"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
+[v __delay `(v  0 ef1`ul ]
+[p i __delay ]
+"7 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _robotMove `(v  0 ef1`i ]
+"8 H:\Aldnoah.Zero\trunk\Assignment3\robot.h
+[v _robotTurn `(v  0 ef1`i ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f877a.h: 90: volatile unsigned char PCL @ 0x002;
@@ -2114,6 +2116,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 152: {
 [e :U _calibrateIR ]
 [f ]
+[; ;Main.c: 154: currentMenu = 1;
+"154
+[e = _currentMenu -> -> 1 `i `uc ]
 [; ;Main.c: 155: rotate(8, 0);
 "155
 [e ( _rotate (2 , -> -> 8 `i `uc -> -> 0 `i `uc ]
@@ -2237,6 +2242,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _choice `uc  1 a ]
 [; ;Main.c: 215: unsigned char choice = 255;
 [e = _choice -> -> 255 `i `uc ]
+[; ;Main.c: 216: currentMenu = 0;
+"216
+[e = _currentMenu -> -> 0 `i `uc ]
 [; ;Main.c: 217: switch (buttonPressed)
 "217
 [e $U 131  ]
@@ -2350,28 +2358,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 264: case 2:
 "264
 [e :U 142 ]
-[; ;Main.c: 265: RC0 = 1; RC1 = 1;;
+[; ;Main.c: 265: _delay((unsigned long)((100)*(20000000/4000.0)));
 "265
-[e = _RC0 -> -> 1 `i `b ]
-[e = _RC1 -> -> 1 `i `b ]
-[; ;Main.c: 266: spi_transfer(0b00001011);
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 266: robotMove(2000);
 "266
-[e ( _spi_transfer (1 -> -> 11 `i `uc ]
-[; ;Main.c: 267: RC0 = 0; RC1 = 0;;
-"267
-[e = _RC0 -> -> 0 `i `b ]
-[e = _RC1 -> -> 0 `i `b ]
-[; ;Main.c: 268: RC2 = 1; _nop(); RC2 = 0;;
-"268
-[e = _RC2 -> -> 1 `i `b ]
-[e ( __nop ..  ]
-[e = _RC2 -> -> 0 `i `b ]
-[; ;Main.c: 271: break;
-"271
+[e ( _robotMove (1 -> 2000 `i ]
+[; ;Main.c: 269: break;
+"269
 [e $U 138  ]
-[; ;Main.c: 272: case 3:
-"272
+[; ;Main.c: 270: case 3:
+"270
 [e :U 143 ]
+[; ;Main.c: 271: _delay((unsigned long)((100)*(20000000/4000.0)));
+"271
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 272: robotMove(1000);
+"272
+[e ( _robotMove (1 -> 1000 `i ]
+[; ;Main.c: 273: robotTurn(-90);
+"273
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 274: robotMove(1000);
+"274
+[e ( _robotMove (1 -> 1000 `i ]
 [; ;Main.c: 275: break;
 "275
 [e $U 138  ]

@@ -214,7 +214,11 @@ unsigned char Menu(unsigned char input)
 void UpdateDisplay(unsigned char serialInput)
 {
 	char adcOutput[16] = "";				
-	lcd_write_control(0b00000001); //clear display	
+	switch (currentMenu)
+		{
+
+						case 0: //main menu
+					lcd_write_control(0b00000001); //clear display	
 			//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
 				sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
 				
@@ -233,5 +237,34 @@ void UpdateDisplay(unsigned char serialInput)
 				lcd_write_string(menuStrings[pos]);
 				lcd_set_cursor(MENURIGHT);	
 				lcd_write_string(shortMenuStrings[(pos + 1) % MENUITEMS]);
+			break;
+			case 1:	//calibration Menu
+				lcd_write_control(0b00000001); //clear display	
+			//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
+				sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+				
+				lcd_set_cursor(0x00);	
+				lcd_write_string(adcOutput);
+								
+				
+								//lcd_set_cursor(MENULEFT);	
+				//lcd_write_string("                    ");
+				lcd_set_cursor(MENULEFT);	
+			
+					lcd_write_string("<<<");
+			
+
+				lcd_set_cursor(MENUCENTER);	
+				lcd_write_string("CONFIRM");
+				lcd_set_cursor(MENURIGHT);	
+				lcd_write_string(">>>");
+			break;
+
+			default:
+			
+			break;
+			
+
+		}
 }
 

@@ -151,7 +151,7 @@ void init()
 void calibrateIR(void)
 {
 	
-
+	currentMenu = 1;
 	rotate(8, CLOCKWISE);
 	while (1)
 	{
@@ -213,7 +213,7 @@ void main(void)
 	while(1)
 	{
 		unsigned char choice = 255;
-		
+		currentMenu = 0;
 		switch (buttonPressed)
 		{
 			case UP:
@@ -262,16 +262,16 @@ void main(void)
 
 			break;
 			case 2:		//Drive forward 2 meters
-				SELECT_SM();			// SPI select the Stepper M
-				spi_transfer(0b00001011);	//for clockwise rotation 
-				SELECT_NONE();
-				SM_STEP();
+				__delay_ms(100);
+				robotMove(2000);
 
 			
 			break;
 			case 3:		//Drive in an L shape
-				
-			
+				__delay_ms(100);
+				robotMove(1000);
+				robotTurn(-90);
+				robotMove(1000);
 			break;
 			case 4:		//Follow wall
 

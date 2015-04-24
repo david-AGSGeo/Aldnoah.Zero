@@ -1322,7 +1322,7 @@ TMR0IE = 1;
 void calibrateIR(void)
 {
 
-
+currentMenu = 1;
 rotate(8, 0);
 while (1)
 {
@@ -1378,7 +1378,7 @@ init();
 while(1)
 {
 unsigned char choice = 255;
-
+currentMenu = 0;
 switch (buttonPressed)
 {
 case 1:
@@ -1427,16 +1427,16 @@ rotate(100, 1);
 
 break;
 case 2:
-RC0 = 1; RC1 = 1;;
-spi_transfer(0b00001011);
-RC0 = 0; RC1 = 0;;
-RC2 = 1; _nop(); RC2 = 0;;
+_delay((unsigned long)((100)*(20000000/4000.0)));
+robotMove(2000);
 
 
 break;
 case 3:
-
-
+_delay((unsigned long)((100)*(20000000/4000.0)));
+robotMove(1000);
+robotTurn(-90);
+robotMove(1000);
 break;
 case 4:
 

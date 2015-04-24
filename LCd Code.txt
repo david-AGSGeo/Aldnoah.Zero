@@ -1,0 +1,25 @@
+
+//Preprocessor directives 
+//uController program
+
+//iRobot Distance Sensor Setup
+ser_putch (142); // Sensor Setup
+ser_putch (19);  // Distance Sensor Packet ID
+ser_putch (148); // Data Stream
+ser_putch (1);   // No. of Packets 
+ser_putch (1);   // Distance Sensor Packet ID
+
+
+//Interrupt Service Routine (void)
+ser_getch();
+
+//LCD Display	
+
+//LCD initialise
+total = dist_high;
+total = total << 8;
+total = total || dist_low ;
+
+lcd_write_(total);
+
+
