@@ -21,15 +21,14 @@ void robot_read(unsigned char packet)
 }
 void robot_distance(void)
 {
+	
 	robot_read(19);
 	
-	distTravelled = ser_getch(); 
-	//ser_putch(139);
-	//ser_putch(8);	
-	//distTravelled << 8;
-	//distTravelled |= ser_getch();
-//	ser_putch(139);
-//	ser_putch(8);
+//highByte = ser_getch();
+//lowByte = ser_getch();	
+
+//distTravelled = (int)lowByte ;
+
 	
 }
 

@@ -61,6 +61,10 @@
 #define		SELECT_SM()		RC0 = 1; RC1 = 1;
 #define 	SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
 
+#define SER_BUFFER_SIZE		16
+		
+#define SER_FIFO_MASK 		(SER_BUFFER_SIZE-1)
+
 
 void calibrateIR(void);
 int scan360(void);
@@ -79,6 +83,7 @@ volatile bit RTC_FLAG_10MS = 0;
 volatile bit RTC_FLAG_50MS = 0;
 volatile bit RTC_FLAG_250MS = 0;
 volatile bit RTC_FLAG_500MS = 0;
+volatile bit SER_RC_FLAG = 0;
 
 //global counter for timer0
 volatile unsigned int RTC_Counter = 0;
@@ -87,7 +92,7 @@ volatile unsigned int RTC_Counter = 0;
 void interrupt isr1(void) 
 {
 	//Timer 1
-	ser_int();
+	
 	
 
 	if(TMR0IF)  //interrupt from timer0
@@ -96,7 +101,7 @@ void interrupt isr1(void)
 		TMR0 = TMR0_VAL;	//reset timer0 value
 
 		RTC_Counter++;		//increase the count
-		//set clock flags (unused0
+		//set clock flags 
 		RTC_FLAG_1MS = 1;	
 		if(RTC_Counter % 10 == 0) 
 		{
@@ -124,6 +129,29 @@ void interrupt isr1(void)
 			buttonPressed = ReadButtons();
 			}
 	}
+
+	 					\
+	if (RCIF) 
+	{	
+		SER_RC_FLAG = 1;	
+		LED0 ^= 0x01;						\
+		DistHighByte = RCREG;
+		distTravelled = (int)DistHighByte ;
+		//rxfifo[rxiptr]=RCREG;				\
+		//ser_tmp=(rxiptr+1) & SER_FIFO_MASK;	\
+		//if (ser_tmp!=rxoptr)				\
+		//	rxiptr=ser_tmp;				
+		
+	}										\
+	if (TXIF && TXIE) 
+	{						\
+		TXREG = txfifo[txoptr];				\
+		++txoptr;							\
+		txoptr &= SER_FIFO_MASK;			\
+		if (txoptr==txiptr) 
+			TXIE = 0;						\
+			
+	}							\
 }
 
 void init()
@@ -135,7 +163,8 @@ void init()
 	robo_init();
 	//PortB all inputs except pin 0 and 1
 	TRISB = 0b11111100;
-
+	TRISC &= 0b10010000;
+	
 	SSPSTAT = 0b01000000;
 	SSPCON = 0b10100001; 
 	//timer0 prescalar set
@@ -195,7 +224,7 @@ void calibrateIR(void)
 			buttonPressed = 0;
 			currentMenu = 0;
 			return;
-			break;
+
 			default:
 			
 			break;
@@ -217,7 +246,12 @@ int scan360(void)
 			
 		}
 		rotate(1, COUNTERCLOCKWISE);
-		UpdateDisplay();
+			
+		if (RTC_FLAG_250MS == 1)
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
 		test = lowestSteps;
 	} 
 	SCAN_FLAG = 0;
@@ -246,10 +280,16 @@ void main(void)
 		if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
 			{
 				RTC_FLAG_250MS = 0;
-				//robot_distance();	
+				robot_distance();	
 				readAvgDistance();
 				UpdateDisplay();
 			}
+	//	if (SER_RC_FLAG)
+		//	{
+		//		SER_RC_FLAG = 0;
+		//		DistHighByte = ser_getch();
+		//		distTravelled = (int)DistHighByte ;
+		//	}
 		
 		switch (buttonPressed)
 		{
@@ -300,8 +340,8 @@ void main(void)
 			break;
 			case 2:		//Drive forward 2 meters
 				__delay_ms(100);
-				robotMove(2000);
-
+				robotMove(200);///////CHange to 2000
+					
 			
 			break;
 			case 3:		//Drive in an L shape
@@ -311,7 +351,7 @@ void main(void)
 				robotMove(1000);
 			break;
 			case 4:		//Follow wall
-				robot_distance();
+				//robot_distance();
 			break;		
 			
 
@@ -320,154 +360,5 @@ void main(void)
 			break;
 		}
 		choice = 255;
-
-/*		if(pb0Pressed) //toggle LED0
-		{
-			pb0Pressed = 0;
-			
-			
-			LED0 ^= 0x01;
-			ser_putch(128); 
-		__delay_ms(100);
-		ser_putch(132); 
-		__delay_ms(100);
-		ser_putch(140); 
-		__delay_ms(100);
-		ser_putch(0); 
-		__delay_ms(100);
-		ser_putch(4); 
-		__delay_ms(100);
-		ser_putch(62); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(66); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(69); 
-		__delay_ms(100);
-		ser_putch(12); 
-		__delay_ms(100);
-		ser_putch(74); 
-		__delay_ms(100);
-		ser_putch(36); 
-		__delay_ms(100);
-		ser_putch(141); 
-		__delay_ms(100);
-		ser_putch(0); 
-		__delay_ms(100);		
-			
-//***************
-				ser_putch(128);  // Start
-				__delay_ms(100);
-				ser_putch(132); // Full mode
-				__delay_ms(100);
-				ser_putch(152); // drive
-				__delay_ms(100);
-				ser_putch(13); // script length
-				__delay_ms(100); 
-				ser_putch(137); //drive - opcode 1
-				__delay_ms(100);
-				ser_putch(1); // 
-				__delay_ms(100);
-				ser_putch(44); 
-				__delay_ms(100);
-				ser_putch(128); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(156); //distance travelled - opcode 2 
-				__delay_ms(100);
-				ser_putch(1); 
-				__delay_ms(100);
-				ser_putch(144); 
-				__delay_ms(100);
-				ser_putch(137); drive - opcode 3
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-				ser_putch(0); 
-				__delay_ms(100);
-		}
-
-		if(pb1Pressed) // 2 half steps CounterClockwise
-		{
-			pb1Pressed = 0;
-			
-			//rotate(2, COUNTERCLOCKWISE);
-		}
-
-		if(pb2Pressed) // 2 half steps Clockwise
-		{
-			pb2Pressed = 0;
-			
-			//rotate(2, CLOCKWISE);
-		}
-
-		if(pb3Pressed) //180 degree sweep (reverse direction each time button is pressed)
-		{
-			pb3Pressed = 0;
-			
-			//rotate(STEPS180, current_direction);
-			current_direction ^= 0x01;
-		}
-
-
-	switch (choice)
-		{
-			case 0:			
-				SELECT_SM();			// SPI select the Stepper M
-				spi_transfer(0b00001011);	//for clockwise rotation 
-				SELECT_NONE();
-				SM_STEP();
-			break;
-			case 1:
-			  
-				SELECT_SM();			// SPI select the Stepper M
-				spi_transfer(0b00001001);	//for clockwise rotation 
-				SELECT_NONE();
-				SM_STEP();
-			break;
-			case 2:
-				SELECT_SM();			// SPI select the Stepper M
-				spi_transfer(0b00001111);	//for clockwise rotation 
-				SELECT_NONE();
-				SM_STEP();
-			
-			break;
-			case 3:
-				SELECT_SM();			// SPI select the Stepper M
-				spi_transfer(0b00001101);	//for clockwise rotation 
-				SELECT_NONE();
-				SM_STEP();
-			
-			break;
-			case 4:
-				ser_putch(128); 
-				__delay_ms(100);
-				ser_putch(132); 
-				__delay_ms(100);
-ser_putch(137); 
-				__delay_ms(100);
-
-ser_putch(0); 
-				__delay_ms(100);
-ser_putch(0); 
-				__delay_ms(100);
-ser_putch(255); 
-				__delay_ms(100);
-ser_putch(255); 
-				__delay_ms(100);
-			break;
-			default:
-			
-			break;
-		}
-		*/
 	}
 }
