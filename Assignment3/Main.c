@@ -9,7 +9,7 @@
     Port B0 - Heartbeat LED 
 	Port B1 - Toggleable LED 
 	Ports B2-B5 - buttons PB0-3
-	Port C - Steppermotor Controller         																 
+	Port C - blah         																 
 																				 
 	Authors: David LEE 
 	S/N 11055579
