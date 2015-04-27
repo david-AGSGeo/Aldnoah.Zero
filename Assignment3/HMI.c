@@ -24,13 +24,13 @@
 #define MENUCENTER 0x44
 #define MENURIGHT 0x4D
 
-#define MENUITEMS 5  //number of items on the menu: change if items added or removed
+#define MENUITEMS 6  //number of items on the menu: change if items added or removed
 
 //menu position
 int pos = 0;
 
-const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall"}; 
-const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw"};
+const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "}; 
+const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
 
 //set up debounce variables 
 
@@ -258,6 +258,18 @@ void UpdateDisplay(void)
 				lcd_write_string("CONFIRM");
 				lcd_set_cursor(MENURIGHT);	
 				lcd_write_string(">>>");
+			break;
+			case 2:	//Charge Menu
+				lcd_write_control(0b00000001); //clear display	
+
+				lcd_set_cursor(0x00);	
+				lcd_write_string(" Charging Mode ");
+								
+
+
+				lcd_set_cursor(MENUCENTER);	
+				lcd_write_string("  EXIT  ");
+
 			break;
 
 			default:

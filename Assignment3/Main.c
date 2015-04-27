@@ -231,6 +231,59 @@ void calibrateIR(void)
 		}
 	}
 }
+void ChargeMode(void)
+{
+	
+	currentMenu = 2;
+	ser_putch(128); //put in passive mode
+		
+	while (1)
+	{
+		if (RTC_FLAG_250MS == 1)
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
+		{
+			case UP:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case DOWN:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case LEFT:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case RIGHT:
+		
+			
+			buttonPressed = 0;
+			
+			break;
+			case CENTER:
+			ser_putch(132); //full mode
+			
+			buttonPressed = 0;
+			currentMenu = 0;
+			return;
+
+			default:
+			
+			break;
+		}
+	}
+}
+
 
 int scan360(void)
 {
@@ -354,7 +407,9 @@ void main(void)
 				//robot_distance();
 			break;		
 			
-
+			case 5:		//Charge Mode
+				ChargeMode();
+			break;	
 			default:
 			
 			break;

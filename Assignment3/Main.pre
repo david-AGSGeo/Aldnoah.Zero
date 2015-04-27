@@ -1402,6 +1402,59 @@ break;
 }
 }
 }
+void ChargeMode(void)
+{
+
+currentMenu = 2;
+ser_putch(128);
+
+while (1)
+{
+if (RTC_FLAG_250MS == 1)
+{
+RTC_FLAG_250MS = 0;
+UpdateDisplay();
+}
+switch (buttonPressed)
+{
+case 1:
+
+
+buttonPressed = 0;
+
+break;
+case 2:
+
+
+buttonPressed = 0;
+
+break;
+case 3:
+
+
+buttonPressed = 0;
+
+break;
+case 4:
+
+
+buttonPressed = 0;
+
+break;
+case 5:
+ser_putch(132);
+
+buttonPressed = 0;
+currentMenu = 0;
+return;
+
+default:
+
+break;
+}
+}
+}
+
 
 int scan360(void)
 {
@@ -1456,7 +1509,7 @@ readAvgDistance();
 UpdateDisplay();
 }
 
-# 294
+# 347
 switch (buttonPressed)
 {
 case 1:
@@ -1520,7 +1573,9 @@ case 4:
 
 break;
 
-
+case 5:
+ChargeMode();
+break;
 default:
 
 break;

@@ -1209,8 +1209,8 @@ unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 # 30 "E:\Aldnoah.Zero\Assignment3\HMI.c"
 int pos = 0;
 
-const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall"};
-const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw"};
+const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "};
+const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
 
 
 
@@ -1369,12 +1369,12 @@ break;
 case 3:
 pos--;
 if (pos < 0)
-pos = 5 - 1;
+pos = 6 - 1;
 
 break;
 case 4:
 pos++;
-if (pos == 5)
+if (pos == 6)
 pos = 0;
 
 break;
@@ -1412,11 +1412,11 @@ lcd_set_cursor(0x40);
 if (pos > 0)
 lcd_write_string(shortMenuStrings[pos - 1]);
 else
-lcd_write_string(shortMenuStrings[pos + 5 - 1]);
+lcd_write_string(shortMenuStrings[pos + 6 - 1]);
 lcd_set_cursor(0x44);
 lcd_write_string(menuStrings[pos]);
 lcd_set_cursor(0x4D);
-lcd_write_string(shortMenuStrings[(pos + 1) % 5]);
+lcd_write_string(shortMenuStrings[(pos + 1) % 6]);
 break;
 case 1:
 lcd_write_control(0b00000001);
@@ -1438,6 +1438,18 @@ lcd_set_cursor(0x44);
 lcd_write_string("CONFIRM");
 lcd_set_cursor(0x4D);
 lcd_write_string(">>>");
+break;
+case 2:
+lcd_write_control(0b00000001);
+
+lcd_set_cursor(0x00);
+lcd_write_string(" Charging Mode ");
+
+
+
+lcd_set_cursor(0x44);
+lcd_write_string("  EXIT  ");
+
 break;
 
 default:

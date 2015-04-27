@@ -9,9 +9,6 @@ void robo_init(void)
 {
 		ser_putch(128); //start
 		ser_putch(132); //full mode
-
-		//iRobot Distance Sensor Setup
-
 }
 
 void robot_read(unsigned char packet)
@@ -34,7 +31,7 @@ void robot_distance(void)
 
 void robotMove(int distance)
 {
-	
+	distTravelled =0;
 	lowByte = (unsigned char) (distance) ;
 	highByte = (unsigned char) (distance >> 8);
 			if (distance >= 0)
@@ -61,7 +58,10 @@ else
 			
 				ser_putch(0); 
 }				
-				ser_putch(156); //distance travelled - opcode 2 
+	
+	
+//while (distTravelled < distanc=
+			ser_putch(156); //distance travelled - opcode 2 
 				
 				ser_putch(highByte); 
 			

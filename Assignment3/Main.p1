@@ -953,6 +953,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _rotate `(v  0 ef2`ui`uc ]
 "10 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _UpdateDisplay `(v  0 ef ]
+"57 E:\Aldnoah.Zero\Assignment3\ser.h
+[v _ser_putch `(v  0 ef1`uc ]
 "12 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
 [p mainexit ]
@@ -2282,320 +2284,453 @@ Version 3.2 HI-TECH Software Intermediate Code
 "233
 [e :UE 113 ]
 }
-"236
-[v _scan360 `(i  1 ef ]
+"235
+[v _ChargeMode `(v  1 ef ]
 {
-[; ;Main.c: 235: int scan360(void)
-[; ;Main.c: 236: {
-[e :U _scan360 ]
+[; ;Main.c: 234: void ChargeMode(void)
+[; ;Main.c: 235: {
+[e :U _ChargeMode ]
 [f ]
+[; ;Main.c: 237: currentMenu = 2;
 "237
-[v _lowestVal `i  1 a ]
-[; ;Main.c: 237: int lowestVal = 0, lowestSteps = 0;
-[e = _lowestVal -> 0 `i ]
-[v _lowestSteps `i  1 a ]
-[e = _lowestSteps -> 0 `i ]
-[; ;Main.c: 238: SCAN_FLAG = 1;
+[e = _currentMenu -> -> 2 `i `uc ]
+[; ;Main.c: 238: ser_putch(128);
 "238
-[e = _SCAN_FLAG -> -> 1 `i `uc ]
-[; ;Main.c: 239: for (int steps = 0; steps < 400; steps++)
-"239
-{
-[v _steps `i  1 a ]
-[e = _steps -> 0 `i ]
-[e $ < _steps -> 400 `i 127  ]
-[e $U 128  ]
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;Main.c: 240: while (1)
 "240
-[e :U 127 ]
-[; ;Main.c: 240: {
-{
-[; ;Main.c: 241: readAvgDistance();
+[e :U 128 ]
+[; ;Main.c: 241: {
 "241
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 242: if (adcVal > lowestVal)
+{
+[; ;Main.c: 242: if (RTC_FLAG_250MS == 1)
 "242
-[e $ ! > _adcVal -> _lowestVal `ui 130  ]
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 130  ]
 [; ;Main.c: 243: {
 "243
 {
-[; ;Main.c: 244: lowestVal = adcVal;
+[; ;Main.c: 244: RTC_FLAG_250MS = 0;
 "244
-[e = _lowestVal -> _adcVal `i ]
-[; ;Main.c: 245: lowestSteps = steps;
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 245: UpdateDisplay();
 "245
-[e = _lowestSteps _steps ]
-"247
+[e ( _UpdateDisplay ..  ]
+"246
 }
 [e :U 130 ]
-[; ;Main.c: 247: }
-[; ;Main.c: 248: rotate(1, 1);
+[; ;Main.c: 246: }
+[; ;Main.c: 247: switch (buttonPressed)
+"247
+[e $U 132  ]
+[; ;Main.c: 248: {
 "248
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 250: if (RTC_FLAG_250MS == 1)
-"250
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 131  ]
-[; ;Main.c: 251: {
-"251
 {
-[; ;Main.c: 252: RTC_FLAG_250MS = 0;
+[; ;Main.c: 249: case 1:
+"249
+[e :U 133 ]
+[; ;Main.c: 252: buttonPressed = 0;
 "252
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 253: UpdateDisplay();
-"253
-[e ( _UpdateDisplay ..  ]
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 254: break;
 "254
-}
-[e :U 131 ]
-[; ;Main.c: 254: }
-[; ;Main.c: 255: test = lowestSteps;
+[e $U 131  ]
+[; ;Main.c: 255: case 2:
 "255
-[e = _test -> _lowestSteps `ui ]
-"256
-}
-"239
-[e ++ _steps -> 1 `i ]
-[e $ < _steps -> 400 `i 127  ]
-[e :U 128 ]
-"256
-}
-[; ;Main.c: 256: }
-[; ;Main.c: 257: SCAN_FLAG = 0;
-"257
-[e = _SCAN_FLAG -> -> 0 `i `uc ]
-[; ;Main.c: 258: return lowestSteps;
+[e :U 134 ]
+[; ;Main.c: 258: buttonPressed = 0;
 "258
-[e ) _lowestSteps ]
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 260: break;
+"260
+[e $U 131  ]
+[; ;Main.c: 261: case 3:
+"261
+[e :U 135 ]
+[; ;Main.c: 264: buttonPressed = 0;
+"264
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 266: break;
+"266
+[e $U 131  ]
+[; ;Main.c: 267: case 4:
+"267
+[e :U 136 ]
+[; ;Main.c: 270: buttonPressed = 0;
+"270
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 272: break;
+"272
+[e $U 131  ]
+[; ;Main.c: 273: case 5:
+"273
+[e :U 137 ]
+[; ;Main.c: 274: ser_putch(132);
+"274
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;Main.c: 276: buttonPressed = 0;
+"276
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 277: currentMenu = 0;
+"277
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 278: return;
+"278
 [e $UE 126  ]
-[; ;Main.c: 259: }
-"259
+[; ;Main.c: 280: default:
+"280
+[e :U 138 ]
+[; ;Main.c: 282: break;
+"282
+[e $U 131  ]
+"283
+}
+[; ;Main.c: 283: }
+[e $U 131  ]
+"247
+[e :U 132 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 133
+ , $ -> -> 2 `i `uc 134
+ , $ -> -> 3 `i `uc 135
+ , $ -> -> 4 `i `uc 136
+ , $ -> -> 5 `i `uc 137
+ 138 ]
+"283
+[e :U 131 ]
+"284
+}
+[e :U 127 ]
+"240
+[e $U 128  ]
+[e :U 129 ]
+[; ;Main.c: 284: }
+[; ;Main.c: 285: }
+"285
 [e :UE 126 ]
 }
-"265
+"289
+[v _scan360 `(i  1 ef ]
+{
+[; ;Main.c: 288: int scan360(void)
+[; ;Main.c: 289: {
+[e :U _scan360 ]
+[f ]
+"290
+[v _lowestVal `i  1 a ]
+[; ;Main.c: 290: int lowestVal = 0, lowestSteps = 0;
+[e = _lowestVal -> 0 `i ]
+[v _lowestSteps `i  1 a ]
+[e = _lowestSteps -> 0 `i ]
+[; ;Main.c: 291: SCAN_FLAG = 1;
+"291
+[e = _SCAN_FLAG -> -> 1 `i `uc ]
+[; ;Main.c: 292: for (int steps = 0; steps < 400; steps++)
+"292
+{
+[v _steps `i  1 a ]
+[e = _steps -> 0 `i ]
+[e $ < _steps -> 400 `i 140  ]
+[e $U 141  ]
+"293
+[e :U 140 ]
+[; ;Main.c: 293: {
+{
+[; ;Main.c: 294: readAvgDistance();
+"294
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 295: if (adcVal > lowestVal)
+"295
+[e $ ! > _adcVal -> _lowestVal `ui 143  ]
+[; ;Main.c: 296: {
+"296
+{
+[; ;Main.c: 297: lowestVal = adcVal;
+"297
+[e = _lowestVal -> _adcVal `i ]
+[; ;Main.c: 298: lowestSteps = steps;
+"298
+[e = _lowestSteps _steps ]
+"300
+}
+[e :U 143 ]
+[; ;Main.c: 300: }
+[; ;Main.c: 301: rotate(1, 1);
+"301
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
+[; ;Main.c: 303: if (RTC_FLAG_250MS == 1)
+"303
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 144  ]
+[; ;Main.c: 304: {
+"304
+{
+[; ;Main.c: 305: RTC_FLAG_250MS = 0;
+"305
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 306: UpdateDisplay();
+"306
+[e ( _UpdateDisplay ..  ]
+"307
+}
+[e :U 144 ]
+[; ;Main.c: 307: }
+[; ;Main.c: 308: test = lowestSteps;
+"308
+[e = _test -> _lowestSteps `ui ]
+"309
+}
+"292
+[e ++ _steps -> 1 `i ]
+[e $ < _steps -> 400 `i 140  ]
+[e :U 141 ]
+"309
+}
+[; ;Main.c: 309: }
+[; ;Main.c: 310: SCAN_FLAG = 0;
+"310
+[e = _SCAN_FLAG -> -> 0 `i `uc ]
+[; ;Main.c: 311: return lowestSteps;
+"311
+[e ) _lowestSteps ]
+[e $UE 139  ]
+[; ;Main.c: 312: }
+"312
+[e :UE 139 ]
+}
+"318
 [v _main `(v  1 ef ]
 {
-[; ;Main.c: 264: void main(void)
-[; ;Main.c: 265: {
+[; ;Main.c: 317: void main(void)
+[; ;Main.c: 318: {
 [e :U _main ]
 [f ]
-[; ;Main.c: 270: init();
-"270
-[e ( _init ..  ]
-[; ;Main.c: 275: while(1)
-"275
-[e :U 134 ]
-[; ;Main.c: 276: {
-"276
-{
-"277
-[v _choice `uc  1 a ]
-[; ;Main.c: 277: unsigned char choice = 255;
-[e = _choice -> -> 255 `i `uc ]
-"278
-[v _shortwall `i  1 a ]
-[; ;Main.c: 278: int shortwall = 0;
-[e = _shortwall -> 0 `i ]
-[; ;Main.c: 280: if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
-"280
-[e $ ! & == -> _SCAN_FLAG `i -> 0 `i == -> _RTC_FLAG_250MS `i -> 1 `i 136  ]
-[; ;Main.c: 281: {
-"281
-{
-[; ;Main.c: 282: RTC_FLAG_250MS = 0;
-"282
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 283: robot_distance();
-"283
-[e ( _robot_distance ..  ]
-[; ;Main.c: 284: readAvgDistance();
-"284
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 285: UpdateDisplay();
-"285
-[e ( _UpdateDisplay ..  ]
-"286
-}
-[e :U 136 ]
-[; ;Main.c: 286: }
-[; ;Main.c: 294: switch (buttonPressed)
-"294
-[e $U 138  ]
-[; ;Main.c: 295: {
-"295
-{
-[; ;Main.c: 296: case 1:
-"296
-[e :U 139 ]
-[; ;Main.c: 297: Menu(1);
-"297
-[e ( _Menu (1 -> -> 1 `i `uc ]
-[; ;Main.c: 299: buttonPressed = 0;
-"299
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 301: break;
-"301
-[e $U 137  ]
-[; ;Main.c: 302: case 2:
-"302
-[e :U 140 ]
-[; ;Main.c: 303: Menu(2);
-"303
-[e ( _Menu (1 -> -> 2 `i `uc ]
-[; ;Main.c: 305: buttonPressed = 0;
-"305
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 307: break;
-"307
-[e $U 137  ]
-[; ;Main.c: 308: case 3:
-"308
-[e :U 141 ]
-[; ;Main.c: 309: Menu(3);
-"309
-[e ( _Menu (1 -> -> 3 `i `uc ]
-[; ;Main.c: 311: buttonPressed = 0;
-"311
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 313: break;
-"313
-[e $U 137  ]
-[; ;Main.c: 314: case 4:
-"314
-[e :U 142 ]
-[; ;Main.c: 315: Menu(4);
-"315
-[e ( _Menu (1 -> -> 4 `i `uc ]
-[; ;Main.c: 317: buttonPressed = 0;
-"317
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 319: break;
-"319
-[e $U 137  ]
-[; ;Main.c: 320: case 5:
-"320
-[e :U 143 ]
-[; ;Main.c: 321: choice = Menu(5);
-"321
-[e = _choice ( _Menu (1 -> -> 5 `i `uc ]
-[; ;Main.c: 323: buttonPressed = 0;
+[; ;Main.c: 323: init();
 "323
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 325: break;
-"325
-[e $U 137  ]
-[; ;Main.c: 326: default:
-"326
-[e :U 144 ]
-[; ;Main.c: 328: break;
+[e ( _init ..  ]
+[; ;Main.c: 328: while(1)
 "328
-[e $U 137  ]
-"329
-}
-[; ;Main.c: 329: }
-[e $U 137  ]
-"294
-[e :U 138 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 139
- , $ -> -> 2 `i `uc 140
- , $ -> -> 3 `i `uc 141
- , $ -> -> 4 `i `uc 142
- , $ -> -> 5 `i `uc 143
- 144 ]
-"329
-[e :U 137 ]
-[; ;Main.c: 332: switch (choice)
-"332
-[e $U 146  ]
-[; ;Main.c: 333: {
-"333
-{
-[; ;Main.c: 334: case 0:
-"334
 [e :U 147 ]
-[; ;Main.c: 335: calibrateIR();
+[; ;Main.c: 329: {
+"329
+{
+"330
+[v _choice `uc  1 a ]
+[; ;Main.c: 330: unsigned char choice = 255;
+[e = _choice -> -> 255 `i `uc ]
+"331
+[v _shortwall `i  1 a ]
+[; ;Main.c: 331: int shortwall = 0;
+[e = _shortwall -> 0 `i ]
+[; ;Main.c: 333: if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
+"333
+[e $ ! & == -> _SCAN_FLAG `i -> 0 `i == -> _RTC_FLAG_250MS `i -> 1 `i 149  ]
+[; ;Main.c: 334: {
+"334
+{
+[; ;Main.c: 335: RTC_FLAG_250MS = 0;
 "335
-[e ( _calibrateIR ..  ]
-[; ;Main.c: 336: break;
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 336: robot_distance();
 "336
-[e $U 145  ]
-[; ;Main.c: 337: case 1:
+[e ( _robot_distance ..  ]
+[; ;Main.c: 337: readAvgDistance();
 "337
-[e :U 148 ]
-[; ;Main.c: 338: shortwall = scan360();
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 338: UpdateDisplay();
 "338
-[e = _shortwall ( _scan360 ..  ]
-[; ;Main.c: 339: rotate((400 - shortwall), 0);
+[e ( _UpdateDisplay ..  ]
 "339
-[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 340: break;
-"340
-[e $U 145  ]
-[; ;Main.c: 341: case 2:
-"341
+}
 [e :U 149 ]
-[; ;Main.c: 342: _delay((unsigned long)((100)*(20000000/4000.0)));
-"342
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 343: robotMove(200);
-"343
-[e ( _robotMove (1 -> 200 `i ]
-[; ;Main.c: 346: break;
-"346
-[e $U 145  ]
-[; ;Main.c: 347: case 3:
+[; ;Main.c: 339: }
+[; ;Main.c: 347: switch (buttonPressed)
 "347
-[e :U 150 ]
-[; ;Main.c: 348: _delay((unsigned long)((100)*(20000000/4000.0)));
+[e $U 151  ]
+[; ;Main.c: 348: {
 "348
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 349: robotMove(1000);
+{
+[; ;Main.c: 349: case 1:
 "349
-[e ( _robotMove (1 -> 1000 `i ]
-[; ;Main.c: 350: robotTurn(-90);
-"350
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 351: robotMove(1000);
-"351
-[e ( _robotMove (1 -> 1000 `i ]
-[; ;Main.c: 352: break;
-"352
-[e $U 145  ]
-[; ;Main.c: 353: case 4:
-"353
-[e :U 151 ]
-[; ;Main.c: 355: break;
-"355
-[e $U 145  ]
-[; ;Main.c: 358: default:
-"358
 [e :U 152 ]
+[; ;Main.c: 350: Menu(1);
+"350
+[e ( _Menu (1 -> -> 1 `i `uc ]
+[; ;Main.c: 352: buttonPressed = 0;
+"352
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 354: break;
+"354
+[e $U 150  ]
+[; ;Main.c: 355: case 2:
+"355
+[e :U 153 ]
+[; ;Main.c: 356: Menu(2);
+"356
+[e ( _Menu (1 -> -> 2 `i `uc ]
+[; ;Main.c: 358: buttonPressed = 0;
+"358
+[e = _buttonPressed -> -> 0 `i `uc ]
 [; ;Main.c: 360: break;
 "360
-[e $U 145  ]
+[e $U 150  ]
+[; ;Main.c: 361: case 3:
 "361
-}
-[; ;Main.c: 361: }
-[e $U 145  ]
-"332
-[e :U 146 ]
-[e [\ _choice , $ -> -> 0 `i `uc 147
- , $ -> -> 1 `i `uc 148
- , $ -> -> 2 `i `uc 149
- , $ -> -> 3 `i `uc 150
- , $ -> -> 4 `i `uc 151
- 152 ]
-"361
-[e :U 145 ]
-[; ;Main.c: 362: choice = 255;
+[e :U 154 ]
+[; ;Main.c: 362: Menu(3);
 "362
-[e = _choice -> -> 255 `i `uc ]
-"363
-}
-[e :U 133 ]
-"275
-[e $U 134  ]
-[e :U 135 ]
-[; ;Main.c: 363: }
-[; ;Main.c: 364: }
+[e ( _Menu (1 -> -> 3 `i `uc ]
+[; ;Main.c: 364: buttonPressed = 0;
 "364
-[e :UE 132 ]
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 366: break;
+"366
+[e $U 150  ]
+[; ;Main.c: 367: case 4:
+"367
+[e :U 155 ]
+[; ;Main.c: 368: Menu(4);
+"368
+[e ( _Menu (1 -> -> 4 `i `uc ]
+[; ;Main.c: 370: buttonPressed = 0;
+"370
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 372: break;
+"372
+[e $U 150  ]
+[; ;Main.c: 373: case 5:
+"373
+[e :U 156 ]
+[; ;Main.c: 374: choice = Menu(5);
+"374
+[e = _choice ( _Menu (1 -> -> 5 `i `uc ]
+[; ;Main.c: 376: buttonPressed = 0;
+"376
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 378: break;
+"378
+[e $U 150  ]
+[; ;Main.c: 379: default:
+"379
+[e :U 157 ]
+[; ;Main.c: 381: break;
+"381
+[e $U 150  ]
+"382
+}
+[; ;Main.c: 382: }
+[e $U 150  ]
+"347
+[e :U 151 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 152
+ , $ -> -> 2 `i `uc 153
+ , $ -> -> 3 `i `uc 154
+ , $ -> -> 4 `i `uc 155
+ , $ -> -> 5 `i `uc 156
+ 157 ]
+"382
+[e :U 150 ]
+[; ;Main.c: 385: switch (choice)
+"385
+[e $U 159  ]
+[; ;Main.c: 386: {
+"386
+{
+[; ;Main.c: 387: case 0:
+"387
+[e :U 160 ]
+[; ;Main.c: 388: calibrateIR();
+"388
+[e ( _calibrateIR ..  ]
+[; ;Main.c: 389: break;
+"389
+[e $U 158  ]
+[; ;Main.c: 390: case 1:
+"390
+[e :U 161 ]
+[; ;Main.c: 391: shortwall = scan360();
+"391
+[e = _shortwall ( _scan360 ..  ]
+[; ;Main.c: 392: rotate((400 - shortwall), 0);
+"392
+[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
+[; ;Main.c: 393: break;
+"393
+[e $U 158  ]
+[; ;Main.c: 394: case 2:
+"394
+[e :U 162 ]
+[; ;Main.c: 395: _delay((unsigned long)((100)*(20000000/4000.0)));
+"395
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 396: robotMove(200);
+"396
+[e ( _robotMove (1 -> 200 `i ]
+[; ;Main.c: 399: break;
+"399
+[e $U 158  ]
+[; ;Main.c: 400: case 3:
+"400
+[e :U 163 ]
+[; ;Main.c: 401: _delay((unsigned long)((100)*(20000000/4000.0)));
+"401
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 402: robotMove(1000);
+"402
+[e ( _robotMove (1 -> 1000 `i ]
+[; ;Main.c: 403: robotTurn(-90);
+"403
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 404: robotMove(1000);
+"404
+[e ( _robotMove (1 -> 1000 `i ]
+[; ;Main.c: 405: break;
+"405
+[e $U 158  ]
+[; ;Main.c: 406: case 4:
+"406
+[e :U 164 ]
+[; ;Main.c: 408: break;
+"408
+[e $U 158  ]
+[; ;Main.c: 410: case 5:
+"410
+[e :U 165 ]
+[; ;Main.c: 411: ChargeMode();
+"411
+[e ( _ChargeMode ..  ]
+[; ;Main.c: 412: break;
+"412
+[e $U 158  ]
+[; ;Main.c: 413: default:
+"413
+[e :U 166 ]
+[; ;Main.c: 415: break;
+"415
+[e $U 158  ]
+"416
+}
+[; ;Main.c: 416: }
+[e $U 158  ]
+"385
+[e :U 159 ]
+[e [\ _choice , $ -> -> 0 `i `uc 160
+ , $ -> -> 1 `i `uc 161
+ , $ -> -> 2 `i `uc 162
+ , $ -> -> 3 `i `uc 163
+ , $ -> -> 4 `i `uc 164
+ , $ -> -> 5 `i `uc 165
+ 166 ]
+"416
+[e :U 158 ]
+[; ;Main.c: 417: choice = 255;
+"417
+[e = _choice -> -> 255 `i `uc ]
+"418
+}
+[e :U 146 ]
+"328
+[e $U 147  ]
+[e :U 148 ]
+[; ;Main.c: 418: }
+[; ;Main.c: 419: }
+"419
+[e :UE 145 ]
 }
