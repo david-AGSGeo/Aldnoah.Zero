@@ -83,7 +83,7 @@ volatile bit RTC_FLAG_10MS = 0;
 volatile bit RTC_FLAG_50MS = 0;
 volatile bit RTC_FLAG_250MS = 0;
 volatile bit RTC_FLAG_500MS = 0;
-volatile bit SER_RC_FLAG = 0;
+//volatile bit SER_RC_FLAG = 0;
 
 //global counter for timer0
 volatile unsigned int RTC_Counter = 0;
@@ -130,28 +130,28 @@ void interrupt isr1(void)
 			}
 	}
 
-	 					\
+	 					
 	if (RCIF) 
 	{	
-		SER_RC_FLAG = 1;	
-		LED0 ^= 0x01;						\
+	//	SER_RC_FLAG = 1;	
+	//	LED0 = 0x01;						
 		DistHighByte = RCREG;
+	//	RCIF = 0;
 		distTravelled = (int)DistHighByte ;
-		//rxfifo[rxiptr]=RCREG;				\
-		//ser_tmp=(rxiptr+1) & SER_FIFO_MASK;	\
-		//if (ser_tmp!=rxoptr)				\
+		//rxfifo[rxiptr]=RCREG;				
+		//ser_tmp=(rxiptr+1) & SER_FIFO_MASK;	
+		//if (ser_tmp!=rxoptr)				
 		//	rxiptr=ser_tmp;				
 		
-	}										\
+	}										
 	if (TXIF && TXIE) 
-	{						\
-		TXREG = txfifo[txoptr];				\
-		++txoptr;							\
-		txoptr &= SER_FIFO_MASK;			\
+	{						
+		TXREG = txfifo[txoptr];				
+		++txoptr;							
+		txoptr &= SER_FIFO_MASK;			
 		if (txoptr==txiptr) 
-			TXIE = 0;						\
-			
-	}							\
+			TXIE = 0;									
+	}							
 }
 
 void init()
@@ -316,7 +316,8 @@ int scan360(void)
 
 void main(void)
 {
-
+		unsigned char choice = 255;		//move these
+		int shortwall = 0;				//move these
 	
 	
 	//initialise function
@@ -327,13 +328,12 @@ void main(void)
 
 	while(1)
 	{
-		unsigned char choice = 255;
-		int shortwall = 0;
+
 
 		if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
 			{
 				RTC_FLAG_250MS = 0;
-				robot_distance();	
+				
 				readAvgDistance();
 				UpdateDisplay();
 			}

@@ -929,8 +929,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RTC_FLAG_250MS `Vb  1 e ]
 "85 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_500MS `Vb  1 e ]
-"86 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _SER_RC_FLAG `Vb  1 e ]
 "89 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
 "8 E:\Aldnoah.Zero\Assignment3\HMI.h
@@ -958,8 +956,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 "12 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
 [p mainexit ]
-"9 E:\Aldnoah.Zero\Assignment3\robot.h
-[v _robot_distance `(v  0 ef ]
 "9 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
@@ -1887,9 +1883,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.h: 10: void robot_read(unsigned char packet);
 "11 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _distTravelled
--> 11 `i
+-> 0 `i
 ]
-[; ;robot.h: 11: volatile int distTravelled = 11;
+[; ;robot.h: 11: volatile int distTravelled = 0;
 [; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte;
 "14
 [i _highByte
@@ -1961,19 +1957,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;Main.c: 85: volatile bit RTC_FLAG_500MS = 0;
-"86
-[i _SER_RC_FLAG
--> 0 `i
-]
-[; ;Main.c: 86: volatile bit SER_RC_FLAG = 0;
 "89
 [i _RTC_Counter
 -> -> 0 `i `ui
 ]
 [; ;Main.c: 89: volatile unsigned int RTC_Counter = 0;
 "93
-[v F1259 `(v  1 tf ]
-[v _isr1 `IF1259  1 e ]
+[v F1258 `(v  1 tf ]
+[v _isr1 `IF1258  1 e ]
 {
 [; ;Main.c: 92: void interrupt isr1(void)
 [; ;Main.c: 93: {
@@ -2070,36 +2061,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 135: {
 "135
 {
-[; ;Main.c: 136: SER_RC_FLAG = 1;
-"136
-[e = _SER_RC_FLAG -> -> 1 `i `b ]
-[; ;Main.c: 137: RB1 ^= 0x01; DistHighByte = RCREG;
-"137
-[e =^ _RB1 -> -> 1 `i `b ]
+[; ;Main.c: 138: DistHighByte = RCREG;
+"138
 [e = _DistHighByte _RCREG ]
-[; ;Main.c: 139: distTravelled = (int)DistHighByte ;
-"139
+[; ;Main.c: 140: distTravelled = (int)DistHighByte ;
+"140
 [e = _distTravelled -> _DistHighByte `i ]
-"145
+"146
 }
 [e :U 109 ]
-[; ;Main.c: 145: } if (TXIF && TXIE)
-[e $ ! && _TXIF _TXIE 110  ]
-[; ;Main.c: 147: { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr)
+[; ;Main.c: 146: }
+[; ;Main.c: 147: if (TXIF && TXIE)
 "147
+[e $ ! && _TXIF _TXIE 110  ]
+[; ;Main.c: 148: {
+"148
 {
+[; ;Main.c: 149: TXREG = txfifo[txoptr];
+"149
 [e = _TXREG *U + &U _txfifo * -> _txoptr `ux -> -> # *U &U _txfifo `ui `ux ]
+[; ;Main.c: 150: ++txoptr;
+"150
 [e =+ _txoptr -> -> 1 `i `uc ]
+[; ;Main.c: 151: txoptr &= (16-1);
+"151
 [e =& _txoptr -> - -> 16 `i -> 1 `i `uc ]
-[e $ ! == -> _txoptr `i -> _txiptr `i 111  ]
-[; ;Main.c: 152: TXIE = 0;
+[; ;Main.c: 152: if (txoptr==txiptr)
 "152
+[e $ ! == -> _txoptr `i -> _txiptr `i 111  ]
+[; ;Main.c: 153: TXIE = 0;
+"153
 [e = _TXIE -> -> 0 `i `b ]
 [e :U 111 ]
 "154
 }
 [e :U 110 ]
-[; ;Main.c: 154: } }
+[; ;Main.c: 154: }
+[; ;Main.c: 155: }
+"155
 [e :UE 102 ]
 }
 "158
@@ -2502,23 +2501,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 318: {
 [e :U _main ]
 [f ]
-[; ;Main.c: 323: init();
-"323
-[e ( _init ..  ]
-[; ;Main.c: 328: while(1)
-"328
-[e :U 147 ]
-[; ;Main.c: 329: {
-"329
-{
-"330
+"319
 [v _choice `uc  1 a ]
-[; ;Main.c: 330: unsigned char choice = 255;
+[; ;Main.c: 319: unsigned char choice = 255;
 [e = _choice -> -> 255 `i `uc ]
-"331
+"320
 [v _shortwall `i  1 a ]
-[; ;Main.c: 331: int shortwall = 0;
+[; ;Main.c: 320: int shortwall = 0;
 [e = _shortwall -> 0 `i ]
+[; ;Main.c: 324: init();
+"324
+[e ( _init ..  ]
+[; ;Main.c: 329: while(1)
+"329
+[e :U 147 ]
+[; ;Main.c: 330: {
+"330
+{
 [; ;Main.c: 333: if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
 "333
 [e $ ! & == -> _SCAN_FLAG `i -> 0 `i == -> _RTC_FLAG_250MS `i -> 1 `i 149  ]
@@ -2528,9 +2527,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 335: RTC_FLAG_250MS = 0;
 "335
 [e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 336: robot_distance();
-"336
-[e ( _robot_distance ..  ]
 [; ;Main.c: 337: readAvgDistance();
 "337
 [e ( _readAvgDistance ..  ]
@@ -2726,7 +2722,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "418
 }
 [e :U 146 ]
-"328
+"329
 [e $U 147  ]
 [e :U 148 ]
 [; ;Main.c: 418: }

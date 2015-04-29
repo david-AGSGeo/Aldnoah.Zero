@@ -1230,7 +1230,7 @@ void robotMove(int distance);
 void robotTurn(int distance);
 void robot_distance(void);
 void robot_read(unsigned char packet);
-volatile int distTravelled = 11;
+volatile int distTravelled = 0;
 volatile unsigned char DistHighByte, DistLowByte;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
@@ -1256,7 +1256,7 @@ volatile bit RTC_FLAG_10MS = 0;
 volatile bit RTC_FLAG_50MS = 0;
 volatile bit RTC_FLAG_250MS = 0;
 volatile bit RTC_FLAG_500MS = 0;
-volatile bit SER_RC_FLAG = 0;
+
 
 
 volatile unsigned int RTC_Counter = 0;
@@ -1303,28 +1303,27 @@ buttonPressed = ReadButtons();
 }
 }
 
-# 134
+
 if (RCIF)
 {
-SER_RC_FLAG = 1;
-RB1 ^= 0x01; DistHighByte = RCREG;
 
-# 139
+
+DistHighByte = RCREG;
+
 distTravelled = (int)DistHighByte ;
 
-# 145
-} if (TXIF && TXIE)
-
-# 147
-{ TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr)
-
-# 152
+# 146
+}
+if (TXIF && TXIE)
+{
+TXREG = txfifo[txoptr];
+++txoptr;
+txoptr &= (16-1);
+if (txoptr==txiptr)
 TXIE = 0;
+}
+}
 
-# 154
-} }
-
-# 157
 void init()
 {
 GIE=0;
@@ -1487,7 +1486,8 @@ return lowestSteps;
 
 void main(void)
 {
-
+unsigned char choice = 255;
+int shortwall = 0;
 
 
 
@@ -1498,13 +1498,12 @@ init();
 
 while(1)
 {
-unsigned char choice = 255;
-int shortwall = 0;
+
 
 if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
 {
 RTC_FLAG_250MS = 0;
-robot_distance();
+
 readAvgDistance();
 UpdateDisplay();
 }

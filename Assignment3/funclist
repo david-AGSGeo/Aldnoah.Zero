@@ -1,11 +1,10 @@
 _lcd_write_data: CODE, 2421 0 19
 _init: CODE, 2888 0 48
 _lcd_write_control: CODE, 2479 0 20
-_robot_distance: CODE, 2360 0 7
 _readDistance: CODE, 2521 0 22
 _robotMove: CODE, 3804 0 140
-___awmod: CODE, 1686 0 104
-_main: CODE, 945 0 277
+___awmod: CODE, 1678 0 104
+_main: CODE, 945 0 272
 _ReadButtons: CODE, 2840 0 48
 _spi_transfer: CODE, 2459 0 20
 _readAvgDistance: CODE, 1951 0 85
@@ -14,10 +13,9 @@ _ChargeMode: CODE, 3204 0 73
 i1___lwmod: CODE, 2995 0 68
 _lcd_set_cursor: CODE, 2036 0 11
 ___lwdiv: CODE, 3277 0 80
-_robot_read: CODE, 2403 0 18
 _init_adc: CODE, 2499 0 22
-_robo_init: CODE, 2375 0 13
-_sprintf: CODE, 1222 0 256
+_robo_init: CODE, 2395 0 13
+_sprintf: CODE, 1217 0 256
 _UpdateDisplay: CODE, 568 0 377
 _ser_init: CODE, 2748 0 46
 _rotate: CODE, 3357 0 80
@@ -25,7 +23,7 @@ _calibrateIR: CODE, 3437 0 100
 ___lwmod: CODE, 3063 0 70
 _ADCconvert: CODE, 21 0 547
 _adc_read: CODE, 2576 0 41
-_isr1: CODE, 1478 0 208
+_isr1: CODE, 1473 0 205
 _robotTurn: CODE, 3668 0 136
 _Debounce: CODE, 3944 0 152
 _Menu: CODE, 3133 0 71
@@ -34,4 +32,4 @@ _lcd_write_string: CODE, 2704 0 44
 ___wmul: CODE, 2660 0 44
 _adc_read_channel: CODE, 2936 0 59
 _lcd_init: CODE, 2617 0 43
-Total: 3513
+Total: 3480

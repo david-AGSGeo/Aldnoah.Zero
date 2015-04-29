@@ -8,7 +8,7 @@ void robotMove(int distance);
 void robotTurn(int distance);
 void robot_distance(void);
 void robot_read(unsigned char packet);
-volatile int distTravelled = 11;
+ volatile int distTravelled = 0;
 volatile unsigned char DistHighByte, DistLowByte;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;

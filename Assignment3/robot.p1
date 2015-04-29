@@ -1741,9 +1741,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.h: 10: void robot_read(unsigned char packet);
 "11 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _distTravelled
--> 11 `i
+-> 0 `i
 ]
-[; ;robot.h: 11: volatile int distTravelled = 11;
+[; ;robot.h: 11: volatile int distTravelled = 0;
 [; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte;
 "14
 [i _highByte
