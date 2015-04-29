@@ -4,6 +4,7 @@
 #include "robot.h"
 #include "ser.h"
 #include "lcd.h"
+#include "HMI.h"
 
 void robo_init(void)
 {
@@ -15,10 +16,20 @@ void robo_init(void)
 
 void robot_read(void)
 {
+
+
+
+
 	ser_putch (142); // Sensor Setup
 	ser_putch (7);  // Distance Sensor Packet ID
-	__delay_ms(200);
-	distTravelled = ser_getch();
+	__delay_ms(5);
+	BumpSensors = ser_getch();
+	ser_putch (142); // Sensor Setup
+	ser_putch (19);  // Distance Sensor Packet ID
+	__delay_ms(5);
+	DistHighByte = ser_getch();//ignored for now
+	DistLowByte = ser_getch();
+//	distTravelled =DistLowByte;
 }
 
 
@@ -28,15 +39,14 @@ void robot_read(void)
 void robotMove(int distance)
 {
 	distTravelled =0;
-	lowByte = (unsigned char) (distance) ;
-	highByte = (unsigned char) (distance >> 8);
+
 			if (distance >= 0)
 {
 				ser_putch(137); //drive - opcode 1
 			
-				ser_putch(0); // 
+				ser_putch(0); // speed high byte
 			
-				ser_putch(200); 
+				ser_putch(50); //speed low byte
 				
 				ser_putch(128); 
 			
@@ -56,12 +66,14 @@ else
 }				
 	
 	
-//while (distTravelled < distanc=
-			ser_putch(156); //distance travelled - opcode 2 
-				
-				ser_putch(highByte); 
-			
-				ser_putch(lowByte); 
+while (distTravelled <= distance)
+	{
+		robot_read();
+		if (BumpSensors)	//hit wall or lifted
+			break;
+		distTravelled += DistLowByte;
+		UpdateDisplay();
+	}
 
 				ser_putch(137); //drive - opcode 3
 

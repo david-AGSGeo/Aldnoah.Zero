@@ -896,11 +896,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "8 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _test `Vui  1 e ]
 "11 E:\Aldnoah.Zero\Assignment3\robot.h
-[v _distTravelled `Vi  1 e ]
+[v _distTravelled `i  1 e ]
 "12 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
 "12 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
+"12 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _BumpSensors `Vuc  1 e ]
 "14 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
 "14 E:\Aldnoah.Zero\Assignment3\robot.h
@@ -1855,8 +1857,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _distTravelled
 -> 0 `i
 ]
-[; ;robot.h: 11: volatile int distTravelled = 0;
-[; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte;
+[; ;robot.h: 11: int distTravelled = 0;
+[; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 "14
 [i _highByte
 -> -> 0 `i `uc
@@ -2415,15 +2417,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UpdateDisplay ]
 [f ]
 "217
-[v F1228 `uc  -> 16 `i s ]
-[i F1228
+[v F1229 `uc  -> 16 `i s ]
+[i F1229
 :U ..
 -> 0 `c
 ..
 ]
 [v _adcOutput `uc  -> 16 `i a ]
 [; ;HMI.c: 217: char adcOutput[16] = "";
-[e = _adcOutput F1228 ]
+[e = _adcOutput F1229 ]
 [; ;HMI.c: 218: switch (currentMenu)
 "218
 [e $U 137  ]
@@ -2436,9 +2438,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.c: 224: lcd_write_control(0b00000001);
 "224
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 226: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
+[; ;HMI.c: 226: sprintf(adcOutput,"ADC:%d Dist:%d",BumpSensors, distTravelled);
 "226
-[e ( _sprintf (1 , , (. , &U _adcOutput :s 13C _adcVal _distTravelled ]
+[e ( _sprintf (1 , , (. , &U _adcOutput :s 13C -> _BumpSensors `i _distTravelled ]
 [; ;HMI.c: 229: lcd_set_cursor(0x00);
 "229
 [e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
@@ -2483,66 +2485,63 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.c: 243: lcd_write_control(0b00000001);
 "243
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 245: sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+[; ;HMI.c: 245: lcd_set_cursor(0x00);
 "245
-[e ( _sprintf (1 , , (. , &U _adcOutput :s 14C -> _highByte `i -> _lowByte `i ]
-[; ;HMI.c: 247: lcd_set_cursor(0x00);
-"247
 [e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
-[; ;HMI.c: 248: lcd_write_string(adcOutput);
-"248
-[e ( _lcd_write_string (1 &U _adcOutput ]
-[; ;HMI.c: 253: lcd_set_cursor(0x40);
-"253
+[; ;HMI.c: 246: lcd_write_string("Zero Step_Motor");
+"246
+[e ( _lcd_write_string (1 -> :s 14C `*uc ]
+[; ;HMI.c: 251: lcd_set_cursor(0x40);
+"251
 [e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
-[; ;HMI.c: 255: lcd_write_string("<<<");
-"255
+[; ;HMI.c: 253: lcd_write_string("<<<");
+"253
 [e ( _lcd_write_string (1 -> :s 15C `*uc ]
-[; ;HMI.c: 258: lcd_set_cursor(0x44);
-"258
+[; ;HMI.c: 256: lcd_set_cursor(0x44);
+"256
 [e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 259: lcd_write_string("CONFIRM");
-"259
+[; ;HMI.c: 257: lcd_write_string("CONFIRM");
+"257
 [e ( _lcd_write_string (1 -> :s 16C `*uc ]
-[; ;HMI.c: 260: lcd_set_cursor(0x4D);
-"260
+[; ;HMI.c: 258: lcd_set_cursor(0x4D);
+"258
 [e ( _lcd_set_cursor (1 -> -> 77 `i `uc ]
-[; ;HMI.c: 261: lcd_write_string(">>>");
-"261
+[; ;HMI.c: 259: lcd_write_string(">>>");
+"259
 [e ( _lcd_write_string (1 -> :s 17C `*uc ]
-[; ;HMI.c: 262: break;
-"262
+[; ;HMI.c: 260: break;
+"260
 [e $U 136  ]
-[; ;HMI.c: 263: case 2:
-"263
+[; ;HMI.c: 261: case 2:
+"261
 [e :U 142 ]
-[; ;HMI.c: 264: lcd_write_control(0b00000001);
-"264
+[; ;HMI.c: 262: lcd_write_control(0b00000001);
+"262
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 266: lcd_set_cursor(0x00);
-"266
+[; ;HMI.c: 264: lcd_set_cursor(0x00);
+"264
 [e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
-[; ;HMI.c: 267: lcd_write_string(" Charging Mode ");
-"267
+[; ;HMI.c: 265: lcd_write_string(" Charging Mode ");
+"265
 [e ( _lcd_write_string (1 -> :s 18C `*uc ]
-[; ;HMI.c: 271: lcd_set_cursor(0x44);
-"271
+[; ;HMI.c: 269: lcd_set_cursor(0x44);
+"269
 [e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 272: lcd_write_string("  EXIT  ");
-"272
+[; ;HMI.c: 270: lcd_write_string("  EXIT  ");
+"270
 [e ( _lcd_write_string (1 -> :s 19C `*uc ]
-[; ;HMI.c: 274: break;
+[; ;HMI.c: 272: break;
+"272
+[e $U 136  ]
+[; ;HMI.c: 274: default:
 "274
-[e $U 136  ]
-[; ;HMI.c: 276: default:
-"276
 [e :U 143 ]
-[; ;HMI.c: 278: break;
-"278
+[; ;HMI.c: 276: break;
+"276
 [e $U 136  ]
-"281
+"279
 }
-[; ;HMI.c: 281: }
+[; ;HMI.c: 279: }
 [e $U 136  ]
 "218
 [e :U 137 ]
@@ -2550,20 +2549,20 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 1 `i `uc 141
  , $ -> -> 2 `i `uc 142
  143 ]
-"281
+"279
 [e :U 136 ]
-[; ;HMI.c: 282: }
-"282
+[; ;HMI.c: 280: }
+"280
 [e :UE 135 ]
 }
 [a 11C 70 108 119 0 ]
+[a 14C 90 101 114 111 32 83 116 101 112 95 77 111 116 111 114 0 ]
 [a 8C 83 99 110 0 ]
 [a 3C 68 114 105 118 101 95 50 109 0 ]
 [a 5C 70 108 119 95 87 97 108 108 0 ]
 [a 7C 67 97 108 0 ]
 [a 12C 67 104 103 0 ]
 [a 13C 65 68 67 58 37 100 32 68 105 115 116 58 37 100 0 ]
-[a 14C 65 68 67 58 37 100 32 68 105 115 116 58 37 100 0 ]
 [a 1C 67 97 108 105 98 95 73 82 0 ]
 [a 16C 67 79 78 70 73 82 77 0 ]
 [a 10C 68 114 76 0 ]

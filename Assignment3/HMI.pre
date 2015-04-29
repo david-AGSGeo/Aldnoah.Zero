@@ -1201,8 +1201,8 @@ void robotMove(int distance);
 void robotTurn(int distance);
 
 void robot_read(void);
-volatile int distTravelled = 0;
-volatile unsigned char DistHighByte, DistLowByte;
+int distTravelled = 0;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
@@ -1403,7 +1403,7 @@ case 0:
 
 lcd_write_control(0b00000001);
 
-sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
+sprintf(adcOutput,"ADC:%d Dist:%d",BumpSensors, distTravelled);
 
 
 lcd_set_cursor(0x00);
@@ -1422,10 +1422,8 @@ break;
 case 1:
 lcd_write_control(0b00000001);
 
-sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
-
 lcd_set_cursor(0x00);
-lcd_write_string(adcOutput);
+lcd_write_string("Zero Step_Motor");
 
 
 

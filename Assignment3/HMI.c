@@ -223,7 +223,7 @@ void UpdateDisplay(void)
 				
 				lcd_write_control(0b00000001); //clear display	
 				
-				sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
+				sprintf(adcOutput,"ADC:%d Dist:%d",BumpSensors, distTravelled);
 			//	sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
 				
 				lcd_set_cursor(0x00);	
@@ -241,11 +241,9 @@ void UpdateDisplay(void)
 			break;
 			case 1:	//calibration Menu
 				lcd_write_control(0b00000001); //clear display	
-			//	sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distance);
-				sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
-				
+
 				lcd_set_cursor(0x00);	
-				lcd_write_string(adcOutput);
+				lcd_write_string("Zero Step_Motor");
 								
 				
 								//lcd_set_cursor(MENULEFT);	

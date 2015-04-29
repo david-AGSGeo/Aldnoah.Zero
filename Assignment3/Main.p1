@@ -896,11 +896,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "6 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `Vuc  1 e ]
 "11 E:\Aldnoah.Zero\Assignment3\robot.h
-[v _distTravelled `Vi  1 e ]
+[v _distTravelled `i  1 e ]
 "12 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
 "12 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
+"12 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _BumpSensors `Vuc  1 e ]
 "14 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
 "14 E:\Aldnoah.Zero\Assignment3\robot.h
@@ -962,6 +964,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "12 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
 [p mainexit ]
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _robot_read `(v  0 ef ]
 "9 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
@@ -971,8 +975,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _robotMove `(v  0 ef1`i ]
 "8 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robotTurn `(v  0 ef1`i ]
-"10 E:\Aldnoah.Zero\Assignment3\robot.h
-[v _robot_read `(v  0 ef ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f877a.h: 90: volatile unsigned char PCL @ 0x002;
@@ -1892,8 +1894,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _distTravelled
 -> 0 `i
 ]
-[; ;robot.h: 11: volatile int distTravelled = 0;
-[; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte;
+[; ;robot.h: 11: int distTravelled = 0;
+[; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 "14
 [i _highByte
 -> -> 0 `i `uc
@@ -1961,8 +1963,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;Main.c: 89: volatile unsigned int RTC_Counter = 0;
 "93
-[v F1255 `(v  1 tf ]
-[v _isr1 `IF1255  1 e ]
+[v F1256 `(v  1 tf ]
+[v _isr1 `IF1256  1 e ]
 {
 [; ;Main.c: 92: void interrupt isr1(void)
 [; ;Main.c: 93: {
@@ -2497,6 +2499,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 314: RTC_FLAG_250MS = 0;
 "314
 [e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 315: robot_read();
+"315
+[e ( _robot_read ..  ]
 [; ;Main.c: 316: readAvgDistance();
 "316
 [e ( _readAvgDistance ..  ]
@@ -2656,9 +2661,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 379: case 4:
 "379
 [e :U 165 ]
-[; ;Main.c: 380: robot_read();
-"380
-[e ( _robot_read ..  ]
 [; ;Main.c: 381: break;
 "381
 [e $U 159  ]

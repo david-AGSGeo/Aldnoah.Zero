@@ -1230,8 +1230,8 @@ void robotMove(int distance);
 void robotTurn(int distance);
 
 void robot_read(void);
-volatile int distTravelled = 0;
-volatile unsigned char DistHighByte, DistLowByte;
+int distTravelled = 0;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
@@ -1485,7 +1485,7 @@ while(1)
 if (RTC_FLAG_250MS == 1)
 {
 RTC_FLAG_250MS = 0;
-
+robot_read();
 readAvgDistance();
 UpdateDisplay();
 }
@@ -1550,7 +1550,7 @@ robotTurn(-90);
 robotMove(1000);
 break;
 case 4:
-robot_read();
+
 break;
 
 case 5:

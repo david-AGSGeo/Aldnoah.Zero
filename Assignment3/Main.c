@@ -312,7 +312,7 @@ void main(void)
 		if (RTC_FLAG_250MS == 1)
 			{
 				RTC_FLAG_250MS = 0;
-				
+				robot_read();
 				readAvgDistance();
 				UpdateDisplay();
 			}
@@ -377,7 +377,7 @@ void main(void)
 				robotMove(1000);
 			break;
 			case 4:		//Follow wall
-				robot_read();
+				
 			break;		
 			
 			case 5:		//Charge Mode

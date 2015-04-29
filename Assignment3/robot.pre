@@ -1096,8 +1096,8 @@ void robotMove(int distance);
 void robotTurn(int distance);
 
 void robot_read(void);
-volatile int distTravelled = 0;
-volatile unsigned char DistHighByte, DistLowByte;
+int distTravelled = 0;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
@@ -1141,7 +1141,14 @@ int total;
 int dist_high;
 int dist_low;
 
-# 8 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+volatile unsigned char currentMenu = 0;
+
+unsigned char ReadButtons(void);
+unsigned char Menu(unsigned char input);
+void UpdateDisplay(void);
+
+# 9 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1152,25 +1159,34 @@ ser_putch(0);
 
 void robot_read(void)
 {
+
+
+
+
 ser_putch (142);
 ser_putch (7);
-_delay((unsigned long)((200)*(20000000/4000.0)));
-distTravelled = ser_getch();
+_delay((unsigned long)((5)*(20000000/4000.0)));
+BumpSensors = ser_getch();
+ser_putch (142);
+ser_putch (19);
+_delay((unsigned long)((5)*(20000000/4000.0)));
+DistHighByte = ser_getch();
+DistLowByte = ser_getch();
+
 }
 
-# 28
+# 39
 void robotMove(int distance)
 {
 distTravelled =0;
-lowByte = (unsigned char) (distance) ;
-highByte = (unsigned char) (distance >> 8);
+
 if (distance >= 0)
 {
 ser_putch(137);
 
 ser_putch(0);
 
-ser_putch(200);
+ser_putch(50);
 
 ser_putch(128);
 
@@ -1190,12 +1206,14 @@ ser_putch(0);
 }
 
 
-
-ser_putch(156);
-
-ser_putch(highByte);
-
-ser_putch(lowByte);
+while (distTravelled <= distance)
+{
+robot_read();
+if (BumpSensors)
+break;
+distTravelled += DistLowByte;
+UpdateDisplay();
+}
 
 ser_putch(137);
 
