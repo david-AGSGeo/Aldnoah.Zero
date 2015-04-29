@@ -1094,8 +1094,8 @@ extern void _delay(unsigned long);
 void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
-void robot_distance(void);
-void robot_read(unsigned char packet);
+
+void robot_read(void);
 volatile int distTravelled = 0;
 volatile unsigned char DistHighByte, DistLowByte;
 
@@ -1146,21 +1146,19 @@ void robo_init(void)
 {
 ser_putch(128);
 ser_putch(132);
+ser_putch(150);
+ser_putch(0);
 }
 
-void robot_read(unsigned char packet)
+void robot_read(void)
 {
 ser_putch (142);
-ser_putch (packet);
-}
-void robot_distance(void)
-{
-
-robot_read(19);
-
-# 30
+ser_putch (7);
+_delay((unsigned long)((200)*(20000000/4000.0)));
+distTravelled = ser_getch();
 }
 
+# 28
 void robotMove(int distance)
 {
 distTravelled =0;

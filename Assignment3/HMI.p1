@@ -882,7 +882,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
 "6 E:\Aldnoah.Zero\Assignment3\HMI.h
-[v _currentMenu `uc  1 e ]
+[v _currentMenu `Vuc  1 e ]
 "36 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _total `i  1 e ]
 "37 E:\Aldnoah.Zero\Assignment3\lcd.h
@@ -1822,7 +1822,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _currentMenu
 -> -> 0 `i `uc
 ]
-[; ;HMI.h: 6: unsigned char currentMenu = 0;
+[; ;HMI.h: 6: volatile unsigned char currentMenu = 0;
 [; ;HMI.h: 8: unsigned char ReadButtons(void);
 [; ;HMI.h: 9: unsigned char Menu(unsigned char input);
 [; ;HMI.h: 10: void UpdateDisplay(void);
@@ -1850,8 +1850,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.h: 6: void robo_init(void);
 [; ;robot.h: 7: void robotMove(int distance);
 [; ;robot.h: 8: void robotTurn(int distance);
-[; ;robot.h: 9: void robot_distance(void);
-[; ;robot.h: 10: void robot_read(unsigned char packet);
+[; ;robot.h: 10: void robot_read(void);
 "11 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _distTravelled
 -> 0 `i
@@ -2219,342 +2218,342 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.c: 141: {
 [e :U _ReadButtons ]
 [f ]
-[; ;HMI.c: 142: Debounce();
-"142
+[; ;HMI.c: 143: Debounce();
+"143
 [e ( _Debounce ..  ]
-[; ;HMI.c: 144: if(UpPressed)
-"144
-[e $ ! _UpPressed 119  ]
-[; ;HMI.c: 145: {
+[; ;HMI.c: 145: if(UpPressed)
 "145
-{
-[; ;HMI.c: 146: UpPressed = 0;
+[e $ ! _UpPressed 119  ]
+[; ;HMI.c: 146: {
 "146
-[e = _UpPressed -> -> 0 `i `b ]
-[; ;HMI.c: 147: return 1;
+{
+[; ;HMI.c: 147: UpPressed = 0;
 "147
+[e = _UpPressed -> -> 0 `i `b ]
+[; ;HMI.c: 148: return 1;
+"148
 [e ) -> -> 1 `i `uc ]
 [e $UE 118  ]
-"149
+"150
 }
 [e :U 119 ]
-[; ;HMI.c: 149: }
-[; ;HMI.c: 151: if(DownPressed)
-"151
-[e $ ! _DownPressed 120  ]
-[; ;HMI.c: 152: {
+[; ;HMI.c: 150: }
+[; ;HMI.c: 152: if(DownPressed)
 "152
-{
-[; ;HMI.c: 153: DownPressed = 0;
+[e $ ! _DownPressed 120  ]
+[; ;HMI.c: 153: {
 "153
-[e = _DownPressed -> -> 0 `i `b ]
-[; ;HMI.c: 154: return 2;
+{
+[; ;HMI.c: 154: DownPressed = 0;
 "154
+[e = _DownPressed -> -> 0 `i `b ]
+[; ;HMI.c: 155: return 2;
+"155
 [e ) -> -> 2 `i `uc ]
 [e $UE 118  ]
-"156
+"157
 }
 [e :U 120 ]
-[; ;HMI.c: 156: }
-[; ;HMI.c: 157: if(LeftPressed)
-"157
-[e $ ! _LeftPressed 121  ]
-[; ;HMI.c: 158: {
+[; ;HMI.c: 157: }
+[; ;HMI.c: 158: if(LeftPressed)
 "158
-{
-[; ;HMI.c: 159: LeftPressed = 0;
+[e $ ! _LeftPressed 121  ]
+[; ;HMI.c: 159: {
 "159
-[e = _LeftPressed -> -> 0 `i `b ]
-[; ;HMI.c: 160: return 3;
+{
+[; ;HMI.c: 160: LeftPressed = 0;
 "160
+[e = _LeftPressed -> -> 0 `i `b ]
+[; ;HMI.c: 161: return 3;
+"161
 [e ) -> -> 3 `i `uc ]
 [e $UE 118  ]
-"162
+"163
 }
 [e :U 121 ]
-[; ;HMI.c: 162: }
-[; ;HMI.c: 163: if(RightPressed)
-"163
-[e $ ! _RightPressed 122  ]
-[; ;HMI.c: 164: {
+[; ;HMI.c: 163: }
+[; ;HMI.c: 164: if(RightPressed)
 "164
-{
-[; ;HMI.c: 165: RightPressed = 0;
+[e $ ! _RightPressed 122  ]
+[; ;HMI.c: 165: {
 "165
-[e = _RightPressed -> -> 0 `i `b ]
-[; ;HMI.c: 166: return 4;
+{
+[; ;HMI.c: 166: RightPressed = 0;
 "166
+[e = _RightPressed -> -> 0 `i `b ]
+[; ;HMI.c: 167: return 4;
+"167
 [e ) -> -> 4 `i `uc ]
 [e $UE 118  ]
-"168
+"169
 }
 [e :U 122 ]
-[; ;HMI.c: 168: }
-[; ;HMI.c: 170: if(CenterPressed)
-"170
-[e $ ! _CenterPressed 123  ]
-[; ;HMI.c: 171: {
+[; ;HMI.c: 169: }
+[; ;HMI.c: 171: if(CenterPressed)
 "171
-{
-[; ;HMI.c: 172: CenterPressed = 0;
+[e $ ! _CenterPressed 123  ]
+[; ;HMI.c: 172: {
 "172
-[e = _CenterPressed -> -> 0 `i `b ]
-[; ;HMI.c: 173: return 5;
+{
+[; ;HMI.c: 173: CenterPressed = 0;
 "173
+[e = _CenterPressed -> -> 0 `i `b ]
+[; ;HMI.c: 174: return 5;
+"174
 [e ) -> -> 5 `i `uc ]
 [e $UE 118  ]
-"175
+"176
 }
 [e :U 123 ]
-[; ;HMI.c: 175: }
-[; ;HMI.c: 176: return 0;
-"176
+[; ;HMI.c: 176: }
+[; ;HMI.c: 177: return 0;
+"177
 [e ) -> -> 0 `i `uc ]
 [e $UE 118  ]
-[; ;HMI.c: 177: }
-"177
+[; ;HMI.c: 178: }
+"178
 [e :UE 118 ]
 }
-"180
+"181
 [v _Menu `(uc  1 ef1`uc ]
 {
-[; ;HMI.c: 179: unsigned char Menu(unsigned char input)
-[; ;HMI.c: 180: {
+[; ;HMI.c: 180: unsigned char Menu(unsigned char BTN_input)
+[; ;HMI.c: 181: {
 [e :U _Menu ]
-[v _input `uc  1 r1 ]
+[v _BTN_input `uc  1 r1 ]
 [f ]
-[; ;HMI.c: 181: switch (input)
-"181
-[e $U 126  ]
-[; ;HMI.c: 182: {
+[; ;HMI.c: 182: switch (BTN_input)
 "182
-{
-[; ;HMI.c: 183: case 1:
+[e $U 126  ]
+[; ;HMI.c: 183: {
 "183
+{
+[; ;HMI.c: 184: case 1:
+"184
 [e :U 127 ]
-[; ;HMI.c: 185: break;
-"185
-[e $U 125  ]
-[; ;HMI.c: 186: case 2:
+[; ;HMI.c: 186: break;
 "186
-[e :U 128 ]
-[; ;HMI.c: 188: break;
-"188
 [e $U 125  ]
-[; ;HMI.c: 189: case 3:
+[; ;HMI.c: 187: case 2:
+"187
+[e :U 128 ]
+[; ;HMI.c: 189: break;
 "189
-[e :U 129 ]
-[; ;HMI.c: 190: pos--;
+[e $U 125  ]
+[; ;HMI.c: 190: case 3:
 "190
-[e -- _pos -> 1 `i ]
-[; ;HMI.c: 191: if (pos < 0)
+[e :U 129 ]
+[; ;HMI.c: 191: pos--;
 "191
-[e $ ! < _pos -> 0 `i 130  ]
-[; ;HMI.c: 192: pos = 6 - 1;
+[e -- _pos -> 1 `i ]
+[; ;HMI.c: 192: if (pos < 0)
 "192
+[e $ ! < _pos -> 0 `i 130  ]
+[; ;HMI.c: 193: pos = 6 - 1;
+"193
 [e = _pos - -> 6 `i -> 1 `i ]
 [e :U 130 ]
-[; ;HMI.c: 194: break;
-"194
-[e $U 125  ]
-[; ;HMI.c: 195: case 4:
+[; ;HMI.c: 195: break;
 "195
-[e :U 131 ]
-[; ;HMI.c: 196: pos++;
+[e $U 125  ]
+[; ;HMI.c: 196: case 4:
 "196
-[e ++ _pos -> 1 `i ]
-[; ;HMI.c: 197: if (pos == 6)
+[e :U 131 ]
+[; ;HMI.c: 197: pos++;
 "197
-[e $ ! == _pos -> 6 `i 132  ]
-[; ;HMI.c: 198: pos = 0;
+[e ++ _pos -> 1 `i ]
+[; ;HMI.c: 198: if (pos == 6)
 "198
+[e $ ! == _pos -> 6 `i 132  ]
+[; ;HMI.c: 199: pos = 0;
+"199
 [e = _pos -> 0 `i ]
 [e :U 132 ]
-[; ;HMI.c: 200: break;
-"200
-[e $U 125  ]
-[; ;HMI.c: 201: case 5:
+[; ;HMI.c: 201: break;
 "201
-[e :U 133 ]
-[; ;HMI.c: 202: return pos;
+[e $U 125  ]
+[; ;HMI.c: 202: case 5:
 "202
+[e :U 133 ]
+[; ;HMI.c: 203: return pos;
+"203
 [e ) -> _pos `uc ]
 [e $UE 124  ]
-[; ;HMI.c: 205: default:
-"205
+[; ;HMI.c: 206: default:
+"206
 [e :U 134 ]
-[; ;HMI.c: 207: break;
-"207
-[e $U 125  ]
+[; ;HMI.c: 208: break;
 "208
-}
-[; ;HMI.c: 208: }
 [e $U 125  ]
-"181
+"209
+}
+[; ;HMI.c: 209: }
+[e $U 125  ]
+"182
 [e :U 126 ]
-[e [\ _input , $ -> -> 1 `i `uc 127
+[e [\ _BTN_input , $ -> -> 1 `i `uc 127
  , $ -> -> 2 `i `uc 128
  , $ -> -> 3 `i `uc 129
  , $ -> -> 4 `i `uc 131
  , $ -> -> 5 `i `uc 133
  134 ]
-"208
-[e :U 125 ]
-[; ;HMI.c: 209: return 255;
 "209
+[e :U 125 ]
+[; ;HMI.c: 210: return 255;
+"210
 [e ) -> -> 255 `i `uc ]
 [e $UE 124  ]
-[; ;HMI.c: 210: }
-"210
+[; ;HMI.c: 211: }
+"211
 [e :UE 124 ]
 }
-"215
+"216
 [v _UpdateDisplay `(v  1 ef ]
 {
-[; ;HMI.c: 214: void UpdateDisplay(void)
-[; ;HMI.c: 215: {
+[; ;HMI.c: 215: void UpdateDisplay(void)
+[; ;HMI.c: 216: {
 [e :U _UpdateDisplay ]
 [f ]
-"216
-[v F1230 `uc  -> 16 `i s ]
-[i F1230
+"217
+[v F1228 `uc  -> 16 `i s ]
+[i F1228
 :U ..
 -> 0 `c
 ..
 ]
 [v _adcOutput `uc  -> 16 `i a ]
-[; ;HMI.c: 216: char adcOutput[16] = "";
-[e = _adcOutput F1230 ]
-[; ;HMI.c: 217: switch (currentMenu)
-"217
-[e $U 137  ]
-[; ;HMI.c: 218: {
+[; ;HMI.c: 217: char adcOutput[16] = "";
+[e = _adcOutput F1228 ]
+[; ;HMI.c: 218: switch (currentMenu)
 "218
+[e $U 137  ]
+[; ;HMI.c: 219: {
+"219
 {
-[; ;HMI.c: 220: case 0:
-"220
+[; ;HMI.c: 221: case 0:
+"221
 [e :U 138 ]
-[; ;HMI.c: 223: lcd_write_control(0b00000001);
-"223
+[; ;HMI.c: 224: lcd_write_control(0b00000001);
+"224
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 225: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
-"225
+[; ;HMI.c: 226: sprintf(adcOutput,"ADC:%d Dist:%d",adcVal, distTravelled);
+"226
 [e ( _sprintf (1 , , (. , &U _adcOutput :s 13C _adcVal _distTravelled ]
-[; ;HMI.c: 228: lcd_set_cursor(0x00);
-"228
-[e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
-[; ;HMI.c: 229: lcd_write_string(adcOutput);
+[; ;HMI.c: 229: lcd_set_cursor(0x00);
 "229
+[e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
+[; ;HMI.c: 230: lcd_write_string(adcOutput);
+"230
 [e ( _lcd_write_string (1 &U _adcOutput ]
-[; ;HMI.c: 231: lcd_set_cursor(0x40);
-"231
-[e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
-[; ;HMI.c: 232: if (pos > 0)
+[; ;HMI.c: 232: lcd_set_cursor(0x40);
 "232
-[e $ ! > _pos -> 0 `i 139  ]
-[; ;HMI.c: 233: lcd_write_string(shortMenuStrings[pos - 1]);
+[e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
+[; ;HMI.c: 233: if (pos > 0)
 "233
+[e $ ! > _pos -> 0 `i 139  ]
+[; ;HMI.c: 234: lcd_write_string(shortMenuStrings[pos - 1]);
+"234
 [e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> - _pos -> 1 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
 [e $U 140  ]
-"234
-[e :U 139 ]
-[; ;HMI.c: 234: else
-[; ;HMI.c: 235: lcd_write_string(shortMenuStrings[pos + 6 - 1]);
 "235
+[e :U 139 ]
+[; ;HMI.c: 235: else
+[; ;HMI.c: 236: lcd_write_string(shortMenuStrings[pos + 6 - 1]);
+"236
 [e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> - + _pos -> 6 `i -> 1 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
 [e :U 140 ]
-[; ;HMI.c: 236: lcd_set_cursor(0x44);
-"236
-[e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 237: lcd_write_string(menuStrings[pos]);
+[; ;HMI.c: 237: lcd_set_cursor(0x44);
 "237
-[e ( _lcd_write_string (1 -> *U + &U _menuStrings * -> -> _pos `ui `ux -> -> # *U &U _menuStrings `ui `ux `*uc ]
-[; ;HMI.c: 238: lcd_set_cursor(0x4D);
+[e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
+[; ;HMI.c: 238: lcd_write_string(menuStrings[pos]);
 "238
-[e ( _lcd_set_cursor (1 -> -> 77 `i `uc ]
-[; ;HMI.c: 239: lcd_write_string(shortMenuStrings[(pos + 1) % 6]);
+[e ( _lcd_write_string (1 -> *U + &U _menuStrings * -> -> _pos `ui `ux -> -> # *U &U _menuStrings `ui `ux `*uc ]
+[; ;HMI.c: 239: lcd_set_cursor(0x4D);
 "239
-[e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> % + _pos -> 1 `i -> 6 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
-[; ;HMI.c: 240: break;
-"240
-[e $U 136  ]
-[; ;HMI.c: 241: case 1:
-"241
-[e :U 141 ]
-[; ;HMI.c: 242: lcd_write_control(0b00000001);
-"242
-[e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 244: sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
-"244
-[e ( _sprintf (1 , , (. , &U _adcOutput :s 14C -> _highByte `i -> _lowByte `i ]
-[; ;HMI.c: 246: lcd_set_cursor(0x00);
-"246
-[e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
-[; ;HMI.c: 247: lcd_write_string(adcOutput);
-"247
-[e ( _lcd_write_string (1 &U _adcOutput ]
-[; ;HMI.c: 252: lcd_set_cursor(0x40);
-"252
-[e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
-[; ;HMI.c: 254: lcd_write_string("<<<");
-"254
-[e ( _lcd_write_string (1 -> :s 15C `*uc ]
-[; ;HMI.c: 257: lcd_set_cursor(0x44);
-"257
-[e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 258: lcd_write_string("CONFIRM");
-"258
-[e ( _lcd_write_string (1 -> :s 16C `*uc ]
-[; ;HMI.c: 259: lcd_set_cursor(0x4D);
-"259
 [e ( _lcd_set_cursor (1 -> -> 77 `i `uc ]
-[; ;HMI.c: 260: lcd_write_string(">>>");
-"260
-[e ( _lcd_write_string (1 -> :s 17C `*uc ]
-[; ;HMI.c: 261: break;
-"261
+[; ;HMI.c: 240: lcd_write_string(shortMenuStrings[(pos + 1) % 6]);
+"240
+[e ( _lcd_write_string (1 -> *U + &U _shortMenuStrings * -> -> % + _pos -> 1 `i -> 6 `i `ui `ux -> -> # *U &U _shortMenuStrings `ui `ux `*uc ]
+[; ;HMI.c: 241: break;
+"241
 [e $U 136  ]
-[; ;HMI.c: 262: case 2:
-"262
-[e :U 142 ]
-[; ;HMI.c: 263: lcd_write_control(0b00000001);
-"263
+[; ;HMI.c: 242: case 1:
+"242
+[e :U 141 ]
+[; ;HMI.c: 243: lcd_write_control(0b00000001);
+"243
 [e ( _lcd_write_control (1 -> -> 1 `i `uc ]
-[; ;HMI.c: 265: lcd_set_cursor(0x00);
-"265
+[; ;HMI.c: 245: sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+"245
+[e ( _sprintf (1 , , (. , &U _adcOutput :s 14C -> _highByte `i -> _lowByte `i ]
+[; ;HMI.c: 247: lcd_set_cursor(0x00);
+"247
 [e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
-[; ;HMI.c: 266: lcd_write_string(" Charging Mode ");
-"266
-[e ( _lcd_write_string (1 -> :s 18C `*uc ]
-[; ;HMI.c: 270: lcd_set_cursor(0x44);
-"270
+[; ;HMI.c: 248: lcd_write_string(adcOutput);
+"248
+[e ( _lcd_write_string (1 &U _adcOutput ]
+[; ;HMI.c: 253: lcd_set_cursor(0x40);
+"253
+[e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
+[; ;HMI.c: 255: lcd_write_string("<<<");
+"255
+[e ( _lcd_write_string (1 -> :s 15C `*uc ]
+[; ;HMI.c: 258: lcd_set_cursor(0x44);
+"258
 [e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 271: lcd_write_string("  EXIT  ");
+[; ;HMI.c: 259: lcd_write_string("CONFIRM");
+"259
+[e ( _lcd_write_string (1 -> :s 16C `*uc ]
+[; ;HMI.c: 260: lcd_set_cursor(0x4D);
+"260
+[e ( _lcd_set_cursor (1 -> -> 77 `i `uc ]
+[; ;HMI.c: 261: lcd_write_string(">>>");
+"261
+[e ( _lcd_write_string (1 -> :s 17C `*uc ]
+[; ;HMI.c: 262: break;
+"262
+[e $U 136  ]
+[; ;HMI.c: 263: case 2:
+"263
+[e :U 142 ]
+[; ;HMI.c: 264: lcd_write_control(0b00000001);
+"264
+[e ( _lcd_write_control (1 -> -> 1 `i `uc ]
+[; ;HMI.c: 266: lcd_set_cursor(0x00);
+"266
+[e ( _lcd_set_cursor (1 -> -> 0 `i `uc ]
+[; ;HMI.c: 267: lcd_write_string(" Charging Mode ");
+"267
+[e ( _lcd_write_string (1 -> :s 18C `*uc ]
+[; ;HMI.c: 271: lcd_set_cursor(0x44);
 "271
+[e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
+[; ;HMI.c: 272: lcd_write_string("  EXIT  ");
+"272
 [e ( _lcd_write_string (1 -> :s 19C `*uc ]
-[; ;HMI.c: 273: break;
-"273
+[; ;HMI.c: 274: break;
+"274
 [e $U 136  ]
-[; ;HMI.c: 275: default:
-"275
+[; ;HMI.c: 276: default:
+"276
 [e :U 143 ]
-[; ;HMI.c: 277: break;
-"277
+[; ;HMI.c: 278: break;
+"278
 [e $U 136  ]
-"280
+"281
 }
-[; ;HMI.c: 280: }
+[; ;HMI.c: 281: }
 [e $U 136  ]
-"217
+"218
 [e :U 137 ]
 [e [\ _currentMenu , $ -> -> 0 `i `uc 138
  , $ -> -> 1 `i `uc 141
  , $ -> -> 2 `i `uc 142
  143 ]
-"280
-[e :U 136 ]
-[; ;HMI.c: 281: }
 "281
+[e :U 136 ]
+[; ;HMI.c: 282: }
+"282
 [e :UE 135 ]
 }
 [a 11C 70 108 119 0 ]

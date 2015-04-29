@@ -1218,7 +1218,7 @@ extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
 # 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
-unsigned char currentMenu = 0;
+volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
@@ -1228,8 +1228,8 @@ void UpdateDisplay(void);
 void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
-void robot_distance(void);
-void robot_read(unsigned char packet);
+
+void robot_read(void);
 volatile int distTravelled = 0;
 volatile unsigned char DistHighByte, DistLowByte;
 
@@ -1244,9 +1244,9 @@ int scan360(void);
 
 unsigned char current_direction = 0;
 int totalSteps = 0;
-unsigned char SCAN_FLAG = 0;
 
-volatile unsigned char buttonPressed = 0;
+
+volatile unsigned char buttonPressed;
 volatile unsigned char serialInput = 0;
 
 
@@ -1264,7 +1264,6 @@ volatile unsigned int RTC_Counter = 0;
 
 void interrupt isr1(void)
 {
-
 
 
 
@@ -1292,59 +1291,42 @@ RTC_FLAG_250MS = 1;
 if(RTC_Counter % 500 == 0)
 {
 RTC_FLAG_500MS = 1;
-RTC_Counter = 0;
 RB0 ^= 0x01;
 
 }
-
 if (buttonPressed == 0)
 {
+
 buttonPressed = ReadButtons();
+
 }
 }
-
-
-if (RCIF)
-{
-
-
-DistHighByte = RCREG;
-
-distTravelled = (int)DistHighByte ;
-
-# 146
-}
-if (TXIF && TXIE)
-{
-TXREG = txfifo[txoptr];
-++txoptr;
-txoptr &= (16-1);
-if (txoptr==txiptr)
-TXIE = 0;
-}
+if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
 }
 
 void init()
 {
-GIE=0;
-init_adc();
-lcd_init();
-ser_init();
-robo_init();
 
-TRISB = 0b11111100;
+
+buttonPressed = 0;
+
+
+
 TRISC &= 0b10010000;
 
 SSPSTAT = 0b01000000;
 SSPCON = 0b10100001;
 
 OPTION_REG = 0b00000100;
-
+ser_init();
+init_adc();
+lcd_init();
+robo_init();
+TRISB = 0b11111100;
 
 TMR0IE = 1;
 PEIE=1;
 
-GIE=1;
 (GIE = 1);
 }
 
@@ -1448,7 +1430,7 @@ currentMenu = 0;
 return;
 
 default:
-
+buttonPressed = 0;
 break;
 }
 }
@@ -1458,7 +1440,7 @@ break;
 int scan360(void)
 {
 int lowestVal = 0, lowestSteps = 0;
-SCAN_FLAG = 1;
+
 for (int steps = 0; steps < 400; steps++)
 {
 readAvgDistance();
@@ -1477,7 +1459,7 @@ UpdateDisplay();
 }
 test = lowestSteps;
 }
-SCAN_FLAG = 0;
+
 return lowestSteps;
 }
 
@@ -1500,7 +1482,7 @@ while(1)
 {
 
 
-if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
+if (RTC_FLAG_250MS == 1)
 {
 RTC_FLAG_250MS = 0;
 
@@ -1508,7 +1490,6 @@ readAvgDistance();
 UpdateDisplay();
 }
 
-# 347
 switch (buttonPressed)
 {
 case 1:
@@ -1542,7 +1523,7 @@ buttonPressed = 0;
 
 break;
 default:
-
+buttonPressed = 0;
 break;
 }
 
@@ -1569,7 +1550,7 @@ robotTurn(-90);
 robotMove(1000);
 break;
 case 4:
-
+robot_read();
 break;
 
 case 5:

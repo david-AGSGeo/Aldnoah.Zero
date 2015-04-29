@@ -55,8 +55,7 @@ unsigned char ser_getch(void)
 {
 	unsigned char c;
 
-
-	while (ser_isrx()==0 )
+	while (ser_isrx()==0)
 		continue;
 
 	GIE=0;

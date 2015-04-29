@@ -139,35 +139,36 @@ void Debounce(void)
 
 unsigned char ReadButtons(void)
 {
+	
 	Debounce();
 	
-	if(UpPressed) //toggle LED0
+	if(UpPressed) 
 	{
 		UpPressed = 0;
 		return 1;
 	
 	}
 
-	if(DownPressed) // 2 half steps CounterClockwise
+	if(DownPressed) 
 	{
 		DownPressed = 0;
 		return 2;
 		
 	}
-		if(LeftPressed) // 2 half steps Clockwise
+		if(LeftPressed) 
 	{
 		LeftPressed = 0;
 		return 3;
 		
 	}
-		if(RightPressed) //180 degree sweep (reverse direction each time button is pressed)
+		if(RightPressed) 
 	{
 		RightPressed = 0;
 		return 4;
 		
 	}
 	
-	if(CenterPressed) //180 degree sweep (reverse direction each time button is pressed)
+	if(CenterPressed) 
 	{
 		CenterPressed = 0;
 		return 5;
@@ -176,9 +177,9 @@ unsigned char ReadButtons(void)
 	return 0;
 }
 
-unsigned char Menu(unsigned char input)
+unsigned char Menu(unsigned char BTN_input)
 {
-	switch (input)
+	switch (BTN_input)
 		{
 			case UP:
 			

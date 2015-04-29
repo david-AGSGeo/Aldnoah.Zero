@@ -71,9 +71,9 @@ int scan360(void);
 
 unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
 int totalSteps = 0; 
-unsigned char SCAN_FLAG = 0;
 
-volatile unsigned char buttonPressed = 0;
+
+volatile unsigned char buttonPressed;
 volatile unsigned char serialInput = 0;
 
 
@@ -83,7 +83,7 @@ volatile bit RTC_FLAG_10MS = 0;
 volatile bit RTC_FLAG_50MS = 0;
 volatile bit RTC_FLAG_250MS = 0;
 volatile bit RTC_FLAG_500MS = 0;
-//volatile bit SER_RC_FLAG = 0;
+
 
 //global counter for timer0
 volatile unsigned int RTC_Counter = 0;
@@ -91,15 +91,14 @@ volatile unsigned int RTC_Counter = 0;
 // Interrupt service routine
 void interrupt isr1(void) 
 {
-	//Timer 1
 	
 	
-
+	
 	if(TMR0IF)  //interrupt from timer0
 	{
 		TMR0IF = 0;		//reset interrupt flag
 		TMR0 = TMR0_VAL;	//reset timer0 value
-
+		
 		RTC_Counter++;		//increase the count
 		//set clock flags 
 		RTC_FLAG_1MS = 1;	
@@ -114,67 +113,47 @@ void interrupt isr1(void)
 		{
 			
 			RTC_FLAG_250MS = 1;
-
+			
 		}
 		if(RTC_Counter % 500 == 0) 		//EVERY 500ms
 		{
 			RTC_FLAG_500MS = 1;
-			RTC_Counter = 0;	//reset RTC Counter
 			HBLED ^= 0x01;		//toggle heartbeat LED
 
 		}
-		
 		if (buttonPressed == 0)
-			{
+		{
+			
 			buttonPressed = ReadButtons();
-			}
-	}
 
-	 					
-	if (RCIF) 
-	{	
-	//	SER_RC_FLAG = 1;	
-	//	LED0 = 0x01;						
-		DistHighByte = RCREG;
-	//	RCIF = 0;
-		distTravelled = (int)DistHighByte ;
-		//rxfifo[rxiptr]=RCREG;				
-		//ser_tmp=(rxiptr+1) & SER_FIFO_MASK;	
-		//if (ser_tmp!=rxoptr)				
-		//	rxiptr=ser_tmp;				
-		
-	}										
-	if (TXIF && TXIE) 
-	{						
-		TXREG = txfifo[txoptr];				
-		++txoptr;							
-		txoptr &= SER_FIFO_MASK;			
-		if (txoptr==txiptr) 
-			TXIE = 0;									
-	}							
+		}
+	}
+	ser_int();							
 }
 
 void init()
 {
-	GIE=0;
-	init_adc();
-	lcd_init();
-	ser_init();
-	robo_init();
+	
+	
+	buttonPressed = 0;
+	
 	//PortB all inputs except pin 0 and 1
-	TRISB = 0b11111100;
+	
 	TRISC &= 0b10010000;
 	
 	SSPSTAT = 0b01000000;
 	SSPCON = 0b10100001; 
 	//timer0 prescalar set
 	OPTION_REG = 0b00000100;
-	
+	ser_init();	
+	init_adc();
+	lcd_init();
+	robo_init();
+	TRISB = 0b11111100;	//PortB all inputs except pin 0 and 1
 	//enable timer0 interrupt
 	TMR0IE = 1;
 	PEIE=1;		//enable peripheral interrupts 
 	//Enable all interrupts
-	GIE=1;
 	ei();
 }
 
@@ -278,7 +257,7 @@ void ChargeMode(void)
 			return;
 
 			default:
-			
+			buttonPressed = 0;
 			break;
 		}
 	}
@@ -288,7 +267,7 @@ void ChargeMode(void)
 int scan360(void)
 {
 	int lowestVal = 0, lowestSteps = 0;
-	SCAN_FLAG = 1;
+
 	for (int steps = 0; steps < 400; steps++)
 	{
 		readAvgDistance();
@@ -307,7 +286,7 @@ int scan360(void)
 			}
 		test = lowestSteps;
 	} 
-	SCAN_FLAG = 0;
+
 	return lowestSteps;
 }
 
@@ -316,8 +295,8 @@ int scan360(void)
 
 void main(void)
 {
-		unsigned char choice = 255;		//move these
-		int shortwall = 0;				//move these
+		unsigned char choice = 255;	
+		int shortwall = 0;				
 	
 	
 	//initialise function
@@ -330,19 +309,13 @@ void main(void)
 	{
 
 
-		if ((SCAN_FLAG == 0) & (RTC_FLAG_250MS == 1))
+		if (RTC_FLAG_250MS == 1)
 			{
 				RTC_FLAG_250MS = 0;
 				
 				readAvgDistance();
 				UpdateDisplay();
 			}
-	//	if (SER_RC_FLAG)
-		//	{
-		//		SER_RC_FLAG = 0;
-		//		DistHighByte = ser_getch();
-		//		distTravelled = (int)DistHighByte ;
-		//	}
 		
 		switch (buttonPressed)
 		{
@@ -377,7 +350,7 @@ void main(void)
 			
 			break;
 			default:
-			
+			buttonPressed = 0;
 			break;
 		}
 
@@ -404,7 +377,7 @@ void main(void)
 				robotMove(1000);
 			break;
 			case 4:		//Follow wall
-				//robot_distance();
+				robot_read();
 			break;		
 			
 			case 5:		//Charge Mode

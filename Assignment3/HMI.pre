@@ -1155,7 +1155,7 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
 # 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
-unsigned char currentMenu = 0;
+volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
@@ -1199,8 +1199,8 @@ void ADCconvert(void);
 void robo_init(void);
 void robotMove(int distance);
 void robotTurn(int distance);
-void robot_distance(void);
-void robot_read(unsigned char packet);
+
+void robot_read(void);
 volatile int distTravelled = 0;
 volatile unsigned char DistHighByte, DistLowByte;
 
@@ -1319,6 +1319,7 @@ CenterReleased = 1;
 
 unsigned char ReadButtons(void)
 {
+
 Debounce();
 
 if(UpPressed)
@@ -1356,9 +1357,9 @@ return 5;
 return 0;
 }
 
-unsigned char Menu(unsigned char input)
+unsigned char Menu(unsigned char BTN_input)
 {
-switch (input)
+switch (BTN_input)
 {
 case 1:
 

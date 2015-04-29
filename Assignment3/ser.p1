@@ -1781,232 +1781,232 @@ Version 3.2 HI-TECH Software Intermediate Code
 "56
 [v _c `uc  1 a ]
 [; ;ser.c: 56: unsigned char c;
-[; ;ser.c: 59: while (ser_isrx()==0 )
-"59
+[; ;ser.c: 58: while (ser_isrx()==0)
+"58
 [e $U 104  ]
 [e :U 105 ]
-[; ;ser.c: 60: continue;
-"60
+[; ;ser.c: 59: continue;
+"59
 [e $U 104  ]
 [e :U 104 ]
-"59
+"58
 [e $ == -> ( _ser_isrx ..  `i -> 0 `i 105  ]
 [e :U 106 ]
-[; ;ser.c: 62: GIE=0;
-"62
+[; ;ser.c: 61: GIE=0;
+"61
 [e = _GIE -> -> 0 `i `b ]
-[; ;ser.c: 63: c=rxfifo[rxoptr];
-"63
+[; ;ser.c: 62: c=rxfifo[rxoptr];
+"62
 [e = _c *U + &U _rxfifo * -> _rxoptr `ux -> -> # *U &U _rxfifo `ui `ux ]
-[; ;ser.c: 64: ++rxoptr;
-"64
+[; ;ser.c: 63: ++rxoptr;
+"63
 [e =+ _rxoptr -> -> 1 `i `uc ]
-[; ;ser.c: 65: rxoptr &= (16-1);
-"65
+[; ;ser.c: 64: rxoptr &= (16-1);
+"64
 [e =& _rxoptr -> - -> 16 `i -> 1 `i `uc ]
-[; ;ser.c: 66: GIE=1;
-"66
+[; ;ser.c: 65: GIE=1;
+"65
 [e = _GIE -> -> 1 `i `b ]
-[; ;ser.c: 67: return c;
-"67
+[; ;ser.c: 66: return c;
+"66
 [e ) _c ]
 [e $UE 103  ]
-[; ;ser.c: 68: }
-"68
+[; ;ser.c: 67: }
+"67
 [e :UE 103 ]
 }
-"71
+"70
 [v _ser_putch `(v  1 ef1`uc ]
 {
-[; ;ser.c: 70: void ser_putch(unsigned char c)
-[; ;ser.c: 71: {
+[; ;ser.c: 69: void ser_putch(unsigned char c)
+[; ;ser.c: 70: {
 [e :U _ser_putch ]
 [v _c `uc  1 r1 ]
 [f ]
-[; ;ser.c: 72: while (((txiptr+1) & (16-1))==txoptr)
-"72
+[; ;ser.c: 71: while (((txiptr+1) & (16-1))==txoptr)
+"71
 [e $U 108  ]
 [e :U 109 ]
-[; ;ser.c: 73: continue;
-"73
+[; ;ser.c: 72: continue;
+"72
 [e $U 108  ]
 [e :U 108 ]
-"72
+"71
 [e $ == & + -> _txiptr `i -> 1 `i - -> 16 `i -> 1 `i -> _txoptr `i 109  ]
 [e :U 110 ]
-[; ;ser.c: 74: GIE=0;
-"74
+[; ;ser.c: 73: GIE=0;
+"73
 [e = _GIE -> -> 0 `i `b ]
-[; ;ser.c: 75: txfifo[txiptr] = c;
-"75
+[; ;ser.c: 74: txfifo[txiptr] = c;
+"74
 [e = *U + &U _txfifo * -> _txiptr `ux -> -> # *U &U _txfifo `ui `ux _c ]
-[; ;ser.c: 76: txiptr=(txiptr+1) & (16-1);
-"76
+[; ;ser.c: 75: txiptr=(txiptr+1) & (16-1);
+"75
 [e = _txiptr -> & + -> _txiptr `i -> 1 `i - -> 16 `i -> 1 `i `uc ]
-[; ;ser.c: 77: TXIE=1;
-"77
+[; ;ser.c: 76: TXIE=1;
+"76
 [e = _TXIE -> -> 1 `i `b ]
-[; ;ser.c: 78: GIE=1;
-"78
+[; ;ser.c: 77: GIE=1;
+"77
 [e = _GIE -> -> 1 `i `b ]
-[; ;ser.c: 79: }
-"79
+[; ;ser.c: 78: }
+"78
 [e :UE 107 ]
 }
-"82
+"81
 [v _ser_puts `(v  1 ef1`*Cuc ]
 {
-[; ;ser.c: 81: void ser_puts(const unsigned char * s)
-[; ;ser.c: 82: {
+[; ;ser.c: 80: void ser_puts(const unsigned char * s)
+[; ;ser.c: 81: {
 [e :U _ser_puts ]
 [v _s `*Cuc  1 r1 ]
 [f ]
-[; ;ser.c: 83: while(*s)
-"83
+[; ;ser.c: 82: while(*s)
+"82
 [e $U 112  ]
 [e :U 113 ]
-[; ;ser.c: 84: ser_putch(*s++);
-"84
+[; ;ser.c: 83: ser_putch(*s++);
+"83
 [e ( _ser_putch (1 *U ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
 [e :U 112 ]
-"83
+"82
 [e $ != -> *U _s `i -> -> -> 0 `i `Cuc `i 113  ]
 [e :U 114 ]
-[; ;ser.c: 85: }
-"85
+[; ;ser.c: 84: }
+"84
 [e :UE 111 ]
 }
-"88
+"87
 [v _ser_puts2 `(v  1 ef1`*uc ]
 {
-[; ;ser.c: 87: void ser_puts2(unsigned char * s)
-[; ;ser.c: 88: {
+[; ;ser.c: 86: void ser_puts2(unsigned char * s)
+[; ;ser.c: 87: {
 [e :U _ser_puts2 ]
 [v _s `*uc  1 r1 ]
 [f ]
-[; ;ser.c: 89: while(*s)
-"89
+[; ;ser.c: 88: while(*s)
+"88
 [e $U 116  ]
 [e :U 117 ]
-[; ;ser.c: 90: ser_putch(*s++);
-"90
+[; ;ser.c: 89: ser_putch(*s++);
+"89
 [e ( _ser_putch (1 *U ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
 [e :U 116 ]
-"89
+"88
 [e $ != -> *U _s `i -> -> -> 0 `i `uc `i 117  ]
 [e :U 118 ]
-[; ;ser.c: 91: }
-"91
+[; ;ser.c: 90: }
+"90
 [e :UE 115 ]
 }
-"94
+"93
 [v _ser_puthex `(v  1 ef1`uc ]
 {
-[; ;ser.c: 93: void ser_puthex(unsigned char v)
-[; ;ser.c: 94: {
+[; ;ser.c: 92: void ser_puthex(unsigned char v)
+[; ;ser.c: 93: {
 [e :U _ser_puthex ]
 [v _v `uc  1 r1 ]
 [f ]
-"95
+"94
 [v _c `uc  1 a ]
-[; ;ser.c: 95: unsigned char c;
-[; ;ser.c: 97: c = v >> 4;
-"97
+[; ;ser.c: 94: unsigned char c;
+[; ;ser.c: 96: c = v >> 4;
+"96
 [e = _c -> >> -> _v `i -> 4 `i `uc ]
-[; ;ser.c: 98: if (c>9) {
-"98
+[; ;ser.c: 97: if (c>9) {
+"97
 [e $ ! > -> _c `i -> 9 `i 120  ]
 {
-[; ;ser.c: 99: ser_putch('A'-10+c);
-"99
+[; ;ser.c: 98: ser_putch('A'-10+c);
+"98
 [e ( _ser_putch (1 -> + - -> 65 `ui -> -> 10 `i `ui -> _c `ui `uc ]
-"100
+"99
 }
-[; ;ser.c: 100: } else {
+[; ;ser.c: 99: } else {
 [e $U 121  ]
 [e :U 120 ]
 {
-[; ;ser.c: 101: ser_putch('0'+c);
-"101
+[; ;ser.c: 100: ser_putch('0'+c);
+"100
 [e ( _ser_putch (1 -> + -> 48 `ui -> _c `ui `uc ]
-"102
+"101
 }
 [e :U 121 ]
-[; ;ser.c: 102: }
-[; ;ser.c: 104: c = v & 0x0F;
-"104
+[; ;ser.c: 101: }
+[; ;ser.c: 103: c = v & 0x0F;
+"103
 [e = _c -> & -> _v `i -> 15 `i `uc ]
-[; ;ser.c: 105: if (c>9) {
-"105
+[; ;ser.c: 104: if (c>9) {
+"104
 [e $ ! > -> _c `i -> 9 `i 122  ]
 {
-[; ;ser.c: 106: ser_putch('A'-10+c);
-"106
+[; ;ser.c: 105: ser_putch('A'-10+c);
+"105
 [e ( _ser_putch (1 -> + - -> 65 `ui -> -> 10 `i `ui -> _c `ui `uc ]
-"107
+"106
 }
-[; ;ser.c: 107: } else {
+[; ;ser.c: 106: } else {
 [e $U 123  ]
 [e :U 122 ]
 {
-[; ;ser.c: 108: ser_putch('0'+c);
-"108
+[; ;ser.c: 107: ser_putch('0'+c);
+"107
 [e ( _ser_putch (1 -> + -> 48 `ui -> _c `ui `uc ]
-"109
+"108
 }
 [e :U 123 ]
+[; ;ser.c: 108: }
 [; ;ser.c: 109: }
-[; ;ser.c: 110: }
-"110
+"109
 [e :UE 119 ]
 }
-"114
+"113
 [v _ser_init `(v  1 ef ]
 {
-[; ;ser.c: 113: void ser_init(void)
-[; ;ser.c: 114: {
+[; ;ser.c: 112: void ser_init(void)
+[; ;ser.c: 113: {
 [e :U _ser_init ]
 [f ]
-[; ;ser.c: 115: TRISC |= 0b10000000;
-"115
+[; ;ser.c: 114: TRISC |= 0b10000000;
+"114
 [e =| _TRISC -> -> 128 `i `uc ]
-[; ;ser.c: 116: TRISC &= 0b10111111;
-"116
+[; ;ser.c: 115: TRISC &= 0b10111111;
+"115
 [e =& _TRISC -> -> 191 `i `uc ]
-[; ;ser.c: 117: BRGH=1;
-"117
+[; ;ser.c: 116: BRGH=1;
+"116
 [e = _BRGH -> -> 1 `i `b ]
-[; ;ser.c: 119: SPBRG=20;
-"119
+[; ;ser.c: 118: SPBRG=20;
+"118
 [e = _SPBRG -> -> 20 `i `uc ]
-[; ;ser.c: 122: TX9=0;
-"122
+[; ;ser.c: 121: TX9=0;
+"121
 [e = _TX9 -> -> 0 `i `b ]
-[; ;ser.c: 123: RX9=0;
-"123
+[; ;ser.c: 122: RX9=0;
+"122
 [e = _RX9 -> -> 0 `i `b ]
-[; ;ser.c: 125: SYNC=0;
-"125
+[; ;ser.c: 124: SYNC=0;
+"124
 [e = _SYNC -> -> 0 `i `b ]
-[; ;ser.c: 126: SPEN=1;
-"126
+[; ;ser.c: 125: SPEN=1;
+"125
 [e = _SPEN -> -> 1 `i `b ]
-[; ;ser.c: 127: CREN=1;
-"127
+[; ;ser.c: 126: CREN=1;
+"126
 [e = _CREN -> -> 1 `i `b ]
-[; ;ser.c: 128: TXIE=0;
-"128
+[; ;ser.c: 127: TXIE=0;
+"127
 [e = _TXIE -> -> 0 `i `b ]
-[; ;ser.c: 129: RCIE=1;
-"129
+[; ;ser.c: 128: RCIE=1;
+"128
 [e = _RCIE -> -> 1 `i `b ]
-[; ;ser.c: 130: TXEN=1;
-"130
+[; ;ser.c: 129: TXEN=1;
+"129
 [e = _TXEN -> -> 1 `i `b ]
-[; ;ser.c: 133: rxiptr=rxoptr=txiptr=txoptr=0;
-"133
+[; ;ser.c: 132: rxiptr=rxoptr=txiptr=txoptr=0;
+"132
 [e = _rxiptr = _rxoptr = _txiptr = _txoptr -> -> 0 `i `uc ]
-[; ;ser.c: 134: }
-"134
+[; ;ser.c: 133: }
+"133
 [e :UE 124 ]
 }
