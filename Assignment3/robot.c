@@ -40,7 +40,7 @@ void robotMove(int distance)
 {
 	distTravelled =0;
 
-			if (distance >= 0)
+			if (distance >= 0)	//forward
 {
 				ser_putch(137); //drive - opcode 1
 			
@@ -52,7 +52,7 @@ void robotMove(int distance)
 			
 				ser_putch(0); 
 }
-else
+else							//backward
 {
 			ser_putch(137); //drive - opcode 1
 			
@@ -93,25 +93,25 @@ void robotTurn(int distance)
 
 	turnlowByte = (unsigned char) (distance) ;
 	turnhighByte = (unsigned char) (distance >> 8);				
-	if (distance >= 0)
+	if (distance >= 0)		//ccounter clockwise
 {
 				ser_putch(137); //drive - opcode 1
 			
 				ser_putch(0); // 
 			
-				ser_putch(100); 
+				ser_putch(50); 
 				
 				ser_putch(0); 
 			
 				ser_putch(1);
 }
-else
+else						//clockwise
 {
 				ser_putch(137); //drive - opcode 1
 			
 				ser_putch(0); // 
 			
-				ser_putch(100); 
+				ser_putch(50); 
 				
 				ser_putch(255); 
 			

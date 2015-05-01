@@ -366,7 +366,7 @@ void main(void)
 			break;
 			case 2:		//Drive forward 2 meters
 				__delay_ms(100);
-				robotMove(200);///////CHange to 2000
+				robotMove(2000);
 					
 			
 			break;
@@ -377,6 +377,54 @@ void main(void)
 				robotMove(1000);
 			break;
 			case 4:		//Follow wall
+			
+			while(1)
+			{
+				shortwall = scan360();
+				int RT2P = 0; //RT2P = Robot Turn to Position
+				int direction1 = 0; // Cw (0) or ccw (1) flag
+				 if (shortwall > 200)	// If the wall is on right, turn 90deg ccw infront of wall.
+				 	RT2P = shortwall + 100;
+				 if (shortwall < 200)	// If the wall is on the left, turn 90deg cw infront of wall.
+				 	RT2P = shortwall - 100; 
+				
+
+				 if (RT2P > 400 && RT2P < 500 )
+				{	
+				 	RT2P = RT2P - 400;
+					direction1 = 1;
+				}
+				 if (RT2P > 200 && RT2P < 400)
+				{ 	
+					RT2P = 400 - RT2P;
+					RT2P = RT2P * -1;
+					direction1 = 0;
+				}
+				 if (RT2P < 200 && RT2P > 0)
+				{ 
+					direction1 = 1;
+				}
+				 if (RT2P < 0 && RT2P > -200)
+				{
+					//RT2P = RT2P * -1;
+					direction1 = 0;
+				}
+				if(RT2P < -200 || RT2P >500)
+					{
+						//display error
+					}
+ 
+				rotate((400 - shortwall), CLOCKWISE); //IR sensor
+				__delay_ms(100); 
+
+
+				int RT2A= RT2P * 36/40;
+				robotTurn(RT2A);
+				__delay_ms(100);
+				rotate(shortwall,CLOCKWISE);
+				__delay_ms(100);
+				robotMove(2000);
+		}		
 				
 			break;		
 			
@@ -390,3 +438,6 @@ void main(void)
 		choice = 255;
 	}
 }
+
+
+
