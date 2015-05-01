@@ -361,7 +361,7 @@ void main(void)
 				calibrateIR();
 			break;
 			case 1:		//Scan 360 degrees
-			 	shortwall = scan360();
+			 	shortwall = scan360() - 13;
 				rotate((400 - shortwall), CLOCKWISE);
 			break;
 			case 2:		//Drive forward 2 meters
@@ -380,7 +380,7 @@ void main(void)
 			
 			while(1)
 			{
-				shortwall = scan360();
+				shortwall = scan360() - 13; //fails, when pointing directly at wall. value <0, IR scanner spins.
 				int RT2P = 0; //RT2P = Robot Turn to Position
 				int direction1 = 0; // Cw (0) or ccw (1) flag
 				 if (shortwall > 200)	// If the wall is on right, turn 90deg ccw infront of wall.
@@ -389,22 +389,22 @@ void main(void)
 				 	RT2P = shortwall - 100; 
 				
 
-				 if (RT2P > 400 && RT2P < 500 )
+				 if (RT2P >= 400 && RT2P < 500 )
 				{	
 				 	RT2P = RT2P - 400;
 					direction1 = 1;
 				}
-				 if (RT2P > 200 && RT2P < 400)
+				 if (RT2P >= 200 && RT2P < 400)
 				{ 	
 					RT2P = 400 - RT2P;
 					RT2P = RT2P * -1;
 					direction1 = 0;
 				}
-				 if (RT2P < 200 && RT2P > 0)
+				 if (RT2P < 200 && RT2P >= 0)
 				{ 
 					direction1 = 1;
 				}
-				 if (RT2P < 0 && RT2P > -200)
+				 if (RT2P < 0 && RT2P >= -200)
 				{
 					//RT2P = RT2P * -1;
 					direction1 = 0;
@@ -414,16 +414,16 @@ void main(void)
 						//display error
 					}
  
-				rotate((400 - shortwall), CLOCKWISE); //IR sensor
+				rotate((400 - shortwall ), CLOCKWISE); //IR sensor
 				__delay_ms(100); 
 
 
-				int RT2A= RT2P * 36/40;
+				int RT2A= RT2P * (36.0/40.0);
 				robotTurn(RT2A);
 				__delay_ms(100);
 				rotate(shortwall,CLOCKWISE);
 				__delay_ms(100);
-				robotMove(2000);
+				robotMove(500);
 		}		
 				
 			break;		

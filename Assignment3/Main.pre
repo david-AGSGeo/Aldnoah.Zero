@@ -1534,7 +1534,7 @@ case 0:
 calibrateIR();
 break;
 case 1:
-shortwall = scan360();
+shortwall = scan360() - 13;
 rotate((400 - shortwall), 0);
 break;
 case 2:
@@ -1553,7 +1553,7 @@ case 4:
 
 while(1)
 {
-shortwall = scan360();
+shortwall = scan360() - 13;
 int RT2P = 0;
 int direction1 = 0;
 if (shortwall > 200)
@@ -1562,22 +1562,22 @@ if (shortwall < 200)
 RT2P = shortwall - 100;
 
 
-if (RT2P > 400 && RT2P < 500 )
+if (RT2P >= 400 && RT2P < 500 )
 {
 RT2P = RT2P - 400;
 direction1 = 1;
 }
-if (RT2P > 200 && RT2P < 400)
+if (RT2P >= 200 && RT2P < 400)
 {
 RT2P = 400 - RT2P;
 RT2P = RT2P * -1;
 direction1 = 0;
 }
-if (RT2P < 200 && RT2P > 0)
+if (RT2P < 200 && RT2P >= 0)
 {
 direction1 = 1;
 }
-if (RT2P < 0 && RT2P > -200)
+if (RT2P < 0 && RT2P >= -200)
 {
 
 direction1 = 0;
@@ -1587,16 +1587,16 @@ if(RT2P < -200 || RT2P >500)
 
 }
 
-rotate((400 - shortwall), 0);
+rotate((400 - shortwall ), 0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 
 
-int RT2A= RT2P * 36/40;
+int RT2A= RT2P * (36.0/40.0);
 robotTurn(RT2A);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 rotate(shortwall,0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
-robotMove(2000);
+robotMove(200);
 }
 
 break;

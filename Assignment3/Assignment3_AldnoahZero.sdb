@@ -5150,6 +5150,29 @@
 [v lcd_set_cursor@address `uc  1 a 1 wreg ]
 "45
 } 0
+"33 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awtoft.c
+[v ___awtoft `(f  1 e 3 0 ]
+{
+"34
+[v ___awtoft@sign `uc  1 a 1 27 ]
+"33
+[v ___awtoft@c `i  1 p 2 22 ]
+"42
+} 0
+"52 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\ftmul.c
+[v ___ftmul `(f  1 e 3 0 ]
+{
+"54
+[v ___ftmul@f3_as_product `um  1 a 3 39 ]
+"53
+[v ___ftmul@sign `uc  1 a 1 43 ]
+[v ___ftmul@cntr `uc  1 a 1 42 ]
+[v ___ftmul@exp `uc  1 a 1 38 ]
+"52
+[v ___ftmul@f1 `f  1 p 3 28 ]
+[v ___ftmul@f2 `f  1 p 3 31 ]
+"84
+} 0
 "55 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.c
 [v _ser_getch `(uc  1 e 1 0 ]
 {
@@ -5239,18 +5262,25 @@
 [v ___awmod@dividend `i  1 p 2 2 ]
 "30
 } 0
-"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\awdiv.c
-[v ___awdiv `(i  1 e 2 0 ]
+"45 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\fttol.c
+[v ___fttol `(l  1 e 4 0 ]
 {
-"6
-[v ___awdiv@quotient `i  1 a 2 13 ]
-"7
-[v ___awdiv@sign `uc  1 a 1 12 ]
-[v ___awdiv@counter `uc  1 a 1 11 ]
-"5
-[v ___awdiv@divisor `i  1 p 2 6 ]
-[v ___awdiv@dividend `i  1 p 2 8 ]
-"37
+"47
+[v ___fttol@lval `ul  1 a 4 17 ]
+"46
+[v ___fttol@exp1 `uc  1 a 1 21 ]
+[v ___fttol@sign1 `uc  1 a 1 16 ]
+"45
+[v ___fttol@f1 `f  1 p 3 8 ]
+"73
+} 0
+"63 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\float.c
+[v ___ftpack `(f  1 e 3 0 ]
+{
+[v ___ftpack@arg `um  1 p 3 0 ]
+[v ___ftpack@exp `uc  1 p 1 3 ]
+[v ___ftpack@sign `uc  1 p 1 4 ]
+"86
 } 0
 "5 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lwmod.c
 [v ___lwmod `(ui  1 e 2 0 ]

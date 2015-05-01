@@ -2619,9 +2619,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 363: case 1:
 "363
 [e :U 162 ]
-[; ;Main.c: 364: shortwall = scan360();
+[; ;Main.c: 364: shortwall = scan360() - 13;
 "364
-[e = _shortwall ( _scan360 ..  ]
+[e = _shortwall - ( _scan360 ..  -> 13 `i ]
 [; ;Main.c: 365: rotate((400 - shortwall), 0);
 "365
 [e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
@@ -2667,9 +2667,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 382: {
 "382
 {
-[; ;Main.c: 383: shortwall = scan360();
+[; ;Main.c: 383: shortwall = scan360() - 13;
 "383
-[e = _shortwall ( _scan360 ..  ]
+[e = _shortwall - ( _scan360 ..  -> 13 `i ]
 "384
 [v _RT2P `i  1 a ]
 [; ;Main.c: 384: int RT2P = 0;
@@ -2692,9 +2692,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "389
 [e = _RT2P - _shortwall -> 100 `i ]
 [e :U 170 ]
-[; ;Main.c: 392: if (RT2P > 400 && RT2P < 500 )
+[; ;Main.c: 392: if (RT2P >= 400 && RT2P < 500 )
 "392
-[e $ ! && > _RT2P -> 400 `i < _RT2P -> 500 `i 171  ]
+[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 171  ]
 [; ;Main.c: 393: {
 "393
 {
@@ -2708,9 +2708,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 171 ]
 [; ;Main.c: 396: }
-[; ;Main.c: 397: if (RT2P > 200 && RT2P < 400)
+[; ;Main.c: 397: if (RT2P >= 200 && RT2P < 400)
 "397
-[e $ ! && > _RT2P -> 200 `i < _RT2P -> 400 `i 172  ]
+[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 172  ]
 [; ;Main.c: 398: {
 "398
 {
@@ -2727,9 +2727,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 172 ]
 [; ;Main.c: 402: }
-[; ;Main.c: 403: if (RT2P < 200 && RT2P > 0)
+[; ;Main.c: 403: if (RT2P < 200 && RT2P >= 0)
 "403
-[e $ ! && < _RT2P -> 200 `i > _RT2P -> 0 `i 173  ]
+[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 173  ]
 [; ;Main.c: 404: {
 "404
 {
@@ -2740,9 +2740,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 173 ]
 [; ;Main.c: 406: }
-[; ;Main.c: 407: if (RT2P < 0 && RT2P > -200)
+[; ;Main.c: 407: if (RT2P < 0 && RT2P >= -200)
 "407
-[e $ ! && < _RT2P -> 0 `i > _RT2P -U -> 200 `i 174  ]
+[e $ ! && < _RT2P -> 0 `i >= _RT2P -U -> 200 `i 174  ]
 [; ;Main.c: 408: {
 "408
 {
@@ -2763,7 +2763,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 175 ]
 [; ;Main.c: 415: }
-[; ;Main.c: 417: rotate((400 - shortwall), 0);
+[; ;Main.c: 417: rotate((400 - shortwall ), 0);
 "417
 [e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
 [; ;Main.c: 418: _delay((unsigned long)((100)*(20000000/4000.0)));
@@ -2771,8 +2771,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
 "421
 [v _RT2A `i  1 a ]
-[; ;Main.c: 421: int RT2A= RT2P * 36/40;
-[e = _RT2A / * _RT2P -> 36 `i -> 40 `i ]
+[; ;Main.c: 421: int RT2A= RT2P * (36.0/40.0);
+[e = _RT2A -> * -> _RT2P `d / .36.0 .40.0 `i ]
 [; ;Main.c: 422: robotTurn(RT2A);
 "422
 [e ( _robotTurn (1 _RT2A ]
@@ -2785,9 +2785,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 425: _delay((unsigned long)((100)*(20000000/4000.0)));
 "425
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 426: robotMove(2000);
+[; ;Main.c: 426: robotMove(200);
 "426
-[e ( _robotMove (1 -> 2000 `i ]
+[e ( _robotMove (1 -> 200 `i ]
 "427
 }
 [e :U 166 ]
