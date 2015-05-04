@@ -4,8 +4,8 @@
 #include <htc.h>
 
 volatile unsigned int adcVal;
-volatile unsigned int distance;
-volatile unsigned int test = 0;
+volatile unsigned int IRdistance;
+
 
 
 unsigned int readDistance(void);

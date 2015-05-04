@@ -1,27 +1,27 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"82 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"82 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _INDF `Vuc  1 e@0 ]
-"86 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"86 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR0 `Vuc  1 e@1 ]
-"90 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"90 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCL `Vuc  1 e@2 ]
-"94 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"94 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _STATUS `Vuc  1 e@3 ]
-"96 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"96 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CARRY `Vb  1 e@24 ]
-"97 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"97 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _DC `Vb  1 e@25 ]
-"98 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"98 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ZERO `Vb  1 e@26 ]
-"99 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"99 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nPD `Vb  1 e@27 ]
-"100 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"100 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nTO `Vb  1 e@28 ]
-"101 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"101 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _IRP `Vb  1 e@31 ]
-"102 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"102 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RP0 `Vb  1 e@29 ]
-"103 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"103 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RP1 `Vb  1 e@30 ]
 [s S2 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
 [n S2 . C DC Z nPD nTO RP IRP ]
@@ -29,145 +29,145 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S3 . . RP0 RP1 ]
 [u S1 `S2 1 `S3 1 ]
 [n S1 . . . ]
-"120 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"120 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _STATUSbits `VS1  1 e@3 ]
-"124 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"124 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _FSR `Vuc  1 e@4 ]
-"128 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"128 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTA `Vuc  1 e@5 ]
-"130 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"130 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RA0 `Vb  1 e@40 ]
-"131 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"131 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RA1 `Vb  1 e@41 ]
-"132 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"132 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RA2 `Vb  1 e@42 ]
-"133 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"133 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RA3 `Vb  1 e@43 ]
-"134 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"134 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RA4 `Vb  1 e@44 ]
-"135 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"135 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RA5 `Vb  1 e@45 ]
 [s S5 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S5 . RA0 RA1 RA2 RA3 RA4 RA5 ]
 [u S4 `S5 1 ]
 [n S4 . . ]
-"146 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"146 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTAbits `VS4  1 e@5 ]
-"150 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"150 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTB `Vuc  1 e@6 ]
-"152 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"152 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB0 `Vb  1 e@48 ]
-"153 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"153 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB1 `Vb  1 e@49 ]
-"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB2 `Vb  1 e@50 ]
-"155 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"155 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB3 `Vb  1 e@51 ]
-"156 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"156 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB4 `Vb  1 e@52 ]
-"157 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"157 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB5 `Vb  1 e@53 ]
-"158 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"158 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB6 `Vb  1 e@54 ]
-"159 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"159 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RB7 `Vb  1 e@55 ]
 [s S7 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S7 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
 [u S6 `S7 1 ]
 [n S6 . . ]
-"172 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"172 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTBbits `VS6  1 e@6 ]
-"176 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"176 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTC `Vuc  1 e@7 ]
-"178 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"178 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC0 `Vb  1 e@56 ]
-"179 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"179 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC1 `Vb  1 e@57 ]
-"180 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"180 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC2 `Vb  1 e@58 ]
-"181 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"181 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC3 `Vb  1 e@59 ]
-"182 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"182 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC4 `Vb  1 e@60 ]
-"183 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"183 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC5 `Vb  1 e@61 ]
-"184 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"184 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC6 `Vb  1 e@62 ]
-"185 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"185 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC7 `Vb  1 e@63 ]
 [s S9 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S9 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
 [u S8 `S9 1 ]
 [n S8 . . ]
-"198 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"198 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTCbits `VS8  1 e@7 ]
-"202 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"202 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTD `Vuc  1 e@8 ]
-"204 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"204 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD0 `Vb  1 e@64 ]
-"205 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"205 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD1 `Vb  1 e@65 ]
-"206 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"206 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD2 `Vb  1 e@66 ]
-"207 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"207 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD3 `Vb  1 e@67 ]
-"208 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"208 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD4 `Vb  1 e@68 ]
-"209 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"209 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD5 `Vb  1 e@69 ]
-"210 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"210 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD6 `Vb  1 e@70 ]
-"211 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"211 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD7 `Vb  1 e@71 ]
 [s S11 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S11 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
 [u S10 `S11 1 ]
 [n S10 . . ]
-"224 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"224 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTDbits `VS10  1 e@8 ]
-"228 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"228 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTE `Vuc  1 e@9 ]
-"230 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"230 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RE0 `Vb  1 e@72 ]
-"231 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"231 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RE1 `Vb  1 e@73 ]
-"232 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"232 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RE2 `Vb  1 e@74 ]
 [s S13 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S13 . RE0 RE1 RE2 ]
 [u S12 `S13 1 ]
 [n S12 . . ]
-"240 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"240 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PORTEbits `VS12  1 e@9 ]
-"244 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"244 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCLATH `Vuc  1 e@10 ]
 [s S15 :5 `uc 1 ]
 [n S15 . PCLATH ]
 [u S14 `S15 1 ]
 [n S14 . . ]
-"251 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"251 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCLATHbits `VS14  1 e@10 ]
-"255 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"255 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _INTCON `Vuc  1 e@11 ]
-"257 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"257 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RBIF `Vb  1 e@88 ]
-"258 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"258 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _INTF `Vb  1 e@89 ]
-"259 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"259 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR0IF `Vb  1 e@90 ]
-"260 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"260 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RBIE `Vb  1 e@91 ]
-"261 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"261 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _INTE `Vb  1 e@92 ]
-"262 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"262 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR0IE `Vb  1 e@93 ]
-"263 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"263 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PEIE `Vb  1 e@94 ]
-"264 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"264 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _GIE `Vb  1 e@95 ]
-"265 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"265 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T0IF `Vb  1 e@90 ]
-"266 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"266 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T0IE `Vb  1 e@93 ]
 [s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S17 . RBIF INTF TMR0IF RBIE INTE TMR0IE PEIE GIE ]
@@ -175,25 +175,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S18 . . T0IF . T0IE ]
 [u S16 `S17 1 `S18 1 ]
 [n S16 . . . ]
-"285 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"285 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _INTCONbits `VS16  1 e@11 ]
-"289 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"289 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIR1 `Vuc  1 e@12 ]
-"291 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"291 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1IF `Vb  1 e@96 ]
-"292 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"292 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR2IF `Vb  1 e@97 ]
-"293 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"293 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1IF `Vb  1 e@98 ]
-"294 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"294 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPIF `Vb  1 e@99 ]
-"295 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"295 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXIF `Vb  1 e@100 ]
-"296 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"296 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCIF `Vb  1 e@101 ]
-"297 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"297 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADIF `Vb  1 e@102 ]
-"298 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"298 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PSPIF `Vb  1 e@103 ]
 [s S20 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S20 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
@@ -201,47 +201,47 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S21 . . . . . . . . ]
 [u S19 `S20 1 `S21 1 ]
 [n S19 . . . ]
-"320 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"320 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIR1bits `VS19  1 e@12 ]
-"324 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"324 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIR2 `Vuc  1 e@13 ]
-"326 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"326 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2IF `Vb  1 e@104 ]
-"327 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"327 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _BCLIF `Vb  1 e@107 ]
-"328 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"328 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEIF `Vb  1 e@108 ]
-"329 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"329 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CMIF `Vb  1 e@110 ]
 [s S23 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S23 . CCP2IF . BCLIF EEIF . CMIF ]
 [u S22 `S23 1 ]
 [n S22 . . ]
-"340 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"340 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIR2bits `VS22  1 e@13 ]
-"345 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"345 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1L `Vuc  1 e@14 ]
-"349 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"349 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1H `Vuc  1 e@15 ]
-"353 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"353 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1 `Vui  1 e@14 ]
-"356 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"356 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1CON `Vuc  1 e@16 ]
-"358 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"358 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1ON `Vb  1 e@128 ]
-"359 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"359 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1CS `Vb  1 e@129 ]
-"360 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"360 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nT1SYNC `Vb  1 e@130 ]
-"361 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"361 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1OSCEN `Vb  1 e@131 ]
-"362 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"362 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1SYNC `Vb  1 e@130 ]
-"363 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"363 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1CKPS0 `Vb  1 e@132 ]
-"364 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"364 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1CKPS1 `Vb  1 e@133 ]
-"365 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"365 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1INSYNC `Vb  1 e@130 ]
 [s S25 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 ]
 [n S25 . TMR1ON TMR1CS nT1SYNC T1OSCEN T1CKPS ]
@@ -251,25 +251,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S27 . . T1INSYNC ]
 [u S24 `S25 1 `S26 1 `S27 1 ]
 [n S24 . . . . ]
-"386 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"386 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T1CONbits `VS24  1 e@16 ]
-"390 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"390 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR2 `Vuc  1 e@17 ]
-"394 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"394 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T2CON `Vuc  1 e@18 ]
-"396 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"396 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR2ON `Vb  1 e@146 ]
-"397 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"397 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T2CKPS0 `Vb  1 e@144 ]
-"398 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"398 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T2CKPS1 `Vb  1 e@145 ]
-"399 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"399 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TOUTPS0 `Vb  1 e@147 ]
-"400 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"400 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TOUTPS1 `Vb  1 e@148 ]
-"401 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"401 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TOUTPS2 `Vb  1 e@149 ]
-"402 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"402 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TOUTPS3 `Vb  1 e@150 ]
 [s S29 :2 `uc 1 :1 `uc 1 :4 `uc 1 ]
 [n S29 . T2CKPS TMR2ON TOUTPS ]
@@ -277,27 +277,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S30 . T2CKPS0 T2CKPS1 . TOUTPS0 TOUTPS1 TOUTPS2 TOUTPS3 ]
 [u S28 `S29 1 `S30 1 ]
 [n S28 . . . ]
-"419 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"419 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T2CONbits `VS28  1 e@18 ]
-"423 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"423 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPBUF `Vuc  1 e@19 ]
-"427 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"427 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPCON `Vuc  1 e@20 ]
-"429 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"429 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CKP `Vb  1 e@164 ]
-"430 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"430 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPEN `Vb  1 e@165 ]
-"431 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"431 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPOV `Vb  1 e@166 ]
-"432 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"432 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _WCOL `Vb  1 e@167 ]
-"433 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"433 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPM0 `Vb  1 e@160 ]
-"434 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"434 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPM1 `Vb  1 e@161 ]
-"435 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"435 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPM2 `Vb  1 e@162 ]
-"436 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"436 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPM3 `Vb  1 e@163 ]
 [s S32 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S32 . SSPM CKP SSPEN SSPOV WCOL ]
@@ -305,27 +305,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S33 . SSPM0 SSPM1 SSPM2 SSPM3 ]
 [u S31 `S32 1 `S33 1 ]
 [n S31 . . . ]
-"452 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"452 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPCONbits `VS31  1 e@20 ]
-"457 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"457 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCPR1L `Vuc  1 e@21 ]
-"461 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"461 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCPR1H `Vuc  1 e@22 ]
-"465 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"465 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCPR1 `Vui  1 e@21 ]
-"468 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"468 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1CON `Vuc  1 e@23 ]
-"470 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"470 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1Y `Vb  1 e@188 ]
-"471 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"471 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1X `Vb  1 e@189 ]
-"472 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"472 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1M0 `Vb  1 e@184 ]
-"473 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"473 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1M1 `Vb  1 e@185 ]
-"474 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"474 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1M2 `Vb  1 e@186 ]
-"475 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"475 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1M3 `Vb  1 e@187 ]
 [s S35 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S35 . CCP1M CCP1Y CCP1X ]
@@ -333,33 +333,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S36 . CCP1M0 CCP1M1 CCP1M2 CCP1M3 ]
 [u S34 `S35 1 `S36 1 ]
 [n S34 . . . ]
-"489 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"489 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1CONbits `VS34  1 e@23 ]
-"493 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"493 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCSTA `Vuc  1 e@24 ]
-"495 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"495 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RX9D `Vb  1 e@192 ]
-"496 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"496 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _OERR `Vb  1 e@193 ]
-"497 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"497 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _FERR `Vb  1 e@194 ]
-"498 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"498 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADDEN `Vb  1 e@195 ]
-"499 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"499 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CREN `Vb  1 e@196 ]
-"500 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"500 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SREN `Vb  1 e@197 ]
-"501 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"501 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RX9 `Vb  1 e@198 ]
-"502 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"502 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SPEN `Vb  1 e@199 ]
-"503 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"503 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCD8 `Vb  1 e@192 ]
-"504 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"504 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC9 `Vb  1 e@198 ]
-"505 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"505 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nRC8 `Vb  1 e@198 ]
-"506 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"506 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RC8_9 `Vb  1 e@198 ]
 [s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S38 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
@@ -371,31 +371,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S41 . . RC8_9 ]
 [u S37 `S38 1 `S39 1 `S40 1 `S41 1 ]
 [n S37 . . . . . ]
-"532 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"532 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCSTAbits `VS37  1 e@24 ]
-"536 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"536 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXREG `Vuc  1 e@25 ]
-"540 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"540 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCREG `Vuc  1 e@26 ]
-"545 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"545 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCPR2L `Vuc  1 e@27 ]
-"549 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"549 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCPR2H `Vuc  1 e@28 ]
-"553 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"553 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCPR2 `Vui  1 e@27 ]
-"556 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"556 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2CON `Vuc  1 e@29 ]
-"558 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"558 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2Y `Vb  1 e@236 ]
-"559 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"559 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2X `Vb  1 e@237 ]
-"560 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"560 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2M0 `Vb  1 e@232 ]
-"561 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"561 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2M1 `Vb  1 e@233 ]
-"562 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"562 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2M2 `Vb  1 e@234 ]
-"563 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"563 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2M3 `Vb  1 e@235 ]
 [s S43 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S43 . CCP2M CCP2Y CCP2X ]
@@ -403,31 +403,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S44 . CCP2M0 CCP2M1 CCP2M2 CCP2M3 ]
 [u S42 `S43 1 `S44 1 ]
 [n S42 . . . ]
-"577 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"577 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2CONbits `VS42  1 e@29 ]
-"581 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"581 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADRESH `Vuc  1 e@30 ]
-"585 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"585 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCON0 `Vuc  1 e@31 ]
-"587 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"587 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADON `Vb  1 e@248 ]
-"588 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"588 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _GO_nDONE `Vb  1 e@250 ]
-"589 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"589 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _GO `Vb  1 e@250 ]
-"590 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"590 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CHS0 `Vb  1 e@251 ]
-"591 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"591 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CHS1 `Vb  1 e@252 ]
-"592 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"592 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CHS2 `Vb  1 e@253 ]
-"593 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"593 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCS0 `Vb  1 e@254 ]
-"594 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"594 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCS1 `Vb  1 e@255 ]
-"595 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"595 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nDONE `Vb  1 e@250 ]
-"596 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"596 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _GO_DONE `Vb  1 e@250 ]
 [s S46 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :2 `uc 1 ]
 [n S46 . ADON . GO_nDONE CHS ADCS ]
@@ -441,25 +441,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S50 . . GO_DONE ]
 [u S45 `S46 1 `S47 1 `S48 1 `S49 1 `S50 1 ]
 [n S45 . . . . . . ]
-"630 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"630 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCON0bits `VS45  1 e@31 ]
-"639 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"639 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _OPTION_REG `Vuc  1 e@129 ]
-"641 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"641 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PSA `Vb  1 e@1035 ]
-"642 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"642 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T0SE `Vb  1 e@1036 ]
-"643 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"643 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _T0CS `Vb  1 e@1037 ]
-"644 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"644 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _INTEDG `Vb  1 e@1038 ]
-"645 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"645 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nRBPU `Vb  1 e@1039 ]
-"646 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"646 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PS0 `Vb  1 e@1032 ]
-"647 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"647 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PS1 `Vb  1 e@1033 ]
-"648 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"648 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PS2 `Vb  1 e@1034 ]
 [s S52 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S52 . PS PSA T0SE T0CS INTEDG nRBPU ]
@@ -467,169 +467,169 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S53 . PS0 PS1 PS2 ]
 [u S51 `S52 1 `S53 1 ]
 [n S51 . . . ]
-"664 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"664 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _OPTION_REGbits `VS51  1 e@129 ]
-"668 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"668 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA `Vuc  1 e@133 ]
-"670 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"670 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA0 `Vb  1 e@1064 ]
-"671 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"671 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA1 `Vb  1 e@1065 ]
-"672 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"672 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA2 `Vb  1 e@1066 ]
-"673 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"673 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA3 `Vb  1 e@1067 ]
-"674 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"674 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA4 `Vb  1 e@1068 ]
-"675 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"675 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISA5 `Vb  1 e@1069 ]
 [s S55 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S55 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 ]
 [u S54 `S55 1 ]
 [n S54 . . ]
-"686 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"686 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISAbits `VS54  1 e@133 ]
-"690 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"690 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB `Vuc  1 e@134 ]
-"692 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"692 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB0 `Vb  1 e@1072 ]
-"693 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"693 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB1 `Vb  1 e@1073 ]
-"694 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"694 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB2 `Vb  1 e@1074 ]
-"695 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"695 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB3 `Vb  1 e@1075 ]
-"696 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"696 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB4 `Vb  1 e@1076 ]
-"697 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"697 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB5 `Vb  1 e@1077 ]
-"698 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"698 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB6 `Vb  1 e@1078 ]
-"699 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"699 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISB7 `Vb  1 e@1079 ]
 [s S57 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S57 . TRISB0 TRISB1 TRISB2 TRISB3 TRISB4 TRISB5 TRISB6 TRISB7 ]
 [u S56 `S57 1 ]
 [n S56 . . ]
-"712 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"712 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISBbits `VS56  1 e@134 ]
-"716 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"716 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC `Vuc  1 e@135 ]
-"718 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"718 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC0 `Vb  1 e@1080 ]
-"719 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"719 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC1 `Vb  1 e@1081 ]
-"720 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"720 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC2 `Vb  1 e@1082 ]
-"721 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"721 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC3 `Vb  1 e@1083 ]
-"722 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"722 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC4 `Vb  1 e@1084 ]
-"723 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"723 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC5 `Vb  1 e@1085 ]
-"724 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"724 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC6 `Vb  1 e@1086 ]
-"725 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"725 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISC7 `Vb  1 e@1087 ]
 [s S59 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S59 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
 [u S58 `S59 1 ]
 [n S58 . . ]
-"738 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"738 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISCbits `VS58  1 e@135 ]
-"742 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"742 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD `Vuc  1 e@136 ]
-"744 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"744 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD0 `Vb  1 e@1088 ]
-"745 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"745 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD1 `Vb  1 e@1089 ]
-"746 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"746 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD2 `Vb  1 e@1090 ]
-"747 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"747 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD3 `Vb  1 e@1091 ]
-"748 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"748 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD4 `Vb  1 e@1092 ]
-"749 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"749 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD5 `Vb  1 e@1093 ]
-"750 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"750 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD6 `Vb  1 e@1094 ]
-"751 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"751 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISD7 `Vb  1 e@1095 ]
 [s S61 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S61 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
 [u S60 `S61 1 ]
 [n S60 . . ]
-"764 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"764 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISDbits `VS60  1 e@136 ]
-"768 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"768 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISE `Vuc  1 e@137 ]
-"770 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"770 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISE0 `Vb  1 e@1096 ]
-"771 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"771 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISE1 `Vb  1 e@1097 ]
-"772 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"772 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISE2 `Vb  1 e@1098 ]
-"773 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"773 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PSPMODE `Vb  1 e@1100 ]
-"774 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"774 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _IBOV `Vb  1 e@1101 ]
-"775 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"775 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _OBF `Vb  1 e@1102 ]
-"776 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"776 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _IBF `Vb  1 e@1103 ]
 [s S63 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S63 . TRISE0 TRISE1 TRISE2 . PSPMODE IBOV OBF IBF ]
 [u S62 `S63 1 ]
 [n S62 . . ]
-"789 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"789 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRISEbits `VS62  1 e@137 ]
-"793 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"793 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIE1 `Vuc  1 e@140 ]
-"795 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"795 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR1IE `Vb  1 e@1120 ]
-"796 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"796 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TMR2IE `Vb  1 e@1121 ]
-"797 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"797 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP1IE `Vb  1 e@1122 ]
-"798 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"798 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPIE `Vb  1 e@1123 ]
-"799 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"799 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXIE `Vb  1 e@1124 ]
-"800 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"800 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCIE `Vb  1 e@1125 ]
-"801 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"801 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADIE `Vb  1 e@1126 ]
-"802 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"802 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PSPIE `Vb  1 e@1127 ]
 [s S65 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S65 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
 [u S64 `S65 1 ]
 [n S64 . . ]
-"815 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"815 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIE1bits `VS64  1 e@140 ]
-"819 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"819 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIE2 `Vuc  1 e@141 ]
-"821 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"821 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CCP2IE `Vb  1 e@1128 ]
-"822 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"822 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _BCLIE `Vb  1 e@1131 ]
-"823 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"823 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEIE `Vb  1 e@1132 ]
-"824 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"824 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CMIE `Vb  1 e@1134 ]
 [s S67 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S67 . CCP2IE . BCLIE EEIE . CMIE ]
 [u S66 `S67 1 ]
 [n S66 . . ]
-"835 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"835 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PIE2bits `VS66  1 e@141 ]
-"839 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"839 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCON `Vuc  1 e@142 ]
-"841 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"841 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nBOR `Vb  1 e@1136 ]
-"842 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"842 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nPOR `Vb  1 e@1137 ]
-"843 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"843 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nBO `Vb  1 e@1136 ]
 [s S69 :1 `uc 1 :1 `uc 1 ]
 [n S69 . nBOR nPOR ]
@@ -637,81 +637,81 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S70 . nBO ]
 [u S68 `S69 1 `S70 1 ]
 [n S68 . . . ]
-"853 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"853 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCONbits `VS68  1 e@142 ]
-"857 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"857 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPCON2 `Vuc  1 e@145 ]
-"859 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"859 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SEN `Vb  1 e@1160 ]
-"860 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"860 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RSEN `Vb  1 e@1161 ]
-"861 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"861 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PEN `Vb  1 e@1162 ]
-"862 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"862 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RCEN `Vb  1 e@1163 ]
-"863 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"863 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ACKEN `Vb  1 e@1164 ]
-"864 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"864 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ACKDT `Vb  1 e@1165 ]
-"865 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"865 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ACKSTAT `Vb  1 e@1166 ]
-"866 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"866 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _GCEN `Vb  1 e@1167 ]
 [s S72 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S72 . SEN RSEN PEN RCEN ACKEN ACKDT ACKSTAT GCEN ]
 [u S71 `S72 1 ]
 [n S71 . . ]
-"879 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"879 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPCON2bits `VS71  1 e@145 ]
-"883 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"883 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PR2 `Vuc  1 e@146 ]
-"887 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"887 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPADD `Vuc  1 e@147 ]
-"891 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"891 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPSTAT `Vuc  1 e@148 ]
-"893 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"893 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _BF `Vb  1 e@1184 ]
-"894 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"894 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _UA `Vb  1 e@1185 ]
-"895 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"895 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _R_nW `Vb  1 e@1186 ]
-"896 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"896 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _S `Vb  1 e@1187 ]
-"897 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"897 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _P `Vb  1 e@1188 ]
-"898 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"898 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _D_nA `Vb  1 e@1189 ]
-"899 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"899 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CKE `Vb  1 e@1190 ]
-"900 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"900 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SMP `Vb  1 e@1191 ]
-"901 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"901 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _R `Vb  1 e@1186 ]
-"902 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"902 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _D `Vb  1 e@1189 ]
-"903 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"903 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _I2C_READ `Vb  1 e@1186 ]
-"904 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"904 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _I2C_START `Vb  1 e@1187 ]
-"905 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"905 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _I2C_STOP `Vb  1 e@1188 ]
-"906 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"906 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _I2C_DATA `Vb  1 e@1189 ]
-"907 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"907 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nW `Vb  1 e@1186 ]
-"908 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"908 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nA `Vb  1 e@1189 ]
-"909 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"909 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nWRITE `Vb  1 e@1186 ]
-"910 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"910 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nADDRESS `Vb  1 e@1189 ]
-"911 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"911 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _R_W `Vb  1 e@1186 ]
-"912 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"912 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _D_A `Vb  1 e@1189 ]
-"913 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"913 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _READ_WRITE `Vb  1 e@1186 ]
-"914 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"914 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _DATA_ADDRESS `Vb  1 e@1189 ]
 [s S74 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S74 . BF UA R_nW S P D_nA CKE SMP ]
@@ -731,29 +731,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S81 . . READ_WRITE . DATA_ADDRESS ]
 [u S73 `S74 1 `S75 1 `S76 1 `S77 1 `S78 1 `S79 1 `S80 1 `S81 1 ]
 [n S73 . . . . . . . . . ]
-"974 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"974 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SSPSTATbits `VS73  1 e@148 ]
-"978 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"978 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXSTA `Vuc  1 e@152 ]
-"980 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"980 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TX9D `Vb  1 e@1216 ]
-"981 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"981 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TRMT `Vb  1 e@1217 ]
-"982 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"982 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _BRGH `Vb  1 e@1218 ]
-"983 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"983 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SYNC `Vb  1 e@1220 ]
-"984 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"984 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXEN `Vb  1 e@1221 ]
-"985 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"985 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TX9 `Vb  1 e@1222 ]
-"986 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"986 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CSRC `Vb  1 e@1223 ]
-"987 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"987 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXD8 `Vb  1 e@1216 ]
-"988 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"988 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _nTX8 `Vb  1 e@1222 ]
-"989 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"989 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TX8_9 `Vb  1 e@1222 ]
 [s S83 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S83 . TX9D TRMT BRGH . SYNC TXEN TX9 CSRC ]
@@ -763,27 +763,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S85 . . TX8_9 ]
 [u S82 `S83 1 `S84 1 `S85 1 ]
 [n S82 . . . . ]
-"1011 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1011 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _TXSTAbits `VS82  1 e@152 ]
-"1015 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1015 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _SPBRG `Vuc  1 e@153 ]
-"1019 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1019 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CMCON `Vuc  1 e@156 ]
-"1021 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1021 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CIS `Vb  1 e@1251 ]
-"1022 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1022 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _C1INV `Vb  1 e@1252 ]
-"1023 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1023 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _C2INV `Vb  1 e@1253 ]
-"1024 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1024 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _C1OUT `Vb  1 e@1254 ]
-"1025 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1025 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _C2OUT `Vb  1 e@1255 ]
-"1026 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1026 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CM0 `Vb  1 e@1248 ]
-"1027 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1027 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CM1 `Vb  1 e@1249 ]
-"1028 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1028 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CM2 `Vb  1 e@1250 ]
 [s S87 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S87 . CM CIS C1INV C2INV C1OUT C2OUT ]
@@ -791,23 +791,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S88 . CM0 CM1 CM2 ]
 [u S86 `S87 1 `S88 1 ]
 [n S86 . . . ]
-"1044 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1044 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CMCONbits `VS86  1 e@156 ]
-"1048 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1048 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVRCON `Vuc  1 e@157 ]
-"1050 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1050 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVRR `Vb  1 e@1261 ]
-"1051 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1051 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVROE `Vb  1 e@1262 ]
-"1052 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1052 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVREN `Vb  1 e@1263 ]
-"1053 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1053 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVR0 `Vb  1 e@1256 ]
-"1054 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1054 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVR1 `Vb  1 e@1257 ]
-"1055 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1055 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVR2 `Vb  1 e@1258 ]
-"1056 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1056 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVR3 `Vb  1 e@1259 ]
 [s S90 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S90 . CVR . CVRR CVROE CVREN ]
@@ -815,23 +815,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S91 . CVR0 CVR1 CVR2 CVR3 ]
 [u S89 `S90 1 `S91 1 ]
 [n S89 . . . ]
-"1072 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1072 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _CVRCONbits `VS89  1 e@157 ]
-"1076 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1076 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADRESL `Vuc  1 e@158 ]
-"1080 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1080 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCON1 `Vuc  1 e@159 ]
-"1082 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1082 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCS2 `Vb  1 e@1278 ]
-"1083 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1083 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADFM `Vb  1 e@1279 ]
-"1084 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1084 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCFG0 `Vb  1 e@1272 ]
-"1085 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1085 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCFG1 `Vb  1 e@1273 ]
-"1086 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1086 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCFG2 `Vb  1 e@1274 ]
-"1087 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1087 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _PCFG3 `Vb  1 e@1275 ]
 [s S93 :4 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S93 . PCFG . ADCS2 ADFM ]
@@ -839,142 +839,142 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S94 . PCFG0 PCFG1 PCFG2 PCFG3 ]
 [u S92 `S93 1 `S94 1 ]
 [n S92 . . . ]
-"1102 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1102 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _ADCON1bits `VS92  1 e@159 ]
-"1111 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1111 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEDATA `Vuc  1 e@268 ]
-"1115 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1115 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEADR `Vuc  1 e@269 ]
-"1119 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1119 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEDATH `Vuc  1 e@270 ]
 [s S96 :6 `uc 1 ]
 [n S96 . . ]
 [u S95 `S96 1 ]
 [n S95 . . ]
-"1126 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1126 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEDATHbits `VS95  1 e@270 ]
-"1130 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1130 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEADRH `Vuc  1 e@271 ]
 [s S98 :5 `uc 1 ]
 [n S98 . . ]
 [u S97 `S98 1 ]
 [n S97 . . ]
-"1137 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1137 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEADRHbits `VS97  1 e@271 ]
-"1146 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1146 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON1 `Vuc  1 e@396 ]
-"1148 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1148 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _RD `Vb  1 e@3168 ]
-"1149 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1149 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _WR `Vb  1 e@3169 ]
-"1150 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1150 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _WREN `Vb  1 e@3170 ]
-"1151 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1151 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _WRERR `Vb  1 e@3171 ]
-"1152 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1152 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EEPGD `Vb  1 e@3175 ]
 [s S100 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
 [n S100 . RD WR WREN WRERR . EEPGD ]
 [u S99 `S100 1 ]
 [n S99 . . ]
-"1163 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1163 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON1bits `VS99  1 e@396 ]
-"1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
+"1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"36 H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h
+"36 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _total `i  1 e ]
-"37 H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h
+"37 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _dist_high `i  1 e ]
-"38 H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h
+"38 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _dist_low `i  1 e ]
-"6 H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h
+"6 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
-"7 H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h
-[v _distance `Vui  1 e ]
-"8 H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h
-[v _test `Vui  1 e ]
-"6 H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h
+"7 E:\Aldnoah.Zero\Assignment3\infrared.h
+[v _IRdistance `Vui  1 e ]
+"6 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `Vuc  1 e ]
-"11 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"13 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _distTravelled `i  1 e ]
-"12 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"13 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _TotalDistTravelled `i  1 e ]
+"14 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
-"12 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"14 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
-"12 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"14 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BumpSensors `Vuc  1 e ]
-"14 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"14 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"14 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"14 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
-"72 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
-[v _current_direction `uc  1 e ]
-"73 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _ROBOTerror `uc  1 e ]
+"83 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _totalSteps `i  1 e ]
-"76 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
+"85 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _buttonPressed `Vuc  1 e ]
-"77 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
-[v _serialInput `Vuc  1 e ]
-"81 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
+"90 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_1MS `Vb  1 e ]
-"82 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
-[v _RTC_FLAG_10MS `Vb  1 e ]
-"83 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
-[v _RTC_FLAG_50MS `Vb  1 e ]
-"84 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
+"93 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_250MS `Vb  1 e ]
-"85 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
+"94 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_500MS `Vb  1 e ]
-"89 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
+"98 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
-"8 H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
-"64 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"64 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _rxfifo `uc  -> 0 `x e ]
-"65 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"65 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _rxiptr `Vuc  0 e ]
-"68 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"68 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_tmp `uc  0 e ]
-"65 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"65 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _rxoptr `Vuc  0 e ]
-"66 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"66 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _txfifo `Xuc  -> 0 `x e ]
-"67 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"67 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _txoptr `Vuc  0 e ]
-"67 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"67 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _txiptr `Vuc  0 e ]
-"61 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
+"61 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_init `(v  0 ef ]
-"7 H:\Aldnoah.Zero.git\trunk\Assignment3\adc.h
+"7 E:\Aldnoah.Zero\Assignment3\adc.h
 [v _init_adc `(v  0 ef ]
-"31 H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h
+"31 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _lcd_init `(v  0 ef ]
-"6 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"6 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robo_init `(v  0 ef ]
-"7 H:\Aldnoah.Zero.git\trunk\Assignment3\steppermotor.h
-[v _rotate `(v  0 ef2`ui`uc ]
-"10 H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h
-[v _UpdateDisplay `(v  0 ef ]
-"57 H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h
-[v _ser_putch `(v  0 ef1`uc ]
-"12 H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h
-[v _readAvgDistance `(v  0 ef ]
 [p mainexit ]
-"10 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"12 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robot_read `(v  0 ef ]
-"9 H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h
+"12 E:\Aldnoah.Zero\Assignment3\infrared.h
+[v _readAvgDistance `(v  0 ef ]
+"10 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _UpdateDisplay `(v  0 ef ]
+"9 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
-"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
+"76 E:\Aldnoah.Zero\Assignment3\Main.c
+[v _calibrateIR `(v  0 ef ]
+"77 E:\Aldnoah.Zero\Assignment3\Main.c
+[v _scan360 `(i  0 ef ]
+"7 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+[v _rotate `(v  0 ef2`ui`uc ]
+"154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
-"7 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
-[v _robotMove `(v  0 ef1`i ]
-"8 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
+"8 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _robotMoveSpeed `(v  0 ef2`i`i ]
+"9 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robotTurn `(v  0 ef1`i ]
+"78 E:\Aldnoah.Zero\Assignment3\Main.c
+[v _ChargeMode `(v  0 ef ]
+"57 E:\Aldnoah.Zero\Assignment3\ser.h
+[v _ser_putch `(v  0 ef1`uc ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f877a.h: 90: volatile unsigned char PCL @ 0x002;
@@ -1854,12 +1854,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 37: int dist_high;
 [; ;lcd.h: 38: int dist_low;
 [; ;infrared.h: 6: volatile unsigned int adcVal;
-[; ;infrared.h: 7: volatile unsigned int distance;
-"8 H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h
-[i _test
--> -> 0 `i `ui
-]
-[; ;infrared.h: 8: volatile unsigned int test = 0;
+[; ;infrared.h: 7: volatile unsigned int IRdistance;
 [; ;infrared.h: 11: unsigned int readDistance(void);
 [; ;infrared.h: 12: void readAvgDistance(void);
 [; ;infrared.h: 13: void ADCconvert(void);
@@ -1878,7 +1873,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 66: extern bank1 unsigned char txfifo[16];
 [; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
 [; ;ser.h: 68: extern unsigned char ser_tmp;
-"6 H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h
+"6 E:\Aldnoah.Zero\Assignment3\HMI.h
 [i _currentMenu
 -> -> 0 `i `uc
 ]
@@ -1888,15 +1883,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.h: 10: void UpdateDisplay(void);
 [; ;robot.h: 6: void robo_init(void);
 [; ;robot.h: 7: void robotMove(int distance);
-[; ;robot.h: 8: void robotTurn(int distance);
-[; ;robot.h: 10: void robot_read(void);
-"11 H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h
-[i _distTravelled
--> 0 `i
-]
-[; ;robot.h: 11: int distTravelled = 0;
-[; ;robot.h: 12: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
-"14
+[; ;robot.h: 8: void robotMoveSpeed(int distance, int speed);
+[; ;robot.h: 9: void robotTurn(int degrees);
+[; ;robot.h: 10: int abs(int v);
+[; ;robot.h: 12: void robot_read(void);
+[; ;robot.h: 13: int distTravelled, TotalDistTravelled;
+[; ;robot.h: 14: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1909,188 +1902,158 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _turnlowByte
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 14: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
-"35 H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c
-[; ;Main.c: 35: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
-[; 	psect config,class=CONFIG,delta=2 ;#
-[; 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
-[; ;Main.c: 69: void calibrateIR(void);
-[; ;Main.c: 70: int scan360(void);
-"72
-[i _current_direction
+[i _ROBOTerror
 -> -> 0 `i `uc
 ]
-[; ;Main.c: 72: unsigned char current_direction = 0;
-"73
+[; ;robot.h: 16: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
+"51 E:\Aldnoah.Zero\Assignment3\Main.c
+[; ;Main.c: 51: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
+[; 	psect config,class=CONFIG,delta=2 ;#
+[; 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
+[; ;Main.c: 76: void calibrateIR(void);
+[; ;Main.c: 77: int scan360(void);
+[; ;Main.c: 78: void ChargeMode(void);
+[; ;Main.c: 79: void FollowWall(void);
+"83
 [i _totalSteps
 -> 0 `i
 ]
-[; ;Main.c: 73: int totalSteps = 0;
-[; ;Main.c: 76: volatile unsigned char buttonPressed;
-"77
-[i _serialInput
--> -> 0 `i `uc
-]
-[; ;Main.c: 77: volatile unsigned char serialInput = 0;
-"81
+[; ;Main.c: 83: int totalSteps = 0;
+[; ;Main.c: 85: volatile unsigned char buttonPressed;
+"90
 [i _RTC_FLAG_1MS
 -> 0 `i
 ]
-[; ;Main.c: 81: volatile bit RTC_FLAG_1MS = 0;
-"82
-[i _RTC_FLAG_10MS
--> 0 `i
-]
-[; ;Main.c: 82: volatile bit RTC_FLAG_10MS = 0;
-"83
-[i _RTC_FLAG_50MS
--> 0 `i
-]
-[; ;Main.c: 83: volatile bit RTC_FLAG_50MS = 0;
-"84
+[; ;Main.c: 90: volatile bit RTC_FLAG_1MS = 0;
+"93
 [i _RTC_FLAG_250MS
 -> 0 `i
 ]
-[; ;Main.c: 84: volatile bit RTC_FLAG_250MS = 0;
-"85
+[; ;Main.c: 93: volatile bit RTC_FLAG_250MS = 0;
+"94
 [i _RTC_FLAG_500MS
 -> 0 `i
 ]
-[; ;Main.c: 85: volatile bit RTC_FLAG_500MS = 0;
-"89
+[; ;Main.c: 94: volatile bit RTC_FLAG_500MS = 0;
+"98
 [i _RTC_Counter
 -> -> 0 `i `ui
 ]
-[; ;Main.c: 89: volatile unsigned int RTC_Counter = 0;
-"93
-[v F1256 `(v  1 tf ]
-[v _isr1 `IF1256  1 e ]
+[; ;Main.c: 98: volatile unsigned int RTC_Counter = 0;
+"102
+[v F1262 `(v  1 tf ]
+[v _isr1 `IF1262  1 e ]
 {
-[; ;Main.c: 92: void interrupt isr1(void)
-[; ;Main.c: 93: {
+[; ;Main.c: 101: void interrupt isr1(void)
+[; ;Main.c: 102: {
 [e :U _isr1 ]
 [f ]
-[; ;Main.c: 97: if(TMR0IF)
-"97
-[e $ ! _TMR0IF 103  ]
-[; ;Main.c: 98: {
-"98
-{
-[; ;Main.c: 99: TMR0IF = 0;
-"99
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;Main.c: 100: TMR0 = 100;
-"100
-[e = _TMR0 -> -> 100 `i `uc ]
-[; ;Main.c: 102: RTC_Counter++;
-"102
-[e ++ _RTC_Counter -> -> 1 `i `ui ]
-[; ;Main.c: 104: RTC_FLAG_1MS = 1;
-"104
-[e = _RTC_FLAG_1MS -> -> 1 `i `b ]
-[; ;Main.c: 105: if(RTC_Counter % 10 == 0)
+[; ;Main.c: 105: if(TMR0IF)
 "105
-[e $ ! == % _RTC_Counter -> -> 10 `i `ui -> -> 0 `i `ui 104  ]
+[e $ ! _TMR0IF 103  ]
 [; ;Main.c: 106: {
 "106
 {
-[; ;Main.c: 107: RTC_FLAG_10MS = 1;
+[; ;Main.c: 107: TMR0IF = 0;
 "107
-[e = _RTC_FLAG_10MS -> -> 1 `i `b ]
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;Main.c: 108: TMR0 = 100;
+"108
+[e = _TMR0 -> -> 100 `i `uc ]
+[; ;Main.c: 110: RTC_Counter++;
 "110
+[e ++ _RTC_Counter -> -> 1 `i `ui ]
+[; ;Main.c: 112: RTC_FLAG_1MS = 1;
+"112
+[e = _RTC_FLAG_1MS -> -> 1 `i `b ]
+[; ;Main.c: 113: if(RTC_Counter % 250 == 0)
+"113
+[e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 104  ]
+[; ;Main.c: 114: {
+"114
+{
+[; ;Main.c: 116: RTC_FLAG_250MS = 1;
+"116
+[e = _RTC_FLAG_250MS -> -> 1 `i `b ]
+"118
 }
 [e :U 104 ]
-[; ;Main.c: 110: }
-[; ;Main.c: 111: if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
-"111
-[e $ ! == % _RTC_Counter -> -> 50 `i `ui -> -> 0 `i `ui 105  ]
-[e = _RTC_FLAG_50MS -> -> 1 `i `b ]
-[e :U 105 ]
-[; ;Main.c: 112: if(RTC_Counter % 250 == 0)
-"112
-[e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 106  ]
-[; ;Main.c: 113: {
-"113
-{
-[; ;Main.c: 115: RTC_FLAG_250MS = 1;
-"115
-[e = _RTC_FLAG_250MS -> -> 1 `i `b ]
-"117
-}
-[e :U 106 ]
-[; ;Main.c: 117: }
-[; ;Main.c: 118: if(RTC_Counter % 500 == 0)
-"118
-[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 107  ]
-[; ;Main.c: 119: {
+[; ;Main.c: 118: }
+[; ;Main.c: 119: if(RTC_Counter % 500 == 0)
 "119
-{
-[; ;Main.c: 120: RTC_FLAG_500MS = 1;
+[e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 105  ]
+[; ;Main.c: 120: {
 "120
-[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
-[; ;Main.c: 121: RB0 ^= 0x01;
+{
+[; ;Main.c: 121: RTC_FLAG_500MS = 1;
 "121
+[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
+[; ;Main.c: 122: RB0 ^= 0x01;
+"122
 [e =^ _RB0 -> -> 1 `i `b ]
-"123
-}
-[e :U 107 ]
-[; ;Main.c: 123: }
-[; ;Main.c: 124: if (buttonPressed == 0)
 "124
-[e $ ! == -> _buttonPressed `i -> 0 `i 108  ]
-[; ;Main.c: 125: {
+}
+[e :U 105 ]
+[; ;Main.c: 124: }
+[; ;Main.c: 125: if (buttonPressed == 0)
 "125
+[e $ ! == -> _buttonPressed `i -> 0 `i 106  ]
+[; ;Main.c: 126: {
+"126
 {
 [; ;Main.c: 127: buttonPressed = ReadButtons();
 "127
 [e = _buttonPressed ( _ReadButtons ..  ]
+"128
+}
+[e :U 106 ]
 "129
 }
-[e :U 108 ]
-"130
-}
 [e :U 103 ]
+[; ;Main.c: 128: }
 [; ;Main.c: 129: }
-[; ;Main.c: 130: }
-[; ;Main.c: 131: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
-"131
-[e $ ! _RCIF 109  ]
+[; ;Main.c: 130: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
+"130
+[e $ ! _RCIF 107  ]
 {
 [e = *U + &U _rxfifo * -> _rxiptr `ux -> -> # *U &U _rxfifo `ui `ux _RCREG ]
 [e = _ser_tmp -> & + -> _rxiptr `i -> 1 `i - -> 16 `i -> 1 `i `uc ]
-[e $ ! != -> _ser_tmp `i -> _rxoptr `i 110  ]
+[e $ ! != -> _ser_tmp `i -> _rxoptr `i 108  ]
 [e = _rxiptr _ser_tmp ]
-[e :U 110 ]
+[e :U 108 ]
 }
-[e :U 109 ]
-[e $ ! && _TXIF _TXIE 111  ]
+[e :U 107 ]
+[e $ ! && _TXIF _TXIE 109  ]
 {
 [e = _TXREG *U + &U _txfifo * -> _txoptr `ux -> -> # *U &U _txfifo `ui `ux ]
 [e =+ _txoptr -> -> 1 `i `uc ]
 [e =& _txoptr -> - -> 16 `i -> 1 `i `uc ]
-[e $ ! == -> _txoptr `i -> _txiptr `i 112  ]
+[e $ ! == -> _txoptr `i -> _txiptr `i 110  ]
 {
 [e = _TXIE -> -> 0 `i `b ]
 }
-[e :U 112 ]
+[e :U 110 ]
 }
-[e :U 111 ]
-[; ;Main.c: 132: }
-"132
+[e :U 109 ]
+[; ;Main.c: 131: }
+"131
 [e :UE 102 ]
 }
-"135
+"136
 [v _init `(v  1 ef ]
 {
-[; ;Main.c: 134: void init()
-[; ;Main.c: 135: {
+[; ;Main.c: 135: void init()
+[; ;Main.c: 136: {
 [e :U _init ]
 [f ]
-[; ;Main.c: 138: buttonPressed = 0;
-"138
+[; ;Main.c: 137: buttonPressed = 0;
+"137
 [e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 142: TRISC &= 0b10010000;
-"142
+[; ;Main.c: 140: TRISB = 0b11111100;
+"140
+[e = _TRISB -> -> 252 `i `uc ]
+[; ;Main.c: 141: TRISC &= 0b10010000;
+"141
 [e =& _TRISC -> -> 144 `i `uc ]
 [; ;Main.c: 144: SSPSTAT = 0b01000000;
 "144
@@ -2098,747 +2061,850 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 145: SSPCON = 0b10100001;
 "145
 [e = _SSPCON -> -> 161 `i `uc ]
-[; ;Main.c: 147: OPTION_REG = 0b00000100;
-"147
-[e = _OPTION_REG -> -> 4 `i `uc ]
-[; ;Main.c: 148: ser_init();
+[; ;Main.c: 148: OPTION_REG = 0b00000100;
 "148
-[e ( _ser_init ..  ]
-[; ;Main.c: 149: init_adc();
-"149
-[e ( _init_adc ..  ]
-[; ;Main.c: 150: lcd_init();
-"150
-[e ( _lcd_init ..  ]
-[; ;Main.c: 151: robo_init();
+[e = _OPTION_REG -> -> 4 `i `uc ]
+[; ;Main.c: 151: ser_init();
 "151
-[e ( _robo_init ..  ]
-[; ;Main.c: 152: TRISB = 0b11111100;
+[e ( _ser_init ..  ]
+[; ;Main.c: 152: init_adc();
 "152
-[e = _TRISB -> -> 252 `i `uc ]
-[; ;Main.c: 154: TMR0IE = 1;
+[e ( _init_adc ..  ]
+[; ;Main.c: 153: lcd_init();
+"153
+[e ( _lcd_init ..  ]
+[; ;Main.c: 154: robo_init();
 "154
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;Main.c: 155: PEIE=1;
-"155
-[e = _PEIE -> -> 1 `i `b ]
-[; ;Main.c: 157: (GIE = 1);
-"157
-[e = _GIE -> -> 1 `i `b ]
-[; ;Main.c: 158: }
+[e ( _robo_init ..  ]
+[; ;Main.c: 158: TMR0IE = 1;
 "158
-[e :UE 113 ]
-}
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;Main.c: 160: PEIE=1;
+"160
+[e = _PEIE -> -> 1 `i `b ]
+[; ;Main.c: 162: (GIE = 1);
+"162
+[e = _GIE -> -> 1 `i `b ]
+[; ;Main.c: 163: }
 "163
-[v _calibrateIR `(v  1 ef ]
-{
-[; ;Main.c: 162: void calibrateIR(void)
-[; ;Main.c: 163: {
-[e :U _calibrateIR ]
-[f ]
-[; ;Main.c: 165: currentMenu = 1;
-"165
-[e = _currentMenu -> -> 1 `i `uc ]
-[; ;Main.c: 166: rotate(8, 0);
-"166
-[e ( _rotate (2 , -> -> 8 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 167: while (1)
-"167
-[e :U 116 ]
-[; ;Main.c: 168: {
-"168
-{
-[; ;Main.c: 169: if (RTC_FLAG_250MS == 1)
-"169
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 118  ]
-[; ;Main.c: 170: {
-"170
-{
-[; ;Main.c: 171: RTC_FLAG_250MS = 0;
-"171
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 172: UpdateDisplay();
-"172
-[e ( _UpdateDisplay ..  ]
-"173
+[e :UE 111 ]
 }
-[e :U 118 ]
-[; ;Main.c: 173: }
-[; ;Main.c: 174: switch (buttonPressed)
-"174
-[e $U 120  ]
-[; ;Main.c: 175: {
-"175
+"170
+[v _main `(v  1 ef ]
 {
-[; ;Main.c: 176: case 1:
+[; ;Main.c: 169: void main(void)
+[; ;Main.c: 170: {
+[e :U _main ]
+[f ]
+"171
+[v _choice `uc  1 a ]
+[; ;Main.c: 171: unsigned char choice = 255;
+[e = _choice -> -> 255 `i `uc ]
+"172
+[v _shortwall `i  1 a ]
+[; ;Main.c: 172: int shortwall = 0;
+[e = _shortwall -> 0 `i ]
+[; ;Main.c: 176: init();
 "176
-[e :U 121 ]
-[; ;Main.c: 179: buttonPressed = 0;
-"179
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 181: break;
+[e ( _init ..  ]
+[; ;Main.c: 181: while(1)
 "181
-[e $U 119  ]
-[; ;Main.c: 182: case 2:
+[e :U 114 ]
+[; ;Main.c: 182: {
 "182
-[e :U 122 ]
-[; ;Main.c: 185: buttonPressed = 0;
+{
+[; ;Main.c: 185: if (RTC_FLAG_250MS == 1)
 "185
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 187: break;
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 116  ]
+[; ;Main.c: 186: {
+"186
+{
+[; ;Main.c: 187: RTC_FLAG_250MS = 0;
 "187
-[e $U 119  ]
-[; ;Main.c: 188: case 3:
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 188: robot_read();
 "188
-[e :U 123 ]
-[; ;Main.c: 189: rotate(1, 1);
+[e ( _robot_read ..  ]
+[; ;Main.c: 189: readAvgDistance();
 "189
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 191: buttonPressed = 0;
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 190: UpdateDisplay();
+"190
+[e ( _UpdateDisplay ..  ]
 "191
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 193: break;
-"193
-[e $U 119  ]
-[; ;Main.c: 194: case 4:
+}
+[e :U 116 ]
+[; ;Main.c: 191: }
+[; ;Main.c: 192: if (buttonPressed)
+"192
+[e $ ! != -> _buttonPressed `i -> -> -> 0 `i `Vuc `i 117  ]
+[; ;Main.c: 194: {
 "194
-[e :U 124 ]
-[; ;Main.c: 195: rotate(1, 0);
+{
+[; ;Main.c: 195: choice = Menu(buttonPressed);
 "195
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 197: buttonPressed = 0;
+[e = _choice ( _Menu (1 _buttonPressed ]
+[; ;Main.c: 196: buttonPressed = 0;
+"196
+[e = _buttonPressed -> -> 0 `i `uc ]
 "197
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 199: break;
-"199
-[e $U 119  ]
-[; ;Main.c: 200: case 5:
-"200
-[e :U 125 ]
-[; ;Main.c: 201: totalSteps = 0;
+}
+[e :U 117 ]
+[; ;Main.c: 197: }
+[; ;Main.c: 201: switch (choice)
 "201
-[e = _totalSteps -> 0 `i ]
-[; ;Main.c: 203: buttonPressed = 0;
+[e $U 119  ]
+[; ;Main.c: 202: {
+"202
+{
+[; ;Main.c: 203: case 0:
 "203
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 204: currentMenu = 0;
+[e :U 120 ]
+[; ;Main.c: 204: calibrateIR();
 "204
-[e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 205: return;
+[e ( _calibrateIR ..  ]
+[; ;Main.c: 205: break;
 "205
-[e $UE 114  ]
-[; ;Main.c: 207: default:
+[e $U 118  ]
+[; ;Main.c: 206: case 1:
+"206
+[e :U 121 ]
+[; ;Main.c: 207: shortwall = scan360() - 13;
 "207
-[e :U 126 ]
+[e = _shortwall - ( _scan360 ..  -> 13 `i ]
+[; ;Main.c: 208: rotate((400 - shortwall), 0);
+"208
+[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
 [; ;Main.c: 209: break;
 "209
-[e $U 119  ]
+[e $U 118  ]
+[; ;Main.c: 210: case 2:
 "210
+[e :U 122 ]
+[; ;Main.c: 211: TotalDistTravelled = 0;
+"211
+[e = _TotalDistTravelled -> 0 `i ]
+[; ;Main.c: 212: _delay((unsigned long)((100)*(20000000/4000.0)));
+"212
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 213: robotMoveSpeed(2000, 200);
+"213
+[e ( _robotMoveSpeed (2 , -> 2000 `i -> 200 `i ]
+[; ;Main.c: 216: break;
+"216
+[e $U 118  ]
+[; ;Main.c: 217: case 3:
+"217
+[e :U 123 ]
+[; ;Main.c: 218: TotalDistTravelled = 0;
+"218
+[e = _TotalDistTravelled -> 0 `i ]
+[; ;Main.c: 219: _delay((unsigned long)((100)*(20000000/4000.0)));
+"219
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 220: robotMoveSpeed(1000, 200);
+"220
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 200 `i ]
+[; ;Main.c: 221: _delay((unsigned long)((100)*(20000000/4000.0)));
+"221
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 222: robotTurn(-90);
+"222
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 223: _delay((unsigned long)((100)*(20000000/4000.0)));
+"223
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 224: robotMoveSpeed(1000, 200);
+"224
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 200 `i ]
+[; ;Main.c: 225: break;
+"225
+[e $U 118  ]
+[; ;Main.c: 226: case 4:
+"226
+[e :U 124 ]
+[; ;Main.c: 227: TotalDistTravelled = 0;
+"227
+[e = _TotalDistTravelled -> 0 `i ]
+[; ;Main.c: 228: while(!ROBOTerror)
+"228
+[e $U 125  ]
+[e :U 126 ]
+[; ;Main.c: 229: {
+"229
+{
+"230
+[v _shortwall `i  1 a ]
+[; ;Main.c: 230: int shortwall = scan360();
+[e = _shortwall ( _scan360 ..  ]
+"231
+[v _RT2P `i  1 a ]
+[; ;Main.c: 231: int RT2P = 0;
+[e = _RT2P -> 0 `i ]
+"232
+[v _direction1 `i  1 a ]
+[; ;Main.c: 232: int direction1 = 0;
+[e = _direction1 -> 0 `i ]
+[; ;Main.c: 233: if (shortwall > 200)
+"233
+[e $ ! > _shortwall -> 200 `i 128  ]
+[; ;Main.c: 234: RT2P = shortwall + 100;
+"234
+[e = _RT2P + _shortwall -> 100 `i ]
+[e :U 128 ]
+[; ;Main.c: 235: if (shortwall < 200)
+"235
+[e $ ! < _shortwall -> 200 `i 129  ]
+[; ;Main.c: 236: RT2P = shortwall - 100;
+"236
+[e = _RT2P - _shortwall -> 100 `i ]
+[e :U 129 ]
+[; ;Main.c: 239: if (RT2P >= 400 && RT2P < 500 )
+"239
+[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 130  ]
+[; ;Main.c: 240: {
+"240
+{
+[; ;Main.c: 241: RT2P = RT2P - 400;
+"241
+[e = _RT2P - _RT2P -> 400 `i ]
+[; ;Main.c: 242: direction1 = 1;
+"242
+[e = _direction1 -> 1 `i ]
+"243
 }
-[; ;Main.c: 210: }
-[e $U 119  ]
-"174
-[e :U 120 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 121
+[e :U 130 ]
+[; ;Main.c: 243: }
+[; ;Main.c: 244: if (RT2P >= 200 && RT2P < 400)
+"244
+[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 131  ]
+[; ;Main.c: 245: {
+"245
+{
+[; ;Main.c: 246: RT2P = 400 - RT2P;
+"246
+[e = _RT2P - -> 400 `i _RT2P ]
+[; ;Main.c: 247: RT2P = RT2P * -1;
+"247
+[e = _RT2P * _RT2P -U -> 1 `i ]
+[; ;Main.c: 248: direction1 = 0;
+"248
+[e = _direction1 -> 0 `i ]
+"249
+}
+[e :U 131 ]
+[; ;Main.c: 249: }
+[; ;Main.c: 250: if (RT2P < 200 && RT2P >= 0)
+"250
+[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 132  ]
+[; ;Main.c: 251: {
+"251
+{
+[; ;Main.c: 252: direction1 = 1;
+"252
+[e = _direction1 -> 1 `i ]
+"253
+}
+[e :U 132 ]
+[; ;Main.c: 253: }
+[; ;Main.c: 254: if (RT2P < 0 && RT2P >= -200)
+"254
+[e $ ! && < _RT2P -> 0 `i >= _RT2P -U -> 200 `i 133  ]
+[; ;Main.c: 255: {
+"255
+{
+[; ;Main.c: 257: direction1 = 0;
+"257
+[e = _direction1 -> 0 `i ]
+"258
+}
+[e :U 133 ]
+[; ;Main.c: 258: }
+[; ;Main.c: 259: if(RT2P < -200 || RT2P >500)
+"259
+[e $ ! || < _RT2P -U -> 200 `i > _RT2P -> 500 `i 134  ]
+[; ;Main.c: 260: {
+"260
+{
+"262
+}
+[e :U 134 ]
+[; ;Main.c: 262: }
+[; ;Main.c: 264: rotate((400 - shortwall ), 0);
+"264
+[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
+[; ;Main.c: 265: _delay((unsigned long)((100)*(20000000/4000.0)));
+"265
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"268
+[v _RT2A `i  1 a ]
+[; ;Main.c: 268: int RT2A= RT2P * (36.0/40.0);
+[e = _RT2A -> * -> _RT2P `d / .36.0 .40.0 `i ]
+[; ;Main.c: 269: robotTurn(RT2A);
+"269
+[e ( _robotTurn (1 _RT2A ]
+[; ;Main.c: 270: _delay((unsigned long)((100)*(20000000/4000.0)));
+"270
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 271: rotate(shortwall,0);
+"271
+[e ( _rotate (2 , -> _shortwall `ui -> -> 0 `i `uc ]
+[; ;Main.c: 272: _delay((unsigned long)((100)*(20000000/4000.0)));
+"272
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 273: robotMoveSpeed(500, 200);
+"273
+[e ( _robotMoveSpeed (2 , -> 500 `i -> 200 `i ]
+"274
+}
+[e :U 125 ]
+"228
+[e $ ! != -> _ROBOTerror `i -> -> -> 0 `i `uc `i 126  ]
+[e :U 127 ]
+[; ;Main.c: 274: }
+[; ;Main.c: 277: break;
+"277
+[e $U 118  ]
+[; ;Main.c: 279: case 5:
+"279
+[e :U 135 ]
+[; ;Main.c: 280: ChargeMode();
+"280
+[e ( _ChargeMode ..  ]
+[; ;Main.c: 281: break;
+"281
+[e $U 118  ]
+[; ;Main.c: 282: default:
+"282
+[e :U 136 ]
+[; ;Main.c: 284: break;
+"284
+[e $U 118  ]
+"285
+}
+[; ;Main.c: 285: }
+[e $U 118  ]
+"201
+[e :U 119 ]
+[e [\ _choice , $ -> -> 0 `i `uc 120
+ , $ -> -> 1 `i `uc 121
  , $ -> -> 2 `i `uc 122
  , $ -> -> 3 `i `uc 123
  , $ -> -> 4 `i `uc 124
- , $ -> -> 5 `i `uc 125
- 126 ]
-"210
-[e :U 119 ]
-"211
-}
-[e :U 115 ]
-"167
-[e $U 116  ]
-[e :U 117 ]
-[; ;Main.c: 211: }
-[; ;Main.c: 212: }
-"212
-[e :UE 114 ]
-}
-"214
-[v _ChargeMode `(v  1 ef ]
-{
-[; ;Main.c: 213: void ChargeMode(void)
-[; ;Main.c: 214: {
-[e :U _ChargeMode ]
-[f ]
-[; ;Main.c: 216: currentMenu = 2;
-"216
-[e = _currentMenu -> -> 2 `i `uc ]
-[; ;Main.c: 217: ser_putch(128);
-"217
-[e ( _ser_putch (1 -> -> 128 `i `uc ]
-[; ;Main.c: 219: while (1)
-"219
-[e :U 129 ]
-[; ;Main.c: 220: {
-"220
-{
-[; ;Main.c: 221: if (RTC_FLAG_250MS == 1)
-"221
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 131  ]
-[; ;Main.c: 222: {
-"222
-{
-[; ;Main.c: 223: RTC_FLAG_250MS = 0;
-"223
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 224: UpdateDisplay();
-"224
-[e ( _UpdateDisplay ..  ]
-"225
-}
-[e :U 131 ]
-[; ;Main.c: 225: }
-[; ;Main.c: 226: switch (buttonPressed)
-"226
-[e $U 133  ]
-[; ;Main.c: 227: {
-"227
-{
-[; ;Main.c: 228: case 1:
-"228
-[e :U 134 ]
-[; ;Main.c: 231: buttonPressed = 0;
-"231
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 233: break;
-"233
-[e $U 132  ]
-[; ;Main.c: 234: case 2:
-"234
-[e :U 135 ]
-[; ;Main.c: 237: buttonPressed = 0;
-"237
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 239: break;
-"239
-[e $U 132  ]
-[; ;Main.c: 240: case 3:
-"240
-[e :U 136 ]
-[; ;Main.c: 243: buttonPressed = 0;
-"243
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 245: break;
-"245
-[e $U 132  ]
-[; ;Main.c: 246: case 4:
-"246
-[e :U 137 ]
-[; ;Main.c: 249: buttonPressed = 0;
-"249
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 251: break;
-"251
-[e $U 132  ]
-[; ;Main.c: 252: case 5:
-"252
-[e :U 138 ]
-[; ;Main.c: 253: ser_putch(132);
-"253
-[e ( _ser_putch (1 -> -> 132 `i `uc ]
-[; ;Main.c: 255: buttonPressed = 0;
-"255
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 256: currentMenu = 0;
-"256
-[e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 257: return;
-"257
-[e $UE 127  ]
-[; ;Main.c: 259: default:
-"259
-[e :U 139 ]
-[; ;Main.c: 260: buttonPressed = 0;
-"260
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 261: break;
-"261
-[e $U 132  ]
-"262
-}
-[; ;Main.c: 262: }
-[e $U 132  ]
-"226
-[e :U 133 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 134
- , $ -> -> 2 `i `uc 135
- , $ -> -> 3 `i `uc 136
- , $ -> -> 4 `i `uc 137
- , $ -> -> 5 `i `uc 138
- 139 ]
-"262
-[e :U 132 ]
-"263
-}
-[e :U 128 ]
-"219
-[e $U 129  ]
-[e :U 130 ]
-[; ;Main.c: 263: }
-[; ;Main.c: 264: }
-"264
-[e :UE 127 ]
-}
-"268
-[v _scan360 `(i  1 ef ]
-{
-[; ;Main.c: 267: int scan360(void)
-[; ;Main.c: 268: {
-[e :U _scan360 ]
-[f ]
-"269
-[v _lowestVal `i  1 a ]
-[; ;Main.c: 269: int lowestVal = 0, lowestSteps = 0;
-[e = _lowestVal -> 0 `i ]
-[v _lowestSteps `i  1 a ]
-[e = _lowestSteps -> 0 `i ]
-[; ;Main.c: 271: for (int steps = 0; steps < 400; steps++)
-"271
-{
-[v _steps `i  1 a ]
-[e = _steps -> 0 `i ]
-[e $ < _steps -> 400 `i 141  ]
-[e $U 142  ]
-"272
-[e :U 141 ]
-[; ;Main.c: 272: {
-{
-[; ;Main.c: 273: readAvgDistance();
-"273
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 274: if (adcVal > lowestVal)
-"274
-[e $ ! > _adcVal -> _lowestVal `ui 144  ]
-[; ;Main.c: 275: {
-"275
-{
-[; ;Main.c: 276: lowestVal = adcVal;
-"276
-[e = _lowestVal -> _adcVal `i ]
-[; ;Main.c: 277: lowestSteps = steps;
-"277
-[e = _lowestSteps _steps ]
-"279
-}
-[e :U 144 ]
-[; ;Main.c: 279: }
-[; ;Main.c: 280: rotate(1, 1);
-"280
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 282: if (RTC_FLAG_250MS == 1)
-"282
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 145  ]
-[; ;Main.c: 283: {
-"283
-{
-[; ;Main.c: 284: RTC_FLAG_250MS = 0;
-"284
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 285: UpdateDisplay();
+ , $ -> -> 5 `i `uc 135
+ 136 ]
 "285
-[e ( _UpdateDisplay ..  ]
+[e :U 118 ]
+[; ;Main.c: 286: choice = 255;
 "286
-}
-[e :U 145 ]
-[; ;Main.c: 286: }
-[; ;Main.c: 287: test = lowestSteps;
-"287
-[e = _test -> _lowestSteps `ui ]
-"288
-}
-"271
-[e ++ _steps -> 1 `i ]
-[e $ < _steps -> 400 `i 141  ]
-[e :U 142 ]
-"288
-}
-[; ;Main.c: 288: }
-[; ;Main.c: 290: return lowestSteps;
-"290
-[e ) _lowestSteps ]
-[e $UE 140  ]
-[; ;Main.c: 291: }
-"291
-[e :UE 140 ]
-}
-"297
-[v _main `(v  1 ef ]
-{
-[; ;Main.c: 296: void main(void)
-[; ;Main.c: 297: {
-[e :U _main ]
-[f ]
-"298
-[v _choice `uc  1 a ]
-[; ;Main.c: 298: unsigned char choice = 255;
 [e = _choice -> -> 255 `i `uc ]
-"299
-[v _shortwall `i  1 a ]
-[; ;Main.c: 299: int shortwall = 0;
-[e = _shortwall -> 0 `i ]
-[; ;Main.c: 303: init();
-"303
-[e ( _init ..  ]
-[; ;Main.c: 308: while(1)
-"308
-[e :U 148 ]
-[; ;Main.c: 309: {
-"309
+"287
+}
+[e :U 113 ]
+"181
+[e $U 114  ]
+[e :U 115 ]
+[; ;Main.c: 287: }
+[; ;Main.c: 288: }
+"288
+[e :UE 112 ]
+}
+"292
+[v _FollowWall `(v  1 ef ]
 {
-[; ;Main.c: 312: if (RTC_FLAG_250MS == 1)
+[; ;Main.c: 291: void FollowWall(void)
+[; ;Main.c: 292: {
+[e :U _FollowWall ]
+[f ]
+"293
+[v _error `uc  1 a ]
+[; ;Main.c: 293: unsigned char error = 0;
+[e = _error -> -> 0 `i `uc ]
+[; ;Main.c: 295: while(!error)
+"295
+[e $U 138  ]
+[e :U 139 ]
+[; ;Main.c: 296: {
+"296
+{
+"298
+[v _shortwall `i  1 a ]
+[; ;Main.c: 298: int shortwall = scan360();
+[e = _shortwall ( _scan360 ..  ]
+"299
+[v _RT2P `i  1 a ]
+[; ;Main.c: 299: int RT2P = 0;
+[e = _RT2P -> 0 `i ]
+"300
+[v _direction1 `i  1 a ]
+[; ;Main.c: 300: int direction1 = 0;
+[e = _direction1 -> 0 `i ]
+[; ;Main.c: 301: if (shortwall >= 200)
+"301
+[e $ ! >= _shortwall -> 200 `i 141  ]
+[; ;Main.c: 302: RT2P = shortwall + 100;
+"302
+[e = _RT2P + _shortwall -> 100 `i ]
+[e :U 141 ]
+[; ;Main.c: 303: if (shortwall < 200)
+"303
+[e $ ! < _shortwall -> 200 `i 142  ]
+[; ;Main.c: 304: RT2P = shortwall - 100;
+"304
+[e = _RT2P - _shortwall -> 100 `i ]
+[e :U 142 ]
+[; ;Main.c: 307: if (RT2P >= 400 && RT2P < 500 )
+"307
+[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 143  ]
+[; ;Main.c: 308: {
+"308
+{
+[; ;Main.c: 309: RT2P -= 400;
+"309
+[e =- _RT2P -> 400 `i ]
+[; ;Main.c: 310: direction1 = 1;
+"310
+[e = _direction1 -> 1 `i ]
+"311
+}
+[; ;Main.c: 311: }
+[e $U 144  ]
 "312
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 150  ]
+[e :U 143 ]
+[; ;Main.c: 312: else if (RT2P >= 200 && RT2P < 400)
+[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 145  ]
 [; ;Main.c: 313: {
 "313
 {
-[; ;Main.c: 314: RTC_FLAG_250MS = 0;
+[; ;Main.c: 314: RT2P = 400 - RT2P;
 "314
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 315: robot_read();
+[e = _RT2P - -> 400 `i _RT2P ]
+[; ;Main.c: 315: RT2P = RT2P * -1;
 "315
-[e ( _robot_read ..  ]
-[; ;Main.c: 316: readAvgDistance();
+[e = _RT2P * _RT2P -U -> 1 `i ]
+[; ;Main.c: 316: direction1 = 0;
 "316
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 317: UpdateDisplay();
-"317
-[e ( _UpdateDisplay ..  ]
-"318
-}
-[e :U 150 ]
-[; ;Main.c: 318: }
-[; ;Main.c: 320: switch (buttonPressed)
-"320
-[e $U 152  ]
-[; ;Main.c: 321: {
-"321
-{
-[; ;Main.c: 322: case 1:
-"322
-[e :U 153 ]
-[; ;Main.c: 323: Menu(1);
-"323
-[e ( _Menu (1 -> -> 1 `i `uc ]
-[; ;Main.c: 325: buttonPressed = 0;
-"325
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 327: break;
-"327
-[e $U 151  ]
-[; ;Main.c: 328: case 2:
-"328
-[e :U 154 ]
-[; ;Main.c: 329: Menu(2);
-"329
-[e ( _Menu (1 -> -> 2 `i `uc ]
-[; ;Main.c: 331: buttonPressed = 0;
-"331
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 333: break;
-"333
-[e $U 151  ]
-[; ;Main.c: 334: case 3:
-"334
-[e :U 155 ]
-[; ;Main.c: 335: Menu(3);
-"335
-[e ( _Menu (1 -> -> 3 `i `uc ]
-[; ;Main.c: 337: buttonPressed = 0;
-"337
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 339: break;
-"339
-[e $U 151  ]
-[; ;Main.c: 340: case 4:
-"340
-[e :U 156 ]
-[; ;Main.c: 341: Menu(4);
-"341
-[e ( _Menu (1 -> -> 4 `i `uc ]
-[; ;Main.c: 343: buttonPressed = 0;
-"343
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 345: break;
-"345
-[e $U 151  ]
-[; ;Main.c: 346: case 5:
-"346
-[e :U 157 ]
-[; ;Main.c: 347: choice = Menu(5);
-"347
-[e = _choice ( _Menu (1 -> -> 5 `i `uc ]
-[; ;Main.c: 349: buttonPressed = 0;
-"349
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 351: break;
-"351
-[e $U 151  ]
-[; ;Main.c: 352: default:
-"352
-[e :U 158 ]
-[; ;Main.c: 353: buttonPressed = 0;
-"353
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 354: break;
-"354
-[e $U 151  ]
-"355
-}
-[; ;Main.c: 355: }
-[e $U 151  ]
-"320
-[e :U 152 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 153
- , $ -> -> 2 `i `uc 154
- , $ -> -> 3 `i `uc 155
- , $ -> -> 4 `i `uc 156
- , $ -> -> 5 `i `uc 157
- 158 ]
-"355
-[e :U 151 ]
-[; ;Main.c: 358: switch (choice)
-"358
-[e $U 160  ]
-[; ;Main.c: 359: {
-"359
-{
-[; ;Main.c: 360: case 0:
-"360
-[e :U 161 ]
-[; ;Main.c: 361: calibrateIR();
-"361
-[e ( _calibrateIR ..  ]
-[; ;Main.c: 362: break;
-"362
-[e $U 159  ]
-[; ;Main.c: 363: case 1:
-"363
-[e :U 162 ]
-[; ;Main.c: 364: shortwall = scan360() - 13;
-"364
-[e = _shortwall - ( _scan360 ..  -> 13 `i ]
-[; ;Main.c: 365: rotate((400 - shortwall), 0);
-"365
-[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 366: break;
-"366
-[e $U 159  ]
-[; ;Main.c: 367: case 2:
-"367
-[e :U 163 ]
-[; ;Main.c: 368: _delay((unsigned long)((100)*(20000000/4000.0)));
-"368
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 369: robotMove(2000);
-"369
-[e ( _robotMove (1 -> 2000 `i ]
-[; ;Main.c: 372: break;
-"372
-[e $U 159  ]
-[; ;Main.c: 373: case 3:
-"373
-[e :U 164 ]
-[; ;Main.c: 374: _delay((unsigned long)((100)*(20000000/4000.0)));
-"374
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 375: robotMove(1000);
-"375
-[e ( _robotMove (1 -> 1000 `i ]
-[; ;Main.c: 376: robotTurn(-90);
-"376
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 377: robotMove(1000);
-"377
-[e ( _robotMove (1 -> 1000 `i ]
-[; ;Main.c: 378: break;
-"378
-[e $U 159  ]
-[; ;Main.c: 379: case 4:
-"379
-[e :U 165 ]
-[; ;Main.c: 381: while(1)
-"381
-[e :U 167 ]
-[; ;Main.c: 382: {
-"382
-{
-[; ;Main.c: 383: shortwall = scan360() - 13;
-"383
-[e = _shortwall - ( _scan360 ..  -> 13 `i ]
-"384
-[v _RT2P `i  1 a ]
-[; ;Main.c: 384: int RT2P = 0;
-[e = _RT2P -> 0 `i ]
-"385
-[v _direction1 `i  1 a ]
-[; ;Main.c: 385: int direction1 = 0;
 [e = _direction1 -> 0 `i ]
-[; ;Main.c: 386: if (shortwall > 200)
-"386
-[e $ ! > _shortwall -> 200 `i 169  ]
-[; ;Main.c: 387: RT2P = shortwall + 100;
-"387
-[e = _RT2P + _shortwall -> 100 `i ]
-[e :U 169 ]
-[; ;Main.c: 388: if (shortwall < 200)
-"388
-[e $ ! < _shortwall -> 200 `i 170  ]
-[; ;Main.c: 389: RT2P = shortwall - 100;
-"389
-[e = _RT2P - _shortwall -> 100 `i ]
-[e :U 170 ]
-[; ;Main.c: 392: if (RT2P >= 400 && RT2P < 500 )
-"392
-[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 171  ]
-[; ;Main.c: 393: {
-"393
+"317
+}
+[; ;Main.c: 317: }
+[e $U 146  ]
+"318
+[e :U 145 ]
+[; ;Main.c: 318: else if (RT2P < 200 && RT2P >= 0)
+[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 147  ]
+[; ;Main.c: 319: {
+"319
 {
-[; ;Main.c: 394: RT2P = RT2P - 400;
-"394
-[e = _RT2P - _RT2P -> 400 `i ]
-[; ;Main.c: 395: direction1 = 1;
-"395
+[; ;Main.c: 320: direction1 = 1;
+"320
 [e = _direction1 -> 1 `i ]
+"321
+}
+[; ;Main.c: 321: }
+[e $U 148  ]
+"322
+[e :U 147 ]
+[; ;Main.c: 322: else if (RT2P < 0 && RT2P >= -200)
+[e $ ! && < _RT2P -> 0 `i >= _RT2P -U -> 200 `i 149  ]
+[; ;Main.c: 323: {
+"323
+{
+[; ;Main.c: 325: direction1 = 0;
+"325
+[e = _direction1 -> 0 `i ]
+"326
+}
+[; ;Main.c: 326: }
+[e $U 150  ]
+"327
+[e :U 149 ]
+[; ;Main.c: 327: else if(RT2P < -200 || RT2P >500)
+[e $ ! || < _RT2P -U -> 200 `i > _RT2P -> 500 `i 151  ]
+[; ;Main.c: 328: {
+"328
+{
+[; ;Main.c: 329: break;
+"329
+[e $U 140  ]
+"330
+}
+[e :U 151 ]
+"332
+[e :U 150 ]
+[e :U 148 ]
+[e :U 146 ]
+[e :U 144 ]
+[; ;Main.c: 330: }
+[; ;Main.c: 332: rotate((400 - shortwall ), 0);
+[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
+[; ;Main.c: 333: _delay((unsigned long)((100)*(20000000/4000.0)));
+"333
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"336
+[v _RT2A `i  1 a ]
+[; ;Main.c: 336: int RT2A= (int)((float)RT2P * (36.0/40.0));
+[e = _RT2A -> * -> -> _RT2P `f `d / .36.0 .40.0 `i ]
+[; ;Main.c: 337: robotTurn(RT2A);
+"337
+[e ( _robotTurn (1 _RT2A ]
+[; ;Main.c: 338: _delay((unsigned long)((100)*(20000000/4000.0)));
+"338
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 339: rotate(shortwall,0);
+"339
+[e ( _rotate (2 , -> _shortwall `ui -> -> 0 `i `uc ]
+[; ;Main.c: 340: _delay((unsigned long)((100)*(20000000/4000.0)));
+"340
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 341: robotMoveSpeed(500, 200);
+"341
+[e ( _robotMoveSpeed (2 , -> 500 `i -> 200 `i ]
+"342
+}
+[e :U 138 ]
+"295
+[e $ ! != -> _error `i -> -> -> 0 `i `uc `i 139  ]
+[e :U 140 ]
+[; ;Main.c: 342: }
+[; ;Main.c: 343: return;
+"343
+[e $UE 137  ]
+[; ;Main.c: 344: }
+"344
+[e :UE 137 ]
+}
+"349
+[v _calibrateIR `(v  1 ef ]
+{
+[; ;Main.c: 348: void calibrateIR(void)
+[; ;Main.c: 349: {
+[e :U _calibrateIR ]
+[f ]
+[; ;Main.c: 351: currentMenu = 1;
+"351
+[e = _currentMenu -> -> 1 `i `uc ]
+[; ;Main.c: 352: rotate(8, 0);
+"352
+[e ( _rotate (2 , -> -> 8 `i `ui -> -> 0 `i `uc ]
+[; ;Main.c: 353: while (1)
+"353
+[e :U 154 ]
+[; ;Main.c: 354: {
+"354
+{
+[; ;Main.c: 355: if (RTC_FLAG_250MS == 1)
+"355
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 156  ]
+[; ;Main.c: 356: {
+"356
+{
+[; ;Main.c: 357: RTC_FLAG_250MS = 0;
+"357
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 358: UpdateDisplay();
+"358
+[e ( _UpdateDisplay ..  ]
+"359
+}
+[e :U 156 ]
+[; ;Main.c: 359: }
+[; ;Main.c: 360: switch (buttonPressed)
+"360
+[e $U 158  ]
+[; ;Main.c: 361: {
+"361
+{
+[; ;Main.c: 362: case 1:
+"362
+[e :U 159 ]
+[; ;Main.c: 365: buttonPressed = 0;
+"365
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 367: break;
+"367
+[e $U 157  ]
+[; ;Main.c: 368: case 2:
+"368
+[e :U 160 ]
+[; ;Main.c: 371: buttonPressed = 0;
+"371
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 373: break;
+"373
+[e $U 157  ]
+[; ;Main.c: 374: case 3:
+"374
+[e :U 161 ]
+[; ;Main.c: 375: rotate(1, 1);
+"375
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
+[; ;Main.c: 377: buttonPressed = 0;
+"377
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 379: break;
+"379
+[e $U 157  ]
+[; ;Main.c: 380: case 4:
+"380
+[e :U 162 ]
+[; ;Main.c: 381: rotate(1, 0);
+"381
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 0 `i `uc ]
+[; ;Main.c: 383: buttonPressed = 0;
+"383
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 385: break;
+"385
+[e $U 157  ]
+[; ;Main.c: 386: case 5:
+"386
+[e :U 163 ]
+[; ;Main.c: 387: totalSteps = 0;
+"387
+[e = _totalSteps -> 0 `i ]
+[; ;Main.c: 389: buttonPressed = 0;
+"389
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 390: currentMenu = 0;
+"390
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 391: return;
+"391
+[e $UE 152  ]
+[; ;Main.c: 393: default:
+"393
+[e :U 164 ]
+[; ;Main.c: 395: break;
+"395
+[e $U 157  ]
 "396
 }
-[e :U 171 ]
 [; ;Main.c: 396: }
-[; ;Main.c: 397: if (RT2P >= 200 && RT2P < 400)
+[e $U 157  ]
+"360
+[e :U 158 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 159
+ , $ -> -> 2 `i `uc 160
+ , $ -> -> 3 `i `uc 161
+ , $ -> -> 4 `i `uc 162
+ , $ -> -> 5 `i `uc 163
+ 164 ]
+"396
+[e :U 157 ]
 "397
-[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 172  ]
-[; ;Main.c: 398: {
+}
+[e :U 153 ]
+"353
+[e $U 154  ]
+[e :U 155 ]
+[; ;Main.c: 397: }
+[; ;Main.c: 398: }
 "398
-{
-[; ;Main.c: 399: RT2P = 400 - RT2P;
-"399
-[e = _RT2P - -> 400 `i _RT2P ]
-[; ;Main.c: 400: RT2P = RT2P * -1;
-"400
-[e = _RT2P * _RT2P -U -> 1 `i ]
-[; ;Main.c: 401: direction1 = 0;
-"401
-[e = _direction1 -> 0 `i ]
+[e :UE 152 ]
+}
 "402
-}
-[e :U 172 ]
-[; ;Main.c: 402: }
-[; ;Main.c: 403: if (RT2P < 200 && RT2P >= 0)
-"403
-[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 173  ]
-[; ;Main.c: 404: {
-"404
+[v _ChargeMode `(v  1 ef ]
 {
-[; ;Main.c: 405: direction1 = 1;
+[; ;Main.c: 401: void ChargeMode(void)
+[; ;Main.c: 402: {
+[e :U _ChargeMode ]
+[f ]
+[; ;Main.c: 404: currentMenu = 2;
+"404
+[e = _currentMenu -> -> 2 `i `uc ]
+[; ;Main.c: 405: ser_putch(128);
 "405
-[e = _direction1 -> 1 `i ]
-"406
-}
-[e :U 173 ]
-[; ;Main.c: 406: }
-[; ;Main.c: 407: if (RT2P < 0 && RT2P >= -200)
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;Main.c: 407: while (1)
 "407
-[e $ ! && < _RT2P -> 0 `i >= _RT2P -U -> 200 `i 174  ]
+[e :U 167 ]
 [; ;Main.c: 408: {
 "408
 {
-[; ;Main.c: 410: direction1 = 0;
+[; ;Main.c: 409: if (RTC_FLAG_250MS == 1)
+"409
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 169  ]
+[; ;Main.c: 410: {
 "410
-[e = _direction1 -> 0 `i ]
-"411
-}
-[e :U 174 ]
-[; ;Main.c: 411: }
-[; ;Main.c: 412: if(RT2P < -200 || RT2P >500)
-"412
-[e $ ! || < _RT2P -U -> 200 `i > _RT2P -> 500 `i 175  ]
-[; ;Main.c: 413: {
-"413
 {
+[; ;Main.c: 411: RTC_FLAG_250MS = 0;
+"411
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 412: UpdateDisplay();
+"412
+[e ( _UpdateDisplay ..  ]
+"413
+}
+[e :U 169 ]
+[; ;Main.c: 413: }
+[; ;Main.c: 414: switch (buttonPressed)
+"414
+[e $U 171  ]
+[; ;Main.c: 415: {
 "415
-}
-[e :U 175 ]
-[; ;Main.c: 415: }
-[; ;Main.c: 417: rotate((400 - shortwall ), 0);
-"417
-[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 418: _delay((unsigned long)((100)*(20000000/4000.0)));
-"418
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+{
+[; ;Main.c: 416: case 1:
+"416
+[e :U 172 ]
+[; ;Main.c: 419: buttonPressed = 0;
+"419
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 421: break;
 "421
-[v _RT2A `i  1 a ]
-[; ;Main.c: 421: int RT2A= RT2P * (36.0/40.0);
-[e = _RT2A -> * -> _RT2P `d / .36.0 .40.0 `i ]
-[; ;Main.c: 422: robotTurn(RT2A);
+[e $U 170  ]
+[; ;Main.c: 422: case 2:
 "422
-[e ( _robotTurn (1 _RT2A ]
-[; ;Main.c: 423: _delay((unsigned long)((100)*(20000000/4000.0)));
-"423
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 424: rotate(shortwall,0);
-"424
-[e ( _rotate (2 , -> _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 425: _delay((unsigned long)((100)*(20000000/4000.0)));
+[e :U 173 ]
+[; ;Main.c: 425: buttonPressed = 0;
 "425
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 426: robotMove(200);
-"426
-[e ( _robotMove (1 -> 200 `i ]
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 427: break;
 "427
-}
-[e :U 166 ]
-"381
-[e $U 167  ]
-[e :U 168 ]
-[; ;Main.c: 427: }
-[; ;Main.c: 429: break;
-"429
-[e $U 159  ]
-[; ;Main.c: 431: case 5:
+[e $U 170  ]
+[; ;Main.c: 428: case 3:
+"428
+[e :U 174 ]
+[; ;Main.c: 431: buttonPressed = 0;
 "431
-[e :U 176 ]
-[; ;Main.c: 432: ChargeMode();
-"432
-[e ( _ChargeMode ..  ]
+[e = _buttonPressed -> -> 0 `i `uc ]
 [; ;Main.c: 433: break;
 "433
-[e $U 159  ]
-[; ;Main.c: 434: default:
+[e $U 170  ]
+[; ;Main.c: 434: case 4:
 "434
-[e :U 177 ]
-[; ;Main.c: 436: break;
-"436
-[e $U 159  ]
+[e :U 175 ]
+[; ;Main.c: 437: buttonPressed = 0;
 "437
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 439: break;
+"439
+[e $U 170  ]
+[; ;Main.c: 440: case 5:
+"440
+[e :U 176 ]
+[; ;Main.c: 441: ser_putch(132);
+"441
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;Main.c: 443: buttonPressed = 0;
+"443
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 444: currentMenu = 0;
+"444
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 445: return;
+"445
+[e $UE 165  ]
+[; ;Main.c: 447: default:
+"447
+[e :U 177 ]
+[; ;Main.c: 448: buttonPressed = 0;
+"448
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 449: break;
+"449
+[e $U 170  ]
+"450
 }
-[; ;Main.c: 437: }
-[e $U 159  ]
-"358
-[e :U 160 ]
-[e [\ _choice , $ -> -> 0 `i `uc 161
- , $ -> -> 1 `i `uc 162
- , $ -> -> 2 `i `uc 163
- , $ -> -> 3 `i `uc 164
- , $ -> -> 4 `i `uc 165
+[; ;Main.c: 450: }
+[e $U 170  ]
+"414
+[e :U 171 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 172
+ , $ -> -> 2 `i `uc 173
+ , $ -> -> 3 `i `uc 174
+ , $ -> -> 4 `i `uc 175
  , $ -> -> 5 `i `uc 176
  177 ]
-"437
-[e :U 159 ]
-[; ;Main.c: 438: choice = 255;
-"438
-[e = _choice -> -> 255 `i `uc ]
-"439
+"450
+[e :U 170 ]
+"451
 }
-[e :U 147 ]
-"308
-[e $U 148  ]
-[e :U 149 ]
-[; ;Main.c: 439: }
-[; ;Main.c: 440: }
-"440
-[e :UE 146 ]
+[e :U 166 ]
+"407
+[e $U 167  ]
+[e :U 168 ]
+[; ;Main.c: 451: }
+[; ;Main.c: 452: }
+"452
+[e :UE 165 ]
+}
+"456
+[v _scan360 `(i  1 ef ]
+{
+[; ;Main.c: 455: int scan360(void)
+[; ;Main.c: 456: {
+[e :U _scan360 ]
+[f ]
+"457
+[v _lowestVal `i  1 a ]
+[; ;Main.c: 457: int lowestVal = 0, lowestSteps = 0;
+[e = _lowestVal -> 0 `i ]
+[v _lowestSteps `i  1 a ]
+[e = _lowestSteps -> 0 `i ]
+[; ;Main.c: 459: for (int steps = 0; steps < 400; steps++)
+"459
+{
+[v _steps `i  1 a ]
+[e = _steps -> 0 `i ]
+[e $ < _steps -> 400 `i 179  ]
+[e $U 180  ]
+"460
+[e :U 179 ]
+[; ;Main.c: 460: {
+{
+[; ;Main.c: 461: readAvgDistance();
+"461
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 462: if (adcVal > lowestVal)
+"462
+[e $ ! > _adcVal -> _lowestVal `ui 182  ]
+[; ;Main.c: 463: {
+"463
+{
+[; ;Main.c: 464: lowestVal = adcVal;
+"464
+[e = _lowestVal -> _adcVal `i ]
+[; ;Main.c: 465: lowestSteps = steps;
+"465
+[e = _lowestSteps _steps ]
+"467
+}
+[e :U 182 ]
+[; ;Main.c: 467: }
+[; ;Main.c: 468: rotate(1, 1);
+"468
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
+[; ;Main.c: 470: if (RTC_FLAG_250MS == 1)
+"470
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 183  ]
+[; ;Main.c: 471: {
+"471
+{
+[; ;Main.c: 472: RTC_FLAG_250MS = 0;
+"472
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 473: UpdateDisplay();
+"473
+[e ( _UpdateDisplay ..  ]
+"474
+}
+[e :U 183 ]
+"476
+}
+"459
+[e ++ _steps -> 1 `i ]
+[e $ < _steps -> 400 `i 179  ]
+[e :U 180 ]
+"476
+}
+[; ;Main.c: 474: }
+[; ;Main.c: 476: }
+[; ;Main.c: 478: return lowestSteps;
+"478
+[e ) _lowestSteps ]
+[e $UE 178  ]
+[; ;Main.c: 479: }
+"479
+[e :UE 178 ]
 }

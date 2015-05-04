@@ -1,7 +1,7 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.c"
+# 1 "E:\Aldnoah.Zero\Assignment3\HMI.c"
 
-# 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
+# 82 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
 
 
@@ -1072,30 +1072,30 @@ unsigned EEPGD : 1;
 volatile unsigned char EECON2 @ 0x18D;
 
 
-# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_nop)
 extern void _nop(void);
 
 # 80
 extern unsigned int flash_read(unsigned short addr);
 
-# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
+# 41 "C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
 extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
+# 153 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 12 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
 typedef int ptrdiff_t;
 typedef unsigned size_t;
 typedef unsigned short wchar_t;
 
-# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdarg.h"
+# 31 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma inline(__va_start)
@@ -1104,7 +1104,7 @@ extern void * __va_start(void);
 #pragma inline(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int errno;
 
 # 58
@@ -1114,7 +1114,7 @@ char * ptr;
 void (* func)(char);
 };
 
-# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\conio.h"
+# 17 "C:\Program Files\HI-TECH Software\PICC\9.83\include\conio.h"
 extern int errno;
 
 
@@ -1131,7 +1131,7 @@ extern bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\stdio.h"
+# 103 "C:\Program Files\HI-TECH Software\PICC\9.83\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -1154,14 +1154,14 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h"
+# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1185,28 +1185,30 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
 volatile unsigned int adcVal;
-volatile unsigned int distance;
-volatile unsigned int test = 0;
+volatile unsigned int IRdistance;
+
 
 
 unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
-void robotTurn(int distance);
+void robotMoveSpeed(int distance, int speed);
+void robotTurn(int degrees);
+int abs(int v);
 
 void robot_read(void);
-int distTravelled = 0;
+int distTravelled, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
-unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
-# 30 "H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.c"
+# 30 "E:\Aldnoah.Zero\Assignment3\HMI.c"
 int pos = 0;
 
 const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "};
@@ -1403,7 +1405,7 @@ case 0:
 
 lcd_write_control(0b00000001);
 
-sprintf(adcOutput,"ADC:%d Dist:%d",BumpSensors, distTravelled);
+sprintf(adcOutput,"IR:%dcm D:%d",IRdistance, TotalDistTravelled);
 
 
 lcd_set_cursor(0x00);

@@ -1,7 +1,7 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.c"
+# 1 "E:\Aldnoah.Zero\Assignment3\robot.c"
 
-# 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
+# 82 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
 
 
@@ -1072,36 +1072,38 @@ unsigned EEPGD : 1;
 volatile unsigned char EECON2 @ 0x18D;
 
 
-# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
+# 27 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_nop)
 extern void _nop(void);
 
 # 80
 extern unsigned int flash_read(unsigned short addr);
 
-# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
+# 41 "C:\Program Files\HI-TECH Software\PICC\9.83\include\eeprom_routines.h"
 extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h"
+# 153 "C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h"
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
-void robotTurn(int distance);
+void robotMoveSpeed(int distance, int speed);
+void robotTurn(int degrees);
+int abs(int v);
 
 void robot_read(void);
-int distTravelled = 0;
+int distTravelled, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
-unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
-# 55 "H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h"
+# 55 "E:\Aldnoah.Zero\Assignment3\ser.h"
 bit ser_isrx(void);
 unsigned char ser_getch(void);
 void ser_putch(unsigned char byte);
@@ -1117,7 +1119,7 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h"
+# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1141,14 +1143,14 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h"
+# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 9 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.c"
+# 9 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1175,9 +1177,53 @@ DistLowByte = ser_getch();
 
 }
 
-# 39
+void RobotDrive(int speed)
+{
+unsigned char speedlowByte = (unsigned char) (speed) ;
+unsigned char speedhighByte = (unsigned char) (speed >> 8);
+
+ser_putch(137);
+
+ser_putch(speedhighByte);
+
+ser_putch(speedlowByte);
+
+ser_putch(128);
+
+ser_putch(0);
+}
+
+
+
+void robotMoveSpeed(int distance, int speed)
+{
+distTravelled = 0;
+int temp1;
+RobotDrive(speed);
+
+while (abs(distTravelled) <= abs(distance))
+{
+robot_read();
+if (BumpSensors)
+{
+ROBOTerror = 1;
+break;
+}
+temp1 = DistHighByte;
+temp1 = temp1 << 8;
+temp1 += DistLowByte;
+distTravelled += temp1;
+TotalDistTravelled += temp1;
+UpdateDisplay();
+}
+
+RobotDrive(0);
+
+}
+
 void robotMove(int distance)
 {
+
 distTravelled =0;
 
 if (distance >= 0)
@@ -1210,8 +1256,12 @@ while (distTravelled <= distance)
 {
 robot_read();
 if (BumpSensors)
+{
+ROBOTerror = 1;
 break;
+}
 distTravelled += DistLowByte;
+TotalDistTravelled += DistLowByte;
 UpdateDisplay();
 }
 
@@ -1227,13 +1277,13 @@ ser_putch(0);
 
 }
 
-void robotTurn(int distance)
+void robotTurn(int degrees)
 {
 
 
-turnlowByte = (unsigned char) (distance) ;
-turnhighByte = (unsigned char) (distance >> 8);
-if (distance >= 0)
+turnlowByte = (unsigned char) (degrees) ;
+turnhighByte = (unsigned char) (degrees >> 8);
+if (degrees >= 0)
 {
 ser_putch(137);
 
@@ -1272,4 +1322,9 @@ ser_putch(0);
 ser_putch(0);
 
 ser_putch(0);
+}
+
+int abs(int v)
+{
+return (v * ((v>0) - (v<0)));
 }

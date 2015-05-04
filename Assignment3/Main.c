@@ -1,19 +1,35 @@
 /*********************************************************************************
 	Description: Assignment 3 submission. 
-		-2Hz heartbeat
-		-Toggleabe LED with debounced button
-		-steppermotor initialisation and control with 
-		3 push buttons (2 half steps Counterclockwise, 2 clockwise, 180 degree sweep)       			 
-	Uses: DSX Experimenter board + Mechatronics Peripheral module																			 
+	Group Name: Aldnoah.Zero
+	
+	SPECS:
+		-1Hz heartbeat
+		-LCD Displaying continuous IR distance
+		-LCD Menu for chosing options
+		-Steppermotor Calibration
+		-Charging Mode
+		-360 IR Scan
+		-2m Straight Line Robot manoeuvre
+		-1m/side Robot L manoeuvre
+		-Wall follow manoeuvre
+     			 
+	Uses: DSX Experimenter board + iRobot Create + iRobot - DSX interface Board																			 
 	Connections: 
+
+	Port A0 - IR Sensor ADC
     Port B0 - Heartbeat LED 
 	Port B1 - Toggleable LED 
-	Ports B2-B5 - buttons PB0-3
-	Port C - blah         																 
+	Ports B2-B5 - 4way joystick button
+	Port C - SPI and Serial   
+	Port D - LCD
+	Port E - LCD      																 
 																				 
-	Authors: David LEE 
-	S/N 11055579
-	Email: David@lee42.com         																 
+	 Authors 		 Student No.		Email
+-----------------------------------------------------------------------------------
+	David LEE  		 11055579 			David@lee42.com 
+	James BOHM		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   																 
 																				 
 **********************************************************************************/
 
@@ -35,52 +51,45 @@
 	__CONFIG(FOSC_HS &  WDTE_OFF & CP_OFF & BOREN_OFF & PWRTE_ON & WRT_OFF & LVP_OFF & CPD_OFF);
 #endif
 
+
 #define _XTAL_FREQ 20000000  //Oscillator (20MHz)
 #define TMR0_VAL 100	     //timer0 start count
 
 #define HBLED RB0 //Heartbeat LED
 #define LED0 RB1 //led for toggling
 
+//Menu Defines
 #define UP 1
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
 #define CENTER 5
 
-#define STEPS180  200	//half steps for a 180 degree rotation (using 200 step/rev steppermotor)
-
-
-//define stepping sequence
+//define stepping sequence directions
 #define CLOCKWISE 0
 #define COUNTERCLOCKWISE 1
 
+//define robot parameters
+#define DRIVESPEED 200
 
-#define		SELECT_NONE()	RC0 = 0; RC1 = 0;
-#define		SELECT_EEPROM()	RC0 = 0; RC1 = 1;
-#define		SELECT_RF()		RC0 = 1; RC1 = 0;
-#define		SELECT_SM()		RC0 = 1; RC1 = 1;
-#define 	SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
-
-#define SER_BUFFER_SIZE		16
-		
-#define SER_FIFO_MASK 		(SER_BUFFER_SIZE-1)
-
-
+//Function Prototypes
 void calibrateIR(void);
 int scan360(void);
+void ChargeMode(void);
+void FollowWall(void);
 
-unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
-int totalSteps = 0; 
 
+//Global Variables
+int totalSteps = 0; //stores steppermotor direction
 
-volatile unsigned char buttonPressed;
-volatile unsigned char serialInput = 0;
+volatile unsigned char buttonPressed;	//stores button presses
+//volatile unsigned char serialInput = 0;
 
 
 //set up flags for timer0 (currently not used))
 volatile bit RTC_FLAG_1MS = 0;
-volatile bit RTC_FLAG_10MS = 0;
-volatile bit RTC_FLAG_50MS = 0;
+//volatile bit RTC_FLAG_10MS = 0;
+//volatile bit RTC_FLAG_50MS = 0;
 volatile bit RTC_FLAG_250MS = 0;
 volatile bit RTC_FLAG_500MS = 0;
 
@@ -93,7 +102,6 @@ void interrupt isr1(void)
 {
 	
 	
-	
 	if(TMR0IF)  //interrupt from timer0
 	{
 		TMR0IF = 0;		//reset interrupt flag
@@ -101,14 +109,7 @@ void interrupt isr1(void)
 		
 		RTC_Counter++;		//increase the count
 		//set clock flags 
-		RTC_FLAG_1MS = 1;	
-		if(RTC_Counter % 10 == 0) 
-		{
-			RTC_FLAG_10MS = 1;
-		
-			
-		}
-		if(RTC_Counter % 50 == 0) RTC_FLAG_50MS = 1;
+		RTC_FLAG_1MS = 1;			
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
 		{
 			
@@ -121,178 +122,50 @@ void interrupt isr1(void)
 			HBLED ^= 0x01;		//toggle heartbeat LED
 
 		}
-		if (buttonPressed == 0)
+		if (buttonPressed == 0)	//if no button is waiting to be responded to
 		{
-			
-			buttonPressed = ReadButtons();
-
+			buttonPressed = ReadButtons();	//chech and debounce buttons
 		}
 	}
-	ser_int();							
+	ser_int();		//serial recieve and transmit interrupt macro					
 }
 
+
+//Initialisation Routine
 void init()
-{
+{	
+	buttonPressed = 0; //no buttons have been pressed
 	
 	
-	buttonPressed = 0;
+	TRISB = 0b11111100;	//PortB all inputs except pin 0 and 1
+	TRISC &= 0b10010000; //force PortC to output except 4 and 7
 	
-	//PortB all inputs except pin 0 and 1
-	
-	TRISC &= 0b10010000;
-	
+	//spi registers
 	SSPSTAT = 0b01000000;
 	SSPCON = 0b10100001; 
+
 	//timer0 prescalar set
 	OPTION_REG = 0b00000100;
+	
+	//Module Initialisations
 	ser_init();	
 	init_adc();
 	lcd_init();
 	robo_init();
-	TRISB = 0b11111100;	//PortB all inputs except pin 0 and 1
+	
+
 	//enable timer0 interrupt
 	TMR0IE = 1;
-	PEIE=1;		//enable peripheral interrupts 
+	//enable peripheral interrupts 
+	PEIE=1;		
 	//Enable all interrupts
 	ei();
 }
 
 
-
-void calibrateIR(void)
-{
-	
-	currentMenu = 1;
-	rotate(8, CLOCKWISE);
-	while (1)
-	{
-		if (RTC_FLAG_250MS == 1)
-			{
-				RTC_FLAG_250MS = 0;
-				UpdateDisplay();
-			}
-		switch (buttonPressed)
-		{
-			case UP:
-			
-			
-			buttonPressed = 0;
-			
-			break;
-			case DOWN:
-			
-			
-			buttonPressed = 0;
-			
-			break;
-			case LEFT:
-			rotate(1, COUNTERCLOCKWISE);
-			
-			buttonPressed = 0;
-			
-			break;
-			case RIGHT:
-			rotate(1, CLOCKWISE);
-			
-			buttonPressed = 0;
-			
-			break;
-			case CENTER:
-			totalSteps = 0;
-			
-			buttonPressed = 0;
-			currentMenu = 0;
-			return;
-
-			default:
-			
-			break;
-		}
-	}
-}
-void ChargeMode(void)
-{
-	
-	currentMenu = 2;
-	ser_putch(128); //put in passive mode
-		
-	while (1)
-	{
-		if (RTC_FLAG_250MS == 1)
-			{
-				RTC_FLAG_250MS = 0;
-				UpdateDisplay();
-			}
-		switch (buttonPressed)
-		{
-			case UP:
-			
-			
-			buttonPressed = 0;
-			
-			break;
-			case DOWN:
-			
-			
-			buttonPressed = 0;
-			
-			break;
-			case LEFT:
-			
-			
-			buttonPressed = 0;
-			
-			break;
-			case RIGHT:
-		
-			
-			buttonPressed = 0;
-			
-			break;
-			case CENTER:
-			ser_putch(132); //full mode
-			
-			buttonPressed = 0;
-			currentMenu = 0;
-			return;
-
-			default:
-			buttonPressed = 0;
-			break;
-		}
-	}
-}
-
-
-int scan360(void)
-{
-	int lowestVal = 0, lowestSteps = 0;
-
-	for (int steps = 0; steps < 400; steps++)
-	{
-		readAvgDistance();
-		if (adcVal > lowestVal)
-		{
-			lowestVal = adcVal;
-			lowestSteps = steps;
-			
-		}
-		rotate(1, COUNTERCLOCKWISE);
-			
-		if (RTC_FLAG_250MS == 1)
-			{
-				RTC_FLAG_250MS = 0;
-				UpdateDisplay();
-			}
-		test = lowestSteps;
-	} 
-
-	return lowestSteps;
-}
-
-
-
-
+/*******************************************************************/
+/*******************************MAIN********************************/
+/*******************************************************************/
 void main(void)
 {
 		unsigned char choice = 255;	
@@ -309,78 +182,52 @@ void main(void)
 	{
 
 
-		if (RTC_FLAG_250MS == 1)
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display, IR, and reading robot values
 			{
 				RTC_FLAG_250MS = 0;
 				robot_read();
 				readAvgDistance();
 				UpdateDisplay();
 			}
-		
-		switch (buttonPressed)
-		{
-			case UP:
-			Menu(UP);
-			
-			buttonPressed = 0;
-			
-			break;
-			case DOWN:
-			Menu(DOWN);
-			
-			buttonPressed = 0;
-			
-			break;
-			case LEFT:
-			Menu(LEFT);
-			
-			buttonPressed = 0;
-			
-			break;
-			case RIGHT:
-			Menu(RIGHT);
-			
-			buttonPressed = 0;
-			
-			break;
-			case CENTER:
-			choice = Menu(CENTER);
-			
-			buttonPressed = 0;
-			
-			break;
-			default:
-			buttonPressed = 0;
-			break;
-		}
+		if (buttonPressed)	//if a button has been debounced, perform the 
+							//appropriate menu action and wait for next button
+			{
+				choice = Menu(buttonPressed);
+				buttonPressed = 0;
+			}
 
-		////////  THIS IS THE MENU ITEM SELECTIONS
+
+		////////  THIS IS THE MENU ITEM SELECTIONS	///////
 		switch (choice)
 		{
 			case 0:		//Calibrate IR	
 				calibrateIR();
 			break;
 			case 1:		//Scan 360 degrees
-			 	shortwall = scan360() - 13;
-				rotate((400 - shortwall), CLOCKWISE);
+			 	shortwall = scan360() - 13;	//find the closest wall
+				rotate((400 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
 			break;
 			case 2:		//Drive forward 2 meters
+				TotalDistTravelled = 0;
 				__delay_ms(100);
-				robotMove(2000);
+				robotMoveSpeed(2000, DRIVESPEED);
 					
 			
 			break;
 			case 3:		//Drive in an L shape
+				TotalDistTravelled = 0;
 				__delay_ms(100);
-				robotMove(1000);
-				robotTurn(-90);
-				robotMove(1000);
+				robotMoveSpeed(1000, DRIVESPEED);
+				__delay_ms(100);
+				robotTurn(-90); //turn clockwise 90 degrees
+				__delay_ms(100);
+				robotMoveSpeed(1000, DRIVESPEED);
 			break;
 			case 4:		//Follow wall
-			
-			while(1)
+				TotalDistTravelled = 0;
+			while(!ROBOTerror)
 			{
-				shortwall = scan360() - 13; //fails, when pointing directly at wall. value <0, IR scanner spins.
+				int shortwall = scan360();// - 13; //fails, when pointing directly at wall. value <0, IR scanner spins.
 				int RT2P = 0; //RT2P = Robot Turn to Position
 				int direction1 = 0; // Cw (0) or ccw (1) flag
 				 if (shortwall > 200)	// If the wall is on right, turn 90deg ccw infront of wall.
@@ -423,8 +270,9 @@ void main(void)
 				__delay_ms(100);
 				rotate(shortwall,CLOCKWISE);
 				__delay_ms(100);
-				robotMove(500);
+				robotMoveSpeed(500, DRIVESPEED);
 		}		
+		//	FollowWall();	
 				
 			break;		
 			
@@ -439,5 +287,193 @@ void main(void)
 	}
 }
 
+//Follow wall routine
+void FollowWall(void)
+{
+	unsigned char error = 0;
+	
+	while(!error)
+			{
+				//shortwall = (scan360()- 13); //fails, when pointing directly at wall. value <0, IR scanner spins.
+				int shortwall = scan360();
+				int RT2P = 0; //RT2P = Robot Turn to Position
+				int direction1 = 0; // Cw (0) or ccw (1) flag
+				 if (shortwall >= 200)	// If the wall is on right, turn 90deg ccw infront of wall.
+				 	RT2P = shortwall + 100;
+				 if (shortwall < 200)	// If the wall is on the left, turn 90deg cw infront of wall.
+				 	RT2P = shortwall - 100; 
+				
+
+				 if (RT2P >= 400 && RT2P < 500 )
+				{	
+				 	RT2P -= 400;
+					direction1 = 1;
+				}
+				 else if (RT2P >= 200 && RT2P < 400)
+				{ 	
+					RT2P = 400 - RT2P;
+					RT2P = RT2P * -1;
+					direction1 = 0;
+				}
+				 else if (RT2P < 200 && RT2P >= 0)
+				{ 
+					direction1 = 1;
+				}
+				 else if (RT2P < 0 && RT2P >= -200)
+				{
+					//RT2P = RT2P * -1;
+					direction1 = 0;
+				}
+				else if(RT2P < -200 || RT2P >500)
+					{
+						break;
+					}
+ 
+				rotate((400 - shortwall ), CLOCKWISE); //IR sensor
+				__delay_ms(100); 
 
 
+				int RT2A= (int)((float)RT2P * (36.0/40.0));
+				robotTurn(RT2A);
+				__delay_ms(100);
+				rotate(shortwall,CLOCKWISE);
+				__delay_ms(100);
+				robotMoveSpeed(500, DRIVESPEED);
+		}		
+	return;
+}
+
+
+//User moves steppermotor to a zero position and sets this to zero
+void calibrateIR(void)
+{
+	
+	currentMenu = 1;	//switch display to Calibration menu
+	rotate(8, CLOCKWISE); //initialise to a known winding
+	while (1)
+	{
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
+		{
+			case UP:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case DOWN:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case LEFT: //half step counterclockwise
+			rotate(1, COUNTERCLOCKWISE); 
+			
+			buttonPressed = 0;
+			
+			break;
+			case RIGHT:	//half step Clockwise
+			rotate(1, CLOCKWISE);
+			
+			buttonPressed = 0;
+			
+			break;		//zero steppermotor and exit to menu
+			case CENTER:
+			totalSteps = 0;
+			
+			buttonPressed = 0;
+			currentMenu = 0;
+			return;
+
+			default:
+			
+			break;
+		}
+	}
+}
+
+//Put robot into passive mode so it can charge the battery
+void ChargeMode(void)
+{
+	
+	currentMenu = 2;	//switch display to charge mode menu
+	ser_putch(128); //put in passive mode
+		
+	while (1)
+	{
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
+		{
+			case UP:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case DOWN:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case LEFT:
+			
+			
+			buttonPressed = 0;
+			
+			break;
+			case RIGHT:
+		
+			
+			buttonPressed = 0;
+			
+			break;
+			case CENTER:
+			ser_putch(132); //put robot into full mode and exit to menu
+			
+			buttonPressed = 0;
+			currentMenu = 0;
+			return;
+
+			default:
+			buttonPressed = 0;
+			break;
+		}
+	}
+}
+
+//Do a 360 degree scan with the steppermotor and return the step value of the closest wall
+int scan360(void)
+{
+	int lowestVal = 0, lowestSteps = 0;
+
+	for (int steps = 0; steps < 400; steps++) //step through 360 degrees
+	{
+		readAvgDistance();
+		if (adcVal > lowestVal)			//compare current value to lowest value (done using raw data to speed up process
+		{
+			lowestVal = adcVal;
+			lowestSteps = steps;
+			
+		}
+		rotate(1, COUNTERCLOCKWISE);	
+			
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		
+	} 
+
+	return lowestSteps;
+}

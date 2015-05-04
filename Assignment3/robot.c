@@ -32,12 +32,53 @@ void robot_read(void)
 //	distTravelled =DistLowByte;
 }
 
+void RobotDrive(int speed)
+{
+		unsigned char speedlowByte = (unsigned char) (speed) ;
+		unsigned char speedhighByte = (unsigned char) (speed >> 8);	
+
+				ser_putch(137); //drive - opcode 1
+			
+				ser_putch(speedhighByte); // speed high byte
+			
+				ser_putch(speedlowByte); //speed low byte
+				
+				ser_putch(128); 
+			
+				ser_putch(0); 
+}
+
 
 	
+void robotMoveSpeed(int distance, int speed)
+{
+	distTravelled =	0;
+	int temp1;
+	RobotDrive(speed);
 
+	while (abs(distTravelled) <= abs(distance))
+	{
+		robot_read();
+		if (BumpSensors)	//hit wall or lifted
+		{	
+			ROBOTerror = 1;
+			break;
+		}
+		temp1 = DistHighByte;
+		temp1 = temp1 << 8;
+		temp1 += DistLowByte;		
+		distTravelled += temp1;
+		TotalDistTravelled += temp1;
+		UpdateDisplay();
+	}
+
+	RobotDrive(0);
+	
+}
 
 void robotMove(int distance)
 {
+
 	distTravelled =0;
 
 			if (distance >= 0)	//forward
@@ -70,8 +111,12 @@ while (distTravelled <= distance)
 	{
 		robot_read();
 		if (BumpSensors)	//hit wall or lifted
+		{
+			ROBOTerror = 1;
 			break;
+		}
 		distTravelled += DistLowByte;
+		TotalDistTravelled += DistLowByte;
 		UpdateDisplay();
 	}
 
@@ -84,16 +129,16 @@ while (distTravelled <= distance)
 				ser_putch(0); 
 			
 				ser_putch(0); 
-			
+	
 }
 
-void robotTurn(int distance)
+void robotTurn(int degrees)
 {
 	
 
-	turnlowByte = (unsigned char) (distance) ;
-	turnhighByte = (unsigned char) (distance >> 8);				
-	if (distance >= 0)		//ccounter clockwise
+	turnlowByte = (unsigned char) (degrees) ;
+	turnhighByte = (unsigned char) (degrees >> 8);				
+	if (degrees >= 0)		//ccounter clockwise
 {
 				ser_putch(137); //drive - opcode 1
 			
@@ -132,4 +177,9 @@ else						//clockwise
 				ser_putch(0); 
 			
 				ser_putch(0); 
+}
+
+int abs(int v) 
+{
+  return  (v * ((v>0) - (v<0))); //gets absolute value by multiplying by 1 or -1   
 }

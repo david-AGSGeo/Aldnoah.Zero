@@ -223,8 +223,8 @@ void UpdateDisplay(void)
 				
 				lcd_write_control(0b00000001); //clear display	
 				
-				sprintf(adcOutput,"ADC:%d Dist:%d",BumpSensors, distTravelled);
-			//	sprintf(adcOutput,"ADC:%d Dist:%d",highByte, lowByte);
+				sprintf(adcOutput,"IR:%dcm D:%d",IRdistance, TotalDistTravelled);
+
 				
 				lcd_set_cursor(0x00);	
 				lcd_write_string(adcOutput);				
