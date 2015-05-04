@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.c"
+# 1 "H:\Aldnoah.Zero-master\Assignment3\infrared.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 volatile unsigned int test = 0;
@@ -1164,7 +1164,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 7 "H:\Aldnoah.Zero.git\trunk\Assignment3\adc.h"
+# 7 "H:\Aldnoah.Zero-master\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1172,7 +1172,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1196,7 +1196,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 9 "H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.c"
+# 9 "H:\Aldnoah.Zero-master\Assignment3\infrared.c"
 void readAvgDistance(void)
 {
 unsigned int fullval = 0;

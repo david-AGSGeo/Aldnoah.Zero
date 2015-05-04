@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c"
+# 1 "H:\Aldnoah.Zero-master\Assignment3\Main.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 7 "H:\Aldnoah.Zero.git\trunk\Assignment3\adc.h"
+# 7 "H:\Aldnoah.Zero-master\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1162,7 +1162,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1186,7 +1186,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\infrared.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 volatile unsigned int test = 0;
@@ -1196,12 +1196,12 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\steppermotor.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
 
-# 55 "H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h"
+# 55 "H:\Aldnoah.Zero-master\Assignment3\ser.h"
 bit ser_isrx(void);
 unsigned char ser_getch(void);
 void ser_putch(unsigned char byte);
@@ -1217,30 +1217,35 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
+int assignedSpeed = 100;
+int d2travel= 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
+void robotMoveSpeed(int distance, int speed);
 void robotTurn(int distance);
+int abs(int v);
 
 void robot_read(void);
-int distTravelled = 0;
+int distTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
-# 35 "H:\Aldnoah.Zero.git\trunk\Assignment3\Main.c"
+# 35 "H:\Aldnoah.Zero-master\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
 # 69
 void calibrateIR(void);
 int scan360(void);
+void straightLineTest(int menuflag);
 
 unsigned char current_direction = 0;
 int totalSteps = 0;
@@ -1331,6 +1336,77 @@ PEIE=1;
 }
 
 
+void straightLineTest(int menuflag)
+{
+
+currentMenu = menuflag + 3;
+
+while (1)
+{
+if (RTC_FLAG_250MS == 1)
+{
+RTC_FLAG_250MS = 0;
+UpdateDisplay();
+}
+switch (buttonPressed)
+{
+case 1:
+
+
+buttonPressed = 0;
+robotTurn(180);
+
+break;
+case 2:
+
+
+buttonPressed = 0;
+currentMenu = 0;
+return;
+
+case 3:
+if(menuflag)
+{
+d2travel -= 500;
+assignedSpeed = 200;
+}
+else
+{
+assignedSpeed -= 100;
+d2travel = 2000;
+}
+buttonPressed = 0;
+
+break;
+case 4:
+if(menuflag)
+{
+d2travel += 500;
+assignedSpeed = 200;
+}
+else
+{
+assignedSpeed += 100;
+d2travel = 2000;
+}
+buttonPressed = 0;
+
+break;
+case 5:
+
+if (assignedSpeed && d2travel)
+{
+robotMoveSpeed(d2travel,assignedSpeed);
+}
+
+buttonPressed = 0;
+default:
+
+break;
+}
+
+}
+}
 
 void calibrateIR(void)
 {
@@ -1531,15 +1607,19 @@ break;
 switch (choice)
 {
 case 0:
-calibrateIR();
+
+
+straightLineTest(0);
+
 break;
 case 1:
-shortwall = scan360() - 13;
-rotate((400 - shortwall), 0);
+
+straightLineTest(1);
 break;
 case 2:
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMove(2000);
+straightLineTest(1);
+
+
 
 
 break;
@@ -1596,7 +1676,7 @@ robotTurn(RT2A);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 rotate(shortwall,0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
-robotMove(200);
+robotMove(500);
 }
 
 break;

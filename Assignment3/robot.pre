@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.c"
+# 1 "H:\Aldnoah.Zero-master\Assignment3\robot.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1090,18 +1090,20 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
+void robotMoveSpeed(int distance, int speed);
 void robotTurn(int distance);
+int abs(int v);
 
 void robot_read(void);
-int distTravelled = 0;
+int distTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
-# 55 "H:\Aldnoah.Zero.git\trunk\Assignment3\ser.h"
+# 55 "H:\Aldnoah.Zero-master\Assignment3\ser.h"
 bit ser_isrx(void);
 unsigned char ser_getch(void);
 void ser_putch(unsigned char byte);
@@ -1117,7 +1119,7 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1141,14 +1143,16 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "H:\Aldnoah.Zero.git\trunk\Assignment3\HMI.h"
+# 6 "H:\Aldnoah.Zero-master\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
+int assignedSpeed = 100;
+int d2travel= 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 9 "H:\Aldnoah.Zero.git\trunk\Assignment3\robot.c"
+# 9 "H:\Aldnoah.Zero-master\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1159,10 +1163,6 @@ ser_putch(0);
 
 void robot_read(void)
 {
-
-
-
-
 ser_putch (142);
 ser_putch (7);
 _delay((unsigned long)((5)*(20000000/4000.0)));
@@ -1175,10 +1175,54 @@ DistLowByte = ser_getch();
 
 }
 
-# 39
+
+
+void robotMoveSpeed(int distance, int speed)
+{
+distTravelled = 0;
+int temp1;
+unsigned char speedlowByte = (unsigned char) (speed) ;
+unsigned char speedhighByte = (unsigned char) (speed >> 8);
+
+ser_putch(137);
+
+ser_putch(speedhighByte);
+
+ser_putch(speedlowByte);
+
+ser_putch(128);
+
+ser_putch(0);
+
+while (abs(distTravelled) <= abs(distance))
+{
+robot_read();
+if (BumpSensors)
+{
+break;
+}
+temp1 = DistHighByte;
+temp1 = temp1 << 8;
+temp1 += DistLowByte;
+distTravelled += temp1;
+UpdateDisplay();
+}
+
+ser_putch(137);
+
+ser_putch(0);
+
+ser_putch(0);
+
+ser_putch(0);
+
+ser_putch(0);
+}
+
 void robotMove(int distance)
 {
 distTravelled =0;
+
 
 if (distance >= 0)
 {
@@ -1272,4 +1316,10 @@ ser_putch(0);
 ser_putch(0);
 
 ser_putch(0);
+}
+
+int abs(int v)
+{
+return v * ( (v<0) * (-1) + (v>0));
+
 }

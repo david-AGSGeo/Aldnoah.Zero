@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.c"
+# 1 "H:\Aldnoah.Zero-master\Assignment3\lcd.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1114,7 +1114,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 17 "H:\Aldnoah.Zero.git\trunk\Assignment3\lcd.c"
+# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.c"
 void lcd_write_control(unsigned char databyte)
 {
 RE2 = 0;

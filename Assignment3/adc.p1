@@ -884,7 +884,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "154 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
-"9 H:\Aldnoah.Zero.git\trunk\Assignment3\adc.h
+"9 H:\Aldnoah.Zero-master\Assignment3\adc.h
 [v _adc_read `(ui  0 ef ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
@@ -1720,7 +1720,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;adc.h: 7: void init_adc(void);
 [; ;adc.h: 9: unsigned int adc_read(void);
 [; ;adc.h: 12: unsigned char adc_read_channel(unsigned char channel);
-"5 H:\Aldnoah.Zero.git\trunk\Assignment3\adc.c
+"5 H:\Aldnoah.Zero-master\Assignment3\adc.c
 [v _adc_read_channel `(uc  1 ef1`uc ]
 {
 [; ;adc.c: 4: unsigned char adc_read_channel(unsigned char channel)

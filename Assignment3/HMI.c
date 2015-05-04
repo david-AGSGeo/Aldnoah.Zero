@@ -241,7 +241,7 @@ void UpdateDisplay(void)
 			break;
 			case 1:	//calibration Menu
 				lcd_write_control(0b00000001); //clear display	
-
+				sprintf(adcOutput,"ADC:%d Dist:%d",BumpSensors, distTravelled);
 				lcd_set_cursor(0x00);	
 				lcd_write_string("Zero Step_Motor");
 								
@@ -270,9 +270,34 @@ void UpdateDisplay(void)
 				lcd_write_string("  EXIT  ");
 
 			break;
+			case 3:	//Straight Line
+				lcd_write_control(0b00000001); //clear display	
+				sprintf(adcOutput,"AS:%dDT:%d",assignedSpeed, distTravelled);
 
+				lcd_set_cursor(0x00);	
+				lcd_write_string(adcOutput);
+								
+
+
+				lcd_set_cursor(MENUCENTER);	
+				lcd_write_string("  EXIT  ");
+
+			break;
+
+						case 4:	//Straight Line
+				lcd_write_control(0b00000001); //clear display	
+				sprintf(adcOutput,"D:%d D:%d",d2travel, distTravelled);
+
+				lcd_set_cursor(0x00);	
+				lcd_write_string(adcOutput);
+								
+
+
+				lcd_set_cursor(MENUCENTER);	
+				lcd_write_string("  EXIT  ");
+
+			break;
 			default:
-			
 			break;
 			
 

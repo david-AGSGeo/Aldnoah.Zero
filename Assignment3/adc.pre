@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\adc.c"
+# 1 "H:\Aldnoah.Zero-master\Assignment3\adc.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 7 "H:\Aldnoah.Zero.git\trunk\Assignment3\adc.h"
+# 7 "H:\Aldnoah.Zero-master\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1098,7 +1098,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 4 "H:\Aldnoah.Zero.git\trunk\Assignment3\adc.c"
+# 4 "H:\Aldnoah.Zero-master\Assignment3\adc.c"
 unsigned char adc_read_channel(unsigned char channel)
 {
 switch(channel)

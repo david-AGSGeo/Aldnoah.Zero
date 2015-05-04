@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero.git\trunk\Assignment3\AT25256A.c"
+# 1 "H:\Aldnoah.Zero-master\Assignment3\AT25256A.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 10 "H:\Aldnoah.Zero.git\trunk\Assignment3\AT25256A.h"
+# 10 "H:\Aldnoah.Zero-master\Assignment3\AT25256A.h"
 static volatile bit CS0 @ (unsigned)&PORTC*8+0;
 static volatile bit CS1 @ (unsigned)&PORTC*8+1;
 
@@ -1103,7 +1103,7 @@ void ee_write_enable(void);
 unsigned char ee_read_byte (unsigned int);
 void ee_write_byte( unsigned int, unsigned char);
 
-# 5 "H:\Aldnoah.Zero.git\trunk\Assignment3\AT25256A.c"
+# 5 "H:\Aldnoah.Zero-master\Assignment3\AT25256A.c"
 void ee_write_byte( unsigned int byte_address, unsigned char data)
 {
 unsigned char addressH;

@@ -68,6 +68,7 @@
 
 void calibrateIR(void);
 int scan360(void);
+void straightLineTest(int menuflag);
 
 unsigned char current_direction = CLOCKWISE; //stores the direction of the sweep
 int totalSteps = 0; 
@@ -158,6 +159,77 @@ void init()
 }
 
 
+void straightLineTest(int menuflag)
+{
+	
+	currentMenu = menuflag + 3;
+	
+	while (1)
+	{
+		if (RTC_FLAG_250MS == 1)
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
+		{
+			case UP:
+			
+			
+			buttonPressed = 0;
+			robotTurn(180);
+			
+			break;
+			case DOWN:
+			
+			
+			buttonPressed = 0;
+			currentMenu = 0;
+			return;
+			
+			case LEFT:
+			if(menuflag)
+			{
+				d2travel -= 500;
+				assignedSpeed = 200;
+			}
+			else
+			{			
+				assignedSpeed -= 100;
+				d2travel = 2000;
+			}
+			buttonPressed = 0;
+			
+			break;
+			case RIGHT:
+			if(menuflag)
+			{
+				d2travel += 500;
+				assignedSpeed = 200;
+			}
+			else
+			{			
+				assignedSpeed += 100;
+				d2travel = 2000;
+			}
+			buttonPressed = 0;
+			
+			break;
+			case CENTER:
+
+			if (assignedSpeed && d2travel)
+			{
+				robotMoveSpeed(d2travel,assignedSpeed);
+			}
+
+			buttonPressed = 0;
+			default:
+			
+			break;
+		}
+	
+	}
+}
 
 void calibrateIR(void)
 {
@@ -297,7 +369,7 @@ void main(void)
 {
 		unsigned char choice = 255;	
 		int shortwall = 0;				
-	
+	//	int menuflag = 0;
 	
 	//initialise function
 	init();
@@ -357,16 +429,20 @@ void main(void)
 		////////  THIS IS THE MENU ITEM SELECTIONS
 		switch (choice)
 		{
-			case 0:		//Calibrate IR	
-				calibrateIR();
+			case 0:		// 2m, Variable Speeds, 3 times.
+				//calibrateIR(); old code
+				//menuflag = 0;
+				straightLineTest(0);
+				
 			break;
-			case 1:		//Scan 360 degrees
-			 	shortwall = scan360() - 13;
-				rotate((400 - shortwall), CLOCKWISE);
+			case 1:		//Straight Line
+				//menuflag = 1;
+				straightLineTest(1);
 			break;
 			case 2:		//Drive forward 2 meters
-				__delay_ms(100);
-				robotMove(2000);
+				straightLineTest(1);
+				//__delay_ms(100);
+			//	robotMove(2000);
 					
 			
 			break;
