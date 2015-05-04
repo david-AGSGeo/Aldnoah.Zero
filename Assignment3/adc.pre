@@ -1098,7 +1098,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 4 "E:\Aldnoah.Zero\Assignment3\adc.c"
+# 19 "E:\Aldnoah.Zero\Assignment3\adc.c"
 unsigned char adc_read_channel(unsigned char channel)
 {
 switch(channel)

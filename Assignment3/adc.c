@@ -1,3 +1,18 @@
+/********************************  adc.c  **************************************
+	Group Name: Aldnoah.Zero
+	
+	Contains routines for reading the analog to digital converter   																 
+																				 
+	 Authors 		 Student No.		Email
+----------------------------------------------------------------------------------
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
+																				 
+**********************************************************************************/
+
 #include "adc.h"
 #define _XTAL_FREQ 20000000  //Oscillator (20MHz)
 

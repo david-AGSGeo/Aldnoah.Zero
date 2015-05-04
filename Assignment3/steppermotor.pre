@@ -1108,8 +1108,9 @@ void ee_write_enable(void);
 unsigned char ee_read_byte (unsigned int);
 void ee_write_byte( unsigned int, unsigned char);
 
-# 30 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
+# 45 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 char current_step = 0b00111100;
+
 
 
 unsigned char spi_transfer(unsigned char data)
@@ -1125,6 +1126,8 @@ SSPIF = 0;
 
 return temp;
 }
+
+
 
 void rotate(unsigned int numsteps, unsigned char direction)
 {
@@ -1144,72 +1147,4 @@ RC0 = 1; RC1 = 1;;
 spi_transfer(0b00000000);
 RC0 = 0; RC1 = 0;;
 RC2 = 1; _nop(); RC2 = 0;;
-}
-
-
-void rotateOld(unsigned char steps, unsigned char direction)
-{
-
-
-for(;steps!=0;--steps)
-{
-if (direction == 0)
-{
-switch(current_step)
-{
-case 0b00111100: PORTC = 0b00101110; current_step = 0b00101110;
-break;
-case 0b00101110: PORTC = 0b00101011; current_step = 0b00101011;
-break;
-case 0b00101011: PORTC = 0b00100111; current_step = 0b00100111;
-break;
-case 0b00100111: PORTC = 0b00110101; current_step = 0b00110101;
-break;
-case 0b00110101: PORTC = 0b00010111; current_step = 0b00010111;
-break;
-case 0b00010111: PORTC = 0b00011011; current_step = 0b00011011;
-break;
-case 0b00011011: PORTC = 0b00011110; current_step = 0b00011110;
-break;
-case 0b00011110: PORTC = 0b00111100; current_step = 0b00111100;
-break;
-
-default: PORTC = 0b00111001;
-break;
-}
-}
-else if (direction == 1)
-{
-switch(current_step)
-{
-case 0b00111100: PORTC = 0b00011110; current_step = 0b00011110;
-break;
-case 0b00101110: PORTC = 0b00111100; current_step = 0b00111100;
-break;
-case 0b00101011: PORTC = 0b00101110; current_step = 0b00101110;
-break;
-case 0b00100111: PORTC = 0b00101011; current_step = 0b00101011;
-break;
-case 0b00110101: PORTC = 0b00100111; current_step = 0b00100111;
-break;
-case 0b00010111: PORTC = 0b00110101; current_step = 0b00110101;
-break;
-case 0b00011011: PORTC = 0b00010111; current_step = 0b00010111;
-break;
-case 0b00011110: PORTC = 0b00011011; current_step = 0b00011011;
-break;
-
-default: PORTC = 0b00111001;
-break;
-}
-}
-else
-{
-
-}
-
-_delay((unsigned long)((15)*(20000000/4000.0)));
-}
-
-PORTC = 0b00111001;
 }

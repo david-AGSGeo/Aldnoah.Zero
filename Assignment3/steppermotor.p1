@@ -885,7 +885,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _CS0 `Vb  1 s@56 ]
 "11 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS1 `Vb  1 s@57 ]
-"30 E:\Aldnoah.Zero\Assignment3\steppermotor.c
+"45 E:\Aldnoah.Zero\Assignment3\steppermotor.c
 [v _current_step `uc  1 e ]
 "28 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __nop `(v  0 ef ]
@@ -1734,383 +1734,126 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;AT25256A.h: 18: void ee_write_enable(void);
 [; ;AT25256A.h: 19: unsigned char ee_read_byte (unsigned int);
 [; ;AT25256A.h: 20: void ee_write_byte( unsigned int, unsigned char);
-"30 E:\Aldnoah.Zero\Assignment3\steppermotor.c
+"45 E:\Aldnoah.Zero\Assignment3\steppermotor.c
 [i _current_step
 -> -> 60 `i `uc
 ]
-[; ;steppermotor.c: 30: char current_step = 0b00111100;
-"34
+[; ;steppermotor.c: 45: char current_step = 0b00111100;
+"50
 [v _spi_transfer `(uc  1 ef1`uc ]
 {
-[; ;steppermotor.c: 33: unsigned char spi_transfer(unsigned char data)
-[; ;steppermotor.c: 34: {
+[; ;steppermotor.c: 49: unsigned char spi_transfer(unsigned char data)
+[; ;steppermotor.c: 50: {
 [e :U _spi_transfer ]
 [v _data `uc  1 r1 ]
 [f ]
-"35
+"51
 [v _temp `uc  1 a ]
-[; ;steppermotor.c: 35: unsigned char temp = 0;
+[; ;steppermotor.c: 51: unsigned char temp = 0;
 [e = _temp -> -> 0 `i `uc ]
-[; ;steppermotor.c: 37: SSPIF = 0;
-"37
+[; ;steppermotor.c: 53: SSPIF = 0;
+"53
 [e = _SSPIF -> -> 0 `i `b ]
-[; ;steppermotor.c: 38: SSPBUF = data;
-"38
+[; ;steppermotor.c: 54: SSPBUF = data;
+"54
 [e = _SSPBUF _data ]
-[; ;steppermotor.c: 40: while (SSPIF == 0);
-"40
+[; ;steppermotor.c: 56: while (SSPIF == 0);
+"56
 [e $U 102  ]
 [e :U 103 ]
 [e :U 102 ]
 [e $ == -> _SSPIF `i -> 0 `i 103  ]
 [e :U 104 ]
-[; ;steppermotor.c: 41: temp = SSPBUF;
-"41
+[; ;steppermotor.c: 57: temp = SSPBUF;
+"57
 [e = _temp _SSPBUF ]
-[; ;steppermotor.c: 42: SSPIF = 0;
-"42
+[; ;steppermotor.c: 58: SSPIF = 0;
+"58
 [e = _SSPIF -> -> 0 `i `b ]
-[; ;steppermotor.c: 44: return temp;
-"44
+[; ;steppermotor.c: 60: return temp;
+"60
 [e ) _temp ]
 [e $UE 101  ]
-[; ;steppermotor.c: 45: }
-"45
+[; ;steppermotor.c: 61: }
+"61
 [e :UE 101 ]
 }
-"48
+"66
 [v _rotate `(v  1 ef2`ui`uc ]
 {
-[; ;steppermotor.c: 47: void rotate(unsigned int numsteps, unsigned char direction)
-[; ;steppermotor.c: 48: {
+[; ;steppermotor.c: 65: void rotate(unsigned int numsteps, unsigned char direction)
+[; ;steppermotor.c: 66: {
 [e :U _rotate ]
 [v _numsteps `ui  1 r1 ]
 [v _direction `uc  1 r2 ]
 [f ]
-[; ;steppermotor.c: 50: RC0 = 1; RC1 = 1;;
-"50
+[; ;steppermotor.c: 68: RC0 = 1; RC1 = 1;;
+"68
 [e = _RC0 -> -> 1 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
-[; ;steppermotor.c: 51: if (direction == 0)
-"51
+[; ;steppermotor.c: 69: if (direction == 0)
+"69
 [e $ ! == -> _direction `i -> 0 `i 106  ]
-[; ;steppermotor.c: 52: spi_transfer(0b00001111);
-"52
+[; ;steppermotor.c: 70: spi_transfer(0b00001111);
+"70
 [e ( _spi_transfer (1 -> -> 15 `i `uc ]
 [e $U 107  ]
-"53
+"71
 [e :U 106 ]
-[; ;steppermotor.c: 53: else
-[; ;steppermotor.c: 54: spi_transfer(0b00001101);
-"54
+[; ;steppermotor.c: 71: else
+[; ;steppermotor.c: 72: spi_transfer(0b00001101);
+"72
 [e ( _spi_transfer (1 -> -> 13 `i `uc ]
 [e :U 107 ]
-[; ;steppermotor.c: 55: RC0 = 0; RC1 = 0;;
-"55
+[; ;steppermotor.c: 73: RC0 = 0; RC1 = 0;;
+"73
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
-[; ;steppermotor.c: 56: for (unsigned int i = 0; i < numsteps; i++)
-"56
+[; ;steppermotor.c: 74: for (unsigned int i = 0; i < numsteps; i++)
+"74
 {
 [v _i `ui  1 a ]
 [e = _i -> -> 0 `i `ui ]
 [e $U 111  ]
-"57
+"75
 [e :U 108 ]
-[; ;steppermotor.c: 57: {
+[; ;steppermotor.c: 75: {
 {
-[; ;steppermotor.c: 58: RC2 = 1; _nop(); RC2 = 0;;
-"58
+[; ;steppermotor.c: 76: RC2 = 1; _nop(); RC2 = 0;;
+"76
 [e = _RC2 -> -> 1 `i `b ]
 [e ( __nop ..  ]
 [e = _RC2 -> -> 0 `i `b ]
-[; ;steppermotor.c: 59: _delay((unsigned long)((15)*(20000000/4000.0)));
-"59
+[; ;steppermotor.c: 77: _delay((unsigned long)((15)*(20000000/4000.0)));
+"77
 [e ( __delay (1 -> * -> -> 15 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"60
+"78
 }
-"56
+"74
 [e ++ _i -> -> 1 `i `ui ]
 [e :U 111 ]
 [e $ < _i _numsteps 108  ]
 [e :U 109 ]
-"60
+"78
 }
-[; ;steppermotor.c: 60: }
-[; ;steppermotor.c: 61: RC0 = 1; RC1 = 1;;
-"61
+[; ;steppermotor.c: 78: }
+[; ;steppermotor.c: 79: RC0 = 1; RC1 = 1;;
+"79
 [e = _RC0 -> -> 1 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
-[; ;steppermotor.c: 62: spi_transfer(0b00000000);
-"62
+[; ;steppermotor.c: 80: spi_transfer(0b00000000);
+"80
 [e ( _spi_transfer (1 -> -> 0 `i `uc ]
-[; ;steppermotor.c: 63: RC0 = 0; RC1 = 0;;
-"63
+[; ;steppermotor.c: 81: RC0 = 0; RC1 = 0;;
+"81
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
-[; ;steppermotor.c: 64: RC2 = 1; _nop(); RC2 = 0;;
-"64
+[; ;steppermotor.c: 82: RC2 = 1; _nop(); RC2 = 0;;
+"82
 [e = _RC2 -> -> 1 `i `b ]
 [e ( __nop ..  ]
 [e = _RC2 -> -> 0 `i `b ]
-[; ;steppermotor.c: 65: }
-"65
-[e :UE 105 ]
-}
-"69
-[v _rotateOld `(v  1 ef2`uc`uc ]
-{
-[; ;steppermotor.c: 68: void rotateOld(unsigned char steps, unsigned char direction)
-[; ;steppermotor.c: 69: {
-[e :U _rotateOld ]
-[v _steps `uc  1 r1 ]
-[v _direction `uc  1 r2 ]
-[f ]
-[; ;steppermotor.c: 72: for(;steps!=0;--steps)
-"72
-{
-[e $ != -> _steps `i -> 0 `i 113  ]
-[e $U 114  ]
-"73
-[e :U 113 ]
-[; ;steppermotor.c: 73: {
-{
-[; ;steppermotor.c: 74: if (direction == 0)
-"74
-[e $ ! == -> _direction `i -> 0 `i 116  ]
-[; ;steppermotor.c: 75: {
-"75
-{
-[; ;steppermotor.c: 76: switch(current_step)
-"76
-[e $U 118  ]
-[; ;steppermotor.c: 77: {
-"77
-{
-[; ;steppermotor.c: 78: case 0b00111100: PORTC = 0b00101110; current_step = 0b00101110;
-"78
-[e :U 119 ]
-[e = _PORTC -> -> 46 `i `uc ]
-[e = _current_step -> -> 46 `i `uc ]
-[; ;steppermotor.c: 79: break;
-"79
-[e $U 117  ]
-[; ;steppermotor.c: 80: case 0b00101110: PORTC = 0b00101011; current_step = 0b00101011;
-"80
-[e :U 120 ]
-[e = _PORTC -> -> 43 `i `uc ]
-[e = _current_step -> -> 43 `i `uc ]
-[; ;steppermotor.c: 81: break;
-"81
-[e $U 117  ]
-[; ;steppermotor.c: 82: case 0b00101011: PORTC = 0b00100111; current_step = 0b00100111;
-"82
-[e :U 121 ]
-[e = _PORTC -> -> 39 `i `uc ]
-[e = _current_step -> -> 39 `i `uc ]
-[; ;steppermotor.c: 83: break;
+[; ;steppermotor.c: 83: }
 "83
-[e $U 117  ]
-[; ;steppermotor.c: 84: case 0b00100111: PORTC = 0b00110101; current_step = 0b00110101;
-"84
-[e :U 122 ]
-[e = _PORTC -> -> 53 `i `uc ]
-[e = _current_step -> -> 53 `i `uc ]
-[; ;steppermotor.c: 85: break;
-"85
-[e $U 117  ]
-[; ;steppermotor.c: 86: case 0b00110101: PORTC = 0b00010111; current_step = 0b00010111;
-"86
-[e :U 123 ]
-[e = _PORTC -> -> 23 `i `uc ]
-[e = _current_step -> -> 23 `i `uc ]
-[; ;steppermotor.c: 87: break;
-"87
-[e $U 117  ]
-[; ;steppermotor.c: 88: case 0b00010111: PORTC = 0b00011011; current_step = 0b00011011;
-"88
-[e :U 124 ]
-[e = _PORTC -> -> 27 `i `uc ]
-[e = _current_step -> -> 27 `i `uc ]
-[; ;steppermotor.c: 89: break;
-"89
-[e $U 117  ]
-[; ;steppermotor.c: 90: case 0b00011011: PORTC = 0b00011110; current_step = 0b00011110;
-"90
-[e :U 125 ]
-[e = _PORTC -> -> 30 `i `uc ]
-[e = _current_step -> -> 30 `i `uc ]
-[; ;steppermotor.c: 91: break;
-"91
-[e $U 117  ]
-[; ;steppermotor.c: 92: case 0b00011110: PORTC = 0b00111100; current_step = 0b00111100;
-"92
-[e :U 126 ]
-[e = _PORTC -> -> 60 `i `uc ]
-[e = _current_step -> -> 60 `i `uc ]
-[; ;steppermotor.c: 93: break;
-"93
-[e $U 117  ]
-[; ;steppermotor.c: 95: default: PORTC = 0b00111001;
-"95
-[e :U 127 ]
-[e = _PORTC -> -> 57 `i `uc ]
-[; ;steppermotor.c: 96: break;
-"96
-[e $U 117  ]
-"97
-}
-[; ;steppermotor.c: 97: }
-[e $U 117  ]
-"76
-[e :U 118 ]
-[e [\ _current_step , $ -> -> 60 `i `uc 119
- , $ -> -> 46 `i `uc 120
- , $ -> -> 43 `i `uc 121
- , $ -> -> 39 `i `uc 122
- , $ -> -> 53 `i `uc 123
- , $ -> -> 23 `i `uc 124
- , $ -> -> 27 `i `uc 125
- , $ -> -> 30 `i `uc 126
- 127 ]
-"97
-[e :U 117 ]
-"98
-}
-[; ;steppermotor.c: 98: }
-[e $U 128  ]
-"99
-[e :U 116 ]
-[; ;steppermotor.c: 99: else if (direction == 1)
-[e $ ! == -> _direction `i -> 1 `i 129  ]
-[; ;steppermotor.c: 100: {
-"100
-{
-[; ;steppermotor.c: 101: switch(current_step)
-"101
-[e $U 131  ]
-[; ;steppermotor.c: 102: {
-"102
-{
-[; ;steppermotor.c: 103: case 0b00111100: PORTC = 0b00011110; current_step = 0b00011110;
-"103
-[e :U 132 ]
-[e = _PORTC -> -> 30 `i `uc ]
-[e = _current_step -> -> 30 `i `uc ]
-[; ;steppermotor.c: 104: break;
-"104
-[e $U 130  ]
-[; ;steppermotor.c: 105: case 0b00101110: PORTC = 0b00111100; current_step = 0b00111100;
-"105
-[e :U 133 ]
-[e = _PORTC -> -> 60 `i `uc ]
-[e = _current_step -> -> 60 `i `uc ]
-[; ;steppermotor.c: 106: break;
-"106
-[e $U 130  ]
-[; ;steppermotor.c: 107: case 0b00101011: PORTC = 0b00101110; current_step = 0b00101110;
-"107
-[e :U 134 ]
-[e = _PORTC -> -> 46 `i `uc ]
-[e = _current_step -> -> 46 `i `uc ]
-[; ;steppermotor.c: 108: break;
-"108
-[e $U 130  ]
-[; ;steppermotor.c: 109: case 0b00100111: PORTC = 0b00101011; current_step = 0b00101011;
-"109
-[e :U 135 ]
-[e = _PORTC -> -> 43 `i `uc ]
-[e = _current_step -> -> 43 `i `uc ]
-[; ;steppermotor.c: 110: break;
-"110
-[e $U 130  ]
-[; ;steppermotor.c: 111: case 0b00110101: PORTC = 0b00100111; current_step = 0b00100111;
-"111
-[e :U 136 ]
-[e = _PORTC -> -> 39 `i `uc ]
-[e = _current_step -> -> 39 `i `uc ]
-[; ;steppermotor.c: 112: break;
-"112
-[e $U 130  ]
-[; ;steppermotor.c: 113: case 0b00010111: PORTC = 0b00110101; current_step = 0b00110101;
-"113
-[e :U 137 ]
-[e = _PORTC -> -> 53 `i `uc ]
-[e = _current_step -> -> 53 `i `uc ]
-[; ;steppermotor.c: 114: break;
-"114
-[e $U 130  ]
-[; ;steppermotor.c: 115: case 0b00011011: PORTC = 0b00010111; current_step = 0b00010111;
-"115
-[e :U 138 ]
-[e = _PORTC -> -> 23 `i `uc ]
-[e = _current_step -> -> 23 `i `uc ]
-[; ;steppermotor.c: 116: break;
-"116
-[e $U 130  ]
-[; ;steppermotor.c: 117: case 0b00011110: PORTC = 0b00011011; current_step = 0b00011011;
-"117
-[e :U 139 ]
-[e = _PORTC -> -> 27 `i `uc ]
-[e = _current_step -> -> 27 `i `uc ]
-[; ;steppermotor.c: 118: break;
-"118
-[e $U 130  ]
-[; ;steppermotor.c: 120: default: PORTC = 0b00111001;
-"120
-[e :U 140 ]
-[e = _PORTC -> -> 57 `i `uc ]
-[; ;steppermotor.c: 121: break;
-"121
-[e $U 130  ]
-"122
-}
-[; ;steppermotor.c: 122: }
-[e $U 130  ]
-"101
-[e :U 131 ]
-[e [\ _current_step , $ -> -> 60 `i `uc 132
- , $ -> -> 46 `i `uc 133
- , $ -> -> 43 `i `uc 134
- , $ -> -> 39 `i `uc 135
- , $ -> -> 53 `i `uc 136
- , $ -> -> 23 `i `uc 137
- , $ -> -> 27 `i `uc 138
- , $ -> -> 30 `i `uc 139
- 140 ]
-"122
-[e :U 130 ]
-"123
-}
-[; ;steppermotor.c: 123: }
-[e $U 141  ]
-"124
-[e :U 129 ]
-[; ;steppermotor.c: 124: else
-[; ;steppermotor.c: 125: {
-"125
-{
-"127
-}
-[e :U 141 ]
-[e :U 128 ]
-[; ;steppermotor.c: 127: }
-[; ;steppermotor.c: 129: _delay((unsigned long)((15)*(20000000/4000.0)));
-"129
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"130
-}
-"72
-[e =- _steps -> -> 1 `i `uc ]
-[e $ != -> _steps `i -> 0 `i 113  ]
-[e :U 114 ]
-"130
-}
-[; ;steppermotor.c: 130: }
-[; ;steppermotor.c: 132: PORTC = 0b00111001;
-"132
-[e = _PORTC -> -> 57 `i `uc ]
-[; ;steppermotor.c: 133: }
-"133
-[e :UE 112 ]
+[e :UE 105 ]
 }

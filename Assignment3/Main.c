@@ -1,4 +1,4 @@
-/*********************************************************************************
+/*********************  MAIN.c   **************************************************
 	Description: Assignment 3 submission. 
 	Group Name: Aldnoah.Zero
 	
@@ -26,10 +26,11 @@
 																				 
 	 Authors 		 Student No.		Email
 -----------------------------------------------------------------------------------
-	David LEE  		 11055579 			David@lee42.com 
-	James BOHM		 11195839			JimmyBohm@gmail.com			
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
     Jose  Gunawarman 11784271			jose.adhitya@gmail.com
-	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   																 
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
 																				 
 **********************************************************************************/
 
@@ -83,7 +84,7 @@ void FollowWall(void);
 int totalSteps = 0; //stores steppermotor direction
 
 volatile unsigned char buttonPressed;	//stores button presses
-//volatile unsigned char serialInput = 0;
+
 
 
 //set up flags for timer0 (currently not used))
@@ -97,30 +98,27 @@ volatile bit RTC_FLAG_500MS = 0;
 //global counter for timer0
 volatile unsigned int RTC_Counter = 0;
 
+/************  isr1  *************/
 // Interrupt service routine
 void interrupt isr1(void) 
 {
-	
-	
 	if(TMR0IF)  //interrupt from timer0
 	{
 		TMR0IF = 0;		//reset interrupt flag
 		TMR0 = TMR0_VAL;	//reset timer0 value
 		
 		RTC_Counter++;		//increase the count
+		
 		//set clock flags 
 		RTC_FLAG_1MS = 1;			
 		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
-		{
-			
-			RTC_FLAG_250MS = 1;
-			
+		{	
+			RTC_FLAG_250MS = 1;		
 		}
 		if(RTC_Counter % 500 == 0) 		//EVERY 500ms
 		{
 			RTC_FLAG_500MS = 1;
 			HBLED ^= 0x01;		//toggle heartbeat LED
-
 		}
 		if (buttonPressed == 0)	//if no button is waiting to be responded to
 		{
@@ -130,12 +128,11 @@ void interrupt isr1(void)
 	ser_int();		//serial recieve and transmit interrupt macro					
 }
 
-
+/************  init  *************/
 //Initialisation Routine
 void init()
 {	
-	buttonPressed = 0; //no buttons have been pressed
-	
+	buttonPressed = 0; //no buttons have been pressed	
 	
 	TRISB = 0b11111100;	//PortB all inputs except pin 0 and 1
 	TRISC &= 0b10010000; //force PortC to output except 4 and 7
@@ -168,33 +165,28 @@ void init()
 /*******************************************************************/
 void main(void)
 {
-		unsigned char choice = 255;	
-		int shortwall = 0;				
-	
-	
+	unsigned char choice = 255;	
+	int shortwall = 0;				
+
 	//initialise function
 	init();
-	
 		
 	//Loop forever
-
 	while(1)
 	{
-
-
 		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display, IR, and reading robot values
-			{
-				RTC_FLAG_250MS = 0;
-				robot_read();
-				readAvgDistance();
-				UpdateDisplay();
-			}
+		{
+			RTC_FLAG_250MS = 0;
+			robot_read();
+			readAvgDistance();
+			UpdateDisplay();
+		}
 		if (buttonPressed)	//if a button has been debounced, perform the 
 							//appropriate menu action and wait for next button
-			{
-				choice = Menu(buttonPressed);
-				buttonPressed = 0;
-			}
+		{
+			choice = Menu(buttonPressed);
+			buttonPressed = 0;
+		}
 
 
 		////////  THIS IS THE MENU ITEM SELECTIONS	///////
@@ -202,18 +194,16 @@ void main(void)
 		{
 			case 0:		//Calibrate IR	
 				calibrateIR();
-			break;
+				break;
 			case 1:		//Scan 360 degrees
 			 	shortwall = scan360() - 13;	//find the closest wall
 				rotate((400 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
-			break;
+				break;
 			case 2:		//Drive forward 2 meters
 				TotalDistTravelled = 0;
 				__delay_ms(100);
-				robotMoveSpeed(2000, DRIVESPEED);
-					
-			
-			break;
+				robotMoveSpeed(2000, DRIVESPEED);				
+				break;
 			case 3:		//Drive in an L shape
 				TotalDistTravelled = 0;
 				__delay_ms(100);
@@ -222,132 +212,73 @@ void main(void)
 				robotTurn(-90); //turn clockwise 90 degrees
 				__delay_ms(100);
 				robotMoveSpeed(1000, DRIVESPEED);
-			break;
+				break;
 			case 4:		//Follow wall
 				TotalDistTravelled = 0;
-			while(!ROBOTerror)
-			{
-				int shortwall = scan360();// - 13; //fails, when pointing directly at wall. value <0, IR scanner spins.
-				int RT2P = 0; //RT2P = Robot Turn to Position
-				int direction1 = 0; // Cw (0) or ccw (1) flag
-				 if (shortwall > 200)	// If the wall is on right, turn 90deg ccw infront of wall.
-				 	RT2P = shortwall + 100;
-				 if (shortwall < 200)	// If the wall is on the left, turn 90deg cw infront of wall.
-				 	RT2P = shortwall - 100; 
-				
-
-				 if (RT2P >= 400 && RT2P < 500 )
-				{	
-				 	RT2P = RT2P - 400;
-					direction1 = 1;
-				}
-				 if (RT2P >= 200 && RT2P < 400)
-				{ 	
-					RT2P = 400 - RT2P;
-					RT2P = RT2P * -1;
-					direction1 = 0;
-				}
-				 if (RT2P < 200 && RT2P >= 0)
-				{ 
-					direction1 = 1;
-				}
-				 if (RT2P < 0 && RT2P >= -200)
+				while(!ROBOTerror)
 				{
-					//RT2P = RT2P * -1;
-					direction1 = 0;
-				}
-				if(RT2P < -200 || RT2P >500)
-					{
-						//display error
+					int shortwall = scan360(); 
+					int RT2P = 0; //RT2P = Robot Turn to Position
+					int direction1 = 0; // Cw (0) or ccw (1) flag
+					if (shortwall > 200)	// If the wall is on right, turn 90deg ccw infront of wall.
+				 		RT2P = shortwall + 100;
+				 	if (shortwall < 200)	// If the wall is on the left, turn 90deg cw infront of wall.
+				 		RT2P = shortwall - 100; 
+				
+				 	if (RT2P >= 400 && RT2P < 500 )	//calculate the correct turn in steppermotor steps
+					{	
+				 		RT2P = RT2P - 400;
+						direction1 = 1;
 					}
- 
-				rotate((400 - shortwall ), CLOCKWISE); //IR sensor
-				__delay_ms(100); 
-
-
-				int RT2A= RT2P * (36.0/40.0);
-				robotTurn(RT2A);
-				__delay_ms(100);
-				rotate(shortwall,CLOCKWISE);
-				__delay_ms(100);
-				robotMoveSpeed(500, DRIVESPEED);
-		}		
-		//	FollowWall();	
-				
-			break;		
-			
-			case 5:		//Charge Mode
-				ChargeMode();
-			break;	
-			default:
-			
-			break;
-		}
-		choice = 255;
-	}
-}
-
-//Follow wall routine
-void FollowWall(void)
-{
-	unsigned char error = 0;
-	
-	while(!error)
-			{
-				//shortwall = (scan360()- 13); //fails, when pointing directly at wall. value <0, IR scanner spins.
-				int shortwall = scan360();
-				int RT2P = 0; //RT2P = Robot Turn to Position
-				int direction1 = 0; // Cw (0) or ccw (1) flag
-				 if (shortwall >= 200)	// If the wall is on right, turn 90deg ccw infront of wall.
-				 	RT2P = shortwall + 100;
-				 if (shortwall < 200)	// If the wall is on the left, turn 90deg cw infront of wall.
-				 	RT2P = shortwall - 100; 
-				
-
-				 if (RT2P >= 400 && RT2P < 500 )
-				{	
-				 	RT2P -= 400;
-					direction1 = 1;
-				}
-				 else if (RT2P >= 200 && RT2P < 400)
-				{ 	
-					RT2P = 400 - RT2P;
-					RT2P = RT2P * -1;
-					direction1 = 0;
-				}
-				 else if (RT2P < 200 && RT2P >= 0)
-				{ 
-					direction1 = 1;
-				}
-				 else if (RT2P < 0 && RT2P >= -200)
-				{
-					//RT2P = RT2P * -1;
-					direction1 = 0;
-				}
-				else if(RT2P < -200 || RT2P >500)
+				 	if (RT2P >= 200 && RT2P < 400)
+					{ 	
+						RT2P = 400 - RT2P;
+						RT2P = RT2P * -1;
+						direction1 = 0;
+					}
+				 	if (RT2P < 200 && RT2P >= 0)
+					{ 
+						direction1 = 1;
+					}
+				 	if (RT2P < 0 && RT2P >= -200)
+					{
+						direction1 = 0;
+					}
+					if(RT2P < -200 || RT2P >500)	//an error has occured
 					{
 						break;
 					}
  
-				rotate((400 - shortwall ), CLOCKWISE); //IR sensor
-				__delay_ms(100); 
+					rotate((400 - shortwall ), CLOCKWISE); //IR sensor
+					__delay_ms(100); 
 
 
-				int RT2A= (int)((float)RT2P * (36.0/40.0));
-				robotTurn(RT2A);
-				__delay_ms(100);
-				rotate(shortwall,CLOCKWISE);
-				__delay_ms(100);
-				robotMoveSpeed(500, DRIVESPEED);
-		}		
-	return;
+					int RT2A= RT2P * (36.0/40.0);	//convert from steppermotor steps to degrees
+					robotTurn(RT2A);
+					__delay_ms(100);
+					rotate(shortwall,CLOCKWISE);
+					__delay_ms(100);
+					robotMoveSpeed(500, DRIVESPEED);
+				}		
+		
+				break;		
+			
+			case 5:		//Charge Mode
+				ChargeMode();
+				break;	
+			default:
+			
+				break;
+		}
+		choice = 255;	//reset menu choice
+	}
 }
 
 
+/************  calibrateIR  *************/
 //User moves steppermotor to a zero position and sets this to zero
 void calibrateIR(void)
 {
-	
 	currentMenu = 1;	//switch display to Calibration menu
 	rotate(8, CLOCKWISE); //initialise to a known winding
 	while (1)
@@ -360,43 +291,31 @@ void calibrateIR(void)
 		switch (buttonPressed)
 		{
 			case UP:
-			
-			
-			buttonPressed = 0;
-			
-			break;
+				buttonPressed = 0;
+				break;
 			case DOWN:
-			
-			
-			buttonPressed = 0;
-			
-			break;
-			case LEFT: //half step counterclockwise
-			rotate(1, COUNTERCLOCKWISE); 
-			
-			buttonPressed = 0;
-			
-			break;
-			case RIGHT:	//half step Clockwise
-			rotate(1, CLOCKWISE);
-			
-			buttonPressed = 0;
-			
-			break;		//zero steppermotor and exit to menu
-			case CENTER:
-			totalSteps = 0;
-			
-			buttonPressed = 0;
-			currentMenu = 0;
-			return;
-
-			default:
-			
-			break;
+				buttonPressed = 0;	
+				break;
+			case LEFT: 						//half step counterclockwise
+				rotate(1, COUNTERCLOCKWISE); 
+				buttonPressed = 0;	
+				break;
+			case RIGHT:						//half step Clockwise
+				rotate(1, CLOCKWISE);
+				buttonPressed = 0;
+				break;		
+			case CENTER:					//zero steppermotor and exit to menu
+				totalSteps = 0;
+				buttonPressed = 0;
+				currentMenu = 0;
+				return;
+			default:						//should not get here
+				break;
 		}
 	}
 }
 
+/************  ChargeMode  *************/
 //Put robot into passive mode so it can charge the battery
 void ChargeMode(void)
 {
@@ -414,43 +333,30 @@ void ChargeMode(void)
 		switch (buttonPressed)
 		{
 			case UP:
-			
-			
-			buttonPressed = 0;
-			
-			break;
+				buttonPressed = 0;
+				break;
 			case DOWN:
-			
-			
-			buttonPressed = 0;
-			
-			break;
+				buttonPressed = 0;
+				break;
 			case LEFT:
-			
-			
-			buttonPressed = 0;
-			
-			break;
+				buttonPressed = 0;
+				break;
 			case RIGHT:
-		
-			
-			buttonPressed = 0;
-			
-			break;
+				buttonPressed = 0;
+				break;
 			case CENTER:
-			ser_putch(132); //put robot into full mode and exit to menu
-			
-			buttonPressed = 0;
-			currentMenu = 0;
-			return;
-
+				ser_putch(132); //put robot into full mode and exit to menu
+				buttonPressed = 0;
+				currentMenu = 0;
+				return;
 			default:
-			buttonPressed = 0;
-			break;
+				buttonPressed = 0;
+				break;
 		}
 	}
 }
 
+/************  scan360  *************/
 //Do a 360 degree scan with the steppermotor and return the step value of the closest wall
 int scan360(void)
 {
@@ -471,8 +377,7 @@ int scan360(void)
 			{
 				RTC_FLAG_250MS = 0;
 				UpdateDisplay();
-			}
-		
+			}		
 	} 
 
 	return lowestSteps;

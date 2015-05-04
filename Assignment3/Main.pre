@@ -1237,10 +1237,10 @@ volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
-# 51 "E:\Aldnoah.Zero\Assignment3\Main.c"
+# 52 "E:\Aldnoah.Zero\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
-# 76
+# 77
 void calibrateIR(void);
 int scan360(void);
 void ChargeMode(void);
@@ -1266,10 +1266,9 @@ volatile bit RTC_FLAG_500MS = 0;
 volatile unsigned int RTC_Counter = 0;
 
 
+
 void interrupt isr1(void)
 {
-
-
 if(TMR0IF)
 {
 TMR0IF = 0;
@@ -1277,18 +1276,16 @@ TMR0 = 100;
 
 RTC_Counter++;
 
+
 RTC_FLAG_1MS = 1;
 if(RTC_Counter % 250 == 0)
 {
-
 RTC_FLAG_250MS = 1;
-
 }
 if(RTC_Counter % 500 == 0)
 {
 RTC_FLAG_500MS = 1;
 RB0 ^= 0x01;
-
 }
 if (buttonPressed == 0)
 {
@@ -1303,7 +1300,6 @@ if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxop
 void init()
 {
 buttonPressed = 0;
-
 
 TRISB = 0b11111100;
 TRISC &= 0b10010000;
@@ -1330,23 +1326,18 @@ PEIE=1;
 (GIE = 1);
 }
 
-# 169
+# 166
 void main(void)
 {
 unsigned char choice = 255;
 int shortwall = 0;
 
 
-
 init();
-
-
 
 
 while(1)
 {
-
-
 if (RTC_FLAG_250MS == 1)
 {
 RTC_FLAG_250MS = 0;
@@ -1376,8 +1367,6 @@ case 2:
 TotalDistTravelled = 0;
 _delay((unsigned long)((100)*(20000000/4000.0)));
 robotMoveSpeed(2000, 200);
-
-
 break;
 case 3:
 TotalDistTravelled = 0;
@@ -1400,7 +1389,6 @@ RT2P = shortwall + 100;
 if (shortwall < 200)
 RT2P = shortwall - 100;
 
-
 if (RT2P >= 400 && RT2P < 500 )
 {
 RT2P = RT2P - 400;
@@ -1418,12 +1406,11 @@ direction1 = 1;
 }
 if (RT2P < 0 && RT2P >= -200)
 {
-
 direction1 = 0;
 }
 if(RT2P < -200 || RT2P >500)
 {
-
+break;
 }
 
 rotate((400 - shortwall ), 0);
@@ -1437,7 +1424,6 @@ rotate(shortwall,0);
 _delay((unsigned long)((100)*(20000000/4000.0)));
 robotMoveSpeed(500, 200);
 }
-
 
 break;
 
@@ -1453,66 +1439,10 @@ choice = 255;
 }
 
 
-void FollowWall(void)
-{
-unsigned char error = 0;
-
-while(!error)
-{
-
-int shortwall = scan360();
-int RT2P = 0;
-int direction1 = 0;
-if (shortwall >= 200)
-RT2P = shortwall + 100;
-if (shortwall < 200)
-RT2P = shortwall - 100;
-
-
-if (RT2P >= 400 && RT2P < 500 )
-{
-RT2P -= 400;
-direction1 = 1;
-}
-else if (RT2P >= 200 && RT2P < 400)
-{
-RT2P = 400 - RT2P;
-RT2P = RT2P * -1;
-direction1 = 0;
-}
-else if (RT2P < 200 && RT2P >= 0)
-{
-direction1 = 1;
-}
-else if (RT2P < 0 && RT2P >= -200)
-{
-
-direction1 = 0;
-}
-else if(RT2P < -200 || RT2P >500)
-{
-break;
-}
-
-rotate((400 - shortwall ), 0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-
-
-int RT2A= (int)((float)RT2P * (36.0/40.0));
-robotTurn(RT2A);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-rotate(shortwall,0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMoveSpeed(500, 200);
-}
-return;
-}
-
 
 
 void calibrateIR(void)
 {
-
 currentMenu = 1;
 rotate(8, 0);
 while (1)
@@ -1525,42 +1455,30 @@ UpdateDisplay();
 switch (buttonPressed)
 {
 case 1:
-
-
 buttonPressed = 0;
-
 break;
 case 2:
-
-
 buttonPressed = 0;
-
 break;
 case 3:
 rotate(1, 1);
-
 buttonPressed = 0;
-
 break;
 case 4:
 rotate(1, 0);
-
 buttonPressed = 0;
-
 break;
 case 5:
 totalSteps = 0;
-
 buttonPressed = 0;
 currentMenu = 0;
 return;
-
 default:
-
 break;
 }
 }
 }
+
 
 
 void ChargeMode(void)
@@ -1579,42 +1497,29 @@ UpdateDisplay();
 switch (buttonPressed)
 {
 case 1:
-
-
 buttonPressed = 0;
-
 break;
 case 2:
-
-
 buttonPressed = 0;
-
 break;
 case 3:
-
-
 buttonPressed = 0;
-
 break;
 case 4:
-
-
 buttonPressed = 0;
-
 break;
 case 5:
 ser_putch(132);
-
 buttonPressed = 0;
 currentMenu = 0;
 return;
-
 default:
 buttonPressed = 0;
 break;
 }
 }
 }
+
 
 
 int scan360(void)
@@ -1637,7 +1542,6 @@ if (RTC_FLAG_250MS == 1)
 RTC_FLAG_250MS = 0;
 UpdateDisplay();
 }
-
 }
 
 return lowestSteps;

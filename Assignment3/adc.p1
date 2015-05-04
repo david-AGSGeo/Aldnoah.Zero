@@ -1720,107 +1720,107 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;adc.h: 7: void init_adc(void);
 [; ;adc.h: 9: unsigned int adc_read(void);
 [; ;adc.h: 12: unsigned char adc_read_channel(unsigned char channel);
-"5 E:\Aldnoah.Zero\Assignment3\adc.c
+"20 E:\Aldnoah.Zero\Assignment3\adc.c
 [v _adc_read_channel `(uc  1 ef1`uc ]
 {
-[; ;adc.c: 4: unsigned char adc_read_channel(unsigned char channel)
-[; ;adc.c: 5: {
+[; ;adc.c: 19: unsigned char adc_read_channel(unsigned char channel)
+[; ;adc.c: 20: {
 [e :U _adc_read_channel ]
 [v _channel `uc  1 r1 ]
 [f ]
-[; ;adc.c: 6: switch(channel)
-"6
-[e $U 103  ]
-[; ;adc.c: 7: {
-"7
-{
-[; ;adc.c: 8: case 0:
-"8
-[e :U 104 ]
-[; ;adc.c: 9: CHS0 = 0;
-"9
-[e = _CHS0 -> -> 0 `i `b ]
-[; ;adc.c: 10: CHS1 = 0;
-"10
-[e = _CHS1 -> -> 0 `i `b ]
-[; ;adc.c: 11: CHS2 = 0;
-"11
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;adc.c: 12: break;
-"12
-[e $U 102  ]
-[; ;adc.c: 13: case 1:
-"13
-[e :U 105 ]
-[; ;adc.c: 14: CHS0 = 1;
-"14
-[e = _CHS0 -> -> 1 `i `b ]
-[; ;adc.c: 15: CHS1 = 0;
-"15
-[e = _CHS1 -> -> 0 `i `b ]
-[; ;adc.c: 16: CHS2 = 0;
-"16
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;adc.c: 17: break;
-"17
-[e $U 102  ]
-[; ;adc.c: 18: case 2:
-"18
-[e :U 106 ]
-[; ;adc.c: 19: CHS0 = 0;
-"19
-[e = _CHS0 -> -> 0 `i `b ]
-[; ;adc.c: 20: CHS1 = 1;
-"20
-[e = _CHS1 -> -> 1 `i `b ]
-[; ;adc.c: 21: CHS2 = 0;
+[; ;adc.c: 21: switch(channel)
 "21
-[e = _CHS2 -> -> 0 `i `b ]
-[; ;adc.c: 22: break;
+[e $U 103  ]
+[; ;adc.c: 22: {
 "22
-[e $U 102  ]
-[; ;adc.c: 23: case 3:
+{
+[; ;adc.c: 23: case 0:
 "23
-[e :U 107 ]
-[; ;adc.c: 24: CHS0 = 1;
+[e :U 104 ]
+[; ;adc.c: 24: CHS0 = 0;
 "24
-[e = _CHS0 -> -> 1 `i `b ]
-[; ;adc.c: 25: CHS1 = 1;
+[e = _CHS0 -> -> 0 `i `b ]
+[; ;adc.c: 25: CHS1 = 0;
 "25
-[e = _CHS1 -> -> 1 `i `b ]
+[e = _CHS1 -> -> 0 `i `b ]
 [; ;adc.c: 26: CHS2 = 0;
 "26
 [e = _CHS2 -> -> 0 `i `b ]
 [; ;adc.c: 27: break;
 "27
 [e $U 102  ]
-[; ;adc.c: 28: case 4:
+[; ;adc.c: 28: case 1:
 "28
-[e :U 108 ]
-[; ;adc.c: 29: CHS0 = 0;
+[e :U 105 ]
+[; ;adc.c: 29: CHS0 = 1;
 "29
-[e = _CHS0 -> -> 0 `i `b ]
+[e = _CHS0 -> -> 1 `i `b ]
 [; ;adc.c: 30: CHS1 = 0;
 "30
 [e = _CHS1 -> -> 0 `i `b ]
-[; ;adc.c: 31: CHS2 = 1;
+[; ;adc.c: 31: CHS2 = 0;
 "31
-[e = _CHS2 -> -> 1 `i `b ]
+[e = _CHS2 -> -> 0 `i `b ]
 [; ;adc.c: 32: break;
 "32
 [e $U 102  ]
-[; ;adc.c: 35: default:
+[; ;adc.c: 33: case 2:
+"33
+[e :U 106 ]
+[; ;adc.c: 34: CHS0 = 0;
+"34
+[e = _CHS0 -> -> 0 `i `b ]
+[; ;adc.c: 35: CHS1 = 1;
 "35
-[e :U 109 ]
-[; ;adc.c: 36: return 0;
+[e = _CHS1 -> -> 1 `i `b ]
+[; ;adc.c: 36: CHS2 = 0;
 "36
+[e = _CHS2 -> -> 0 `i `b ]
+[; ;adc.c: 37: break;
+"37
+[e $U 102  ]
+[; ;adc.c: 38: case 3:
+"38
+[e :U 107 ]
+[; ;adc.c: 39: CHS0 = 1;
+"39
+[e = _CHS0 -> -> 1 `i `b ]
+[; ;adc.c: 40: CHS1 = 1;
+"40
+[e = _CHS1 -> -> 1 `i `b ]
+[; ;adc.c: 41: CHS2 = 0;
+"41
+[e = _CHS2 -> -> 0 `i `b ]
+[; ;adc.c: 42: break;
+"42
+[e $U 102  ]
+[; ;adc.c: 43: case 4:
+"43
+[e :U 108 ]
+[; ;adc.c: 44: CHS0 = 0;
+"44
+[e = _CHS0 -> -> 0 `i `b ]
+[; ;adc.c: 45: CHS1 = 0;
+"45
+[e = _CHS1 -> -> 0 `i `b ]
+[; ;adc.c: 46: CHS2 = 1;
+"46
+[e = _CHS2 -> -> 1 `i `b ]
+[; ;adc.c: 47: break;
+"47
+[e $U 102  ]
+[; ;adc.c: 50: default:
+"50
+[e :U 109 ]
+[; ;adc.c: 51: return 0;
+"51
 [e ) -> -> 0 `i `uc ]
 [e $UE 101  ]
-"37
+"52
 }
-[; ;adc.c: 37: }
+[; ;adc.c: 52: }
 [e $U 102  ]
-"6
+"21
 [e :U 103 ]
 [e [\ _channel , $ -> -> 0 `i `uc 104
  , $ -> -> 1 `i `uc 105
@@ -1828,92 +1828,92 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 3 `i `uc 107
  , $ -> -> 4 `i `uc 108
  109 ]
-"37
+"52
 [e :U 102 ]
-[; ;adc.c: 39: _delay((unsigned long)((50)*(20000000/4000000.0)));
-"39
+[; ;adc.c: 54: _delay((unsigned long)((50)*(20000000/4000000.0)));
+"54
 [e ( __delay (1 -> * -> -> 50 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
-[; ;adc.c: 41: return adc_read();
-"41
+[; ;adc.c: 56: return adc_read();
+"56
 [e ) -> ( _adc_read ..  `uc ]
 [e $UE 101  ]
-[; ;adc.c: 43: }
-"43
+[; ;adc.c: 58: }
+"58
 [e :UE 101 ]
 }
-"46
+"61
 [v _init_adc `(v  1 ef ]
 {
-[; ;adc.c: 45: void init_adc(void)
-[; ;adc.c: 46: {
+[; ;adc.c: 60: void init_adc(void)
+[; ;adc.c: 61: {
 [e :U _init_adc ]
 [f ]
-[; ;adc.c: 48: PORTA = 0;
-"48
+[; ;adc.c: 63: PORTA = 0;
+"63
 [e = _PORTA -> -> 0 `i `uc ]
-[; ;adc.c: 49: TRISA = 0b00111111;
-"49
+[; ;adc.c: 64: TRISA = 0b00111111;
+"64
 [e = _TRISA -> -> 63 `i `uc ]
-[; ;adc.c: 52: ADCON0 = 0b10100001;
-"52
+[; ;adc.c: 67: ADCON0 = 0b10100001;
+"67
 [e = _ADCON0 -> -> 161 `i `uc ]
-[; ;adc.c: 53: ADCON1 = 0b0000010;
-"53
+[; ;adc.c: 68: ADCON1 = 0b0000010;
+"68
 [e = _ADCON1 -> -> 2 `i `uc ]
-[; ;adc.c: 55: _delay((unsigned long)((50)*(20000000/4000000.0)));
-"55
+[; ;adc.c: 70: _delay((unsigned long)((50)*(20000000/4000000.0)));
+"70
 [e ( __delay (1 -> * -> -> 50 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
-[; ;adc.c: 57: }
-"57
+[; ;adc.c: 72: }
+"72
 [e :UE 110 ]
 }
-"61
+"76
 [v _adc_read `(ui  1 ef ]
 {
-[; ;adc.c: 60: unsigned int adc_read(void)
-[; ;adc.c: 61: {
+[; ;adc.c: 75: unsigned int adc_read(void)
+[; ;adc.c: 76: {
 [e :U _adc_read ]
 [f ]
-"62
+"77
 [v _adc_value `Vui  1 a ]
-[; ;adc.c: 62: volatile unsigned int adc_value;
-[; ;adc.c: 64: ADRESH = 0;
-"64
+[; ;adc.c: 77: volatile unsigned int adc_value;
+[; ;adc.c: 79: ADRESH = 0;
+"79
 [e = _ADRESH -> -> 0 `i `uc ]
-[; ;adc.c: 66: GO = 1;
-"66
+[; ;adc.c: 81: GO = 1;
+"81
 [e = _GO -> -> 1 `i `b ]
-[; ;adc.c: 67: while(GO) continue;
-"67
+[; ;adc.c: 82: while(GO) continue;
+"82
 [e $U 112  ]
 [e :U 113 ]
 [e $U 112  ]
 [e :U 112 ]
 [e $ _GO 113  ]
 [e :U 114 ]
-[; ;adc.c: 68: asm("nop");
-"68
+[; ;adc.c: 83: asm("nop");
+"83
 [; nop ;#
-[; ;adc.c: 69: asm("nop");
-"69
+[; ;adc.c: 84: asm("nop");
+"84
 [; nop ;#
-[; ;adc.c: 70: asm("nop");
-"70
+[; ;adc.c: 85: asm("nop");
+"85
 [; nop ;#
-[; ;adc.c: 73: adc_value = ADRESH;
-"73
+[; ;adc.c: 88: adc_value = ADRESH;
+"88
 [e = _adc_value -> _ADRESH `ui ]
-[; ;adc.c: 74: adc_value <<= 1;
-"74
+[; ;adc.c: 89: adc_value <<= 1;
+"89
 [e =<< _adc_value -> 1 `i ]
-[; ;adc.c: 75: adc_value |= (ADRESL >> 15);
-"75
+[; ;adc.c: 90: adc_value |= (ADRESL >> 15);
+"90
 [e =| _adc_value -> >> -> _ADRESL `i -> 15 `i `ui ]
-[; ;adc.c: 78: return (adc_value);
-"78
+[; ;adc.c: 93: return (adc_value);
+"93
 [e ) _adc_value ]
 [e $UE 111  ]
-[; ;adc.c: 79: }
-"79
+[; ;adc.c: 94: }
+"94
 [e :UE 111 ]
 }

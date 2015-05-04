@@ -1196,7 +1196,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 9 "E:\Aldnoah.Zero\Assignment3\infrared.c"
+# 26 "E:\Aldnoah.Zero\Assignment3\infrared.c"
 void readAvgDistance(void)
 {
 unsigned int fullval = 0, tempIR = 0;
@@ -1215,45 +1215,49 @@ adcVal = fullval / j;
 ADCconvert();
 }
 
+
+
 unsigned int readDistance(void)
 {
-unsigned int readVal ;
+unsigned int readVal;
 
 readVal = adc_read_channel(0);
 
 return readVal;
 }
 
+
+
 void ADCconvert(void)
 {
 
-# 43
+# 64
 if (adcVal >= 213 && adcVal < 234)
 {
-IRdistance = 15 + ((20-15)*(234-adcVal))/(234-213);
+IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);
 }
 else if (adcVal >= 170 && adcVal < 213)
 {
-IRdistance = 20 + ((30-20)*(213-adcVal))/(213-170);
+IRdistance = 20 + ((30 - 20)*(213 - adcVal)) / (213 - 170);
 }
 else if (adcVal >= 128 && adcVal < 170)
 {
-IRdistance = 30 + ((40-30)*(170-adcVal))/(170-128);
+IRdistance = 30 + ((40 - 30)*(170 - adcVal)) / (170 - 128);
 }
 else if (adcVal >= 107 && adcVal < 128)
 {
-IRdistance = 40 + ((50-40)*(128-adcVal))/(128-107);
+IRdistance = 40 + ((50 - 40)*(128 - adcVal)) / (128 - 107);
 }
 else if (adcVal >= 77 && adcVal < 107)
 {
-IRdistance = 50 + ((60-50)*(107-adcVal))/(107-77);
+IRdistance = 50 + ((60 - 50)*(107 - adcVal)) / (107 - 77);
 }
 else if (adcVal >= 56 && adcVal < 77)
 {
-IRdistance = 60 + ((70-60)*(77-adcVal))/(77-56);
+IRdistance = 60 + ((70 - 60)*(77 - adcVal)) / (77 - 56);
 }
 else if (adcVal >= 43 && adcVal < 56)
 {
-IRdistance = 70 + ((80-70)*(56-adcVal))/(56-43);
+IRdistance = 70 + ((80 - 70)*(56 - adcVal)) / (56 - 43);
 }
 }

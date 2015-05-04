@@ -1,0 +1,1720 @@
+/*********************  MAIN.c   **************************************************
+	Description: Assignment 3 submission. 
+	Group Name: Aldnoah.Zero
+	
+	SPECS:
+		-1Hz heartbeat
+		-LCD Displaying continuous IR distance
+		-LCD Menu for chosing options
+		-Steppermotor Calibration
+		-Charging Mode
+		-360 IR Scan
+		-2m Straight Line Robot manoeuvre
+		-1m/side Robot L manoeuvre
+		-Wall follow manoeuvre
+     			 
+	Uses: DSX Experimenter board + iRobot Create + iRobot - DSX interface Board																			 
+	Connections: 
+
+	Port A0 - IR Sensor ADC
+    Port B0 - Heartbeat LED 
+	Port B1 - Toggleable LED 
+	Ports B2-B5 - 4way joystick button
+	Port C - SPI and Serial   
+	Port D - LCD
+	Port E - LCD      																 
+																				 
+	 Authors 		 Student No.		Email
+-----------------------------------------------------------------------------------
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
+																				 
+**********************************************************************************/
+
+#include <htc.h>
+#include <stdio.h>
+#include "adc.h"
+#include "lcd.h"
+#include "infrared.h"
+#include "steppermotor.h"
+#include "ser.h"
+#include "HMI.h"
+#include "robot.h"
+
+//check htc.h version
+
+#if (_HTC_VER_MAJOR_ < 9 && _HTC_VER_MINOR_ < 81)
+	__CONFIG(HS & WDTDIS & PWRTEN & BOREN & LVPDIS & DUNPROT & WRTEN & UNPROTECT);
+#else
+	__CONFIG(FOSC_HS &  WDTE_OFF & CP_OFF & BOREN_OFF & PWRTE_ON & WRT_OFF & LVP_OFF & CPD_OFF);
+#endif
+
+
+#define _XTAL_FREQ 20000000  //Oscillator (20MHz)
+
+#define TMR0_VAL 100	     //timer0 start count
+
+
+#define HBLED RB0 //Heartbeat LED
+
+#define LED0 RB1 //led for toggling
+
+
+
+//Menu Defines
+#define UP 1
+#define DOWN 2
+#define LEFT 3
+#define RIGHT 4
+#define CENTER 5
+
+//define stepping sequence directions
+
+#define CLOCKWISE 0
+
+#define COUNTERCLOCKWISE 1
+
+//define robot parameters
+#define DRIVESPEED 200
+
+//Function Prototypes
+void calibrateIR(void);
+int scan360(void);
+void ChargeMode(void);
+void FollowWall(void);
+
+
+//Global Variables
+int totalSteps = 0; //stores steppermotor direction
+
+volatile unsigned char buttonPressed;	//stores button presses
+
+
+
+//set up flags for timer0 (currently not used))
+volatile bit RTC_FLAG_1MS = 0;
+//volatile bit RTC_FLAG_10MS = 0;
+//volatile bit RTC_FLAG_50MS = 0;
+volatile bit RTC_FLAG_250MS = 0;
+volatile bit RTC_FLAG_500MS = 0;
+
+
+//global counter for timer0
+volatile unsigned int RTC_Counter = 0;
+
+/************  isr1  *************/
+// Interrupt service routine
+void interrupt isr1(void) 
+{
+	if(TMR0IF)  //interrupt from timer0
+	{
+		TMR0IF = 0;		//reset interrupt flag
+		TMR0 = TMR0_VAL;	//reset timer0 value
+		
+		RTC_Counter++;		//increase the count
+		
+		//set clock flags 
+		RTC_FLAG_1MS = 1;			
+		if(RTC_Counter % 250 == 0) 		//EVERY 250ms
+		{	
+			RTC_FLAG_250MS = 1;		
+		}
+		if(RTC_Counter % 500 == 0) 		//EVERY 500ms
+		{
+			RTC_FLAG_500MS = 1;
+			HBLED ^= 0x01;		//toggle heartbeat LED
+		}
+		if (buttonPressed == 0)	//if no button is waiting to be responded to
+		{
+			buttonPressed = ReadButtons();	//chech and debounce buttons
+		}
+	}
+	ser_int();		//serial recieve and transmit interrupt macro					
+}
+
+/************  init  *************/
+//Initialisation Routine
+void init()
+{	
+	buttonPressed = 0; //no buttons have been pressed	
+	
+	TRISB = 0b11111100;	//PortB all inputs except pin 0 and 1
+	TRISC &= 0b10010000; //force PortC to output except 4 and 7
+	
+	//spi registers
+	SSPSTAT = 0b01000000;
+	SSPCON = 0b10100001; 
+
+	//timer0 prescalar set
+	OPTION_REG = 0b00000100;
+	
+	//Module Initialisations
+	ser_init();	
+	init_adc();
+	lcd_init();
+	robo_init();
+	
+
+	//enable timer0 interrupt
+	TMR0IE = 1;
+	//enable peripheral interrupts 
+	PEIE=1;		
+	//Enable all interrupts
+	ei();
+}
+
+
+/*******************************************************************/
+/*******************************MAIN********************************/
+/*******************************************************************/
+void main(void)
+{
+	unsigned char choice = 255;	
+	int shortwall = 0;				
+
+	//initialise function
+	init();
+		
+	//Loop forever
+	while(1)
+	{
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display, IR, and reading robot values
+		{
+			RTC_FLAG_250MS = 0;
+			robot_read();
+			readAvgDistance();
+			UpdateDisplay();
+		}
+		if (buttonPressed)	//if a button has been debounced, perform the 
+							//appropriate menu action and wait for next button
+		{
+			choice = Menu(buttonPressed);
+			buttonPressed = 0;
+		}
+
+
+		////////  THIS IS THE MENU ITEM SELECTIONS	///////
+		switch (choice)
+		{
+			case 0:		//Calibrate IR	
+				calibrateIR();
+				break;
+			case 1:		//Scan 360 degrees
+			 	shortwall = scan360() - 13;	//find the closest wall
+				rotate((400 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
+				break;
+			case 2:		//Drive forward 2 meters
+				TotalDistTravelled = 0;
+				__delay_ms(100);
+				robotMoveSpeed(2000, DRIVESPEED);				
+				break;
+			case 3:		//Drive in an L shape
+				TotalDistTravelled = 0;
+				__delay_ms(100);
+				robotMoveSpeed(1000, DRIVESPEED);
+				__delay_ms(100);
+				robotTurn(-90); //turn clockwise 90 degrees
+				__delay_ms(100);
+				robotMoveSpeed(1000, DRIVESPEED);
+				break;
+			case 4:		//Follow wall
+				TotalDistTravelled = 0;
+				while(!ROBOTerror)
+				{
+					int shortwall = scan360(); 
+					int RT2P = 0; //RT2P = Robot Turn to Position
+					int direction1 = 0; // Cw (0) or ccw (1) flag
+					if (shortwall > 200)	// If the wall is on right, turn 90deg ccw infront of wall.
+				 		RT2P = shortwall + 100;
+				 	if (shortwall < 200)	// If the wall is on the left, turn 90deg cw infront of wall.
+				 		RT2P = shortwall - 100; 
+				
+				 	if (RT2P >= 400 && RT2P < 500 )	//calculate the correct turn in steppermotor steps
+					{	
+				 		RT2P = RT2P - 400;
+						direction1 = 1;
+					}
+				 	if (RT2P >= 200 && RT2P < 400)
+					{ 	
+						RT2P = 400 - RT2P;
+						RT2P = RT2P * -1;
+						direction1 = 0;
+					}
+				 	if (RT2P < 200 && RT2P >= 0)
+					{ 
+						direction1 = 1;
+					}
+				 	if (RT2P < 0 && RT2P >= -200)
+					{
+						direction1 = 0;
+					}
+					if(RT2P < -200 || RT2P >500)	//an error has occured
+					{
+						break;
+					}
+ 
+					rotate((400 - shortwall ), CLOCKWISE); //IR sensor
+					__delay_ms(100); 
+
+
+					int RT2A= RT2P * (36.0/40.0);	//convert from steppermotor steps to degrees
+					robotTurn(RT2A);
+					__delay_ms(100);
+					rotate(shortwall,CLOCKWISE);
+					__delay_ms(100);
+					robotMoveSpeed(500, DRIVESPEED);
+				}		
+		
+				break;		
+			
+			case 5:		//Charge Mode
+				ChargeMode();
+				break;	
+			default:
+			
+				break;
+		}
+		choice = 255;	//reset menu choice
+	}
+}
+
+
+/************  calibrateIR  *************/
+//User moves steppermotor to a zero position and sets this to zero
+void calibrateIR(void)
+{
+	currentMenu = 1;	//switch display to Calibration menu
+	rotate(8, CLOCKWISE); //initialise to a known winding
+	while (1)
+	{
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
+		{
+			case UP:
+				buttonPressed = 0;
+				break;
+			case DOWN:
+				buttonPressed = 0;	
+				break;
+			case LEFT: 						//half step counterclockwise
+				rotate(1, COUNTERCLOCKWISE); 
+				buttonPressed = 0;	
+				break;
+			case RIGHT:						//half step Clockwise
+				rotate(1, CLOCKWISE);
+				buttonPressed = 0;
+				break;		
+			case CENTER:					//zero steppermotor and exit to menu
+				totalSteps = 0;
+				buttonPressed = 0;
+				currentMenu = 0;
+				return;
+			default:						//should not get here
+				break;
+		}
+	}
+}
+
+/************  ChargeMode  *************/
+//Put robot into passive mode so it can charge the battery
+void ChargeMode(void)
+{
+	
+	currentMenu = 2;	//switch display to charge mode menu
+	ser_putch(128); //put in passive mode
+		
+	while (1)
+	{
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}
+		switch (buttonPressed)
+		{
+			case UP:
+				buttonPressed = 0;
+				break;
+			case DOWN:
+				buttonPressed = 0;
+				break;
+			case LEFT:
+				buttonPressed = 0;
+				break;
+			case RIGHT:
+				buttonPressed = 0;
+				break;
+			case CENTER:
+				ser_putch(132); //put robot into full mode and exit to menu
+				buttonPressed = 0;
+				currentMenu = 0;
+				return;
+			default:
+				buttonPressed = 0;
+				break;
+		}
+	}
+}
+
+/************  scan360  *************/
+
+//Do a 360 degree scan with the steppermotor and return the step value of the closest wall
+int scan360(void)
+{
+	int lowestVal = 0, lowestSteps = 0;
+
+	for (int steps = 0; steps < 400; steps++) //step through 360 degrees
+	{
+		readAvgDistance();
+		if (adcVal > lowestVal)			//compare current value to lowest value (done using raw data to speed up process
+		{
+			lowestVal = adcVal;
+			lowestSteps = steps;
+			
+		}
+		rotate(1, COUNTERCLOCKWISE);	
+			
+		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
+			{
+				RTC_FLAG_250MS = 0;
+				UpdateDisplay();
+			}		
+	} 
+
+	return lowestSteps;
+}
+
+/**************  adc.h   *****************/
+
+#ifndef ADC_H
+#define ADC_H
+
+#include <htc.h>
+
+
+void init_adc(void);
+
+unsigned int adc_read(void);
+
+
+unsigned char adc_read_channel(unsigned char channel);
+
+#endif 
+
+//#include "io_config.h"
+#include "AT25256A.h"
+#include <htc.h>
+
+void ee_write_byte( unsigned int byte_address, unsigned char data)
+{
+	unsigned char addressH;
+	unsigned char addressL;
+	unsigned char temp;
+	
+	addressL = byte_address & 0x00FF;
+	addressH = (byte_address >> 8) & 0x00FF;
+	
+	ee_write_enable();
+	
+	EEPROM_SPI_ENABLE();
+	
+	SSPIF = 0;
+	SSPBUF = AT25XXXA_WRITE;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	SSPBUF = addressH;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+
+	SSPIF = 0;
+	SSPBUF = addressL;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+		
+	SSPIF = 0;
+	SSPBUF = data;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);	
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	EEPROM_SPI_DISABLE();
+}
+
+unsigned char ee_read_byte (unsigned int byte_address)
+{
+	unsigned char addressH;
+	unsigned char addressL;
+	unsigned char temp;
+	
+	addressL = byte_address & 0x00FF;
+	addressH = (byte_address >> 8) & 0x00FF;
+	
+	EEPROM_SPI_ENABLE();
+	
+	SSPIF = 0;
+	SSPBUF = AT25XXXA_READ;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	SSPBUF = addressH;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	SSPBUF = addressL;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);	
+	temp = SSPBUF;
+
+	SSPIF = 0;
+	SSPBUF = 0x00;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);	
+	temp = SSPBUF;
+		
+	SSPIF = 0;
+	EEPROM_SPI_DISABLE();
+	
+	return temp;
+}
+
+void ee_write_enable(void)
+{
+	unsigned char temp;
+	
+	EEPROM_SPI_ENABLE();
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	
+	SSPIF = 0;
+	SSPBUF = AT25XXXA_WREN;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	EEPROM_SPI_DISABLE();
+}
+
+void ee_write_disable(void)
+{
+	unsigned char temp;
+	
+	EEPROM_SPI_ENABLE();
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	
+	SSPIF = 0;
+	SSPBUF = AT25XXXA_WRDI;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	EEPROM_SPI_DISABLE();
+}
+
+unsigned char ee_read_status (void)
+{
+	unsigned char temp=0;
+	
+	EEPROM_SPI_ENABLE();
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	
+	SSPIF = 0;
+	SSPBUF = AT25XXXA_RDSR;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	SSPBUF = 0x00;
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	
+	SSPIF = 0;
+	EEPROM_SPI_DISABLE();	
+	
+	return temp;
+}
+
+
+/**************  AT25256A.h   *****************/
+
+#include <htc.h>
+
+#define AT25XXXA_WREN	0b00000110
+#define AT25XXXA_WRDI	0b00000100
+#define AT25XXXA_RDSR	0b00000101
+#define AT25XXXA_WRSR	0b00000001
+#define AT25XXXA_READ	0b00000011
+#define AT25XXXA_WRITE	0b00000010
+
+static volatile bit CS0 @ (unsigned)&PORTC*8+0;
+static volatile bit CS1 @ (unsigned)&PORTC*8+1;
+
+#define EEPROM_SPI_ENABLE()	CS0 = 0; CS1 = 1;
+#define EEPROM_SPI_DISABLE()	CS0 = 0; CS1 = 0;
+
+unsigned char ee_read_status (void);
+void ee_write_disable(void);
+void ee_write_enable(void);
+unsigned char ee_read_byte (unsigned int);
+void ee_write_byte( unsigned int, unsigned char);
+
+
+/********************************  HMI.c  **************************************
+	Group Name: Aldnoah.Zero
+	
+	Contains the Human Machine Interface  																 
+																				 
+	 Authors 		 Student No.		Email
+----------------------------------------------------------------------------------
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
+																				 
+**********************************************************************************/
+
+#include <htc.h>
+#include <stdio.h>
+#include "HMI.h"
+#include "lcd.h"
+#include "infrared.h"
+#include "robot.h"
+
+//button direction assignments
+#define UP 1
+#define DOWN 2
+#define LEFT 3
+#define RIGHT 4
+#define CENTER 5
+
+//pin assignments for the buttons
+#define PB_UP !RB2 //button 0 pin	
+#define PB_DOWN !RB3 //button 1 pin	
+#define PB_LEFT !RB4 //button 2 pin	
+#define PB_RIGHT !RB5 //button 3 pin	
+#define PB_CENTER !RB6 //button 4 pin	
+#define DEBOUNCE_REQ_COUNT 10  //10ms debounce time
+
+#define MENULEFT 0x40
+#define MENUCENTER 0x44
+#define MENURIGHT 0x4D
+
+#define MENUITEMS 6  //number of items on the menu: change if items added or removed
+
+//menu position
+int pos = 0;
+
+
+//display strings for the main menu
+const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "}; 
+const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
+
+//set up debounce variables 
+volatile bit UpPressed = 0;
+volatile bit UpReleased = 0;
+volatile unsigned char UpDebounceCount = 0;
+
+volatile bit DownPressed = 0;
+volatile bit DownReleased = 0;
+volatile unsigned char DownDebounceCount = 0;
+
+volatile bit LeftPressed = 0;
+volatile bit LeftReleased = 0;
+volatile unsigned char LeftDebounceCount = 0;
+
+volatile bit RightPressed = 0;
+volatile bit RightReleased = 0;
+volatile unsigned char RightDebounceCount = 0;
+
+volatile bit CenterPressed = 0;
+volatile bit CenterReleased = 0;
+volatile unsigned char CenterDebounceCount = 0;
+
+
+/************  Debounce  *************/
+//debounces the buttons
+void Debounce(void)
+{
+		//Debounce PB0
+		if(PB_UP)
+		{
+			UpDebounceCount++; //count 10 ms, and then wait for release 
+			if(UpDebounceCount >= DEBOUNCE_REQ_COUNT & UpReleased)
+			{
+				UpPressed = 1;			
+				UpReleased = 0;
+			}
+		}
+		else	//button has been released
+		{
+			UpDebounceCount = 0;
+			UpReleased = 1;
+		}
+
+		//Debounce PB1
+		if(PB_DOWN)
+		{
+			DownDebounceCount++;
+			if(DownDebounceCount >= DEBOUNCE_REQ_COUNT & DownReleased)
+			{
+				DownPressed = 1;			
+				DownReleased = 0;
+			}
+		}
+		else
+		{
+			DownDebounceCount = 0;
+			DownReleased = 1;
+		}
+		//Debounce PB2
+		if(PB_LEFT)
+		{
+			LeftDebounceCount++;
+			if(LeftDebounceCount >= DEBOUNCE_REQ_COUNT & LeftReleased)
+			{
+				LeftPressed = 1;			
+				LeftReleased = 0;
+			}
+		}
+		else
+		{
+			LeftDebounceCount = 0;
+			LeftReleased = 1;
+		}
+		//Debounce PB3
+		if(PB_RIGHT)
+		{
+			RightDebounceCount++;
+			if(RightDebounceCount >= DEBOUNCE_REQ_COUNT & RightReleased)
+			{
+				RightPressed = 1;			
+				RightReleased = 0;
+			}
+		}
+		else
+		{
+			RightDebounceCount = 0;
+			RightReleased = 1;
+		}
+		//Debounce PB3
+		if(PB_CENTER)
+		{
+			CenterDebounceCount++;
+			if(CenterDebounceCount >= DEBOUNCE_REQ_COUNT & CenterReleased)
+			{
+				CenterPressed = 1;			
+				CenterReleased = 0;
+			}
+		}
+		else
+		{
+			CenterDebounceCount = 0;
+			CenterReleased = 1;
+		}
+}
+
+/************  ReadButtons  *************/
+// read and debounce the buttons, and return the button that is pressed
+unsigned char ReadButtons(void)
+{
+	
+	Debounce();
+	
+	if(UpPressed) 
+	{
+		UpPressed = 0;
+		return UP;
+	
+	}
+
+	if(DownPressed) 
+	{
+		DownPressed = 0;
+		return DOWN;
+		
+	}
+		if(LeftPressed) 
+	{
+		LeftPressed = 0;
+		return LEFT;
+		
+	}
+		if(RightPressed) 
+	{
+		RightPressed = 0;
+		return RIGHT;
+		
+	}
+	
+	if(CenterPressed) 
+	{
+		CenterPressed = 0;
+		return CENTER;
+		
+	}
+	return 0;// no button pressed
+}
+
+/************  Menu  *************/
+//move the menu positions based on the button pressed 
+unsigned char Menu(unsigned char BTN_input)
+{
+	switch (BTN_input)
+		{
+			case UP:
+			
+			break;
+			case DOWN:
+			
+			break;
+			case LEFT:
+			pos--;
+			if (pos < 0)
+				pos = MENUITEMS - 1;
+				
+			break;
+			case RIGHT:
+			pos++;		
+			if (pos == MENUITEMS)
+				pos = 0;	
+			
+			break;
+			case CENTER:
+			return pos;	//return the selected menu item position
+			
+
+			default:
+			
+			break;
+		}
+	return 255; //no choice selected
+}
+
+/************  UpdateDisplay  *************/
+//draw the display based on the current menu selected
+void UpdateDisplay(void)
+{
+	char LCDOutput[16] = "";				
+	switch (currentMenu)		//which Menu are we on
+	{
+		case 0: //main menu
+			lcd_write_control(0b00000001); //clear display	
+			sprintf(LCDOutput,"IR:%dcm D:%d",IRdistance, TotalDistTravelled);
+			lcd_set_cursor(0x00);	
+			lcd_write_string(LCDOutput);				
+			lcd_set_cursor(MENULEFT);	
+			if (pos > 0)
+				lcd_write_string(shortMenuStrings[pos - 1]);
+			else
+				lcd_write_string(shortMenuStrings[pos + MENUITEMS - 1]);
+			lcd_set_cursor(MENUCENTER);	
+			lcd_write_string(menuStrings[pos]);
+			lcd_set_cursor(MENURIGHT);	
+			lcd_write_string(shortMenuStrings[(pos + 1) % MENUITEMS]);
+			break;
+		case 1:	//calibration Menu
+			lcd_write_control(0b00000001); //clear display	
+			lcd_set_cursor(0x00);	
+			lcd_write_string("Zero Step_Motor");
+			lcd_set_cursor(MENULEFT);	
+			lcd_write_string("<<<");
+			lcd_set_cursor(MENUCENTER);	
+			lcd_write_string("CONFIRM");
+			lcd_set_cursor(MENURIGHT);	
+			lcd_write_string(">>>");
+			break;
+		case 2:	//Charge Menu
+			lcd_write_control(0b00000001); //clear display	
+			lcd_set_cursor(0x00);	
+			lcd_write_string(" Charging Mode ");
+			lcd_set_cursor(MENUCENTER);	
+			lcd_write_string("  EXIT  ");
+			break;
+		default:	//unknown menu	
+			break;	
+	}
+}
+
+
+/**************  HMI.h   *****************/
+
+#ifndef HMI_H
+#define HMI_H
+
+#include <htc.h>
+
+volatile unsigned char currentMenu = 0;
+
+unsigned char ReadButtons(void);
+unsigned char Menu(unsigned char input);
+void UpdateDisplay(void);
+
+
+#endif 
+
+/********************************  infrared.c  **************************************
+	Group Name: Aldnoah.Zero
+	
+	Contains routines for reading the IR sensor   																 
+																				 
+	 Authors 		 Student No.		Email
+----------------------------------------------------------------------------------
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
+																				 
+**********************************************************************************/
+
+#include <htc.h>
+#include <stdio.h>
+#include "infrared.h"
+#include "adc.h"
+#include "lcd.h"
+
+#define NUMREADS 8 //number of adc reads to average for IR sensor
+
+/************  readAvgDistance  *************/
+//takes a number of reads of the IR and stores the average in adcVal
+void readAvgDistance(void)
+{
+	unsigned int fullval = 0, tempIR = 0;
+	int j = 0;
+
+	for (int i = 0; i < NUMREADS; i++)	// take the readings
+	{
+		tempIR = readDistance();
+		if (tempIR <= 1000)	//ignore any spikes!
+		{
+			fullval += tempIR;	//add the readings together
+			j++;
+		}
+	}
+	adcVal = fullval / j;	//divide to get average
+	ADCconvert();			//convert to distance in cm
+}
+
+/************  readDistance  *************/
+//returns the current adc value
+unsigned int readDistance(void)
+{
+	unsigned int readVal;
+
+	readVal = adc_read_channel(0);
+
+	return readVal;
+}
+
+/************  ADCconvert  *************/
+//converts the adcVal to a distance and stores it in IRdistance
+void ADCconvert(void)
+{
+	//No room for error included
+	//Errors evolve with increasing distance
+	// limited to voltage range: 0.5<v<0.75, 
+	// corresponding distance range: 0.15m<dist<1.3m
+
+	if (adcVal >= 213 && adcVal < 234)
+	{
+		IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);
+	}
+	else if (adcVal >= 170 && adcVal < 213)
+	{
+		IRdistance = 20 + ((30 - 20)*(213 - adcVal)) / (213 - 170);
+	}
+	else if (adcVal >= 128 && adcVal < 170)
+	{
+		IRdistance = 30 + ((40 - 30)*(170 - adcVal)) / (170 - 128);
+	}
+	else if (adcVal >= 107 && adcVal < 128)
+	{
+		IRdistance = 40 + ((50 - 40)*(128 - adcVal)) / (128 - 107);
+	}
+	else if (adcVal >= 77 && adcVal < 107)
+	{
+		IRdistance = 50 + ((60 - 50)*(107 - adcVal)) / (107 - 77);
+	}
+	else if (adcVal >= 56 && adcVal < 77)
+	{
+		IRdistance = 60 + ((70 - 60)*(77 - adcVal)) / (77 - 56);
+	}
+	else if (adcVal >= 43 && adcVal < 56)
+	{
+		IRdistance = 70 + ((80 - 70)*(56 - adcVal)) / (56 - 43);
+	}
+}
+
+
+/**************  infrared.h   *****************/
+
+#ifndef INFRARED_H
+#define INFRARED_H
+
+#include <htc.h>
+
+volatile unsigned int adcVal;
+volatile unsigned int IRdistance;
+
+
+
+unsigned int readDistance(void);
+void readAvgDistance(void);
+void ADCconvert(void);
+
+
+#endif 
+
+#include <htc.h>
+#include "lcd.h"
+
+
+//defines
+//#define RS RE0			//LCD Register Select
+//#define RW RE1			//LCD Read Write
+//#define EN RE2			//LCD Enable
+//#define LCD_DATA PORTD	//LCD data pins are connected to Port D
+#define _XTAL_FREQ 20000000
+
+
+
+
+//functions
+//write controls to LCD
+void lcd_write_control(unsigned char databyte)
+{
+	EN = 0;
+	RW = 0;
+	RS = 0;
+	LCD_DATA = databyte;
+	EN = 1;
+	EN = 0;
+	__delay_ms(2);
+}
+
+//write data to LCD
+void lcd_write_data(unsigned char databyte)
+{
+	EN = 0;
+	RW = 0;
+	RS = 1;
+	LCD_DATA = databyte;
+	EN = 1;
+	EN = 0;
+	__delay_ms(1);
+}
+
+//move the LCD cursor to a particular location
+void lcd_set_cursor(unsigned char address)
+{
+	address |= 0b10000000;		//format address command using mask
+	lcd_write_control(address);	//write address command
+}
+
+void lcd_write_string(char * s)
+{
+	// write characters
+	while(*s) lcd_write_data(*s++);
+}
+
+//function accepts char between 0 and 99 and writes it to lcd display in 2 digits
+void lcd_write_2_digit_bcd(unsigned char data)
+{
+	unsigned char OnesDigit, TensDigit;
+
+	//load number to be converted into OnesDigit and clear TensDigit
+	OnesDigit = data;
+	TensDigit = 0;
+
+	//Perform a BCD Conversion	
+	while (OnesDigit >= 10)
+	{
+		OnesDigit = OnesDigit - 10;
+		TensDigit++;
+	}
+	
+	lcd_write_data((unsigned char)TensDigit + 48);
+	lcd_write_data((unsigned char)OnesDigit + 48);
+}
+
+void lcd_write_3_digit_bcd(unsigned int data)
+{
+	unsigned int OnesDigit, TensDigit, HundredsDigit;
+
+	//load number to be converted into OnesDigit and clear TensDigit
+	OnesDigit = data;
+	TensDigit = 0;
+	HundredsDigit = 0;
+
+	//Perform a BCD Conversion	
+	while (OnesDigit >= 10)
+	{
+		OnesDigit = OnesDigit - 10;
+		TensDigit++;
+	}
+	while (TensDigit >= 10)
+	{
+		TensDigit -= 10;
+		HundredsDigit++;
+	}
+	lcd_write_data((unsigned int)HundredsDigit + 48);
+	lcd_write_data((unsigned int)TensDigit + 48);
+	lcd_write_data((unsigned int)OnesDigit + 48);
+
+}
+
+//function initalises the LCD module - check that ADCON1 setting doesn't conflict
+void lcd_init(void)
+{
+
+
+	//setup ADCON1 register to make PortE Digital
+	ADCON1 = 0b00000010;	//left justified, PortE Digital, PortA Analogue
+
+
+	PORTD = 0;				//set all pins on portd low
+	PORTE = 0;				//set all pins on porte low
+
+	TRISD = 0b00000000;		//set all pins to output
+	TRISE = 0b00000000;		//set all pins to output
+
+	//LCD Initialisation
+	lcd_write_control(0b00000001); //clear display
+	lcd_write_control(0b00111000); //set up display
+	lcd_write_control(0b00001100); //turn display on
+	lcd_write_control(0b00000110); //move to first digit
+	lcd_write_control(0b00000010); //entry mode setup
+
+}
+
+
+/**************  lcd.h   *****************/
+
+#ifndef	LCD_H
+#define LCD_H
+
+#include <htc.h>
+
+
+//defines
+#define RS RE0			//LCD Register Select
+#define RW RE1			//LCD Read Write
+#define EN RE2			//LCD Enable
+#define LCD_DATA PORTD	//LCD data pins are connected to Port D
+
+#define _XTAL_FREQ 20000000
+
+//write controls to LCD
+void lcd_write_control(unsigned char databyte);
+
+//write data to LCD
+void lcd_write_data(unsigned char databyte);
+
+//move the LCD cursor to a particular location
+void lcd_set_cursor(unsigned char address);
+
+void lcd_write_string(char * s);
+
+//function accepts char between 0 and 99 and writes it to lcd display in 2 digits
+void lcd_write_2_digit_bcd(unsigned char data);
+
+//function initalises the LCD module - check that ADCON1 setting doesn't conflict
+void lcd_init(void);
+
+void lcd_write_3_digit_bcd(unsigned int data);
+
+void LCD_display_distance(void);
+int total;
+int dist_high;
+int dist_low;
+
+#endif //LCD_H
+
+/********************************  robot.c  **************************************
+	Group Name: Aldnoah.Zero
+	
+	Contains routines for robot sensing and movement   																 
+																				 
+	 Authors 		 Student No.		Email
+----------------------------------------------------------------------------------
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
+																				 
+**********************************************************************************/
+
+#include <htc.h>
+
+#include "robot.h"
+#include "ser.h"
+#include "lcd.h"
+#include "HMI.h"
+
+/************  robo_init  *************/
+//initialise the robot to full mode
+void robo_init(void)
+{
+	ser_putch(128); //start
+	ser_putch(132); //full mode
+	ser_putch(150);	// stop and sensor read requests
+	ser_putch(0);
+}
+
+/************  robot_read  *************/
+//reads the robot sensors specified
+void robot_read(void)
+{
+	ser_putch(142); // Sensor Setup
+	ser_putch(7);  // Bump Sensor Packet ID
+	__delay_ms(5);
+	BumpSensors = ser_getch();
+	ser_putch(142); // Sensor Setup
+	ser_putch(19);  // Distance Sensor Packet ID
+	__delay_ms(5);
+	DistHighByte = ser_getch();
+	DistLowByte = ser_getch();
+
+}
+
+/************  RobotDrive  *************/
+//Moves the robot forward at the requested speed
+void RobotDrive(int speed)
+{
+	//split speed into high and low byte
+	unsigned char speedlowByte = (unsigned char)(speed);	
+	unsigned char speedhighByte = (unsigned char)(speed >> 8);
+
+	ser_putch(137); //drive - opcode 1
+
+	ser_putch(speedhighByte); // speed high byte
+
+	ser_putch(speedlowByte); //speed low byte
+
+	ser_putch(128);
+
+	ser_putch(0);
+}
+
+/************  robotMoveSpeed  *************/
+//move forward the requested distance at the requested speed
+void robotMoveSpeed(int distance, int speed)
+{
+	distTravelled = 0;
+	int temp1;
+	RobotDrive(speed);	//start robot moving
+
+	//keep going till requested distance is reached (absolute value used for negative distances)
+	while (abs(distTravelled) <= abs(distance))	
+	{
+		robot_read();
+		if (BumpSensors)	//hit wall or lifted
+		{
+			ROBOTerror = 1;	//signal an error
+			break;
+		}
+		temp1 = DistHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += DistLowByte;
+		distTravelled += temp1;
+		TotalDistTravelled += temp1;
+		UpdateDisplay();
+	}
+
+	RobotDrive(0);	//stop robot
+
+}
+
+/************  robotMove  *************/
+//move forward the requested distance at a set speed (not used currently)
+void robotMove(int distance)
+{
+
+	distTravelled = 0;
+
+	if (distance >= 0)	//forward
+	{
+		ser_putch(137); //drive - opcode 1
+
+		ser_putch(0); // speed high byte
+
+		ser_putch(50); //speed low byte
+
+		ser_putch(128);
+
+		ser_putch(0);
+	}
+	else							//backward
+	{
+		ser_putch(137); //drive - opcode 1
+
+		ser_putch(0xff); // 
+
+		ser_putch(0x38);
+
+		ser_putch(128);
+
+		ser_putch(0);
+	}
+
+
+	while (distTravelled <= distance)
+	{
+		robot_read();
+		if (BumpSensors)	//hit wall or lifted
+		{
+			ROBOTerror = 1;
+			break;
+		}
+		distTravelled += DistLowByte;
+		TotalDistTravelled += DistLowByte;
+		UpdateDisplay();
+	}
+
+	ser_putch(137); //drive - opcode 3
+
+	ser_putch(0);
+
+	ser_putch(0);
+
+	ser_putch(0);
+
+	ser_putch(0);
+
+}
+
+/************  robotTurn  *************/
+//turns the robot x degrees
+void robotTurn(int degrees)
+{
+
+	//split the degrees into high and low bytes
+	turnlowByte = (unsigned char)(degrees);
+	turnhighByte = (unsigned char)(degrees >> 8);
+	if (degrees >= 0)		//ccounter clockwise
+	{
+		ser_putch(137); //drive - opcode 1
+
+		ser_putch(0); // 
+
+		ser_putch(50);
+
+		ser_putch(0);
+
+		ser_putch(1);
+	}
+	else						//clockwise
+	{
+		ser_putch(137); //drive - opcode 1
+
+		ser_putch(0); // 
+
+		ser_putch(50);
+
+		ser_putch(255);
+
+		ser_putch(255);
+	}
+	ser_putch(157); //angle travelled - opcode 2 
+
+	ser_putch(turnhighByte);
+
+	ser_putch(turnlowByte);
+
+	ser_putch(137); //drive - opcode 3
+
+	ser_putch(0);
+
+	ser_putch(0);
+
+	ser_putch(0);
+
+	ser_putch(0);
+}
+
+/************  abs  *************/
+//return the absolute value of the input
+int abs(int v)
+{
+	return  (v * ((v > 0) - (v < 0))); //gets absolute value by multiplying by 1 or -1   
+}
+
+/**************  robot.h   *****************/
+
+#ifndef ROBOT_H
+#define ROBOT_H
+
+#include <htc.h>
+
+void robo_init(void);
+void robotMove(int distance);
+void robotMoveSpeed(int distance, int speed);
+void robotTurn(int degrees);
+int abs(int v);
+
+void robot_read(void);
+int distTravelled, TotalDistTravelled;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
+
+unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
+#endif 
+
+
+
+/*
+ * Distributed by www.microchipC.com - one of the web's largest
+ * repositories of C source code for Microchip PIC micros.
+ *
+ * ser.c
+ *
+ * Interrupt Driven Serial Routines with Circular FIFO
+ * Copyright (c) 2006, Regulus Berdin
+ * All rights reserved. 
+ * 
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.  IN NO EVENT SHALL REGULUS BERDIN BE LIABLE FOR
+ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * 
+*/
+
+#define _SER_C_
+#include <htc.h>
+#include "ser.h"
+
+unsigned char rxfifo[SER_BUFFER_SIZE];
+volatile unsigned char rxiptr, rxoptr;
+bank1 unsigned char txfifo[SER_BUFFER_SIZE];
+volatile unsigned char txiptr, txoptr;
+unsigned char ser_tmp;
+
+bit ser_isrx(void)
+{
+	if(OERR) {
+		CREN = 0;
+		CREN = 1;
+		return 0;
+	}
+	return (rxiptr!=rxoptr);
+}
+
+unsigned char ser_getch(void)
+{
+	unsigned char c;
+
+	while (ser_isrx()==0)
+		continue;
+
+	GIE=0;
+	c=rxfifo[rxoptr];
+	++rxoptr;
+	rxoptr &= SER_FIFO_MASK;
+	GIE=1;
+	return c;
+}
+
+void ser_putch(unsigned char c)
+{
+	while (((txiptr+1) & SER_FIFO_MASK)==txoptr)
+		continue;
+	GIE=0;
+	txfifo[txiptr] = c;
+	txiptr=(txiptr+1) & SER_FIFO_MASK;
+	TXIE=1;
+	GIE=1;
+}
+
+void ser_puts(const unsigned char * s)
+{
+	while(*s)
+		ser_putch(*s++);
+}
+
+void ser_puts2(unsigned char * s)
+{
+	while(*s)
+		ser_putch(*s++);
+}
+
+void ser_puthex(unsigned char v)
+{
+	unsigned char c;
+
+	c = v >> 4;
+	if (c>9) {
+		ser_putch('A'-10+c);
+	} else {
+		ser_putch('0'+c);
+	}
+
+	c = v & 0x0F;
+	if (c>9) {
+		ser_putch('A'-10+c);
+	} else {
+		ser_putch('0'+c);
+	}
+}
+
+
+void ser_init(void)
+{
+	TRISC |= 0b10000000;		//set RC7 to input for RX
+	TRISC &= 0b10111111;		//set RC6 to output for TX
+	BRGH=1;					//high speed
+
+	SPBRG=20;				//57.6K @ 20MHz, SPBRG = (20MHz/(16*BAUD_RATE))-1;
+//	SPBRG=10;				//115.2K @ 20MHz, SPBRG = (20MHz/(16*BAUD_RATE))-1;
+
+	TX9=0;					//8 bits
+	RX9=0;					//
+
+	SYNC=0;					//uart settings
+	SPEN=1;
+	CREN=1;
+	TXIE=0;
+	RCIE=1;
+	TXEN=1;
+	//PEIE=1;		//enable peripheral interrupts and global interrupts in main function
+
+	rxiptr=rxoptr=txiptr=txoptr=0;
+}
+
+
+/*
+ * ser.h
+ *
+ * Interrupt Driven Serial Routines with Circular FIFO
+ * Copyright (c) 2006, Regulus Berdin
+ * All rights reserved. 
+ * 
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.  IN NO EVENT SHALL REGULUS BERDIN BE LIABLE FOR
+ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*/
+
+#ifndef _SER_H_
+#define _SER_H_
+
+/* Valid buffer size value are only power of 2 (ex: 2,4,..,64,128) */
+#define SER_BUFFER_SIZE		16
+		
+#define SER_FIFO_MASK 		(SER_BUFFER_SIZE-1)
+
+/* Insert this macro inside the interrupt routine */
+#define ser_int() 							\
+	if (RCIF) {								\
+		rxfifo[rxiptr]=RCREG;				\
+		ser_tmp=(rxiptr+1) & SER_FIFO_MASK;	\
+		if (ser_tmp!=rxoptr)				\
+			rxiptr=ser_tmp;					\
+	}										\
+	if (TXIF && TXIE) {						\
+		TXREG = txfifo[txoptr];				\
+		++txoptr;							\
+		txoptr &= SER_FIFO_MASK;			\
+		if (txoptr==txiptr) {				\
+			TXIE = 0;						\
+		}									\
+	}
+
+bit ser_isrx(void);
+unsigned char ser_getch(void);
+void ser_putch(unsigned char byte);
+void ser_puts(const char * s);
+void ser_puts2(unsigned char * s);
+void ser_puthex(unsigned char v);
+void ser_init(void);
+
+#ifndef _SER_C_
+extern unsigned char rxfifo[SER_BUFFER_SIZE];
+extern volatile unsigned char rxiptr, rxoptr;
+extern bank1 unsigned char txfifo[SER_BUFFER_SIZE];
+extern volatile unsigned char txiptr, txoptr;
+extern unsigned char ser_tmp;
+#endif
+
+#endif
+
+
+/********************************  steppermotor.c  **************************************
+	Group Name: Aldnoah.Zero
+	
+	Contains routines for moving the steppermotor   																 
+																				 
+	 Authors 		 Student No.		Email
+----------------------------------------------------------------------------------
+	David Lee  		 11055579 			David@lee42.com 
+	James Bohm		 11195839			JimmyBohm@gmail.com			
+    Jose  Gunawarman 11784271			jose.adhitya@gmail.com
+	Navi  Gunaratne  11434305			11434305@student.uts.edu.au   			
+	John  Lim		 12050326			john.lim@hotmail.com								 
+																				 
+**********************************************************************************/
+
+#include <htc.h>
+#include "steppermotor.h"
+#include "AT25256A.h"
+
+
+#define _XTAL_FREQ 20000000  //Oscillator (20MHz)
+//define stepping sequence
+
+#define STEP0 0b00111100 
+#define STEP1 0b00101110 
+#define STEP2 0b00101011 
+#define STEP3 0b00100111 
+#define STEP4 0b00110101 
+#define STEP5 0b00010111 
+#define STEP6 0b00011011 
+#define STEP7 0b00011110
+
+#define STEP_OFF 0b00111001 //all winding deenergised
+
+
+#define		SELECT_NONE()	RC0 = 0; RC1 = 0;
+#define		SELECT_EEPROM()	RC0 = 0; RC1 = 1;
+#define		SELECT_RF()		RC0 = 1; RC1 = 0;
+#define		SELECT_SM()		RC0 = 1; RC1 = 1;
+#define 	SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
+
+#define CLOCKWISE 0
+#define COUNTERCLOCKWISE 1
+
+char current_step = STEP0;		//stores current step
+
+/************  spi_transfer  *************/
+//send a char over the SPI
+unsigned char spi_transfer(unsigned char data)
+{
+	unsigned char temp = 0;
+
+	SSPIF = 0;
+	SSPBUF = data;
+
+	while (SSPIF == 0);
+	temp = SSPBUF;
+	SSPIF = 0;
+
+	return temp;
+}
+
+/************  rotate  *************/
+//rotate the steppermotor x half steps in the chosen direction
+void rotate(unsigned int numsteps, unsigned char direction)
+{
+
+	SELECT_SM();			// SPI select the Stepper M
+	if (direction == 0)
+		spi_transfer(0b00001111);	//for clockwise rotation 
+	else
+		spi_transfer(0b00001101);	//for clockwise rotation 		
+	SELECT_NONE();
+	for (unsigned int i = 0; i < numsteps; i++)
+	{
+		SM_STEP();
+		__delay_ms(15);  //give motor time to respond
+	}
+	SELECT_SM();			// SPI select the Stepper M
+	spi_transfer(0b00000000);	//de-energise windings		
+	SELECT_NONE();
+	SM_STEP();
+}
+
+
+/**************  steppermotor.h   *****************/
+
+#ifndef STEPPERMOTOR_H
+#define STEPPERMOTOR_H
+
+#include <htc.h>
+
+unsigned char spi_transfer(unsigned char data);
+void rotate(unsigned int numsteps, unsigned char direction);
+void rotateOld(unsigned char steps, unsigned char direction);
+
+
+#endif 

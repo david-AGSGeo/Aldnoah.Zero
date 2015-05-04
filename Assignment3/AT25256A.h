@@ -1,3 +1,5 @@
+/**************  AT25256A.h   *****************/
+
 #include <htc.h>
 
 #define AT25XXXA_WREN	0b00000110

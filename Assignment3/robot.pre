@@ -1150,7 +1150,7 @@ unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 9 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 25 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1159,28 +1159,29 @@ ser_putch(150);
 ser_putch(0);
 }
 
+
+
 void robot_read(void)
 {
-
-
-
-
-ser_putch (142);
-ser_putch (7);
+ser_putch(142);
+ser_putch(7);
 _delay((unsigned long)((5)*(20000000/4000.0)));
 BumpSensors = ser_getch();
-ser_putch (142);
-ser_putch (19);
+ser_putch(142);
+ser_putch(19);
 _delay((unsigned long)((5)*(20000000/4000.0)));
 DistHighByte = ser_getch();
 DistLowByte = ser_getch();
 
 }
 
+
+
 void RobotDrive(int speed)
 {
-unsigned char speedlowByte = (unsigned char) (speed) ;
-unsigned char speedhighByte = (unsigned char) (speed >> 8);
+
+unsigned char speedlowByte = (unsigned char)(speed);
+unsigned char speedhighByte = (unsigned char)(speed >> 8);
 
 ser_putch(137);
 
@@ -1200,6 +1201,7 @@ void robotMoveSpeed(int distance, int speed)
 distTravelled = 0;
 int temp1;
 RobotDrive(speed);
+
 
 while (abs(distTravelled) <= abs(distance))
 {
@@ -1221,10 +1223,12 @@ RobotDrive(0);
 
 }
 
+
+
 void robotMove(int distance)
 {
 
-distTravelled =0;
+distTravelled = 0;
 
 if (distance >= 0)
 {
@@ -1277,12 +1281,14 @@ ser_putch(0);
 
 }
 
+
+
 void robotTurn(int degrees)
 {
 
 
-turnlowByte = (unsigned char) (degrees) ;
-turnhighByte = (unsigned char) (degrees >> 8);
+turnlowByte = (unsigned char)(degrees);
+turnhighByte = (unsigned char)(degrees >> 8);
 if (degrees >= 0)
 {
 ser_putch(137);
@@ -1324,7 +1330,9 @@ ser_putch(0);
 ser_putch(0);
 }
 
+
+
 int abs(int v)
 {
-return (v * ((v>0) - (v<0)));
+return (v * ((v > 0) - (v < 0)));
 }
