@@ -66,6 +66,11 @@
 #define RIGHT 4
 #define CENTER 5
 
+//robot read types
+#define DIST 0
+#define ANGLE 1
+#define ALL 2
+
 //define stepping sequence directions
 #define CLOCKWISE 0
 #define COUNTERCLOCKWISE 1
@@ -177,7 +182,7 @@ void main(void)
 		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display, IR, and reading robot values
 		{
 			RTC_FLAG_250MS = 0;
-			robot_read();
+			robot_read(ALL);
 			readAvgDistance();
 			UpdateDisplay();
 		}
@@ -200,18 +205,10 @@ void main(void)
 				rotate((200 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
 				break;
 			case 2:		//Drive forward 2 meters
-				TotalDistTravelled = 0;
-				__delay_ms(100);
-				robotMoveSpeed(2000, DRIVESPEED);				
+robotTurnSpeed(-90, 1); //turn clockwise 90 degrees				
 				break;
 			case 3:		//Drive in an L shape
-				TotalDistTravelled = 0;
-				__delay_ms(100);
-				robotMoveSpeed(1000, DRIVESPEED);
-				__delay_ms(100);
-				robotTurn(-90); //turn clockwise 90 degrees
-				__delay_ms(100);
-				robotMoveSpeed(1000, DRIVESPEED);
+robotTurnSpeed(90, 1); //turn clockwise 90 degrees		
 				break;
 			case 4:		//Follow wall
 				TotalDistTravelled = 0;

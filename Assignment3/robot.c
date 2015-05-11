@@ -20,6 +20,11 @@
 #include "lcd.h"
 #include "HMI.h"
 
+#define DIST 0
+#define ANGLE 1
+#define ALL 2
+
+
 /************  robo_init  *************/
 //initialise the robot to full mode
 void robo_init(void)
@@ -32,18 +37,42 @@ void robo_init(void)
 
 /************  robot_read  *************/
 //reads the robot sensors specified
-void robot_read(void)
+void robot_read(unsigned char readType)
 {
 	ser_putch(142); // Sensor Setup
 	ser_putch(7);  // Bump Sensor Packet ID
 	__delay_ms(5);
 	BumpSensors = ser_getch();
-	ser_putch(142); // Sensor Setup
-	ser_putch(19);  // Distance Sensor Packet ID
-	__delay_ms(5);
-	DistHighByte = ser_getch();
-	DistLowByte = ser_getch();
-
+	if (readType == DIST)
+	{
+		ser_putch(142); // Sensor Setup
+		ser_putch(19);  // Distance Sensor Packet ID
+		__delay_ms(5);
+		DistHighByte = ser_getch();
+		DistLowByte = ser_getch();
+	}
+	else if (readType == ANGLE)
+	{	
+		ser_putch(142); // Sensor Setup
+		ser_putch(20);  // Angle Sensor Packet ID
+		__delay_ms(5);
+		AngleHighByte = ser_getch();
+		AngleLowByte = ser_getch();
+	}
+	else if (readType == ALL)
+	{	
+		//read all sensors here
+		ser_putch(142); // Sensor Setup
+		ser_putch(19);  // Distance Sensor Packet ID
+		__delay_ms(5);
+		DistHighByte = ser_getch();
+		DistLowByte = ser_getch();
+		ser_putch(142); // Sensor Setup
+		ser_putch(20);  // Angle Sensor Packet ID
+		__delay_ms(5);
+		AngleHighByte = ser_getch();
+		AngleLowByte = ser_getch();
+	}
 }
 
 /************  RobotDrive  *************/
@@ -65,6 +94,48 @@ void RobotDrive(int speed)
 	ser_putch(0);
 }
 
+
+void robotTurn(int angle)
+{
+	
+	if (angle > 0)		//counter clockwise
+	{
+		ser_putch(137); 
+
+		ser_putch(0);  
+
+		ser_putch(50);
+
+		ser_putch(0);
+
+		ser_putch(1);
+	}
+	else if (angle < 0)						//clockwise
+	{
+		ser_putch(137); 
+
+		ser_putch(0);  
+
+		ser_putch(50);
+
+		ser_putch(255);
+
+		ser_putch(255);
+	}
+	else
+	{
+		ser_putch(137); 
+
+		ser_putch(0);  
+
+		ser_putch(0);
+
+		ser_putch(0);
+
+		ser_putch(0);
+	}
+}
+
 /************  robotMoveSpeed  *************/
 //move forward the requested distance at the requested speed
 void robotMoveSpeed(int distance, int speed)
@@ -76,7 +147,7 @@ void robotMoveSpeed(int distance, int speed)
 	//keep going till requested distance is reached (absolute value used for negative distances)
 	while (abs(distTravelled) <= abs(distance))	
 	{
-		robot_read();
+		robot_read(DIST);
 		if (BumpSensors)	//hit wall or lifted
 		{
 			ROBOTerror = 1;	//signal an error
@@ -94,111 +165,34 @@ void robotMoveSpeed(int distance, int speed)
 
 }
 
-/************  robotMove  *************/
-//move forward the requested distance at a set speed (not used currently)
-void robotMove(int distance)
+
+/************  robotTurnSpeed  *************/
+//turns the robot x degrees at selected speed
+
+void robotTurnSpeed(int angle, int speed)
 {
+	angleTurned = 0;
+	int temp1 = 0;
 
-	distTravelled = 0;
+	robotTurn(angle);	//start robot turning
 
-	if (distance >= 0)	//forward
+	//keep going till requested distance is reached (absolute value used for negative distances)
+	while (abs(angleTurned) <= abs(angle))	
 	{
-		ser_putch(137); //drive - opcode 1
-
-		ser_putch(0); // speed high byte
-
-		ser_putch(50); //speed low byte
-
-		ser_putch(128);
-
-		ser_putch(0);
-	}
-	else							//backward
-	{
-		ser_putch(137); //drive - opcode 1
-
-		ser_putch(0xff); // 
-
-		ser_putch(0x38);
-
-		ser_putch(128);
-
-		ser_putch(0);
-	}
-
-
-	while (distTravelled <= distance)
-	{
-		robot_read();
+		robot_read(ANGLE);
 		if (BumpSensors)	//hit wall or lifted
 		{
-			ROBOTerror = 1;
+			ROBOTerror = 1;	//signal an error
 			break;
 		}
-		distTravelled += DistLowByte;
-		TotalDistTravelled += DistLowByte;
+		temp1 = AngleHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += AngleLowByte;
+		angleTurned += temp1;
 		UpdateDisplay();
 	}
 
-	ser_putch(137); //drive - opcode 3
-
-	ser_putch(0);
-
-	ser_putch(0);
-
-	ser_putch(0);
-
-	ser_putch(0);
-
-}
-
-/************  robotTurn  *************/
-//turns the robot x degrees
-void robotTurn(int degrees)
-{
-
-	//split the degrees into high and low bytes
-	turnlowByte = (unsigned char)(degrees);
-	turnhighByte = (unsigned char)(degrees >> 8);
-	if (degrees >= 0)		//ccounter clockwise
-	{
-		ser_putch(137); //drive - opcode 1
-
-		ser_putch(0); // 
-
-		ser_putch(50);
-
-		ser_putch(0);
-
-		ser_putch(1);
-	}
-	else						//clockwise
-	{
-		ser_putch(137); //drive - opcode 1
-
-		ser_putch(0); // 
-
-		ser_putch(50);
-
-		ser_putch(255);
-
-		ser_putch(255);
-	}
-	ser_putch(157); //angle travelled - opcode 2 
-
-	ser_putch(turnhighByte);
-
-	ser_putch(turnlowByte);
-
-	ser_putch(137); //drive - opcode 3
-
-	ser_putch(0);
-
-	ser_putch(0);
-
-	ser_putch(0);
-
-	ser_putch(0);
+	robotTurn(0);	//stop robot
 }
 
 /************  abs  *************/

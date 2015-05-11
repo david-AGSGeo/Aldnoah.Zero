@@ -239,7 +239,7 @@ void UpdateDisplay(void)
 	{
 		case 0: //main menu
 			lcd_write_control(0b00000001); //clear display	
-			sprintf(LCDOutput,"IR:%dcm D:%d",IRdistance, TotalDistTravelled);
+			sprintf(LCDOutput,"IR:%dcm D:%d",IRdistance, angleTurned);
 			lcd_set_cursor(0x00);	
 			lcd_write_string(LCDOutput);				
 			lcd_set_cursor(MENULEFT);	

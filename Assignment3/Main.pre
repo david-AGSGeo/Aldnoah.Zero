@@ -1229,18 +1229,19 @@ void robo_init(void);
 void robotMove(int distance);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
+void robotTurnSpeed(int angle, int speed);
 int abs(int v);
 
-void robot_read(void);
-int distTravelled, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
+void robot_read(unsigned char readType);
+int distTravelled,angleTurned, TotalDistTravelled;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
 # 52 "E:\Aldnoah.Zero\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
-# 77
+# 82
 void calibrateIR(void);
 int scan360(void);
 void ChargeMode(void);
@@ -1326,7 +1327,7 @@ PEIE=1;
 (GIE = 1);
 }
 
-# 166
+# 171
 void main(void)
 {
 unsigned char choice = 255;
@@ -1341,7 +1342,7 @@ while(1)
 if (RTC_FLAG_250MS == 1)
 {
 RTC_FLAG_250MS = 0;
-robot_read();
+robot_read(2);
 readAvgDistance();
 UpdateDisplay();
 }
@@ -1364,18 +1365,10 @@ shortwall = scan360() - 13;
 rotate((200 - shortwall), 0);
 break;
 case 2:
-TotalDistTravelled = 0;
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMoveSpeed(2000, 200);
+robotTurnSpeed(-90, 1);
 break;
 case 3:
-TotalDistTravelled = 0;
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMoveSpeed(1000, 200);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotTurn(-90);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMoveSpeed(1000, 200);
+robotTurnSpeed(90, 1);
 break;
 case 4:
 TotalDistTravelled = 0;
