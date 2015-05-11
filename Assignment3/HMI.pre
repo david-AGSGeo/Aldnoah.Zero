@@ -1205,7 +1205,7 @@ int abs(int v);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 

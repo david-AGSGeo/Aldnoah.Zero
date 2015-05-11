@@ -205,10 +205,11 @@ void main(void)
 				rotate((200 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
 				break;
 			case 2:		//Drive forward 2 meters
-robotTurnSpeed(-90, 1); //turn clockwise 90 degrees				
+				//robotTurnSpeed(-90, 1); //turn clockwise 90 degrees				
+				robotMoveSpeed(500, DRIVESPEED);
 				break;
 			case 3:		//Drive in an L shape
-robotTurnSpeed(90, 1); //turn clockwise 90 degrees		
+				robotTurnSpeed(90, 1); //turn clockwise 90 degrees		
 				break;
 			case 4:		//Follow wall
 				TotalDistTravelled = 0;

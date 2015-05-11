@@ -1100,7 +1100,7 @@ int abs(int v);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1168,6 +1168,11 @@ ser_putch(142);
 ser_putch(7);
 _delay((unsigned long)((5)*(20000000/4000.0)));
 BumpSensors = ser_getch();
+ser_putch(142);
+ser_putch(13);
+_delay((unsigned long)((5)*(20000000/4000.0)));
+VwallSensor = ser_getch();
+
 if (readType == 0)
 {
 ser_putch(142);
@@ -1273,7 +1278,7 @@ RobotDrive(speed);
 while (abs(distTravelled) <= abs(distance))
 {
 robot_read(0);
-if (BumpSensors)
+if (BumpSensors || VwallSensor)
 {
 ROBOTerror = 1;
 break;
@@ -1290,7 +1295,7 @@ RobotDrive(0);
 
 }
 
-# 172
+# 177
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;
@@ -1302,7 +1307,7 @@ robotTurn(angle);
 while (abs(angleTurned) <= abs(angle))
 {
 robot_read(1);
-if (BumpSensors)
+if (BumpSensors || VwallSensor)
 {
 ROBOTerror = 1;
 break;

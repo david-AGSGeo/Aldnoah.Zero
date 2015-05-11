@@ -1234,7 +1234,7 @@ int abs(int v);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1365,7 +1365,8 @@ shortwall = scan360() - 13;
 rotate((200 - shortwall), 0);
 break;
 case 2:
-robotTurnSpeed(-90, 1);
+
+robotMoveSpeed(500, 200);
 break;
 case 3:
 robotTurnSpeed(90, 1);
