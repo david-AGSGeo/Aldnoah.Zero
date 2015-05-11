@@ -2111,7 +2111,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.c: 150: RobotDrive(speed);
 "150
 [e ( _RobotDrive (1 _speed ]
-[; ;robot.c: 153: while (abs(distTravelled) <= abs(distance))
+[; ;robot.c: 153: while (abs(distTravelled) < abs(distance))
 "153
 [e $U 115  ]
 [e :U 116 ]
@@ -2156,106 +2156,123 @@ Version 3.2 HI-TECH Software Intermediate Code
 "166
 [e ( _UpdateDisplay ..  ]
 "167
+[v _remaining `f  1 a ]
+[; ;robot.c: 167: float remaining = abs(distance) - abs(distTravelled) ;
+[e = _remaining -> - ( _abs (1 _distance ( _abs (1 _distTravelled `f ]
+[; ;robot.c: 168: if ( remaining < 100)
+"168
+[e $ ! < _remaining -> -> 100 `i `f 119  ]
+[; ;robot.c: 169: {
+"169
+{
+[; ;robot.c: 170: RobotDrive(speed * (remaining/100.0));
+"170
+[e ( _RobotDrive (1 -> * -> _speed `d / -> _remaining `d .100.0 `i ]
+"171
+}
+[e :U 119 ]
+"172
 }
 [e :U 115 ]
 "153
-[e $ <= ( _abs (1 _distTravelled ( _abs (1 _distance 116  ]
+[e $ < ( _abs (1 _distTravelled ( _abs (1 _distance 116  ]
 [e :U 117 ]
-[; ;robot.c: 167: }
-[; ;robot.c: 169: RobotDrive(0);
-"169
-[e ( _RobotDrive (1 -> 0 `i ]
 [; ;robot.c: 171: }
-"171
+[; ;robot.c: 172: }
+[; ;robot.c: 174: RobotDrive(0);
+"174
+[e ( _RobotDrive (1 -> 0 `i ]
+[; ;robot.c: 176: }
+"176
 [e :UE 114 ]
 }
-"178
+"183
 [v _robotTurnSpeed `(v  1 ef2`i`i ]
 {
-[; ;robot.c: 177: void robotTurnSpeed(int angle, int speed)
-[; ;robot.c: 178: {
+[; ;robot.c: 182: void robotTurnSpeed(int angle, int speed)
+[; ;robot.c: 183: {
 [e :U _robotTurnSpeed ]
 [v _angle `i  1 r1 ]
 [v _speed `i  1 r2 ]
 [f ]
-[; ;robot.c: 179: angleTurned = 0;
-"179
+[; ;robot.c: 184: angleTurned = 0;
+"184
 [e = _angleTurned -> 0 `i ]
-"180
+"185
 [v _temp1 `i  1 a ]
-[; ;robot.c: 180: int temp1 = 0;
+[; ;robot.c: 185: int temp1 = 0;
 [e = _temp1 -> 0 `i ]
-[; ;robot.c: 182: robotTurn(angle);
-"182
-[e ( _robotTurn (1 _angle ]
-[; ;robot.c: 185: while (abs(angleTurned) <= abs(angle))
-"185
-[e $U 120  ]
-[e :U 121 ]
-[; ;robot.c: 186: {
-"186
-{
-[; ;robot.c: 187: robot_read(1);
+[; ;robot.c: 187: robotTurn(angle);
 "187
-[e ( _robot_read (1 -> -> 1 `i `uc ]
-[; ;robot.c: 188: if (BumpSensors || VwallSensor)
-"188
-[e $ ! || != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 123  ]
-[; ;robot.c: 189: {
-"189
-{
-[; ;robot.c: 190: ROBOTerror = 1;
+[e ( _robotTurn (1 _angle ]
+[; ;robot.c: 190: while (abs(angleTurned) < abs(angle))
 "190
-[e = _ROBOTerror -> -> 1 `i `uc ]
-[; ;robot.c: 191: break;
-"191
-[e $U 122  ]
-"192
-}
-[e :U 123 ]
-[; ;robot.c: 192: }
-[; ;robot.c: 193: temp1 = AngleHighByte;
-"193
-[e = _temp1 -> _AngleHighByte `i ]
-[; ;robot.c: 194: temp1 = temp1 << 8;
-"194
-[e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 195: temp1 += AngleLowByte;
-"195
-[e =+ _temp1 -> _AngleLowByte `i ]
-[; ;robot.c: 196: angleTurned += temp1;
-"196
-[e =+ _angleTurned _temp1 ]
-[; ;robot.c: 197: UpdateDisplay();
-"197
-[e ( _UpdateDisplay ..  ]
-"198
-}
-[e :U 120 ]
-"185
-[e $ <= ( _abs (1 _angleTurned ( _abs (1 _angle 121  ]
+[e $U 121  ]
 [e :U 122 ]
-[; ;robot.c: 198: }
-[; ;robot.c: 200: robotTurn(0);
-"200
-[e ( _robotTurn (1 -> 0 `i ]
-[; ;robot.c: 201: }
-"201
-[e :UE 119 ]
+[; ;robot.c: 191: {
+"191
+{
+[; ;robot.c: 192: robot_read(1);
+"192
+[e ( _robot_read (1 -> -> 1 `i `uc ]
+[; ;robot.c: 193: if (BumpSensors || VwallSensor)
+"193
+[e $ ! || != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 124  ]
+[; ;robot.c: 194: {
+"194
+{
+[; ;robot.c: 195: ROBOTerror = 1;
+"195
+[e = _ROBOTerror -> -> 1 `i `uc ]
+[; ;robot.c: 196: break;
+"196
+[e $U 123  ]
+"197
 }
+[e :U 124 ]
+[; ;robot.c: 197: }
+[; ;robot.c: 198: temp1 = AngleHighByte;
+"198
+[e = _temp1 -> _AngleHighByte `i ]
+[; ;robot.c: 199: temp1 = temp1 << 8;
+"199
+[e = _temp1 << _temp1 -> 8 `i ]
+[; ;robot.c: 200: temp1 += AngleLowByte;
+"200
+[e =+ _temp1 -> _AngleLowByte `i ]
+[; ;robot.c: 201: angleTurned += temp1;
+"201
+[e =+ _angleTurned _temp1 ]
+[; ;robot.c: 202: UpdateDisplay();
+"202
+[e ( _UpdateDisplay ..  ]
+"203
+}
+[e :U 121 ]
+"190
+[e $ < ( _abs (1 _angleTurned ( _abs (1 _angle 122  ]
+[e :U 123 ]
+[; ;robot.c: 203: }
+[; ;robot.c: 205: robotTurn(0);
+"205
+[e ( _robotTurn (1 -> 0 `i ]
+[; ;robot.c: 206: }
 "206
+[e :UE 120 ]
+}
+"211
 [v _abs `(i  1 ef1`i ]
 {
-[; ;robot.c: 205: int abs(int v)
-[; ;robot.c: 206: {
+[; ;robot.c: 210: int abs(int v)
+[; ;robot.c: 211: {
 [e :U _abs ]
 [v _v `i  1 r1 ]
 [f ]
-[; ;robot.c: 207: return (v * ((v > 0) - (v < 0)));
-"207
+[; ;robot.c: 212: return (v * ((v > 0) - (v < 0)));
+"212
 [e ) * _v - -> > _v -> 0 `i `i -> < _v -> 0 `i `i ]
-[e $UE 124  ]
-[; ;robot.c: 208: }
-"208
-[e :UE 124 ]
+[e $UE 125  ]
+[; ;robot.c: 213: }
+"213
+[e :UE 125 ]
 }

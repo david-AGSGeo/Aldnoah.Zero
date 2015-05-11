@@ -201,12 +201,12 @@ void main(void)
 				calibrateIR();
 				break;
 			case 1:		//Scan 360 degrees
-			 	shortwall = scan360() - 13;	//find the closest wall
+			 	shortwall = scan360();	//find the closest wall
 				rotate((200 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
 				break;
 			case 2:		//Drive forward 2 meters
 				//robotTurnSpeed(-90, 1); //turn clockwise 90 degrees				
-				robotMoveSpeed(500, DRIVESPEED);
+				robotMoveSpeed(1000, 400);
 				break;
 			case 3:		//Drive in an L shape
 				robotTurnSpeed(90, 1); //turn clockwise 90 degrees		

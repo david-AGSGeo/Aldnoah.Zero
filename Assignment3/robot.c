@@ -150,7 +150,7 @@ void robotMoveSpeed(int distance, int speed)
 	RobotDrive(speed);	//start robot moving
 
 	//keep going till requested distance is reached (absolute value used for negative distances)
-	while (abs(distTravelled) <= abs(distance))	
+	while (abs(distTravelled) < abs(distance))	
 	{
 		robot_read(DIST);
 		if (BumpSensors || VwallSensor)	//hit wall or lifted
@@ -164,6 +164,11 @@ void robotMoveSpeed(int distance, int speed)
 		distTravelled += temp1;
 		TotalDistTravelled += temp1;
 		UpdateDisplay();
+		float remaining = abs(distance) - abs(distTravelled) ;
+		if ( remaining < 100)
+		{
+			RobotDrive(speed * (remaining/100.0));	//slow robot down
+		}
 	}
 
 	RobotDrive(0);	//stop robot
@@ -182,7 +187,7 @@ void robotTurnSpeed(int angle, int speed)
 	robotTurn(angle);	//start robot turning
 
 	//keep going till requested distance is reached (absolute value used for negative distances)
-	while (abs(angleTurned) <= abs(angle))	
+	while (abs(angleTurned) < abs(angle))	
 	{
 		robot_read(ANGLE);
 		if (BumpSensors || VwallSensor)	//hit wall or lifted

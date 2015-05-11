@@ -1361,12 +1361,12 @@ case 0:
 calibrateIR();
 break;
 case 1:
-shortwall = scan360() - 13;
+shortwall = scan360();
 rotate((200 - shortwall), 0);
 break;
 case 2:
 
-robotMoveSpeed(500, 200);
+robotMoveSpeed(1000, 400);
 break;
 case 3:
 robotTurnSpeed(90, 1);

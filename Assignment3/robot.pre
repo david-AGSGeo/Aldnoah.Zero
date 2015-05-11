@@ -1275,7 +1275,7 @@ int temp1;
 RobotDrive(speed);
 
 
-while (abs(distTravelled) <= abs(distance))
+while (abs(distTravelled) < abs(distance))
 {
 robot_read(0);
 if (BumpSensors || VwallSensor)
@@ -1289,13 +1289,18 @@ temp1 += DistLowByte;
 distTravelled += temp1;
 TotalDistTravelled += temp1;
 UpdateDisplay();
+float remaining = abs(distance) - abs(distTravelled) ;
+if ( remaining < 100)
+{
+RobotDrive(speed * (remaining/100.0));
+}
 }
 
 RobotDrive(0);
 
 }
 
-# 177
+# 182
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;
@@ -1304,7 +1309,7 @@ int temp1 = 0;
 robotTurn(angle);
 
 
-while (abs(angleTurned) <= abs(angle))
+while (abs(angleTurned) < abs(angle))
 {
 robot_read(1);
 if (BumpSensors || VwallSensor)

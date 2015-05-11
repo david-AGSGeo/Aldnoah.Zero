@@ -2180,9 +2180,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 203: case 1:
 "203
 [e :U 121 ]
-[; ;Main.c: 204: shortwall = scan360() - 13;
+[; ;Main.c: 204: shortwall = scan360();
 "204
-[e = _shortwall - ( _scan360 ..  -> 13 `i ]
+[e = _shortwall ( _scan360 ..  ]
 [; ;Main.c: 205: rotate((200 - shortwall), 0);
 "205
 [e ( _rotate (2 , -> - -> 200 `i _shortwall `ui -> -> 0 `i `uc ]
@@ -2192,9 +2192,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 207: case 2:
 "207
 [e :U 122 ]
-[; ;Main.c: 209: robotMoveSpeed(500, 200);
+[; ;Main.c: 209: robotMoveSpeed(1000, 400);
 "209
-[e ( _robotMoveSpeed (2 , -> 500 `i -> 200 `i ]
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 400 `i ]
 [; ;Main.c: 210: break;
 "210
 [e $U 118  ]
