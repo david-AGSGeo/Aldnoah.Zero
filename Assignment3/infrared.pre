@@ -1196,7 +1196,15 @@ int total;
 int dist_high;
 int dist_low;
 
-# 26 "E:\Aldnoah.Zero\Assignment3\infrared.c"
+# 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+volatile unsigned char currentMenu = 0;
+
+unsigned char ReadButtons(void);
+unsigned char Menu(unsigned char input);
+void UpdateDisplay(void);
+int Disp1, Disp2;
+
+# 27 "E:\Aldnoah.Zero\Assignment3\infrared.c"
 void readAvgDistance(void)
 {
 unsigned int fullval = 0, tempIR = 0;
@@ -1213,6 +1221,7 @@ j++;
 }
 adcVal = fullval / j;
 ADCconvert();
+Disp1 = adcVal;
 }
 
 
@@ -1231,7 +1240,7 @@ return readVal;
 void ADCconvert(void)
 {
 
-# 64
+# 66
 if (adcVal >= 213 && adcVal < 234)
 {
 IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);

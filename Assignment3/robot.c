@@ -19,11 +19,16 @@
 #include "ser.h"
 #include "lcd.h"
 #include "HMI.h"
+#include "infrared.h"
 
 #define DIST 0
 #define ANGLE 1
 #define ALL 2
 
+//Radii
+#define STRAIGHT 0x7FFF
+#define LEFT -1800
+#define RIGHT 1800
 
 /************  robo_init  *************/
 //initialise the robot to full mode
@@ -82,11 +87,13 @@ void robot_read(unsigned char readType)
 
 /************  RobotDrive  *************/
 //Moves the robot forward at the requested speed
-void RobotDrive(int speed)
+void RobotDrive(int speed, int radius)
 {
 	//split speed into high and low byte
 	unsigned char speedlowByte = (unsigned char)(speed);	
 	unsigned char speedhighByte = (unsigned char)(speed >> 8);
+	unsigned char radiuslowByte = (unsigned char)(radius);	
+	unsigned char radiushighByte = (unsigned char)(radius >> 8);
 
 	ser_putch(137); //drive - opcode 1
 
@@ -94,10 +101,11 @@ void RobotDrive(int speed)
 
 	ser_putch(speedlowByte); //speed low byte
 
-	ser_putch(128);
+	ser_putch(radiushighByte); //128 is straight
 
-	ser_putch(0);
+	ser_putch(radiuslowByte);
 }
+
 
 
 void robotTurn(int angle)
@@ -141,13 +149,64 @@ void robotTurn(int angle)
 	}
 }
 
+
+/************  robotFollow  *************/
+//
+void robotFollow(int distance, int speed, int AdcTarget)
+{
+	distTravelled = 0;
+	int temp1;
+	RobotDrive(speed, STRAIGHT);	//start robot moving
+
+	//keep going till requested distance is reached (absolute value used for negative distances)
+	while (abs(distTravelled) < abs(distance))	
+	{
+		readAvgDistance();
+		if (adcVal > (AdcTarget + 5))
+		{
+			RobotDrive(speed, RIGHT);	
+		}
+		else if (adcVal < (AdcTarget - 5))
+		{
+			RobotDrive(speed, LEFT);
+		}
+		else
+		{
+			RobotDrive(speed, STRAIGHT);
+		}
+		robot_read(DIST);
+		if (BumpSensors || VwallSensor)	//hit wall or lifted
+		{
+			ROBOTerror = 1;	//signal an error
+			break;
+		}
+		temp1 = DistHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += DistLowByte;
+		distTravelled += temp1;
+		TotalDistTravelled += temp1;
+		Disp2 = distTravelled;
+		UpdateDisplay();
+		float remaining = abs(distance) - abs(distTravelled) ;
+		if ( remaining < 100)
+		{
+			RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
+		}
+	}
+
+	RobotDrive(0, STRAIGHT);	//stop robot
+
+}
+
+
+
 /************  robotMoveSpeed  *************/
 //move forward the requested distance at the requested speed
 void robotMoveSpeed(int distance, int speed)
 {
 	distTravelled = 0;
 	int temp1;
-	RobotDrive(speed);	//start robot moving
+	RobotDrive(speed, STRAIGHT);	//start robot moving
 
 	//keep going till requested distance is reached (absolute value used for negative distances)
 	while (abs(distTravelled) < abs(distance))	
@@ -163,15 +222,16 @@ void robotMoveSpeed(int distance, int speed)
 		temp1 += DistLowByte;
 		distTravelled += temp1;
 		TotalDistTravelled += temp1;
+		Disp2 = distTravelled;
 		UpdateDisplay();
 		float remaining = abs(distance) - abs(distTravelled) ;
 		if ( remaining < 100)
 		{
-			RobotDrive(speed * (remaining/100.0));	//slow robot down
+			RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
 		}
 	}
 
-	RobotDrive(0);	//stop robot
+	RobotDrive(0, STRAIGHT);	//stop robot
 
 }
 
@@ -199,6 +259,7 @@ void robotTurnSpeed(int angle, int speed)
 		temp1 = temp1 << 8;
 		temp1 += AngleLowByte;
 		angleTurned += temp1;
+		Disp2 = angleTurned;
 		UpdateDisplay();
 	}
 

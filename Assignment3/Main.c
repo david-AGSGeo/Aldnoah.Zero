@@ -206,10 +206,12 @@ void main(void)
 				break;
 			case 2:		//Drive forward 2 meters
 				//robotTurnSpeed(-90, 1); //turn clockwise 90 degrees				
-				robotMoveSpeed(1000, 400);
+				robotMoveSpeed(2000, 400);
 				break;
 			case 3:		//Drive in an L shape
-				robotTurnSpeed(90, 1); //turn clockwise 90 degrees		
+				
+				robotFollow(2000, 400, adcVal);
+				
 				break;
 			case 4:		//Follow wall
 				TotalDistTravelled = 0;

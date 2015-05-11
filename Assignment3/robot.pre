@@ -1092,10 +1092,11 @@ extern void _delay(unsigned long);
 
 # 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
-void robotMove(int distance);
+void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
+void robotFollow(int distance, int speed, int AdcTarget);
 int abs(int v);
 
 void robot_read(unsigned char readType);
@@ -1150,8 +1151,19 @@ volatile unsigned char currentMenu = 0;
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
+int Disp1, Disp2;
 
-# 30 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 8 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+volatile unsigned int adcVal;
+volatile unsigned int IRdistance;
+
+
+
+unsigned int readDistance(void);
+void readAvgDistance(void);
+void ADCconvert(void);
+
+# 35 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1207,11 +1219,13 @@ AngleLowByte = ser_getch();
 
 
 
-void RobotDrive(int speed)
+void RobotDrive(int speed, int radius)
 {
 
 unsigned char speedlowByte = (unsigned char)(speed);
 unsigned char speedhighByte = (unsigned char)(speed >> 8);
+unsigned char radiuslowByte = (unsigned char)(radius);
+unsigned char radiushighByte = (unsigned char)(radius >> 8);
 
 ser_putch(137);
 
@@ -1219,10 +1233,11 @@ ser_putch(speedhighByte);
 
 ser_putch(speedlowByte);
 
-ser_putch(128);
+ser_putch(radiushighByte);
 
-ser_putch(0);
+ser_putch(radiuslowByte);
 }
+
 
 
 void robotTurn(int angle)
@@ -1268,11 +1283,59 @@ ser_putch(0);
 
 
 
+
+void robotFollow(int distance, int speed, int AdcTarget)
+{
+distTravelled = 0;
+int temp1;
+RobotDrive(speed, 0x7FFF);
+
+
+while (abs(distTravelled) < abs(distance))
+{
+readAvgDistance();
+if (adcVal > (AdcTarget + 5))
+{
+RobotDrive(speed, 1800);
+}
+else if (adcVal < (AdcTarget - 5))
+{
+RobotDrive(speed, -1800);
+}
+else
+{
+RobotDrive(speed, 0x7FFF);
+}
+robot_read(0);
+if (BumpSensors || VwallSensor)
+{
+ROBOTerror = 1;
+break;
+}
+temp1 = DistHighByte;
+temp1 = temp1 << 8;
+temp1 += DistLowByte;
+distTravelled += temp1;
+TotalDistTravelled += temp1;
+Disp2 = distTravelled;
+UpdateDisplay();
+float remaining = abs(distance) - abs(distTravelled) ;
+if ( remaining < 100)
+{
+RobotDrive(speed * (remaining/100.0), 0x7FFF);
+}
+}
+
+RobotDrive(0, 0x7FFF);
+
+}
+
+# 205
 void robotMoveSpeed(int distance, int speed)
 {
 distTravelled = 0;
 int temp1;
-RobotDrive(speed);
+RobotDrive(speed, 0x7FFF);
 
 
 while (abs(distTravelled) < abs(distance))
@@ -1288,19 +1351,20 @@ temp1 = temp1 << 8;
 temp1 += DistLowByte;
 distTravelled += temp1;
 TotalDistTravelled += temp1;
+Disp2 = distTravelled;
 UpdateDisplay();
 float remaining = abs(distance) - abs(distTravelled) ;
 if ( remaining < 100)
 {
-RobotDrive(speed * (remaining/100.0));
+RobotDrive(speed * (remaining/100.0), 0x7FFF);
 }
 }
 
-RobotDrive(0);
+RobotDrive(0, 0x7FFF);
 
 }
 
-# 182
+# 242
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;
@@ -1321,6 +1385,7 @@ temp1 = AngleHighByte;
 temp1 = temp1 << 8;
 temp1 += AngleLowByte;
 angleTurned += temp1;
+Disp2 = angleTurned;
 UpdateDisplay();
 }
 

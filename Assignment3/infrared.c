@@ -18,6 +18,7 @@
 #include "infrared.h"
 #include "adc.h"
 #include "lcd.h"
+#include "HMI.h"
 
 #define NUMREADS 8 //number of adc reads to average for IR sensor
 
@@ -39,6 +40,7 @@ void readAvgDistance(void)
 	}
 	adcVal = fullval / j;	//divide to get average
 	ADCconvert();			//convert to distance in cm
+	Disp1 = adcVal;
 }
 
 /************  readDistance  *************/

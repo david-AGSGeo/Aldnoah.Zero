@@ -891,6 +891,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _dist_high `i  1 e ]
 "39 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _dist_low `i  1 e ]
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _currentMenu `Vuc  1 e ]
+"13 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _Disp1 `i  1 e ]
+"13 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _Disp2 `i  1 e ]
 "13 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readDistance `(ui  0 ef ]
 "15 E:\Aldnoah.Zero\Assignment3\infrared.h
@@ -1780,204 +1786,216 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 37: int total;
 [; ;lcd.h: 38: int dist_high;
 [; ;lcd.h: 39: int dist_low;
-"27 E:\Aldnoah.Zero\Assignment3\infrared.c
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
+[i _currentMenu
+-> -> 0 `i `uc
+]
+[; ;HMI.h: 8: volatile unsigned char currentMenu = 0;
+[; ;HMI.h: 10: unsigned char ReadButtons(void);
+[; ;HMI.h: 11: unsigned char Menu(unsigned char input);
+[; ;HMI.h: 12: void UpdateDisplay(void);
+[; ;HMI.h: 13: int Disp1, Disp2;
+"28 E:\Aldnoah.Zero\Assignment3\infrared.c
 [v _readAvgDistance `(v  1 ef ]
 {
-[; ;infrared.c: 26: void readAvgDistance(void)
-[; ;infrared.c: 27: {
+[; ;infrared.c: 27: void readAvgDistance(void)
+[; ;infrared.c: 28: {
 [e :U _readAvgDistance ]
 [f ]
-"28
+"29
 [v _fullval `ui  1 a ]
-[; ;infrared.c: 28: unsigned int fullval = 0, tempIR = 0;
+[; ;infrared.c: 29: unsigned int fullval = 0, tempIR = 0;
 [e = _fullval -> -> 0 `i `ui ]
 [v _tempIR `ui  1 a ]
 [e = _tempIR -> -> 0 `i `ui ]
-"29
+"30
 [v _j `i  1 a ]
-[; ;infrared.c: 29: int j = 0;
+[; ;infrared.c: 30: int j = 0;
 [e = _j -> 0 `i ]
-[; ;infrared.c: 31: for (int i = 0; i < 8; i++)
-"31
+[; ;infrared.c: 32: for (int i = 0; i < 8; i++)
+"32
 {
 [v _i `i  1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 103  ]
 [e $U 104  ]
-"32
-[e :U 103 ]
-[; ;infrared.c: 32: {
-{
-[; ;infrared.c: 33: tempIR = readDistance();
 "33
-[e = _tempIR ( _readDistance ..  ]
-[; ;infrared.c: 34: if (tempIR <= 1000)
-"34
-[e $ ! <= _tempIR -> -> 1000 `i `ui 106  ]
-[; ;infrared.c: 35: {
-"35
+[e :U 103 ]
+[; ;infrared.c: 33: {
 {
-[; ;infrared.c: 36: fullval += tempIR;
+[; ;infrared.c: 34: tempIR = readDistance();
+"34
+[e = _tempIR ( _readDistance ..  ]
+[; ;infrared.c: 35: if (tempIR <= 1000)
+"35
+[e $ ! <= _tempIR -> -> 1000 `i `ui 106  ]
+[; ;infrared.c: 36: {
 "36
-[e =+ _fullval _tempIR ]
-[; ;infrared.c: 37: j++;
+{
+[; ;infrared.c: 37: fullval += tempIR;
 "37
-[e ++ _j -> 1 `i ]
+[e =+ _fullval _tempIR ]
+[; ;infrared.c: 38: j++;
 "38
-}
-[e :U 106 ]
+[e ++ _j -> 1 `i ]
 "39
 }
-"31
+[e :U 106 ]
+"40
+}
+"32
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 103  ]
 [e :U 104 ]
-"39
-}
-[; ;infrared.c: 38: }
-[; ;infrared.c: 39: }
-[; ;infrared.c: 40: adcVal = fullval / j;
 "40
-[e = _adcVal / _fullval -> _j `ui ]
-[; ;infrared.c: 41: ADCconvert();
+}
+[; ;infrared.c: 39: }
+[; ;infrared.c: 40: }
+[; ;infrared.c: 41: adcVal = fullval / j;
 "41
-[e ( _ADCconvert ..  ]
-[; ;infrared.c: 42: }
+[e = _adcVal / _fullval -> _j `ui ]
+[; ;infrared.c: 42: ADCconvert();
 "42
+[e ( _ADCconvert ..  ]
+[; ;infrared.c: 43: Disp1 = adcVal;
+"43
+[e = _Disp1 -> _adcVal `i ]
+[; ;infrared.c: 44: }
+"44
 [e :UE 102 ]
 }
-"47
+"49
 [v _readDistance `(ui  1 ef ]
 {
-[; ;infrared.c: 46: unsigned int readDistance(void)
-[; ;infrared.c: 47: {
+[; ;infrared.c: 48: unsigned int readDistance(void)
+[; ;infrared.c: 49: {
 [e :U _readDistance ]
 [f ]
-"48
-[v _readVal `ui  1 a ]
-[; ;infrared.c: 48: unsigned int readVal;
-[; ;infrared.c: 50: readVal = adc_read_channel(0);
 "50
-[e = _readVal -> ( _adc_read_channel (1 -> -> 0 `i `uc `ui ]
-[; ;infrared.c: 52: return readVal;
+[v _readVal `ui  1 a ]
+[; ;infrared.c: 50: unsigned int readVal;
+[; ;infrared.c: 52: readVal = adc_read_channel(0);
 "52
+[e = _readVal -> ( _adc_read_channel (1 -> -> 0 `i `uc `ui ]
+[; ;infrared.c: 54: return readVal;
+"54
 [e ) _readVal ]
 [e $UE 107  ]
-[; ;infrared.c: 53: }
-"53
+[; ;infrared.c: 55: }
+"55
 [e :UE 107 ]
 }
-"58
+"60
 [v _ADCconvert `(v  1 ef ]
 {
-[; ;infrared.c: 57: void ADCconvert(void)
-[; ;infrared.c: 58: {
+[; ;infrared.c: 59: void ADCconvert(void)
+[; ;infrared.c: 60: {
 [e :U _ADCconvert ]
 [f ]
-[; ;infrared.c: 64: if (adcVal >= 213 && adcVal < 234)
-"64
-[e $ ! && >= _adcVal -> -> 213 `i `ui < _adcVal -> -> 234 `i `ui 109  ]
-[; ;infrared.c: 65: {
-"65
-{
-[; ;infrared.c: 66: IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);
+[; ;infrared.c: 66: if (adcVal >= 213 && adcVal < 234)
 "66
-[e = _IRdistance + -> -> 15 `i `ui / * -> - -> 20 `i -> 15 `i `ui - -> -> 234 `i `ui _adcVal -> - -> 234 `i -> 213 `i `ui ]
+[e $ ! && >= _adcVal -> -> 213 `i `ui < _adcVal -> -> 234 `i `ui 109  ]
+[; ;infrared.c: 67: {
 "67
-}
-[; ;infrared.c: 67: }
-[e $U 110  ]
+{
+[; ;infrared.c: 68: IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);
 "68
-[e :U 109 ]
-[; ;infrared.c: 68: else if (adcVal >= 170 && adcVal < 213)
-[e $ ! && >= _adcVal -> -> 170 `i `ui < _adcVal -> -> 213 `i `ui 111  ]
-[; ;infrared.c: 69: {
+[e = _IRdistance + -> -> 15 `i `ui / * -> - -> 20 `i -> 15 `i `ui - -> -> 234 `i `ui _adcVal -> - -> 234 `i -> 213 `i `ui ]
 "69
-{
-[; ;infrared.c: 70: IRdistance = 20 + ((30 - 20)*(213 - adcVal)) / (213 - 170);
+}
+[; ;infrared.c: 69: }
+[e $U 110  ]
 "70
-[e = _IRdistance + -> -> 20 `i `ui / * -> - -> 30 `i -> 20 `i `ui - -> -> 213 `i `ui _adcVal -> - -> 213 `i -> 170 `i `ui ]
+[e :U 109 ]
+[; ;infrared.c: 70: else if (adcVal >= 170 && adcVal < 213)
+[e $ ! && >= _adcVal -> -> 170 `i `ui < _adcVal -> -> 213 `i `ui 111  ]
+[; ;infrared.c: 71: {
 "71
-}
-[; ;infrared.c: 71: }
-[e $U 112  ]
+{
+[; ;infrared.c: 72: IRdistance = 20 + ((30 - 20)*(213 - adcVal)) / (213 - 170);
 "72
-[e :U 111 ]
-[; ;infrared.c: 72: else if (adcVal >= 128 && adcVal < 170)
-[e $ ! && >= _adcVal -> -> 128 `i `ui < _adcVal -> -> 170 `i `ui 113  ]
-[; ;infrared.c: 73: {
+[e = _IRdistance + -> -> 20 `i `ui / * -> - -> 30 `i -> 20 `i `ui - -> -> 213 `i `ui _adcVal -> - -> 213 `i -> 170 `i `ui ]
 "73
-{
-[; ;infrared.c: 74: IRdistance = 30 + ((40 - 30)*(170 - adcVal)) / (170 - 128);
+}
+[; ;infrared.c: 73: }
+[e $U 112  ]
 "74
-[e = _IRdistance + -> -> 30 `i `ui / * -> - -> 40 `i -> 30 `i `ui - -> -> 170 `i `ui _adcVal -> - -> 170 `i -> 128 `i `ui ]
+[e :U 111 ]
+[; ;infrared.c: 74: else if (adcVal >= 128 && adcVal < 170)
+[e $ ! && >= _adcVal -> -> 128 `i `ui < _adcVal -> -> 170 `i `ui 113  ]
+[; ;infrared.c: 75: {
 "75
-}
-[; ;infrared.c: 75: }
-[e $U 114  ]
+{
+[; ;infrared.c: 76: IRdistance = 30 + ((40 - 30)*(170 - adcVal)) / (170 - 128);
 "76
-[e :U 113 ]
-[; ;infrared.c: 76: else if (adcVal >= 107 && adcVal < 128)
-[e $ ! && >= _adcVal -> -> 107 `i `ui < _adcVal -> -> 128 `i `ui 115  ]
-[; ;infrared.c: 77: {
+[e = _IRdistance + -> -> 30 `i `ui / * -> - -> 40 `i -> 30 `i `ui - -> -> 170 `i `ui _adcVal -> - -> 170 `i -> 128 `i `ui ]
 "77
-{
-[; ;infrared.c: 78: IRdistance = 40 + ((50 - 40)*(128 - adcVal)) / (128 - 107);
+}
+[; ;infrared.c: 77: }
+[e $U 114  ]
 "78
-[e = _IRdistance + -> -> 40 `i `ui / * -> - -> 50 `i -> 40 `i `ui - -> -> 128 `i `ui _adcVal -> - -> 128 `i -> 107 `i `ui ]
+[e :U 113 ]
+[; ;infrared.c: 78: else if (adcVal >= 107 && adcVal < 128)
+[e $ ! && >= _adcVal -> -> 107 `i `ui < _adcVal -> -> 128 `i `ui 115  ]
+[; ;infrared.c: 79: {
 "79
-}
-[; ;infrared.c: 79: }
-[e $U 116  ]
+{
+[; ;infrared.c: 80: IRdistance = 40 + ((50 - 40)*(128 - adcVal)) / (128 - 107);
 "80
-[e :U 115 ]
-[; ;infrared.c: 80: else if (adcVal >= 77 && adcVal < 107)
-[e $ ! && >= _adcVal -> -> 77 `i `ui < _adcVal -> -> 107 `i `ui 117  ]
-[; ;infrared.c: 81: {
+[e = _IRdistance + -> -> 40 `i `ui / * -> - -> 50 `i -> 40 `i `ui - -> -> 128 `i `ui _adcVal -> - -> 128 `i -> 107 `i `ui ]
 "81
-{
-[; ;infrared.c: 82: IRdistance = 50 + ((60 - 50)*(107 - adcVal)) / (107 - 77);
+}
+[; ;infrared.c: 81: }
+[e $U 116  ]
 "82
-[e = _IRdistance + -> -> 50 `i `ui / * -> - -> 60 `i -> 50 `i `ui - -> -> 107 `i `ui _adcVal -> - -> 107 `i -> 77 `i `ui ]
+[e :U 115 ]
+[; ;infrared.c: 82: else if (adcVal >= 77 && adcVal < 107)
+[e $ ! && >= _adcVal -> -> 77 `i `ui < _adcVal -> -> 107 `i `ui 117  ]
+[; ;infrared.c: 83: {
 "83
-}
-[; ;infrared.c: 83: }
-[e $U 118  ]
+{
+[; ;infrared.c: 84: IRdistance = 50 + ((60 - 50)*(107 - adcVal)) / (107 - 77);
 "84
-[e :U 117 ]
-[; ;infrared.c: 84: else if (adcVal >= 56 && adcVal < 77)
-[e $ ! && >= _adcVal -> -> 56 `i `ui < _adcVal -> -> 77 `i `ui 119  ]
-[; ;infrared.c: 85: {
+[e = _IRdistance + -> -> 50 `i `ui / * -> - -> 60 `i -> 50 `i `ui - -> -> 107 `i `ui _adcVal -> - -> 107 `i -> 77 `i `ui ]
 "85
-{
-[; ;infrared.c: 86: IRdistance = 60 + ((70 - 60)*(77 - adcVal)) / (77 - 56);
-"86
-[e = _IRdistance + -> -> 60 `i `ui / * -> - -> 70 `i -> 60 `i `ui - -> -> 77 `i `ui _adcVal -> - -> 77 `i -> 56 `i `ui ]
-"87
 }
-[; ;infrared.c: 87: }
-[e $U 120  ]
-"88
-[e :U 119 ]
-[; ;infrared.c: 88: else if (adcVal >= 43 && adcVal < 56)
-[e $ ! && >= _adcVal -> -> 43 `i `ui < _adcVal -> -> 56 `i `ui 121  ]
-[; ;infrared.c: 89: {
-"89
+[; ;infrared.c: 85: }
+[e $U 118  ]
+"86
+[e :U 117 ]
+[; ;infrared.c: 86: else if (adcVal >= 56 && adcVal < 77)
+[e $ ! && >= _adcVal -> -> 56 `i `ui < _adcVal -> -> 77 `i `ui 119  ]
+[; ;infrared.c: 87: {
+"87
 {
-[; ;infrared.c: 90: IRdistance = 70 + ((80 - 70)*(56 - adcVal)) / (56 - 43);
+[; ;infrared.c: 88: IRdistance = 60 + ((70 - 60)*(77 - adcVal)) / (77 - 56);
+"88
+[e = _IRdistance + -> -> 60 `i `ui / * -> - -> 70 `i -> 60 `i `ui - -> -> 77 `i `ui _adcVal -> - -> 77 `i -> 56 `i `ui ]
+"89
+}
+[; ;infrared.c: 89: }
+[e $U 120  ]
 "90
-[e = _IRdistance + -> -> 70 `i `ui / * -> - -> 80 `i -> 70 `i `ui - -> -> 56 `i `ui _adcVal -> - -> 56 `i -> 43 `i `ui ]
+[e :U 119 ]
+[; ;infrared.c: 90: else if (adcVal >= 43 && adcVal < 56)
+[e $ ! && >= _adcVal -> -> 43 `i `ui < _adcVal -> -> 56 `i `ui 121  ]
+[; ;infrared.c: 91: {
 "91
+{
+[; ;infrared.c: 92: IRdistance = 70 + ((80 - 70)*(56 - adcVal)) / (56 - 43);
+"92
+[e = _IRdistance + -> -> 70 `i `ui / * -> - -> 80 `i -> 70 `i `ui - -> -> 56 `i `ui _adcVal -> - -> 56 `i -> 43 `i `ui ]
+"93
 }
 [e :U 121 ]
-"92
+"94
 [e :U 120 ]
 [e :U 118 ]
 [e :U 116 ]
 [e :U 114 ]
 [e :U 112 ]
 [e :U 110 ]
-[; ;infrared.c: 91: }
-[; ;infrared.c: 92: }
+[; ;infrared.c: 93: }
+[; ;infrared.c: 94: }
 [e :UE 108 ]
 }

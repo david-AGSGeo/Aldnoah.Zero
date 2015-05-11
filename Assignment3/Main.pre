@@ -1223,13 +1223,15 @@ volatile unsigned char currentMenu = 0;
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
+int Disp1, Disp2;
 
 # 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
-void robotMove(int distance);
+void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
+void robotFollow(int distance, int speed, int AdcTarget);
 int abs(int v);
 
 void robot_read(unsigned char readType);
@@ -1366,10 +1368,12 @@ rotate((200 - shortwall), 0);
 break;
 case 2:
 
-robotMoveSpeed(1000, 400);
+robotMoveSpeed(2000, 400);
 break;
 case 3:
-robotTurnSpeed(90, 1);
+
+robotFollow(2000, 400, adcVal);
+
 break;
 case 4:
 TotalDistTravelled = 0;
