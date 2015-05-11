@@ -1090,12 +1090,12 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
 
-# 10 "E:\Aldnoah.Zero\Assignment3\AT25256A.h"
+# 12 "E:\Aldnoah.Zero\Assignment3\AT25256A.h"
 static volatile bit CS0 @ (unsigned)&PORTC*8+0;
 static volatile bit CS1 @ (unsigned)&PORTC*8+1;
 
@@ -1134,9 +1134,9 @@ void rotate(unsigned int numsteps, unsigned char direction)
 
 RC0 = 1; RC1 = 1;;
 if (direction == 0)
-spi_transfer(0b00001111);
+spi_transfer(0b00001011);
 else
-spi_transfer(0b00001101);
+spi_transfer(0b00001001);
 RC0 = 0; RC1 = 0;;
 for (unsigned int i = 0; i < numsteps; i++)
 {

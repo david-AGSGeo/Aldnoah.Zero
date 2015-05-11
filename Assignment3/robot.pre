@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
 void robotMoveSpeed(int distance, int speed);
@@ -1119,7 +1119,7 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+# 18 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1143,7 +1143,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);

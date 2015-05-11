@@ -881,33 +881,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"13 E:\Aldnoah.Zero\Assignment3\robot.h
+"15 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _distTravelled `i  1 e ]
-"13 E:\Aldnoah.Zero\Assignment3\robot.h
+"15 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _TotalDistTravelled `i  1 e ]
-"14 E:\Aldnoah.Zero\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
-"14 E:\Aldnoah.Zero\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
-"14 E:\Aldnoah.Zero\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BumpSensors `Vuc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _ROBOTerror `uc  1 e ]
-"36 E:\Aldnoah.Zero\Assignment3\lcd.h
-[v _total `i  1 e ]
 "37 E:\Aldnoah.Zero\Assignment3\lcd.h
-[v _dist_high `i  1 e ]
+[v _total `i  1 e ]
 "38 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"39 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _dist_low `i  1 e ]
-"6 E:\Aldnoah.Zero\Assignment3\HMI.h
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `Vuc  1 e ]
 "57 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_putch `(v  0 ef1`uc ]
@@ -916,9 +916,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i __delay ]
 "56 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_getch `(uc  0 ef ]
-"10 E:\Aldnoah.Zero\Assignment3\HMI.h
+"12 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _UpdateDisplay `(v  0 ef ]
-"10 E:\Aldnoah.Zero\Assignment3\robot.h
+"12 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _abs `(i  0 ef1`i ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
@@ -1751,15 +1751,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-[; ;robot.h: 6: void robo_init(void);
-[; ;robot.h: 7: void robotMove(int distance);
-[; ;robot.h: 8: void robotMoveSpeed(int distance, int speed);
-[; ;robot.h: 9: void robotTurn(int degrees);
-[; ;robot.h: 10: int abs(int v);
-[; ;robot.h: 12: void robot_read(void);
-[; ;robot.h: 13: int distTravelled, TotalDistTravelled;
-[; ;robot.h: 14: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+[; ;robot.h: 8: void robo_init(void);
+[; ;robot.h: 9: void robotMove(int distance);
+[; ;robot.h: 10: void robotMoveSpeed(int distance, int speed);
+[; ;robot.h: 11: void robotTurn(int degrees);
+[; ;robot.h: 12: int abs(int v);
+[; ;robot.h: 14: void robot_read(void);
+[; ;robot.h: 15: int distTravelled, TotalDistTravelled;
+[; ;robot.h: 16: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1775,7 +1775,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _ROBOTerror
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 16: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
+[; ;robot.h: 18: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 [; ;ser.h: 55: bit ser_isrx(void);
 [; ;ser.h: 56: unsigned char ser_getch(void);
 [; ;ser.h: 57: void ser_putch(unsigned char byte);
@@ -1788,25 +1788,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 66: extern bank1 unsigned char txfifo[16];
 [; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
 [; ;ser.h: 68: extern unsigned char ser_tmp;
-[; ;lcd.h: 17: void lcd_write_control(unsigned char databyte);
-[; ;lcd.h: 20: void lcd_write_data(unsigned char databyte);
-[; ;lcd.h: 23: void lcd_set_cursor(unsigned char address);
-[; ;lcd.h: 25: void lcd_write_string(char * s);
-[; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
-[; ;lcd.h: 31: void lcd_init(void);
-[; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
-[; ;lcd.h: 35: void LCD_display_distance(void);
-[; ;lcd.h: 36: int total;
-[; ;lcd.h: 37: int dist_high;
-[; ;lcd.h: 38: int dist_low;
-"6 E:\Aldnoah.Zero\Assignment3\HMI.h
+[; ;lcd.h: 18: void lcd_write_control(unsigned char databyte);
+[; ;lcd.h: 21: void lcd_write_data(unsigned char databyte);
+[; ;lcd.h: 24: void lcd_set_cursor(unsigned char address);
+[; ;lcd.h: 26: void lcd_write_string(char * s);
+[; ;lcd.h: 29: void lcd_write_2_digit_bcd(unsigned char data);
+[; ;lcd.h: 32: void lcd_init(void);
+[; ;lcd.h: 34: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 36: void LCD_display_distance(void);
+[; ;lcd.h: 37: int total;
+[; ;lcd.h: 38: int dist_high;
+[; ;lcd.h: 39: int dist_low;
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [i _currentMenu
 -> -> 0 `i `uc
 ]
-[; ;HMI.h: 6: volatile unsigned char currentMenu = 0;
-[; ;HMI.h: 8: unsigned char ReadButtons(void);
-[; ;HMI.h: 9: unsigned char Menu(unsigned char input);
-[; ;HMI.h: 10: void UpdateDisplay(void);
+[; ;HMI.h: 8: volatile unsigned char currentMenu = 0;
+[; ;HMI.h: 10: unsigned char ReadButtons(void);
+[; ;HMI.h: 11: unsigned char Menu(unsigned char input);
+[; ;HMI.h: 12: void UpdateDisplay(void);
 "26 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _robo_init `(v  1 ef ]
 {

@@ -1913,7 +1913,7 @@ l11451:
 	line	200
 	
 l11453:	
-;Main.c: 200: rotate((400 - shortwall), 0);
+;Main.c: 200: rotate((200 - shortwall), 0);
 	comf	(main@shortwall),w
 	movwf	(??_main+0)+0
 	comf	(main@shortwall+1),w
@@ -1922,12 +1922,12 @@ l11453:
 	skipnz
 	incf	((??_main+0)+0+1),f
 	movf	0+(??_main+0)+0,w
-	addlw	low(0190h)
+	addlw	low(0C8h)
 	movwf	(?_rotate)
 	movf	1+(??_main+0)+0,w
 	skipnc
 	addlw	1
-	addlw	high(0190h)
+	addlw	high(0C8h)
 	movwf	1+(?_rotate)
 	clrf	0+(?_rotate)+02h
 	fcall	_rotate
@@ -3408,7 +3408,7 @@ l11351:
 	clrf	(scan360@lowestSteps)
 	clrf	(scan360@lowestSteps+1)
 	line	365
-;Main.c: 365: for (int steps = 0; steps < 400; steps++)
+;Main.c: 365: for (int steps = 0; steps < 200; steps+= 2)
 	clrf	(scan360@steps)
 	clrf	(scan360@steps+1)
 	
@@ -3416,11 +3416,11 @@ l11353:
 	movf	(scan360@steps+1),w
 	xorlw	80h
 	movwf	btemp+1
-	movlw	(high(0190h))^80h
+	movlw	(high(0C8h))^80h
 	subwf	btemp+1,w
 	skipz
 	goto	u5395
-	movlw	low(0190h)
+	movlw	low(0C8h)
 	subwf	(scan360@steps),w
 u5395:
 
@@ -3505,10 +3505,10 @@ l2281:
 	
 l11363:	
 ;Main.c: 373: }
-;Main.c: 374: rotate(1, 1);
-	movlw	low(01h)
+;Main.c: 374: rotate(2, 1);
+	movlw	low(02h)
 	movwf	(?_rotate)
-	movlw	high(01h)
+	movlw	high(02h)
 	movwf	((?_rotate))+1
 	clrf	0+(?_rotate)+02h
 	bsf	status,0
@@ -3542,24 +3542,24 @@ l2282:
 	line	365
 	
 l11371:	
-	movlw	low(01h)
+	movlw	low(02h)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	addwf	(scan360@steps),f
 	skipnc
 	incf	(scan360@steps+1),f
-	movlw	high(01h)
+	movlw	high(02h)
 	addwf	(scan360@steps+1),f
 	
 l11373:	
 	movf	(scan360@steps+1),w
 	xorlw	80h
 	movwf	btemp+1
-	movlw	(high(0190h))^80h
+	movlw	(high(0C8h))^80h
 	subwf	btemp+1,w
 	skipz
 	goto	u5425
-	movlw	low(0190h)
+	movlw	low(0C8h)
 	subwf	(scan360@steps),w
 u5425:
 
@@ -7562,8 +7562,8 @@ u4900:
 	line	70
 	
 l10957:	
-;steppermotor.c: 70: spi_transfer(0b00001111);
-	movlw	(0Fh)
+;steppermotor.c: 70: spi_transfer(0b00001011);
+	movlw	(0Bh)
 	fcall	_spi_transfer
 	goto	l10961
 	line	71
@@ -7573,8 +7573,8 @@ l3707:
 	
 l10959:	
 ;steppermotor.c: 71: else
-;steppermotor.c: 72: spi_transfer(0b00001101);
-	movlw	(0Dh)
+;steppermotor.c: 72: spi_transfer(0b00001001);
+	movlw	(09h)
 	fcall	_spi_transfer
 	goto	l10961
 	

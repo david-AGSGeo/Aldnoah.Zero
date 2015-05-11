@@ -881,37 +881,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"36 E:\Aldnoah.Zero\Assignment3\lcd.h
-[v _total `i  1 e ]
 "37 E:\Aldnoah.Zero\Assignment3\lcd.h
-[v _dist_high `i  1 e ]
+[v _total `i  1 e ]
 "38 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"39 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _dist_low `i  1 e ]
-"6 E:\Aldnoah.Zero\Assignment3\infrared.h
+"8 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
-"7 E:\Aldnoah.Zero\Assignment3\infrared.h
+"9 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _IRdistance `Vui  1 e ]
-"6 E:\Aldnoah.Zero\Assignment3\HMI.h
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `Vuc  1 e ]
-"13 E:\Aldnoah.Zero\Assignment3\robot.h
+"15 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _distTravelled `i  1 e ]
-"13 E:\Aldnoah.Zero\Assignment3\robot.h
+"15 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _TotalDistTravelled `i  1 e ]
-"14 E:\Aldnoah.Zero\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
-"14 E:\Aldnoah.Zero\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
-"14 E:\Aldnoah.Zero\Assignment3\robot.h
+"16 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BumpSensors `Vuc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _ROBOTerror `uc  1 e ]
 "84 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _totalSteps `i  1 e ]
@@ -925,7 +925,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RTC_FLAG_500MS `Vb  1 e ]
 "99 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
-"8 E:\Aldnoah.Zero\Assignment3\HMI.h
+"10 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
 "64 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _rxfifo `uc  -> 0 `x e ]
@@ -943,33 +943,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _txiptr `Vuc  0 e ]
 "61 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_init `(v  0 ef ]
-"7 E:\Aldnoah.Zero\Assignment3\adc.h
+"9 E:\Aldnoah.Zero\Assignment3\adc.h
 [v _init_adc `(v  0 ef ]
-"31 E:\Aldnoah.Zero\Assignment3\lcd.h
+"32 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _lcd_init `(v  0 ef ]
-"6 E:\Aldnoah.Zero\Assignment3\robot.h
+"8 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robo_init `(v  0 ef ]
 [p mainexit ]
-"12 E:\Aldnoah.Zero\Assignment3\robot.h
+"14 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robot_read `(v  0 ef ]
-"12 E:\Aldnoah.Zero\Assignment3\infrared.h
+"14 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
-"10 E:\Aldnoah.Zero\Assignment3\HMI.h
+"12 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _UpdateDisplay `(v  0 ef ]
-"9 E:\Aldnoah.Zero\Assignment3\HMI.h
+"11 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
 "77 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _calibrateIR `(v  0 ef ]
 "78 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _scan360 `(i  0 ef ]
-"7 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+"9 E:\Aldnoah.Zero\Assignment3\steppermotor.h
 [v _rotate `(v  0 ef2`ui`uc ]
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
-"8 E:\Aldnoah.Zero\Assignment3\robot.h
+"10 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robotMoveSpeed `(v  0 ef2`i`i ]
-"9 E:\Aldnoah.Zero\Assignment3\robot.h
+"11 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robotTurn `(v  0 ef1`i ]
 "79 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _ChargeMode `(v  0 ef ]
@@ -1839,28 +1839,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 202: extern int vsscanf(const char *, const char *, va_list);
 [; ;stdio.h: 206: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 207: extern int printf(const char *, ...);
-[; ;adc.h: 7: void init_adc(void);
-[; ;adc.h: 9: unsigned int adc_read(void);
-[; ;adc.h: 12: unsigned char adc_read_channel(unsigned char channel);
-[; ;lcd.h: 17: void lcd_write_control(unsigned char databyte);
-[; ;lcd.h: 20: void lcd_write_data(unsigned char databyte);
-[; ;lcd.h: 23: void lcd_set_cursor(unsigned char address);
-[; ;lcd.h: 25: void lcd_write_string(char * s);
-[; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
-[; ;lcd.h: 31: void lcd_init(void);
-[; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
-[; ;lcd.h: 35: void LCD_display_distance(void);
-[; ;lcd.h: 36: int total;
-[; ;lcd.h: 37: int dist_high;
-[; ;lcd.h: 38: int dist_low;
-[; ;infrared.h: 6: volatile unsigned int adcVal;
-[; ;infrared.h: 7: volatile unsigned int IRdistance;
-[; ;infrared.h: 11: unsigned int readDistance(void);
-[; ;infrared.h: 12: void readAvgDistance(void);
-[; ;infrared.h: 13: void ADCconvert(void);
-[; ;steppermotor.h: 6: unsigned char spi_transfer(unsigned char data);
-[; ;steppermotor.h: 7: void rotate(unsigned int numsteps, unsigned char direction);
-[; ;steppermotor.h: 8: void rotateOld(unsigned char steps, unsigned char direction);
+[; ;adc.h: 9: void init_adc(void);
+[; ;adc.h: 11: unsigned int adc_read(void);
+[; ;adc.h: 14: unsigned char adc_read_channel(unsigned char channel);
+[; ;lcd.h: 18: void lcd_write_control(unsigned char databyte);
+[; ;lcd.h: 21: void lcd_write_data(unsigned char databyte);
+[; ;lcd.h: 24: void lcd_set_cursor(unsigned char address);
+[; ;lcd.h: 26: void lcd_write_string(char * s);
+[; ;lcd.h: 29: void lcd_write_2_digit_bcd(unsigned char data);
+[; ;lcd.h: 32: void lcd_init(void);
+[; ;lcd.h: 34: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 36: void LCD_display_distance(void);
+[; ;lcd.h: 37: int total;
+[; ;lcd.h: 38: int dist_high;
+[; ;lcd.h: 39: int dist_low;
+[; ;infrared.h: 8: volatile unsigned int adcVal;
+[; ;infrared.h: 9: volatile unsigned int IRdistance;
+[; ;infrared.h: 13: unsigned int readDistance(void);
+[; ;infrared.h: 14: void readAvgDistance(void);
+[; ;infrared.h: 15: void ADCconvert(void);
+[; ;steppermotor.h: 8: unsigned char spi_transfer(unsigned char data);
+[; ;steppermotor.h: 9: void rotate(unsigned int numsteps, unsigned char direction);
+[; ;steppermotor.h: 10: void rotateOld(unsigned char steps, unsigned char direction);
 [; ;ser.h: 55: bit ser_isrx(void);
 [; ;ser.h: 56: unsigned char ser_getch(void);
 [; ;ser.h: 57: void ser_putch(unsigned char byte);
@@ -1873,23 +1873,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 66: extern bank1 unsigned char txfifo[16];
 [; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
 [; ;ser.h: 68: extern unsigned char ser_tmp;
-"6 E:\Aldnoah.Zero\Assignment3\HMI.h
+"8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [i _currentMenu
 -> -> 0 `i `uc
 ]
-[; ;HMI.h: 6: volatile unsigned char currentMenu = 0;
-[; ;HMI.h: 8: unsigned char ReadButtons(void);
-[; ;HMI.h: 9: unsigned char Menu(unsigned char input);
-[; ;HMI.h: 10: void UpdateDisplay(void);
-[; ;robot.h: 6: void robo_init(void);
-[; ;robot.h: 7: void robotMove(int distance);
-[; ;robot.h: 8: void robotMoveSpeed(int distance, int speed);
-[; ;robot.h: 9: void robotTurn(int degrees);
-[; ;robot.h: 10: int abs(int v);
-[; ;robot.h: 12: void robot_read(void);
-[; ;robot.h: 13: int distTravelled, TotalDistTravelled;
-[; ;robot.h: 14: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
-"16 E:\Aldnoah.Zero\Assignment3\robot.h
+[; ;HMI.h: 8: volatile unsigned char currentMenu = 0;
+[; ;HMI.h: 10: unsigned char ReadButtons(void);
+[; ;HMI.h: 11: unsigned char Menu(unsigned char input);
+[; ;HMI.h: 12: void UpdateDisplay(void);
+[; ;robot.h: 8: void robo_init(void);
+[; ;robot.h: 9: void robotMove(int distance);
+[; ;robot.h: 10: void robotMoveSpeed(int distance, int speed);
+[; ;robot.h: 11: void robotTurn(int degrees);
+[; ;robot.h: 12: int abs(int v);
+[; ;robot.h: 14: void robot_read(void);
+[; ;robot.h: 15: int distTravelled, TotalDistTravelled;
+[; ;robot.h: 16: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1905,7 +1905,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _ROBOTerror
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 16: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
+[; ;robot.h: 18: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 "52 E:\Aldnoah.Zero\Assignment3\Main.c
 [; ;Main.c: 52: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
@@ -2172,9 +2172,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 199: shortwall = scan360() - 13;
 "199
 [e = _shortwall - ( _scan360 ..  -> 13 `i ]
-[; ;Main.c: 200: rotate((400 - shortwall), 0);
+[; ;Main.c: 200: rotate((200 - shortwall), 0);
 "200
-[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
+[e ( _rotate (2 , -> - -> 200 `i _shortwall `ui -> -> 0 `i `uc ]
 [; ;Main.c: 201: break;
 "201
 [e $U 118  ]
@@ -2680,12 +2680,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _lowestVal -> 0 `i ]
 [v _lowestSteps `i  1 a ]
 [e = _lowestSteps -> 0 `i ]
-[; ;Main.c: 365: for (int steps = 0; steps < 400; steps++)
+[; ;Main.c: 365: for (int steps = 0; steps < 200; steps+= 2)
 "365
 {
 [v _steps `i  1 a ]
 [e = _steps -> 0 `i ]
-[e $ < _steps -> 400 `i 164  ]
+[e $ < _steps -> 200 `i 164  ]
 [e $U 165  ]
 "366
 [e :U 164 ]
@@ -2710,9 +2710,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 167 ]
 [; ;Main.c: 373: }
-[; ;Main.c: 374: rotate(1, 1);
+[; ;Main.c: 374: rotate(2, 1);
 "374
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
+[e ( _rotate (2 , -> -> 2 `i `ui -> -> 1 `i `uc ]
 [; ;Main.c: 376: if (RTC_FLAG_250MS == 1)
 "376
 [e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 168  ]
@@ -2731,8 +2731,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "381
 }
 "365
-[e ++ _steps -> 1 `i ]
-[e $ < _steps -> 400 `i 164  ]
+[e =+ _steps -> 2 `i ]
+[e $ < _steps -> 200 `i 164  ]
 [e :U 165 ]
 "381
 }

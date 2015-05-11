@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int IRdistance;
 
@@ -1164,7 +1164,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
+# 9 "E:\Aldnoah.Zero\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1172,7 +1172,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+# 18 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 

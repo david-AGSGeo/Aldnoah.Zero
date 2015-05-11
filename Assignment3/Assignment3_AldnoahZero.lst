@@ -1,7 +1,7 @@
 
 
 HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
-                                                                                               Mon May 04 17:12:08 2015
+                                                                                               Mon May 11 13:15:39 2015
 
 HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
      1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
@@ -1931,7 +1931,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1913                           	line	200
   1914                           	
   1915  005F                     l11453:	
-  1916                           ;Main.c: 200: rotate((400 - shortwall), 0);
+  1916                           ;Main.c: 200: rotate((200 - shortwall), 0);
   1917  005F  0969               	comf	(main@shortwall),w
   1918  0060  00E2               	movwf	(??_main+0)+0
   1919  0061  096A               	comf	(main@shortwall+1),w
@@ -1940,12 +1940,12 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   1922  0064  1903               	skipnz
   1923  0065  0AE3               	incf	((??_main+0)+0+1),f
   1924  0066  0862               	movf	0+(??_main+0)+0,w
-  1925  0067  3E90               	addlw	low(0190h)
+  1925  0067  3EC8               	addlw	low(0C8h)
   1926  0068  00A3               	movwf	(?_rotate)
   1927  0069  0863               	movf	1+(??_main+0)+0,w
   1928  006A  1803               	skipnc
   1929  006B  3E01               	addlw	1
-  1930  006C  3E01               	addlw	high(0190h)
+  1930  006C  3E00               	addlw	high(0C8h)
   1931  006D  00A4               	movwf	1+(?_rotate)
   1932  006E  01A5               	clrf	0+(?_rotate)+02h
   1933  006F  120A  158A  21A4   	fcall	_rotate
@@ -3449,7 +3449,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3408  078A  01DD               	clrf	(scan360@lowestSteps)
   3409  078B  01DE               	clrf	(scan360@lowestSteps+1)
   3410                           	line	365
-  3411                           ;Main.c: 365: for (int steps = 0; steps < 400; steps++)
+  3411                           ;Main.c: 365: for (int steps = 0; steps < 200; steps+= 2)
   3412  078C  01DF               	clrf	(scan360@steps)
   3413  078D  01E0               	clrf	(scan360@steps+1)
   3414                           	
@@ -3457,11 +3457,11 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3416  078E  0860               	movf	(scan360@steps+1),w
   3417  078F  3A80               	xorlw	80h
   3418  0790  00FF               	movwf	btemp+1
-  3419  0791  3081               	movlw	(high(0190h))^80h
+  3419  0791  3080               	movlw	(high(0C8h))^80h
   3420  0792  027F               	subwf	btemp+1,w
   3421  0793  1D03               	skipz
   3422  0794  2F97               	goto	u5395
-  3423  0795  3090               	movlw	low(0190h)
+  3423  0795  30C8               	movlw	low(0C8h)
   3424  0796  025F               	subwf	(scan360@steps),w
   3425  0797                     u5395:
   3426                           
@@ -3547,10 +3547,10 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3505                           	
   3506  07C9                     l11363:	
   3507                           ;Main.c: 373: }
-  3508                           ;Main.c: 374: rotate(1, 1);
-  3509  07C9  3001               	movlw	low(01h)
+  3508                           ;Main.c: 374: rotate(2, 1);
+  3509  07C9  3002               	movlw	low(02h)
   3510  07CA  00A3               	movwf	(?_rotate)
-  3511  07CB  3000               	movlw	high(01h)
+  3511  07CB  3000               	movlw	high(02h)
   3512  07CC  00A4               	movwf	((?_rotate))+1
   3513  07CD  01A5               	clrf	0+(?_rotate)+02h
   3514  07CE  1403               	bsf	status,0
@@ -3586,24 +3586,24 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   3542                           	line	365
   3543                           	
   3544  07E0                     l11371:	
-  3545  07E0  3001               	movlw	low(01h)
+  3545  07E0  3002               	movlw	low(02h)
   3546  07E1  1283               	bcf	status, 5	;RP0=0, select bank0
   3547  07E2  1303               	bcf	status, 6	;RP1=0, select bank0
   3548  07E3  07DF               	addwf	(scan360@steps),f
   3549  07E4  1803               	skipnc
   3550  07E5  0AE0               	incf	(scan360@steps+1),f
-  3551  07E6  3000               	movlw	high(01h)
+  3551  07E6  3000               	movlw	high(02h)
   3552  07E7  07E0               	addwf	(scan360@steps+1),f
   3553                           	
   3554  07E8                     l11373:	
   3555  07E8  0860               	movf	(scan360@steps+1),w
   3556  07E9  3A80               	xorlw	80h
   3557  07EA  00FF               	movwf	btemp+1
-  3558  07EB  3081               	movlw	(high(0190h))^80h
+  3558  07EB  3080               	movlw	(high(0C8h))^80h
   3559  07EC  027F               	subwf	btemp+1,w
   3560  07ED  1D03               	skipz
   3561  07EE  2FF1               	goto	u5425
-  3562  07EF  3090               	movlw	low(0190h)
+  3562  07EF  30C8               	movlw	low(0C8h)
   3563  07F0  025F               	subwf	(scan360@steps),w
   3564  07F1                     u5425:
   3565                           
@@ -7709,8 +7709,8 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   7562                           	line	70
   7563                           	
   7564  09AD                     l10957:	
-  7565                           ;steppermotor.c: 70: spi_transfer(0b00001111);
-  7566  09AD  300F               	movlw	(0Fh)
+  7565                           ;steppermotor.c: 70: spi_transfer(0b00001011);
+  7566  09AD  300B               	movlw	(0Bh)
   7567  09AE  160A  118A  248B   	fcall	_spi_transfer
               120A  158A         
   7568  09B3  29BB               	goto	l10961
@@ -7721,8 +7721,8 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
   7573                           	
   7574  09B4                     l10959:	
   7575                           ;steppermotor.c: 71: else
-  7576                           ;steppermotor.c: 72: spi_transfer(0b00001101);
-  7577  09B4  300D               	movlw	(0Dh)
+  7576                           ;steppermotor.c: 72: spi_transfer(0b00001001);
+  7577  09B4  3009               	movlw	(09h)
   7578  09B5  160A  118A  248B   	fcall	_spi_transfer
               120A  158A         
   7579  09BA  29BB               	goto	l10961
@@ -11909,7 +11909,7 @@ HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
 
 
 HI-TECH Software PICC Macro Assembler V9.83 build 10920 
-Symbol Table                                                                                   Mon May 04 17:12:08 2015
+Symbol Table                                                                                   Mon May 11 13:15:39 2015
 
  __end_of_lcd_write_control 14B3             ??_UpdateDisplay 0045                           pc 0002  
                         _GO 00FA                          _RD 0C60                          _WR 0C61  

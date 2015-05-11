@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
+# 9 "E:\Aldnoah.Zero\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);

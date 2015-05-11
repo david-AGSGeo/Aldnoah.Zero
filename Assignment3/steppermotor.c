@@ -67,9 +67,9 @@ void rotate(unsigned int numsteps, unsigned char direction)
 
 	SELECT_SM();			// SPI select the Stepper M
 	if (direction == 0)
-		spi_transfer(0b00001111);	//for clockwise rotation 
+		spi_transfer(0b00001011);	//for clockwise rotation 
 	else
-		spi_transfer(0b00001101);	//for clockwise rotation 		
+		spi_transfer(0b00001001);	//for clockwise rotation 		
 	SELECT_NONE();
 	for (unsigned int i = 0; i < numsteps; i++)
 	{

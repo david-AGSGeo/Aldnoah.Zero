@@ -197,7 +197,7 @@ void main(void)
 				break;
 			case 1:		//Scan 360 degrees
 			 	shortwall = scan360() - 13;	//find the closest wall
-				rotate((400 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
+				rotate((200 - shortwall), CLOCKWISE);	//turn IR to face the closest wall
 				break;
 			case 2:		//Drive forward 2 meters
 				TotalDistTravelled = 0;
@@ -362,7 +362,7 @@ int scan360(void)
 {
 	int lowestVal = 0, lowestSteps = 0;
 
-	for (int steps = 0; steps < 400; steps++) //step through 360 degrees
+	for (int steps = 0; steps < 200; steps+= 2) //step through 360 degrees
 	{
 		readAvgDistance();
 		if (adcVal > lowestVal)			//compare current value to lowest value (done using raw data to speed up process
@@ -371,7 +371,7 @@ int scan360(void)
 			lowestSteps = steps;
 			
 		}
-		rotate(1, COUNTERCLOCKWISE);	
+		rotate(2, COUNTERCLOCKWISE);	
 			
 		if (RTC_FLAG_250MS == 1)	//4Hz refresh rate for display
 			{

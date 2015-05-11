@@ -1154,14 +1154,14 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+# 18 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1185,7 +1185,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int IRdistance;
 
@@ -1195,7 +1195,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
 void robotMoveSpeed(int distance, int speed);

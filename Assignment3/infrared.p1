@@ -881,21 +881,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"6 E:\Aldnoah.Zero\Assignment3\infrared.h
+"8 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
-"7 E:\Aldnoah.Zero\Assignment3\infrared.h
+"9 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _IRdistance `Vui  1 e ]
-"36 E:\Aldnoah.Zero\Assignment3\lcd.h
-[v _total `i  1 e ]
 "37 E:\Aldnoah.Zero\Assignment3\lcd.h
-[v _dist_high `i  1 e ]
+[v _total `i  1 e ]
 "38 E:\Aldnoah.Zero\Assignment3\lcd.h
+[v _dist_high `i  1 e ]
+"39 E:\Aldnoah.Zero\Assignment3\lcd.h
 [v _dist_low `i  1 e ]
-"11 E:\Aldnoah.Zero\Assignment3\infrared.h
-[v _readDistance `(ui  0 ef ]
 "13 E:\Aldnoah.Zero\Assignment3\infrared.h
+[v _readDistance `(ui  0 ef ]
+"15 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _ADCconvert `(v  0 ef ]
-"12 E:\Aldnoah.Zero\Assignment3\adc.h
+"14 E:\Aldnoah.Zero\Assignment3\adc.h
 [v _adc_read_channel `(uc  0 ef1`uc ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
@@ -1761,25 +1761,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 202: extern int vsscanf(const char *, const char *, va_list);
 [; ;stdio.h: 206: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 207: extern int printf(const char *, ...);
-[; ;infrared.h: 6: volatile unsigned int adcVal;
-[; ;infrared.h: 7: volatile unsigned int IRdistance;
-[; ;infrared.h: 11: unsigned int readDistance(void);
-[; ;infrared.h: 12: void readAvgDistance(void);
-[; ;infrared.h: 13: void ADCconvert(void);
-[; ;adc.h: 7: void init_adc(void);
-[; ;adc.h: 9: unsigned int adc_read(void);
-[; ;adc.h: 12: unsigned char adc_read_channel(unsigned char channel);
-[; ;lcd.h: 17: void lcd_write_control(unsigned char databyte);
-[; ;lcd.h: 20: void lcd_write_data(unsigned char databyte);
-[; ;lcd.h: 23: void lcd_set_cursor(unsigned char address);
-[; ;lcd.h: 25: void lcd_write_string(char * s);
-[; ;lcd.h: 28: void lcd_write_2_digit_bcd(unsigned char data);
-[; ;lcd.h: 31: void lcd_init(void);
-[; ;lcd.h: 33: void lcd_write_3_digit_bcd(unsigned int data);
-[; ;lcd.h: 35: void LCD_display_distance(void);
-[; ;lcd.h: 36: int total;
-[; ;lcd.h: 37: int dist_high;
-[; ;lcd.h: 38: int dist_low;
+[; ;infrared.h: 8: volatile unsigned int adcVal;
+[; ;infrared.h: 9: volatile unsigned int IRdistance;
+[; ;infrared.h: 13: unsigned int readDistance(void);
+[; ;infrared.h: 14: void readAvgDistance(void);
+[; ;infrared.h: 15: void ADCconvert(void);
+[; ;adc.h: 9: void init_adc(void);
+[; ;adc.h: 11: unsigned int adc_read(void);
+[; ;adc.h: 14: unsigned char adc_read_channel(unsigned char channel);
+[; ;lcd.h: 18: void lcd_write_control(unsigned char databyte);
+[; ;lcd.h: 21: void lcd_write_data(unsigned char databyte);
+[; ;lcd.h: 24: void lcd_set_cursor(unsigned char address);
+[; ;lcd.h: 26: void lcd_write_string(char * s);
+[; ;lcd.h: 29: void lcd_write_2_digit_bcd(unsigned char data);
+[; ;lcd.h: 32: void lcd_init(void);
+[; ;lcd.h: 34: void lcd_write_3_digit_bcd(unsigned int data);
+[; ;lcd.h: 36: void LCD_display_distance(void);
+[; ;lcd.h: 37: int total;
+[; ;lcd.h: 38: int dist_high;
+[; ;lcd.h: 39: int dist_low;
 "27 E:\Aldnoah.Zero\Assignment3\infrared.c
 [v _readAvgDistance `(v  1 ef ]
 {

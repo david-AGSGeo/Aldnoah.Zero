@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 7 "E:\Aldnoah.Zero\Assignment3\adc.h"
+# 9 "E:\Aldnoah.Zero\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1162,7 +1162,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "E:\Aldnoah.Zero\Assignment3\lcd.h"
+# 18 "E:\Aldnoah.Zero\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1186,7 +1186,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "E:\Aldnoah.Zero\Assignment3\infrared.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int IRdistance;
 
@@ -1196,7 +1196,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
@@ -1217,14 +1217,14 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 6 "E:\Aldnoah.Zero\Assignment3\HMI.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 6 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
 void robotMoveSpeed(int distance, int speed);
@@ -1361,7 +1361,7 @@ calibrateIR();
 break;
 case 1:
 shortwall = scan360() - 13;
-rotate((400 - shortwall), 0);
+rotate((200 - shortwall), 0);
 break;
 case 2:
 TotalDistTravelled = 0;
@@ -1526,7 +1526,7 @@ int scan360(void)
 {
 int lowestVal = 0, lowestSteps = 0;
 
-for (int steps = 0; steps < 400; steps++)
+for (int steps = 0; steps < 200; steps+= 2)
 {
 readAvgDistance();
 if (adcVal > lowestVal)
@@ -1535,7 +1535,7 @@ lowestVal = adcVal;
 lowestSteps = steps;
 
 }
-rotate(1, 1);
+rotate(2, 1);
 
 if (RTC_FLAG_250MS == 1)
 {

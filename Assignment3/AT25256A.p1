@@ -881,11 +881,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"10 E:\Aldnoah.Zero\Assignment3\AT25256A.h
+"12 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS0 `Vb  1 s@56 ]
-"11 E:\Aldnoah.Zero\Assignment3\AT25256A.h
+"13 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS1 `Vb  1 s@57 ]
-"18 E:\Aldnoah.Zero\Assignment3\AT25256A.h
+"20 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _ee_write_enable `(v  0 ef ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
@@ -1718,13 +1718,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-[; ;AT25256A.h: 10: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
-[; ;AT25256A.h: 11: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
-[; ;AT25256A.h: 16: unsigned char ee_read_status (void);
-[; ;AT25256A.h: 17: void ee_write_disable(void);
-[; ;AT25256A.h: 18: void ee_write_enable(void);
-[; ;AT25256A.h: 19: unsigned char ee_read_byte (unsigned int);
-[; ;AT25256A.h: 20: void ee_write_byte( unsigned int, unsigned char);
+[; ;AT25256A.h: 12: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
+[; ;AT25256A.h: 13: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
+[; ;AT25256A.h: 18: unsigned char ee_read_status (void);
+[; ;AT25256A.h: 19: void ee_write_disable(void);
+[; ;AT25256A.h: 20: void ee_write_enable(void);
+[; ;AT25256A.h: 21: unsigned char ee_read_byte (unsigned int);
+[; ;AT25256A.h: 22: void ee_write_byte( unsigned int, unsigned char);
 "6 E:\Aldnoah.Zero\Assignment3\AT25256A.c
 [v _ee_write_byte `(v  1 ef2`ui`uc ]
 {

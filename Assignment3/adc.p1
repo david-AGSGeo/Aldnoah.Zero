@@ -884,7 +884,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
-"9 E:\Aldnoah.Zero\Assignment3\adc.h
+"11 E:\Aldnoah.Zero\Assignment3\adc.h
 [v _adc_read `(ui  0 ef ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
@@ -1717,9 +1717,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-[; ;adc.h: 7: void init_adc(void);
-[; ;adc.h: 9: unsigned int adc_read(void);
-[; ;adc.h: 12: unsigned char adc_read_channel(unsigned char channel);
+[; ;adc.h: 9: void init_adc(void);
+[; ;adc.h: 11: unsigned int adc_read(void);
+[; ;adc.h: 14: unsigned char adc_read_channel(unsigned char channel);
 "20 E:\Aldnoah.Zero\Assignment3\adc.c
 [v _adc_read_channel `(uc  1 ef1`uc ]
 {

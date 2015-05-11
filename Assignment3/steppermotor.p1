@@ -881,9 +881,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"10 E:\Aldnoah.Zero\Assignment3\AT25256A.h
+"12 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS0 `Vb  1 s@56 ]
-"11 E:\Aldnoah.Zero\Assignment3\AT25256A.h
+"13 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS1 `Vb  1 s@57 ]
 "45 E:\Aldnoah.Zero\Assignment3\steppermotor.c
 [v _current_step `uc  1 e ]
@@ -1724,16 +1724,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-[; ;steppermotor.h: 6: unsigned char spi_transfer(unsigned char data);
-[; ;steppermotor.h: 7: void rotate(unsigned int numsteps, unsigned char direction);
-[; ;steppermotor.h: 8: void rotateOld(unsigned char steps, unsigned char direction);
-[; ;AT25256A.h: 10: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
-[; ;AT25256A.h: 11: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
-[; ;AT25256A.h: 16: unsigned char ee_read_status (void);
-[; ;AT25256A.h: 17: void ee_write_disable(void);
-[; ;AT25256A.h: 18: void ee_write_enable(void);
-[; ;AT25256A.h: 19: unsigned char ee_read_byte (unsigned int);
-[; ;AT25256A.h: 20: void ee_write_byte( unsigned int, unsigned char);
+[; ;steppermotor.h: 8: unsigned char spi_transfer(unsigned char data);
+[; ;steppermotor.h: 9: void rotate(unsigned int numsteps, unsigned char direction);
+[; ;steppermotor.h: 10: void rotateOld(unsigned char steps, unsigned char direction);
+[; ;AT25256A.h: 12: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
+[; ;AT25256A.h: 13: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
+[; ;AT25256A.h: 18: unsigned char ee_read_status (void);
+[; ;AT25256A.h: 19: void ee_write_disable(void);
+[; ;AT25256A.h: 20: void ee_write_enable(void);
+[; ;AT25256A.h: 21: unsigned char ee_read_byte (unsigned int);
+[; ;AT25256A.h: 22: void ee_write_byte( unsigned int, unsigned char);
 "45 E:\Aldnoah.Zero\Assignment3\steppermotor.c
 [i _current_step
 -> -> 60 `i `uc
@@ -1794,16 +1794,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;steppermotor.c: 69: if (direction == 0)
 "69
 [e $ ! == -> _direction `i -> 0 `i 106  ]
-[; ;steppermotor.c: 70: spi_transfer(0b00001111);
+[; ;steppermotor.c: 70: spi_transfer(0b00001011);
 "70
-[e ( _spi_transfer (1 -> -> 15 `i `uc ]
+[e ( _spi_transfer (1 -> -> 11 `i `uc ]
 [e $U 107  ]
 "71
 [e :U 106 ]
 [; ;steppermotor.c: 71: else
-[; ;steppermotor.c: 72: spi_transfer(0b00001101);
+[; ;steppermotor.c: 72: spi_transfer(0b00001001);
 "72
-[e ( _spi_transfer (1 -> -> 13 `i `uc ]
+[e ( _spi_transfer (1 -> -> 9 `i `uc ]
 [e :U 107 ]
 [; ;steppermotor.c: 73: RC0 = 0; RC1 = 0;;
 "73
