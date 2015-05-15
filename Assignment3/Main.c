@@ -449,7 +449,9 @@ void main(void)
 			case 3:		//Drive in an L shape
 				__delay_ms(100);
 				robotMove(1000);
+				__delay_ms(100);
 				robotTurn(-90);
+				__delay_ms(100);
 				robotMove(1000);
 			break;
 			case 4:		//Follow wall

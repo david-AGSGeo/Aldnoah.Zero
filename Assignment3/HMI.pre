@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero-master\Assignment3\HMI.c"
+# 1 "H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\HMI.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 int assignedSpeed = 100;
 int d2travel= 0;
@@ -1163,7 +1163,7 @@ unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero\branches\Testing\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1187,7 +1187,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\infrared.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 volatile unsigned int test = 0;
@@ -1197,7 +1197,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\robot.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
 void robotMoveSpeed(int distance, int speed);
@@ -1210,7 +1210,7 @@ volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
-# 30 "H:\Aldnoah.Zero-master\Assignment3\HMI.c"
+# 30 "H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.c"
 int pos = 0;
 
 const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "};

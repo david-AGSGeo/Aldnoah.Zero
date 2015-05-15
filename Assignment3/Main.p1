@@ -881,105 +881,105 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"36 H:\Aldnoah.Zero-master\Assignment3\lcd.h
+"36 H:\Aldnoah.Zero\branches\Testing\Assignment3\lcd.h
 [v _total `i  1 e ]
-"37 H:\Aldnoah.Zero-master\Assignment3\lcd.h
+"37 H:\Aldnoah.Zero\branches\Testing\Assignment3\lcd.h
 [v _dist_high `i  1 e ]
-"38 H:\Aldnoah.Zero-master\Assignment3\lcd.h
+"38 H:\Aldnoah.Zero\branches\Testing\Assignment3\lcd.h
 [v _dist_low `i  1 e ]
-"6 H:\Aldnoah.Zero-master\Assignment3\infrared.h
+"6 H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h
 [v _adcVal `Vui  1 e ]
-"7 H:\Aldnoah.Zero-master\Assignment3\infrared.h
+"7 H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h
 [v _distance `Vui  1 e ]
-"8 H:\Aldnoah.Zero-master\Assignment3\infrared.h
+"8 H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h
 [v _test `Vui  1 e ]
-"6 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"6 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [v _currentMenu `Vuc  1 e ]
-"7 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"7 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [v _assignedSpeed `i  1 e ]
-"8 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"8 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [v _d2travel `i  1 e ]
-"13 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"13 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _distTravelled `i  1 e ]
-"14 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"14 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
-"14 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"14 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
-"14 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"14 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _BumpSensors `Vuc  1 e ]
-"16 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"16 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"16 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"16 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"16 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"16 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"16 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"16 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
-"73 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"73 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _current_direction `uc  1 e ]
-"74 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"74 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _totalSteps `i  1 e ]
-"77 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"77 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _buttonPressed `Vuc  1 e ]
-"78 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"78 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _serialInput `Vuc  1 e ]
-"82 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"82 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _RTC_FLAG_1MS `Vb  1 e ]
-"83 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"83 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _RTC_FLAG_10MS `Vb  1 e ]
-"84 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"84 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _RTC_FLAG_50MS `Vb  1 e ]
-"85 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"85 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _RTC_FLAG_250MS `Vb  1 e ]
-"86 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"86 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _RTC_FLAG_500MS `Vb  1 e ]
-"90 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"90 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
-"10 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"10 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
-"64 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"64 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _rxfifo `uc  -> 0 `x e ]
-"65 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"65 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _rxiptr `Vuc  0 e ]
-"68 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"68 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _ser_tmp `uc  0 e ]
-"65 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"65 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _rxoptr `Vuc  0 e ]
-"66 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"66 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _txfifo `Xuc  -> 0 `x e ]
-"67 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"67 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _txoptr `Vuc  0 e ]
-"67 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"67 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _txiptr `Vuc  0 e ]
-"61 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"61 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _ser_init `(v  0 ef ]
-"7 H:\Aldnoah.Zero-master\Assignment3\adc.h
+"7 H:\Aldnoah.Zero\branches\Testing\Assignment3\adc.h
 [v _init_adc `(v  0 ef ]
-"31 H:\Aldnoah.Zero-master\Assignment3\lcd.h
+"31 H:\Aldnoah.Zero\branches\Testing\Assignment3\lcd.h
 [v _lcd_init `(v  0 ef ]
-"6 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"6 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _robo_init `(v  0 ef ]
-"12 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"12 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [v _UpdateDisplay `(v  0 ef ]
-"9 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"9 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _robotTurn `(v  0 ef1`i ]
-"8 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"8 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _robotMoveSpeed `(v  0 ef2`i`i ]
-"7 H:\Aldnoah.Zero-master\Assignment3\steppermotor.h
+"7 H:\Aldnoah.Zero\branches\Testing\Assignment3\steppermotor.h
 [v _rotate `(v  0 ef2`ui`uc ]
-"57 H:\Aldnoah.Zero-master\Assignment3\ser.h
+"57 H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h
 [v _ser_putch `(v  0 ef1`uc ]
-"12 H:\Aldnoah.Zero-master\Assignment3\infrared.h
+"12 H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h
 [v _readAvgDistance `(v  0 ef ]
 [p mainexit ]
-"12 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"12 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _robot_read `(v  0 ef ]
-"11 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"11 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
 "154 C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
-"7 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"7 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [v _robotMove `(v  0 ef1`i ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
 [; ;pic16f877a.h: 86: volatile unsigned char TMR0 @ 0x001;
@@ -1861,7 +1861,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 38: int dist_low;
 [; ;infrared.h: 6: volatile unsigned int adcVal;
 [; ;infrared.h: 7: volatile unsigned int distance;
-"8 H:\Aldnoah.Zero-master\Assignment3\infrared.h
+"8 H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h
 [i _test
 -> -> 0 `i `ui
 ]
@@ -1884,7 +1884,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 66: extern bank1 unsigned char txfifo[16];
 [; ;ser.h: 67: extern volatile unsigned char txiptr, txoptr;
 [; ;ser.h: 68: extern unsigned char ser_tmp;
-"6 H:\Aldnoah.Zero-master\Assignment3\HMI.h
+"6 H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h
 [i _currentMenu
 -> -> 0 `i `uc
 ]
@@ -1910,7 +1910,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.h: 12: void robot_read(void);
 [; ;robot.h: 13: int distTravelled;
 [; ;robot.h: 14: volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
-"16 H:\Aldnoah.Zero-master\Assignment3\robot.h
+"16 H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1924,7 +1924,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;robot.h: 16: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
-"35 H:\Aldnoah.Zero-master\Assignment3\Main.c
+"35 H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c
 [; ;Main.c: 35: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
 [; 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
@@ -2853,173 +2853,179 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 451: robotMove(1000);
 "451
 [e ( _robotMove (1 -> 1000 `i ]
-[; ;Main.c: 452: robotTurn(-90);
+[; ;Main.c: 452: _delay((unsigned long)((100)*(20000000/4000.0)));
 "452
-[e ( _robotTurn (1 -U -> 90 `i ]
-[; ;Main.c: 453: robotMove(1000);
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 453: robotTurn(-90);
 "453
-[e ( _robotMove (1 -> 1000 `i ]
-[; ;Main.c: 454: break;
+[e ( _robotTurn (1 -U -> 90 `i ]
+[; ;Main.c: 454: _delay((unsigned long)((100)*(20000000/4000.0)));
 "454
-[e $U 177  ]
-[; ;Main.c: 455: case 4:
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 455: robotMove(1000);
 "455
-[e :U 183 ]
-[; ;Main.c: 457: while(1)
+[e ( _robotMove (1 -> 1000 `i ]
+[; ;Main.c: 456: break;
+"456
+[e $U 177  ]
+[; ;Main.c: 457: case 4:
 "457
-[e :U 185 ]
-[; ;Main.c: 458: {
-"458
-{
-[; ;Main.c: 459: shortwall = scan360() - 13;
+[e :U 183 ]
+[; ;Main.c: 459: while(1)
 "459
-[e = _shortwall - ( _scan360 ..  -> 13 `i ]
+[e :U 185 ]
+[; ;Main.c: 460: {
 "460
-[v _RT2P `i  1 a ]
-[; ;Main.c: 460: int RT2P = 0;
-[e = _RT2P -> 0 `i ]
+{
+[; ;Main.c: 461: shortwall = scan360() - 13;
 "461
-[v _direction1 `i  1 a ]
-[; ;Main.c: 461: int direction1 = 0;
-[e = _direction1 -> 0 `i ]
-[; ;Main.c: 462: if (shortwall > 200)
+[e = _shortwall - ( _scan360 ..  -> 13 `i ]
 "462
-[e $ ! > _shortwall -> 200 `i 187  ]
-[; ;Main.c: 463: RT2P = shortwall + 100;
+[v _RT2P `i  1 a ]
+[; ;Main.c: 462: int RT2P = 0;
+[e = _RT2P -> 0 `i ]
 "463
+[v _direction1 `i  1 a ]
+[; ;Main.c: 463: int direction1 = 0;
+[e = _direction1 -> 0 `i ]
+[; ;Main.c: 464: if (shortwall > 200)
+"464
+[e $ ! > _shortwall -> 200 `i 187  ]
+[; ;Main.c: 465: RT2P = shortwall + 100;
+"465
 [e = _RT2P + _shortwall -> 100 `i ]
 [e :U 187 ]
-[; ;Main.c: 464: if (shortwall < 200)
-"464
+[; ;Main.c: 466: if (shortwall < 200)
+"466
 [e $ ! < _shortwall -> 200 `i 188  ]
-[; ;Main.c: 465: RT2P = shortwall - 100;
-"465
+[; ;Main.c: 467: RT2P = shortwall - 100;
+"467
 [e = _RT2P - _shortwall -> 100 `i ]
 [e :U 188 ]
-[; ;Main.c: 468: if (RT2P >= 400 && RT2P < 500 )
-"468
-[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 189  ]
-[; ;Main.c: 469: {
-"469
-{
-[; ;Main.c: 470: RT2P = RT2P - 400;
+[; ;Main.c: 470: if (RT2P >= 400 && RT2P < 500 )
 "470
-[e = _RT2P - _RT2P -> 400 `i ]
-[; ;Main.c: 471: direction1 = 1;
+[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 189  ]
+[; ;Main.c: 471: {
 "471
-[e = _direction1 -> 1 `i ]
+{
+[; ;Main.c: 472: RT2P = RT2P - 400;
 "472
+[e = _RT2P - _RT2P -> 400 `i ]
+[; ;Main.c: 473: direction1 = 1;
+"473
+[e = _direction1 -> 1 `i ]
+"474
 }
 [e :U 189 ]
-[; ;Main.c: 472: }
-[; ;Main.c: 473: if (RT2P >= 200 && RT2P < 400)
-"473
-[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 190  ]
-[; ;Main.c: 474: {
-"474
-{
-[; ;Main.c: 475: RT2P = 400 - RT2P;
+[; ;Main.c: 474: }
+[; ;Main.c: 475: if (RT2P >= 200 && RT2P < 400)
 "475
-[e = _RT2P - -> 400 `i _RT2P ]
-[; ;Main.c: 476: RT2P = RT2P * -1;
+[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 190  ]
+[; ;Main.c: 476: {
 "476
-[e = _RT2P * _RT2P -U -> 1 `i ]
-[; ;Main.c: 477: direction1 = 0;
+{
+[; ;Main.c: 477: RT2P = 400 - RT2P;
 "477
-[e = _direction1 -> 0 `i ]
+[e = _RT2P - -> 400 `i _RT2P ]
+[; ;Main.c: 478: RT2P = RT2P * -1;
 "478
+[e = _RT2P * _RT2P -U -> 1 `i ]
+[; ;Main.c: 479: direction1 = 0;
+"479
+[e = _direction1 -> 0 `i ]
+"480
 }
 [e :U 190 ]
-[; ;Main.c: 478: }
-[; ;Main.c: 479: if (RT2P < 200 && RT2P >= 0)
-"479
-[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 191  ]
-[; ;Main.c: 480: {
-"480
-{
-[; ;Main.c: 481: direction1 = 1;
+[; ;Main.c: 480: }
+[; ;Main.c: 481: if (RT2P < 200 && RT2P >= 0)
 "481
-[e = _direction1 -> 1 `i ]
+[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 191  ]
+[; ;Main.c: 482: {
 "482
+{
+[; ;Main.c: 483: direction1 = 1;
+"483
+[e = _direction1 -> 1 `i ]
+"484
 }
 [e :U 191 ]
-[; ;Main.c: 482: }
-[; ;Main.c: 483: if (RT2P < 0 && RT2P >= -200)
-"483
+[; ;Main.c: 484: }
+[; ;Main.c: 485: if (RT2P < 0 && RT2P >= -200)
+"485
 [e $ ! && < _RT2P -> 0 `i >= _RT2P -U -> 200 `i 192  ]
-[; ;Main.c: 484: {
-"484
-{
-[; ;Main.c: 486: direction1 = 0;
+[; ;Main.c: 486: {
 "486
+{
+[; ;Main.c: 488: direction1 = 0;
+"488
 [e = _direction1 -> 0 `i ]
-"487
+"489
 }
 [e :U 192 ]
-[; ;Main.c: 487: }
-[; ;Main.c: 488: if(RT2P < -200 || RT2P >500)
-"488
+[; ;Main.c: 489: }
+[; ;Main.c: 490: if(RT2P < -200 || RT2P >500)
+"490
 [e $ ! || < _RT2P -U -> 200 `i > _RT2P -> 500 `i 193  ]
-[; ;Main.c: 489: {
-"489
-{
+[; ;Main.c: 491: {
 "491
+{
+"493
 }
 [e :U 193 ]
-[; ;Main.c: 491: }
-[; ;Main.c: 493: rotate((400 - shortwall ), 0);
-"493
+[; ;Main.c: 493: }
+[; ;Main.c: 495: rotate((400 - shortwall ), 0);
+"495
 [e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 494: _delay((unsigned long)((100)*(20000000/4000.0)));
-"494
+[; ;Main.c: 496: _delay((unsigned long)((100)*(20000000/4000.0)));
+"496
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"497
-[v _RT2A `i  1 a ]
-[; ;Main.c: 497: int RT2A= RT2P * (36.0/40.0);
-[e = _RT2A -> * -> _RT2P `d / .36.0 .40.0 `i ]
-[; ;Main.c: 498: robotTurn(RT2A);
-"498
-[e ( _robotTurn (1 _RT2A ]
-[; ;Main.c: 499: _delay((unsigned long)((100)*(20000000/4000.0)));
 "499
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 500: rotate(shortwall,0);
+[v _RT2A `i  1 a ]
+[; ;Main.c: 499: int RT2A= RT2P * (36.0/40.0);
+[e = _RT2A -> * -> _RT2P `d / .36.0 .40.0 `i ]
+[; ;Main.c: 500: robotTurn(RT2A);
 "500
-[e ( _rotate (2 , -> _shortwall `ui -> -> 0 `i `uc ]
+[e ( _robotTurn (1 _RT2A ]
 [; ;Main.c: 501: _delay((unsigned long)((100)*(20000000/4000.0)));
 "501
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 502: robotMove(500);
+[; ;Main.c: 502: rotate(shortwall,0);
 "502
-[e ( _robotMove (1 -> 500 `i ]
+[e ( _rotate (2 , -> _shortwall `ui -> -> 0 `i `uc ]
+[; ;Main.c: 503: _delay((unsigned long)((100)*(20000000/4000.0)));
 "503
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 504: robotMove(500);
+"504
+[e ( _robotMove (1 -> 500 `i ]
+"505
 }
 [e :U 184 ]
-"457
+"459
 [e $U 185  ]
 [e :U 186 ]
-[; ;Main.c: 503: }
-[; ;Main.c: 505: break;
-"505
-[e $U 177  ]
-[; ;Main.c: 507: case 5:
+[; ;Main.c: 505: }
+[; ;Main.c: 507: break;
 "507
-[e :U 194 ]
-[; ;Main.c: 508: ChargeMode();
-"508
-[e ( _ChargeMode ..  ]
-[; ;Main.c: 509: break;
+[e $U 177  ]
+[; ;Main.c: 509: case 5:
 "509
-[e $U 177  ]
-[; ;Main.c: 510: default:
+[e :U 194 ]
+[; ;Main.c: 510: ChargeMode();
 "510
-[e :U 195 ]
-[; ;Main.c: 512: break;
-"512
+[e ( _ChargeMode ..  ]
+[; ;Main.c: 511: break;
+"511
 [e $U 177  ]
-"513
+[; ;Main.c: 512: default:
+"512
+[e :U 195 ]
+[; ;Main.c: 514: break;
+"514
+[e $U 177  ]
+"515
 }
-[; ;Main.c: 513: }
+[; ;Main.c: 515: }
 [e $U 177  ]
 "430
 [e :U 178 ]
@@ -3030,19 +3036,19 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 183
  , $ -> -> 5 `i `uc 194
  195 ]
-"513
-[e :U 177 ]
-[; ;Main.c: 514: choice = 255;
-"514
-[e = _choice -> -> 255 `i `uc ]
 "515
+[e :U 177 ]
+[; ;Main.c: 516: choice = 255;
+"516
+[e = _choice -> -> 255 `i `uc ]
+"517
 }
 [e :U 165 ]
 "380
 [e $U 166  ]
 [e :U 167 ]
-[; ;Main.c: 515: }
-[; ;Main.c: 516: }
-"516
+[; ;Main.c: 517: }
+[; ;Main.c: 518: }
+"518
 [e :UE 164 ]
 }

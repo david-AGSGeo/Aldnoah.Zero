@@ -1,5 +1,5 @@
 
-# 1 "H:\Aldnoah.Zero-master\Assignment3\Main.c"
+# 1 "H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c"
 
 # 82 "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\include\pic16f877a.h"
 volatile unsigned char INDF @ 0x000;
@@ -1154,7 +1154,7 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 7 "H:\Aldnoah.Zero-master\Assignment3\adc.h"
+# 7 "H:\Aldnoah.Zero\branches\Testing\Assignment3\adc.h"
 void init_adc(void);
 
 unsigned int adc_read(void);
@@ -1162,7 +1162,7 @@ unsigned int adc_read(void);
 
 unsigned char adc_read_channel(unsigned char channel);
 
-# 17 "H:\Aldnoah.Zero-master\Assignment3\lcd.h"
+# 17 "H:\Aldnoah.Zero\branches\Testing\Assignment3\lcd.h"
 void lcd_write_control(unsigned char databyte);
 
 
@@ -1186,7 +1186,7 @@ int total;
 int dist_high;
 int dist_low;
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\infrared.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\infrared.h"
 volatile unsigned int adcVal;
 volatile unsigned int distance;
 volatile unsigned int test = 0;
@@ -1196,12 +1196,12 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\steppermotor.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
 
-# 55 "H:\Aldnoah.Zero-master\Assignment3\ser.h"
+# 55 "H:\Aldnoah.Zero\branches\Testing\Assignment3\ser.h"
 bit ser_isrx(void);
 unsigned char ser_getch(void);
 void ser_putch(unsigned char byte);
@@ -1217,7 +1217,7 @@ extern bank1 unsigned char txfifo[16];
 extern volatile unsigned char txiptr, txoptr;
 extern unsigned char ser_tmp;
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\HMI.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 int assignedSpeed = 100;
 int d2travel= 0;
@@ -1226,7 +1226,7 @@ unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 
-# 6 "H:\Aldnoah.Zero-master\Assignment3\robot.h"
+# 6 "H:\Aldnoah.Zero\branches\Testing\Assignment3\robot.h"
 void robo_init(void);
 void robotMove(int distance);
 void robotMoveSpeed(int distance, int speed);
@@ -1239,7 +1239,7 @@ volatile unsigned char DistHighByte, DistLowByte, BumpSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0;
 
-# 35 "H:\Aldnoah.Zero-master\Assignment3\Main.c"
+# 35 "H:\Aldnoah.Zero\branches\Testing\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
 # 69
@@ -1626,7 +1626,9 @@ break;
 case 3:
 _delay((unsigned long)((100)*(20000000/4000.0)));
 robotMove(1000);
+_delay((unsigned long)((100)*(20000000/4000.0)));
 robotTurn(-90);
+_delay((unsigned long)((100)*(20000000/4000.0)));
 robotMove(1000);
 break;
 case 4:
