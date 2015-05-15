@@ -228,19 +228,13 @@ void main(void)
                 
                 break;
             case 3:     //Drive in an L shape
- 
-                // 180 Scan CW - store minimum
-                // back to original
-                // 180 Scan CCW - look for close to minimum
-                // move sensor to original minimum location
-                // fix sensor, rotate robot until minimum location reached
-                __delay_ms(100);
-                robotMoveSpeed(1000,400);
-                robotTurnSpeed(80,200);
-                robotMoveSpeed(1000,400);
-                robotTurnSpeed(80,200);
-                robotMoveSpeed(2000,400);
-                robotTurnSpeed(-80,200);
+                     __delay_ms(100);
+                robotMove(2000);
+                robotTurn(-90);
+                robotMove(2000);
+                robotTurn(-90);
+                robotMove(2000);
+                robotTurn(90);
                 break;
             case 4:    
      
@@ -507,54 +501,3 @@ int distcheck(int dirFlag) //returns adc distance of wall in certain direction
     return lowestVal;
 
 }
-/****************ALTERNATIVE SOLUTION**************
-
-void start(void)
-{
-    RightWallFollow();
-    LeftWallFollow();
-    if (Error = 1 )     // Bump Sensor Flag
-        robotDrive(500, 200)
-        
-    if (Error = 3 && TotalDistance > 25m)   //Victim Found Flag
-        LeftWallFollow();
-    else if (Error = 3)
-        RightWallFollow();
-    //Somehow make its stop, turn left and go over the ramps back home.
-}
-
-void RightWallFollow(void)
-{
-    rotate(50, CLOCKWISE);
-
-    while(!Error)
-    {
-        RobotFollow();
-    }
-
-    if (error = 3)
-    {
-        song();
-    }
-
-    robotDrive(-500, 200);
-    robotTurn( 90, COUNTERCLOCKWISE)
-}
-void LefttWallFollow(void)
-{
-    rotate(50, COUNTERCLOCKWISE);
-
-    while(!Error)
-    {
-        RobotFollow();
-    }
-        
-    if (error = 3)
-    {
-        song();
-    }
-
-    robotDrive(-500, 200);
-    robotTurn( 90, CLOCKWISE)
-}
-**\

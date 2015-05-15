@@ -228,19 +228,13 @@ void main(void)
                 
                 break;
             case 3:     //Drive in an L shape
- 
-                // 180 Scan CW - store minimum
-                // back to original
-                // 180 Scan CCW - look for close to minimum
-                // move sensor to original minimum location
-                // fix sensor, rotate robot until minimum location reached
-                __delay_ms(100);
-                robotMoveSpeed(1000,400);
-                robotTurnSpeed(80,200);
-                robotMoveSpeed(1000,400);
-                robotTurnSpeed(80,200);
-                robotMoveSpeed(2000,400);
-                robotTurnSpeed(-80,200);
+                     __delay_ms(100);
+                robotMove(2000);
+                robotTurn(-90);
+                robotMove(2000);
+                robotTurn(-90);
+                robotMove(2000);
+                robotTurn(90);
                 break;
             case 4:    
      

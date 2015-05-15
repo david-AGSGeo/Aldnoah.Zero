@@ -1,0 +1,26 @@
+1. Hard Code till cliff
+2. Turn 180.
+3. Drive till wall.
+4. Start Left wall follow till victim detected
+5. Turn 180.
+6. switch
+	case e:	drive 1m, turn R
+	case d: drive 1m, turn R
+	case c: drive 1m, turn L
+	case b: drive 1m
+	case a: Start gohome();
+7. gohome()
+	{
+		drive till 50cm from wall.
+		turn L
+		calculate distance behind.
+		drive 1
+		follow wall till left turn
+		turn drive 3m
+		calibrate
+		turn R
+		drive 1m
+		turn R
+		drive 1m
+	}
+

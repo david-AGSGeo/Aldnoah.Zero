@@ -69,7 +69,7 @@ void rotate(unsigned int numsteps, unsigned char direction)
 	if (direction == 0)
 		spi_transfer(0b00001011);	//for clockwise rotation 
 	else
-		spi_transfer(0b00001001);	//for clockwise rotation 		
+		spi_transfer(0b00001001);	//for counter-clockwise rotation 		
 	SELECT_NONE();
 	for (unsigned int i = 0; i < numsteps; i++)
 	{
@@ -80,4 +80,13 @@ void rotate(unsigned int numsteps, unsigned char direction)
 	spi_transfer(0b00000000);	//de-energise windings		
 	SELECT_NONE();
 	SM_STEP();
+}
+
+void rotateDirectional(unsigned int numsteps)
+{
+	if(numsteps < 0)
+	{	
+		numsteps = numsteps * -1;
+		rotate(numsteps, 0);
+	}
 }
