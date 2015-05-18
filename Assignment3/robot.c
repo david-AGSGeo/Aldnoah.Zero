@@ -117,7 +117,7 @@ void robotTurn(int angle)
 
 		ser_putch(0);  
 
-		ser_putch(50);
+		ser_putch(200);
 
 		ser_putch(0);
 
@@ -129,7 +129,7 @@ void robotTurn(int angle)
 
 		ser_putch(0);  
 
-		ser_putch(50);
+		ser_putch(200);
 
 		ser_putch(255);
 
@@ -157,18 +157,30 @@ void robotFollow(int distance, int speed, int AdcTarget)
 	distTravelled = 0;
 	int temp1;
 	RobotDrive(speed, STRAIGHT);	//start robot moving
+	ROBOTerror = 0;	//no errors yet :)
 
 	//keep going till requested distance is reached (absolute value used for negative distances)
 	while (abs(distTravelled) < abs(distance))	
 	{
+		
 		readAvgDistance();
-		if (adcVal > (AdcTarget + 5))
+		if (adcVal > (AdcTarget + 5) && adcVal < (AdcTarget + 30)) //correct right
 		{
 			RobotDrive(speed, RIGHT);	
 		}
-		else if (adcVal < (AdcTarget - 5))
+		else if (adcVal < (AdcTarget - 5) && adcVal > (AdcTarget - 30)) //correct left
 		{
 			RobotDrive(speed, LEFT);
+		}
+		else if (adcVal <= (AdcTarget - 30))	//turn right
+		{
+			ROBOTerror = 10;	//signal right turn
+			break;
+		}
+		else if (adcVal >= (AdcTarget + 30))	//turn left
+		{
+			ROBOTerror = 11;	//signal a left turn
+			break; 
 		}
 		else
 		{
@@ -177,7 +189,7 @@ void robotFollow(int distance, int speed, int AdcTarget)
 		robot_read(DIST);
 		if (BumpSensors || VwallSensor)	//hit wall or lifted
 		{
-			ROBOTerror = 1;	//signal an error
+			ROBOTerror = 1;	//signal a bump sensor 
 			break;
 		}
 		temp1 = DistHighByte;	//add bytes together
@@ -187,11 +199,11 @@ void robotFollow(int distance, int speed, int AdcTarget)
 		TotalDistTravelled += temp1;
 		Disp2 = distTravelled;
 		UpdateDisplay();
-		float remaining = abs(distance) - abs(distTravelled) ;
-		if ( remaining < 100)
-		{
-			RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
-		}
+	//	float remaining = abs(distance) - abs(distTravelled) ;
+	//	if ( remaining < 100)
+	//	{
+	//		RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
+	//}
 	}
 
 	RobotDrive(0, STRAIGHT);	//stop robot
@@ -224,11 +236,11 @@ void robotMoveSpeed(int distance, int speed)
 		TotalDistTravelled += temp1;
 		Disp2 = distTravelled;
 		UpdateDisplay();
-		float remaining = abs(distance) - abs(distTravelled) ;
-		if ( remaining < 100)
-		{
-			RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
-		}
+		//float remaining = abs(distance) - abs(distTravelled) ;
+		//if ( remaining < 100)
+		//{
+	//		RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
+	//	}
 	}
 
 	RobotDrive(0, STRAIGHT);	//stop robot

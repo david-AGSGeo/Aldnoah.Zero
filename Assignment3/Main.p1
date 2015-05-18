@@ -972,21 +972,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Menu `(uc  0 ef1`uc ]
 "82 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _calibrateIR `(v  0 ef ]
-"83 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _scan360 `(i  0 ef ]
-"9 E:\Aldnoah.Zero\Assignment3\steppermotor.h
-[v _rotate `(v  0 ef2`ui`uc ]
+"12 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _robotTurnSpeed `(v  0 ef2`i`i ]
 "10 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robotMoveSpeed `(v  0 ef2`i`i ]
-"13 E:\Aldnoah.Zero\Assignment3\robot.h
-[v _robotFollow `(v  0 ef3`i`i`i ]
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
 [p i __delay ]
-"11 E:\Aldnoah.Zero\Assignment3\robot.h
-[v _robotTurn `(v  0 ef1`i ]
+"13 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _robotFollow `(v  0 ef3`i`i`i ]
 "84 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _ChargeMode `(v  0 ef ]
+"9 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+[v _rotate `(v  0 ef2`ui`uc ]
 "57 E:\Aldnoah.Zero\Assignment3\ser.h
 [v _ser_putch `(v  0 ef1`uc ]
 [; ;pic16f877a.h: 82: volatile unsigned char INDF @ 0x000;
@@ -2186,199 +2184,187 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 203: case 1:
 "203
 [e :U 121 ]
-[; ;Main.c: 204: shortwall = scan360();
-"204
-[e = _shortwall ( _scan360 ..  ]
-[; ;Main.c: 205: rotate((200 - shortwall), 0);
-"205
-[e ( _rotate (2 , -> - -> 200 `i _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 206: break;
-"206
-[e $U 118  ]
-[; ;Main.c: 207: case 2:
-"207
-[e :U 122 ]
-[; ;Main.c: 209: robotMoveSpeed(2000, 400);
+[; ;Main.c: 209: break;
 "209
-[e ( _robotMoveSpeed (2 , -> 2000 `i -> 400 `i ]
-[; ;Main.c: 210: break;
+[e $U 118  ]
+[; ;Main.c: 210: case 2:
 "210
-[e $U 118  ]
-[; ;Main.c: 211: case 3:
-"211
-[e :U 123 ]
-[; ;Main.c: 213: robotFollow(2000, 400, adcVal);
-"213
-[e ( _robotFollow (3 , , -> 2000 `i -> 400 `i -> _adcVal `i ]
-[; ;Main.c: 215: break;
+[e :U 122 ]
+[; ;Main.c: 215: robotTurnSpeed(-90,400);
 "215
-[e $U 118  ]
-[; ;Main.c: 216: case 4:
+[e ( _robotTurnSpeed (2 , -U -> 90 `i -> 400 `i ]
+[; ;Main.c: 216: readAvgDistance();
 "216
-[e :U 124 ]
-[; ;Main.c: 217: TotalDistTravelled = 0;
+[e ( _readAvgDistance ..  ]
 "217
-[e = _TotalDistTravelled -> 0 `i ]
-[; ;Main.c: 218: while(!ROBOTerror)
+[v _a `i  1 a ]
+[; ;Main.c: 217: int a = adcVal;
+[e = _a -> _adcVal `i ]
+[; ;Main.c: 218: robotMoveSpeed(1500 - a,400);
 "218
+[e ( _robotMoveSpeed (2 , - -> 1500 `i _a -> 400 `i ]
+[; ;Main.c: 220: robotTurnSpeed(-90,400);
+"220
+[e ( _robotTurnSpeed (2 , -U -> 90 `i -> 400 `i ]
+[; ;Main.c: 221: robotMoveSpeed(4000,400);
+"221
+[e ( _robotMoveSpeed (2 , -> 4000 `i -> 400 `i ]
+[; ;Main.c: 223: robotTurnSpeed(90,400);
+"223
+[e ( _robotTurnSpeed (2 , -> 90 `i -> 400 `i ]
+[; ;Main.c: 224: robotMoveSpeed(1000,400);
+"224
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 400 `i ]
+[; ;Main.c: 225: robotTurnSpeed(90,400);
+"225
+[e ( _robotTurnSpeed (2 , -> 90 `i -> 400 `i ]
+[; ;Main.c: 226: robotMoveSpeed(1000,400);
+"226
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 400 `i ]
+[; ;Main.c: 229: break;
+"229
+[e $U 118  ]
+[; ;Main.c: 230: case 3:
+"230
+[e :U 123 ]
+[; ;Main.c: 237: _delay((unsigned long)((100)*(20000000/4000.0)));
+"237
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 238: robotMoveSpeed(1000,400);
+"238
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 400 `i ]
+[; ;Main.c: 239: robotTurnSpeed(80,200);
+"239
+[e ( _robotTurnSpeed (2 , -> 80 `i -> 200 `i ]
+[; ;Main.c: 240: robotMoveSpeed(1000,400);
+"240
+[e ( _robotMoveSpeed (2 , -> 1000 `i -> 400 `i ]
+[; ;Main.c: 241: robotTurnSpeed(80,200);
+"241
+[e ( _robotTurnSpeed (2 , -> 80 `i -> 200 `i ]
+[; ;Main.c: 242: robotMoveSpeed(2000,400);
+"242
+[e ( _robotMoveSpeed (2 , -> 2000 `i -> 400 `i ]
+[; ;Main.c: 243: robotTurnSpeed(-80,200);
+"243
+[e ( _robotTurnSpeed (2 , -U -> 80 `i -> 200 `i ]
+[; ;Main.c: 244: break;
+"244
+[e $U 118  ]
+[; ;Main.c: 245: case 4:
+"245
+[e :U 124 ]
+[; ;Main.c: 246: while (ROBOTerror != 1)
+"246
 [e $U 125  ]
 [e :U 126 ]
-[; ;Main.c: 219: {
-"219
-{
-"220
-[v _shortwall `i  1 a ]
-[; ;Main.c: 220: int shortwall = scan360();
-[e = _shortwall ( _scan360 ..  ]
-"221
-[v _RT2P `i  1 a ]
-[; ;Main.c: 221: int RT2P = 0;
-[e = _RT2P -> 0 `i ]
-"222
-[v _direction1 `i  1 a ]
-[; ;Main.c: 222: int direction1 = 0;
-[e = _direction1 -> 0 `i ]
-[; ;Main.c: 223: if (shortwall > 200)
-"223
-[e $ ! > _shortwall -> 200 `i 128  ]
-[; ;Main.c: 224: RT2P = shortwall + 100;
-"224
-[e = _RT2P + _shortwall -> 100 `i ]
-[e :U 128 ]
-[; ;Main.c: 225: if (shortwall < 200)
-"225
-[e $ ! < _shortwall -> 200 `i 129  ]
-[; ;Main.c: 226: RT2P = shortwall - 100;
-"226
-[e = _RT2P - _shortwall -> 100 `i ]
-[e :U 129 ]
-[; ;Main.c: 228: if (RT2P >= 400 && RT2P < 500 )
-"228
-[e $ ! && >= _RT2P -> 400 `i < _RT2P -> 500 `i 130  ]
-[; ;Main.c: 229: {
-"229
-{
-[; ;Main.c: 230: RT2P = RT2P - 400;
-"230
-[e = _RT2P - _RT2P -> 400 `i ]
-[; ;Main.c: 231: direction1 = 1;
-"231
-[e = _direction1 -> 1 `i ]
-"232
-}
-[e :U 130 ]
-[; ;Main.c: 232: }
-[; ;Main.c: 233: if (RT2P >= 200 && RT2P < 400)
-"233
-[e $ ! && >= _RT2P -> 200 `i < _RT2P -> 400 `i 131  ]
-[; ;Main.c: 234: {
-"234
-{
-[; ;Main.c: 235: RT2P = 400 - RT2P;
-"235
-[e = _RT2P - -> 400 `i _RT2P ]
-[; ;Main.c: 236: RT2P = RT2P * -1;
-"236
-[e = _RT2P * _RT2P -U -> 1 `i ]
-[; ;Main.c: 237: direction1 = 0;
-"237
-[e = _direction1 -> 0 `i ]
-"238
-}
-[e :U 131 ]
-[; ;Main.c: 238: }
-[; ;Main.c: 239: if (RT2P < 200 && RT2P >= 0)
-"239
-[e $ ! && < _RT2P -> 200 `i >= _RT2P -> 0 `i 132  ]
-[; ;Main.c: 240: {
-"240
-{
-[; ;Main.c: 241: direction1 = 1;
-"241
-[e = _direction1 -> 1 `i ]
-"242
-}
-[e :U 132 ]
-[; ;Main.c: 242: }
-[; ;Main.c: 243: if (RT2P < 0 && RT2P >= -200)
-"243
-[e $ ! && < _RT2P -> 0 `i >= _RT2P -U -> 200 `i 133  ]
-[; ;Main.c: 244: {
-"244
-{
-[; ;Main.c: 245: direction1 = 0;
-"245
-[e = _direction1 -> 0 `i ]
-"246
-}
-[e :U 133 ]
-[; ;Main.c: 246: }
-[; ;Main.c: 247: if(RT2P < -200 || RT2P >500)
+[; ;Main.c: 247: {
 "247
-[e $ ! || < _RT2P -U -> 200 `i > _RT2P -> 500 `i 134  ]
-[; ;Main.c: 248: {
-"248
 {
-[; ;Main.c: 249: break;
+[; ;Main.c: 248: switch (ROBOTerror)
+"248
+[e $U 129  ]
+[; ;Main.c: 249: {
 "249
-[e $U 127  ]
+{
+[; ;Main.c: 250: case 0:
 "250
-}
-[e :U 134 ]
-[; ;Main.c: 250: }
-[; ;Main.c: 252: rotate((400 - shortwall ), 0);
+[e :U 130 ]
+[; ;Main.c: 251: robotFollow(1000, 300, adcVal);
+"251
+[e ( _robotFollow (3 , , -> 1000 `i -> 300 `i -> _adcVal `i ]
+[; ;Main.c: 252: break;
 "252
-[e ( _rotate (2 , -> - -> 400 `i _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 253: _delay((unsigned long)((100)*(20000000/4000.0)));
+[e $U 128  ]
+[; ;Main.c: 253: case 1:
 "253
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[e :U 131 ]
+[; ;Main.c: 255: break;
+"255
+[e $U 128  ]
+[; ;Main.c: 256: case 10:
 "256
-[v _RT2A `i  1 a ]
-[; ;Main.c: 256: int RT2A= RT2P * (36.0/40.0);
-[e = _RT2A -> * -> _RT2P `d / .36.0 .40.0 `i ]
-[; ;Main.c: 257: robotTurn(RT2A);
+[e :U 132 ]
+[; ;Main.c: 257: robotTurnSpeed(90,400);
 "257
-[e ( _robotTurn (1 _RT2A ]
-[; ;Main.c: 258: _delay((unsigned long)((100)*(20000000/4000.0)));
-"258
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 259: rotate(shortwall,0);
+[e ( _robotTurnSpeed (2 , -> 90 `i -> 400 `i ]
+[; ;Main.c: 259: readAvgDistance();
 "259
-[e ( _rotate (2 , -> _shortwall `ui -> -> 0 `i `uc ]
-[; ;Main.c: 260: _delay((unsigned long)((100)*(20000000/4000.0)));
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 260: robotFollow(1000, 300, adcVal - 10);
 "260
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 261: robotMoveSpeed(500, 200);
+[e ( _robotFollow (3 , , -> 1000 `i -> 300 `i -> - _adcVal -> -> 10 `i `ui `i ]
+[; ;Main.c: 261: break;
 "261
-[e ( _robotMoveSpeed (2 , -> 500 `i -> 200 `i ]
+[e $U 128  ]
+[; ;Main.c: 262: case 11:
 "262
-}
-[e :U 125 ]
-"218
-[e $ ! != -> _ROBOTerror `i -> -> -> 0 `i `uc `i 126  ]
-[e :U 127 ]
-[; ;Main.c: 262: }
-[; ;Main.c: 264: break;
+[e :U 133 ]
+[; ;Main.c: 264: robotMoveSpeed(700,300);
 "264
-[e $U 118  ]
-[; ;Main.c: 266: case 5:
+[e ( _robotMoveSpeed (2 , -> 700 `i -> 300 `i ]
+[; ;Main.c: 265: robotTurnSpeed(-90,400);
+"265
+[e ( _robotTurnSpeed (2 , -U -> 90 `i -> 400 `i ]
+[; ;Main.c: 266: readAvgDistance();
 "266
-[e :U 135 ]
-[; ;Main.c: 267: ChargeMode();
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 267: robotFollow(1000, 300, adcVal - 10);
 "267
-[e ( _ChargeMode ..  ]
+[e ( _robotFollow (3 , , -> 1000 `i -> 300 `i -> - _adcVal -> -> 10 `i `ui `i ]
 [; ;Main.c: 268: break;
 "268
-[e $U 118  ]
+[e $U 128  ]
 [; ;Main.c: 269: default:
 "269
-[e :U 136 ]
+[e :U 134 ]
+[; ;Main.c: 270: robotFollow(1000, 300, adcVal);
+"270
+[e ( _robotFollow (3 , , -> 1000 `i -> 300 `i -> _adcVal `i ]
 [; ;Main.c: 271: break;
 "271
-[e $U 118  ]
-"272
+[e $U 128  ]
+"273
 }
-[; ;Main.c: 272: }
+[; ;Main.c: 273: }
+[e $U 128  ]
+"248
+[e :U 129 ]
+[e [\ _ROBOTerror , $ -> -> 0 `i `uc 130
+ , $ -> -> 1 `i `uc 131
+ , $ -> -> 10 `i `uc 132
+ , $ -> -> 11 `i `uc 133
+ 134 ]
+"273
+[e :U 128 ]
+"274
+}
+[e :U 125 ]
+"246
+[e $ != -> _ROBOTerror `i -> 1 `i 126  ]
+[e :U 127 ]
+[; ;Main.c: 274: }
+[; ;Main.c: 275: break;
+"275
+[e $U 118  ]
+[; ;Main.c: 277: case 5:
+"277
+[e :U 135 ]
+[; ;Main.c: 278: ChargeMode();
+"278
+[e ( _ChargeMode ..  ]
+[; ;Main.c: 279: break;
+"279
+[e $U 118  ]
+[; ;Main.c: 280: default:
+"280
+[e :U 136 ]
+[; ;Main.c: 282: break;
+"282
+[e $U 118  ]
+"283
+}
+[; ;Main.c: 283: }
 [e $U 118  ]
 "198
 [e :U 119 ]
@@ -2389,353 +2375,364 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 124
  , $ -> -> 5 `i `uc 135
  136 ]
-"272
+"283
 [e :U 118 ]
-[; ;Main.c: 273: choice = 255;
-"273
+[; ;Main.c: 284: choice = 255;
+"284
 [e = _choice -> -> 255 `i `uc ]
-"274
+"285
 }
 [e :U 113 ]
 "180
 [e $U 114  ]
 [e :U 115 ]
-[; ;Main.c: 274: }
-[; ;Main.c: 275: }
-"275
+[; ;Main.c: 285: }
+[; ;Main.c: 286: }
+"286
 [e :UE 112 ]
 }
-"281
-[v _calibrateIR `(v  1 ef ]
-{
-[; ;Main.c: 280: void calibrateIR(void)
-[; ;Main.c: 281: {
-[e :U _calibrateIR ]
-[f ]
-[; ;Main.c: 282: currentMenu = 1;
-"282
-[e = _currentMenu -> -> 1 `i `uc ]
-[; ;Main.c: 283: rotate(8, 0);
-"283
-[e ( _rotate (2 , -> -> 8 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 284: while (1)
-"284
-[e :U 139 ]
-[; ;Main.c: 285: {
-"285
-{
-[; ;Main.c: 286: if (RTC_FLAG_250MS == 1)
-"286
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 141  ]
-[; ;Main.c: 287: {
-"287
-{
-[; ;Main.c: 288: RTC_FLAG_250MS = 0;
 "288
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 289: UpdateDisplay();
-"289
-[e ( _UpdateDisplay ..  ]
-"290
-}
-[e :U 141 ]
-[; ;Main.c: 290: }
-[; ;Main.c: 291: switch (buttonPressed)
-"291
-[e $U 143  ]
-[; ;Main.c: 292: {
-"292
+[v _start `(v  1 ef ]
 {
-[; ;Main.c: 293: case 1:
-"293
-[e :U 144 ]
-[; ;Main.c: 294: buttonPressed = 0;
-"294
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 295: break;
-"295
-[e $U 142  ]
-[; ;Main.c: 296: case 2:
-"296
-[e :U 145 ]
-[; ;Main.c: 297: buttonPressed = 0;
-"297
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 298: break;
-"298
-[e $U 142  ]
-[; ;Main.c: 299: case 3:
-"299
-[e :U 146 ]
-[; ;Main.c: 300: rotate(1, 1);
-"300
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 301: buttonPressed = 0;
-"301
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 302: break;
-"302
-[e $U 142  ]
-[; ;Main.c: 303: case 4:
-"303
-[e :U 147 ]
-[; ;Main.c: 304: rotate(1, 0);
-"304
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 305: buttonPressed = 0;
-"305
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 306: break;
-"306
-[e $U 142  ]
-[; ;Main.c: 307: case 5:
-"307
-[e :U 148 ]
-[; ;Main.c: 308: totalSteps = 0;
-"308
-[e = _totalSteps -> 0 `i ]
-[; ;Main.c: 309: buttonPressed = 0;
-"309
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 310: currentMenu = 0;
-"310
-[e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 311: return;
-"311
-[e $UE 137  ]
-[; ;Main.c: 312: default:
-"312
-[e :U 149 ]
-[; ;Main.c: 313: break;
-"313
-[e $U 142  ]
-"314
-}
-[; ;Main.c: 314: }
-[e $U 142  ]
-"291
-[e :U 143 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 144
- , $ -> -> 2 `i `uc 145
- , $ -> -> 3 `i `uc 146
- , $ -> -> 4 `i `uc 147
- , $ -> -> 5 `i `uc 148
- 149 ]
-"314
-[e :U 142 ]
-"315
-}
-[e :U 138 ]
-"284
-[e $U 139  ]
-[e :U 140 ]
-[; ;Main.c: 315: }
-[; ;Main.c: 316: }
-"316
+[; ;Main.c: 287: void start(void)
+[; ;Main.c: 288: {
+[e :U _start ]
+[f ]
+[; ;Main.c: 388: }
+"388
 [e :UE 137 ]
 }
-"321
+"393
+[v _calibrateIR `(v  1 ef ]
+{
+[; ;Main.c: 392: void calibrateIR(void)
+[; ;Main.c: 393: {
+[e :U _calibrateIR ]
+[f ]
+[; ;Main.c: 394: currentMenu = 1;
+"394
+[e = _currentMenu -> -> 1 `i `uc ]
+[; ;Main.c: 395: rotate(8, 0);
+"395
+[e ( _rotate (2 , -> -> 8 `i `ui -> -> 0 `i `uc ]
+[; ;Main.c: 396: while (1)
+"396
+[e :U 140 ]
+[; ;Main.c: 397: {
+"397
+{
+[; ;Main.c: 398: if (RTC_FLAG_250MS == 1)
+"398
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 142  ]
+[; ;Main.c: 399: {
+"399
+{
+[; ;Main.c: 400: RTC_FLAG_250MS = 0;
+"400
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 401: UpdateDisplay();
+"401
+[e ( _UpdateDisplay ..  ]
+"402
+}
+[e :U 142 ]
+[; ;Main.c: 402: }
+[; ;Main.c: 403: switch (buttonPressed)
+"403
+[e $U 144  ]
+[; ;Main.c: 404: {
+"404
+{
+[; ;Main.c: 405: case 1:
+"405
+[e :U 145 ]
+[; ;Main.c: 406: buttonPressed = 0;
+"406
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 407: break;
+"407
+[e $U 143  ]
+[; ;Main.c: 408: case 2:
+"408
+[e :U 146 ]
+[; ;Main.c: 409: buttonPressed = 0;
+"409
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 410: break;
+"410
+[e $U 143  ]
+[; ;Main.c: 411: case 3:
+"411
+[e :U 147 ]
+[; ;Main.c: 412: rotate(1, 1);
+"412
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
+[; ;Main.c: 413: buttonPressed = 0;
+"413
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 414: break;
+"414
+[e $U 143  ]
+[; ;Main.c: 415: case 4:
+"415
+[e :U 148 ]
+[; ;Main.c: 416: rotate(1, 0);
+"416
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 0 `i `uc ]
+[; ;Main.c: 417: buttonPressed = 0;
+"417
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 418: break;
+"418
+[e $U 143  ]
+[; ;Main.c: 419: case 5:
+"419
+[e :U 149 ]
+[; ;Main.c: 420: totalSteps = 0;
+"420
+[e = _totalSteps -> 0 `i ]
+[; ;Main.c: 421: buttonPressed = 0;
+"421
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 422: currentMenu = 0;
+"422
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 423: return;
+"423
+[e $UE 138  ]
+[; ;Main.c: 424: default:
+"424
+[e :U 150 ]
+[; ;Main.c: 425: break;
+"425
+[e $U 143  ]
+"426
+}
+[; ;Main.c: 426: }
+[e $U 143  ]
+"403
+[e :U 144 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 145
+ , $ -> -> 2 `i `uc 146
+ , $ -> -> 3 `i `uc 147
+ , $ -> -> 4 `i `uc 148
+ , $ -> -> 5 `i `uc 149
+ 150 ]
+"426
+[e :U 143 ]
+"427
+}
+[e :U 139 ]
+"396
+[e $U 140  ]
+[e :U 141 ]
+[; ;Main.c: 427: }
+[; ;Main.c: 428: }
+"428
+[e :UE 138 ]
+}
+"433
 [v _ChargeMode `(v  1 ef ]
 {
-[; ;Main.c: 320: void ChargeMode(void)
-[; ;Main.c: 321: {
+[; ;Main.c: 432: void ChargeMode(void)
+[; ;Main.c: 433: {
 [e :U _ChargeMode ]
 [f ]
-[; ;Main.c: 323: currentMenu = 2;
-"323
+[; ;Main.c: 435: currentMenu = 2;
+"435
 [e = _currentMenu -> -> 2 `i `uc ]
-[; ;Main.c: 324: ser_putch(128);
-"324
+[; ;Main.c: 436: ser_putch(128);
+"436
 [e ( _ser_putch (1 -> -> 128 `i `uc ]
-[; ;Main.c: 326: while (1)
-"326
-[e :U 152 ]
-[; ;Main.c: 327: {
-"327
-{
-[; ;Main.c: 328: if (RTC_FLAG_250MS == 1)
-"328
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 154  ]
-[; ;Main.c: 329: {
-"329
-{
-[; ;Main.c: 330: RTC_FLAG_250MS = 0;
-"330
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 331: UpdateDisplay();
-"331
-[e ( _UpdateDisplay ..  ]
-"332
-}
-[e :U 154 ]
-[; ;Main.c: 332: }
-[; ;Main.c: 333: switch (buttonPressed)
-"333
-[e $U 156  ]
-[; ;Main.c: 334: {
-"334
-{
-[; ;Main.c: 335: case 1:
-"335
-[e :U 157 ]
-[; ;Main.c: 336: buttonPressed = 0;
-"336
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 337: break;
-"337
-[e $U 155  ]
-[; ;Main.c: 338: case 2:
-"338
-[e :U 158 ]
-[; ;Main.c: 339: buttonPressed = 0;
-"339
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 340: break;
-"340
-[e $U 155  ]
-[; ;Main.c: 341: case 3:
-"341
-[e :U 159 ]
-[; ;Main.c: 342: buttonPressed = 0;
-"342
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 343: break;
-"343
-[e $U 155  ]
-[; ;Main.c: 344: case 4:
-"344
-[e :U 160 ]
-[; ;Main.c: 345: buttonPressed = 0;
-"345
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 346: break;
-"346
-[e $U 155  ]
-[; ;Main.c: 347: case 5:
-"347
-[e :U 161 ]
-[; ;Main.c: 348: ser_putch(132);
-"348
-[e ( _ser_putch (1 -> -> 132 `i `uc ]
-[; ;Main.c: 349: buttonPressed = 0;
-"349
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 350: currentMenu = 0;
-"350
-[e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 351: return;
-"351
-[e $UE 150  ]
-[; ;Main.c: 352: default:
-"352
-[e :U 162 ]
-[; ;Main.c: 353: buttonPressed = 0;
-"353
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 354: break;
-"354
-[e $U 155  ]
-"355
-}
-[; ;Main.c: 355: }
-[e $U 155  ]
-"333
-[e :U 156 ]
-[e [\ _buttonPressed , $ -> -> 1 `i `uc 157
- , $ -> -> 2 `i `uc 158
- , $ -> -> 3 `i `uc 159
- , $ -> -> 4 `i `uc 160
- , $ -> -> 5 `i `uc 161
- 162 ]
-"355
-[e :U 155 ]
-"356
-}
-[e :U 151 ]
-"326
-[e $U 152  ]
+[; ;Main.c: 438: while (1)
+"438
 [e :U 153 ]
-[; ;Main.c: 356: }
-[; ;Main.c: 357: }
-"357
-[e :UE 150 ]
+[; ;Main.c: 439: {
+"439
+{
+[; ;Main.c: 440: if (RTC_FLAG_250MS == 1)
+"440
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 155  ]
+[; ;Main.c: 441: {
+"441
+{
+[; ;Main.c: 442: RTC_FLAG_250MS = 0;
+"442
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 443: UpdateDisplay();
+"443
+[e ( _UpdateDisplay ..  ]
+"444
 }
-"362
+[e :U 155 ]
+[; ;Main.c: 444: }
+[; ;Main.c: 445: switch (buttonPressed)
+"445
+[e $U 157  ]
+[; ;Main.c: 446: {
+"446
+{
+[; ;Main.c: 447: case 1:
+"447
+[e :U 158 ]
+[; ;Main.c: 448: buttonPressed = 0;
+"448
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 449: break;
+"449
+[e $U 156  ]
+[; ;Main.c: 450: case 2:
+"450
+[e :U 159 ]
+[; ;Main.c: 451: buttonPressed = 0;
+"451
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 452: break;
+"452
+[e $U 156  ]
+[; ;Main.c: 453: case 3:
+"453
+[e :U 160 ]
+[; ;Main.c: 454: buttonPressed = 0;
+"454
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 455: break;
+"455
+[e $U 156  ]
+[; ;Main.c: 456: case 4:
+"456
+[e :U 161 ]
+[; ;Main.c: 457: buttonPressed = 0;
+"457
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 458: break;
+"458
+[e $U 156  ]
+[; ;Main.c: 459: case 5:
+"459
+[e :U 162 ]
+[; ;Main.c: 460: ser_putch(132);
+"460
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;Main.c: 461: buttonPressed = 0;
+"461
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 462: currentMenu = 0;
+"462
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 463: return;
+"463
+[e $UE 151  ]
+[; ;Main.c: 464: default:
+"464
+[e :U 163 ]
+[; ;Main.c: 465: buttonPressed = 0;
+"465
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 466: break;
+"466
+[e $U 156  ]
+"467
+}
+[; ;Main.c: 467: }
+[e $U 156  ]
+"445
+[e :U 157 ]
+[e [\ _buttonPressed , $ -> -> 1 `i `uc 158
+ , $ -> -> 2 `i `uc 159
+ , $ -> -> 3 `i `uc 160
+ , $ -> -> 4 `i `uc 161
+ , $ -> -> 5 `i `uc 162
+ 163 ]
+"467
+[e :U 156 ]
+"468
+}
+[e :U 152 ]
+"438
+[e $U 153  ]
+[e :U 154 ]
+[; ;Main.c: 468: }
+[; ;Main.c: 469: }
+"469
+[e :UE 151 ]
+}
+"474
 [v _scan360 `(i  1 ef ]
 {
-[; ;Main.c: 361: int scan360(void)
-[; ;Main.c: 362: {
+[; ;Main.c: 473: int scan360(void)
+[; ;Main.c: 474: {
 [e :U _scan360 ]
 [f ]
-"363
+"475
 [v _lowestVal `i  1 a ]
-[; ;Main.c: 363: int lowestVal = 0, lowestSteps = 0;
+[; ;Main.c: 475: int lowestVal = 0, lowestSteps = 0;
 [e = _lowestVal -> 0 `i ]
 [v _lowestSteps `i  1 a ]
 [e = _lowestSteps -> 0 `i ]
-[; ;Main.c: 365: for (int steps = 0; steps < 200; steps+= 2)
-"365
+[; ;Main.c: 477: for (int steps = 0; steps < 200; steps+= 2)
+"477
 {
 [v _steps `i  1 a ]
 [e = _steps -> 0 `i ]
-[e $ < _steps -> 200 `i 164  ]
-[e $U 165  ]
-"366
-[e :U 164 ]
-[; ;Main.c: 366: {
+[e $ < _steps -> 200 `i 165  ]
+[e $U 166  ]
+"478
+[e :U 165 ]
+[; ;Main.c: 478: {
 {
-[; ;Main.c: 367: readAvgDistance();
-"367
+[; ;Main.c: 479: readAvgDistance();
+"479
 [e ( _readAvgDistance ..  ]
-[; ;Main.c: 368: if (adcVal > lowestVal)
-"368
-[e $ ! > _adcVal -> _lowestVal `ui 167  ]
-[; ;Main.c: 369: {
-"369
+[; ;Main.c: 480: if (adcVal > lowestVal)
+"480
+[e $ ! > _adcVal -> _lowestVal `ui 168  ]
+[; ;Main.c: 481: {
+"481
 {
-[; ;Main.c: 370: lowestVal = adcVal;
-"370
+[; ;Main.c: 482: lowestVal = adcVal;
+"482
 [e = _lowestVal -> _adcVal `i ]
-[; ;Main.c: 371: lowestSteps = steps;
-"371
+[; ;Main.c: 483: lowestSteps = steps;
+"483
 [e = _lowestSteps _steps ]
-"373
-}
-[e :U 167 ]
-[; ;Main.c: 373: }
-[; ;Main.c: 374: rotate(2, 1);
-"374
-[e ( _rotate (2 , -> -> 2 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 376: if (RTC_FLAG_250MS == 1)
-"376
-[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 168  ]
-[; ;Main.c: 377: {
-"377
-{
-[; ;Main.c: 378: RTC_FLAG_250MS = 0;
-"378
-[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 379: UpdateDisplay();
-"379
-[e ( _UpdateDisplay ..  ]
-"380
+"485
 }
 [e :U 168 ]
-"381
+[; ;Main.c: 485: }
+[; ;Main.c: 486: rotate(2, 1);
+"486
+[e ( _rotate (2 , -> -> 2 `i `ui -> -> 1 `i `uc ]
+[; ;Main.c: 488: if (RTC_FLAG_250MS == 1)
+"488
+[e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 169  ]
+[; ;Main.c: 489: {
+"489
+{
+[; ;Main.c: 490: RTC_FLAG_250MS = 0;
+"490
+[e = _RTC_FLAG_250MS -> -> 0 `i `b ]
+[; ;Main.c: 491: UpdateDisplay();
+"491
+[e ( _UpdateDisplay ..  ]
+"492
 }
-"365
+[e :U 169 ]
+"493
+}
+"477
 [e =+ _steps -> 2 `i ]
-[e $ < _steps -> 200 `i 164  ]
-[e :U 165 ]
-"381
+[e $ < _steps -> 200 `i 165  ]
+[e :U 166 ]
+"493
 }
-[; ;Main.c: 380: }
-[; ;Main.c: 381: }
-[; ;Main.c: 383: return lowestSteps;
-"383
+[; ;Main.c: 492: }
+[; ;Main.c: 493: }
+[; ;Main.c: 495: return lowestSteps;
+"495
 [e ) _lowestSteps ]
-[e $UE 163  ]
-[; ;Main.c: 384: }
-"384
-[e :UE 163 ]
+[e $UE 164  ]
+[; ;Main.c: 496: }
+"496
+[e :UE 164 ]
 }

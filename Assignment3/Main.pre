@@ -1363,66 +1363,70 @@ case 0:
 calibrateIR();
 break;
 case 1:
-shortwall = scan360();
-rotate((200 - shortwall), 0);
+
+# 209
 break;
 case 2:
 
-robotMoveSpeed(2000, 400);
+
+
+
+robotTurnSpeed(-90,400);
+readAvgDistance();
+int a = adcVal;
+robotMoveSpeed(1500 - a,400);
+
+robotTurnSpeed(-90,400);
+robotMoveSpeed(4000,400);
+
+robotTurnSpeed(90,400);
+robotMoveSpeed(1000,400);
+robotTurnSpeed(90,400);
+robotMoveSpeed(1000,400);
+
+
 break;
 case 3:
 
-robotFollow(2000, 400, adcVal);
-
+# 237
+_delay((unsigned long)((100)*(20000000/4000.0)));
+robotMoveSpeed(1000,400);
+robotTurnSpeed(80,200);
+robotMoveSpeed(1000,400);
+robotTurnSpeed(80,200);
+robotMoveSpeed(2000,400);
+robotTurnSpeed(-80,200);
 break;
 case 4:
-TotalDistTravelled = 0;
-while(!ROBOTerror)
+while (ROBOTerror != 1)
 {
-int shortwall = scan360();
-int RT2P = 0;
-int direction1 = 0;
-if (shortwall > 200)
-RT2P = shortwall + 100;
-if (shortwall < 200)
-RT2P = shortwall - 100;
-
-if (RT2P >= 400 && RT2P < 500 )
+switch (ROBOTerror)
 {
-RT2P = RT2P - 400;
-direction1 = 1;
-}
-if (RT2P >= 200 && RT2P < 400)
-{
-RT2P = 400 - RT2P;
-RT2P = RT2P * -1;
-direction1 = 0;
-}
-if (RT2P < 200 && RT2P >= 0)
-{
-direction1 = 1;
-}
-if (RT2P < 0 && RT2P >= -200)
-{
-direction1 = 0;
-}
-if(RT2P < -200 || RT2P >500)
-{
+case 0:
+robotFollow(1000, 300, adcVal);
 break;
+case 1:
+
+break;
+case 10:
+robotTurnSpeed(90,400);
+
+readAvgDistance();
+robotFollow(1000, 300, adcVal - 10);
+break;
+case 11:
+
+robotMoveSpeed(700,300);
+robotTurnSpeed(-90,400);
+readAvgDistance();
+robotFollow(1000, 300, adcVal - 10);
+break;
+default:
+robotFollow(1000, 300, adcVal);
+break;
+
 }
-
-rotate((400 - shortwall ), 0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-
-
-int RT2A= RT2P * (36.0/40.0);
-robotTurn(RT2A);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-rotate(shortwall,0);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMoveSpeed(500, 200);
 }
-
 break;
 
 case 5:
@@ -1435,7 +1439,11 @@ break;
 choice = 255;
 }
 }
+void start(void)
+{
 
+# 388
+}
 
 
 
@@ -1544,3 +1552,4 @@ UpdateDisplay();
 
 return lowestSteps;
 }
+

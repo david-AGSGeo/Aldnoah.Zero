@@ -213,7 +213,7 @@ void main(void)
         //drive till 50cm from wall (Follow right wall)
         //calibrate (Find the east wall)
         robotTurnSpeed(-90,400);    //Left
-        readAvgDistance()
+        readAvgDistance();
         int a = adcVal;
         robotMoveSpeed(1500 - a,400);
         //calibrate
@@ -243,8 +243,35 @@ void main(void)
                 robotTurnSpeed(-80,200);
                 break;
             case 4:    
-     
-                robotFollow(2000, 400, adcVal);
+     			while (ROBOTerror != 1)
+				{ 
+                	switch (ROBOTerror)
+					{
+						case 0:
+							robotFollow(1000, 300, adcVal);
+						break;
+						case 1:
+							
+						break;
+						case 10:
+							robotTurnSpeed(90,400);    //Right
+							
+							readAvgDistance();
+							robotFollow(1000, 300, adcVal - 10);
+						break;
+						case 11:
+							
+							robotMoveSpeed(700,300);
+							robotTurnSpeed(-90,400);    //Left
+							readAvgDistance();
+							robotFollow(1000, 300, adcVal - 10);
+						break;
+						default:
+							robotFollow(1000, 300, adcVal);
+						break;
+
+					}
+				}
                 break;      
             
             case 5:     //Charge Mode
@@ -468,7 +495,7 @@ int scan360(void)
     return lowestSteps;
 }
 
-// ********************* UNTESTED******************
+/* ********************* UNTESTED******************
 int distcheck(int dirFlag) //returns adc distance of wall in certain direction 
 {
     // dirFlag is the direction the user wants to check to find a wall.
@@ -494,7 +521,7 @@ int distcheck(int dirFlag) //returns adc distance of wall in certain direction
     {
         rotateDirectional(-1); //rotate back to initial position.
         rotateDirectional(startPos*-1);
-    }
+    }*/
 /**         
         if (RTC_FLAG_250MS == 1)    //4Hz refresh rate for display
             {
@@ -504,9 +531,9 @@ int distcheck(int dirFlag) //returns adc distance of wall in certain direction
 **/
      
 
-    return lowestVal;
+//    return lowestVal;
 
-}
+//}
 /****************ALTERNATIVE SOLUTION**************
 
 void start(void)
@@ -557,4 +584,4 @@ void LefttWallFollow(void)
     robotDrive(-500, 200);
     robotTurn( 90, CLOCKWISE)
 }
-**\
+**/

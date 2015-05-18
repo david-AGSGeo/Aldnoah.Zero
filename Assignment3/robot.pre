@@ -1249,7 +1249,7 @@ ser_putch(137);
 
 ser_putch(0);
 
-ser_putch(50);
+ser_putch(200);
 
 ser_putch(0);
 
@@ -1261,7 +1261,7 @@ ser_putch(137);
 
 ser_putch(0);
 
-ser_putch(50);
+ser_putch(200);
 
 ser_putch(255);
 
@@ -1289,18 +1289,30 @@ void robotFollow(int distance, int speed, int AdcTarget)
 distTravelled = 0;
 int temp1;
 RobotDrive(speed, 0x7FFF);
+ROBOTerror = 0;
 
 
 while (abs(distTravelled) < abs(distance))
 {
+
 readAvgDistance();
-if (adcVal > (AdcTarget + 5))
+if (adcVal > (AdcTarget + 5) && adcVal < (AdcTarget + 30))
 {
 RobotDrive(speed, 1800);
 }
-else if (adcVal < (AdcTarget - 5))
+else if (adcVal < (AdcTarget - 5) && adcVal > (AdcTarget - 30))
 {
 RobotDrive(speed, -1800);
+}
+else if (adcVal <= (AdcTarget - 30))
+{
+ROBOTerror = 10;
+break;
+}
+else if (adcVal >= (AdcTarget + 30))
+{
+ROBOTerror = 11;
+break;
 }
 else
 {
@@ -1319,18 +1331,15 @@ distTravelled += temp1;
 TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
-float remaining = abs(distance) - abs(distTravelled) ;
-if ( remaining < 100)
-{
-RobotDrive(speed * (remaining/100.0), 0x7FFF);
-}
+
+# 207
 }
 
 RobotDrive(0, 0x7FFF);
 
 }
 
-# 205
+# 217
 void robotMoveSpeed(int distance, int speed)
 {
 distTravelled = 0;
@@ -1353,18 +1362,15 @@ distTravelled += temp1;
 TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
-float remaining = abs(distance) - abs(distTravelled) ;
-if ( remaining < 100)
-{
-RobotDrive(speed * (remaining/100.0), 0x7FFF);
-}
+
+# 244
 }
 
 RobotDrive(0, 0x7FFF);
 
 }
 
-# 242
+# 254
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;

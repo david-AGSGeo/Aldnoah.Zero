@@ -82,11 +82,11 @@ void rotate(unsigned int numsteps, unsigned char direction)
 	SM_STEP();
 }
 
-void rotateDirectional(unsigned int numsteps)
-{
-	if(numsteps < 0)
-	{	
-		numsteps = numsteps * -1;
-		rotate(numsteps, 0);
-	}
-}
+//void rotateDirectional(unsigned int numsteps)
+//{
+//	if(numsteps < 0)
+//	{	
+//		numsteps = numsteps * -1;
+//		rotate(numsteps, 0);
+//	}
+//}
