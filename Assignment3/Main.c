@@ -253,6 +253,12 @@ void main(void)
 						case 1:
 							
 						break;
+						case 2:
+							
+						break;
+						case 3:
+							
+						break;
 						case 10:
 							robotTurnSpeed(90,400);    //Right
 							

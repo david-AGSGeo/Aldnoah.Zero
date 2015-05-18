@@ -27,27 +27,27 @@
 void readAvgDistance(void)
 {
 	unsigned int fullval = 0, tempIR = 0;
-	int j = 0;
+	unsigned char j, i;
 	unsigned int values[NUMREADS];
 
-	for (unsigned char i = 0; i < NUMREADS; i++)	// take the readings
+	for (i = 0; i < NUMREADS; i++)	// take the readings
 	{
 		values[i] = readDistance();
 	}
-    for (i = 0; i < n; ++i)
+    for (i = 0; i < NUMREADS; i++)
     {
-        for (j = i + 1; j < n; ++j)
+        for (j = i ; j < NUMREADS; j++)
         {
             if (values[i] > values[j])
             {
-                a =  values[i];
+                tempIR =  values[i];
                 values[i] = values[j];
-                values[j] = a;
+                values[j] = tempIR;
            }
         }
     }
-	adcVal = values[NUMREADS/2];	//divide to get average
-	ADCconvert();			//convert to distance in cm
+	adcVal = values[NUMREADS/2];	//divide to get median
+	//ADCconvert();			//convert to distance in cm
 	Disp1 = adcVal;
 }
 

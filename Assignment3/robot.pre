@@ -1101,7 +1101,7 @@ int abs(int v);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1180,10 +1180,21 @@ ser_putch(142);
 ser_putch(7);
 _delay((unsigned long)((5)*(20000000/4000.0)));
 BumpSensors = ser_getch();
+
 ser_putch(142);
 ser_putch(13);
 _delay((unsigned long)((5)*(20000000/4000.0)));
 VwallSensor = ser_getch();
+
+ser_putch(142);
+ser_putch(10);
+_delay((unsigned long)((5)*(20000000/4000.0)));
+CliffSensors = ser_getch();
+
+ser_putch(142);
+ser_putch(11);
+_delay((unsigned long)((5)*(20000000/4000.0)));
+CliffSensors += ser_getch();
 
 if (readType == 0)
 {
@@ -1319,9 +1330,19 @@ else
 RobotDrive(speed, 0x7FFF);
 }
 robot_read(0);
-if (BumpSensors || VwallSensor)
+if (BumpSensors)
 {
 ROBOTerror = 1;
+break;
+}
+if (VwallSensor)
+{
+ROBOTerror = 2;
+break;
+}
+if (CliffSensors)
+{
+ROBOTerror = 3;
 break;
 }
 temp1 = DistHighByte;
@@ -1332,14 +1353,15 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 207
+# 228
 }
-
+Disp2 = ROBOTerror;
+UpdateDisplay();
 RobotDrive(0, 0x7FFF);
 
 }
 
-# 217
+# 239
 void robotMoveSpeed(int distance, int speed)
 {
 distTravelled = 0;
@@ -1350,9 +1372,19 @@ RobotDrive(speed, 0x7FFF);
 while (abs(distTravelled) < abs(distance))
 {
 robot_read(0);
-if (BumpSensors || VwallSensor)
+if (BumpSensors)
 {
 ROBOTerror = 1;
+break;
+}
+if (VwallSensor)
+{
+ROBOTerror = 2;
+break;
+}
+if (CliffSensors)
+{
+ROBOTerror = 3;
 break;
 }
 temp1 = DistHighByte;
@@ -1363,14 +1395,15 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 244
+# 276
 }
-
+Disp2 = ROBOTerror;
+UpdateDisplay();
 RobotDrive(0, 0x7FFF);
 
 }
 
-# 254
+# 287
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;

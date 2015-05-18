@@ -915,6 +915,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _AngleLowByte `Vuc  1 e ]
 "18 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _VwallSensor `Vuc  1 e ]
+"18 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _CliffSensors `Vuc  1 e ]
 "20 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
 "20 E:\Aldnoah.Zero\Assignment3\robot.h
@@ -1868,7 +1870,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.h: 14: int abs(int v);
 [; ;robot.h: 16: void robot_read(unsigned char readType);
 [; ;robot.h: 17: int distTravelled,angleTurned, TotalDistTravelled;
-[; ;robot.h: 18: volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor ;
+[; ;robot.h: 18: volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
 "20 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _highByte
 -> -> 0 `i `uc
@@ -2430,15 +2432,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UpdateDisplay ]
 [f ]
 "237
-[v F1249 `uc  -> 16 `i s ]
-[i F1249
+[v F1250 `uc  -> 16 `i s ]
+[i F1250
 :U ..
 -> 0 `c
 ..
 ]
 [v _LCDOutput `uc  -> 16 `i a ]
 [; ;HMI.c: 237: char LCDOutput[16] = "";
-[e = _LCDOutput F1249 ]
+[e = _LCDOutput F1250 ]
 [; ;HMI.c: 238: switch (currentMenu)
 "238
 [e $U 137  ]

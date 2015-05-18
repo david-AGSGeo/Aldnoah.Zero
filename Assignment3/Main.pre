@@ -1236,7 +1236,7 @@ int abs(int v);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1408,6 +1408,12 @@ break;
 case 1:
 
 break;
+case 2:
+
+break;
+case 3:
+
+break;
 case 10:
 robotTurnSpeed(90,400);
 
@@ -1442,7 +1448,7 @@ choice = 255;
 void start(void)
 {
 
-# 388
+# 394
 }
 
 

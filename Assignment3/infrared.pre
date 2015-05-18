@@ -1208,19 +1208,27 @@ int Disp1, Disp2;
 void readAvgDistance(void)
 {
 unsigned int fullval = 0, tempIR = 0;
-int j = 0;
+unsigned char j, i;
+unsigned int values[7];
 
-for (int i = 0; i < 8; i++)
+for (i = 0; i < 7; i++)
 {
-tempIR = readDistance();
-if (tempIR <= 1000)
+values[i] = readDistance();
+}
+for (i = 0; i < 7; i++)
 {
-fullval += tempIR;
-j++;
+for (j = i ; j < 7; j++)
+{
+if (values[i] > values[j])
+{
+tempIR = values[i];
+values[i] = values[j];
+values[j] = tempIR;
 }
 }
-adcVal = fullval / j;
-ADCconvert();
+}
+adcVal = values[7/2];
+
 Disp1 = adcVal;
 }
 
@@ -1240,7 +1248,7 @@ return readVal;
 void ADCconvert(void)
 {
 
-# 66
+# 74
 if (adcVal >= 213 && adcVal < 234)
 {
 IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);

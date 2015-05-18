@@ -48,10 +48,21 @@ void robot_read(unsigned char readType)
 	ser_putch(7);  // Bump Sensor Packet ID
 	__delay_ms(5);
 	BumpSensors = ser_getch();
+
 	ser_putch(142); // Sensor Setup
 	ser_putch(13);  // Virtual Wall Sensor Packet ID
 	__delay_ms(5);
 	VwallSensor = ser_getch();
+
+	ser_putch(142); // Sensor Setup
+	ser_putch(10);  // Cliff R Sensor Packet ID
+	__delay_ms(5);
+	CliffSensors = ser_getch();
+
+	ser_putch(142); // Sensor Setup
+	ser_putch(11);  // Cliff L Sensor Packet ID
+	__delay_ms(5);
+	CliffSensors += ser_getch();
 	
 	if (readType == DIST)
 	{
@@ -187,9 +198,19 @@ void robotFollow(int distance, int speed, int AdcTarget)
 			RobotDrive(speed, STRAIGHT);
 		}
 		robot_read(DIST);
-		if (BumpSensors || VwallSensor)	//hit wall or lifted
+		if (BumpSensors)	//hit wall or lifted
 		{
-			ROBOTerror = 1;	//signal a bump sensor 
+			ROBOTerror = 1;	//signal an error
+			break;
+		}
+		if (VwallSensor)	//lifted
+		{
+			ROBOTerror = 2;	//signal an error
+			break;
+		}
+		if (CliffSensors)	//cliff
+		{
+			ROBOTerror = 3;	//signal an error
 			break;
 		}
 		temp1 = DistHighByte;	//add bytes together
@@ -205,7 +226,8 @@ void robotFollow(int distance, int speed, int AdcTarget)
 	//		RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
 	//}
 	}
-
+	Disp2 = ROBOTerror;
+		UpdateDisplay();
 	RobotDrive(0, STRAIGHT);	//stop robot
 
 }
@@ -224,9 +246,19 @@ void robotMoveSpeed(int distance, int speed)
 	while (abs(distTravelled) < abs(distance))	
 	{
 		robot_read(DIST);
-		if (BumpSensors || VwallSensor)	//hit wall or lifted
+		if (BumpSensors)	//hit wall or lifted
 		{
 			ROBOTerror = 1;	//signal an error
+			break;
+		}
+		if (VwallSensor)	//lifted
+		{
+			ROBOTerror = 2;	//signal an error
+			break;
+		}
+		if (CliffSensors)	//cliff
+		{
+			ROBOTerror = 3;	//signal an error
 			break;
 		}
 		temp1 = DistHighByte;	//add bytes together
@@ -242,7 +274,8 @@ void robotMoveSpeed(int distance, int speed)
 	//		RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
 	//	}
 	}
-
+	Disp2 = ROBOTerror;
+		UpdateDisplay();
 	RobotDrive(0, STRAIGHT);	//stop robot
 
 }
