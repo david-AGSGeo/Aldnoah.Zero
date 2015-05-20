@@ -897,35 +897,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _adcVal `Vui  1 e ]
 "9 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _IRdistance `Vui  1 e ]
-"17 E:\Aldnoah.Zero\Assignment3\robot.h
+"22 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _distTravelled `i  1 e ]
-"17 E:\Aldnoah.Zero\Assignment3\robot.h
+"22 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _angleTurned `i  1 e ]
-"17 E:\Aldnoah.Zero\Assignment3\robot.h
+"22 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _TotalDistTravelled `i  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BumpSensors `Vuc  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _AngleHighByte `Vuc  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _AngleLowByte `Vuc  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _VwallSensor `Vuc  1 e ]
-"18 E:\Aldnoah.Zero\Assignment3\robot.h
+"23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _CliffSensors `Vuc  1 e ]
-"20 E:\Aldnoah.Zero\Assignment3\robot.h
+"24 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _BattCharge `ui  1 e ]
+"24 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _BattState `ui  1 e ]
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"20 E:\Aldnoah.Zero\Assignment3\robot.h
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"20 E:\Aldnoah.Zero\Assignment3\robot.h
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"20 E:\Aldnoah.Zero\Assignment3\robot.h
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
-"20 E:\Aldnoah.Zero\Assignment3\robot.h
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _ROBOTerror `uc  1 e ]
 "45 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _pos `i  1 e ]
@@ -1862,16 +1866,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;infrared.h: 14: void readAvgDistance(void);
 [; ;infrared.h: 15: void ADCconvert(void);
 [; ;robot.h: 8: void robo_init(void);
-[; ;robot.h: 9: void robotMove(int distance, int radius);
-[; ;robot.h: 10: void robotMoveSpeed(int distance, int speed);
-[; ;robot.h: 11: void robotTurn(int degrees);
-[; ;robot.h: 12: void robotTurnSpeed(int angle, int speed);
-[; ;robot.h: 13: void robotFollow(int distance, int speed, int AdcTarget);
-[; ;robot.h: 14: int abs(int v);
-[; ;robot.h: 16: void robot_read(unsigned char readType);
-[; ;robot.h: 17: int distTravelled,angleTurned, TotalDistTravelled;
-[; ;robot.h: 18: volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
-"20 E:\Aldnoah.Zero\Assignment3\robot.h
+[; ;robot.h: 10: void RobotDrive(int speed, int radius);
+[; ;robot.h: 11: void robotMove(int distance, int radius);
+[; ;robot.h: 12: void robotMoveSpeed(int distance, int speed);
+[; ;robot.h: 13: void robotTurn(int degrees);
+[; ;robot.h: 14: void robotTurnSpeed(int angle, int speed);
+[; ;robot.h: 15: void robotFollow(int speed, int AdcTarget);
+[; ;robot.h: 16: void robot_turnRight(int speed, int AdcTarget);
+[; ;robot.h: 17: void RobotBattRead(void);
+[; ;robot.h: 18: int abs(int v);
+[; ;robot.h: 19: void robotLoadSong(void);
+[; ;robot.h: 21: void robot_read(unsigned char readType);
+[; ;robot.h: 22: int distTravelled,angleTurned, TotalDistTravelled;
+[; ;robot.h: 23: volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+"24 E:\Aldnoah.Zero\Assignment3\robot.h
+[i _BattCharge
+-> -> 0 `i `ui
+]
+[i _BattState
+-> -> 0 `i `ui
+]
+[; ;robot.h: 24: unsigned int BattCharge = 0, BattState = 0;
+"27
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1887,7 +1903,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _ROBOTerror
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 20: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
+[; ;robot.h: 27: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 "45 E:\Aldnoah.Zero\Assignment3\HMI.c
 [i _pos
 -> 0 `i
@@ -2432,15 +2448,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UpdateDisplay ]
 [f ]
 "237
-[v F1250 `uc  -> 16 `i s ]
-[i F1250
+[v F1261 `uc  -> 16 `i s ]
+[i F1261
 :U ..
 -> 0 `c
 ..
 ]
 [v _LCDOutput `uc  -> 16 `i a ]
 [; ;HMI.c: 237: char LCDOutput[16] = "";
-[e = _LCDOutput F1250 ]
+[e = _LCDOutput F1261 ]
 [; ;HMI.c: 238: switch (currentMenu)
 "238
 [e $U 137  ]
@@ -2539,35 +2555,122 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.c: 269: lcd_write_string(" Charging Mode ");
 "269
 [e ( _lcd_write_string (1 -> :s 18C `*uc ]
-[; ;HMI.c: 270: lcd_set_cursor(0x44);
+[; ;HMI.c: 270: lcd_set_cursor(0x40);
 "270
-[e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
-[; ;HMI.c: 271: lcd_write_string("  EXIT  ");
+[e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
+[; ;HMI.c: 271: sprintf(LCDOutput,"%dmV", BattCharge);
 "271
-[e ( _lcd_write_string (1 -> :s 19C `*uc ]
-[; ;HMI.c: 272: break;
+[e ( _sprintf (1 , (. , &U _LCDOutput :s 19C _BattCharge ]
+[; ;HMI.c: 272: lcd_write_string(LCDOutput);
 "272
-[e $U 136  ]
-[; ;HMI.c: 273: default:
+[e ( _lcd_write_string (1 &U _LCDOutput ]
+[; ;HMI.c: 273: lcd_set_cursor(0x4D);
 "273
-[e :U 143 ]
-[; ;HMI.c: 274: break;
+[e ( _lcd_set_cursor (1 -> -> 77 `i `uc ]
+[; ;HMI.c: 274: switch(BattState)
 "274
-[e $U 136  ]
+[e $U 144  ]
+[; ;HMI.c: 275: {
 "275
+{
+[; ;HMI.c: 276: case 0:
+"276
+[e :U 145 ]
+[; ;HMI.c: 277: lcd_write_string("NC");
+"277
+[e ( _lcd_write_string (1 -> :s 20C `*uc ]
+[; ;HMI.c: 278: break;
+"278
+[e $U 143  ]
+[; ;HMI.c: 279: case 1:
+"279
+[e :U 146 ]
+[; ;HMI.c: 280: lcd_write_string("RC");
+"280
+[e ( _lcd_write_string (1 -> :s 21C `*uc ]
+[; ;HMI.c: 281: break;
+"281
+[e $U 143  ]
+[; ;HMI.c: 282: case 2:
+"282
+[e :U 147 ]
+[; ;HMI.c: 283: lcd_write_string("FC");
+"283
+[e ( _lcd_write_string (1 -> :s 22C `*uc ]
+[; ;HMI.c: 284: break;
+"284
+[e $U 143  ]
+[; ;HMI.c: 285: case 3:
+"285
+[e :U 148 ]
+[; ;HMI.c: 286: lcd_write_string("TC");
+"286
+[e ( _lcd_write_string (1 -> :s 23C `*uc ]
+[; ;HMI.c: 287: break;
+"287
+[e $U 143  ]
+[; ;HMI.c: 288: case 4:
+"288
+[e :U 149 ]
+[; ;HMI.c: 289: lcd_write_string("Wa");
+"289
+[e ( _lcd_write_string (1 -> :s 24C `*uc ]
+[; ;HMI.c: 290: break;
+"290
+[e $U 143  ]
+[; ;HMI.c: 291: case 5:
+"291
+[e :U 150 ]
+[; ;HMI.c: 292: lcd_write_string("FC");
+"292
+[e ( _lcd_write_string (1 -> :s 25C `*uc ]
+[; ;HMI.c: 293: break;
+"293
+[e $U 143  ]
+"294
 }
-[; ;HMI.c: 275: }
+[; ;HMI.c: 294: }
+[e $U 143  ]
+"274
+[e :U 144 ]
+[e [\ _BattState , $ -> -> 0 `i `ui 145
+ , $ -> -> 1 `i `ui 146
+ , $ -> -> 2 `i `ui 147
+ , $ -> -> 3 `i `ui 148
+ , $ -> -> 4 `i `ui 149
+ , $ -> -> 5 `i `ui 150
+ 143 ]
+"294
+[e :U 143 ]
+[; ;HMI.c: 296: lcd_set_cursor(0x44);
+"296
+[e ( _lcd_set_cursor (1 -> -> 68 `i `uc ]
+[; ;HMI.c: 297: lcd_write_string("  EXIT  ");
+"297
+[e ( _lcd_write_string (1 -> :s 26C `*uc ]
+[; ;HMI.c: 298: break;
+"298
+[e $U 136  ]
+[; ;HMI.c: 299: default:
+"299
+[e :U 151 ]
+[; ;HMI.c: 300: break;
+"300
+[e $U 136  ]
+"301
+}
+[; ;HMI.c: 301: }
 [e $U 136  ]
 "238
 [e :U 137 ]
 [e [\ _currentMenu , $ -> -> 0 `i `uc 138
  , $ -> -> 1 `i `uc 141
  , $ -> -> 2 `i `uc 142
- 143 ]
-"275
+ 151 ]
+"301
 [e :U 136 ]
-[; ;HMI.c: 276: }
-"276
+[; ;HMI.c: 302: }
+"302
 [e :UE 135 ]
 }
 [a 11C 70 108 119 0 ]
@@ -2578,14 +2681,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 7C 67 97 108 0 ]
 [a 12C 67 104 103 0 ]
 [a 13C 73 82 58 37 100 99 109 32 68 58 37 100 0 ]
+[a 24C 87 97 0 ]
+[a 19C 37 100 109 86 0 ]
 [a 1C 67 97 108 105 98 95 73 82 0 ]
 [a 16C 67 79 78 70 73 82 77 0 ]
 [a 10C 68 114 76 0 ]
 [a 4C 68 114 105 118 101 95 76 0 ]
+[a 23C 84 67 0 ]
+[a 21C 82 67 0 ]
+[a 20C 78 67 0 ]
+[a 22C 70 67 0 ]
+[a 25C 70 67 0 ]
 [a 17C 62 62 62 0 ]
 [a 15C 60 60 60 0 ]
 [a 9C 68 114 50 0 ]
 [a 2C 83 99 97 110 95 51 54 48 0 ]
 [a 6C 32 67 104 97 114 103 101 32 0 ]
 [a 18C 32 67 104 97 114 103 105 110 103 32 77 111 100 101 32 0 ]
-[a 19C 32 32 69 88 73 84 32 32 0 ]
+[a 26C 32 32 69 88 73 84 32 32 0 ]

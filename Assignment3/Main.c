@@ -82,11 +82,11 @@
 void calibrateIR(void);
 int scan360(void);
 void ChargeMode(void);
-void FollowWall(void);
-
+void RightTurn(void);
+void Init_Follow_IR(void);
 
 //Global Variables
-int totalSteps = 0; //stores steppermotor direction
+
 
 volatile unsigned char buttonPressed;   //stores button presses
 
@@ -175,7 +175,7 @@ void main(void)
 
     //initialise function
     init();
-        
+    robotLoadSong();
     //Loop forever
     while(1)
     {
@@ -205,79 +205,85 @@ void main(void)
                // rotate((200 - shortwall), CLOCKWISE);   //turn IR to face the closest wall
                 
                //robotTurn(shortwall*36/40)
-           
+           		ser_putch(141); 
+
+				ser_putch(0); 
                 break;
             case 2:     //Drive forward 2 meters
-                //robotTurnSpeed(-90, 1); //turn clockwise 90 degrees               
-                //robotMoveSpeed(2000, 400);
-        //drive till 50cm from wall (Follow right wall)
-        //calibrate (Find the east wall)
-        robotTurnSpeed(-90,400);    //Left
-        readAvgDistance();
-        int a = adcVal;
-        robotMoveSpeed(1500 - a,400);
-        //calibrate
-        robotTurnSpeed(-90,400);    //Left
-        robotMoveSpeed(4000,400);
-        //calibrate
-        robotTurnSpeed(90,400);    //Right
-        robotMoveSpeed(1000,400);
-        robotTurnSpeed(90,400);    //Right
-        robotMoveSpeed(1000,400);
-                
-                
+               
+                robotMoveSpeed(-200,-200);
                 break;
             case 3:     //Drive in an L shape
  
-                // 180 Scan CW - store minimum
-                // back to original
-                // 180 Scan CCW - look for close to minimum
-                // move sensor to original minimum location
-                // fix sensor, rotate robot until minimum location reached
-                __delay_ms(100);
-                robotMoveSpeed(1000,400);
-                robotTurnSpeed(80,200);
-                robotMoveSpeed(1000,400);
-                robotTurnSpeed(80,200);
-                robotMoveSpeed(2000,400);
-                robotTurnSpeed(-80,200);
+                robotTurnSpeed(-70,400);
+				__delay_ms(1000);
+				robotTurnSpeed(-80,400);
+				__delay_ms(1000);
+				robotTurnSpeed(-90,400);
+				__delay_ms(1000);
+				robotTurnSpeed(-100,400);    //Left
                 break;
             case 4:    
+				Init_Follow_IR();
      			while (ROBOTerror != 1)
 				{ 
                 	switch (ROBOTerror)
 					{
 						case 0:
-							robotFollow(1000, 300, adcVal);
+							readAvgDistance();
+							robotFollow(200, adcVal);
 						break;
 						case 1:
-							
+							ROBOTerror = 1;
 						break;
 						case 2:
-							
+							ROBOTerror = 1;
 						break;
 						case 3:
-							
+								ROBOTerror = 0;
+								RobotDrive(-200, 0x7FFF);
+								__delay_ms(1000);
+								robotMoveSpeed(-200,-200);
+								robotTurnSpeed(80,400);    //Left
+								robotMoveSpeed(300,200);
+								readAvgDistance();
+								robotFollow(200, adcVal - 10);
 						break;
-						case 10:
-							robotTurnSpeed(90,400);    //Right
+						case 10: // ahead blocked, turn left
+							//robotMoveSpeed(700,200);
+							robotTurnSpeed(80,400);    //Left
 							
 							readAvgDistance();
-							robotFollow(1000, 300, adcVal - 10);
+							robotFollow(200, adcVal - 10);
 						break;
-						case 11:
-							
-							robotMoveSpeed(700,300);
-							robotTurnSpeed(-90,400);    //Left
+						case 11://right free, turn right
+							__delay_ms(1000);
+							rotate(25, CLOCKWISE);
 							readAvgDistance();
-							robotFollow(1000, 300, adcVal - 10);
+							robot_turnRight(200, adcVal);
+							rotate(25, COUNTERCLOCKWISE);
+							readAvgDistance();
+							robotFollow(200, adcVal);
+							//RightTurn();
+							//__delay_ms(1000);
+							//robotMoveSpeed(700,200);
+							//__delay_ms(1000);
+							//robotTurnSpeed(-80,400);  
+							
+							//__delay_ms(1000);
+							//robotMoveSpeed(100,200);
+							//__delay_ms(1000);  
+							//readAvgDistance();
+							//robotFollow(200, adcVal - 10);
 						break;
 						default:
-							robotFollow(1000, 300, adcVal);
+							readAvgDistance();
+							robotFollow(200, adcVal);
 						break;
 
 					}
 				}
+				ROBOTerror = 0;	//clear any errors
                 break;      
             
             case 5:     //Charge Mode
@@ -290,108 +296,21 @@ void main(void)
         choice = 255;   //reset menu choice
     }
 }
-void start(void)
-{
-    /********* Route 2 Cliff  **********
-    //Calibrate Orientation
-    Start Total Distance Covered Counter
-    Drive 2m.
-    Turn Left.
-    Drive 1m
-    Turn Left.
-    Drive 2m.
-    Turn Right.
-    Drive till cliff.
-    Turn 180
-    ********** Route 2 Cliff  **********/
-    
-    
-    /********* Calibrate Position **********
-    Scan area, and navigate away from cliff, into walled area.
-    Turn 180
-    ********** Calibrate Position **********/
-    
-    
-    /********* Left Wall Follow **********
-    while(wall on your left)
-        RobotFollow(Left)
-    if(drastic decreas in adc)
-        Make Left turn
-    elseif(Drastic Increase in adc)
-        Make Right Turn
-          RobotFollow(Left); ??
-       
-    ********** Left Wall Follow **********/
-    
-    
-    /********* Found Victim **********
-    Play Song
-    follow wall till 
-    Turn 180
-    ********** Found Victim  **********/
-   
-    
-    /********* Drive to Checkpoint **********
-    
-       int wall = distCheck(2);
-    
-if (totalDistanceTravelled > 11m && totalDistanceTravelled < 12m)
-    tile = 4;
-else if (totalDistanceTravelled > 12m && totalDistanceTravelled < 13m)
-    tile = 3;
-else if (totalDistanceTravelled > 13m && totalDistanceTravelled < 14m)
-    tile = 2;
-else if (totalDistanceTravelled > 14m && totalDistanceTravelled < 15m)
-    tile = 1;
-else if (totalDistanceTravelled > 15m && totalDistanceTravelled < 16m)
-    tile = 0;
-else if (totalDistanceTravelled > 20m && totalDistanceTravelled < 17m)
-    tile = 6;
-else if (totalDistanceTravelled > 21m)
-    tile = 5;
 
-    switch(tile)
-    {
-    case 0: //tile E
-        dive 1m;
-        turn R
-    case 1: //tile D
-        drive 1m, 
-        turn R
-    case 2: //tile C
-        drive 1m, 
-        turn L
-    case 3: //tile B
-        drive 1m
-    case 4: //tile A
-        return;
-    case 5: //tile G
-        drive 1m
-        turn Left
-    case 6: //tile F
-        drive 1m
-        turn Left
-        return;
-    }
-    ********** Drive to Checkpoint  **********/
-    
-    
-    /********* Route Home **********
-        drive till 50cm from wall (Follow right wall)
-        calibrate (Find the east wall)
-        robotTurnSpeed(-90,400);    //Left
-        int a = calculate distance behind.
-        robotMoveSpeed(1500 - a,400);
-        calibrate
-        robotTurnSpeed(-90,400);    //Left
-        robotMoveSpeed(4000,400);
-        calibrate
-        robotTurnSpeed(90,400);    //Right
-        robotMoveSpeed(1000,400);
-        robotTurnSpeed(90,400);    //Right
-        robotMoveSpeed(1000,400);
-    ********** Route Home  **********/
+void Init_Follow_IR(void)
+{
+	calibrateIR();
+	__delay_ms(500);
+	rotate(25, CLOCKWISE);
 }
+
+void RightTurn(void)
+{
+	rotate(25, CLOCKWISE);
+	readAvgDistance();
+	robot_turnRight(200, adcVal);
+}
+
 
 /************  calibrateIR  *************/
 //User moves steppermotor to a zero position and sets this to zero
@@ -446,6 +365,7 @@ void ChargeMode(void)
         if (RTC_FLAG_250MS == 1)    //4Hz refresh rate for display
             {
                 RTC_FLAG_250MS = 0;
+				RobotBattRead();
                 UpdateDisplay();
             }
         switch (buttonPressed)
@@ -501,93 +421,3 @@ int scan360(void)
     return lowestSteps;
 }
 
-/* ********************* UNTESTED******************
-int distcheck(int dirFlag) //returns adc distance of wall in certain direction 
-{
-    // dirFlag is the direction the user wants to check to find a wall.
-    // 0 = Infront
-    // 1 = Left side
-    // 2 = Behind
-    // -1 = Right Side
-    int lowestVal = 0, lowestSteps = 0;
-    int startPos = dirFlag * 100;
-    rotateDirectional(startPos - 50); // Rotate to Le
-    for ( int i = 0; i < 50; i+= 1) //step through 90 degrees
-    {
-        readAvgDistance();
-        if (adcVal > lowestVal)         //compare current value to lowest value (done using raw data to speed up process
-        {
-            lowestVal = adcVal;
-            lowestSteps = i;
-            
-        }
-        rotateDirectional(1);
-    }
-    while(i>25)
-    {
-        rotateDirectional(-1); //rotate back to initial position.
-        rotateDirectional(startPos*-1);
-    }*/
-/**         
-        if (RTC_FLAG_250MS == 1)    //4Hz refresh rate for display
-            {
-                RTC_FLAG_250MS = 0;
-                UpdateDisplay();
-            }       
-**/
-     
-
-//    return lowestVal;
-
-//}
-/****************ALTERNATIVE SOLUTION**************
-
-void start(void)
-{
-    RightWallFollow();
-    LeftWallFollow();
-    if (Error = 1 )     // Bump Sensor Flag
-        robotDrive(500, 200)
-        
-    if (Error = 3 && TotalDistance > 25m)   //Victim Found Flag
-        LeftWallFollow();
-    else if (Error = 3)
-        RightWallFollow();
-    //Somehow make its stop, turn left and go over the ramps back home.
-}
-
-void RightWallFollow(void)
-{
-    rotate(50, CLOCKWISE);
-
-    while(!Error)
-    {
-        RobotFollow();
-    }
-
-    if (error = 3)
-    {
-        song();
-    }
-
-    robotDrive(-500, 200);
-    robotTurn( 90, COUNTERCLOCKWISE)
-}
-void LefttWallFollow(void)
-{
-    rotate(50, COUNTERCLOCKWISE);
-
-    while(!Error)
-    {
-        RobotFollow();
-    }
-        
-    if (error = 3)
-    {
-        song();
-    }
-
-    robotDrive(-500, 200);
-    robotTurn( 90, CLOCKWISE)
-}
-**/

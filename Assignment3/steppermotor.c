@@ -74,6 +74,10 @@ void rotate(unsigned int numsteps, unsigned char direction)
 	for (unsigned int i = 0; i < numsteps; i++)
 	{
 		SM_STEP();
+		if (direction)
+			totalSteps++;
+		else
+			totalSteps--;
 		__delay_ms(15);  //give motor time to respond
 	}
 	SELECT_SM();			// SPI select the Stepper M

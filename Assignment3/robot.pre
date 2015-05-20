@@ -1092,16 +1092,23 @@ extern void _delay(unsigned long);
 
 # 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
+
+void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int distance, int speed, int AdcTarget);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnRight(int speed, int AdcTarget);
+void RobotBattRead(void);
 int abs(int v);
+void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+unsigned int BattCharge = 0, BattState = 0;
+
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1163,7 +1170,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 35 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 39 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1177,30 +1184,34 @@ ser_putch(0);
 void robot_read(unsigned char readType)
 {
 ser_putch(142);
-ser_putch(7);
-_delay((unsigned long)((5)*(20000000/4000.0)));
-BumpSensors = ser_getch();
-
-ser_putch(142);
-ser_putch(13);
-_delay((unsigned long)((5)*(20000000/4000.0)));
-VwallSensor = ser_getch();
-
-ser_putch(142);
 ser_putch(10);
-_delay((unsigned long)((5)*(20000000/4000.0)));
+
 CliffSensors = ser_getch();
 
 ser_putch(142);
 ser_putch(11);
-_delay((unsigned long)((5)*(20000000/4000.0)));
+
 CliffSensors += ser_getch();
+
+
+
+ser_putch(142);
+ser_putch(7);
+
+BumpSensors = ser_getch();
+
+ser_putch(142);
+ser_putch(13);
+
+VwallSensor = ser_getch();
+
+
 
 if (readType == 0)
 {
 ser_putch(142);
 ser_putch(19);
-_delay((unsigned long)((5)*(20000000/4000.0)));
+
 DistHighByte = ser_getch();
 DistLowByte = ser_getch();
 }
@@ -1208,7 +1219,7 @@ else if (readType == 1)
 {
 ser_putch(142);
 ser_putch(20);
-_delay((unsigned long)((5)*(20000000/4000.0)));
+
 AngleHighByte = ser_getch();
 AngleLowByte = ser_getch();
 }
@@ -1217,14 +1228,18 @@ else if (readType == 2)
 
 ser_putch(142);
 ser_putch(19);
-_delay((unsigned long)((5)*(20000000/4000.0)));
+
 DistHighByte = ser_getch();
 DistLowByte = ser_getch();
 ser_putch(142);
 ser_putch(20);
-_delay((unsigned long)((5)*(20000000/4000.0)));
+
 AngleHighByte = ser_getch();
 AngleLowByte = ser_getch();
+}
+else if (readType == 3)
+{
+
 }
 }
 
@@ -1295,35 +1310,46 @@ ser_putch(0);
 
 
 
-void robotFollow(int distance, int speed, int AdcTarget)
+void robotFollow(int speed, int AdcTarget)
 {
 distTravelled = 0;
 int temp1;
 RobotDrive(speed, 0x7FFF);
 ROBOTerror = 0;
+int turncounter = 0;
 
-
-while (abs(distTravelled) < abs(distance))
+while (1)
 {
-
+if (AdcTarget > 100)
+AdcTarget--;
+if (AdcTarget < 100)
+AdcTarget++;
 readAvgDistance();
-if (adcVal > (AdcTarget + 5) && adcVal < (AdcTarget + 30))
+if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 25))
 {
-RobotDrive(speed, 1800);
+RobotDrive(speed, 1700);
 }
-else if (adcVal < (AdcTarget - 5) && adcVal > (AdcTarget - 30))
+else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 25))
 {
-RobotDrive(speed, -1800);
+RobotDrive(speed, -1700);
 }
-else if (adcVal <= (AdcTarget - 30))
+else if (adcVal <= (AdcTarget - 20))
+{
+turncounter++;
+if (turncounter > 3)
+{
+ROBOTerror = 11;
+break;
+}
+}
+else if (adcVal >= (AdcTarget + 25))
+{
+turncounter--;
+if (turncounter < -3)
 {
 ROBOTerror = 10;
 break;
 }
-else if (adcVal >= (AdcTarget + 30))
-{
-ROBOTerror = 11;
-break;
 }
 else
 {
@@ -1350,18 +1376,122 @@ temp1 = temp1 << 8;
 temp1 += DistLowByte;
 distTravelled += temp1;
 TotalDistTravelled += temp1;
+
 Disp2 = distTravelled;
 UpdateDisplay();
-
-# 228
 }
+RobotDrive(0, 0x7FFF);
 Disp2 = ROBOTerror;
 UpdateDisplay();
-RobotDrive(0, 0x7FFF);
+
 
 }
 
-# 239
+void robotLoadSong(void)
+{
+ser_putch(140);
+ser_putch(0);
+ser_putch(2);
+ser_putch(72);
+ser_putch(16);
+ser_putch(84);
+ser_putch(16);
+}
+
+void robot_turnRight(int speed, int AdcTarget)
+{
+angleTurned = 0;
+int temp1;
+RobotDrive(speed, 0x7FFF);
+ROBOTerror = 0;
+
+
+while (1)
+{
+readAvgDistance();
+if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 15))
+{
+RobotDrive(speed, 1700);
+}
+else if (adcVal < (AdcTarget))
+{
+RobotDrive(speed, -1700);
+}
+else if (adcVal >= (AdcTarget + 15))
+{
+ser_putch(141);
+
+ser_putch(0);
+
+break;
+}
+else
+{
+RobotDrive(speed, 0x7FFF);
+}
+robot_read(2);
+if (BumpSensors)
+{
+ROBOTerror = 1;
+break;
+}
+if (VwallSensor)
+{
+ROBOTerror = 2;
+break;
+}
+if (CliffSensors)
+{
+ROBOTerror = 3;
+break;
+}
+temp1 = DistHighByte;
+temp1 = temp1 << 8;
+temp1 += DistLowByte;
+distTravelled += temp1;
+TotalDistTravelled += temp1;
+temp1 = AngleHighByte;
+temp1 = temp1 << 8;
+temp1 += AngleLowByte;
+angleTurned += temp1;
+Disp2 = angleTurned;
+UpdateDisplay();
+}
+RobotDrive(speed, -500);
+while (abs(angleTurned) < abs(-90))
+{
+robot_read(1);
+if (BumpSensors)
+{
+ROBOTerror = 1;
+break;
+}
+if (VwallSensor)
+{
+ROBOTerror = 2;
+break;
+}
+if (CliffSensors)
+{
+ROBOTerror = 3;
+break;
+}
+temp1 = AngleHighByte;
+temp1 = temp1 << 8;
+temp1 += AngleLowByte;
+angleTurned += temp1;
+Disp2 = angleTurned;
+UpdateDisplay();
+}
+RobotDrive(0, 0x7FFF);
+Disp2 = ROBOTerror;
+UpdateDisplay();
+
+
+}
+
+
+
 void robotMoveSpeed(int distance, int speed)
 {
 distTravelled = 0;
@@ -1395,7 +1525,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 276
+# 397
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1403,7 +1533,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 287
+# 408
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;
@@ -1429,6 +1559,26 @@ UpdateDisplay();
 }
 
 robotTurn(0);
+}
+
+void RobotBattRead(void)
+{
+int temp1 = 0;
+ser_putch(142);
+ser_putch(25);
+_delay((unsigned long)((5)*(20000000/4000.0)));
+DistHighByte = ser_getch();
+DistLowByte = ser_getch();
+ser_putch(142);
+ser_putch(21);
+_delay((unsigned long)((5)*(20000000/4000.0)));
+BattState = ser_getch();
+
+
+temp1 = DistHighByte;
+temp1 = temp1 << 8;
+temp1 += DistLowByte;
+BattCharge = temp1;
 }
 
 

@@ -267,6 +267,32 @@ void UpdateDisplay(void)
 			lcd_write_control(0b00000001); //clear display	
 			lcd_set_cursor(0x00);	
 			lcd_write_string(" Charging Mode ");
+			lcd_set_cursor(MENULEFT);
+			sprintf(LCDOutput,"%dmV", BattCharge);	
+			lcd_write_string(LCDOutput);
+			lcd_set_cursor(MENURIGHT);	
+				switch(BattState)
+				{
+					case 0:
+						lcd_write_string("NC");
+						break;
+					case 1:
+						lcd_write_string("RC");
+						break;
+					case 2:
+						lcd_write_string("FC");
+						break;
+					case 3:
+						lcd_write_string("TC");
+						break;
+					case 4:
+						lcd_write_string("Wa");
+						break;
+					case 5:
+						lcd_write_string("FC");
+						break;
+				}
+				
 			lcd_set_cursor(MENUCENTER);	
 			lcd_write_string("  EXIT  ");
 			break;

@@ -20,11 +20,32 @@
 #include "lcd.h"
 #include "HMI.h"
 
-#define NUMREADS 7 //number of adc reads to average for IR sensor
+#define NUMREADS 8 //number of adc reads to average for IR sensor
+
+
+
+void readAvgDistance(void)
+{
+	unsigned int fullval = 0, tempIR = 0;
+	int j = 0;
+
+	for (int i = 0; i < NUMREADS; i++)	// take the readings
+	{
+		tempIR = readDistance();
+		if (tempIR <= 1000)	//ignore any spikes!
+		{
+			fullval += tempIR;	//add the readings together
+			j++;
+		}
+	}
+	adcVal = fullval / j;	//divide to get average
+	ADCconvert();			//convert to distance in cm
+	Disp1 = adcVal;
+}
 
 /************  readAvgDistance  *************/
 //takes a number of reads of the IR and stores the average in adcVal
-void readAvgDistance(void)
+/*void readAvgDistance(void)
 {
 	unsigned int fullval = 0, tempIR = 0;
 	unsigned char j, i;
@@ -49,7 +70,7 @@ void readAvgDistance(void)
 	adcVal = values[NUMREADS/2];	//divide to get median
 	//ADCconvert();			//convert to distance in cm
 	Disp1 = adcVal;
-}
+}*/
 
 /************  readDistance  *************/
 //returns the current adc value

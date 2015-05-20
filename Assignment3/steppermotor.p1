@@ -881,6 +881,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
+"11 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+[v _totalSteps `i  1 e ]
 "12 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS0 `Vb  1 s@56 ]
 "13 E:\Aldnoah.Zero\Assignment3\AT25256A.h
@@ -1727,6 +1729,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;steppermotor.h: 8: unsigned char spi_transfer(unsigned char data);
 [; ;steppermotor.h: 9: void rotate(unsigned int numsteps, unsigned char direction);
 [; ;steppermotor.h: 10: void rotateOld(unsigned char steps, unsigned char direction);
+"11 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+[i _totalSteps
+-> 0 `i
+]
+[; ;steppermotor.h: 11: int totalSteps = 0;
 [; ;AT25256A.h: 12: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
 [; ;AT25256A.h: 13: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
 [; ;AT25256A.h: 18: unsigned char ee_read_status (void);
@@ -1824,36 +1831,50 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _RC2 -> -> 1 `i `b ]
 [e ( __nop ..  ]
 [e = _RC2 -> -> 0 `i `b ]
-[; ;steppermotor.c: 77: _delay((unsigned long)((15)*(20000000/4000.0)));
+[; ;steppermotor.c: 77: if (direction)
 "77
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[e $ ! != -> _direction `i -> -> -> 0 `i `uc `i 112  ]
+[; ;steppermotor.c: 78: totalSteps++;
 "78
+[e ++ _totalSteps -> 1 `i ]
+[e $U 113  ]
+"79
+[e :U 112 ]
+[; ;steppermotor.c: 79: else
+[; ;steppermotor.c: 80: totalSteps--;
+"80
+[e -- _totalSteps -> 1 `i ]
+[e :U 113 ]
+[; ;steppermotor.c: 81: _delay((unsigned long)((15)*(20000000/4000.0)));
+"81
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"82
 }
 "74
 [e ++ _i -> -> 1 `i `ui ]
 [e :U 111 ]
 [e $ < _i _numsteps 108  ]
 [e :U 109 ]
-"78
+"82
 }
-[; ;steppermotor.c: 78: }
-[; ;steppermotor.c: 79: RC0 = 1; RC1 = 1;;
-"79
+[; ;steppermotor.c: 82: }
+[; ;steppermotor.c: 83: RC0 = 1; RC1 = 1;;
+"83
 [e = _RC0 -> -> 1 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
-[; ;steppermotor.c: 80: spi_transfer(0b00000000);
-"80
+[; ;steppermotor.c: 84: spi_transfer(0b00000000);
+"84
 [e ( _spi_transfer (1 -> -> 0 `i `uc ]
-[; ;steppermotor.c: 81: RC0 = 0; RC1 = 0;;
-"81
+[; ;steppermotor.c: 85: RC0 = 0; RC1 = 0;;
+"85
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
-[; ;steppermotor.c: 82: RC2 = 1; _nop(); RC2 = 0;;
-"82
+[; ;steppermotor.c: 86: RC2 = 1; _nop(); RC2 = 0;;
+"86
 [e = _RC2 -> -> 1 `i `b ]
 [e ( __nop ..  ]
 [e = _RC2 -> -> 0 `i `b ]
-[; ;steppermotor.c: 83: }
-"83
+[; ;steppermotor.c: 87: }
+"87
 [e :UE 105 ]
 }

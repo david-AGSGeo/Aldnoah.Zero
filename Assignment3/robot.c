@@ -24,11 +24,15 @@
 #define DIST 0
 #define ANGLE 1
 #define ALL 2
+#define SENSORS 3
 
 //Radii
 #define STRAIGHT 0x7FFF
-#define LEFT -1800
-#define RIGHT 1800
+#define LEFT -1700
+#define RIGHT 1700
+#define ARCRIGHT -500
+
+#define IDEAL 100	//target distance for IR wall follow
 
 /************  robo_init  *************/
 //initialise the robot to full mode
@@ -45,30 +49,34 @@ void robo_init(void)
 void robot_read(unsigned char readType)
 {
 	ser_putch(142); // Sensor Setup
-	ser_putch(7);  // Bump Sensor Packet ID
-	__delay_ms(5);
-	BumpSensors = ser_getch();
-
-	ser_putch(142); // Sensor Setup
-	ser_putch(13);  // Virtual Wall Sensor Packet ID
-	__delay_ms(5);
-	VwallSensor = ser_getch();
-
-	ser_putch(142); // Sensor Setup
 	ser_putch(10);  // Cliff R Sensor Packet ID
-	__delay_ms(5);
+	//__delay_ms(5);
 	CliffSensors = ser_getch();
 
 	ser_putch(142); // Sensor Setup
 	ser_putch(11);  // Cliff L Sensor Packet ID
-	__delay_ms(5);
+	//__delay_ms(5);
 	CliffSensors += ser_getch();
+	//if (CliffSensors)
+	//	return;
+	
+	ser_putch(142); // Sensor Setup
+	ser_putch(7);  // Bump Sensor Packet ID
+	//__delay_ms(5);
+	BumpSensors = ser_getch();
+
+	ser_putch(142); // Sensor Setup
+	ser_putch(13);  // Virtual Wall Sensor Packet ID
+	//__delay_ms(5);
+	VwallSensor = ser_getch();
+
+	
 	
 	if (readType == DIST)
 	{
 		ser_putch(142); // Sensor Setup
 		ser_putch(19);  // Distance Sensor Packet ID
-		__delay_ms(5);
+		//__delay_ms(5);
 		DistHighByte = ser_getch();
 		DistLowByte = ser_getch();
 	}
@@ -76,7 +84,7 @@ void robot_read(unsigned char readType)
 	{	
 		ser_putch(142); // Sensor Setup
 		ser_putch(20);  // Angle Sensor Packet ID
-		__delay_ms(5);
+		//__delay_ms(5);
 		AngleHighByte = ser_getch();
 		AngleLowByte = ser_getch();
 	}
@@ -85,14 +93,18 @@ void robot_read(unsigned char readType)
 		//read all sensors here
 		ser_putch(142); // Sensor Setup
 		ser_putch(19);  // Distance Sensor Packet ID
-		__delay_ms(5);
+		//__delay_ms(5);
 		DistHighByte = ser_getch();
 		DistLowByte = ser_getch();
 		ser_putch(142); // Sensor Setup
 		ser_putch(20);  // Angle Sensor Packet ID
-		__delay_ms(5);
+		//__delay_ms(5);
 		AngleHighByte = ser_getch();
 		AngleLowByte = ser_getch();
+	}
+	else if (readType == SENSORS)
+	{	
+		
 	}
 }
 
@@ -163,35 +175,46 @@ void robotTurn(int angle)
 
 /************  robotFollow  *************/
 //
-void robotFollow(int distance, int speed, int AdcTarget)
+void robotFollow(int speed, int AdcTarget)
 {
 	distTravelled = 0;
 	int temp1;
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
-
-	//keep going till requested distance is reached (absolute value used for negative distances)
-	while (abs(distTravelled) < abs(distance))	
+	int turncounter = 0;
+	//keep going :)
+	while (1)	
 	{
-		
+		if (AdcTarget > IDEAL)	// veer toward ideal distance 
+			AdcTarget--;
+		if (AdcTarget < IDEAL)
+			AdcTarget++;
 		readAvgDistance();
-		if (adcVal > (AdcTarget + 5) && adcVal < (AdcTarget + 30)) //correct right
+		if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 25)) //correct right
 		{
 			RobotDrive(speed, RIGHT);	
 		}
-		else if (adcVal < (AdcTarget - 5) && adcVal > (AdcTarget - 30)) //correct left
+		else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 25)) //correct left
 		{
 			RobotDrive(speed, LEFT);
 		}
-		else if (adcVal <= (AdcTarget - 30))	//turn right
+		else if (adcVal <= (AdcTarget - 20))	//turn left
 		{
-			ROBOTerror = 10;	//signal right turn
-			break;
+			turncounter++;
+			if (turncounter > 3)
+			{			
+				ROBOTerror = 11;	//signal left turn
+				break;
+			}
 		}
-		else if (adcVal >= (AdcTarget + 30))	//turn left
+		else if (adcVal >= (AdcTarget + 25))	//turn right
 		{
-			ROBOTerror = 11;	//signal a left turn
-			break; 
+			turncounter--;
+			if (turncounter < -3)
+			{			
+				ROBOTerror = 10;	//signal left turn
+				break;
+			}
 		}
 		else
 		{
@@ -218,21 +241,119 @@ void robotFollow(int distance, int speed, int AdcTarget)
 		temp1 += DistLowByte;
 		distTravelled += temp1;
 		TotalDistTravelled += temp1;
+		
 		Disp2 = distTravelled;
-		UpdateDisplay();
-	//	float remaining = abs(distance) - abs(distTravelled) ;
-	//	if ( remaining < 100)
-	//	{
-	//		RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
-	//}
+		UpdateDisplay();	//show distance travelled
 	}
-	Disp2 = ROBOTerror;
-		UpdateDisplay();
 	RobotDrive(0, STRAIGHT);	//stop robot
+	Disp2 = ROBOTerror;
+	UpdateDisplay(); //show error code
+	
 
 }
 
+void robotLoadSong(void)
+{
+	ser_putch(140); 
+		ser_putch(0); 
+		ser_putch(2); 
+		ser_putch(72); 
+		ser_putch(16);
+		ser_putch(84); 
+		ser_putch(16);
+}
 
+void robot_turnRight(int speed, int AdcTarget)
+{
+	angleTurned = 0;
+	int temp1;
+	RobotDrive(speed, STRAIGHT);	//start robot moving
+	ROBOTerror = 0;	//no errors yet :)
+
+	//keep going :)
+	while (1)	
+	{
+		readAvgDistance();
+		if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 15)) //correct right
+		{
+			RobotDrive(speed, RIGHT);	
+		}
+		else if (adcVal < (AdcTarget)) //correct left
+		{
+			RobotDrive(speed, LEFT);
+		}
+		else if (adcVal >= (AdcTarget + 15))	//reached gap!
+		{
+			ser_putch(141); 
+
+			ser_putch(0); 	
+				
+			break; 
+		}
+		else
+		{
+			RobotDrive(speed, STRAIGHT);
+		}
+		robot_read(ALL);
+		if (BumpSensors)	//hit wall or lifted
+		{
+			ROBOTerror = 1;	//signal an error
+			break;
+		}
+		if (VwallSensor)	//lifted
+		{
+			ROBOTerror = 2;	//signal an error
+			break;
+		}
+		if (CliffSensors)	//cliff
+		{
+			ROBOTerror = 3;	//signal an error
+			break;
+		}
+		temp1 = DistHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += DistLowByte;
+		distTravelled += temp1;
+		TotalDistTravelled += temp1;
+		temp1 = AngleHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += AngleLowByte;
+		angleTurned += temp1;
+		Disp2 = angleTurned;
+		UpdateDisplay();	//show distance travelled
+	}
+	RobotDrive(speed, ARCRIGHT);	//start robot moving
+	while (abs(angleTurned) < abs(-90))	
+	{
+		robot_read(ANGLE);
+		if (BumpSensors)	//hit wall or lifted
+		{
+			ROBOTerror = 1;	//signal an error
+			break;
+		}
+		if (VwallSensor)	//lifted
+		{
+			ROBOTerror = 2;	//signal an error
+			break;
+		}
+		if (CliffSensors)	//cliff
+		{
+			ROBOTerror = 3;	//signal an error
+			break;
+		}
+		temp1 = AngleHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += AngleLowByte;
+		angleTurned += temp1;
+		Disp2 = angleTurned;
+		UpdateDisplay();
+	}
+	RobotDrive(0, STRAIGHT);	//stop robot
+	Disp2 = ROBOTerror;
+	UpdateDisplay(); //show error code
+	
+
+}
 
 /************  robotMoveSpeed  *************/
 //move forward the requested distance at the requested speed
@@ -288,7 +409,7 @@ void robotTurnSpeed(int angle, int speed)
 {
 	angleTurned = 0;
 	int temp1 = 0;
-
+	
 	robotTurn(angle);	//start robot turning
 
 	//keep going till requested distance is reached (absolute value used for negative distances)
@@ -310,6 +431,26 @@ void robotTurnSpeed(int angle, int speed)
 
 	robotTurn(0);	//stop robot
 }
+
+void RobotBattRead(void)
+{
+	int temp1 = 0;
+	ser_putch(142); // Sensor Setup
+	ser_putch(25);  // Distance Sensor Packet ID
+	__delay_ms(5);
+	DistHighByte = ser_getch();
+	DistLowByte = ser_getch();
+	ser_putch(142); // Sensor Setup
+	ser_putch(21);  // Angle Sensor Packet ID
+	__delay_ms(5);
+	BattState = ser_getch();
+	
+
+	temp1 = DistHighByte;	//add bytes together
+	temp1 = temp1 << 8;
+	temp1 += DistLowByte;
+	BattCharge = temp1;
+	}
 
 /************  abs  *************/
 //return the absolute value of the input

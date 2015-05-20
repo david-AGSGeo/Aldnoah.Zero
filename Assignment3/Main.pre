@@ -1200,6 +1200,7 @@ void ADCconvert(void);
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
+int totalSteps = 0;
 
 # 55 "E:\Aldnoah.Zero\Assignment3\ser.h"
 bit ser_isrx(void);
@@ -1227,16 +1228,23 @@ int Disp1, Disp2;
 
 # 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
+
+void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int distance, int speed, int AdcTarget);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnRight(int speed, int AdcTarget);
+void RobotBattRead(void);
 int abs(int v);
+void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+unsigned int BattCharge = 0, BattState = 0;
+
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1247,11 +1255,11 @@ asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF
 void calibrateIR(void);
 int scan360(void);
 void ChargeMode(void);
-void FollowWall(void);
+void RightTurn(void);
+void Init_Follow_IR(void);
 
 
 
-int totalSteps = 0;
 
 volatile unsigned char buttonPressed;
 
@@ -1337,7 +1345,7 @@ int shortwall = 0;
 
 
 init();
-
+robotLoadSong();
 
 while(1)
 {
@@ -1364,75 +1372,79 @@ calibrateIR();
 break;
 case 1:
 
-# 209
+
+
+
+ser_putch(141);
+
+ser_putch(0);
 break;
 case 2:
 
-
-
-
-robotTurnSpeed(-90,400);
-readAvgDistance();
-int a = adcVal;
-robotMoveSpeed(1500 - a,400);
-
-robotTurnSpeed(-90,400);
-robotMoveSpeed(4000,400);
-
-robotTurnSpeed(90,400);
-robotMoveSpeed(1000,400);
-robotTurnSpeed(90,400);
-robotMoveSpeed(1000,400);
-
-
+robotMoveSpeed(-200,-200);
 break;
 case 3:
 
-# 237
-_delay((unsigned long)((100)*(20000000/4000.0)));
-robotMoveSpeed(1000,400);
-robotTurnSpeed(80,200);
-robotMoveSpeed(1000,400);
-robotTurnSpeed(80,200);
-robotMoveSpeed(2000,400);
-robotTurnSpeed(-80,200);
+robotTurnSpeed(-70,400);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+robotTurnSpeed(-80,400);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+robotTurnSpeed(-90,400);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+robotTurnSpeed(-100,400);
 break;
 case 4:
+Init_Follow_IR();
 while (ROBOTerror != 1)
 {
 switch (ROBOTerror)
 {
 case 0:
-robotFollow(1000, 300, adcVal);
+readAvgDistance();
+robotFollow(200, adcVal);
 break;
 case 1:
-
+ROBOTerror = 1;
 break;
 case 2:
-
+ROBOTerror = 1;
 break;
 case 3:
-
+ROBOTerror = 0;
+RobotDrive(-200, 0x7FFF);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+robotMoveSpeed(-200,-200);
+robotTurnSpeed(80,400);
+robotMoveSpeed(300,200);
+readAvgDistance();
+robotFollow(200, adcVal - 10);
 break;
 case 10:
-robotTurnSpeed(90,400);
+
+robotTurnSpeed(80,400);
 
 readAvgDistance();
-robotFollow(1000, 300, adcVal - 10);
+robotFollow(200, adcVal - 10);
 break;
 case 11:
-
-robotMoveSpeed(700,300);
-robotTurnSpeed(-90,400);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+rotate(25, 0);
 readAvgDistance();
-robotFollow(1000, 300, adcVal - 10);
+robot_turnRight(200, adcVal);
+rotate(25, 1);
+readAvgDistance();
+robotFollow(200, adcVal);
+
+# 278
 break;
 default:
-robotFollow(1000, 300, adcVal);
+readAvgDistance();
+robotFollow(200, adcVal);
 break;
 
 }
 }
+ROBOTerror = 0;
 break;
 
 case 5:
@@ -1445,11 +1457,21 @@ break;
 choice = 255;
 }
 }
-void start(void)
-{
 
-# 394
+void Init_Follow_IR(void)
+{
+calibrateIR();
+_delay((unsigned long)((500)*(20000000/4000.0)));
+rotate(25, 0);
 }
+
+void RightTurn(void)
+{
+rotate(25, 0);
+readAvgDistance();
+robot_turnRight(200, adcVal);
+}
+
 
 
 
@@ -1504,6 +1526,7 @@ while (1)
 if (RTC_FLAG_250MS == 1)
 {
 RTC_FLAG_250MS = 0;
+RobotBattRead();
 UpdateDisplay();
 }
 switch (buttonPressed)

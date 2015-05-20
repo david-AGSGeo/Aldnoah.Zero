@@ -1198,16 +1198,23 @@ void ADCconvert(void);
 
 # 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
+
+void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int distance, int speed, int AdcTarget);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnRight(int speed, int AdcTarget);
+void RobotBattRead(void);
 int abs(int v);
+void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+unsigned int BattCharge = 0, BattState = 0;
+
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
@@ -1437,6 +1444,32 @@ case 2:
 lcd_write_control(0b00000001);
 lcd_set_cursor(0x00);
 lcd_write_string(" Charging Mode ");
+lcd_set_cursor(0x40);
+sprintf(LCDOutput,"%dmV", BattCharge);
+lcd_write_string(LCDOutput);
+lcd_set_cursor(0x4D);
+switch(BattState)
+{
+case 0:
+lcd_write_string("NC");
+break;
+case 1:
+lcd_write_string("RC");
+break;
+case 2:
+lcd_write_string("FC");
+break;
+case 3:
+lcd_write_string("TC");
+break;
+case 4:
+lcd_write_string("Wa");
+break;
+case 5:
+lcd_write_string("FC");
+break;
+}
+
 lcd_set_cursor(0x44);
 lcd_write_string("  EXIT  ");
 break;

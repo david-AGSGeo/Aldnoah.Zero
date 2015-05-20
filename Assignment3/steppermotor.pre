@@ -1094,6 +1094,7 @@ extern void _delay(unsigned long);
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
+int totalSteps = 0;
 
 # 12 "E:\Aldnoah.Zero\Assignment3\AT25256A.h"
 static volatile bit CS0 @ (unsigned)&PORTC*8+0;
@@ -1141,6 +1142,10 @@ RC0 = 0; RC1 = 0;;
 for (unsigned int i = 0; i < numsteps; i++)
 {
 RC2 = 1; _nop(); RC2 = 0;;
+if (direction)
+totalSteps++;
+else
+totalSteps--;
 _delay((unsigned long)((15)*(20000000/4000.0)));
 }
 RC0 = 1; RC1 = 1;;
