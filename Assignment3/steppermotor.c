@@ -60,6 +60,7 @@ unsigned char spi_transfer(unsigned char data)
 	return temp;
 }
 
+
 /************  rotate  *************/
 //rotate the steppermotor x half steps in the chosen direction
 void rotate(unsigned int numsteps, unsigned char direction)

@@ -1226,7 +1226,7 @@ unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 int Disp1, Disp2;
 
-# 8 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 11 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 
 void RobotDrive(int speed, int radius);
@@ -1234,13 +1234,15 @@ void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int speed, int AdcTarget);
+void robotFollow(int speed, int AdcTarget, unsigned char followDir);
 void robot_turnRight(int speed, int AdcTarget);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
+
+unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
 unsigned int BattCharge = 0, BattState = 0;
@@ -1372,74 +1374,75 @@ calibrateIR();
 break;
 case 1:
 
-
-
-
-ser_putch(141);
-
-ser_putch(0);
+# 207
 break;
 case 2:
 
-robotMoveSpeed(-200,-200);
+
 break;
 case 3:
 
-robotTurnSpeed(-70,400);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-robotTurnSpeed(-80,400);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-robotTurnSpeed(-90,400);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-robotTurnSpeed(-100,400);
+
 break;
 case 4:
+RobotPos = 6;
+unsigned char currentFlw = 0;
 Init_Follow_IR();
-while (ROBOTerror != 1)
+while (ROBOTerror != 9)
 {
 switch (ROBOTerror)
 {
 case 0:
 readAvgDistance();
-robotFollow(200, adcVal);
+robotFollow(200, adcVal, currentFlw);
 break;
 case 1:
-ROBOTerror = 1;
+if (RobotPos == 10 || RobotPos == 11)
+{
+RobotDrive(-200, 0x7FFF);
+_delay((unsigned long)((200)*(20000000/4000.0)));
+RobotPos == 11;
+ROBOTerror = 0;
+robotTurnSpeed((-(angleTurned - 75)),400);
+}
+else
+ROBOTerror = 9;
 break;
 case 2:
-ROBOTerror = 1;
+ROBOTerror = 9;
 break;
 case 3:
+RobotPos++;
 ROBOTerror = 0;
 RobotDrive(-200, 0x7FFF);
 _delay((unsigned long)((1000)*(20000000/4000.0)));
 robotMoveSpeed(-200,-200);
-robotTurnSpeed(-angleTurned,400);
+robotTurnSpeed((-angleTurned),400);
 robotMoveSpeed(300,200);
 readAvgDistance();
-robotFollow(200, adcVal - 10);
+robotFollow(200, adcVal - 10, currentFlw);
 break;
 case 10:
+RobotPos++;
 
 robotTurnSpeed(80,400);
 
 readAvgDistance();
-robotFollow(200, adcVal - 10);
+robotFollow(200, adcVal - 10, currentFlw);
 break;
 case 11:
-
+RobotPos++;
 rotate(25, 0);
 readAvgDistance();
 robot_turnRight(200, adcVal);
 rotate(25, 1);
 readAvgDistance();
-robotFollow(200, adcVal);
+robotFollow(200, adcVal, currentFlw);
 
-# 276
 break;
 default:
 readAvgDistance();
-robotFollow(200, adcVal);
+robotFollow(200, adcVal, currentFlw);
 break;
 
 }

@@ -897,39 +897,41 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _adcVal `Vui  1 e ]
 "9 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _IRdistance `Vui  1 e ]
-"22 E:\Aldnoah.Zero\Assignment3\robot.h
+"26 E:\Aldnoah.Zero\Assignment3\robot.h
+[v _RobotPos `uc  1 e ]
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _distTravelled `i  1 e ]
-"22 E:\Aldnoah.Zero\Assignment3\robot.h
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _angleTurned `i  1 e ]
-"22 E:\Aldnoah.Zero\Assignment3\robot.h
+"27 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _TotalDistTravelled `i  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistHighByte `Vuc  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _DistLowByte `Vuc  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BumpSensors `Vuc  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _AngleHighByte `Vuc  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _AngleLowByte `Vuc  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _VwallSensor `Vuc  1 e ]
-"23 E:\Aldnoah.Zero\Assignment3\robot.h
+"28 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _CliffSensors `Vuc  1 e ]
-"24 E:\Aldnoah.Zero\Assignment3\robot.h
+"29 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BattCharge `ui  1 e ]
-"24 E:\Aldnoah.Zero\Assignment3\robot.h
+"29 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _BattState `ui  1 e ]
-"27 E:\Aldnoah.Zero\Assignment3\robot.h
+"32 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _highByte `uc  1 e ]
-"27 E:\Aldnoah.Zero\Assignment3\robot.h
+"32 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _lowByte `uc  1 e ]
-"27 E:\Aldnoah.Zero\Assignment3\robot.h
+"32 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnhighByte `uc  1 e ]
-"27 E:\Aldnoah.Zero\Assignment3\robot.h
+"32 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _turnlowByte `uc  1 e ]
-"27 E:\Aldnoah.Zero\Assignment3\robot.h
+"32 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _ROBOTerror `uc  1 e ]
 "45 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _pos `i  1 e ]
@@ -1865,29 +1867,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;infrared.h: 13: unsigned int readDistance(void);
 [; ;infrared.h: 14: void readAvgDistance(void);
 [; ;infrared.h: 15: void ADCconvert(void);
-[; ;robot.h: 8: void robo_init(void);
-[; ;robot.h: 10: void RobotDrive(int speed, int radius);
-[; ;robot.h: 11: void robotMove(int distance, int radius);
-[; ;robot.h: 12: void robotMoveSpeed(int distance, int speed);
-[; ;robot.h: 13: void robotTurn(int degrees);
-[; ;robot.h: 14: void robotTurnSpeed(int angle, int speed);
-[; ;robot.h: 15: void robotFollow(int speed, int AdcTarget);
-[; ;robot.h: 16: void robot_turnRight(int speed, int AdcTarget);
-[; ;robot.h: 17: void RobotBattRead(void);
-[; ;robot.h: 18: int abs(int v);
-[; ;robot.h: 19: void robotLoadSong(void);
-[; ;robot.h: 21: void robot_read(unsigned char readType);
-[; ;robot.h: 22: int distTravelled,angleTurned, TotalDistTravelled;
-[; ;robot.h: 23: volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
-"24 E:\Aldnoah.Zero\Assignment3\robot.h
+[; ;robot.h: 11: void robo_init(void);
+[; ;robot.h: 13: void RobotDrive(int speed, int radius);
+[; ;robot.h: 14: void robotMove(int distance, int radius);
+[; ;robot.h: 15: void robotMoveSpeed(int distance, int speed);
+[; ;robot.h: 16: void robotTurn(int degrees);
+[; ;robot.h: 17: void robotTurnSpeed(int angle, int speed);
+[; ;robot.h: 18: void robotFollow(int speed, int AdcTarget, unsigned char followDir);
+[; ;robot.h: 19: void robot_turnRight(int speed, int AdcTarget);
+[; ;robot.h: 20: void RobotBattRead(void);
+[; ;robot.h: 21: int abs(int v);
+[; ;robot.h: 22: void robotLoadSong(void);
+[; ;robot.h: 24: void robot_read(unsigned char readType);
+[; ;robot.h: 26: unsigned char RobotPos;
+[; ;robot.h: 27: int distTravelled,angleTurned, TotalDistTravelled;
+[; ;robot.h: 28: volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+"29 E:\Aldnoah.Zero\Assignment3\robot.h
 [i _BattCharge
 -> -> 0 `i `ui
 ]
 [i _BattState
 -> -> 0 `i `ui
 ]
-[; ;robot.h: 24: unsigned int BattCharge = 0, BattState = 0;
-"27
+[; ;robot.h: 29: unsigned int BattCharge = 0, BattState = 0;
+"32
 [i _highByte
 -> -> 0 `i `uc
 ]
@@ -1903,7 +1906,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _ROBOTerror
 -> -> 0 `i `uc
 ]
-[; ;robot.h: 27: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
+[; ;robot.h: 32: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 "45 E:\Aldnoah.Zero\Assignment3\HMI.c
 [i _pos
 -> 0 `i
@@ -2448,15 +2451,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UpdateDisplay ]
 [f ]
 "237
-[v F1261 `uc  -> 16 `i s ]
-[i F1261
+[v F1263 `uc  -> 16 `i s ]
+[i F1263
 :U ..
 -> 0 `c
 ..
 ]
 [v _LCDOutput `uc  -> 16 `i a ]
 [; ;HMI.c: 237: char LCDOutput[16] = "";
-[e = _LCDOutput F1261 ]
+[e = _LCDOutput F1263 ]
 [; ;HMI.c: 238: switch (currentMenu)
 "238
 [e $U 137  ]
@@ -2558,7 +2561,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;HMI.c: 270: lcd_set_cursor(0x40);
 "270
 [e ( _lcd_set_cursor (1 -> -> 64 `i `uc ]
-[; ;HMI.c: 271: sprintf(LCDOutput,"%dmV", BattCharge);
+[; ;HMI.c: 271: sprintf(LCDOutput,"%dmA", BattCharge);
 "271
 [e ( _sprintf (1 , (. , &U _LCDOutput :s 19C _BattCharge ]
 [; ;HMI.c: 272: lcd_write_string(LCDOutput);
@@ -2682,7 +2685,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 12C 67 104 103 0 ]
 [a 13C 73 82 58 37 100 99 109 32 68 58 37 100 0 ]
 [a 24C 87 97 0 ]
-[a 19C 37 100 109 86 0 ]
 [a 1C 67 97 108 105 98 95 73 82 0 ]
 [a 16C 67 79 78 70 73 82 77 0 ]
 [a 10C 68 114 76 0 ]
@@ -2692,6 +2694,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [a 20C 78 67 0 ]
 [a 22C 70 67 0 ]
 [a 25C 70 67 0 ]
+[a 19C 37 100 109 65 0 ]
 [a 17C 62 62 62 0 ]
 [a 15C 60 60 60 0 ]
 [a 9C 68 114 50 0 ]

@@ -5,6 +5,9 @@
 
 #include <htc.h>
 
+#define RIGHTFLW 0
+#define LEFTFLW 1
+
 void robo_init(void);
 
 void RobotDrive(int speed, int radius);
@@ -12,13 +15,15 @@ void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int speed, int AdcTarget);
+void robotFollow(int speed, int AdcTarget, unsigned char followDir);
 void robot_turnRight(int speed, int AdcTarget);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
+
+unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
 unsigned int BattCharge = 0, BattState = 0;

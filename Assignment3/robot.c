@@ -32,7 +32,7 @@
 #define STRAIGHT 0x7FFF
 #define LEFT -1700
 #define RIGHT 1700
-#define ARCRIGHT -400
+#define ARCRIGHT -450
 
 #define IDEAL 100	//target distance for IR wall follow
 
@@ -177,7 +177,7 @@ void robotTurn(int angle)
 
 /************  robotFollow  *************/
 //
-void robotFollow(int speed, int AdcTarget)
+void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 {
 	distTravelled = 0;
 	int temp1;
@@ -241,11 +241,11 @@ void robotFollow(int speed, int AdcTarget)
 		distTravelled += temp1;
 		TotalDistTravelled += temp1;
 		
-		Disp2 = distTravelled;
+		Disp2 = RobotPos;
 		UpdateDisplay();	//show distance travelled
 	}
 	RobotDrive(0, STRAIGHT);	//stop robot
-	Disp2 = ROBOTerror;
+	Disp2 = RobotPos;
 	UpdateDisplay(); //show error code
 	
 
@@ -257,6 +257,7 @@ void robot_turnRight(int speed, int AdcTarget)
 {
 	angleTurned = 0;
 	int temp1;
+	int turnTarget = 0; 
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
 
@@ -314,12 +315,24 @@ void robot_turnRight(int speed, int AdcTarget)
 		temp1 = temp1 << 8;
 		temp1 += AngleLowByte;
 		angleTurned += temp1;
-		Disp2 = angleTurned;
+		Disp2 = RobotPos;
 		UpdateDisplay();	//show distance travelled
 	}
 	RobotDrive((speed * 3/4), ARCRIGHT);	//start robot moving
 	angleTurned = 0;
-	while (abs(angleTurned) < abs(-70))	
+	switch (RobotPos)
+	{
+		case 7:
+			turnTarget = -175;
+			break;
+		case 11:
+			turnTarget = -175;
+			break;
+		default:
+			turnTarget = -75;
+			break;
+	}
+	while (abs(angleTurned) < abs(turnTarget))	
 	{
 		robot_read(ANGLE);
 		if (BumpSensors)	//hit wall or lifted

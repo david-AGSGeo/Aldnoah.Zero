@@ -203,80 +203,75 @@ void main(void)
                // rotate((200 - shortwall), CLOCKWISE);   //turn IR to face the closest wall
                 
                //robotTurn(shortwall*36/40)
-           		ser_putch(141); 
-
-				ser_putch(0); 
+           		
                 break;
             case 2:     //Drive forward 2 meters
                
-                robotMoveSpeed(-200,-200);
+                
                 break;
             case 3:     //Drive in an L shape
  
-                robotTurnSpeed(-70,400);
-				__delay_ms(1000);
-				robotTurnSpeed(-80,400);
-				__delay_ms(1000);
-				robotTurnSpeed(-90,400);
-				__delay_ms(1000);
-				robotTurnSpeed(-100,400);    //Left
+                
                 break;
-            case 4:    
+            case 4:    //-------------------NAVIGATE MAZE-----------------
+				RobotPos = 6; //should be 0 for final
+				unsigned char currentFlw = RIGHTFLW;
 				Init_Follow_IR();
-     			while (ROBOTerror != 1)
+     			while (ROBOTerror != 9)
 				{ 
                 	switch (ROBOTerror)
 					{
 						case 0:
 							readAvgDistance();
-							robotFollow(200, adcVal);
+							robotFollow(200, adcVal, currentFlw);
 						break;
 						case 1:
-							ROBOTerror = 1;
+							if (RobotPos == 10 || RobotPos == 11)
+							{
+								RobotDrive(-200, 0x7FFF); //back up
+								__delay_ms(200);
+								RobotPos == 11;
+								ROBOTerror = 0;
+								robotTurnSpeed((-(angleTurned - 75)),400);    //straighten up
+							}
+							else
+								ROBOTerror = 9;
 						break;
 						case 2:
-							ROBOTerror = 1;
+							ROBOTerror = 9;
 						break;
 						case 3:
+								RobotPos++;
 								ROBOTerror = 0;
 								RobotDrive(-200, 0x7FFF);
 								__delay_ms(1000);
 								robotMoveSpeed(-200,-200);
-								robotTurnSpeed(-angleTurned,400);    //straighten up
+								robotTurnSpeed((-angleTurned),400);    //straighten up
 								robotMoveSpeed(300,200);	//move forward to sense next wall
 								readAvgDistance();
-								robotFollow(200, adcVal - 10);
+								robotFollow(200, adcVal - 10, currentFlw);
 						break;
 						case 10: // ahead blocked, turn left
+							RobotPos++;
 							//robotMoveSpeed(700,200);
 							robotTurnSpeed(80,400);    //Left
 							
 							readAvgDistance();
-							robotFollow(200, adcVal - 10);
+							robotFollow(200, adcVal - 10, currentFlw);
 						break;
 						case 11://right free, turn right
-						
+							RobotPos++;
 							rotate(25, CLOCKWISE);
 							readAvgDistance();
 							robot_turnRight(200, adcVal);
 							rotate(25, COUNTERCLOCKWISE);
 							readAvgDistance();
-							robotFollow(200, adcVal);
-							//RightTurn();
-							//__delay_ms(1000);
-							//robotMoveSpeed(700,200);
-							//__delay_ms(1000);
-							//robotTurnSpeed(-80,400);  
-							
-							//__delay_ms(1000);
-							//robotMoveSpeed(100,200);
-							//__delay_ms(1000);  
-							//readAvgDistance();
-							//robotFollow(200, adcVal - 10);
+							robotFollow(200, adcVal, currentFlw);
+
 						break;
 						default:
 							readAvgDistance();
-							robotFollow(200, adcVal);
+							robotFollow(200, adcVal, currentFlw);
 						break;
 
 					}

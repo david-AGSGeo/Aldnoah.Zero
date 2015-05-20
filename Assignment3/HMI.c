@@ -268,7 +268,7 @@ void UpdateDisplay(void)
 			lcd_set_cursor(0x00);	
 			lcd_write_string(" Charging Mode ");
 			lcd_set_cursor(MENULEFT);
-			sprintf(LCDOutput,"%dmV", BattCharge);	
+			sprintf(LCDOutput,"%dmA", BattCharge);	
 			lcd_write_string(LCDOutput);
 			lcd_set_cursor(MENURIGHT);	
 				switch(BattState)
