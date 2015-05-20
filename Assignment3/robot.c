@@ -32,7 +32,7 @@
 #define STRAIGHT 0x7FFF
 #define LEFT -1700
 #define RIGHT 1700
-#define ARCRIGHT -450
+#define ARCRIGHT -400
 
 #define IDEAL 100	//target distance for IR wall follow
 
@@ -71,6 +71,11 @@ void robot_read(unsigned char readType)
 	ser_putch(13);  // Virtual Wall Sensor Packet ID
 	//__delay_ms(5);
 	VwallSensor = ser_getch();
+	
+	ser_putch(142); // Sensor Setup
+	ser_putch(17);  // Virtual Wall Sensor Packet ID
+	//__delay_ms(5);
+	VictimSensor = ser_getch();
 
 	
 	
@@ -104,6 +109,7 @@ void robot_read(unsigned char readType)
 		AngleHighByte = ser_getch();
 		AngleLowByte = ser_getch();
 	}
+	
 	else if (readType == SENSORS)
 	{	
 		
@@ -235,6 +241,11 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
+		if (VictimSensor != 255)	//victim
+		{
+			ROBOTerror = 4;	//signal an error
+			break;
+		}
 		temp1 = DistHighByte;	//add bytes together
 		temp1 = temp1 << 8;
 		temp1 += DistLowByte;
@@ -306,6 +317,11 @@ void robot_turnRight(int speed, int AdcTarget)
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
+		if (VictimSensor != 255)	//victim
+		{
+			ROBOTerror = 4;	//signal an error
+			break;
+		}
 		temp1 = DistHighByte;	//add bytes together
 		temp1 = temp1 << 8;
 		temp1 += DistLowByte;
@@ -350,6 +366,11 @@ void robot_turnRight(int speed, int AdcTarget)
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
+		if (VictimSensor != 255)	//victim
+		{
+			ROBOTerror = 4;	//signal an error
+			break;
+		}
 		temp1 = AngleHighByte;	//add bytes together
 		temp1 = temp1 << 8;
 		temp1 += AngleLowByte;
@@ -389,6 +410,11 @@ void robotMoveSpeed(int distance, int speed)
 		if (CliffSensors)	//cliff
 		{
 			ROBOTerror = 3;	//signal an error
+			break;
+		}
+		if (VictimSensor != 255)	//victim
+		{
+			ROBOTerror = 4;	//signal an error
 			break;
 		}
 		temp1 = DistHighByte;	//add bytes together
@@ -477,5 +503,13 @@ void robotLoadSong(void)
 		ser_putch(72); 
 		ser_putch(16);
 		ser_putch(84); 
+		ser_putch(16);
+
+	ser_putch(140); 
+		ser_putch(1); 
+		ser_putch(2); 
+		ser_putch(84); 
+		ser_putch(16);
+		ser_putch(72); 
 		ser_putch(16);
 }

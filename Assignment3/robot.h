@@ -25,7 +25,7 @@ void robot_read(unsigned char readType);
 
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;
 unsigned int BattCharge = 0, BattState = 0;
 
 

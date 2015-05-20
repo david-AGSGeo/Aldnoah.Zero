@@ -1108,7 +1108,7 @@ void robot_read(unsigned char readType);
 
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;
 unsigned int BattCharge = 0, BattState = 0;
 
 
@@ -1213,6 +1213,11 @@ ser_putch(13);
 
 VwallSensor = ser_getch();
 
+ser_putch(142);
+ser_putch(17);
+
+VictimSensor = ser_getch();
+
 
 
 if (readType == 0)
@@ -1245,6 +1250,7 @@ ser_putch(20);
 AngleHighByte = ser_getch();
 AngleLowByte = ser_getch();
 }
+
 else if (readType == 3)
 {
 
@@ -1376,6 +1382,11 @@ if (CliffSensors)
 ROBOTerror = 3;
 break;
 }
+if (VictimSensor != 255)
+{
+ROBOTerror = 4;
+break;
+}
 temp1 = DistHighByte;
 temp1 = temp1 << 8;
 temp1 += DistLowByte;
@@ -1417,7 +1428,7 @@ RobotDrive(speed, -1700);
 else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))
 {
 
-# 283
+# 294
 ser_putch(141);
 ser_putch(0);
 break;
@@ -1444,6 +1455,11 @@ if (CliffSensors)
 ROBOTerror = 3;
 break;
 }
+if (VictimSensor != 255)
+{
+ROBOTerror = 4;
+break;
+}
 temp1 = DistHighByte;
 temp1 = temp1 << 8;
 temp1 += DistLowByte;
@@ -1456,7 +1472,7 @@ angleTurned += temp1;
 Disp2 = RobotPos;
 UpdateDisplay();
 }
-RobotDrive((speed * 3/4), -450);
+RobotDrive((speed * 3/4), -400);
 angleTurned = 0;
 switch (RobotPos)
 {
@@ -1486,6 +1502,11 @@ break;
 if (CliffSensors)
 {
 ROBOTerror = 3;
+break;
+}
+if (VictimSensor != 255)
+{
+ROBOTerror = 4;
 break;
 }
 temp1 = AngleHighByte;
@@ -1529,6 +1550,11 @@ if (CliffSensors)
 ROBOTerror = 3;
 break;
 }
+if (VictimSensor != 255)
+{
+ROBOTerror = 4;
+break;
+}
 temp1 = DistHighByte;
 temp1 = temp1 << 8;
 temp1 += DistLowByte;
@@ -1537,7 +1563,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 406
+# 432
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1545,7 +1571,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 417
+# 443
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;
@@ -1609,5 +1635,13 @@ ser_putch(2);
 ser_putch(72);
 ser_putch(16);
 ser_putch(84);
+ser_putch(16);
+
+ser_putch(140);
+ser_putch(1);
+ser_putch(2);
+ser_putch(84);
+ser_putch(16);
+ser_putch(72);
 ser_putch(16);
 }

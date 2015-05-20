@@ -1244,7 +1244,7 @@ void robot_read(unsigned char readType);
 
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
-volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors ;
+volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;
 unsigned int BattCharge = 0, BattState = 0;
 
 
@@ -1385,7 +1385,7 @@ case 3:
 
 break;
 case 4:
-RobotPos = 6;
+RobotPos = 0;
 unsigned char currentFlw = 0;
 Init_Follow_IR();
 while (ROBOTerror != 9)
@@ -1400,7 +1400,7 @@ case 1:
 if (RobotPos == 10 || RobotPos == 11)
 {
 RobotDrive(-200, 0x7FFF);
-_delay((unsigned long)((200)*(20000000/4000.0)));
+_delay((unsigned long)((100)*(20000000/4000.0)));
 RobotPos == 11;
 ROBOTerror = 0;
 robotTurnSpeed((-(angleTurned - 75)),400);
@@ -1422,10 +1422,18 @@ robotMoveSpeed(300,200);
 readAvgDistance();
 robotFollow(200, adcVal - 10, currentFlw);
 break;
+case 4:
+ser_putch(141);
+ser_putch(1);
+ROBOTerror = 9;
+break;
+case 9:
+ROBOTerror = 9;
+break;
 case 10:
 RobotPos++;
 
-robotTurnSpeed(80,400);
+robotTurnSpeed(75,400);
 
 readAvgDistance();
 robotFollow(200, adcVal - 10, currentFlw);

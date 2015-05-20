@@ -214,7 +214,7 @@ void main(void)
                 
                 break;
             case 4:    //-------------------NAVIGATE MAZE-----------------
-				RobotPos = 6; //should be 0 for final
+				RobotPos = 0; //STARTING NODE: should be 0 for final!
 				unsigned char currentFlw = RIGHTFLW;
 				Init_Follow_IR();
      			while (ROBOTerror != 9)
@@ -225,11 +225,11 @@ void main(void)
 							readAvgDistance();
 							robotFollow(200, adcVal, currentFlw);
 						break;
-						case 1:
-							if (RobotPos == 10 || RobotPos == 11)
+						case 1:	//bump sensor
+							if (RobotPos == 10 || RobotPos == 11) //low wall
 							{
 								RobotDrive(-200, 0x7FFF); //back up
-								__delay_ms(200);
+								__delay_ms(100);
 								RobotPos == 11;
 								ROBOTerror = 0;
 								robotTurnSpeed((-(angleTurned - 75)),400);    //straighten up
@@ -237,10 +237,10 @@ void main(void)
 							else
 								ROBOTerror = 9;
 						break;
-						case 2:
+						case 2:	//wheel drop
 							ROBOTerror = 9;
 						break;
-						case 3:
+						case 3:	//cliff sensor
 								RobotPos++;
 								ROBOTerror = 0;
 								RobotDrive(-200, 0x7FFF);
@@ -251,10 +251,18 @@ void main(void)
 								readAvgDistance();
 								robotFollow(200, adcVal - 10, currentFlw);
 						break;
+						case 4:	///VICTIM FOUND!
+							ser_putch(141); 
+							ser_putch(1);
+							ROBOTerror = 9;
+						break;
+						case 9:
+							ROBOTerror = 9;
+						break;
 						case 10: // ahead blocked, turn left
 							RobotPos++;
 							//robotMoveSpeed(700,200);
-							robotTurnSpeed(80,400);    //Left
+							robotTurnSpeed(75,400);    //Left
 							
 							readAvgDistance();
 							robotFollow(200, adcVal - 10, currentFlw);
