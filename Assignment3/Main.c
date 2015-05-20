@@ -71,9 +71,7 @@
 #define ANGLE 1
 #define ALL 2
 
-//define stepping sequence directions
-#define CLOCKWISE 0
-#define COUNTERCLOCKWISE 1
+
 
 //define robot parameters
 #define DRIVESPEED 200
@@ -244,8 +242,8 @@ void main(void)
 								RobotDrive(-200, 0x7FFF);
 								__delay_ms(1000);
 								robotMoveSpeed(-200,-200);
-								robotTurnSpeed(80,400);    //Left
-								robotMoveSpeed(300,200);
+								robotTurnSpeed(-angleTurned,400);    //straighten up
+								robotMoveSpeed(300,200);	//move forward to sense next wall
 								readAvgDistance();
 								robotFollow(200, adcVal - 10);
 						break;
@@ -257,7 +255,7 @@ void main(void)
 							robotFollow(200, adcVal - 10);
 						break;
 						case 11://right free, turn right
-							__delay_ms(1000);
+						
 							rotate(25, CLOCKWISE);
 							readAvgDistance();
 							robot_turnRight(200, adcVal);
@@ -318,6 +316,7 @@ void calibrateIR(void)
 {
     currentMenu = 1;    //switch display to Calibration menu
     rotate(8, CLOCKWISE); //initialise to a known winding
+	rotate(8, COUNTERCLOCKWISE);
     while (1)
     {
         if (RTC_FLAG_250MS == 1)    //4Hz refresh rate for display
@@ -342,7 +341,8 @@ void calibrateIR(void)
                 buttonPressed = 0;
                 break;      
             case CENTER:                    //zero steppermotor and exit to menu
-                totalSteps = 0;
+                
+				totalSteps = 0;
                 buttonPressed = 0;
                 currentMenu = 0;
                 return;

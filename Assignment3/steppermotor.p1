@@ -881,7 +881,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"11 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+"16 E:\Aldnoah.Zero\Assignment3\steppermotor.h
 [v _totalSteps `i  1 e ]
 "12 E:\Aldnoah.Zero\Assignment3\AT25256A.h
 [v _CS0 `Vb  1 s@56 ]
@@ -1726,14 +1726,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-[; ;steppermotor.h: 8: unsigned char spi_transfer(unsigned char data);
-[; ;steppermotor.h: 9: void rotate(unsigned int numsteps, unsigned char direction);
-[; ;steppermotor.h: 10: void rotateOld(unsigned char steps, unsigned char direction);
-"11 E:\Aldnoah.Zero\Assignment3\steppermotor.h
+[; ;steppermotor.h: 13: unsigned char spi_transfer(unsigned char data);
+[; ;steppermotor.h: 14: void rotate(unsigned int numsteps, unsigned char direction);
+[; ;steppermotor.h: 15: void rotateOld(unsigned char steps, unsigned char direction);
+"16 E:\Aldnoah.Zero\Assignment3\steppermotor.h
 [i _totalSteps
 -> 0 `i
 ]
-[; ;steppermotor.h: 11: int totalSteps = 0;
+[; ;steppermotor.h: 16: int totalSteps = 0;
 [; ;AT25256A.h: 12: static volatile bit CS0 @ (unsigned)&PORTC*8+0;
 [; ;AT25256A.h: 13: static volatile bit CS1 @ (unsigned)&PORTC*8+1;
 [; ;AT25256A.h: 18: unsigned char ee_read_status (void);

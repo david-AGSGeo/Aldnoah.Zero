@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 8 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+# 13 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);

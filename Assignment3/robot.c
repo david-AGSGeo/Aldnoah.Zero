@@ -20,6 +20,8 @@
 #include "lcd.h"
 #include "HMI.h"
 #include "infrared.h"
+#include "steppermotor.h"
+
 
 #define DIST 0
 #define ANGLE 1
@@ -30,7 +32,7 @@
 #define STRAIGHT 0x7FFF
 #define LEFT -1700
 #define RIGHT 1700
-#define ARCRIGHT -500
+#define ARCRIGHT -400
 
 #define IDEAL 100	//target distance for IR wall follow
 
@@ -179,42 +181,39 @@ void robotFollow(int speed, int AdcTarget)
 {
 	distTravelled = 0;
 	int temp1;
+	unsigned char hysterysis = 20;
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
-	int turncounter = 0;
+	
 	//keep going :)
 	while (1)	
-	{
+	{	
+		//if (abs(AdcTarget - IDEAL) >= hysterysis) // too close or too far
+		//	hysterysis = abs(AdcTarget - IDEAL) + 5; //increase hysterysis
 		if (AdcTarget > IDEAL)	// veer toward ideal distance 
 			AdcTarget--;
 		if (AdcTarget < IDEAL)
 			AdcTarget++;
 		readAvgDistance();
-		if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 25)) //correct right
+		if (adcVal > (AdcTarget) && adcVal < (AdcTarget + hysterysis)) //correct right
 		{
 			RobotDrive(speed, RIGHT);	
 		}
-		else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 25)) //correct left
+		else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - hysterysis)) //correct left
 		{
 			RobotDrive(speed, LEFT);
 		}
-		else if (adcVal <= (AdcTarget - 20))	//turn left
+		else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))	//corner detected
 		{
-			turncounter++;
-			if (turncounter > 3)
-			{			
+			rotate(10,COUNTERCLOCKWISE);
+			readAvgDistance();
+			rotate(10,CLOCKWISE);
+			if (adcVal < 50)
 				ROBOTerror = 11;	//signal left turn
-				break;
-			}
-		}
-		else if (adcVal >= (AdcTarget + 25))	//turn right
-		{
-			turncounter--;
-			if (turncounter < -3)
-			{			
+			else
 				ROBOTerror = 10;	//signal left turn
-				break;
-			}
+			
+			break;
 		}
 		else
 		{
@@ -252,16 +251,7 @@ void robotFollow(int speed, int AdcTarget)
 
 }
 
-void robotLoadSong(void)
-{
-	ser_putch(140); 
-		ser_putch(0); 
-		ser_putch(2); 
-		ser_putch(72); 
-		ser_putch(16);
-		ser_putch(84); 
-		ser_putch(16);
-}
+
 
 void robot_turnRight(int speed, int AdcTarget)
 {
@@ -278,18 +268,23 @@ void robot_turnRight(int speed, int AdcTarget)
 		{
 			RobotDrive(speed, RIGHT);	
 		}
-		else if (adcVal < (AdcTarget)) //correct left
+		else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 15)) //correct left
 		{
 			RobotDrive(speed, LEFT);
 		}
-		else if (adcVal >= (AdcTarget + 15))	//reached gap!
+			else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))	//corner detected
 		{
-			ser_putch(141); 
-
-			ser_putch(0); 	
-				
-			break; 
+			//rotate(10,COUNTERCLOCKWISE);
+			//readAvgDistance();
+			//rotate(10,CLOCKWISE);
+			//if (adcVal < 50)
+			//{
+				ser_putch(141); 
+				ser_putch(0); 
+				break;
+			//}
 		}
+			
 		else
 		{
 			RobotDrive(speed, STRAIGHT);
@@ -322,8 +317,9 @@ void robot_turnRight(int speed, int AdcTarget)
 		Disp2 = angleTurned;
 		UpdateDisplay();	//show distance travelled
 	}
-	RobotDrive(speed, ARCRIGHT);	//start robot moving
-	while (abs(angleTurned) < abs(-90))	
+	RobotDrive((speed * 3/4), ARCRIGHT);	//start robot moving
+	angleTurned = 0;
+	while (abs(angleTurned) < abs(-70))	
 	{
 		robot_read(ANGLE);
 		if (BumpSensors)	//hit wall or lifted
@@ -457,4 +453,16 @@ void RobotBattRead(void)
 int abs(int v)
 {
 	return  (v * ((v > 0) - (v < 0))); //gets absolute value by multiplying by 1 or -1   
+}
+
+
+void robotLoadSong(void)
+{
+	ser_putch(140); 
+		ser_putch(0); 
+		ser_putch(2); 
+		ser_putch(72); 
+		ser_putch(16);
+		ser_putch(84); 
+		ser_putch(16);
 }

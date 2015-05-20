@@ -5,6 +5,11 @@
 
 #include <htc.h>
 
+
+//define stepping sequence directions
+#define CLOCKWISE 0
+#define COUNTERCLOCKWISE 1
+
 unsigned char spi_transfer(unsigned char data);
 void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);

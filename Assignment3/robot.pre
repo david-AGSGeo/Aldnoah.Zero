@@ -1170,7 +1170,13 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 39 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 13 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
+unsigned char spi_transfer(unsigned char data);
+void rotate(unsigned int numsteps, unsigned char direction);
+void rotateOld(unsigned char steps, unsigned char direction);
+int totalSteps = 0;
+
+# 41 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1314,42 +1320,39 @@ void robotFollow(int speed, int AdcTarget)
 {
 distTravelled = 0;
 int temp1;
+unsigned char hysterysis = 20;
 RobotDrive(speed, 0x7FFF);
 ROBOTerror = 0;
-int turncounter = 0;
+
 
 while (1)
 {
+
+
 if (AdcTarget > 100)
 AdcTarget--;
 if (AdcTarget < 100)
 AdcTarget++;
 readAvgDistance();
-if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 25))
+if (adcVal > (AdcTarget) && adcVal < (AdcTarget + hysterysis))
 {
 RobotDrive(speed, 1700);
 }
-else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 25))
+else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - hysterysis))
 {
 RobotDrive(speed, -1700);
 }
-else if (adcVal <= (AdcTarget - 20))
+else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))
 {
-turncounter++;
-if (turncounter > 3)
-{
+rotate(10,1);
+readAvgDistance();
+rotate(10,0);
+if (adcVal < 50)
 ROBOTerror = 11;
-break;
-}
-}
-else if (adcVal >= (AdcTarget + 25))
-{
-turncounter--;
-if (turncounter < -3)
-{
+else
 ROBOTerror = 10;
+
 break;
-}
 }
 else
 {
@@ -1387,16 +1390,7 @@ UpdateDisplay();
 
 }
 
-void robotLoadSong(void)
-{
-ser_putch(140);
-ser_putch(0);
-ser_putch(2);
-ser_putch(72);
-ser_putch(16);
-ser_putch(84);
-ser_putch(16);
-}
+
 
 void robot_turnRight(int speed, int AdcTarget)
 {
@@ -1413,18 +1407,20 @@ if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 15))
 {
 RobotDrive(speed, 1700);
 }
-else if (adcVal < (AdcTarget))
+else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 15))
 {
 RobotDrive(speed, -1700);
 }
-else if (adcVal >= (AdcTarget + 15))
+else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))
 {
+
+# 282
 ser_putch(141);
-
 ser_putch(0);
-
 break;
+
 }
+
 else
 {
 RobotDrive(speed, 0x7FFF);
@@ -1457,8 +1453,9 @@ angleTurned += temp1;
 Disp2 = angleTurned;
 UpdateDisplay();
 }
-RobotDrive(speed, -500);
-while (abs(angleTurned) < abs(-90))
+RobotDrive((speed * 3/4), -400);
+angleTurned = 0;
+while (abs(angleTurned) < abs(-70))
 {
 robot_read(1);
 if (BumpSensors)
@@ -1525,7 +1522,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 397
+# 393
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1533,7 +1530,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 408
+# 404
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;
@@ -1586,4 +1583,16 @@ BattCharge = temp1;
 int abs(int v)
 {
 return (v * ((v > 0) - (v < 0)));
+}
+
+
+void robotLoadSong(void)
+{
+ser_putch(140);
+ser_putch(0);
+ser_putch(2);
+ser_putch(72);
+ser_putch(16);
+ser_putch(84);
+ser_putch(16);
 }
