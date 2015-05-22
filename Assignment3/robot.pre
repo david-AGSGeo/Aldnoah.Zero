@@ -1099,7 +1099,8 @@ void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed, int AdcTarget);
+void robot_turnRight(int speed);
+void robot_turnLeft(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
@@ -1369,21 +1370,25 @@ RobotDrive(speed, 0x7FFF);
 robot_read(0);
 if (BumpSensors)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 1;
 break;
 }
 if (VwallSensor)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 2;
 break;
 }
 if (CliffSensors)
 {
+RobotDrive(-200, 0x7FFF);
 ROBOTerror = 3;
 break;
 }
 if (VictimSensor != 255)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 4;
 break;
 }
@@ -1396,23 +1401,43 @@ TotalDistTravelled += temp1;
 Disp2 = RobotPos;
 UpdateDisplay();
 }
-RobotDrive(0, 0x7FFF);
+
 Disp2 = RobotPos;
 UpdateDisplay();
-
-
 }
 
-
-
-void robot_turnRight(int speed, int AdcTarget)
+void robot_turnLeft(void)
 {
+switch (RobotPos)
+{
+case 8:
+robotTurnSpeed(160,400);
+RobotPos++;
+break;
+case 12:
+robotTurnSpeed(75,400);
+break;
+case 15:
+robotTurnSpeed(160,400);
+RobotPos++;
+break;
+default:
+robotTurnSpeed(80,400);
+break;
+}
+}
+
+void robot_turnRight(int speed)
+{
+
 angleTurned = 0;
 int temp1;
 int turnTarget = 0;
 RobotDrive(speed, 0x7FFF);
 ROBOTerror = 0;
-
+rotate(25, 0);
+readAvgDistance();
+int AdcTarget = adcVal;
 
 while (1)
 {
@@ -1427,12 +1452,7 @@ RobotDrive(speed, -1700);
 }
 else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))
 {
-
-# 294
-ser_putch(141);
-ser_putch(0);
 break;
-
 }
 
 else
@@ -1442,21 +1462,25 @@ RobotDrive(speed, 0x7FFF);
 robot_read(2);
 if (BumpSensors)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 1;
 break;
 }
 if (VwallSensor)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 2;
 break;
 }
 if (CliffSensors)
 {
+RobotDrive(-200, 0x7FFF);
 ROBOTerror = 3;
 break;
 }
 if (VictimSensor != 255)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 4;
 break;
 }
@@ -1472,40 +1496,65 @@ angleTurned += temp1;
 Disp2 = RobotPos;
 UpdateDisplay();
 }
-RobotDrive((speed * 3/4), -400);
+
 angleTurned = 0;
 switch (RobotPos)
 {
+case 3:
+RobotDrive((speed /2), -400);
+turnTarget = -90;
+break;
+
 case 7:
-turnTarget = -175;
+RobotDrive((speed), -400-100);
+turnTarget = -185;
+break;
+case 10:
+RobotDrive((speed), -400-100);
+turnTarget = -90;
 break;
 case 11:
-turnTarget = -175;
+RobotDrive((speed), -400 - 100);
+turnTarget = -190;
+break;
+case 12:
+RobotDrive((speed), -400 - 50);
+turnTarget = -190;
+break;
+case 17:
+RobotDrive((speed), -400 - 100);
+turnTarget = -190;
 break;
 default:
+RobotDrive((speed), -400);
 turnTarget = -75;
 break;
 }
+rotate(25, 1);
 while (abs(angleTurned) < abs(turnTarget))
 {
-robot_read(1);
+robot_read(2);
 if (BumpSensors)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 1;
 break;
 }
 if (VwallSensor)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 2;
 break;
 }
 if (CliffSensors)
 {
+RobotDrive(-200, 0x7FFF);
 ROBOTerror = 3;
 break;
 }
 if (VictimSensor != 255)
 {
+RobotDrive(0, 0x7FFF);
 ROBOTerror = 4;
 break;
 }
@@ -1513,10 +1562,14 @@ temp1 = AngleHighByte;
 temp1 = temp1 << 8;
 temp1 += AngleLowByte;
 angleTurned += temp1;
-Disp2 = angleTurned;
+temp1 = DistHighByte;
+temp1 = temp1 << 8;
+temp1 += DistLowByte;
+distTravelled += temp1;
+TotalDistTravelled += temp1;
+
 UpdateDisplay();
 }
-RobotDrive(0, 0x7FFF);
 Disp2 = ROBOTerror;
 UpdateDisplay();
 
@@ -1563,7 +1616,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 432
+# 481
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1571,7 +1624,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 443
+# 492
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;

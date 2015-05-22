@@ -239,7 +239,7 @@ void UpdateDisplay(void)
 	{
 		case 0: //main menu
 			lcd_write_control(0b00000001); //clear display	
-			sprintf(LCDOutput,"IR:%dcm D:%d",Disp1, Disp2);
+			sprintf(LCDOutput,"IR:%3dcm D:%3d",Disp1, Disp2);
 			lcd_set_cursor(0x00);	
 			lcd_write_string(LCDOutput);				
 			lcd_set_cursor(MENULEFT);	
@@ -295,6 +295,17 @@ void UpdateDisplay(void)
 				
 			lcd_set_cursor(MENUCENTER);	
 			lcd_write_string("  EXIT  ");
+			break;
+		case 3: //Maze Navigation Menu
+			lcd_write_control(0b00000001); //clear display	
+			sprintf(LCDOutput,"IR:%3dcm CP:%3d",adcVal, RobotPos);
+			lcd_set_cursor(0x00);	
+			lcd_write_string(LCDOutput);				
+			int tempDist = (TotalDistTravelled/ 10);			
+	
+			sprintf(LCDOutput,"D:%4dcm AT:%3d",tempDist, angleTurned);
+			lcd_set_cursor(MENULEFT);
+			lcd_write_string(LCDOutput);
 			break;
 		default:	//unknown menu	
 			break;	

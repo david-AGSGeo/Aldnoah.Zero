@@ -190,7 +190,7 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 	unsigned char hysterysis = 20;
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
-	
+
 	//keep going :)
 	while (1)	
 	{	
@@ -228,21 +228,25 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 		robot_read(DIST);
 		if (BumpSensors)	//hit wall or lifted
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 1;	//signal an error
 			break;
 		}
 		if (VwallSensor)	//lifted
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 2;	//signal an error
 			break;
 		}
 		if (CliffSensors)	//cliff
 		{
+			RobotDrive(-200, 0x7FFF); //reverse robot!
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
 		if (VictimSensor != 255)	//victim
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 4;	//signal an error
 			break;
 		}
@@ -255,23 +259,43 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 		Disp2 = RobotPos;
 		UpdateDisplay();	//show distance travelled
 	}
-	RobotDrive(0, STRAIGHT);	//stop robot
-	Disp2 = RobotPos;
-	UpdateDisplay(); //show error code
-	
 
+	Disp2 = RobotPos;
+	UpdateDisplay(); //show error code	
 }
 
-
-
-void robot_turnRight(int speed, int AdcTarget)
+void robot_turnLeft(void)
 {
+	switch (RobotPos)
+	{
+		case 8:
+			robotTurnSpeed(160,400); 
+			RobotPos++;
+			break;
+		case 12:
+			robotTurnSpeed(75,400); 
+			break;
+		case 15:
+			robotTurnSpeed(160,400); 
+			RobotPos++;
+			break;
+		default:
+			robotTurnSpeed(80,400);    //Left
+			break;
+	}
+}
+
+void robot_turnRight(int speed)
+{
+	
 	angleTurned = 0;
 	int temp1;
 	int turnTarget = 0; 
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
-
+	rotate(25, CLOCKWISE); //point directly at wall
+	readAvgDistance();
+	int AdcTarget = adcVal;
 	//keep going :)
 	while (1)	
 	{
@@ -286,15 +310,7 @@ void robot_turnRight(int speed, int AdcTarget)
 		}
 			else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))	//corner detected
 		{
-			//rotate(10,COUNTERCLOCKWISE);
-			//readAvgDistance();
-			//rotate(10,CLOCKWISE);
-			//if (adcVal < 50)
-			//{
-				ser_putch(141); 
-				ser_putch(0); 
 				break;
-			//}
 		}
 			
 		else
@@ -304,21 +320,25 @@ void robot_turnRight(int speed, int AdcTarget)
 		robot_read(ALL);
 		if (BumpSensors)	//hit wall or lifted
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 1;	//signal an error
 			break;
 		}
 		if (VwallSensor)	//lifted
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 2;	//signal an error
 			break;
 		}
 		if (CliffSensors)	//cliff
 		{
+			RobotDrive(-200, 0x7FFF); //reverse robot!
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
 		if (VictimSensor != 255)	//victim
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 4;	//signal an error
 			break;
 		}
@@ -334,40 +354,65 @@ void robot_turnRight(int speed, int AdcTarget)
 		Disp2 = RobotPos;
 		UpdateDisplay();	//show distance travelled
 	}
-	RobotDrive((speed * 3/4), ARCRIGHT);	//start robot moving
+	
 	angleTurned = 0;
 	switch (RobotPos)
 	{
+		case 3:
+			RobotDrive((speed /2), ARCRIGHT);	//start robot moving
+			turnTarget = -90;
+			break;
+
 		case 7:
-			turnTarget = -175;
+			RobotDrive((speed), ARCRIGHT-100);	//start robot moving
+			turnTarget = -185;
+			break;
+		case 10:
+			RobotDrive((speed), ARCRIGHT-100);	//start robot moving
+			turnTarget = -90;
 			break;
 		case 11:
-			turnTarget = -175;
+			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
+			turnTarget = -190;
+			break;
+		case 12:
+			RobotDrive((speed), ARCRIGHT - 50);	//start robot moving
+			turnTarget = -190;
+			break;
+		case 17:
+			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
+			turnTarget = -190;
 			break;
 		default:
+			RobotDrive((speed), ARCRIGHT);	//start robot moving
 			turnTarget = -75;
 			break;
 	}
+	rotate(25, COUNTERCLOCKWISE);
 	while (abs(angleTurned) < abs(turnTarget))	
 	{
-		robot_read(ANGLE);
+		robot_read(ALL);
 		if (BumpSensors)	//hit wall or lifted
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 1;	//signal an error
 			break;
 		}
 		if (VwallSensor)	//lifted
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 2;	//signal an error
 			break;
 		}
 		if (CliffSensors)	//cliff
 		{
+			RobotDrive(-200, 0x7FFF); //reverse robot!
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
 		if (VictimSensor != 255)	//victim
 		{
+			RobotDrive(0, STRAIGHT);	//stop robot
 			ROBOTerror = 4;	//signal an error
 			break;
 		}
@@ -375,10 +420,14 @@ void robot_turnRight(int speed, int AdcTarget)
 		temp1 = temp1 << 8;
 		temp1 += AngleLowByte;
 		angleTurned += temp1;
-		Disp2 = angleTurned;
+		temp1 = DistHighByte;	//add bytes together
+		temp1 = temp1 << 8;
+		temp1 += DistLowByte;
+		distTravelled += temp1;
+		TotalDistTravelled += temp1;
+		
 		UpdateDisplay();
 	}
-	RobotDrive(0, STRAIGHT);	//stop robot
 	Disp2 = ROBOTerror;
 	UpdateDisplay(); //show error code
 	

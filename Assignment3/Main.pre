@@ -1235,7 +1235,8 @@ void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed, int AdcTarget);
+void robot_turnRight(int speed);
+void robot_turnLeft(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
@@ -1344,7 +1345,9 @@ void main(void)
 {
 unsigned char choice = 255;
 int shortwall = 0;
-
+unsigned char currentFlw = 0;
+RobotPos = 0;
+currentMenu = 0;
 
 init();
 robotLoadSong();
@@ -1356,6 +1359,7 @@ if (RTC_FLAG_250MS == 1)
 RTC_FLAG_250MS = 0;
 robot_read(2);
 readAvgDistance();
+Disp2 = RobotPos;
 UpdateDisplay();
 }
 if (buttonPressed)
@@ -1373,35 +1377,39 @@ case 0:
 calibrateIR();
 break;
 case 1:
+RobotPos = 0;
 
-# 207
 break;
 case 2:
-
+RobotPos = 6;
 
 break;
 case 3:
 
-
+RobotPos = 9;
 break;
 case 4:
-RobotPos = 0;
-unsigned char currentFlw = 0;
+
+
+
 Init_Follow_IR();
+currentMenu = 3;
 while (ROBOTerror != 9)
 {
+
 switch (ROBOTerror)
 {
 case 0:
+
 readAvgDistance();
 robotFollow(200, adcVal, currentFlw);
 break;
 case 1:
-if (RobotPos == 10 || RobotPos == 11)
+if (RobotPos == 10)
 {
 RobotDrive(-200, 0x7FFF);
-_delay((unsigned long)((100)*(20000000/4000.0)));
-RobotPos == 11;
+_delay((unsigned long)((200)*(20000000/4000.0)));
+RobotPos++;
 ROBOTerror = 0;
 robotTurnSpeed((-(angleTurned - 75)),400);
 }
@@ -1414,18 +1422,18 @@ break;
 case 3:
 RobotPos++;
 ROBOTerror = 0;
-RobotDrive(-200, 0x7FFF);
+
 _delay((unsigned long)((1000)*(20000000/4000.0)));
 robotMoveSpeed(-200,-200);
-robotTurnSpeed((-angleTurned),400);
-robotMoveSpeed(300,200);
+robotTurnSpeed((-angleTurned-10),400);
+robotMoveSpeed(250,200);
 readAvgDistance();
 robotFollow(200, adcVal - 10, currentFlw);
 break;
 case 4:
 ser_putch(141);
 ser_putch(1);
-ROBOTerror = 9;
+
 break;
 case 9:
 ROBOTerror = 9;
@@ -1433,17 +1441,17 @@ break;
 case 10:
 RobotPos++;
 
-robotTurnSpeed(75,400);
+robot_turnLeft();
+
 
 readAvgDistance();
 robotFollow(200, adcVal - 10, currentFlw);
 break;
 case 11:
 RobotPos++;
-rotate(25, 0);
-readAvgDistance();
-robot_turnRight(200, adcVal);
-rotate(25, 1);
+
+robot_turnRight(200);
+
 readAvgDistance();
 robotFollow(200, adcVal, currentFlw);
 
@@ -1476,16 +1484,7 @@ _delay((unsigned long)((500)*(20000000/4000.0)));
 rotate(25, 0);
 }
 
-void RightTurn(void)
-{
-rotate(25, 0);
-readAvgDistance();
-robot_turnRight(200, adcVal);
-}
-
-
-
-
+# 317
 void calibrateIR(void)
 {
 currentMenu = 1;
@@ -1566,32 +1565,5 @@ buttonPressed = 0;
 break;
 }
 }
-}
-
-
-
-int scan360(void)
-{
-int lowestVal = 0, lowestSteps = 0;
-
-for (int steps = 0; steps < 200; steps+= 2)
-{
-readAvgDistance();
-if (adcVal > lowestVal)
-{
-lowestVal = adcVal;
-lowestSteps = steps;
-
-}
-rotate(2, 1);
-
-if (RTC_FLAG_250MS == 1)
-{
-RTC_FLAG_250MS = 0;
-UpdateDisplay();
-}
-}
-
-return lowestSteps;
 }
 

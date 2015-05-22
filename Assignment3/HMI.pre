@@ -1205,7 +1205,8 @@ void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed, int AdcTarget);
+void robot_turnRight(int speed);
+void robot_turnLeft(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
@@ -1418,7 +1419,7 @@ switch (currentMenu)
 {
 case 0:
 lcd_write_control(0b00000001);
-sprintf(LCDOutput,"IR:%dcm D:%d",Disp1, Disp2);
+sprintf(LCDOutput,"IR:%3dcm D:%3d",Disp1, Disp2);
 lcd_set_cursor(0x00);
 lcd_write_string(LCDOutput);
 lcd_set_cursor(0x40);
@@ -1474,6 +1475,17 @@ break;
 
 lcd_set_cursor(0x44);
 lcd_write_string("  EXIT  ");
+break;
+case 3:
+lcd_write_control(0b00000001);
+sprintf(LCDOutput,"IR:%3dcm CP:%3d",adcVal, RobotPos);
+lcd_set_cursor(0x00);
+lcd_write_string(LCDOutput);
+int tempDist = (TotalDistTravelled/ 10);
+
+sprintf(LCDOutput,"D:%4dcm AT:%3d",tempDist, angleTurned);
+lcd_set_cursor(0x40);
+lcd_write_string(LCDOutput);
 break;
 default:
 break;

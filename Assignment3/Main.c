@@ -169,8 +169,10 @@ void init()
 void main(void)
 {
     unsigned char choice = 255; 
-    int shortwall = 0;              
-
+    int shortwall = 0;             
+	unsigned char currentFlw = RIGHTFLW; 
+	RobotPos = 0; //STARTING NODE: should be 0 for final!
+	currentMenu = 0;    //display main menu
     //initialise function
     init();
     robotLoadSong();
@@ -182,6 +184,7 @@ void main(void)
             RTC_FLAG_250MS = 0;
             robot_read(ALL);
             readAvgDistance();
+			Disp2 = RobotPos;
             UpdateDisplay();
         }
         if (buttonPressed)  //if a button has been debounced, perform the 
@@ -199,38 +202,39 @@ void main(void)
                 calibrateIR();
                 break;
             case 1:     //Scan 360 degrees
-               // shortwall = scan360();  //find the closest wall
-               // rotate((200 - shortwall), CLOCKWISE);   //turn IR to face the closest wall
-                
-               //robotTurn(shortwall*36/40)
+             				RobotPos = 0; //STARTING NODE: start
            		
                 break;
             case 2:     //Drive forward 2 meters
-               
+               				RobotPos = 6; //STARTING NODE: checkpoint
                 
                 break;
             case 3:     //Drive in an L shape
  
-                
+                				RobotPos = 9; //STARTING NODE: bump
                 break;
             case 4:    //-------------------NAVIGATE MAZE-----------------
-				RobotPos = 0; //STARTING NODE: should be 0 for final!
-				unsigned char currentFlw = RIGHTFLW;
+				
+
+				
 				Init_Follow_IR();
+				currentMenu = 3;    //switch display to Maze Navigation
      			while (ROBOTerror != 9)
 				{ 
+					
                 	switch (ROBOTerror)
 					{
 						case 0:
+							
 							readAvgDistance();
 							robotFollow(200, adcVal, currentFlw);
 						break;
 						case 1:	//bump sensor
-							if (RobotPos == 10 || RobotPos == 11) //low wall
+							if (RobotPos == 10) //low wall
 							{
 								RobotDrive(-200, 0x7FFF); //back up
-								__delay_ms(100);
-								RobotPos == 11;
+								__delay_ms(200);
+								RobotPos++;
 								ROBOTerror = 0;
 								robotTurnSpeed((-(angleTurned - 75)),400);    //straighten up
 							}
@@ -243,36 +247,36 @@ void main(void)
 						case 3:	//cliff sensor
 								RobotPos++;
 								ROBOTerror = 0;
-								RobotDrive(-200, 0x7FFF);
+								
 								__delay_ms(1000);
 								robotMoveSpeed(-200,-200);
-								robotTurnSpeed((-angleTurned),400);    //straighten up
-								robotMoveSpeed(300,200);	//move forward to sense next wall
+								robotTurnSpeed((-angleTurned-10),400);    //straighten up
+								robotMoveSpeed(250,200);	//move forward to sense next wall
 								readAvgDistance();
 								robotFollow(200, adcVal - 10, currentFlw);
 						break;
 						case 4:	///VICTIM FOUND!
 							ser_putch(141); 
 							ser_putch(1);
-							ROBOTerror = 9;
+							//ROBOTerror = 9;
 						break;
 						case 9:
 							ROBOTerror = 9;
 						break;
 						case 10: // ahead blocked, turn left
 							RobotPos++;
-							//robotMoveSpeed(700,200);
-							robotTurnSpeed(75,400);    //Left
+
+							robot_turnLeft();
+							
 							
 							readAvgDistance();
 							robotFollow(200, adcVal - 10, currentFlw);
 						break;
 						case 11://right free, turn right
 							RobotPos++;
-							rotate(25, CLOCKWISE);
-							readAvgDistance();
-							robot_turnRight(200, adcVal);
-							rotate(25, COUNTERCLOCKWISE);
+							
+							robot_turnRight(200);
+							
 							readAvgDistance();
 							robotFollow(200, adcVal, currentFlw);
 
@@ -305,12 +309,7 @@ void Init_Follow_IR(void)
 	rotate(25, CLOCKWISE);
 }
 
-void RightTurn(void)
-{
-	rotate(25, CLOCKWISE);
-	readAvgDistance();
-	robot_turnRight(200, adcVal);
-}
+
 
 
 /************  calibrateIR  *************/
@@ -397,30 +396,5 @@ void ChargeMode(void)
     }
 }
 
-/************  scan360  *************/
-//Do a 360 degree scan with the steppermotor and return the step value of the closest wall
-int scan360(void)
-{
-    int lowestVal = 0, lowestSteps = 0;
 
-    for (int steps = 0; steps < 200; steps+= 2) //step through 360 degrees
-    {
-        readAvgDistance();
-        if (adcVal > lowestVal)         //compare current value to lowest value (done using raw data to speed up process
-        {
-            lowestVal = adcVal;
-            lowestSteps = steps;
-            
-        }
-        rotate(2, COUNTERCLOCKWISE);    
-            
-        if (RTC_FLAG_250MS == 1)    //4Hz refresh rate for display
-            {
-                RTC_FLAG_250MS = 0;
-                UpdateDisplay();
-            }       
-    } 
-
-    return lowestSteps;
-}
 
