@@ -19,16 +19,6 @@
 
 
 #define _XTAL_FREQ 20000000  //Oscillator (20MHz)
-//define stepping sequence
-
-#define STEP0 0b00111100 
-#define STEP1 0b00101110 
-#define STEP2 0b00101011 
-#define STEP3 0b00100111 
-#define STEP4 0b00110101 
-#define STEP5 0b00010111 
-#define STEP6 0b00011011 
-#define STEP7 0b00011110
 
 #define STEP_OFF 0b00111001 //all winding deenergised
 
@@ -42,7 +32,7 @@
 #define CLOCKWISE 0
 #define COUNTERCLOCKWISE 1
 
-char current_step = STEP0;		//stores current step
+
 
 /************  spi_transfer  *************/
 //send a char over the SPI
@@ -87,11 +77,3 @@ void rotate(unsigned int numsteps, unsigned char direction)
 	SM_STEP();
 }
 
-//void rotateDirectional(unsigned int numsteps)
-//{
-//	if(numsteps < 0)
-//	{	
-//		numsteps = numsteps * -1;
-//		rotate(numsteps, 0);
-//	}
-//}

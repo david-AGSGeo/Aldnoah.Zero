@@ -52,10 +52,6 @@ const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
 
 
 
-/************  Debounce  *************/
-//debounces the buttons
-
-
 /************  ReadButtons  *************/
 // read and debounce the buttons, and return the button that is pressed
 unsigned char ReadButtons(void)

@@ -1109,11 +1109,7 @@ void ee_write_enable(void);
 unsigned char ee_read_byte (unsigned int);
 void ee_write_byte( unsigned int, unsigned char);
 
-# 45 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
-char current_step = 0b00111100;
-
-
-
+# 39 "E:\Aldnoah.Zero\Assignment3\steppermotor.c"
 unsigned char spi_transfer(unsigned char data)
 {
 unsigned char temp = 0;

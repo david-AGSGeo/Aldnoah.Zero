@@ -39,38 +39,11 @@ void readAvgDistance(void)
 		}
 	}
 	adcVal = fullval / j;	//divide to get average
-	ADCconvert();			//convert to distance in cm
+
 	Disp1 = adcVal;
 }
 
-/************  readAvgDistance  *************/
-//takes a number of reads of the IR and stores the average in adcVal
-/*void readAvgDistance(void)
-{
-	unsigned int fullval = 0, tempIR = 0;
-	unsigned char j, i;
-	unsigned int values[NUMREADS];
 
-	for (i = 0; i < NUMREADS; i++)	// take the readings
-	{
-		values[i] = readDistance();
-	}
-    for (i = 0; i < NUMREADS; i++)
-    {
-        for (j = i ; j < NUMREADS; j++)
-        {
-            if (values[i] > values[j])
-            {
-                tempIR =  values[i];
-                values[i] = values[j];
-                values[j] = tempIR;
-           }
-        }
-    }
-	adcVal = values[NUMREADS/2];	//divide to get median
-	//ADCconvert();			//convert to distance in cm
-	Disp1 = adcVal;
-}*/
 
 /************  readDistance  *************/
 //returns the current adc value
@@ -83,41 +56,3 @@ unsigned int readDistance(void)
 	return readVal;
 }
 
-/************  ADCconvert  *************/
-//converts the adcVal to a distance and stores it in IRdistance
-void ADCconvert(void)
-{
-	//No room for error included
-	//Errors evolve with increasing distance
-	// limited to voltage range: 0.5<v<0.75, 
-	// corresponding distance range: 0.15m<dist<1.3m
-
-	if (adcVal >= 213 && adcVal < 234)
-	{
-		IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);
-	}
-	else if (adcVal >= 170 && adcVal < 213)
-	{
-		IRdistance = 20 + ((30 - 20)*(213 - adcVal)) / (213 - 170);
-	}
-	else if (adcVal >= 128 && adcVal < 170)
-	{
-		IRdistance = 30 + ((40 - 30)*(170 - adcVal)) / (170 - 128);
-	}
-	else if (adcVal >= 107 && adcVal < 128)
-	{
-		IRdistance = 40 + ((50 - 40)*(128 - adcVal)) / (128 - 107);
-	}
-	else if (adcVal >= 77 && adcVal < 107)
-	{
-		IRdistance = 50 + ((60 - 50)*(107 - adcVal)) / (107 - 77);
-	}
-	else if (adcVal >= 56 && adcVal < 77)
-	{
-		IRdistance = 60 + ((70 - 60)*(77 - adcVal)) / (77 - 56);
-	}
-	else if (adcVal >= 43 && adcVal < 56)
-	{
-		IRdistance = 70 + ((80 - 70)*(56 - adcVal)) / (56 - 43);
-	}
-}

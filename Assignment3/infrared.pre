@@ -1162,7 +1162,6 @@ volatile unsigned int IRdistance;
 
 unsigned int readDistance(void);
 void readAvgDistance(void);
-void ADCconvert(void);
 
 # 9 "E:\Aldnoah.Zero\Assignment3\adc.h"
 void init_adc(void);
@@ -1242,11 +1241,11 @@ j++;
 }
 }
 adcVal = fullval / j;
-ADCconvert();
+
 Disp1 = adcVal;
 }
 
-# 77
+# 50
 unsigned int readDistance(void)
 {
 unsigned int readVal;
@@ -1256,38 +1255,3 @@ readVal = adc_read_channel(0);
 return readVal;
 }
 
-
-
-void ADCconvert(void)
-{
-
-# 95
-if (adcVal >= 213 && adcVal < 234)
-{
-IRdistance = 15 + ((20 - 15)*(234 - adcVal)) / (234 - 213);
-}
-else if (adcVal >= 170 && adcVal < 213)
-{
-IRdistance = 20 + ((30 - 20)*(213 - adcVal)) / (213 - 170);
-}
-else if (adcVal >= 128 && adcVal < 170)
-{
-IRdistance = 30 + ((40 - 30)*(170 - adcVal)) / (170 - 128);
-}
-else if (adcVal >= 107 && adcVal < 128)
-{
-IRdistance = 40 + ((50 - 40)*(128 - adcVal)) / (128 - 107);
-}
-else if (adcVal >= 77 && adcVal < 107)
-{
-IRdistance = 50 + ((60 - 50)*(107 - adcVal)) / (107 - 77);
-}
-else if (adcVal >= 56 && adcVal < 77)
-{
-IRdistance = 60 + ((70 - 60)*(77 - adcVal)) / (77 - 56);
-}
-else if (adcVal >= 43 && adcVal < 56)
-{
-IRdistance = 70 + ((80 - 70)*(56 - adcVal)) / (56 - 43);
-}
-}

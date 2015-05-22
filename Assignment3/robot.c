@@ -26,7 +26,7 @@
 #define DIST 0
 #define ANGLE 1
 #define ALL 2
-#define SENSORS 3
+
 
 //Radii
 #define STRAIGHT 0x7FFF
@@ -37,6 +37,7 @@
 
 #define IDEAL 100	//target distance for IR wall follow
 
+#define TRACKINGDIST 2050
 
 /************  robo_init  *************/
 //initialise the robot to full mode
@@ -112,10 +113,6 @@ void robot_read(unsigned char readType)
 		AngleLowByte = ser_getch();
 	}
 	
-	else if (readType == SENSORS)
-	{	
-		
-	}
 }
 
 /************  RobotDrive  *************/
@@ -208,11 +205,18 @@ void robotFollow(int speed, int AdcTarget)
 		readAvgDistance();
 		if (adcVal > (AdcTarget) && adcVal < (AdcTarget + hysterysis)) //correct right
 		{
-			RobotDrive(speed, RIGHT);	
+			if (followDir == LEFTFLW)
+				RobotDrive(speed, LEFT);
+			if (followDir == RIGHTFLW)
+				RobotDrive(speed, RIGHT);
+				
 		}
 		else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - hysterysis)) //correct left
 		{
-			RobotDrive(speed, LEFT);
+			if (followDir == LEFTFLW)
+				RobotDrive(speed, RIGHT);
+			if (followDir == RIGHTFLW)
+				RobotDrive(speed, LEFT);
 		}
 		else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))	//corner detected
 		{
@@ -269,7 +273,17 @@ void robotFollow(int speed, int AdcTarget)
 		temp1 += DistLowByte;
 		distTravelled += temp1;
 		TotalDistTravelled += temp1;
-		
+		if (trackingDist > 0 && trackingDist <= TotalDistTravelled - TRACKINGDIST )	//victim
+		{
+			
+			robotTurnSpeed(80,400); 
+			robotMoveSpeed(400, ROBOTSPEED);
+			trackingDist = 0;
+			RobotPos++;
+			//RobotDrive(0, STRAIGHT);	//stop robot
+			//ROBOTerror = 4;	//signal an error
+			break;
+		}		
 		Disp2 = RobotPos;
 		UpdateDisplay();	//show distance travelled
 	}
@@ -297,10 +311,21 @@ void robot_turnInPlace()
 			robotTurnSpeed(70,400); 
 			break;
 		case 17:
-			robotTurnSpeed(85,400); 
+			robotTurnSpeed(80,400); 
+			break;
+		case 21:
+			//home!!!!!
+			ser_putch(141); 
+			ser_putch(1);
+			ROBOTerror = 9;
+			RobotDrive(0, STRAIGHT);	//stop robot
 			break;
 		default:
-			robotTurnSpeed(80,400);    //Left
+				if (followDir == LEFTFLW)
+					robotTurnSpeed(-80,400);    //Right
+				if (followDir == RIGHTFLW)
+					robotTurnSpeed(80,400);    //Left
+			
 			break;
 	}
 }
@@ -410,13 +435,22 @@ void robot_turnArc(int speed)
 			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
 			turnTarget = -190;
 			break;
+		case 20: //FINAL TURN
+			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
+			turnTarget = -190;
+			break;
 		default:
 				if (followDir == LEFTFLW)
+{
 					RobotDrive((speed), ARCLEFT);	//start robot moving
+					turnTarget = 75;
+}
 				if (followDir == RIGHTFLW)
+{
 					RobotDrive((speed), ARCRIGHT);	//start robot moving
+					turnTarget = -75;
+}			
 			
-			turnTarget = -75;
 			break;
 	}
 	if (followDir == RIGHTFLW)

@@ -12,7 +12,7 @@ volatile unsigned int IRdistance;
 
 unsigned int readDistance(void);
 void readAvgDistance(void);
-void ADCconvert(void);
+
 
 
 #endif 

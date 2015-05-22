@@ -1216,7 +1216,6 @@ volatile unsigned int IRdistance;
 
 unsigned int readDistance(void);
 void readAvgDistance(void);
-void ADCconvert(void);
 
 # 14 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
@@ -1224,7 +1223,7 @@ void robo_init(void);
 void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
-void robotTurn(int degrees);
+
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget);
 void robot_turnArc(int speed);
@@ -1235,7 +1234,7 @@ void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
-
+int trackingDist = 0;
 unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
@@ -1253,7 +1252,7 @@ int pos = 0;
 const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "};
 const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
 
-# 61
+# 57
 unsigned char ReadButtons(void)
 {
 

@@ -171,7 +171,6 @@ void init()
 void main(void)
 {
     unsigned char choice = 255; 
-    int shortwall = 0;             
 	followDir = RIGHTFLW; 
 	RobotPos = 0; //STARTING NODE: should be 0 for final!
 	currentMenu = 0;    //display main menu
@@ -205,7 +204,8 @@ void main(void)
                 break;
             case 1:     //Scan 360 degrees
              				RobotPos = 16; //STARTING NODE: start
-           		
+           					Init_Follow_IR();
+							GoHome();
                 break;
             case 2:     //Drive forward 2 meters
                				RobotPos = 6; //STARTING NODE: checkpoint
@@ -264,9 +264,12 @@ void GoHome(void)
 				robotFollow(ROBOTSPEED, adcVal);
 				break;
 			case 1:	//bump sensor
+
 				ROBOTerror = 9;
 				break;
-			case 2:	//wheel drop
+			case 2:	//Virtual Wall
+				ser_putch(141); 
+				ser_putch(0);
 				ROBOTerror = 9;
 				break;
 			case 3:	//cliff sensor
@@ -285,19 +288,23 @@ void GoHome(void)
 					robot_turnInPlace();
 				if (RobotPos == 17) //past checkpoint
 				{
-					followDir = LEFTFLW;
-					rotate(50,COUNTERCLOCKWISE);
-					robotMoveSpeed(250,ROBOTSPEED);
+					trackingDist = TotalDistTravelled;
 				}			
 				readAvgDistance();
 				robotFollow(ROBOTSPEED, adcVal - 10);
 				break;
 			case 11://right free, turn right
 				RobotPos++;
+				if (RobotPos == 19)
+				{
+					robotMoveSpeed(500, ROBOTSPEED);
+					ROBOTerror = 0;
+					break;
+				}
 				if (followDir == LEFTFLW)
-					robot_turnArc(ROBOTSPEED);
-				if (followDir == RIGHTFLW)
 					robot_turnInPlace();
+				if (followDir == RIGHTFLW)
+					robot_turnArc(ROBOTSPEED);
 				readAvgDistance();
 				robotFollow(ROBOTSPEED, adcVal);
 				break;
@@ -333,8 +340,11 @@ while (ROBOTerror != 9)
 							else
 								ROBOTerror = 9;
 						break;
-						case 2:	//wheel drop
-							ROBOTerror = 9;
+						case 2:	//Virtual wall
+							ser_putch(141); 
+							ser_putch(0);
+							robotTurnSpeed((180),ROBOTTURNSPEED);   //turn around
+							ROBOTerror = 0;
 						break;
 						case 3:	//cliff sensor
 								RobotPos++;

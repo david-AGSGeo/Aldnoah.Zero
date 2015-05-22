@@ -1096,7 +1096,7 @@ void robo_init(void);
 void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
-void robotTurn(int degrees);
+
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget);
 void robot_turnArc(int speed);
@@ -1107,7 +1107,7 @@ void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
-
+int trackingDist = 0;
 unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
@@ -1195,7 +1195,6 @@ volatile unsigned int IRdistance;
 
 unsigned int readDistance(void);
 void readAvgDistance(void);
-void ADCconvert(void);
 
 # 13 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
@@ -1203,7 +1202,7 @@ void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
 int totalSteps = 0;
 
-# 43 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 44 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1276,10 +1275,6 @@ AngleHighByte = ser_getch();
 AngleLowByte = ser_getch();
 }
 
-else if (readType == 3)
-{
-
-}
 }
 
 
@@ -1372,10 +1367,17 @@ AdcTarget++;
 readAvgDistance();
 if (adcVal > (AdcTarget) && adcVal < (AdcTarget + hysterysis))
 {
+if (followDir == 1)
+RobotDrive(speed, -1700);
+if (followDir == 0)
 RobotDrive(speed, 1700);
+
 }
 else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - hysterysis))
 {
+if (followDir == 1)
+RobotDrive(speed, 1700);
+if (followDir == 0)
 RobotDrive(speed, -1700);
 }
 else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))
@@ -1433,7 +1435,17 @@ temp1 = temp1 << 8;
 temp1 += DistLowByte;
 distTravelled += temp1;
 TotalDistTravelled += temp1;
+if (trackingDist > 0 && trackingDist <= TotalDistTravelled - 2050 )
+{
 
+robotTurnSpeed(80,400);
+robotMoveSpeed(400, 200);
+trackingDist = 0;
+RobotPos++;
+
+
+break;
+}
 Disp2 = RobotPos;
 UpdateDisplay();
 }
@@ -1461,10 +1473,21 @@ case 16:
 robotTurnSpeed(70,400);
 break;
 case 17:
-robotTurnSpeed(85,400);
+robotTurnSpeed(80,400);
+break;
+case 21:
+
+ser_putch(141);
+ser_putch(1);
+ROBOTerror = 9;
+RobotDrive(0, 0x7FFF);
 break;
 default:
+if (followDir == 1)
+robotTurnSpeed(-80,400);
+if (followDir == 0)
 robotTurnSpeed(80,400);
+
 break;
 }
 }
@@ -1574,13 +1597,22 @@ case 15:
 RobotDrive((speed), -400 - 100);
 turnTarget = -190;
 break;
+case 20:
+RobotDrive((speed), -400 - 100);
+turnTarget = -190;
+break;
 default:
 if (followDir == 1)
+{
 RobotDrive((speed), 400);
+turnTarget = 75;
+}
 if (followDir == 0)
+{
 RobotDrive((speed), -400);
-
 turnTarget = -75;
+}
+
 break;
 }
 if (followDir == 0)
@@ -1677,7 +1709,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 520
+# 554
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1685,7 +1717,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 531
+# 565
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;

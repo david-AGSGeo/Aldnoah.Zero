@@ -16,7 +16,7 @@ void robo_init(void);
 void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
-void robotTurn(int degrees);
+
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget);
 void robot_turnArc(int speed);
@@ -27,7 +27,7 @@ void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
-
+int trackingDist = 0;
 unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;

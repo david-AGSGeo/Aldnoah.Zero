@@ -1194,7 +1194,6 @@ volatile unsigned int IRdistance;
 
 unsigned int readDistance(void);
 void readAvgDistance(void);
-void ADCconvert(void);
 
 # 13 "E:\Aldnoah.Zero\Assignment3\steppermotor.h"
 unsigned char spi_transfer(unsigned char data);
@@ -1254,7 +1253,7 @@ void robo_init(void);
 void RobotDrive(int speed, int radius);
 void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
-void robotTurn(int degrees);
+
 void robotTurnSpeed(int angle, int speed);
 void robotFollow(int speed, int AdcTarget);
 void robot_turnArc(int speed);
@@ -1265,7 +1264,7 @@ void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
-
+int trackingDist = 0;
 unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
@@ -1367,7 +1366,6 @@ PEIE=1;
 void main(void)
 {
 unsigned char choice = 255;
-int shortwall = 0;
 followDir = 0;
 RobotPos = 0;
 currentMenu = 0;
@@ -1401,7 +1399,8 @@ calibrateIR();
 break;
 case 1:
 RobotPos = 16;
-
+Init_Follow_IR();
+GoHome();
 break;
 case 2:
 RobotPos = 6;
@@ -1460,9 +1459,12 @@ readAvgDistance();
 robotFollow(200, adcVal);
 break;
 case 1:
+
 ROBOTerror = 9;
 break;
 case 2:
+ser_putch(141);
+ser_putch(0);
 ROBOTerror = 9;
 break;
 case 3:
@@ -1481,19 +1483,23 @@ if (followDir == 0)
 robot_turnInPlace();
 if (RobotPos == 17)
 {
-followDir = 1;
-rotate(50,1);
-robotMoveSpeed(250,200);
+trackingDist = TotalDistTravelled;
 }
 readAvgDistance();
 robotFollow(200, adcVal - 10);
 break;
 case 11:
 RobotPos++;
+if (RobotPos == 19)
+{
+robotMoveSpeed(500, 200);
+ROBOTerror = 0;
+break;
+}
 if (followDir == 1)
-robot_turnArc(200);
-if (followDir == 0)
 robot_turnInPlace();
+if (followDir == 0)
+robot_turnArc(200);
 readAvgDistance();
 robotFollow(200, adcVal);
 break;
@@ -1530,7 +1536,10 @@ else
 ROBOTerror = 9;
 break;
 case 2:
-ROBOTerror = 9;
+ser_putch(141);
+ser_putch(0);
+robotTurnSpeed((180),400);
+ROBOTerror = 0;
 break;
 case 3:
 RobotPos++;
