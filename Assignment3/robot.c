@@ -190,12 +190,15 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 	unsigned char hysterysis = 20;
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
-
+	
 	//keep going :)
 	while (1)	
 	{	
-		//if (abs(AdcTarget - IDEAL) >= hysterysis) // too close or too far
-		//	hysterysis = abs(AdcTarget - IDEAL) + 5; //increase hysterysis
+		if ((AdcTarget + IDEAL) <= hysterysis) // too close or too far
+		{
+			ser_putch(141); 
+			ser_putch(0);
+		}
 		if (AdcTarget > IDEAL)	// veer toward ideal distance 
 			AdcTarget--;
 		if (AdcTarget < IDEAL)
@@ -211,13 +214,22 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 		}
 		else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))	//corner detected
 		{
-			rotate(10,COUNTERCLOCKWISE);
-			readAvgDistance();
-			rotate(10,CLOCKWISE);
-			if (adcVal < 50)
-				ROBOTerror = 11;	//signal left turn
+			if (followDir == RIGHTFLW)
+			{
+				rotate(10,COUNTERCLOCKWISE);
+				readAvgDistance();
+				rotate(10,CLOCKWISE);
+			}
 			else
-				ROBOTerror = 10;	//signal left turn
+			{
+				rotate(10,CLOCKWISE);
+				readAvgDistance();
+				rotate(10,COUNTERCLOCKWISE);
+			}
+			if (adcVal < 50)
+				ROBOTerror = 11;	//signal Right turn
+			else
+				ROBOTerror = 10;	//signal Left turn
 			
 			break;
 		}
@@ -273,11 +285,14 @@ void robot_turnLeft(void)
 			RobotPos++;
 			break;
 		case 12:
-			robotTurnSpeed(75,400); 
+			robotTurnSpeed(70,400); 
 			break;
 		case 15:
 			robotTurnSpeed(160,400); 
 			RobotPos++;
+			break;
+		case 16:
+			robotTurnSpeed(70,400); 
 			break;
 		default:
 			robotTurnSpeed(80,400);    //Left
@@ -293,7 +308,14 @@ void robot_turnRight(int speed)
 	int turnTarget = 0; 
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
-	rotate(25, CLOCKWISE); //point directly at wall
+	if (followDir == RIGHTFLW)
+	{
+		rotate(25,CLOCKWISE);
+	}
+	else
+	{
+		rotate(25,COUNTERCLOCKWISE);
+	}	
 	readAvgDistance();
 	int AdcTarget = adcVal;
 	//keep going :)
@@ -368,7 +390,7 @@ void robot_turnRight(int speed)
 			turnTarget = -185;
 			break;
 		case 10:
-			RobotDrive((speed), ARCRIGHT-100);	//start robot moving
+			RobotDrive((speed), ARCRIGHT );	//start robot moving
 			turnTarget = -90;
 			break;
 		case 11:
@@ -377,6 +399,10 @@ void robot_turnRight(int speed)
 			break;
 		case 12:
 			RobotDrive((speed), ARCRIGHT - 50);	//start robot moving
+			turnTarget = -190;
+			break;
+		case 15:
+			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
 			turnTarget = -190;
 			break;
 		case 17:

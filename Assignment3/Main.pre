@@ -1221,6 +1221,28 @@ extern unsigned char ser_tmp;
 # 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
+
+volatile bit UpPressed = 0;
+volatile bit UpReleased = 0;
+volatile unsigned char UpDebounceCount = 0;
+
+volatile bit DownPressed = 0;
+volatile bit DownReleased = 0;
+volatile unsigned char DownDebounceCount = 0;
+
+volatile bit LeftPressed = 0;
+volatile bit LeftReleased = 0;
+volatile unsigned char LeftDebounceCount = 0;
+
+volatile bit RightPressed = 0;
+volatile bit RightReleased = 0;
+volatile unsigned char RightDebounceCount = 0;
+
+volatile bit CenterPressed = 0;
+volatile bit CenterReleased = 0;
+volatile unsigned char CenterDebounceCount = 0;
+
+# 106
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
@@ -1260,13 +1282,13 @@ int scan360(void);
 void ChargeMode(void);
 void RightTurn(void);
 void Init_Follow_IR(void);
+void FindVictim(void);
+void GoHome(void);
 
-
-
-
+# 92
 volatile unsigned char buttonPressed;
-
-
+unsigned char currentFlw;
+unsigned char FoundVictim = 0;
 
 
 volatile bit RTC_FLAG_1MS = 0;
@@ -1340,12 +1362,12 @@ PEIE=1;
 (GIE = 1);
 }
 
-# 169
+# 172
 void main(void)
 {
 unsigned char choice = 255;
 int shortwall = 0;
-unsigned char currentFlw = 0;
+currentFlw = 0;
 RobotPos = 0;
 currentMenu = 0;
 
@@ -1386,14 +1408,104 @@ RobotPos = 6;
 break;
 case 3:
 
-RobotPos = 9;
+RobotPos = 12;
 break;
 case 4:
-
-
-
+FoundVictim = 0;
 Init_Follow_IR();
 currentMenu = 3;
+FindVictim();
+if (FoundVictim)
+GoHome();
+ROBOTerror = 0;
+break;
+
+case 5:
+ChargeMode();
+break;
+default:
+
+break;
+}
+choice = 255;
+}
+}
+
+void Init_Follow_IR(void)
+{
+calibrateIR();
+_delay((unsigned long)((500)*(20000000/4000.0)));
+rotate(25, 0);
+}
+
+void GoHome(void)
+{
+switch (RobotPos)
+{
+case 7:
+robotTurnSpeed(175,400);
+break;
+case 15:
+robotTurnSpeed(175,400);
+robot_turnRight(200);
+break;
+}
+while (ROBOTerror != 9)
+{
+
+switch (ROBOTerror)
+{
+case 0:
+
+readAvgDistance();
+robotFollow(200, adcVal, currentFlw);
+break;
+case 1:
+ROBOTerror = 9;
+break;
+case 2:
+ROBOTerror = 9;
+break;
+case 3:
+ROBOTerror = 9;
+break;
+case 4:
+ROBOTerror = 0;
+break;
+case 9:
+
+break;
+case 10:
+RobotPos++;
+robot_turnLeft();
+if (RobotPos == 17)
+{
+currentFlw = 1;
+rotate(50,1);
+robotMoveSpeed(250,200);
+}
+readAvgDistance();
+robotFollow(200, adcVal - 10, currentFlw);
+break;
+case 11:
+RobotPos++;
+robot_turnRight(200);
+readAvgDistance();
+robotFollow(200, adcVal, currentFlw);
+
+break;
+default:
+readAvgDistance();
+robotFollow(200, adcVal, currentFlw);
+break;
+
+}
+}
+
+}
+
+void FindVictim(void)
+{
 while (ROBOTerror != 9)
 {
 
@@ -1433,7 +1545,9 @@ break;
 case 4:
 ser_putch(141);
 ser_putch(1);
-
+RobotPos++;
+FoundVictim = 1;
+ROBOTerror = 9;
 break;
 case 9:
 ROBOTerror = 9;
@@ -1463,28 +1577,11 @@ break;
 
 }
 }
-ROBOTerror = 0;
-break;
-
-case 5:
-ChargeMode();
-break;
-default:
-
-break;
-}
-choice = 255;
-}
 }
 
-void Init_Follow_IR(void)
-{
-calibrateIR();
-_delay((unsigned long)((500)*(20000000/4000.0)));
-rotate(25, 0);
-}
 
-# 317
+
+
 void calibrateIR(void)
 {
 currentMenu = 1;

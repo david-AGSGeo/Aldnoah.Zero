@@ -1158,6 +1158,28 @@ int dist_low;
 # 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
+
+volatile bit UpPressed = 0;
+volatile bit UpReleased = 0;
+volatile unsigned char UpDebounceCount = 0;
+
+volatile bit DownPressed = 0;
+volatile bit DownReleased = 0;
+volatile unsigned char DownDebounceCount = 0;
+
+volatile bit LeftPressed = 0;
+volatile bit LeftReleased = 0;
+volatile unsigned char LeftDebounceCount = 0;
+
+volatile bit RightPressed = 0;
+volatile bit RightReleased = 0;
+volatile unsigned char RightDebounceCount = 0;
+
+volatile bit CenterPressed = 0;
+volatile bit CenterReleased = 0;
+volatile unsigned char CenterDebounceCount = 0;
+
+# 106
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
@@ -1336,8 +1358,11 @@ ROBOTerror = 0;
 
 while (1)
 {
-
-
+if ((AdcTarget + 100) <= hysterysis)
+{
+ser_putch(141);
+ser_putch(0);
+}
 if (AdcTarget > 100)
 AdcTarget--;
 if (AdcTarget < 100)
@@ -1353,9 +1378,18 @@ RobotDrive(speed, -1700);
 }
 else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))
 {
+if (followDir == 0)
+{
 rotate(10,1);
 readAvgDistance();
 rotate(10,0);
+}
+else
+{
+rotate(10,0);
+readAvgDistance();
+rotate(10,1);
+}
 if (adcVal < 50)
 ROBOTerror = 11;
 else
@@ -1415,11 +1449,14 @@ robotTurnSpeed(160,400);
 RobotPos++;
 break;
 case 12:
-robotTurnSpeed(75,400);
+robotTurnSpeed(70,400);
 break;
 case 15:
 robotTurnSpeed(160,400);
 RobotPos++;
+break;
+case 16:
+robotTurnSpeed(70,400);
 break;
 default:
 robotTurnSpeed(80,400);
@@ -1435,7 +1472,14 @@ int temp1;
 int turnTarget = 0;
 RobotDrive(speed, 0x7FFF);
 ROBOTerror = 0;
-rotate(25, 0);
+if (followDir == 0)
+{
+rotate(25,0);
+}
+else
+{
+rotate(25,1);
+}
 readAvgDistance();
 int AdcTarget = adcVal;
 
@@ -1510,7 +1554,7 @@ RobotDrive((speed), -400-100);
 turnTarget = -185;
 break;
 case 10:
-RobotDrive((speed), -400-100);
+RobotDrive((speed), -400 );
 turnTarget = -90;
 break;
 case 11:
@@ -1519,6 +1563,10 @@ turnTarget = -190;
 break;
 case 12:
 RobotDrive((speed), -400 - 50);
+turnTarget = -190;
+break;
+case 15:
+RobotDrive((speed), -400 - 100);
 turnTarget = -190;
 break;
 case 17:
@@ -1616,7 +1664,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 481
+# 507
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1624,7 +1672,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 492
+# 518
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;

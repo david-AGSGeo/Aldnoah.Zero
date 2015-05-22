@@ -49,109 +49,12 @@ int pos = 0;
 const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "}; 
 const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
 
-//set up debounce variables 
-volatile bit UpPressed = 0;
-volatile bit UpReleased = 0;
-volatile unsigned char UpDebounceCount = 0;
 
-volatile bit DownPressed = 0;
-volatile bit DownReleased = 0;
-volatile unsigned char DownDebounceCount = 0;
-
-volatile bit LeftPressed = 0;
-volatile bit LeftReleased = 0;
-volatile unsigned char LeftDebounceCount = 0;
-
-volatile bit RightPressed = 0;
-volatile bit RightReleased = 0;
-volatile unsigned char RightDebounceCount = 0;
-
-volatile bit CenterPressed = 0;
-volatile bit CenterReleased = 0;
-volatile unsigned char CenterDebounceCount = 0;
 
 
 /************  Debounce  *************/
 //debounces the buttons
-void Debounce(void)
-{
-		//Debounce PB0
-		if(PB_UP)
-		{
-			UpDebounceCount++; //count 10 ms, and then wait for release 
-			if(UpDebounceCount >= DEBOUNCE_REQ_COUNT & UpReleased)
-			{
-				UpPressed = 1;			
-				UpReleased = 0;
-			}
-		}
-		else	//button has been released
-		{
-			UpDebounceCount = 0;
-			UpReleased = 1;
-		}
 
-		//Debounce PB1
-		if(PB_DOWN)
-		{
-			DownDebounceCount++;
-			if(DownDebounceCount >= DEBOUNCE_REQ_COUNT & DownReleased)
-			{
-				DownPressed = 1;			
-				DownReleased = 0;
-			}
-		}
-		else
-		{
-			DownDebounceCount = 0;
-			DownReleased = 1;
-		}
-		//Debounce PB2
-		if(PB_LEFT)
-		{
-			LeftDebounceCount++;
-			if(LeftDebounceCount >= DEBOUNCE_REQ_COUNT & LeftReleased)
-			{
-				LeftPressed = 1;			
-				LeftReleased = 0;
-			}
-		}
-		else
-		{
-			LeftDebounceCount = 0;
-			LeftReleased = 1;
-		}
-		//Debounce PB3
-		if(PB_RIGHT)
-		{
-			RightDebounceCount++;
-			if(RightDebounceCount >= DEBOUNCE_REQ_COUNT & RightReleased)
-			{
-				RightPressed = 1;			
-				RightReleased = 0;
-			}
-		}
-		else
-		{
-			RightDebounceCount = 0;
-			RightReleased = 1;
-		}
-		//Debounce PB3
-		if(PB_CENTER)
-		{
-			CenterDebounceCount++;
-			if(CenterDebounceCount >= DEBOUNCE_REQ_COUNT & CenterReleased)
-			{
-				CenterPressed = 1;			
-				CenterReleased = 0;
-			}
-		}
-		else
-		{
-			CenterDebounceCount = 0;
-			CenterReleased = 1;
-		}
-}
 
 /************  ReadButtons  *************/
 // read and debounce the buttons, and return the button that is pressed

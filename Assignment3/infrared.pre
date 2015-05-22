@@ -1199,6 +1199,28 @@ int dist_low;
 # 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
+
+volatile bit UpPressed = 0;
+volatile bit UpReleased = 0;
+volatile unsigned char UpDebounceCount = 0;
+
+volatile bit DownPressed = 0;
+volatile bit DownReleased = 0;
+volatile unsigned char DownDebounceCount = 0;
+
+volatile bit LeftPressed = 0;
+volatile bit LeftReleased = 0;
+volatile unsigned char LeftDebounceCount = 0;
+
+volatile bit RightPressed = 0;
+volatile bit RightReleased = 0;
+volatile unsigned char RightDebounceCount = 0;
+
+volatile bit CenterPressed = 0;
+volatile bit CenterReleased = 0;
+volatile unsigned char CenterDebounceCount = 0;
+
+# 106
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);

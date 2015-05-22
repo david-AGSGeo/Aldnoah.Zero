@@ -893,9 +893,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _dist_low `i  1 e ]
 "8 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _currentMenu `Vuc  1 e ]
+"11 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _UpPressed `Vb  1 e ]
+"12 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _UpReleased `Vb  1 e ]
 "13 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _UpDebounceCount `Vuc  1 e ]
+"15 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _DownPressed `Vb  1 e ]
+"16 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _DownReleased `Vb  1 e ]
+"17 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _DownDebounceCount `Vuc  1 e ]
+"19 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _LeftPressed `Vb  1 e ]
+"20 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _LeftReleased `Vb  1 e ]
+"21 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _LeftDebounceCount `Vuc  1 e ]
+"23 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _RightPressed `Vb  1 e ]
+"24 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _RightReleased `Vb  1 e ]
+"25 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _RightDebounceCount `Vuc  1 e ]
+"27 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _CenterPressed `Vb  1 e ]
+"28 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _CenterReleased `Vb  1 e ]
+"29 E:\Aldnoah.Zero\Assignment3\HMI.h
+[v _CenterDebounceCount `Vuc  1 e ]
+"109 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Disp1 `i  1 e ]
-"13 E:\Aldnoah.Zero\Assignment3\HMI.h
+"109 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Disp2 `i  1 e ]
 "13 E:\Aldnoah.Zero\Assignment3\infrared.h
 [v _readDistance `(ui  0 ef ]
@@ -1791,10 +1821,85 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;HMI.h: 8: volatile unsigned char currentMenu = 0;
-[; ;HMI.h: 10: unsigned char ReadButtons(void);
-[; ;HMI.h: 11: unsigned char Menu(unsigned char input);
-[; ;HMI.h: 12: void UpdateDisplay(void);
-[; ;HMI.h: 13: int Disp1, Disp2;
+"11
+[i _UpPressed
+-> 0 `i
+]
+[; ;HMI.h: 11: volatile bit UpPressed = 0;
+"12
+[i _UpReleased
+-> 0 `i
+]
+[; ;HMI.h: 12: volatile bit UpReleased = 0;
+"13
+[i _UpDebounceCount
+-> -> 0 `i `uc
+]
+[; ;HMI.h: 13: volatile unsigned char UpDebounceCount = 0;
+"15
+[i _DownPressed
+-> 0 `i
+]
+[; ;HMI.h: 15: volatile bit DownPressed = 0;
+"16
+[i _DownReleased
+-> 0 `i
+]
+[; ;HMI.h: 16: volatile bit DownReleased = 0;
+"17
+[i _DownDebounceCount
+-> -> 0 `i `uc
+]
+[; ;HMI.h: 17: volatile unsigned char DownDebounceCount = 0;
+"19
+[i _LeftPressed
+-> 0 `i
+]
+[; ;HMI.h: 19: volatile bit LeftPressed = 0;
+"20
+[i _LeftReleased
+-> 0 `i
+]
+[; ;HMI.h: 20: volatile bit LeftReleased = 0;
+"21
+[i _LeftDebounceCount
+-> -> 0 `i `uc
+]
+[; ;HMI.h: 21: volatile unsigned char LeftDebounceCount = 0;
+"23
+[i _RightPressed
+-> 0 `i
+]
+[; ;HMI.h: 23: volatile bit RightPressed = 0;
+"24
+[i _RightReleased
+-> 0 `i
+]
+[; ;HMI.h: 24: volatile bit RightReleased = 0;
+"25
+[i _RightDebounceCount
+-> -> 0 `i `uc
+]
+[; ;HMI.h: 25: volatile unsigned char RightDebounceCount = 0;
+"27
+[i _CenterPressed
+-> 0 `i
+]
+[; ;HMI.h: 27: volatile bit CenterPressed = 0;
+"28
+[i _CenterReleased
+-> 0 `i
+]
+[; ;HMI.h: 28: volatile bit CenterReleased = 0;
+"29
+[i _CenterDebounceCount
+-> -> 0 `i `uc
+]
+[; ;HMI.h: 29: volatile unsigned char CenterDebounceCount = 0;
+[; ;HMI.h: 106: unsigned char ReadButtons(void);
+[; ;HMI.h: 107: unsigned char Menu(unsigned char input);
+[; ;HMI.h: 108: void UpdateDisplay(void);
+[; ;HMI.h: 109: int Disp1, Disp2;
 "28 E:\Aldnoah.Zero\Assignment3\infrared.c
 [v _readAvgDistance `(v  1 ef ]
 {

@@ -1157,6 +1157,28 @@ extern int printf(const char *, ...);
 # 8 "E:\Aldnoah.Zero\Assignment3\HMI.h"
 volatile unsigned char currentMenu = 0;
 
+
+volatile bit UpPressed = 0;
+volatile bit UpReleased = 0;
+volatile unsigned char UpDebounceCount = 0;
+
+volatile bit DownPressed = 0;
+volatile bit DownReleased = 0;
+volatile unsigned char DownDebounceCount = 0;
+
+volatile bit LeftPressed = 0;
+volatile bit LeftReleased = 0;
+volatile unsigned char LeftDebounceCount = 0;
+
+volatile bit RightPressed = 0;
+volatile bit RightReleased = 0;
+volatile unsigned char RightDebounceCount = 0;
+
+volatile bit CenterPressed = 0;
+volatile bit CenterReleased = 0;
+volatile unsigned char CenterDebounceCount = 0;
+
+# 106
 unsigned char ReadButtons(void);
 unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
@@ -1229,116 +1251,11 @@ int pos = 0;
 const char* menuStrings[] = {"Calib_IR", "Scan_360", "Drive_2m", "Drive_L", "Flw_Wall", " Charge "};
 const char* shortMenuStrings[] = {"Cal", "Scn", "Dr2", "DrL", "Flw", "Chg"};
 
-
-volatile bit UpPressed = 0;
-volatile bit UpReleased = 0;
-volatile unsigned char UpDebounceCount = 0;
-
-volatile bit DownPressed = 0;
-volatile bit DownReleased = 0;
-volatile unsigned char DownDebounceCount = 0;
-
-volatile bit LeftPressed = 0;
-volatile bit LeftReleased = 0;
-volatile unsigned char LeftDebounceCount = 0;
-
-volatile bit RightPressed = 0;
-volatile bit RightReleased = 0;
-volatile unsigned char RightDebounceCount = 0;
-
-volatile bit CenterPressed = 0;
-volatile bit CenterReleased = 0;
-volatile unsigned char CenterDebounceCount = 0;
-
-
-
-
-void Debounce(void)
-{
-
-if(!RB2)
-{
-UpDebounceCount++;
-if(UpDebounceCount >= 10 & UpReleased)
-{
-UpPressed = 1;
-UpReleased = 0;
-}
-}
-else
-{
-UpDebounceCount = 0;
-UpReleased = 1;
-}
-
-
-if(!RB3)
-{
-DownDebounceCount++;
-if(DownDebounceCount >= 10 & DownReleased)
-{
-DownPressed = 1;
-DownReleased = 0;
-}
-}
-else
-{
-DownDebounceCount = 0;
-DownReleased = 1;
-}
-
-if(!RB4)
-{
-LeftDebounceCount++;
-if(LeftDebounceCount >= 10 & LeftReleased)
-{
-LeftPressed = 1;
-LeftReleased = 0;
-}
-}
-else
-{
-LeftDebounceCount = 0;
-LeftReleased = 1;
-}
-
-if(!RB5)
-{
-RightDebounceCount++;
-if(RightDebounceCount >= 10 & RightReleased)
-{
-RightPressed = 1;
-RightReleased = 0;
-}
-}
-else
-{
-RightDebounceCount = 0;
-RightReleased = 1;
-}
-
-if(!RB6)
-{
-CenterDebounceCount++;
-if(CenterDebounceCount >= 10 & CenterReleased)
-{
-CenterPressed = 1;
-CenterReleased = 0;
-}
-}
-else
-{
-CenterDebounceCount = 0;
-CenterReleased = 1;
-}
-}
-
-
-
+# 61
 unsigned char ReadButtons(void)
 {
 
-Debounce();
+if(!RB2) { UpDebounceCount++; if(UpDebounceCount >= 10 & UpReleased) { UpPressed = 1; UpReleased = 0; } } else { UpDebounceCount = 0; UpReleased = 1; } if(!RB3) { DownDebounceCount++; if(DownDebounceCount >= 10 & DownReleased) { DownPressed = 1; DownReleased = 0; } } else { DownDebounceCount = 0; DownReleased = 1; } if(!RB4) { LeftDebounceCount++; if(LeftDebounceCount >= 10 & LeftReleased) { LeftPressed = 1; LeftReleased = 0; } } else { LeftDebounceCount = 0; LeftReleased = 1; } if(!RB5) { RightDebounceCount++; if(RightDebounceCount >= 10 & RightReleased) { RightPressed = 1; RightReleased = 0; } } else { RightDebounceCount = 0; RightReleased = 1; } if(!RB6) { CenterDebounceCount++; if(CenterDebounceCount >= 10 & CenterReleased) { CenterPressed = 1; CenterReleased = 0; } } else { CenterDebounceCount = 0; CenterReleased = 1; };
 
 if(UpPressed)
 {

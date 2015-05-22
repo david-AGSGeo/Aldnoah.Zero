@@ -82,13 +82,16 @@ int scan360(void);
 void ChargeMode(void);
 void RightTurn(void);
 void Init_Follow_IR(void);
+void FindVictim(void);
+void GoHome(void);
+
 
 //Global Variables
 
 
 volatile unsigned char buttonPressed;   //stores button presses
-
-
+unsigned char currentFlw;
+unsigned char FoundVictim = 0;
 
 //set up flags for timer0 (currently not used))
 volatile bit RTC_FLAG_1MS = 0;
@@ -170,7 +173,7 @@ void main(void)
 {
     unsigned char choice = 255; 
     int shortwall = 0;             
-	unsigned char currentFlw = RIGHTFLW; 
+	currentFlw = RIGHTFLW; 
 	RobotPos = 0; //STARTING NODE: should be 0 for final!
 	currentMenu = 0;    //display main menu
     //initialise function
@@ -211,15 +214,105 @@ void main(void)
                 break;
             case 3:     //Drive in an L shape
  
-                				RobotPos = 9; //STARTING NODE: bump
+                				RobotPos = 12; //STARTING NODE: bump
                 break;
             case 4:    //-------------------NAVIGATE MAZE-----------------
-				
-
-				
+				FoundVictim = 0;
 				Init_Follow_IR();
 				currentMenu = 3;    //switch display to Maze Navigation
-     			while (ROBOTerror != 9)
+     			FindVictim();
+				if (FoundVictim)
+					GoHome();
+				ROBOTerror = 0;	//clear any errors
+                break;      
+            
+            case 5:     //Charge Mode
+                ChargeMode();
+                break;  
+            default:
+            
+                break;
+        }
+        choice = 255;   //reset menu choice
+    }
+}
+
+void Init_Follow_IR(void)
+{
+	calibrateIR();
+	__delay_ms(500);
+	rotate(25, CLOCKWISE);
+}
+
+void GoHome(void)
+{
+	switch (RobotPos)
+	{
+		case 7:     //victim in first dead end
+			robotTurnSpeed(175,400); 
+			break;  		
+		case 15:     //victim in second dead end
+			robotTurnSpeed(175,400); 
+			robot_turnRight(200); 
+			break;  	
+	}
+	while (ROBOTerror != 9)
+				{ 
+					
+                	switch (ROBOTerror)
+					{
+						case 0:
+							
+							readAvgDistance();
+							robotFollow(200, adcVal, currentFlw);
+						break;
+						case 1:	//bump sensor
+								ROBOTerror = 9;
+						break;
+						case 2:	//wheel drop
+							ROBOTerror = 9;
+						break;
+						case 3:	//cliff sensor
+							ROBOTerror = 9;
+						break;
+						case 4:	///VICTIM FOUND!
+							ROBOTerror = 0; //already found !!!
+						break;
+						case 9:
+
+						break;
+						case 10: // ahead blocked, turn left
+							RobotPos++;
+							robot_turnLeft();
+							if (RobotPos == 17) //past checkpoint
+							{
+								currentFlw = LEFTFLW;
+								rotate(50,COUNTERCLOCKWISE);
+								robotMoveSpeed(250,200);
+							}			
+							readAvgDistance();
+							robotFollow(200, adcVal - 10, currentFlw);
+						break;
+						case 11://right free, turn right
+							RobotPos++;
+							robot_turnRight(200);
+							readAvgDistance();
+							robotFollow(200, adcVal, currentFlw);
+
+						break;
+						default:
+							readAvgDistance();
+							robotFollow(200, adcVal, currentFlw);
+						break;
+
+					}
+				}
+
+}
+
+void FindVictim(void)
+{
+while (ROBOTerror != 9)
 				{ 
 					
                 	switch (ROBOTerror)
@@ -258,7 +351,9 @@ void main(void)
 						case 4:	///VICTIM FOUND!
 							ser_putch(141); 
 							ser_putch(1);
-							//ROBOTerror = 9;
+							RobotPos++;
+							FoundVictim = 1;
+							ROBOTerror = 9;
 						break;
 						case 9:
 							ROBOTerror = 9;
@@ -288,28 +383,7 @@ void main(void)
 
 					}
 				}
-				ROBOTerror = 0;	//clear any errors
-                break;      
-            
-            case 5:     //Charge Mode
-                ChargeMode();
-                break;  
-            default:
-            
-                break;
-        }
-        choice = 255;   //reset menu choice
-    }
 }
-
-void Init_Follow_IR(void)
-{
-	calibrateIR();
-	__delay_ms(500);
-	rotate(25, CLOCKWISE);
-}
-
-
 
 
 /************  calibrateIR  *************/
