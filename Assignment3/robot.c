@@ -33,8 +33,10 @@
 #define LEFT -1700
 #define RIGHT 1700
 #define ARCRIGHT -400
+#define ARCLEFT 400
 
 #define IDEAL 100	//target distance for IR wall follow
+
 
 /************  robo_init  *************/
 //initialise the robot to full mode
@@ -183,7 +185,7 @@ void robotTurn(int angle)
 
 /************  robotFollow  *************/
 //
-void robotFollow(int speed, int AdcTarget, unsigned char followDir)
+void robotFollow(int speed, int AdcTarget)
 {
 	distTravelled = 0;
 	int temp1;
@@ -276,7 +278,7 @@ void robotFollow(int speed, int AdcTarget, unsigned char followDir)
 	UpdateDisplay(); //show error code	
 }
 
-void robot_turnLeft(void)
+void robot_turnInPlace()
 {
 	switch (RobotPos)
 	{
@@ -294,13 +296,16 @@ void robot_turnLeft(void)
 		case 16:
 			robotTurnSpeed(70,400); 
 			break;
+		case 17:
+			robotTurnSpeed(85,400); 
+			break;
 		default:
 			robotTurnSpeed(80,400);    //Left
 			break;
 	}
 }
 
-void robot_turnRight(int speed)
+void robot_turnArc(int speed)
 {
 	
 	angleTurned = 0;
@@ -405,16 +410,24 @@ void robot_turnRight(int speed)
 			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
 			turnTarget = -190;
 			break;
-		case 17:
-			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
-			turnTarget = -190;
-			break;
 		default:
-			RobotDrive((speed), ARCRIGHT);	//start robot moving
+				if (followDir == LEFTFLW)
+					RobotDrive((speed), ARCLEFT);	//start robot moving
+				if (followDir == RIGHTFLW)
+					RobotDrive((speed), ARCRIGHT);	//start robot moving
+			
 			turnTarget = -75;
 			break;
 	}
-	rotate(25, COUNTERCLOCKWISE);
+	if (followDir == RIGHTFLW)
+	{
+		rotate(25,COUNTERCLOCKWISE);
+	}
+	else
+	{
+		rotate(25,CLOCKWISE);
+	}	
+	
 	while (abs(angleTurned) < abs(turnTarget))	
 	{
 		robot_read(ALL);

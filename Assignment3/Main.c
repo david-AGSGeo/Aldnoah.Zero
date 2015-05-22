@@ -90,7 +90,6 @@ void GoHome(void);
 
 
 volatile unsigned char buttonPressed;   //stores button presses
-unsigned char currentFlw;
 unsigned char FoundVictim = 0;
 
 //set up flags for timer0 (currently not used))
@@ -173,7 +172,7 @@ void main(void)
 {
     unsigned char choice = 255; 
     int shortwall = 0;             
-	currentFlw = RIGHTFLW; 
+	followDir = RIGHTFLW; 
 	RobotPos = 0; //STARTING NODE: should be 0 for final!
 	currentMenu = 0;    //display main menu
     //initialise function
@@ -205,7 +204,7 @@ void main(void)
                 calibrateIR();
                 break;
             case 1:     //Scan 360 degrees
-             				RobotPos = 0; //STARTING NODE: start
+             				RobotPos = 16; //STARTING NODE: start
            		
                 break;
             case 2:     //Drive forward 2 meters
@@ -249,65 +248,65 @@ void GoHome(void)
 	switch (RobotPos)
 	{
 		case 7:     //victim in first dead end
-			robotTurnSpeed(175,400); 
+			robotTurnSpeed(175,ROBOTTURNSPEED); 
 			break;  		
 		case 15:     //victim in second dead end
-			robotTurnSpeed(175,400); 
-			robot_turnRight(200); 
+			robotTurnSpeed(175,ROBOTTURNSPEED); 
+			robot_turnArc(ROBOTSPEED); 
 			break;  	
 	}
 	while (ROBOTerror != 9)
-				{ 
-					
-                	switch (ROBOTerror)
-					{
-						case 0:
-							
-							readAvgDistance();
-							robotFollow(200, adcVal, currentFlw);
-						break;
-						case 1:	//bump sensor
-								ROBOTerror = 9;
-						break;
-						case 2:	//wheel drop
-							ROBOTerror = 9;
-						break;
-						case 3:	//cliff sensor
-							ROBOTerror = 9;
-						break;
-						case 4:	///VICTIM FOUND!
-							ROBOTerror = 0; //already found !!!
-						break;
-						case 9:
-
-						break;
-						case 10: // ahead blocked, turn left
-							RobotPos++;
-							robot_turnLeft();
-							if (RobotPos == 17) //past checkpoint
-							{
-								currentFlw = LEFTFLW;
-								rotate(50,COUNTERCLOCKWISE);
-								robotMoveSpeed(250,200);
-							}			
-							readAvgDistance();
-							robotFollow(200, adcVal - 10, currentFlw);
-						break;
-						case 11://right free, turn right
-							RobotPos++;
-							robot_turnRight(200);
-							readAvgDistance();
-							robotFollow(200, adcVal, currentFlw);
-
-						break;
-						default:
-							readAvgDistance();
-							robotFollow(200, adcVal, currentFlw);
-						break;
-
-					}
-				}
-
+	{ 	
+       	switch (ROBOTerror)
+		{
+			case 0:				
+				readAvgDistance();
+				robotFollow(ROBOTSPEED, adcVal);
+				break;
+			case 1:	//bump sensor
+				ROBOTerror = 9;
+				break;
+			case 2:	//wheel drop
+				ROBOTerror = 9;
+				break;
+			case 3:	//cliff sensor
+				ROBOTerror = 9;
+				break;
+			case 4:	///VICTIM FOUND!
+				ROBOTerror = 0; //already found !!!
+				break;
+			case 9:
+				break;
+			case 10: // ahead blocked, turn left
+				RobotPos++;
+				if (followDir == LEFTFLW)
+					robot_turnArc(ROBOTSPEED);
+				if (followDir == RIGHTFLW)
+					robot_turnInPlace();
+				if (RobotPos == 17) //past checkpoint
+				{
+					followDir = LEFTFLW;
+					rotate(50,COUNTERCLOCKWISE);
+					robotMoveSpeed(250,ROBOTSPEED);
+				}			
+				readAvgDistance();
+				robotFollow(ROBOTSPEED, adcVal - 10);
+				break;
+			case 11://right free, turn right
+				RobotPos++;
+				if (followDir == LEFTFLW)
+					robot_turnArc(ROBOTSPEED);
+				if (followDir == RIGHTFLW)
+					robot_turnInPlace();
+				readAvgDistance();
+				robotFollow(ROBOTSPEED, adcVal);
+				break;
+			default:
+				readAvgDistance();
+				robotFollow(ROBOTSPEED, adcVal);
+			break;
+		}
+	}
 }
 
 void FindVictim(void)
@@ -320,7 +319,7 @@ while (ROBOTerror != 9)
 						case 0:
 							
 							readAvgDistance();
-							robotFollow(200, adcVal, currentFlw);
+							robotFollow(ROBOTSPEED, adcVal);
 						break;
 						case 1:	//bump sensor
 							if (RobotPos == 10) //low wall
@@ -329,7 +328,7 @@ while (ROBOTerror != 9)
 								__delay_ms(200);
 								RobotPos++;
 								ROBOTerror = 0;
-								robotTurnSpeed((-(angleTurned - 75)),400);    //straighten up
+								robotTurnSpeed((-(angleTurned - 75)),ROBOTTURNSPEED);    //straighten up
 							}
 							else
 								ROBOTerror = 9;
@@ -342,11 +341,11 @@ while (ROBOTerror != 9)
 								ROBOTerror = 0;
 								
 								__delay_ms(1000);
-								robotMoveSpeed(-200,-200);
-								robotTurnSpeed((-angleTurned-10),400);    //straighten up
-								robotMoveSpeed(250,200);	//move forward to sense next wall
+								robotMoveSpeed(-200,-ROBOTSPEED);
+								robotTurnSpeed((-angleTurned-10),ROBOTTURNSPEED);    //straighten up
+								robotMoveSpeed(250,ROBOTSPEED);	//move forward to sense next wall
 								readAvgDistance();
-								robotFollow(200, adcVal - 10, currentFlw);
+								robotFollow(ROBOTSPEED, adcVal - 10);
 						break;
 						case 4:	///VICTIM FOUND!
 							ser_putch(141); 
@@ -360,25 +359,20 @@ while (ROBOTerror != 9)
 						break;
 						case 10: // ahead blocked, turn left
 							RobotPos++;
-
-							robot_turnLeft();
-							
-							
+							robot_turnInPlace();				
 							readAvgDistance();
-							robotFollow(200, adcVal - 10, currentFlw);
+							robotFollow(ROBOTSPEED, adcVal - 10);
 						break;
 						case 11://right free, turn right
-							RobotPos++;
-							
-							robot_turnRight(200);
-							
+							RobotPos++;	
+							robot_turnArc(ROBOTSPEED);
 							readAvgDistance();
-							robotFollow(200, adcVal, currentFlw);
+							robotFollow(ROBOTSPEED, adcVal);
 
 						break;
 						default:
 							readAvgDistance();
-							robotFollow(200, adcVal, currentFlw);
+							robotFollow(ROBOTSPEED, adcVal);
 						break;
 
 					}

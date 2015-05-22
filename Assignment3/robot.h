@@ -8,6 +8,9 @@
 #define RIGHTFLW 0
 #define LEFTFLW 1
 
+#define ROBOTSPEED 200
+#define ROBOTTURNSPEED 400
+
 void robo_init(void);
 
 void RobotDrive(int speed, int radius);
@@ -15,15 +18,17 @@ void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed);
-void robot_turnLeft(void);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnArc(int speed);
+void robot_turnInPlace(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
+
+unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;

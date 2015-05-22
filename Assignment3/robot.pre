@@ -1090,7 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 11 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 14 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 
 void RobotDrive(int speed, int radius);
@@ -1098,15 +1098,17 @@ void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed);
-void robot_turnLeft(void);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnArc(int speed);
+void robot_turnInPlace(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
+
+unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;
@@ -1201,7 +1203,7 @@ void rotate(unsigned int numsteps, unsigned char direction);
 void rotateOld(unsigned char steps, unsigned char direction);
 int totalSteps = 0;
 
-# 41 "E:\Aldnoah.Zero\Assignment3\robot.c"
+# 43 "E:\Aldnoah.Zero\Assignment3\robot.c"
 void robo_init(void)
 {
 ser_putch(128);
@@ -1347,7 +1349,7 @@ ser_putch(0);
 
 
 
-void robotFollow(int speed, int AdcTarget, unsigned char followDir)
+void robotFollow(int speed, int AdcTarget)
 {
 distTravelled = 0;
 int temp1;
@@ -1440,7 +1442,7 @@ Disp2 = RobotPos;
 UpdateDisplay();
 }
 
-void robot_turnLeft(void)
+void robot_turnInPlace()
 {
 switch (RobotPos)
 {
@@ -1458,13 +1460,16 @@ break;
 case 16:
 robotTurnSpeed(70,400);
 break;
+case 17:
+robotTurnSpeed(85,400);
+break;
 default:
 robotTurnSpeed(80,400);
 break;
 }
 }
 
-void robot_turnRight(int speed)
+void robot_turnArc(int speed)
 {
 
 angleTurned = 0;
@@ -1569,16 +1574,24 @@ case 15:
 RobotDrive((speed), -400 - 100);
 turnTarget = -190;
 break;
-case 17:
-RobotDrive((speed), -400 - 100);
-turnTarget = -190;
-break;
 default:
+if (followDir == 1)
+RobotDrive((speed), 400);
+if (followDir == 0)
 RobotDrive((speed), -400);
+
 turnTarget = -75;
 break;
 }
-rotate(25, 1);
+if (followDir == 0)
+{
+rotate(25,1);
+}
+else
+{
+rotate(25,0);
+}
+
 while (abs(angleTurned) < abs(turnTarget))
 {
 robot_read(2);
@@ -1664,7 +1677,7 @@ TotalDistTravelled += temp1;
 Disp2 = distTravelled;
 UpdateDisplay();
 
-# 507
+# 520
 }
 Disp2 = ROBOTerror;
 UpdateDisplay();
@@ -1672,7 +1685,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 518
+# 531
 void robotTurnSpeed(int angle, int speed)
 {
 angleTurned = 0;

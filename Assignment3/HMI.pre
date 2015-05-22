@@ -1218,7 +1218,7 @@ unsigned int readDistance(void);
 void readAvgDistance(void);
 void ADCconvert(void);
 
-# 11 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 14 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 
 void RobotDrive(int speed, int radius);
@@ -1226,15 +1226,17 @@ void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed);
-void robot_turnLeft(void);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnArc(int speed);
+void robot_turnInPlace(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
+
+unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;

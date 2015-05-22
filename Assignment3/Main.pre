@@ -1248,7 +1248,7 @@ unsigned char Menu(unsigned char input);
 void UpdateDisplay(void);
 int Disp1, Disp2;
 
-# 11 "E:\Aldnoah.Zero\Assignment3\robot.h"
+# 14 "E:\Aldnoah.Zero\Assignment3\robot.h"
 void robo_init(void);
 
 void RobotDrive(int speed, int radius);
@@ -1256,15 +1256,17 @@ void robotMove(int distance, int radius);
 void robotMoveSpeed(int distance, int speed);
 void robotTurn(int degrees);
 void robotTurnSpeed(int angle, int speed);
-void robotFollow(int speed, int AdcTarget, unsigned char followDir);
-void robot_turnRight(int speed);
-void robot_turnLeft(void);
+void robotFollow(int speed, int AdcTarget);
+void robot_turnArc(int speed);
+void robot_turnInPlace(void);
 void RobotBattRead(void);
 int abs(int v);
 void robotLoadSong(void);
 
 void robot_read(unsigned char readType);
 
+
+unsigned char followDir;
 unsigned char RobotPos;
 int distTravelled,angleTurned, TotalDistTravelled;
 volatile unsigned char DistHighByte, DistLowByte, BumpSensors, AngleHighByte, AngleLowByte, VwallSensor, CliffSensors, VictimSensor ;
@@ -1287,7 +1289,6 @@ void GoHome(void);
 
 # 92
 volatile unsigned char buttonPressed;
-unsigned char currentFlw;
 unsigned char FoundVictim = 0;
 
 
@@ -1362,12 +1363,12 @@ PEIE=1;
 (GIE = 1);
 }
 
-# 172
+# 171
 void main(void)
 {
 unsigned char choice = 255;
 int shortwall = 0;
-currentFlw = 0;
+followDir = 0;
 RobotPos = 0;
 currentMenu = 0;
 
@@ -1399,7 +1400,7 @@ case 0:
 calibrateIR();
 break;
 case 1:
-RobotPos = 0;
+RobotPos = 16;
 
 break;
 case 2:
@@ -1447,18 +1448,16 @@ robotTurnSpeed(175,400);
 break;
 case 15:
 robotTurnSpeed(175,400);
-robot_turnRight(200);
+robot_turnArc(200);
 break;
 }
 while (ROBOTerror != 9)
 {
-
 switch (ROBOTerror)
 {
 case 0:
-
 readAvgDistance();
-robotFollow(200, adcVal, currentFlw);
+robotFollow(200, adcVal);
 break;
 case 1:
 ROBOTerror = 9;
@@ -1473,35 +1472,37 @@ case 4:
 ROBOTerror = 0;
 break;
 case 9:
-
 break;
 case 10:
 RobotPos++;
-robot_turnLeft();
+if (followDir == 1)
+robot_turnArc(200);
+if (followDir == 0)
+robot_turnInPlace();
 if (RobotPos == 17)
 {
-currentFlw = 1;
+followDir = 1;
 rotate(50,1);
 robotMoveSpeed(250,200);
 }
 readAvgDistance();
-robotFollow(200, adcVal - 10, currentFlw);
+robotFollow(200, adcVal - 10);
 break;
 case 11:
 RobotPos++;
-robot_turnRight(200);
+if (followDir == 1)
+robot_turnArc(200);
+if (followDir == 0)
+robot_turnInPlace();
 readAvgDistance();
-robotFollow(200, adcVal, currentFlw);
-
+robotFollow(200, adcVal);
 break;
 default:
 readAvgDistance();
-robotFollow(200, adcVal, currentFlw);
+robotFollow(200, adcVal);
 break;
-
 }
 }
-
 }
 
 void FindVictim(void)
@@ -1514,7 +1515,7 @@ switch (ROBOTerror)
 case 0:
 
 readAvgDistance();
-robotFollow(200, adcVal, currentFlw);
+robotFollow(200, adcVal);
 break;
 case 1:
 if (RobotPos == 10)
@@ -1540,7 +1541,7 @@ robotMoveSpeed(-200,-200);
 robotTurnSpeed((-angleTurned-10),400);
 robotMoveSpeed(250,200);
 readAvgDistance();
-robotFollow(200, adcVal - 10, currentFlw);
+robotFollow(200, adcVal - 10);
 break;
 case 4:
 ser_putch(141);
@@ -1554,25 +1555,20 @@ ROBOTerror = 9;
 break;
 case 10:
 RobotPos++;
-
-robot_turnLeft();
-
-
+robot_turnInPlace();
 readAvgDistance();
-robotFollow(200, adcVal - 10, currentFlw);
+robotFollow(200, adcVal - 10);
 break;
 case 11:
 RobotPos++;
-
-robot_turnRight(200);
-
+robot_turnArc(200);
 readAvgDistance();
-robotFollow(200, adcVal, currentFlw);
+robotFollow(200, adcVal);
 
 break;
 default:
 readAvgDistance();
-robotFollow(200, adcVal, currentFlw);
+robotFollow(200, adcVal);
 break;
 
 }
