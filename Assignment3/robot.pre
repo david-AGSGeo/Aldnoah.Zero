@@ -1355,7 +1355,7 @@ ROBOTerror = 0;
 
 while (1)
 {
-if (AdcTarget > 180)
+if (AdcTarget > 185)
 {
 ser_putch(141);
 ser_putch(0);
@@ -1366,16 +1366,8 @@ readAvgDistance();
 ROBOTerror = 0;
 break;
 }
-if (AdcTarget < 30)
-{
-ser_putch(141);
-ser_putch(0);
 
-robotTurnSpeed(-10,400);
-readAvgDistance();
-ROBOTerror = 0;
-break;
-}
+# 217
 if (AdcTarget > 100)
 AdcTarget--;
 if (AdcTarget < 100)
@@ -1477,13 +1469,14 @@ robotTurnSpeed(160,400);
 RobotPos++;
 break;
 case 12:
-robotTurnSpeed(70,400);
+robotTurnSpeed(80,400);
 break;
-case 13:
-robotTurnSpeed(70,400);
+case 14:
+robotTurnSpeed(80,400);
 ser_putch(141);
 ser_putch(3);
 break;
+
 case 15:
 robotTurnSpeed(160,400);
 RobotPos++;
@@ -1611,7 +1604,7 @@ turnTarget = -190;
 break;
 case 12:
 RobotDrive((speed), -400 - 50);
-turnTarget = -190;
+turnTarget = -185;
 
 break;
 case 15:
@@ -1666,7 +1659,7 @@ break;
 }
 if (CliffSensors)
 {
-RobotDrive(-200, 0x7FFF);
+
 ROBOTerror = 3;
 break;
 }
@@ -1741,7 +1734,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 586
+# 587
 void robotTurnSpeed(int angle, int speed)
 {
 robot_read(2);
@@ -1863,5 +1856,26 @@ ser_putch(48);
 ser_putch(16);
 ser_putch(49);
 ser_putch(16);
+
+ser_putch(140);
+ser_putch(4);
+ser_putch(6);
+
+ser_putch(63);
+ser_putch(8);
+ser_putch(67);
+ser_putch(8);
+ser_putch(73);
+ser_putch(48);
+
+ser_putch(63);
+ser_putch(8);
+ser_putch(67);
+ser_putch(8);
+ser_putch(75);
+ser_putch(64);
+
+
+
 
 }

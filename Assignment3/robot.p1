@@ -2312,9 +2312,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;robot.c: 195: {
 "195
 {
-[; ;robot.c: 196: if (AdcTarget > 180)
+[; ;robot.c: 196: if (AdcTarget > 185)
 "196
-[e $ ! > _AdcTarget -> 180 `i 118  ]
+[e $ ! > _AdcTarget -> 185 `i 118  ]
 [; ;robot.c: 197: {
 "197
 {
@@ -2346,110 +2346,82 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 118 ]
 [; ;robot.c: 206: }
-[; ;robot.c: 207: if (AdcTarget < 30)
-"207
-[e $ ! < _AdcTarget -> 30 `i 119  ]
-[; ;robot.c: 208: {
-"208
-{
-[; ;robot.c: 209: ser_putch(141);
-"209
-[e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;robot.c: 210: ser_putch(0);
-"210
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;robot.c: 212: robotTurnSpeed(-10,400);
-"212
-[e ( _robotTurnSpeed (2 , -U -> 10 `i -> 400 `i ]
-[; ;robot.c: 213: readAvgDistance();
-"213
-[e ( _readAvgDistance ..  ]
-[; ;robot.c: 214: ROBOTerror = 0;
-"214
-[e = _ROBOTerror -> -> 0 `i `uc ]
-[; ;robot.c: 215: break;
-"215
-[e $U 117  ]
-"216
-}
-[e :U 119 ]
-[; ;robot.c: 216: }
 [; ;robot.c: 217: if (AdcTarget > 100)
 "217
-[e $ ! > _AdcTarget -> 100 `i 120  ]
+[e $ ! > _AdcTarget -> 100 `i 119  ]
 [; ;robot.c: 218: AdcTarget--;
 "218
 [e -- _AdcTarget -> 1 `i ]
-[e :U 120 ]
+[e :U 119 ]
 [; ;robot.c: 219: if (AdcTarget < 100)
 "219
-[e $ ! < _AdcTarget -> 100 `i 121  ]
+[e $ ! < _AdcTarget -> 100 `i 120  ]
 [; ;robot.c: 220: AdcTarget++;
 "220
 [e ++ _AdcTarget -> 1 `i ]
-[e :U 121 ]
+[e :U 120 ]
 [; ;robot.c: 221: readAvgDistance();
 "221
 [e ( _readAvgDistance ..  ]
 [; ;robot.c: 222: if (adcVal > (AdcTarget) && adcVal < (AdcTarget + hysterysis))
 "222
-[e $ ! && > _adcVal -> _AdcTarget `ui < _adcVal -> + _AdcTarget -> _hysterysis `i `ui 122  ]
+[e $ ! && > _adcVal -> _AdcTarget `ui < _adcVal -> + _AdcTarget -> _hysterysis `i `ui 121  ]
 [; ;robot.c: 223: {
 "223
 {
 [; ;robot.c: 224: if (followDir == 1)
 "224
-[e $ ! == -> _followDir `i -> 1 `i 123  ]
+[e $ ! == -> _followDir `i -> 1 `i 122  ]
 [; ;robot.c: 225: RobotDrive(speed, -1700);
 "225
 [e ( _RobotDrive (2 , _speed -U -> 1700 `i ]
-[e :U 123 ]
+[e :U 122 ]
 [; ;robot.c: 226: if (followDir == 0)
 "226
-[e $ ! == -> _followDir `i -> 0 `i 124  ]
+[e $ ! == -> _followDir `i -> 0 `i 123  ]
 [; ;robot.c: 227: RobotDrive(speed, 1700);
 "227
 [e ( _RobotDrive (2 , _speed -> 1700 `i ]
-[e :U 124 ]
+[e :U 123 ]
 "229
 }
 [; ;robot.c: 229: }
-[e $U 125  ]
+[e $U 124  ]
 "230
-[e :U 122 ]
+[e :U 121 ]
 [; ;robot.c: 230: else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - hysterysis))
-[e $ ! && < _adcVal -> _AdcTarget `ui > _adcVal -> - _AdcTarget -> _hysterysis `i `ui 126  ]
+[e $ ! && < _adcVal -> _AdcTarget `ui > _adcVal -> - _AdcTarget -> _hysterysis `i `ui 125  ]
 [; ;robot.c: 231: {
 "231
 {
 [; ;robot.c: 232: if (followDir == 1)
 "232
-[e $ ! == -> _followDir `i -> 1 `i 127  ]
+[e $ ! == -> _followDir `i -> 1 `i 126  ]
 [; ;robot.c: 233: RobotDrive(speed, 1700);
 "233
 [e ( _RobotDrive (2 , _speed -> 1700 `i ]
-[e :U 127 ]
+[e :U 126 ]
 [; ;robot.c: 234: if (followDir == 0)
 "234
-[e $ ! == -> _followDir `i -> 0 `i 128  ]
+[e $ ! == -> _followDir `i -> 0 `i 127  ]
 [; ;robot.c: 235: RobotDrive(speed, -1700);
 "235
 [e ( _RobotDrive (2 , _speed -U -> 1700 `i ]
-[e :U 128 ]
+[e :U 127 ]
 "236
 }
 [; ;robot.c: 236: }
-[e $U 129  ]
+[e $U 128  ]
 "237
-[e :U 126 ]
+[e :U 125 ]
 [; ;robot.c: 237: else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))
-[e $ ! || <= _adcVal -> - _AdcTarget -> _hysterysis `i `ui >= _adcVal -> + _AdcTarget -> _hysterysis `i `ui 130  ]
+[e $ ! || <= _adcVal -> - _AdcTarget -> _hysterysis `i `ui >= _adcVal -> + _AdcTarget -> _hysterysis `i `ui 129  ]
 [; ;robot.c: 238: {
 "238
 {
 [; ;robot.c: 239: if (followDir == 0)
 "239
-[e $ ! == -> _followDir `i -> 0 `i 131  ]
+[e $ ! == -> _followDir `i -> 0 `i 130  ]
 [; ;robot.c: 240: {
 "240
 {
@@ -2465,9 +2437,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "244
 }
 [; ;robot.c: 244: }
-[e $U 132  ]
+[e $U 131  ]
 "245
-[e :U 131 ]
+[e :U 130 ]
 [; ;robot.c: 245: else
 [; ;robot.c: 246: {
 "246
@@ -2483,31 +2455,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _rotate (2 , -> -> 10 `i `ui -> -> 1 `i `uc ]
 "250
 }
-[e :U 132 ]
+[e :U 131 ]
 [; ;robot.c: 250: }
 [; ;robot.c: 251: if (adcVal < 50)
 "251
-[e $ ! < _adcVal -> -> 50 `i `ui 133  ]
+[e $ ! < _adcVal -> -> 50 `i `ui 132  ]
 [; ;robot.c: 252: ROBOTerror = 11;
 "252
 [e = _ROBOTerror -> -> 11 `i `uc ]
-[e $U 134  ]
+[e $U 133  ]
 "253
-[e :U 133 ]
+[e :U 132 ]
 [; ;robot.c: 253: else
 [; ;robot.c: 254: ROBOTerror = 10;
 "254
 [e = _ROBOTerror -> -> 10 `i `uc ]
-[e :U 134 ]
+[e :U 133 ]
 [; ;robot.c: 256: break;
 "256
 [e $U 117  ]
 "257
 }
 [; ;robot.c: 257: }
-[e $U 135  ]
+[e $U 134  ]
 "258
-[e :U 130 ]
+[e :U 129 ]
 [; ;robot.c: 258: else
 [; ;robot.c: 259: {
 "259
@@ -2517,16 +2489,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _RobotDrive (2 , _speed -> 32767 `i ]
 "261
 }
-[e :U 135 ]
-[e :U 129 ]
-[e :U 125 ]
+[e :U 134 ]
+[e :U 128 ]
+[e :U 124 ]
 [; ;robot.c: 261: }
 [; ;robot.c: 262: robot_read(0);
 "262
 [e ( _robot_read (1 -> -> 0 `i `uc ]
 [; ;robot.c: 263: if (BumpSensors)
 "263
-[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 136  ]
+[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 135  ]
 [; ;robot.c: 264: {
 "264
 {
@@ -2541,11 +2513,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 117  ]
 "268
 }
-[e :U 136 ]
+[e :U 135 ]
 [; ;robot.c: 268: }
 [; ;robot.c: 269: if (VwallSensor)
 "269
-[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 137  ]
+[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 136  ]
 [; ;robot.c: 270: {
 "270
 {
@@ -2560,11 +2532,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 117  ]
 "274
 }
-[e :U 137 ]
+[e :U 136 ]
 [; ;robot.c: 274: }
 [; ;robot.c: 275: if (CliffSensors)
 "275
-[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 138  ]
+[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 137  ]
 [; ;robot.c: 276: {
 "276
 {
@@ -2579,11 +2551,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 117  ]
 "280
 }
-[e :U 138 ]
+[e :U 137 ]
 [; ;robot.c: 280: }
 [; ;robot.c: 281: if (VictimSensor != 255)
 "281
-[e $ ! != -> _VictimSensor `i -> 255 `i 139  ]
+[e $ ! != -> _VictimSensor `i -> 255 `i 138  ]
 [; ;robot.c: 282: {
 "282
 {
@@ -2598,7 +2570,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 117  ]
 "286
 }
-[e :U 139 ]
+[e :U 138 ]
 [; ;robot.c: 286: }
 [; ;robot.c: 287: temp1 = DistHighByte;
 "287
@@ -2617,7 +2589,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e =+ _TotalDistTravelled _temp1 ]
 [; ;robot.c: 292: if (trackingDist > 0 && trackingDist <= TotalDistTravelled - 2050 )
 "292
-[e $ ! && > _trackingDist -> 0 `i <= _trackingDist - _TotalDistTravelled -> 2050 `i 140  ]
+[e $ ! && > _trackingDist -> 0 `i <= _trackingDist - _TotalDistTravelled -> 2050 `i 139  ]
 [; ;robot.c: 293: {
 "293
 {
@@ -2638,7 +2610,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 117  ]
 "300
 }
-[e :U 140 ]
+[e :U 139 ]
 [; ;robot.c: 300: }
 [; ;robot.c: 301: Disp2 = RobotPos;
 "301
@@ -2672,13 +2644,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;robot.c: 311: switch (RobotPos)
 "311
-[e $U 143  ]
+[e $U 142  ]
 [; ;robot.c: 312: {
 "312
 {
 [; ;robot.c: 313: case 8:
 "313
-[e :U 144 ]
+[e :U 143 ]
 [; ;robot.c: 314: robotTurnSpeed(160,400);
 "314
 [e ( _robotTurnSpeed (2 , -> 160 `i -> 400 `i ]
@@ -2687,22 +2659,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ++ _RobotPos -> -> 1 `i `uc ]
 [; ;robot.c: 316: break;
 "316
-[e $U 142  ]
+[e $U 141  ]
 [; ;robot.c: 317: case 12:
 "317
-[e :U 145 ]
-[; ;robot.c: 318: robotTurnSpeed(70,400);
+[e :U 144 ]
+[; ;robot.c: 318: robotTurnSpeed(80,400);
 "318
-[e ( _robotTurnSpeed (2 , -> 70 `i -> 400 `i ]
+[e ( _robotTurnSpeed (2 , -> 80 `i -> 400 `i ]
 [; ;robot.c: 319: break;
 "319
-[e $U 142  ]
-[; ;robot.c: 320: case 13:
+[e $U 141  ]
+[; ;robot.c: 320: case 14:
 "320
-[e :U 146 ]
-[; ;robot.c: 321: robotTurnSpeed(70,400);
+[e :U 145 ]
+[; ;robot.c: 321: robotTurnSpeed(80,400);
 "321
-[e ( _robotTurnSpeed (2 , -> 70 `i -> 400 `i ]
+[e ( _robotTurnSpeed (2 , -> 80 `i -> 400 `i ]
 [; ;robot.c: 322: ser_putch(141);
 "322
 [e ( _ser_putch (1 -> -> 141 `i `uc ]
@@ -2711,1117 +2683,1159 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _ser_putch (1 -> -> 3 `i `uc ]
 [; ;robot.c: 324: break;
 "324
-[e $U 142  ]
-[; ;robot.c: 325: case 15:
-"325
-[e :U 147 ]
-[; ;robot.c: 326: robotTurnSpeed(160,400);
+[e $U 141  ]
+[; ;robot.c: 326: case 15:
 "326
-[e ( _robotTurnSpeed (2 , -> 160 `i -> 400 `i ]
-[; ;robot.c: 327: RobotPos++;
+[e :U 146 ]
+[; ;robot.c: 327: robotTurnSpeed(160,400);
 "327
-[e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;robot.c: 328: break;
+[e ( _robotTurnSpeed (2 , -> 160 `i -> 400 `i ]
+[; ;robot.c: 328: RobotPos++;
 "328
-[e $U 142  ]
-[; ;robot.c: 329: case 16:
+[e ++ _RobotPos -> -> 1 `i `uc ]
+[; ;robot.c: 329: break;
 "329
-[e :U 148 ]
-[; ;robot.c: 330: robotTurnSpeed(70,400);
+[e $U 141  ]
+[; ;robot.c: 330: case 16:
 "330
-[e ( _robotTurnSpeed (2 , -> 70 `i -> 400 `i ]
-[; ;robot.c: 331: break;
+[e :U 147 ]
+[; ;robot.c: 331: robotTurnSpeed(70,400);
 "331
-[e $U 142  ]
-[; ;robot.c: 332: case 17:
+[e ( _robotTurnSpeed (2 , -> 70 `i -> 400 `i ]
+[; ;robot.c: 332: break;
 "332
-[e :U 149 ]
-[; ;robot.c: 333: robotTurnSpeed(80,400);
+[e $U 141  ]
+[; ;robot.c: 333: case 17:
 "333
-[e ( _robotTurnSpeed (2 , -> 80 `i -> 400 `i ]
-[; ;robot.c: 334: break;
+[e :U 148 ]
+[; ;robot.c: 334: robotTurnSpeed(80,400);
 "334
-[e $U 142  ]
-[; ;robot.c: 335: case 21:
-"335
-[e :U 150 ]
-[; ;robot.c: 337: RobotDrive(0, 0x7FFF);
-"337
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 338: ser_putch(141);
-"338
-[e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;robot.c: 339: ser_putch(2);
-"339
-[e ( _ser_putch (1 -> -> 2 `i `uc ]
-[; ;robot.c: 340: ROBOTerror = 9;
-"340
-[e = _ROBOTerror -> -> 9 `i `uc ]
-[; ;robot.c: 342: break;
-"342
-[e $U 142  ]
-[; ;robot.c: 343: default:
-"343
-[e :U 151 ]
-[; ;robot.c: 344: if (followDir == 1)
-"344
-[e $ ! == -> _followDir `i -> 1 `i 152  ]
-[; ;robot.c: 345: robotTurnSpeed(-80,400);
-"345
-[e ( _robotTurnSpeed (2 , -U -> 80 `i -> 400 `i ]
-[e :U 152 ]
-[; ;robot.c: 346: if (followDir == 0)
-"346
-[e $ ! == -> _followDir `i -> 0 `i 153  ]
-[; ;robot.c: 347: robotTurnSpeed(80,400);
-"347
 [e ( _robotTurnSpeed (2 , -> 80 `i -> 400 `i ]
-[e :U 153 ]
-[; ;robot.c: 349: break;
-"349
-[e $U 142  ]
+[; ;robot.c: 335: break;
+"335
+[e $U 141  ]
+[; ;robot.c: 336: case 21:
+"336
+[e :U 149 ]
+[; ;robot.c: 338: RobotDrive(0, 0x7FFF);
+"338
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 339: ser_putch(141);
+"339
+[e ( _ser_putch (1 -> -> 141 `i `uc ]
+[; ;robot.c: 340: ser_putch(2);
+"340
+[e ( _ser_putch (1 -> -> 2 `i `uc ]
+[; ;robot.c: 341: ROBOTerror = 9;
+"341
+[e = _ROBOTerror -> -> 9 `i `uc ]
+[; ;robot.c: 343: break;
+"343
+[e $U 141  ]
+[; ;robot.c: 344: default:
+"344
+[e :U 150 ]
+[; ;robot.c: 345: if (followDir == 1)
+"345
+[e $ ! == -> _followDir `i -> 1 `i 151  ]
+[; ;robot.c: 346: robotTurnSpeed(-80,400);
+"346
+[e ( _robotTurnSpeed (2 , -U -> 80 `i -> 400 `i ]
+[e :U 151 ]
+[; ;robot.c: 347: if (followDir == 0)
+"347
+[e $ ! == -> _followDir `i -> 0 `i 152  ]
+[; ;robot.c: 348: robotTurnSpeed(80,400);
+"348
+[e ( _robotTurnSpeed (2 , -> 80 `i -> 400 `i ]
+[e :U 152 ]
+[; ;robot.c: 350: break;
 "350
-}
-[; ;robot.c: 350: }
-[e $U 142  ]
-"311
-[e :U 143 ]
-[e [\ _RobotPos , $ -> -> 8 `i `uc 144
- , $ -> -> 12 `i `uc 145
- , $ -> -> 13 `i `uc 146
- , $ -> -> 15 `i `uc 147
- , $ -> -> 16 `i `uc 148
- , $ -> -> 17 `i `uc 149
- , $ -> -> 21 `i `uc 150
- 151 ]
-"350
-[e :U 142 ]
-[; ;robot.c: 351: }
+[e $U 141  ]
 "351
-[e :UE 141 ]
 }
-"354
+[; ;robot.c: 351: }
+[e $U 141  ]
+"311
+[e :U 142 ]
+[e [\ _RobotPos , $ -> -> 8 `i `uc 143
+ , $ -> -> 12 `i `uc 144
+ , $ -> -> 14 `i `uc 145
+ , $ -> -> 15 `i `uc 146
+ , $ -> -> 16 `i `uc 147
+ , $ -> -> 17 `i `uc 148
+ , $ -> -> 21 `i `uc 149
+ 150 ]
+"351
+[e :U 141 ]
+[; ;robot.c: 352: }
+"352
+[e :UE 140 ]
+}
+"355
 [v _robot_turnArc `(v  1 ef1`i ]
 {
-[; ;robot.c: 353: void robot_turnArc(int speed)
-[; ;robot.c: 354: {
+[; ;robot.c: 354: void robot_turnArc(int speed)
+[; ;robot.c: 355: {
 [e :U _robot_turnArc ]
 [v _speed `i  1 r1 ]
 [f ]
-[; ;robot.c: 356: angleTurned = 0;
-"356
-[e = _angleTurned -> 0 `i ]
+[; ;robot.c: 357: angleTurned = 0;
 "357
-[v _temp1 `i  1 a ]
+[e = _angleTurned -> 0 `i ]
 "358
-[v _turnTarget `i  1 a ]
-[; ;robot.c: 357: int temp1;
-[; ;robot.c: 358: int turnTarget = 0;
-[e = _turnTarget -> 0 `i ]
-[; ;robot.c: 359: RobotDrive(speed, 0x7FFF);
+[v _temp1 `i  1 a ]
 "359
-[e ( _RobotDrive (2 , _speed -> 32767 `i ]
-[; ;robot.c: 360: ROBOTerror = 0;
+[v _turnTarget `i  1 a ]
+[; ;robot.c: 358: int temp1;
+[; ;robot.c: 359: int turnTarget = 0;
+[e = _turnTarget -> 0 `i ]
+[; ;robot.c: 360: RobotDrive(speed, 0x7FFF);
 "360
-[e = _ROBOTerror -> -> 0 `i `uc ]
-[; ;robot.c: 361: if (followDir == 0)
-"361
-[e $ ! == -> _followDir `i -> 0 `i 155  ]
-[; ;robot.c: 362: {
-"362
-{
-[; ;robot.c: 363: rotate(25,0);
-"363
-[e ( _rotate (2 , -> -> 25 `i `ui -> -> 0 `i `uc ]
-"364
-}
-[; ;robot.c: 364: }
-[e $U 156  ]
-"365
-[e :U 155 ]
-[; ;robot.c: 365: else
-[; ;robot.c: 366: {
-"366
-{
-[; ;robot.c: 367: rotate(25,1);
-"367
-[e ( _rotate (2 , -> -> 25 `i `ui -> -> 1 `i `uc ]
-"368
-}
-[e :U 156 ]
-[; ;robot.c: 368: }
-[; ;robot.c: 369: readAvgDistance();
-"369
-[e ( _readAvgDistance ..  ]
-"370
-[v _AdcTarget `i  1 a ]
-[; ;robot.c: 370: int AdcTarget = adcVal;
-[e = _AdcTarget -> _adcVal `i ]
-[; ;robot.c: 372: while (1)
-"372
-[e :U 158 ]
-[; ;robot.c: 373: {
-"373
-{
-[; ;robot.c: 374: readAvgDistance();
-"374
-[e ( _readAvgDistance ..  ]
-[; ;robot.c: 375: if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 15))
-"375
-[e $ ! && > _adcVal -> _AdcTarget `ui < _adcVal -> + _AdcTarget -> 15 `i `ui 160  ]
-[; ;robot.c: 376: {
-"376
-{
-[; ;robot.c: 377: RobotDrive(speed, 1700);
-"377
-[e ( _RobotDrive (2 , _speed -> 1700 `i ]
-"378
-}
-[; ;robot.c: 378: }
-[e $U 161  ]
-"379
-[e :U 160 ]
-[; ;robot.c: 379: else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 15))
-[e $ ! && < _adcVal -> _AdcTarget `ui > _adcVal -> - _AdcTarget -> 15 `i `ui 162  ]
-[; ;robot.c: 380: {
-"380
-{
-[; ;robot.c: 381: RobotDrive(speed, -1700);
-"381
-[e ( _RobotDrive (2 , _speed -U -> 1700 `i ]
-"382
-}
-[; ;robot.c: 382: }
-[e $U 163  ]
-"383
-[e :U 162 ]
-[; ;robot.c: 383: else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))
-[e $ ! || <= _adcVal -> - _AdcTarget -> 50 `i `ui >= _adcVal -> + _AdcTarget -> 15 `i `ui 164  ]
-[; ;robot.c: 384: {
-"384
-{
-[; ;robot.c: 385: break;
-"385
-[e $U 159  ]
-"386
-}
-[; ;robot.c: 386: }
-[e $U 165  ]
-"388
-[e :U 164 ]
-[; ;robot.c: 388: else
-[; ;robot.c: 389: {
-"389
-{
-[; ;robot.c: 390: RobotDrive(speed, 0x7FFF);
-"390
 [e ( _RobotDrive (2 , _speed -> 32767 `i ]
+[; ;robot.c: 361: ROBOTerror = 0;
+"361
+[e = _ROBOTerror -> -> 0 `i `uc ]
+[; ;robot.c: 362: if (followDir == 0)
+"362
+[e $ ! == -> _followDir `i -> 0 `i 154  ]
+[; ;robot.c: 363: {
+"363
+{
+[; ;robot.c: 364: rotate(25,0);
+"364
+[e ( _rotate (2 , -> -> 25 `i `ui -> -> 0 `i `uc ]
+"365
+}
+[; ;robot.c: 365: }
+[e $U 155  ]
+"366
+[e :U 154 ]
+[; ;robot.c: 366: else
+[; ;robot.c: 367: {
+"367
+{
+[; ;robot.c: 368: rotate(25,1);
+"368
+[e ( _rotate (2 , -> -> 25 `i `ui -> -> 1 `i `uc ]
+"369
+}
+[e :U 155 ]
+[; ;robot.c: 369: }
+[; ;robot.c: 370: readAvgDistance();
+"370
+[e ( _readAvgDistance ..  ]
+"371
+[v _AdcTarget `i  1 a ]
+[; ;robot.c: 371: int AdcTarget = adcVal;
+[e = _AdcTarget -> _adcVal `i ]
+[; ;robot.c: 373: while (1)
+"373
+[e :U 157 ]
+[; ;robot.c: 374: {
+"374
+{
+[; ;robot.c: 375: readAvgDistance();
+"375
+[e ( _readAvgDistance ..  ]
+[; ;robot.c: 376: if (adcVal > (AdcTarget) && adcVal < (AdcTarget + 15))
+"376
+[e $ ! && > _adcVal -> _AdcTarget `ui < _adcVal -> + _AdcTarget -> 15 `i `ui 159  ]
+[; ;robot.c: 377: {
+"377
+{
+[; ;robot.c: 378: RobotDrive(speed, 1700);
+"378
+[e ( _RobotDrive (2 , _speed -> 1700 `i ]
+"379
+}
+[; ;robot.c: 379: }
+[e $U 160  ]
+"380
+[e :U 159 ]
+[; ;robot.c: 380: else if (adcVal < (AdcTarget) && adcVal > (AdcTarget - 15))
+[e $ ! && < _adcVal -> _AdcTarget `ui > _adcVal -> - _AdcTarget -> 15 `i `ui 161  ]
+[; ;robot.c: 381: {
+"381
+{
+[; ;robot.c: 382: RobotDrive(speed, -1700);
+"382
+[e ( _RobotDrive (2 , _speed -U -> 1700 `i ]
+"383
+}
+[; ;robot.c: 383: }
+[e $U 162  ]
+"384
+[e :U 161 ]
+[; ;robot.c: 384: else if (adcVal <= (AdcTarget - 50) || adcVal >= (AdcTarget + 15))
+[e $ ! || <= _adcVal -> - _AdcTarget -> 50 `i `ui >= _adcVal -> + _AdcTarget -> 15 `i `ui 163  ]
+[; ;robot.c: 385: {
+"385
+{
+[; ;robot.c: 386: break;
+"386
+[e $U 158  ]
+"387
+}
+[; ;robot.c: 387: }
+[e $U 164  ]
+"389
+[e :U 163 ]
+[; ;robot.c: 389: else
+[; ;robot.c: 390: {
+"390
+{
+[; ;robot.c: 391: RobotDrive(speed, 0x7FFF);
 "391
+[e ( _RobotDrive (2 , _speed -> 32767 `i ]
+"392
+}
+[e :U 164 ]
+[e :U 162 ]
+[e :U 160 ]
+[; ;robot.c: 392: }
+[; ;robot.c: 393: robot_read(2);
+"393
+[e ( _robot_read (1 -> -> 2 `i `uc ]
+[; ;robot.c: 394: if (BumpSensors)
+"394
+[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 165  ]
+[; ;robot.c: 395: {
+"395
+{
+[; ;robot.c: 396: RobotDrive(0, 0x7FFF);
+"396
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 397: ROBOTerror = 1;
+"397
+[e = _ROBOTerror -> -> 1 `i `uc ]
+[; ;robot.c: 398: break;
+"398
+[e $U 158  ]
+"399
 }
 [e :U 165 ]
-[e :U 163 ]
-[e :U 161 ]
-[; ;robot.c: 391: }
-[; ;robot.c: 392: robot_read(2);
-"392
-[e ( _robot_read (1 -> -> 2 `i `uc ]
-[; ;robot.c: 393: if (BumpSensors)
-"393
-[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 166  ]
-[; ;robot.c: 394: {
-"394
+[; ;robot.c: 399: }
+[; ;robot.c: 400: if (VwallSensor)
+"400
+[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 166  ]
+[; ;robot.c: 401: {
+"401
 {
-[; ;robot.c: 395: RobotDrive(0, 0x7FFF);
-"395
+[; ;robot.c: 402: RobotDrive(0, 0x7FFF);
+"402
 [e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 396: ROBOTerror = 1;
-"396
-[e = _ROBOTerror -> -> 1 `i `uc ]
-[; ;robot.c: 397: break;
-"397
-[e $U 159  ]
-"398
+[; ;robot.c: 403: ROBOTerror = 2;
+"403
+[e = _ROBOTerror -> -> 2 `i `uc ]
+[; ;robot.c: 404: break;
+"404
+[e $U 158  ]
+"405
 }
 [e :U 166 ]
-[; ;robot.c: 398: }
-[; ;robot.c: 399: if (VwallSensor)
-"399
-[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 167  ]
-[; ;robot.c: 400: {
-"400
+[; ;robot.c: 405: }
+[; ;robot.c: 406: if (CliffSensors)
+"406
+[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 167  ]
+[; ;robot.c: 407: {
+"407
 {
-[; ;robot.c: 401: RobotDrive(0, 0x7FFF);
-"401
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 402: ROBOTerror = 2;
-"402
-[e = _ROBOTerror -> -> 2 `i `uc ]
-[; ;robot.c: 403: break;
-"403
-[e $U 159  ]
-"404
+[; ;robot.c: 408: RobotDrive(-200, 0x7FFF);
+"408
+[e ( _RobotDrive (2 , -U -> 200 `i -> 32767 `i ]
+[; ;robot.c: 409: ROBOTerror = 3;
+"409
+[e = _ROBOTerror -> -> 3 `i `uc ]
+[; ;robot.c: 410: break;
+"410
+[e $U 158  ]
+"411
 }
 [e :U 167 ]
-[; ;robot.c: 404: }
-[; ;robot.c: 405: if (CliffSensors)
-"405
-[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 168  ]
-[; ;robot.c: 406: {
-"406
+[; ;robot.c: 411: }
+[; ;robot.c: 412: if (VictimSensor != 255)
+"412
+[e $ ! != -> _VictimSensor `i -> 255 `i 168  ]
+[; ;robot.c: 413: {
+"413
 {
-[; ;robot.c: 407: RobotDrive(-200, 0x7FFF);
-"407
-[e ( _RobotDrive (2 , -U -> 200 `i -> 32767 `i ]
-[; ;robot.c: 408: ROBOTerror = 3;
-"408
-[e = _ROBOTerror -> -> 3 `i `uc ]
-[; ;robot.c: 409: break;
-"409
-[e $U 159  ]
-"410
+[; ;robot.c: 414: RobotDrive(0, 0x7FFF);
+"414
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 415: ROBOTerror = 4;
+"415
+[e = _ROBOTerror -> -> 4 `i `uc ]
+[; ;robot.c: 416: break;
+"416
+[e $U 158  ]
+"417
 }
 [e :U 168 ]
-[; ;robot.c: 410: }
-[; ;robot.c: 411: if (VictimSensor != 255)
-"411
-[e $ ! != -> _VictimSensor `i -> 255 `i 169  ]
-[; ;robot.c: 412: {
-"412
-{
-[; ;robot.c: 413: RobotDrive(0, 0x7FFF);
-"413
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 414: ROBOTerror = 4;
-"414
-[e = _ROBOTerror -> -> 4 `i `uc ]
-[; ;robot.c: 415: break;
-"415
-[e $U 159  ]
-"416
-}
-[e :U 169 ]
-[; ;robot.c: 416: }
-[; ;robot.c: 417: temp1 = DistHighByte;
-"417
-[e = _temp1 -> _DistHighByte `i ]
-[; ;robot.c: 418: temp1 = temp1 << 8;
+[; ;robot.c: 417: }
+[; ;robot.c: 418: temp1 = DistHighByte;
 "418
-[e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 419: temp1 += DistLowByte;
+[e = _temp1 -> _DistHighByte `i ]
+[; ;robot.c: 419: temp1 = temp1 << 8;
 "419
-[e =+ _temp1 -> _DistLowByte `i ]
-[; ;robot.c: 420: distTravelled += temp1;
-"420
-[e =+ _distTravelled _temp1 ]
-[; ;robot.c: 421: TotalDistTravelled += temp1;
-"421
-[e =+ _TotalDistTravelled _temp1 ]
-[; ;robot.c: 422: temp1 = AngleHighByte;
-"422
-[e = _temp1 -> _AngleHighByte `i ]
-[; ;robot.c: 423: temp1 = temp1 << 8;
-"423
 [e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 424: temp1 += AngleLowByte;
+[; ;robot.c: 420: temp1 += DistLowByte;
+"420
+[e =+ _temp1 -> _DistLowByte `i ]
+[; ;robot.c: 421: distTravelled += temp1;
+"421
+[e =+ _distTravelled _temp1 ]
+[; ;robot.c: 422: TotalDistTravelled += temp1;
+"422
+[e =+ _TotalDistTravelled _temp1 ]
+[; ;robot.c: 423: temp1 = AngleHighByte;
+"423
+[e = _temp1 -> _AngleHighByte `i ]
+[; ;robot.c: 424: temp1 = temp1 << 8;
 "424
-[e =+ _temp1 -> _AngleLowByte `i ]
-[; ;robot.c: 425: angleTurned += temp1;
+[e = _temp1 << _temp1 -> 8 `i ]
+[; ;robot.c: 425: temp1 += AngleLowByte;
 "425
-[e =+ _angleTurned _temp1 ]
-[; ;robot.c: 426: Disp2 = RobotPos;
+[e =+ _temp1 -> _AngleLowByte `i ]
+[; ;robot.c: 426: angleTurned += temp1;
 "426
-[e = _Disp2 -> _RobotPos `i ]
-[; ;robot.c: 427: UpdateDisplay();
+[e =+ _angleTurned _temp1 ]
+[; ;robot.c: 427: Disp2 = RobotPos;
 "427
-[e ( _UpdateDisplay ..  ]
+[e = _Disp2 -> _RobotPos `i ]
+[; ;robot.c: 428: UpdateDisplay();
 "428
+[e ( _UpdateDisplay ..  ]
+"429
 }
-[e :U 157 ]
-"372
-[e $U 158  ]
-[e :U 159 ]
-[; ;robot.c: 428: }
-[; ;robot.c: 430: angleTurned = 0;
-"430
-[e = _angleTurned -> 0 `i ]
-[; ;robot.c: 431: switch (RobotPos)
+[e :U 156 ]
+"373
+[e $U 157  ]
+[e :U 158 ]
+[; ;robot.c: 429: }
+[; ;robot.c: 431: angleTurned = 0;
 "431
-[e $U 171  ]
-[; ;robot.c: 432: {
+[e = _angleTurned -> 0 `i ]
+[; ;robot.c: 432: switch (RobotPos)
 "432
-{
-[; ;robot.c: 433: case 3:
+[e $U 170  ]
+[; ;robot.c: 433: {
 "433
-[e :U 172 ]
-[; ;robot.c: 434: RobotDrive((speed /3), -400);
-"434
-[e ( _RobotDrive (2 , / _speed -> 3 `i -U -> 400 `i ]
-[; ;robot.c: 435: turnTarget = -100;
-"435
-[e = _turnTarget -U -> 100 `i ]
-[; ;robot.c: 436: break;
-"436
-[e $U 170  ]
-[; ;robot.c: 438: case 7:
-"438
-[e :U 173 ]
-[; ;robot.c: 439: RobotDrive((speed), -400-100);
-"439
-[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
-[; ;robot.c: 440: turnTarget = -185;
-"440
-[e = _turnTarget -U -> 185 `i ]
-[; ;robot.c: 441: break;
-"441
-[e $U 170  ]
-[; ;robot.c: 442: case 10:
-"442
-[e :U 174 ]
-[; ;robot.c: 443: RobotDrive((speed), -400 );
-"443
-[e ( _RobotDrive (2 , _speed -U -> 400 `i ]
-[; ;robot.c: 444: turnTarget = -90;
-"444
-[e = _turnTarget -U -> 90 `i ]
-[; ;robot.c: 445: break;
-"445
-[e $U 170  ]
-[; ;robot.c: 446: case 11:
-"446
-[e :U 175 ]
-[; ;robot.c: 447: RobotDrive((speed), -400 - 100);
-"447
-[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
-[; ;robot.c: 448: turnTarget = -190;
-"448
-[e = _turnTarget -U -> 190 `i ]
-[; ;robot.c: 449: break;
-"449
-[e $U 170  ]
-[; ;robot.c: 450: case 12:
-"450
-[e :U 176 ]
-[; ;robot.c: 451: RobotDrive((speed), -400 - 50);
-"451
-[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 50 `i ]
-[; ;robot.c: 452: turnTarget = -190;
-"452
-[e = _turnTarget -U -> 190 `i ]
-[; ;robot.c: 454: break;
-"454
-[e $U 170  ]
-[; ;robot.c: 455: case 15:
-"455
-[e :U 177 ]
-[; ;robot.c: 456: RobotDrive((speed), -400 - 100);
-"456
-[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
-[; ;robot.c: 457: turnTarget = -190;
-"457
-[e = _turnTarget -U -> 190 `i ]
-[; ;robot.c: 458: break;
-"458
-[e $U 170  ]
-[; ;robot.c: 459: case 19:
-"459
-[e :U 178 ]
-[; ;robot.c: 460: robotMoveSpeed(600, 200);
-"460
-[e ( _robotMoveSpeed (2 , -> 600 `i -> 200 `i ]
-[; ;robot.c: 461: turnTarget = 0;
-"461
-[e = _turnTarget -> 0 `i ]
-[; ;robot.c: 462: break;
-"462
-[e $U 170  ]
-[; ;robot.c: 463: case 20:
-"463
-[e :U 179 ]
-[; ;robot.c: 464: RobotDrive((speed), -400 - 100);
-"464
-[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
-[; ;robot.c: 465: turnTarget = -190;
-"465
-[e = _turnTarget -U -> 190 `i ]
-[; ;robot.c: 466: break;
-"466
-[e $U 170  ]
-[; ;robot.c: 467: default:
-"467
-[e :U 180 ]
-[; ;robot.c: 468: if (followDir == 1)
-"468
-[e $ ! == -> _followDir `i -> 1 `i 181  ]
-[; ;robot.c: 469: {
-"469
 {
-[; ;robot.c: 470: RobotDrive((speed), 400);
+[; ;robot.c: 434: case 3:
+"434
+[e :U 171 ]
+[; ;robot.c: 435: RobotDrive((speed /3), -400);
+"435
+[e ( _RobotDrive (2 , / _speed -> 3 `i -U -> 400 `i ]
+[; ;robot.c: 436: turnTarget = -100;
+"436
+[e = _turnTarget -U -> 100 `i ]
+[; ;robot.c: 437: break;
+"437
+[e $U 169  ]
+[; ;robot.c: 439: case 7:
+"439
+[e :U 172 ]
+[; ;robot.c: 440: RobotDrive((speed), -400-100);
+"440
+[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
+[; ;robot.c: 441: turnTarget = -185;
+"441
+[e = _turnTarget -U -> 185 `i ]
+[; ;robot.c: 442: break;
+"442
+[e $U 169  ]
+[; ;robot.c: 443: case 10:
+"443
+[e :U 173 ]
+[; ;robot.c: 444: RobotDrive((speed), -400 );
+"444
+[e ( _RobotDrive (2 , _speed -U -> 400 `i ]
+[; ;robot.c: 445: turnTarget = -90;
+"445
+[e = _turnTarget -U -> 90 `i ]
+[; ;robot.c: 446: break;
+"446
+[e $U 169  ]
+[; ;robot.c: 447: case 11:
+"447
+[e :U 174 ]
+[; ;robot.c: 448: RobotDrive((speed), -400 - 100);
+"448
+[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
+[; ;robot.c: 449: turnTarget = -190;
+"449
+[e = _turnTarget -U -> 190 `i ]
+[; ;robot.c: 450: break;
+"450
+[e $U 169  ]
+[; ;robot.c: 451: case 12:
+"451
+[e :U 175 ]
+[; ;robot.c: 452: RobotDrive((speed), -400 - 50);
+"452
+[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 50 `i ]
+[; ;robot.c: 453: turnTarget = -185;
+"453
+[e = _turnTarget -U -> 185 `i ]
+[; ;robot.c: 455: break;
+"455
+[e $U 169  ]
+[; ;robot.c: 456: case 15:
+"456
+[e :U 176 ]
+[; ;robot.c: 457: RobotDrive((speed), -400 - 100);
+"457
+[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
+[; ;robot.c: 458: turnTarget = -190;
+"458
+[e = _turnTarget -U -> 190 `i ]
+[; ;robot.c: 459: break;
+"459
+[e $U 169  ]
+[; ;robot.c: 460: case 19:
+"460
+[e :U 177 ]
+[; ;robot.c: 461: robotMoveSpeed(600, 200);
+"461
+[e ( _robotMoveSpeed (2 , -> 600 `i -> 200 `i ]
+[; ;robot.c: 462: turnTarget = 0;
+"462
+[e = _turnTarget -> 0 `i ]
+[; ;robot.c: 463: break;
+"463
+[e $U 169  ]
+[; ;robot.c: 464: case 20:
+"464
+[e :U 178 ]
+[; ;robot.c: 465: RobotDrive((speed), -400 - 100);
+"465
+[e ( _RobotDrive (2 , _speed - -U -> 400 `i -> 100 `i ]
+[; ;robot.c: 466: turnTarget = -190;
+"466
+[e = _turnTarget -U -> 190 `i ]
+[; ;robot.c: 467: break;
+"467
+[e $U 169  ]
+[; ;robot.c: 468: default:
+"468
+[e :U 179 ]
+[; ;robot.c: 469: if (followDir == 1)
+"469
+[e $ ! == -> _followDir `i -> 1 `i 180  ]
+[; ;robot.c: 470: {
 "470
-[e ( _RobotDrive (2 , _speed -> 400 `i ]
-[; ;robot.c: 471: turnTarget = 75;
+{
+[; ;robot.c: 471: RobotDrive((speed), 400);
 "471
-[e = _turnTarget -> 75 `i ]
+[e ( _RobotDrive (2 , _speed -> 400 `i ]
+[; ;robot.c: 472: turnTarget = 75;
 "472
+[e = _turnTarget -> 75 `i ]
+"473
+}
+[e :U 180 ]
+[; ;robot.c: 473: }
+[; ;robot.c: 474: if (followDir == 0)
+"474
+[e $ ! == -> _followDir `i -> 0 `i 181  ]
+[; ;robot.c: 475: {
+"475
+{
+[; ;robot.c: 476: RobotDrive((speed), -400);
+"476
+[e ( _RobotDrive (2 , _speed -U -> 400 `i ]
+[; ;robot.c: 477: turnTarget = -75;
+"477
+[e = _turnTarget -U -> 75 `i ]
+"478
 }
 [e :U 181 ]
-[; ;robot.c: 472: }
-[; ;robot.c: 473: if (followDir == 0)
-"473
-[e $ ! == -> _followDir `i -> 0 `i 182  ]
-[; ;robot.c: 474: {
-"474
-{
-[; ;robot.c: 475: RobotDrive((speed), -400);
-"475
-[e ( _RobotDrive (2 , _speed -U -> 400 `i ]
-[; ;robot.c: 476: turnTarget = -75;
-"476
-[e = _turnTarget -U -> 75 `i ]
-"477
-}
-[e :U 182 ]
-[; ;robot.c: 477: }
-[; ;robot.c: 479: break;
-"479
-[e $U 170  ]
+[; ;robot.c: 478: }
+[; ;robot.c: 480: break;
 "480
-}
-[; ;robot.c: 480: }
-[e $U 170  ]
-"431
-[e :U 171 ]
-[e [\ _RobotPos , $ -> -> 3 `i `uc 172
- , $ -> -> 7 `i `uc 173
- , $ -> -> 10 `i `uc 174
- , $ -> -> 11 `i `uc 175
- , $ -> -> 12 `i `uc 176
- , $ -> -> 15 `i `uc 177
- , $ -> -> 19 `i `uc 178
- , $ -> -> 20 `i `uc 179
- 180 ]
-"480
-[e :U 170 ]
-[; ;robot.c: 481: if (followDir == 0)
+[e $U 169  ]
 "481
-[e $ ! == -> _followDir `i -> 0 `i 183  ]
-[; ;robot.c: 482: {
+}
+[; ;robot.c: 481: }
+[e $U 169  ]
+"432
+[e :U 170 ]
+[e [\ _RobotPos , $ -> -> 3 `i `uc 171
+ , $ -> -> 7 `i `uc 172
+ , $ -> -> 10 `i `uc 173
+ , $ -> -> 11 `i `uc 174
+ , $ -> -> 12 `i `uc 175
+ , $ -> -> 15 `i `uc 176
+ , $ -> -> 19 `i `uc 177
+ , $ -> -> 20 `i `uc 178
+ 179 ]
+"481
+[e :U 169 ]
+[; ;robot.c: 482: if (followDir == 0)
 "482
-{
-[; ;robot.c: 483: rotate(25,1);
+[e $ ! == -> _followDir `i -> 0 `i 182  ]
+[; ;robot.c: 483: {
 "483
-[e ( _rotate (2 , -> -> 25 `i `ui -> -> 1 `i `uc ]
+{
+[; ;robot.c: 484: rotate(25,1);
 "484
-}
-[; ;robot.c: 484: }
-[e $U 184  ]
+[e ( _rotate (2 , -> -> 25 `i `ui -> -> 1 `i `uc ]
 "485
-[e :U 183 ]
-[; ;robot.c: 485: else
-[; ;robot.c: 486: {
-"486
-{
-[; ;robot.c: 487: rotate(25,0);
-"487
-[e ( _rotate (2 , -> -> 25 `i `ui -> -> 0 `i `uc ]
-"488
 }
-[e :U 184 ]
-[; ;robot.c: 488: }
-[; ;robot.c: 490: while (abs(angleTurned) < abs(turnTarget))
-"490
-[e $U 185  ]
-[e :U 186 ]
-[; ;robot.c: 491: {
+[; ;robot.c: 485: }
+[e $U 183  ]
+"486
+[e :U 182 ]
+[; ;robot.c: 486: else
+[; ;robot.c: 487: {
+"487
+{
+[; ;robot.c: 488: rotate(25,0);
+"488
+[e ( _rotate (2 , -> -> 25 `i `ui -> -> 0 `i `uc ]
+"489
+}
+[e :U 183 ]
+[; ;robot.c: 489: }
+[; ;robot.c: 491: while (abs(angleTurned) < abs(turnTarget))
 "491
-{
-[; ;robot.c: 492: robot_read(2);
+[e $U 184  ]
+[e :U 185 ]
+[; ;robot.c: 492: {
 "492
-[e ( _robot_read (1 -> -> 2 `i `uc ]
-[; ;robot.c: 493: if (BumpSensors)
-"493
-[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 188  ]
-[; ;robot.c: 494: {
-"494
 {
-[; ;robot.c: 495: RobotDrive(0, 0x7FFF);
+[; ;robot.c: 493: robot_read(2);
+"493
+[e ( _robot_read (1 -> -> 2 `i `uc ]
+[; ;robot.c: 494: if (BumpSensors)
+"494
+[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 187  ]
+[; ;robot.c: 495: {
 "495
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 496: ROBOTerror = 1;
+{
+[; ;robot.c: 496: RobotDrive(0, 0x7FFF);
 "496
-[e = _ROBOTerror -> -> 1 `i `uc ]
-[; ;robot.c: 497: break;
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 497: ROBOTerror = 1;
 "497
-[e $U 187  ]
+[e = _ROBOTerror -> -> 1 `i `uc ]
+[; ;robot.c: 498: break;
 "498
+[e $U 186  ]
+"499
+}
+[e :U 187 ]
+[; ;robot.c: 499: }
+[; ;robot.c: 500: if (VwallSensor)
+"500
+[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 188  ]
+[; ;robot.c: 501: {
+"501
+{
+[; ;robot.c: 502: RobotDrive(0, 0x7FFF);
+"502
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 503: ROBOTerror = 2;
+"503
+[e = _ROBOTerror -> -> 2 `i `uc ]
+[; ;robot.c: 504: break;
+"504
+[e $U 186  ]
+"505
 }
 [e :U 188 ]
-[; ;robot.c: 498: }
-[; ;robot.c: 499: if (VwallSensor)
-"499
-[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 189  ]
-[; ;robot.c: 500: {
-"500
+[; ;robot.c: 505: }
+[; ;robot.c: 506: if (CliffSensors)
+"506
+[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 189  ]
+[; ;robot.c: 507: {
+"507
 {
-[; ;robot.c: 501: RobotDrive(0, 0x7FFF);
-"501
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 502: ROBOTerror = 2;
-"502
-[e = _ROBOTerror -> -> 2 `i `uc ]
-[; ;robot.c: 503: break;
-"503
-[e $U 187  ]
-"504
+[; ;robot.c: 509: ROBOTerror = 3;
+"509
+[e = _ROBOTerror -> -> 3 `i `uc ]
+[; ;robot.c: 510: break;
+"510
+[e $U 186  ]
+"511
 }
 [e :U 189 ]
-[; ;robot.c: 504: }
-[; ;robot.c: 505: if (CliffSensors)
-"505
-[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 190  ]
-[; ;robot.c: 506: {
-"506
+[; ;robot.c: 511: }
+[; ;robot.c: 512: if (VictimSensor != 255)
+"512
+[e $ ! != -> _VictimSensor `i -> 255 `i 190  ]
+[; ;robot.c: 513: {
+"513
 {
-[; ;robot.c: 507: RobotDrive(-200, 0x7FFF);
-"507
-[e ( _RobotDrive (2 , -U -> 200 `i -> 32767 `i ]
-[; ;robot.c: 508: ROBOTerror = 3;
-"508
-[e = _ROBOTerror -> -> 3 `i `uc ]
-[; ;robot.c: 509: break;
-"509
-[e $U 187  ]
-"510
+[; ;robot.c: 514: RobotDrive(0, 0x7FFF);
+"514
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 515: ROBOTerror = 4;
+"515
+[e = _ROBOTerror -> -> 4 `i `uc ]
+[; ;robot.c: 516: break;
+"516
+[e $U 186  ]
+"517
 }
 [e :U 190 ]
-[; ;robot.c: 510: }
-[; ;robot.c: 511: if (VictimSensor != 255)
-"511
-[e $ ! != -> _VictimSensor `i -> 255 `i 191  ]
-[; ;robot.c: 512: {
-"512
-{
-[; ;robot.c: 513: RobotDrive(0, 0x7FFF);
-"513
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 514: ROBOTerror = 4;
-"514
-[e = _ROBOTerror -> -> 4 `i `uc ]
-[; ;robot.c: 515: break;
-"515
-[e $U 187  ]
-"516
-}
-[e :U 191 ]
-[; ;robot.c: 516: }
-[; ;robot.c: 517: temp1 = AngleHighByte;
-"517
-[e = _temp1 -> _AngleHighByte `i ]
-[; ;robot.c: 518: temp1 = temp1 << 8;
+[; ;robot.c: 517: }
+[; ;robot.c: 518: temp1 = AngleHighByte;
 "518
-[e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 519: temp1 += AngleLowByte;
+[e = _temp1 -> _AngleHighByte `i ]
+[; ;robot.c: 519: temp1 = temp1 << 8;
 "519
-[e =+ _temp1 -> _AngleLowByte `i ]
-[; ;robot.c: 520: angleTurned += temp1;
-"520
-[e =+ _angleTurned _temp1 ]
-[; ;robot.c: 521: temp1 = DistHighByte;
-"521
-[e = _temp1 -> _DistHighByte `i ]
-[; ;robot.c: 522: temp1 = temp1 << 8;
-"522
 [e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 523: temp1 += DistLowByte;
+[; ;robot.c: 520: temp1 += AngleLowByte;
+"520
+[e =+ _temp1 -> _AngleLowByte `i ]
+[; ;robot.c: 521: angleTurned += temp1;
+"521
+[e =+ _angleTurned _temp1 ]
+[; ;robot.c: 522: temp1 = DistHighByte;
+"522
+[e = _temp1 -> _DistHighByte `i ]
+[; ;robot.c: 523: temp1 = temp1 << 8;
 "523
-[e =+ _temp1 -> _DistLowByte `i ]
-[; ;robot.c: 524: distTravelled += temp1;
+[e = _temp1 << _temp1 -> 8 `i ]
+[; ;robot.c: 524: temp1 += DistLowByte;
 "524
-[e =+ _distTravelled _temp1 ]
-[; ;robot.c: 525: TotalDistTravelled += temp1;
+[e =+ _temp1 -> _DistLowByte `i ]
+[; ;robot.c: 525: distTravelled += temp1;
 "525
+[e =+ _distTravelled _temp1 ]
+[; ;robot.c: 526: TotalDistTravelled += temp1;
+"526
 [e =+ _TotalDistTravelled _temp1 ]
-[; ;robot.c: 527: UpdateDisplay();
-"527
-[e ( _UpdateDisplay ..  ]
+[; ;robot.c: 528: UpdateDisplay();
 "528
-}
-[e :U 185 ]
-"490
-[e $ < ( _abs (1 _angleTurned ( _abs (1 _turnTarget 186  ]
-[e :U 187 ]
-[; ;robot.c: 528: }
-[; ;robot.c: 529: Disp2 = ROBOTerror;
-"529
-[e = _Disp2 -> _ROBOTerror `i ]
-[; ;robot.c: 530: UpdateDisplay();
-"530
 [e ( _UpdateDisplay ..  ]
-[; ;robot.c: 533: }
-"533
-[e :UE 154 ]
+"529
 }
-"538
+[e :U 184 ]
+"491
+[e $ < ( _abs (1 _angleTurned ( _abs (1 _turnTarget 185  ]
+[e :U 186 ]
+[; ;robot.c: 529: }
+[; ;robot.c: 530: Disp2 = ROBOTerror;
+"530
+[e = _Disp2 -> _ROBOTerror `i ]
+[; ;robot.c: 531: UpdateDisplay();
+"531
+[e ( _UpdateDisplay ..  ]
+[; ;robot.c: 534: }
+"534
+[e :UE 153 ]
+}
+"539
 [v _robotMoveSpeed `(v  1 ef2`i`i ]
 {
-[; ;robot.c: 537: void robotMoveSpeed(int distance, int speed)
-[; ;robot.c: 538: {
+[; ;robot.c: 538: void robotMoveSpeed(int distance, int speed)
+[; ;robot.c: 539: {
 [e :U _robotMoveSpeed ]
 [v _distance `i  1 r1 ]
 [v _speed `i  1 r2 ]
 [f ]
-[; ;robot.c: 539: robot_read(2);
-"539
-[e ( _robot_read (1 -> -> 2 `i `uc ]
-[; ;robot.c: 540: distTravelled = 0;
+[; ;robot.c: 540: robot_read(2);
 "540
-[e = _distTravelled -> 0 `i ]
+[e ( _robot_read (1 -> -> 2 `i `uc ]
+[; ;robot.c: 541: distTravelled = 0;
 "541
-[v _temp1 `i  1 a ]
-[; ;robot.c: 541: int temp1;
-[; ;robot.c: 542: RobotDrive(speed, 0x7FFF);
+[e = _distTravelled -> 0 `i ]
 "542
+[v _temp1 `i  1 a ]
+[; ;robot.c: 542: int temp1;
+[; ;robot.c: 543: RobotDrive(speed, 0x7FFF);
+"543
 [e ( _RobotDrive (2 , _speed -> 32767 `i ]
-[; ;robot.c: 545: while (abs(distTravelled) < abs(distance))
-"545
-[e $U 193  ]
-[e :U 194 ]
-[; ;robot.c: 546: {
+[; ;robot.c: 546: while (abs(distTravelled) < abs(distance))
 "546
-{
-[; ;robot.c: 547: robot_read(0);
+[e $U 192  ]
+[e :U 193 ]
+[; ;robot.c: 547: {
 "547
-[e ( _robot_read (1 -> -> 0 `i `uc ]
-[; ;robot.c: 548: if (BumpSensors)
-"548
-[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 196  ]
-[; ;robot.c: 549: {
-"549
 {
-[; ;robot.c: 550: ROBOTerror = 1;
+[; ;robot.c: 548: robot_read(0);
+"548
+[e ( _robot_read (1 -> -> 0 `i `uc ]
+[; ;robot.c: 549: if (BumpSensors)
+"549
+[e $ ! != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i 195  ]
+[; ;robot.c: 550: {
 "550
-[e = _ROBOTerror -> -> 1 `i `uc ]
-[; ;robot.c: 551: break;
+{
+[; ;robot.c: 551: ROBOTerror = 1;
 "551
-[e $U 195  ]
+[e = _ROBOTerror -> -> 1 `i `uc ]
+[; ;robot.c: 552: break;
 "552
+[e $U 194  ]
+"553
+}
+[e :U 195 ]
+[; ;robot.c: 553: }
+[; ;robot.c: 554: if (VwallSensor)
+"554
+[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 196  ]
+[; ;robot.c: 555: {
+"555
+{
+[; ;robot.c: 556: ROBOTerror = 2;
+"556
+[e = _ROBOTerror -> -> 2 `i `uc ]
+[; ;robot.c: 557: break;
+"557
+[e $U 194  ]
+"558
 }
 [e :U 196 ]
-[; ;robot.c: 552: }
-[; ;robot.c: 553: if (VwallSensor)
-"553
-[e $ ! != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 197  ]
-[; ;robot.c: 554: {
-"554
+[; ;robot.c: 558: }
+[; ;robot.c: 559: if (CliffSensors)
+"559
+[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 197  ]
+[; ;robot.c: 560: {
+"560
 {
-[; ;robot.c: 555: ROBOTerror = 2;
-"555
-[e = _ROBOTerror -> -> 2 `i `uc ]
-[; ;robot.c: 556: break;
-"556
-[e $U 195  ]
-"557
+[; ;robot.c: 561: ROBOTerror = 3;
+"561
+[e = _ROBOTerror -> -> 3 `i `uc ]
+[; ;robot.c: 562: break;
+"562
+[e $U 194  ]
+"563
 }
 [e :U 197 ]
-[; ;robot.c: 557: }
-[; ;robot.c: 558: if (CliffSensors)
-"558
-[e $ ! != -> _CliffSensors `i -> -> -> 0 `i `Vuc `i 198  ]
-[; ;robot.c: 559: {
-"559
+[; ;robot.c: 563: }
+[; ;robot.c: 564: if (VictimSensor != 255)
+"564
+[e $ ! != -> _VictimSensor `i -> 255 `i 198  ]
+[; ;robot.c: 565: {
+"565
 {
-[; ;robot.c: 560: ROBOTerror = 3;
-"560
-[e = _ROBOTerror -> -> 3 `i `uc ]
-[; ;robot.c: 561: break;
-"561
-[e $U 195  ]
-"562
+[; ;robot.c: 566: ROBOTerror = 4;
+"566
+[e = _ROBOTerror -> -> 4 `i `uc ]
+[; ;robot.c: 567: break;
+"567
+[e $U 194  ]
+"568
 }
 [e :U 198 ]
-[; ;robot.c: 562: }
-[; ;robot.c: 563: if (VictimSensor != 255)
-"563
-[e $ ! != -> _VictimSensor `i -> 255 `i 199  ]
-[; ;robot.c: 564: {
-"564
-{
-[; ;robot.c: 565: ROBOTerror = 4;
-"565
-[e = _ROBOTerror -> -> 4 `i `uc ]
-[; ;robot.c: 566: break;
-"566
-[e $U 195  ]
-"567
-}
-[e :U 199 ]
-[; ;robot.c: 567: }
-[; ;robot.c: 568: temp1 = DistHighByte;
-"568
-[e = _temp1 -> _DistHighByte `i ]
-[; ;robot.c: 569: temp1 = temp1 << 8;
+[; ;robot.c: 568: }
+[; ;robot.c: 569: temp1 = DistHighByte;
 "569
-[e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 570: temp1 += DistLowByte;
+[e = _temp1 -> _DistHighByte `i ]
+[; ;robot.c: 570: temp1 = temp1 << 8;
 "570
-[e =+ _temp1 -> _DistLowByte `i ]
-[; ;robot.c: 571: distTravelled += temp1;
+[e = _temp1 << _temp1 -> 8 `i ]
+[; ;robot.c: 571: temp1 += DistLowByte;
 "571
-[e =+ _distTravelled _temp1 ]
-[; ;robot.c: 572: TotalDistTravelled += temp1;
+[e =+ _temp1 -> _DistLowByte `i ]
+[; ;robot.c: 572: distTravelled += temp1;
 "572
-[e =+ _TotalDistTravelled _temp1 ]
-[; ;robot.c: 573: Disp2 = distTravelled;
+[e =+ _distTravelled _temp1 ]
+[; ;robot.c: 573: TotalDistTravelled += temp1;
 "573
-[e = _Disp2 _distTravelled ]
-[; ;robot.c: 574: UpdateDisplay();
+[e =+ _TotalDistTravelled _temp1 ]
+[; ;robot.c: 574: Disp2 = distTravelled;
 "574
-[e ( _UpdateDisplay ..  ]
+[e = _Disp2 _distTravelled ]
+[; ;robot.c: 575: UpdateDisplay();
 "575
-}
-[e :U 193 ]
-"545
-[e $ < ( _abs (1 _distTravelled ( _abs (1 _distance 194  ]
-[e :U 195 ]
-[; ;robot.c: 575: }
-[; ;robot.c: 576: Disp2 = ROBOTerror;
-"576
-[e = _Disp2 -> _ROBOTerror `i ]
-[; ;robot.c: 577: UpdateDisplay();
-"577
 [e ( _UpdateDisplay ..  ]
-[; ;robot.c: 578: RobotDrive(0, 0x7FFF);
-"578
-[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
-[; ;robot.c: 580: }
-"580
-[e :UE 192 ]
+"576
 }
-"587
+[e :U 192 ]
+"546
+[e $ < ( _abs (1 _distTravelled ( _abs (1 _distance 193  ]
+[e :U 194 ]
+[; ;robot.c: 576: }
+[; ;robot.c: 577: Disp2 = ROBOTerror;
+"577
+[e = _Disp2 -> _ROBOTerror `i ]
+[; ;robot.c: 578: UpdateDisplay();
+"578
+[e ( _UpdateDisplay ..  ]
+[; ;robot.c: 579: RobotDrive(0, 0x7FFF);
+"579
+[e ( _RobotDrive (2 , -> 0 `i -> 32767 `i ]
+[; ;robot.c: 581: }
+"581
+[e :UE 191 ]
+}
+"588
 [v _robotTurnSpeed `(v  1 ef2`i`i ]
 {
-[; ;robot.c: 586: void robotTurnSpeed(int angle, int speed)
-[; ;robot.c: 587: {
+[; ;robot.c: 587: void robotTurnSpeed(int angle, int speed)
+[; ;robot.c: 588: {
 [e :U _robotTurnSpeed ]
 [v _angle `i  1 r1 ]
 [v _speed `i  1 r2 ]
 [f ]
-[; ;robot.c: 588: robot_read(2);
-"588
-[e ( _robot_read (1 -> -> 2 `i `uc ]
-[; ;robot.c: 589: angleTurned = 0;
+[; ;robot.c: 589: robot_read(2);
 "589
-[e = _angleTurned -> 0 `i ]
+[e ( _robot_read (1 -> -> 2 `i `uc ]
+[; ;robot.c: 590: angleTurned = 0;
 "590
+[e = _angleTurned -> 0 `i ]
+"591
 [v _temp1 `i  1 a ]
-[; ;robot.c: 590: int temp1 = 0;
+[; ;robot.c: 591: int temp1 = 0;
 [e = _temp1 -> 0 `i ]
-[; ;robot.c: 592: robotTurn(angle);
-"592
+[; ;robot.c: 593: robotTurn(angle);
+"593
 [e ( _robotTurn (1 _angle ]
-[; ;robot.c: 595: while (abs(angleTurned) < abs(angle))
-"595
-[e $U 201  ]
-[e :U 202 ]
-[; ;robot.c: 596: {
+[; ;robot.c: 596: while (abs(angleTurned) < abs(angle))
 "596
-{
-[; ;robot.c: 597: robot_read(1);
-"597
-[e ( _robot_read (1 -> -> 1 `i `uc ]
-[; ;robot.c: 598: if (BumpSensors || VwallSensor)
-"598
-[e $ ! || != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 204  ]
-[; ;robot.c: 599: {
-"599
-{
-[; ;robot.c: 600: ROBOTerror = 1;
-"600
-[e = _ROBOTerror -> -> 1 `i `uc ]
-[; ;robot.c: 601: break;
-"601
-[e $U 203  ]
-"602
-}
-[e :U 204 ]
-[; ;robot.c: 602: }
-[; ;robot.c: 603: temp1 = AngleHighByte;
-"603
-[e = _temp1 -> _AngleHighByte `i ]
-[; ;robot.c: 604: temp1 = temp1 << 8;
-"604
-[e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 605: temp1 += AngleLowByte;
-"605
-[e =+ _temp1 -> _AngleLowByte `i ]
-[; ;robot.c: 606: angleTurned += temp1;
-"606
-[e =+ _angleTurned _temp1 ]
-[; ;robot.c: 607: Disp2 = angleTurned;
-"607
-[e = _Disp2 _angleTurned ]
-[; ;robot.c: 608: UpdateDisplay();
-"608
-[e ( _UpdateDisplay ..  ]
-"609
-}
+[e $U 200  ]
 [e :U 201 ]
-"595
-[e $ < ( _abs (1 _angleTurned ( _abs (1 _angle 202  ]
-[e :U 203 ]
-[; ;robot.c: 609: }
-[; ;robot.c: 611: robotTurn(0);
-"611
-[e ( _robotTurn (1 -> 0 `i ]
-[; ;robot.c: 612: }
-"612
-[e :UE 200 ]
+[; ;robot.c: 597: {
+"597
+{
+[; ;robot.c: 598: robot_read(1);
+"598
+[e ( _robot_read (1 -> -> 1 `i `uc ]
+[; ;robot.c: 599: if (BumpSensors || VwallSensor)
+"599
+[e $ ! || != -> _BumpSensors `i -> -> -> 0 `i `Vuc `i != -> _VwallSensor `i -> -> -> 0 `i `Vuc `i 203  ]
+[; ;robot.c: 600: {
+"600
+{
+[; ;robot.c: 601: ROBOTerror = 1;
+"601
+[e = _ROBOTerror -> -> 1 `i `uc ]
+[; ;robot.c: 602: break;
+"602
+[e $U 202  ]
+"603
 }
-"615
+[e :U 203 ]
+[; ;robot.c: 603: }
+[; ;robot.c: 604: temp1 = AngleHighByte;
+"604
+[e = _temp1 -> _AngleHighByte `i ]
+[; ;robot.c: 605: temp1 = temp1 << 8;
+"605
+[e = _temp1 << _temp1 -> 8 `i ]
+[; ;robot.c: 606: temp1 += AngleLowByte;
+"606
+[e =+ _temp1 -> _AngleLowByte `i ]
+[; ;robot.c: 607: angleTurned += temp1;
+"607
+[e =+ _angleTurned _temp1 ]
+[; ;robot.c: 608: Disp2 = angleTurned;
+"608
+[e = _Disp2 _angleTurned ]
+[; ;robot.c: 609: UpdateDisplay();
+"609
+[e ( _UpdateDisplay ..  ]
+"610
+}
+[e :U 200 ]
+"596
+[e $ < ( _abs (1 _angleTurned ( _abs (1 _angle 201  ]
+[e :U 202 ]
+[; ;robot.c: 610: }
+[; ;robot.c: 612: robotTurn(0);
+"612
+[e ( _robotTurn (1 -> 0 `i ]
+[; ;robot.c: 613: }
+"613
+[e :UE 199 ]
+}
+"616
 [v _RobotBattRead `(v  1 ef ]
 {
-[; ;robot.c: 614: void RobotBattRead(void)
-[; ;robot.c: 615: {
+[; ;robot.c: 615: void RobotBattRead(void)
+[; ;robot.c: 616: {
 [e :U _RobotBattRead ]
 [f ]
-"616
-[v _temp1 `i  1 a ]
-[; ;robot.c: 616: int temp1 = 0;
-[e = _temp1 -> 0 `i ]
-[; ;robot.c: 617: ser_putch(142);
 "617
-[e ( _ser_putch (1 -> -> 142 `i `uc ]
-[; ;robot.c: 618: ser_putch(25);
+[v _temp1 `i  1 a ]
+[; ;robot.c: 617: int temp1 = 0;
+[e = _temp1 -> 0 `i ]
+[; ;robot.c: 618: ser_putch(142);
 "618
-[e ( _ser_putch (1 -> -> 25 `i `uc ]
-[; ;robot.c: 619: _delay((unsigned long)((5)*(20000000/4000.0)));
-"619
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;robot.c: 620: DistHighByte = ser_getch();
-"620
-[e = _DistHighByte ( _ser_getch ..  ]
-[; ;robot.c: 621: DistLowByte = ser_getch();
-"621
-[e = _DistLowByte ( _ser_getch ..  ]
-[; ;robot.c: 622: ser_putch(142);
-"622
 [e ( _ser_putch (1 -> -> 142 `i `uc ]
-[; ;robot.c: 623: ser_putch(21);
-"623
-[e ( _ser_putch (1 -> -> 21 `i `uc ]
-[; ;robot.c: 624: _delay((unsigned long)((5)*(20000000/4000.0)));
-"624
+[; ;robot.c: 619: ser_putch(25);
+"619
+[e ( _ser_putch (1 -> -> 25 `i `uc ]
+[; ;robot.c: 620: _delay((unsigned long)((5)*(20000000/4000.0)));
+"620
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;robot.c: 625: BattState = ser_getch();
+[; ;robot.c: 621: DistHighByte = ser_getch();
+"621
+[e = _DistHighByte ( _ser_getch ..  ]
+[; ;robot.c: 622: DistLowByte = ser_getch();
+"622
+[e = _DistLowByte ( _ser_getch ..  ]
+[; ;robot.c: 623: ser_putch(142);
+"623
+[e ( _ser_putch (1 -> -> 142 `i `uc ]
+[; ;robot.c: 624: ser_putch(21);
+"624
+[e ( _ser_putch (1 -> -> 21 `i `uc ]
+[; ;robot.c: 625: _delay((unsigned long)((5)*(20000000/4000.0)));
 "625
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;robot.c: 626: BattState = ser_getch();
+"626
 [e = _BattState -> ( _ser_getch ..  `ui ]
-[; ;robot.c: 628: temp1 = DistHighByte;
-"628
-[e = _temp1 -> _DistHighByte `i ]
-[; ;robot.c: 629: temp1 = temp1 << 8;
+[; ;robot.c: 629: temp1 = DistHighByte;
 "629
-[e = _temp1 << _temp1 -> 8 `i ]
-[; ;robot.c: 630: temp1 += DistLowByte;
+[e = _temp1 -> _DistHighByte `i ]
+[; ;robot.c: 630: temp1 = temp1 << 8;
 "630
-[e =+ _temp1 -> _DistLowByte `i ]
-[; ;robot.c: 631: BattCharge = temp1;
+[e = _temp1 << _temp1 -> 8 `i ]
+[; ;robot.c: 631: temp1 += DistLowByte;
 "631
-[e = _BattCharge -> _temp1 `ui ]
-[; ;robot.c: 632: }
+[e =+ _temp1 -> _DistLowByte `i ]
+[; ;robot.c: 632: BattCharge = temp1;
 "632
-[e :UE 205 ]
+[e = _BattCharge -> _temp1 `ui ]
+[; ;robot.c: 633: }
+"633
+[e :UE 204 ]
 }
-"637
+"638
 [v _abs `(i  1 ef1`i ]
 {
-[; ;robot.c: 636: int abs(int v)
-[; ;robot.c: 637: {
+[; ;robot.c: 637: int abs(int v)
+[; ;robot.c: 638: {
 [e :U _abs ]
 [v _v `i  1 r1 ]
 [f ]
-[; ;robot.c: 638: return (v * ((v > 0) - (v < 0)));
-"638
-[e ) * _v - -> > _v -> 0 `i `i -> < _v -> 0 `i `i ]
-[e $UE 206  ]
-[; ;robot.c: 639: }
+[; ;robot.c: 639: return (v * ((v > 0) - (v < 0)));
 "639
-[e :UE 206 ]
+[e ) * _v - -> > _v -> 0 `i `i -> < _v -> 0 `i `i ]
+[e $UE 205  ]
+[; ;robot.c: 640: }
+"640
+[e :UE 205 ]
 }
-"643
+"644
 [v _robotLoadSong `(v  1 ef ]
 {
-[; ;robot.c: 642: void robotLoadSong(void)
-[; ;robot.c: 643: {
+[; ;robot.c: 643: void robotLoadSong(void)
+[; ;robot.c: 644: {
 [e :U _robotLoadSong ]
 [f ]
-[; ;robot.c: 644: ser_putch(140);
-"644
-[e ( _ser_putch (1 -> -> 140 `i `uc ]
-[; ;robot.c: 645: ser_putch(0);
+[; ;robot.c: 645: ser_putch(140);
 "645
-[e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;robot.c: 646: ser_putch(2);
+[e ( _ser_putch (1 -> -> 140 `i `uc ]
+[; ;robot.c: 646: ser_putch(0);
 "646
+[e ( _ser_putch (1 -> -> 0 `i `uc ]
+[; ;robot.c: 647: ser_putch(2);
+"647
 [e ( _ser_putch (1 -> -> 2 `i `uc ]
-[; ;robot.c: 648: ser_putch(72);
-"648
-[e ( _ser_putch (1 -> -> 72 `i `uc ]
-[; ;robot.c: 649: ser_putch(16);
+[; ;robot.c: 649: ser_putch(72);
 "649
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 650: ser_putch(84);
-"650
-[e ( _ser_putch (1 -> -> 84 `i `uc ]
-[; ;robot.c: 651: ser_putch(16);
-"651
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 653: ser_putch(140);
-"653
-[e ( _ser_putch (1 -> -> 140 `i `uc ]
-[; ;robot.c: 654: ser_putch(1);
-"654
-[e ( _ser_putch (1 -> -> 1 `i `uc ]
-[; ;robot.c: 655: ser_putch(2);
-"655
-[e ( _ser_putch (1 -> -> 2 `i `uc ]
-[; ;robot.c: 657: ser_putch(84);
-"657
-[e ( _ser_putch (1 -> -> 84 `i `uc ]
-[; ;robot.c: 658: ser_putch(16);
-"658
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 659: ser_putch(72);
-"659
 [e ( _ser_putch (1 -> -> 72 `i `uc ]
-[; ;robot.c: 660: ser_putch(16);
-"660
+[; ;robot.c: 650: ser_putch(16);
+"650
 [e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 662: ser_putch(140);
-"662
+[; ;robot.c: 651: ser_putch(84);
+"651
+[e ( _ser_putch (1 -> -> 84 `i `uc ]
+[; ;robot.c: 652: ser_putch(16);
+"652
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 654: ser_putch(140);
+"654
 [e ( _ser_putch (1 -> -> 140 `i `uc ]
-[; ;robot.c: 663: ser_putch(2);
-"663
+[; ;robot.c: 655: ser_putch(1);
+"655
+[e ( _ser_putch (1 -> -> 1 `i `uc ]
+[; ;robot.c: 656: ser_putch(2);
+"656
 [e ( _ser_putch (1 -> -> 2 `i `uc ]
+[; ;robot.c: 658: ser_putch(84);
+"658
+[e ( _ser_putch (1 -> -> 84 `i `uc ]
+[; ;robot.c: 659: ser_putch(16);
+"659
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 660: ser_putch(72);
+"660
+[e ( _ser_putch (1 -> -> 72 `i `uc ]
+[; ;robot.c: 661: ser_putch(16);
+"661
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 663: ser_putch(140);
+"663
+[e ( _ser_putch (1 -> -> 140 `i `uc ]
 [; ;robot.c: 664: ser_putch(2);
 "664
 [e ( _ser_putch (1 -> -> 2 `i `uc ]
-[; ;robot.c: 666: ser_putch(48);
-"666
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 665: ser_putch(2);
+"665
+[e ( _ser_putch (1 -> -> 2 `i `uc ]
 [; ;robot.c: 667: ser_putch(48);
 "667
 [e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 668: ser_putch(49);
+[; ;robot.c: 668: ser_putch(48);
 "668
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 669: ser_putch(16);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 669: ser_putch(49);
 "669
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 670: ser_putch(16);
+"670
 [e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 671: ser_putch(140);
-"671
-[e ( _ser_putch (1 -> -> 140 `i `uc ]
-[; ;robot.c: 672: ser_putch(3);
+[; ;robot.c: 672: ser_putch(140);
 "672
-[e ( _ser_putch (1 -> -> 3 `i `uc ]
-[; ;robot.c: 673: ser_putch(16);
+[e ( _ser_putch (1 -> -> 140 `i `uc ]
+[; ;robot.c: 673: ser_putch(3);
 "673
+[e ( _ser_putch (1 -> -> 3 `i `uc ]
+[; ;robot.c: 674: ser_putch(16);
+"674
 [e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 675: ser_putch(48);
-"675
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 676: ser_putch(16);
+[; ;robot.c: 676: ser_putch(48);
 "676
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 677: ser_putch(49);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 677: ser_putch(16);
 "677
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 678: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 678: ser_putch(49);
 "678
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 679: ser_putch(48);
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 679: ser_putch(16);
 "679
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 680: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 680: ser_putch(48);
 "680
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 681: ser_putch(49);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 681: ser_putch(16);
 "681
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 682: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 682: ser_putch(49);
 "682
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 683: ser_putch(48);
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 683: ser_putch(16);
 "683
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 684: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 684: ser_putch(48);
 "684
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 685: ser_putch(49);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 685: ser_putch(16);
 "685
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 686: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 686: ser_putch(49);
 "686
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 687: ser_putch(48);
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 687: ser_putch(16);
 "687
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 688: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 688: ser_putch(48);
 "688
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 689: ser_putch(49);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 689: ser_putch(16);
 "689
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 690: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 690: ser_putch(49);
 "690
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 691: ser_putch(48);
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 691: ser_putch(16);
 "691
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 692: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 692: ser_putch(48);
 "692
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 693: ser_putch(49);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 693: ser_putch(16);
 "693
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 694: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 694: ser_putch(49);
 "694
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 695: ser_putch(48);
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 695: ser_putch(16);
 "695
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 696: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 696: ser_putch(48);
 "696
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 697: ser_putch(49);
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 697: ser_putch(16);
 "697
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 698: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 698: ser_putch(49);
 "698
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 699: ser_putch(48);
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 699: ser_putch(16);
 "699
-[e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 700: ser_putch(16);
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 700: ser_putch(48);
 "700
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 701: ser_putch(49);
-"701
-[e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 702: ser_putch(16);
-"702
-[e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 703: ser_putch(48);
-"703
 [e ( _ser_putch (1 -> -> 48 `i `uc ]
-[; ;robot.c: 704: ser_putch(16);
-"704
+[; ;robot.c: 701: ser_putch(16);
+"701
 [e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 705: ser_putch(49);
-"705
+[; ;robot.c: 702: ser_putch(49);
+"702
 [e ( _ser_putch (1 -> -> 49 `i `uc ]
-[; ;robot.c: 706: ser_putch(16);
-"706
+[; ;robot.c: 703: ser_putch(16);
+"703
 [e ( _ser_putch (1 -> -> 16 `i `uc ]
-[; ;robot.c: 708: }
-"708
-[e :UE 207 ]
+[; ;robot.c: 704: ser_putch(48);
+"704
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 705: ser_putch(16);
+"705
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 706: ser_putch(49);
+"706
+[e ( _ser_putch (1 -> -> 49 `i `uc ]
+[; ;robot.c: 707: ser_putch(16);
+"707
+[e ( _ser_putch (1 -> -> 16 `i `uc ]
+[; ;robot.c: 709: ser_putch(140);
+"709
+[e ( _ser_putch (1 -> -> 140 `i `uc ]
+[; ;robot.c: 710: ser_putch(4);
+"710
+[e ( _ser_putch (1 -> -> 4 `i `uc ]
+[; ;robot.c: 711: ser_putch(6);
+"711
+[e ( _ser_putch (1 -> -> 6 `i `uc ]
+[; ;robot.c: 713: ser_putch(63);
+"713
+[e ( _ser_putch (1 -> -> 63 `i `uc ]
+[; ;robot.c: 714: ser_putch(8);
+"714
+[e ( _ser_putch (1 -> -> 8 `i `uc ]
+[; ;robot.c: 715: ser_putch(67);
+"715
+[e ( _ser_putch (1 -> -> 67 `i `uc ]
+[; ;robot.c: 716: ser_putch(8);
+"716
+[e ( _ser_putch (1 -> -> 8 `i `uc ]
+[; ;robot.c: 717: ser_putch(73);
+"717
+[e ( _ser_putch (1 -> -> 73 `i `uc ]
+[; ;robot.c: 718: ser_putch(48);
+"718
+[e ( _ser_putch (1 -> -> 48 `i `uc ]
+[; ;robot.c: 720: ser_putch(63);
+"720
+[e ( _ser_putch (1 -> -> 63 `i `uc ]
+[; ;robot.c: 721: ser_putch(8);
+"721
+[e ( _ser_putch (1 -> -> 8 `i `uc ]
+[; ;robot.c: 722: ser_putch(67);
+"722
+[e ( _ser_putch (1 -> -> 67 `i `uc ]
+[; ;robot.c: 723: ser_putch(8);
+"723
+[e ( _ser_putch (1 -> -> 8 `i `uc ]
+[; ;robot.c: 724: ser_putch(75);
+"724
+[e ( _ser_putch (1 -> -> 75 `i `uc ]
+[; ;robot.c: 725: ser_putch(64);
+"725
+[e ( _ser_putch (1 -> -> 64 `i `uc ]
+[; ;robot.c: 730: }
+"730
+[e :UE 206 ]
 }

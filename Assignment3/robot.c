@@ -193,7 +193,7 @@ void robotFollow(int speed, int AdcTarget)
 	//keep going :)
 	while (1)	
 	{	
-		if (AdcTarget > 180) // too close to wall!
+		if (AdcTarget > 185) // too close to wall!
 		{
 			ser_putch(141); 
 			ser_putch(0);
@@ -204,7 +204,7 @@ void robotFollow(int speed, int AdcTarget)
 			ROBOTerror = 0;
 			break;
 		}
-				if (AdcTarget < 30) // too far from wall!
+			/*if (AdcTarget < 30) // too far from wall!
 		{
 			ser_putch(141); 
 			ser_putch(0);
@@ -213,7 +213,7 @@ void robotFollow(int speed, int AdcTarget)
 			readAvgDistance();
 			ROBOTerror = 0;
 			break;
-		}
+		}*/
 		if (AdcTarget > IDEAL)	// veer toward ideal distance 
 			AdcTarget--;
 		if (AdcTarget < IDEAL)
@@ -315,13 +315,14 @@ void robot_turnInPlace()
 			RobotPos++;
 			break;
 		case 12:
-			robotTurnSpeed(70,400); 
+			robotTurnSpeed(80,400); 
 			break;
-		case 13:
-			robotTurnSpeed(70,400); 
+		case 14:
+			robotTurnSpeed(80,400); 
 			ser_putch(141); 
 			ser_putch(3);
 			break;
+
 		case 15:
 			robotTurnSpeed(160,400); 
 			RobotPos++;
@@ -449,7 +450,7 @@ void robot_turnArc(int speed)
 			break;
 		case 12:
 			RobotDrive((speed), ARCRIGHT - 50);	//start robot moving
-			turnTarget = -190;
+			turnTarget = -185;
 
 			break;
 		case 15:
@@ -504,7 +505,7 @@ void robot_turnArc(int speed)
 		}
 		if (CliffSensors)	//cliff
 		{
-			RobotDrive(-200, 0x7FFF); //reverse robot!
+			
 			ROBOTerror = 3;	//signal an error
 			break;
 		}
@@ -695,7 +696,7 @@ ser_putch(140); //JAWS THEME cont
 		ser_putch(48); 
 		ser_putch(16);
 		ser_putch(49); 
-		ser_putch(16);	
+		ser_putch(16);
 		ser_putch(48); 
 		ser_putch(16);
 		ser_putch(49); 
@@ -703,6 +704,27 @@ ser_putch(140); //JAWS THEME cont
 		ser_putch(48); 
 		ser_putch(16);
 		ser_putch(49); 
-		ser_putch(16);	
+		ser_putch(16);
+
+ser_putch(140); //JAWS THEME cont
+		ser_putch(4); 
+		ser_putch(6); 
+	
+		ser_putch(63); 
+		ser_putch(8);	
+		ser_putch(67); 
+		ser_putch(8);	
+		ser_putch(73); 
+		ser_putch(48);	
+				
+		ser_putch(63); 
+		ser_putch(8);	
+		ser_putch(67); 
+		ser_putch(8);	
+		ser_putch(75); 
+		ser_putch(64);	
+	
+	
+	
 	
 }

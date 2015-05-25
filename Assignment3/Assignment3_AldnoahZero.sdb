@@ -4214,9 +4214,9 @@
 [v _GoHome `(v  1 e 0 0 ]
 "325
 [v _FindVictim `(v  1 e 0 0 ]
-"406
+"407
 [v _calibrateIR `(v  1 e 0 0 ]
-"448
+"449
 [v _ChargeMode `(v  1 e 0 0 ]
 "45 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _robo_init `(v  1 e 0 0 ]
@@ -4230,17 +4230,17 @@
 [v _robotFollow `(v  1 e 0 0 ]
 "310
 [v _robot_turnInPlace `(v  1 e 0 0 ]
-"354
+"355
 [v _robot_turnArc `(v  1 e 0 0 ]
-"538
+"539
 [v _robotMoveSpeed `(v  1 e 0 0 ]
-"587
+"588
 [v _robotTurnSpeed `(v  1 e 0 0 ]
-"615
+"616
 [v _RobotBattRead `(v  1 e 0 0 ]
-"637
+"638
 [v _abs `(i  1 e 2 0 ]
-"643
+"644
 [v _robotLoadSong `(v  1 e 0 0 ]
 "45 E:\Aldnoah.Zero\Assignment3\ser.c
 [v _ser_isrx `(b  1 e 0 0 ]
@@ -5093,7 +5093,7 @@
 "325
 [v _FindVictim `(v  1 e 0 0 ]
 {
-"400
+"401
 } 0
 "248
 [v _GoHome `(v  1 e 0 0 ]
@@ -5103,7 +5103,7 @@
 "310 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _robot_turnInPlace `(v  1 e 0 0 ]
 {
-"351
+"352
 } 0
 "186
 [v _robotFollow `(v  1 e 0 0 ]
@@ -5117,53 +5117,53 @@
 [v robotFollow@AdcTarget `i  1 p 2 66 ]
 "307
 } 0
-"354
+"355
 [v _robot_turnArc `(v  1 e 0 0 ]
 {
-"357
-[v robot_turnArc@temp1 `i  1 a 2 73 ]
-"370
-[v robot_turnArc@AdcTarget `i  1 a 2 71 ]
 "358
+[v robot_turnArc@temp1 `i  1 a 2 73 ]
+"371
+[v robot_turnArc@AdcTarget `i  1 a 2 71 ]
+"359
 [v robot_turnArc@turnTarget `i  1 a 2 69 ]
-"354
+"355
 [v robot_turnArc@speed `i  1 p 2 64 ]
-"533
+"534
 } 0
 "241 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _Init_Follow_IR `(v  1 e 0 0 ]
 {
 "245
 } 0
-"538 E:\Aldnoah.Zero\Assignment3\robot.c
+"539 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _robotMoveSpeed `(v  1 e 0 0 ]
 {
-"541
+"542
 [v robotMoveSpeed@temp1 `i  1 a 2 62 ]
-"538
+"539
 [v robotMoveSpeed@distance `i  1 p 2 55 ]
 [v robotMoveSpeed@speed `i  1 p 2 57 ]
-"580
+"581
 } 0
-"587
+"588
 [v _robotTurnSpeed `(v  1 e 0 0 ]
 {
-"590
+"591
 [v robotTurnSpeed@temp1 `i  1 a 2 62 ]
-"587
+"588
 [v robotTurnSpeed@angle `i  1 p 2 55 ]
 [v robotTurnSpeed@speed `i  1 p 2 57 ]
-"612
+"613
 } 0
-"448 E:\Aldnoah.Zero\Assignment3\Main.c
+"449 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _ChargeMode `(v  1 e 0 0 ]
 {
-"485
+"486
 } 0
-"406
+"407
 [v _calibrateIR `(v  1 e 0 0 ]
 {
-"443
+"444
 } 0
 "135 E:\Aldnoah.Zero\Assignment3\HMI.c
 [v _UpdateDisplay `(v  1 e 0 0 ]
@@ -5200,12 +5200,12 @@
 [v readDistance@readVal `ui  1 a 2 12 ]
 "57
 } 0
-"615 E:\Aldnoah.Zero\Assignment3\robot.c
+"616 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _RobotBattRead `(v  1 e 0 0 ]
 {
-"616
+"617
 [v RobotBattRead@temp1 `i  1 a 2 4 ]
-"632
+"633
 } 0
 "55
 [v _robot_read `(v  1 e 0 0 ]
@@ -5232,11 +5232,11 @@
 [v lcd_set_cursor@address `uc  1 a 1 wreg ]
 "45
 } 0
-"637 E:\Aldnoah.Zero\Assignment3\robot.c
+"638 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _abs `(i  1 e 2 0 ]
 {
 [v abs@v `i  1 p 2 6 ]
-"639
+"640
 } 0
 "142
 [v _robotTurn `(v  1 e 0 0 ]
@@ -5298,10 +5298,10 @@
 [v rotate@direction `uc  1 p 1 5 ]
 "78
 } 0
-"643 E:\Aldnoah.Zero\Assignment3\robot.c
+"644 E:\Aldnoah.Zero\Assignment3\robot.c
 [v _robotLoadSong `(v  1 e 0 0 ]
 {
-"708
+"730
 } 0
 "45
 [v _robo_init `(v  1 e 0 0 ]

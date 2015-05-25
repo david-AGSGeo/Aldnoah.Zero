@@ -210,7 +210,7 @@ void main(void)
             case 2:     //Drive forward 2 meters
                				RobotPos = 6; //STARTING NODE: checkpoint
                 							ser_putch(141); 
-				ser_putch(2);
+				ser_putch(4);
                 break;
             case 3:     //Drive in an L shape
  
@@ -363,9 +363,10 @@ while (ROBOTerror != 9)
 								robotFollow(ROBOTSPEED, adcVal - 10);
 						break;
 						case 4:	///VICTIM FOUND!
-							robotMoveSpeed(500,ROBOTSPEED);	//move forward to sense next wall
+							RobotDrive(200, 0x7FFF); 
+							__delay_ms(1000);
 							ser_putch(141); 
-							ser_putch(1);
+							ser_putch(4);
 							RobotPos++;
 							FoundVictim = 1;
 							ROBOTerror = 9;
