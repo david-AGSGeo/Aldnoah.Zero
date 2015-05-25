@@ -193,10 +193,26 @@ void robotFollow(int speed, int AdcTarget)
 	//keep going :)
 	while (1)	
 	{	
-		if ((AdcTarget + IDEAL) <= hysterysis) // too close or too far
+		if (AdcTarget > 180) // too close to wall!
 		{
 			ser_putch(141); 
 			ser_putch(0);
+			robotTurnSpeed(70,400);
+			robotMoveSpeed(100,ROBOTSPEED);	//move forward to sense next wall
+			robotTurnSpeed(-70,400);
+			readAvgDistance();
+			ROBOTerror = 0;
+			break;
+		}
+				if (AdcTarget < 30) // too far from wall!
+		{
+			ser_putch(141); 
+			ser_putch(0);
+
+			robotTurnSpeed(-10,400);
+			readAvgDistance();
+			ROBOTerror = 0;
+			break;
 		}
 		if (AdcTarget > IDEAL)	// veer toward ideal distance 
 			AdcTarget--;
@@ -280,8 +296,6 @@ void robotFollow(int speed, int AdcTarget)
 			robotMoveSpeed(400, ROBOTSPEED);
 			trackingDist = 0;
 			RobotPos++;
-			//RobotDrive(0, STRAIGHT);	//stop robot
-			//ROBOTerror = 4;	//signal an error
 			break;
 		}		
 		Disp2 = RobotPos;
@@ -303,6 +317,11 @@ void robot_turnInPlace()
 		case 12:
 			robotTurnSpeed(70,400); 
 			break;
+		case 13:
+			robotTurnSpeed(70,400); 
+			ser_putch(141); 
+			ser_putch(3);
+			break;
 		case 15:
 			robotTurnSpeed(160,400); 
 			RobotPos++;
@@ -315,10 +334,11 @@ void robot_turnInPlace()
 			break;
 		case 21:
 			//home!!!!!
-			ser_putch(141); 
-			ser_putch(1);
-			ROBOTerror = 9;
 			RobotDrive(0, STRAIGHT);	//stop robot
+			ser_putch(141); 
+			ser_putch(2);
+			ROBOTerror = 9;
+			
 			break;
 		default:
 				if (followDir == LEFTFLW)
@@ -411,8 +431,8 @@ void robot_turnArc(int speed)
 	switch (RobotPos)
 	{
 		case 3:
-			RobotDrive((speed /2), ARCRIGHT);	//start robot moving
-			turnTarget = -90;
+			RobotDrive((speed /3), ARCRIGHT);	//start robot moving
+			turnTarget = -100;
 			break;
 
 		case 7:
@@ -430,10 +450,15 @@ void robot_turnArc(int speed)
 		case 12:
 			RobotDrive((speed), ARCRIGHT - 50);	//start robot moving
 			turnTarget = -190;
+
 			break;
 		case 15:
 			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
 			turnTarget = -190;
+			break;
+		case 19: //skip over turn
+			robotMoveSpeed(600, ROBOTSPEED);
+			turnTarget = 0;
 			break;
 		case 20: //FINAL TURN
 			RobotDrive((speed), ARCRIGHT - 100);	//start robot moving
@@ -511,6 +536,7 @@ void robot_turnArc(int speed)
 //move forward the requested distance at the requested speed
 void robotMoveSpeed(int distance, int speed)
 {
+	robot_read(ALL);
 	distTravelled = 0;
 	int temp1;
 	RobotDrive(speed, STRAIGHT);	//start robot moving
@@ -546,11 +572,6 @@ void robotMoveSpeed(int distance, int speed)
 		TotalDistTravelled += temp1;
 		Disp2 = distTravelled;
 		UpdateDisplay();
-		//float remaining = abs(distance) - abs(distTravelled) ;
-		//if ( remaining < 100)
-		//{
-	//		RobotDrive(speed * (remaining/100.0), STRAIGHT);	//slow robot down
-	//	}
 	}
 	Disp2 = ROBOTerror;
 		UpdateDisplay();
@@ -564,6 +585,7 @@ void robotMoveSpeed(int distance, int speed)
 
 void robotTurnSpeed(int angle, int speed)
 {
+	robot_read(ALL);
 	angleTurned = 0;
 	int temp1 = 0;
 	
@@ -619,19 +641,68 @@ int abs(int v)
 
 void robotLoadSong(void)
 {
-	ser_putch(140); 
+	ser_putch(140); //error 1
 		ser_putch(0); 
 		ser_putch(2); 
+
 		ser_putch(72); 
 		ser_putch(16);
 		ser_putch(84); 
 		ser_putch(16);
 
-	ser_putch(140); 
+	ser_putch(140); //error 2
 		ser_putch(1); 
 		ser_putch(2); 
+
 		ser_putch(84); 
 		ser_putch(16);
 		ser_putch(72); 
 		ser_putch(16);
+
+	ser_putch(140); //JAWS THEME START
+		ser_putch(2); 
+		ser_putch(2); 
+
+		ser_putch(48); 
+		ser_putch(48);
+		ser_putch(49); 
+		ser_putch(16);
+
+ser_putch(140); //JAWS THEME cont
+		ser_putch(3); 
+		ser_putch(16); 
+
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);	
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);	
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);	
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);	
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);	
+		ser_putch(48); 
+		ser_putch(16);
+		ser_putch(49); 
+		ser_putch(16);	
+	
 }

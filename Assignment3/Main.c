@@ -209,7 +209,8 @@ void main(void)
                 break;
             case 2:     //Drive forward 2 meters
                				RobotPos = 6; //STARTING NODE: checkpoint
-                
+                							ser_putch(141); 
+				ser_putch(2);
                 break;
             case 3:     //Drive in an L shape
  
@@ -289,18 +290,22 @@ void GoHome(void)
 				if (RobotPos == 17) //past checkpoint
 				{
 					trackingDist = TotalDistTravelled;
-				}			
+				}		
+				if (RobotPos == 21) //HOME!!
+				{
+					break;
+				}	
 				readAvgDistance();
 				robotFollow(ROBOTSPEED, adcVal - 10);
 				break;
 			case 11://right free, turn right
 				RobotPos++;
-				if (RobotPos == 19)
-				{
-					robotMoveSpeed(500, ROBOTSPEED);
-					ROBOTerror = 0;
-					break;
-				}
+			//	if (RobotPos == 19)
+			//	{
+			//		robotMoveSpeed(500, ROBOTSPEED);
+			//		ROBOTerror = 0;
+			//		break;
+			//	}
 				if (followDir == LEFTFLW)
 					robot_turnInPlace();
 				if (followDir == RIGHTFLW)
@@ -358,6 +363,7 @@ while (ROBOTerror != 9)
 								robotFollow(ROBOTSPEED, adcVal - 10);
 						break;
 						case 4:	///VICTIM FOUND!
+							robotMoveSpeed(500,ROBOTSPEED);	//move forward to sense next wall
 							ser_putch(141); 
 							ser_putch(1);
 							RobotPos++;
@@ -368,12 +374,16 @@ while (ROBOTerror != 9)
 							ROBOTerror = 9;
 						break;
 						case 10: // ahead blocked, turn left
+							ser_putch(141); 
+							ser_putch(2);
 							RobotPos++;
 							robot_turnInPlace();				
 							readAvgDistance();
 							robotFollow(ROBOTSPEED, adcVal - 10);
 						break;
 						case 11://right free, turn right
+							ser_putch(141); 
+							ser_putch(2);
 							RobotPos++;	
 							robot_turnArc(ROBOTSPEED);
 							readAvgDistance();

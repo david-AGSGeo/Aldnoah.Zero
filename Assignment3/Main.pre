@@ -1404,7 +1404,8 @@ GoHome();
 break;
 case 2:
 RobotPos = 6;
-
+ser_putch(141);
+ser_putch(2);
 break;
 case 3:
 
@@ -1485,17 +1486,17 @@ if (RobotPos == 17)
 {
 trackingDist = TotalDistTravelled;
 }
+if (RobotPos == 21)
+{
+break;
+}
 readAvgDistance();
 robotFollow(200, adcVal - 10);
 break;
 case 11:
 RobotPos++;
-if (RobotPos == 19)
-{
-robotMoveSpeed(500, 200);
-ROBOTerror = 0;
-break;
-}
+
+# 309
 if (followDir == 1)
 robot_turnInPlace();
 if (followDir == 0)
@@ -1553,6 +1554,7 @@ readAvgDistance();
 robotFollow(200, adcVal - 10);
 break;
 case 4:
+robotMoveSpeed(500,200);
 ser_putch(141);
 ser_putch(1);
 RobotPos++;
@@ -1563,12 +1565,16 @@ case 9:
 ROBOTerror = 9;
 break;
 case 10:
+ser_putch(141);
+ser_putch(2);
 RobotPos++;
 robot_turnInPlace();
 readAvgDistance();
 robotFollow(200, adcVal - 10);
 break;
 case 11:
+ser_putch(141);
+ser_putch(2);
 RobotPos++;
 robot_turnArc(200);
 readAvgDistance();
