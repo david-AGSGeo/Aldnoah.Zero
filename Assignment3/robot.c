@@ -116,7 +116,7 @@ void robot_read(unsigned char readType)
 }
 
 /************  RobotDrive  *************/
-//Moves the robot forward at the requested speed
+//Moves the robot forward at the requested speed at the requested radius
 void RobotDrive(int speed, int radius)
 {
 	//split speed into high and low byte
@@ -137,7 +137,8 @@ void RobotDrive(int speed, int radius)
 }
 
 
-
+/************  RobotTurn  *************/
+//starts the robot turning in the requested direction
 void robotTurn(int angle)
 {
 	
@@ -181,12 +182,12 @@ void robotTurn(int angle)
 
 
 /************  robotFollow  *************/
-//
+////right wall follow until corner is reached
 void robotFollow(int speed, int AdcTarget)
 {
 	distTravelled = 0;
 	int temp1;
-	unsigned char hysterysis = 20;
+	unsigned char hysterysis = 20; //value used to correct distance from wall
 	RobotDrive(speed, STRAIGHT);	//start robot moving
 	ROBOTerror = 0;	//no errors yet :)
 	
@@ -195,25 +196,15 @@ void robotFollow(int speed, int AdcTarget)
 	{	
 		if (AdcTarget > 185) // too close to wall!
 		{
-			ser_putch(141); 
+			ser_putch(141);  //warning beep
 			ser_putch(0);
 			robotTurnSpeed(70,400);
-			robotMoveSpeed(100,ROBOTSPEED);	//move forward to sense next wall
+			robotMoveSpeed(100,ROBOTSPEED);	//move away from wall
 			robotTurnSpeed(-70,400);
 			readAvgDistance();
 			ROBOTerror = 0;
 			break;
 		}
-			/*if (AdcTarget < 30) // too far from wall!
-		{
-			ser_putch(141); 
-			ser_putch(0);
-
-			robotTurnSpeed(-10,400);
-			readAvgDistance();
-			ROBOTerror = 0;
-			break;
-		}*/
 		if (AdcTarget > IDEAL)	// veer toward ideal distance 
 			AdcTarget--;
 		if (AdcTarget < IDEAL)
@@ -236,18 +227,11 @@ void robotFollow(int speed, int AdcTarget)
 		}
 		else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))	//corner detected
 		{
-			if (followDir == RIGHTFLW)
-			{
+			
 				rotate(10,COUNTERCLOCKWISE);
 				readAvgDistance();
 				rotate(10,CLOCKWISE);
-			}
-			else
-			{
-				rotate(10,CLOCKWISE);
-				readAvgDistance();
-				rotate(10,COUNTERCLOCKWISE);
-			}
+
 			if (adcVal < 50)
 				ROBOTerror = 11;	//signal Right turn
 			else
@@ -259,7 +243,8 @@ void robotFollow(int speed, int AdcTarget)
 		{
 			RobotDrive(speed, STRAIGHT);
 		}
-		robot_read(DIST);
+
+		robot_read(DIST); //read robot sensors
 		if (BumpSensors)	//hit wall or lifted
 		{
 			RobotDrive(0, STRAIGHT);	//stop robot
@@ -284,12 +269,12 @@ void robotFollow(int speed, int AdcTarget)
 			ROBOTerror = 4;	//signal an error
 			break;
 		}
-		temp1 = DistHighByte;	//add bytes together
+		temp1 = DistHighByte;	//add distance bytes together
 		temp1 = temp1 << 8;
 		temp1 += DistLowByte;
 		distTravelled += temp1;
 		TotalDistTravelled += temp1;
-		if (trackingDist > 0 && trackingDist <= TotalDistTravelled - TRACKINGDIST )	//victim
+		if (trackingDist > 0 && trackingDist <= TotalDistTravelled - TRACKINGDIST )	//used for return
 		{
 			
 			robotTurnSpeed(80,400); 
@@ -303,9 +288,11 @@ void robotFollow(int speed, int AdcTarget)
 	}
 
 	Disp2 = RobotPos;
-	UpdateDisplay(); //show error code	
+	UpdateDisplay(); //show error code on exit
 }
 
+/************  robot_turnInPlace  *************/
+//turns in place based on current checkpoint
 void robot_turnInPlace()
 {
 	switch (RobotPos)
@@ -337,39 +324,34 @@ void robot_turnInPlace()
 			//home!!!!!
 			RobotDrive(0, STRAIGHT);	//stop robot
 			ser_putch(141); 
-			ser_putch(2);
+			ser_putch(4);
 			ROBOTerror = 9;
 			
 			break;
-		default:
-				if (followDir == LEFTFLW)
-					robotTurnSpeed(-80,400);    //Right
-				if (followDir == RIGHTFLW)
+		default: //all other checkpoints
+
 					robotTurnSpeed(80,400);    //Left
 			
 			break;
 	}
 }
 
+/************  robot_turnArc  *************/
+//turns in an arc based on current checkpoint moving at the requested speed
 void robot_turnArc(int speed)
 {
 	
 	angleTurned = 0;
 	int temp1;
 	int turnTarget = 0; 
-	RobotDrive(speed, STRAIGHT);	//start robot moving
+	RobotDrive(speed, STRAIGHT);	//start robot moving forward
 	ROBOTerror = 0;	//no errors yet :)
-	if (followDir == RIGHTFLW)
-	{
-		rotate(25,CLOCKWISE);
-	}
-	else
-	{
-		rotate(25,COUNTERCLOCKWISE);
-	}	
+
+	rotate(25,CLOCKWISE); //move IR to 90 degrees
+	
 	readAvgDistance();
 	int AdcTarget = adcVal;
-	//keep going :)
+	//keep going until the robot is right next to the actual corner
 	while (1)	
 	{
 		readAvgDistance();
@@ -428,8 +410,10 @@ void robot_turnArc(int speed)
 		UpdateDisplay();	//show distance travelled
 	}
 	
+
+	//once the corner has been reached
 	angleTurned = 0;
-	switch (RobotPos)
+	switch (RobotPos)  //turn based on checkpoint
 	{
 		case 3:
 			RobotDrive((speed /3), ARCRIGHT);	//start robot moving
@@ -440,6 +424,11 @@ void robot_turnArc(int speed)
 			RobotDrive((speed), ARCRIGHT-100);	//start robot moving
 			turnTarget = -185;
 			break;
+		//case 8:
+		//	RobotDrive((speed), ARCLEFT);	//start robot moving
+		//	turnTarget = 185;
+		//	RobotPos = 16;
+		//	break;
 		case 10:
 			RobotDrive((speed), ARCRIGHT );	//start robot moving
 			turnTarget = -90;
@@ -466,28 +455,14 @@ void robot_turnArc(int speed)
 			turnTarget = -190;
 			break;
 		default:
-				if (followDir == LEFTFLW)
-{
-					RobotDrive((speed), ARCLEFT);	//start robot moving
-					turnTarget = 75;
-}
-				if (followDir == RIGHTFLW)
-{
-					RobotDrive((speed), ARCRIGHT);	//start robot moving
-					turnTarget = -75;
-}			
-			
+			RobotDrive((speed), ARCRIGHT);	//start robot moving
+			turnTarget = -75;
 			break;
 	}
-	if (followDir == RIGHTFLW)
-	{
-		rotate(25,COUNTERCLOCKWISE);
-	}
-	else
-	{
-		rotate(25,CLOCKWISE);
-	}	
-	
+
+	rotate(25,COUNTERCLOCKWISE); //put IR back to 45 degrees
+
+	//start the arc turn and continue till the required angle is reached
 	while (abs(angleTurned) < abs(turnTarget))	
 	{
 		robot_read(ALL);
@@ -612,6 +587,8 @@ void robotTurnSpeed(int angle, int speed)
 	robotTurn(0);	//stop robot
 }
 
+/************  RobotBattRead  *************/
+//reads the battery info from the robot
 void RobotBattRead(void)
 {
 	int temp1 = 0;
@@ -639,7 +616,8 @@ int abs(int v)
 	return  (v * ((v > 0) - (v < 0))); //gets absolute value by multiplying by 1 or -1   
 }
 
-
+/************  robotLoadSong  *************/
+//ummm... not sure :)
 void robotLoadSong(void)
 {
 	ser_putch(140); //error 1
@@ -669,7 +647,7 @@ void robotLoadSong(void)
 		ser_putch(49); 
 		ser_putch(16);
 
-ser_putch(140); //JAWS THEME cont
+	ser_putch(140); //JAWS THEME cont
 		ser_putch(3); 
 		ser_putch(16); 
 
@@ -706,7 +684,7 @@ ser_putch(140); //JAWS THEME cont
 		ser_putch(49); 
 		ser_putch(16);
 
-ser_putch(140); //JAWS THEME cont
+	ser_putch(140); //JAWS THEME cont
 		ser_putch(4); 
 		ser_putch(6); 
 	
@@ -722,9 +700,5 @@ ser_putch(140); //JAWS THEME cont
 		ser_putch(67); 
 		ser_putch(8);	
 		ser_putch(75); 
-		ser_putch(64);	
-	
-	
-	
-	
+		ser_putch(64);		
 }

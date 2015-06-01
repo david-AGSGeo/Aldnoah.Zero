@@ -167,28 +167,28 @@ void UpdateDisplay(void)
 			lcd_set_cursor(0x00);	
 			lcd_write_string(" Charging Mode ");
 			lcd_set_cursor(MENULEFT);
-			sprintf(LCDOutput,"%dmA", BattCharge);	
+			sprintf(LCDOutput,"%dmA", BattCharge);	//display current charege in mA and current charging mode
 			lcd_write_string(LCDOutput);
 			lcd_set_cursor(MENURIGHT);	
 				switch(BattState)
 				{
 					case 0:
-						lcd_write_string("NC");
+						lcd_write_string("NC"); //not charging
 						break;
 					case 1:
-						lcd_write_string("RC");
+						lcd_write_string("RC"); //rest charge (battery too hot for full charge)
 						break;
 					case 2:
-						lcd_write_string("FC");
+						lcd_write_string("FC"); //full charge
 						break;
 					case 3:
-						lcd_write_string("TC");
+						lcd_write_string("TC"); //trickle charge
 						break;
 					case 4:
-						lcd_write_string("Wa");
+						lcd_write_string("Wa"); //warning
 						break;
 					case 5:
-						lcd_write_string("FC");
+						lcd_write_string("FC"); //fully charged?
 						break;
 				}
 				
@@ -197,12 +197,12 @@ void UpdateDisplay(void)
 			break;
 		case 3: //Maze Navigation Menu
 			lcd_write_control(0b00000001); //clear display	
-			sprintf(LCDOutput,"IR:%3dcm CP:%3d",adcVal, RobotPos);
+			sprintf(LCDOutput,"IR:%3dcm CP:%3d",adcVal, RobotPos); //top line to display IR value (raw, and current checkpoint 
 			lcd_set_cursor(0x00);	
 			lcd_write_string(LCDOutput);				
 			int tempDist = (TotalDistTravelled/ 10);			
 	
-			sprintf(LCDOutput,"D:%4dcm AT:%3d",tempDist, angleTurned);
+			sprintf(LCDOutput,"D:%4dcm AT:%3d",tempDist, angleTurned);// dbottom line to display total dist travvelled and measured angle turned (for troubleshooting)
 			lcd_set_cursor(MENULEFT);
 			lcd_write_string(LCDOutput);
 			break;

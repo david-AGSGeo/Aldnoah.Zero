@@ -1300,6 +1300,7 @@ ser_putch(radiuslowByte);
 
 
 
+
 void robotTurn(int angle)
 {
 
@@ -1366,8 +1367,6 @@ readAvgDistance();
 ROBOTerror = 0;
 break;
 }
-
-# 217
 if (AdcTarget > 100)
 AdcTarget--;
 if (AdcTarget < 100)
@@ -1390,18 +1389,11 @@ RobotDrive(speed, -1700);
 }
 else if (adcVal <= (AdcTarget - hysterysis) || adcVal >= (AdcTarget + hysterysis))
 {
-if (followDir == 0)
-{
+
 rotate(10,1);
 readAvgDistance();
 rotate(10,0);
-}
-else
-{
-rotate(10,0);
-readAvgDistance();
-rotate(10,1);
-}
+
 if (adcVal < 50)
 ROBOTerror = 11;
 else
@@ -1413,6 +1405,7 @@ else
 {
 RobotDrive(speed, 0x7FFF);
 }
+
 robot_read(0);
 if (BumpSensors)
 {
@@ -1460,6 +1453,8 @@ Disp2 = RobotPos;
 UpdateDisplay();
 }
 
+
+
 void robot_turnInPlace()
 {
 switch (RobotPos)
@@ -1491,19 +1486,19 @@ case 21:
 
 RobotDrive(0, 0x7FFF);
 ser_putch(141);
-ser_putch(2);
+ser_putch(4);
 ROBOTerror = 9;
 
 break;
 default:
-if (followDir == 1)
-robotTurnSpeed(-80,400);
-if (followDir == 0)
+
 robotTurnSpeed(80,400);
 
 break;
 }
 }
+
+
 
 void robot_turnArc(int speed)
 {
@@ -1513,14 +1508,9 @@ int temp1;
 int turnTarget = 0;
 RobotDrive(speed, 0x7FFF);
 ROBOTerror = 0;
-if (followDir == 0)
-{
+
 rotate(25,0);
-}
-else
-{
-rotate(25,1);
-}
+
 readAvgDistance();
 int AdcTarget = adcVal;
 
@@ -1582,6 +1572,8 @@ Disp2 = RobotPos;
 UpdateDisplay();
 }
 
+
+
 angleTurned = 0;
 switch (RobotPos)
 {
@@ -1594,6 +1586,8 @@ case 7:
 RobotDrive((speed), -400-100);
 turnTarget = -185;
 break;
+
+# 432
 case 10:
 RobotDrive((speed), -400 );
 turnTarget = -90;
@@ -1620,27 +1614,13 @@ RobotDrive((speed), -400 - 100);
 turnTarget = -190;
 break;
 default:
-if (followDir == 1)
-{
-RobotDrive((speed), 400);
-turnTarget = 75;
-}
-if (followDir == 0)
-{
 RobotDrive((speed), -400);
 turnTarget = -75;
-}
-
 break;
 }
-if (followDir == 0)
-{
+
 rotate(25,1);
-}
-else
-{
-rotate(25,0);
-}
+
 
 while (abs(angleTurned) < abs(turnTarget))
 {
@@ -1734,7 +1714,7 @@ RobotDrive(0, 0x7FFF);
 
 }
 
-# 587
+# 562
 void robotTurnSpeed(int angle, int speed)
 {
 robot_read(2);
@@ -1763,6 +1743,8 @@ UpdateDisplay();
 robotTurn(0);
 }
 
+
+
 void RobotBattRead(void)
 {
 int temp1 = 0;
@@ -1789,6 +1771,7 @@ int abs(int v)
 {
 return (v * ((v > 0) - (v < 0)));
 }
+
 
 
 void robotLoadSong(void)
@@ -1874,8 +1857,4 @@ ser_putch(67);
 ser_putch(8);
 ser_putch(75);
 ser_putch(64);
-
-
-
-
 }

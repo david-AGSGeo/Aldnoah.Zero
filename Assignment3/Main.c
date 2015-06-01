@@ -1,17 +1,16 @@
 /*********************  MAIN.c   **************************************************
-    Description: Assignment 3 submission. 
+    Description: Assignment 4 submission. 
     Group Name: Aldnoah.Zero
     
     SPECS:
         -1Hz heartbeat
-        -LCD Displaying continuous IR distance
-        -LCD Menu for chosing options
-        -Steppermotor Calibration
-        -Charging Mode
-        -360 IR Scan
-        -2m Straight Line Robot manoeuvre
-        -1m/side Robot L manoeuvre
-        -Wall follow manoeuvre
+        -LCD Displaying Human Machine Interface with scrolling Menus
+        -Steppermotor Calibration and zeroing
+        -Charging Mode with battery monitoring
+        -Maze navigation using Right wall follow
+        -Checkpoint recognition and recording
+        -awesome music :)
+        -Victim location and home by shortest path
                  
     Uses: DSX Experimenter board + iRobot Create + iRobot - DSX interface Board                                                                          
     Connections: 
@@ -78,17 +77,13 @@
 
 //Function Prototypes
 void calibrateIR(void);
-int scan360(void);
 void ChargeMode(void);
-void RightTurn(void);
 void Init_Follow_IR(void);
 void FindVictim(void);
 void GoHome(void);
 
 
 //Global Variables
-
-
 volatile unsigned char buttonPressed;   //stores button presses
 unsigned char FoundVictim = 0;
 
@@ -127,7 +122,7 @@ void interrupt isr1(void)
         }
         if (buttonPressed == 0) //if no button is waiting to be responded to
         {
-            buttonPressed = ReadButtons();  //chech and debounce buttons
+            buttonPressed = ReadButtons();  //chech and debounce buttons (this is a macro)
         }
     }
     ser_int();      //serial recieve and transmit interrupt macro                   
@@ -176,15 +171,15 @@ void main(void)
 	currentMenu = 0;    //display main menu
     //initialise function
     init();
-    robotLoadSong();
+    robotLoadSong(); //uuuuh.... load a song into the robot?
     //Loop forever
     while(1)
     {
         if (RTC_FLAG_250MS == 1)    //4Hz refresh rate for display, IR, and reading robot values
         {
             RTC_FLAG_250MS = 0;
-            robot_read(ALL);
-            readAvgDistance();
+            robot_read(ALL); //check all robot sensors
+            readAvgDistance(); //read IR sensor
 			Disp2 = RobotPos;
             UpdateDisplay();
         }
@@ -202,28 +197,26 @@ void main(void)
             case 0:     //Calibrate IR  
                 calibrateIR();
                 break;
-            case 1:     //Scan 360 degrees
-             				RobotPos = 16; //STARTING NODE: start
-           					Init_Follow_IR();
-							GoHome();
+            case 1:     //set starting checkpoint to 16
+             	RobotPos = 16; //STARTING NODE: start
+           		Init_Follow_IR();
+				GoHome();
                 break;
-            case 2:     //Drive forward 2 meters
-               				RobotPos = 6; //STARTING NODE: checkpoint
-                							ser_putch(141); 
-				ser_putch(4);
+            case 2:     //set starting checkpoint to 6
+               	RobotPos = 6; //STARTING NODE: checkpoint
                 break;
-            case 3:     //Drive in an L shape
- 
-                				RobotPos = 12; //STARTING NODE: bump
+            case 3:     //set starting checkpoint to 12
+                RobotPos = 12; //STARTING NODE: bump
                 break;
             case 4:    //-------------------NAVIGATE MAZE-----------------
-				FoundVictim = 0;
-				Init_Follow_IR();
+				FoundVictim = 0; //victim not found yet
+				Init_Follow_IR(); //set up IR for start
 				currentMenu = 3;    //switch display to Maze Navigation
-     			FindVictim();
+     			FindVictim();	//look for the victim in the maze
 				if (FoundVictim)
-					GoHome();
+					GoHome(); //obvious :)
 				ROBOTerror = 0;	//clear any errors
+				currentMenu = 0; //return to main menu
                 break;      
             
             case 5:     //Charge Mode
@@ -237,30 +230,37 @@ void main(void)
     }
 }
 
+/************  Init_Follow_IR  *************/
+//Initialisation Routine for the IR
 void Init_Follow_IR(void)
 {
 	calibrateIR();
 	__delay_ms(500);
-	rotate(25, CLOCKWISE);
+	rotate(25, CLOCKWISE); //set scanning angle to 45 degrees
 }
 
+
+/************  GoHome  *************/
+//Navigates back to the starting points using checkpoints for decision making
 void GoHome(void)
 {
 	switch (RobotPos)
 	{
 		case 7:     //victim in first dead end
 			robotTurnSpeed(175,ROBOTTURNSPEED); 
+			//RobbotPos++;
+			//robot_turnArc(ROBOTSPEED); 
 			break;  		
 		case 15:     //victim in second dead end
 			robotTurnSpeed(175,ROBOTTURNSPEED); 
 			robot_turnArc(ROBOTSPEED); 
 			break;  	
 	}
-	while (ROBOTerror != 9)
+	while (ROBOTerror != 9) //no fatal error
 	{ 	
        	switch (ROBOTerror)
 		{
-			case 0:				
+			case 0:	//no error
 				readAvgDistance();
 				robotFollow(ROBOTSPEED, adcVal);
 				break;
@@ -277,7 +277,7 @@ void GoHome(void)
 				ROBOTerror = 9;
 				break;
 			case 4:	///VICTIM FOUND!
-				ROBOTerror = 0; //already found !!!
+				ROBOTerror = 0; //already found !!! 
 				break;
 			case 9:
 				break;
@@ -300,12 +300,7 @@ void GoHome(void)
 				break;
 			case 11://right free, turn right
 				RobotPos++;
-			//	if (RobotPos == 19)
-			//	{
-			//		robotMoveSpeed(500, ROBOTSPEED);
-			//		ROBOTerror = 0;
-			//		break;
-			//	}
+
 				if (followDir == LEFTFLW)
 					robot_turnInPlace();
 				if (followDir == RIGHTFLW)
@@ -313,7 +308,7 @@ void GoHome(void)
 				readAvgDistance();
 				robotFollow(ROBOTSPEED, adcVal);
 				break;
-			default:
+			default: 
 				readAvgDistance();
 				robotFollow(ROBOTSPEED, adcVal);
 			break;
@@ -321,20 +316,22 @@ void GoHome(void)
 	}
 }
 
+/************  FindVictim  *************/
+//navigate from starting checkpoint until victim is found
 void FindVictim(void)
 {
-while (ROBOTerror != 9)
+while (ROBOTerror != 9) //no fatal error
 				{ 
 					
                 	switch (ROBOTerror)
 					{
-						case 0:
+						case 0: //no error
 							
 							readAvgDistance();
-							robotFollow(ROBOTSPEED, adcVal);
+							robotFollow(ROBOTSPEED, adcVal); //right wall follow
 						break;
 						case 1:	//bump sensor
-							if (RobotPos == 10) //low wall
+							if (RobotPos == 10) //robot at low wall
 							{
 								RobotDrive(-200, 0x7FFF); //back up
 								__delay_ms(200);
@@ -342,12 +339,14 @@ while (ROBOTerror != 9)
 								ROBOTerror = 0;
 								robotTurnSpeed((-(angleTurned - 75)),ROBOTTURNSPEED);    //straighten up
 							}
-							else
+							else //robot hit a different wall
 								ROBOTerror = 9;
 						break;
 						case 2:	//Virtual wall
-							ser_putch(141); 
+							ser_putch(141); //play alert beep
 							ser_putch(0);
+							RobotDrive(-200, 0x7FFF); //back up
+								__delay_ms(200);
 							robotTurnSpeed((180),ROBOTTURNSPEED);   //turn around
 							ROBOTerror = 0;
 						break;
@@ -365,17 +364,17 @@ while (ROBOTerror != 9)
 						case 4:	///VICTIM FOUND!
 							RobotDrive(200, 0x7FFF); 
 							__delay_ms(1000);
-							ser_putch(141); 
+							ser_putch(141); //play song
 							ser_putch(4);
 							RobotPos++;
 							FoundVictim = 1;
-							ROBOTerror = 9;
+							ROBOTerror = 9; //exit to main
 						break;
-						case 9:
+						case 9: //fatal error!
 							ROBOTerror = 9;
 						break;
 						case 10: // ahead blocked, turn left
-							ser_putch(141); 
+							ser_putch(141); //DaaaaaaDum
 							ser_putch(2);
 							RobotPos++;
 							robot_turnInPlace();				
@@ -383,7 +382,7 @@ while (ROBOTerror != 9)
 							robotFollow(ROBOTSPEED, adcVal - 10);
 						break;
 						case 11://right free, turn right
-							ser_putch(141); 
+							ser_putch(141); //DaaaaaaDum
 							ser_putch(2);
 							RobotPos++;	
 							robot_turnArc(ROBOTSPEED);

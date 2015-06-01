@@ -971,17 +971,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _turnlowByte `uc  1 e ]
 "38 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _ROBOTerror `uc  1 e ]
-"92 E:\Aldnoah.Zero\Assignment3\Main.c
+"87 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _buttonPressed `Vuc  1 e ]
-"93 E:\Aldnoah.Zero\Assignment3\Main.c
+"88 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _FoundVictim `uc  1 e ]
-"96 E:\Aldnoah.Zero\Assignment3\Main.c
+"91 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_1MS `Vb  1 e ]
-"99 E:\Aldnoah.Zero\Assignment3\Main.c
+"94 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_250MS `Vb  1 e ]
-"100 E:\Aldnoah.Zero\Assignment3\Main.c
+"95 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_FLAG_500MS `Vb  1 e ]
-"104 E:\Aldnoah.Zero\Assignment3\Main.c
+"99 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _RTC_Counter `Vui  1 e ]
 "106 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _ReadButtons `(uc  0 ef ]
@@ -1018,17 +1018,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _UpdateDisplay `(v  0 ef ]
 "107 E:\Aldnoah.Zero\Assignment3\HMI.h
 [v _Menu `(uc  0 ef1`uc ]
-"80 E:\Aldnoah.Zero\Assignment3\Main.c
+"79 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _calibrateIR `(v  0 ef ]
-"84 E:\Aldnoah.Zero\Assignment3\Main.c
+"81 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _Init_Follow_IR `(v  0 ef ]
-"86 E:\Aldnoah.Zero\Assignment3\Main.c
+"83 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _GoHome `(v  0 ef ]
-"57 E:\Aldnoah.Zero\Assignment3\ser.h
-[v _ser_putch `(v  0 ef1`uc ]
-"85 E:\Aldnoah.Zero\Assignment3\Main.c
-[v _FindVictim `(v  0 ef ]
 "82 E:\Aldnoah.Zero\Assignment3\Main.c
+[v _FindVictim `(v  0 ef ]
+"80 E:\Aldnoah.Zero\Assignment3\Main.c
 [v _ChargeMode `(v  0 ef ]
 "154 C:\Program Files\HI-TECH Software\PICC\9.83\include\pic.h
 [v __delay `(v  0 ef1`ul ]
@@ -1041,6 +1039,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _robot_turnArc `(v  0 ef1`i ]
 "21 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robotFollow `(v  0 ef2`i`i ]
+"57 E:\Aldnoah.Zero\Assignment3\ser.h
+[v _ser_putch `(v  0 ef1`uc ]
 "23 E:\Aldnoah.Zero\Assignment3\robot.h
 [v _robot_turnInPlace `(v  0 ef ]
 "16 E:\Aldnoah.Zero\Assignment3\robot.h
@@ -2081,117 +2081,115 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;robot.h: 38: unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
-"52 E:\Aldnoah.Zero\Assignment3\Main.c
-[; ;Main.c: 52: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
+"51 E:\Aldnoah.Zero\Assignment3\Main.c
+[; ;Main.c: 51: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
 [; 	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF ;#
-[; ;Main.c: 80: void calibrateIR(void);
-[; ;Main.c: 81: int scan360(void);
-[; ;Main.c: 82: void ChargeMode(void);
-[; ;Main.c: 83: void RightTurn(void);
-[; ;Main.c: 84: void Init_Follow_IR(void);
-[; ;Main.c: 85: void FindVictim(void);
-[; ;Main.c: 86: void GoHome(void);
-[; ;Main.c: 92: volatile unsigned char buttonPressed;
-"93
+[; ;Main.c: 79: void calibrateIR(void);
+[; ;Main.c: 80: void ChargeMode(void);
+[; ;Main.c: 81: void Init_Follow_IR(void);
+[; ;Main.c: 82: void FindVictim(void);
+[; ;Main.c: 83: void GoHome(void);
+[; ;Main.c: 87: volatile unsigned char buttonPressed;
+"88
 [i _FoundVictim
 -> -> 0 `i `uc
 ]
-[; ;Main.c: 93: unsigned char FoundVictim = 0;
-"96
+[; ;Main.c: 88: unsigned char FoundVictim = 0;
+"91
 [i _RTC_FLAG_1MS
 -> 0 `i
 ]
-[; ;Main.c: 96: volatile bit RTC_FLAG_1MS = 0;
-"99
+[; ;Main.c: 91: volatile bit RTC_FLAG_1MS = 0;
+"94
 [i _RTC_FLAG_250MS
 -> 0 `i
 ]
-[; ;Main.c: 99: volatile bit RTC_FLAG_250MS = 0;
-"100
+[; ;Main.c: 94: volatile bit RTC_FLAG_250MS = 0;
+"95
 [i _RTC_FLAG_500MS
 -> 0 `i
 ]
-[; ;Main.c: 100: volatile bit RTC_FLAG_500MS = 0;
-"104
+[; ;Main.c: 95: volatile bit RTC_FLAG_500MS = 0;
+"99
 [i _RTC_Counter
 -> -> 0 `i `ui
 ]
-[; ;Main.c: 104: volatile unsigned int RTC_Counter = 0;
-"109
-[v F1311 `(v  1 tf ]
-[v _isr1 `IF1311  1 e ]
+[; ;Main.c: 99: volatile unsigned int RTC_Counter = 0;
+"104
+[v F1307 `(v  1 tf ]
+[v _isr1 `IF1307  1 e ]
 {
-[; ;Main.c: 108: void interrupt isr1(void)
-[; ;Main.c: 109: {
+[; ;Main.c: 103: void interrupt isr1(void)
+[; ;Main.c: 104: {
 [e :U _isr1 ]
 [f ]
-[; ;Main.c: 110: if(TMR0IF)
-"110
+[; ;Main.c: 105: if(TMR0IF)
+"105
 [e $ ! _TMR0IF 103  ]
-[; ;Main.c: 111: {
-"111
+[; ;Main.c: 106: {
+"106
 {
-[; ;Main.c: 112: TMR0IF = 0;
-"112
+[; ;Main.c: 107: TMR0IF = 0;
+"107
 [e = _TMR0IF -> -> 0 `i `b ]
-[; ;Main.c: 113: TMR0 = 100;
-"113
+[; ;Main.c: 108: TMR0 = 100;
+"108
 [e = _TMR0 -> -> 100 `i `uc ]
-[; ;Main.c: 115: RTC_Counter++;
-"115
+[; ;Main.c: 110: RTC_Counter++;
+"110
 [e ++ _RTC_Counter -> -> 1 `i `ui ]
-[; ;Main.c: 118: RTC_FLAG_1MS = 1;
-"118
+[; ;Main.c: 113: RTC_FLAG_1MS = 1;
+"113
 [e = _RTC_FLAG_1MS -> -> 1 `i `b ]
-[; ;Main.c: 119: if(RTC_Counter % 250 == 0)
-"119
+[; ;Main.c: 114: if(RTC_Counter % 250 == 0)
+"114
 [e $ ! == % _RTC_Counter -> -> 250 `i `ui -> -> 0 `i `ui 104  ]
-[; ;Main.c: 120: {
-"120
+[; ;Main.c: 115: {
+"115
 {
-[; ;Main.c: 121: RTC_FLAG_250MS = 1;
-"121
+[; ;Main.c: 116: RTC_FLAG_250MS = 1;
+"116
 [e = _RTC_FLAG_250MS -> -> 1 `i `b ]
-"122
+"117
 }
 [e :U 104 ]
-[; ;Main.c: 122: }
-[; ;Main.c: 123: if(RTC_Counter % 500 == 0)
-"123
+[; ;Main.c: 117: }
+[; ;Main.c: 118: if(RTC_Counter % 500 == 0)
+"118
 [e $ ! == % _RTC_Counter -> -> 500 `i `ui -> -> 0 `i `ui 105  ]
+[; ;Main.c: 119: {
+"119
+{
+[; ;Main.c: 120: RTC_FLAG_500MS = 1;
+"120
+[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
+[; ;Main.c: 121: RB0 ^= 0x01;
+"121
+[e =^ _RB0 -> -> 1 `i `b ]
+"122
+}
+[e :U 105 ]
+[; ;Main.c: 122: }
+[; ;Main.c: 123: if (buttonPressed == 0)
+"123
+[e $ ! == -> _buttonPressed `i -> 0 `i 106  ]
 [; ;Main.c: 124: {
 "124
 {
-[; ;Main.c: 125: RTC_FLAG_500MS = 1;
+[; ;Main.c: 125: buttonPressed = ReadButtons();
 "125
-[e = _RTC_FLAG_500MS -> -> 1 `i `b ]
-[; ;Main.c: 126: RB0 ^= 0x01;
-"126
-[e =^ _RB0 -> -> 1 `i `b ]
-"127
-}
-[e :U 105 ]
-[; ;Main.c: 127: }
-[; ;Main.c: 128: if (buttonPressed == 0)
-"128
-[e $ ! == -> _buttonPressed `i -> 0 `i 106  ]
-[; ;Main.c: 129: {
-"129
-{
-[; ;Main.c: 130: buttonPressed = ReadButtons();
-"130
 [e = _buttonPressed ( _ReadButtons ..  ]
-"131
+"126
 }
 [e :U 106 ]
-"132
+"127
 }
 [e :U 103 ]
-[; ;Main.c: 131: }
-[; ;Main.c: 132: }
-[; ;Main.c: 133: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
-"133
+[; ;Main.c: 126: }
+[; ;Main.c: 127: }
+[; ;Main.c: 128: if (RCIF) { rxfifo[rxiptr]=RCREG; ser_tmp=(rxiptr+1) & (16-1); if (ser_tmp!=rxoptr) rxiptr=ser_tmp; } if (TXIF && TXIE) { TXREG = txfifo[txoptr]; ++txoptr; txoptr &= (16-1); if (txoptr==txiptr) { TXIE = 0; } };
+"128
 [e $ ! _RCIF 107  ]
 {
 [e = *U + &U _rxfifo * -> _rxiptr `ux -> -> # *U &U _rxfifo `ui `ux _RCREG ]
@@ -2213,235 +2211,232 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 110 ]
 }
 [e :U 109 ]
-[; ;Main.c: 134: }
-"134
+[; ;Main.c: 129: }
+"129
 [e :UE 102 ]
 }
-"139
+"134
 [v _init `(v  1 ef ]
 {
-[; ;Main.c: 138: void init()
-[; ;Main.c: 139: {
+[; ;Main.c: 133: void init()
+[; ;Main.c: 134: {
 [e :U _init ]
 [f ]
-[; ;Main.c: 140: buttonPressed = 0;
-"140
+[; ;Main.c: 135: buttonPressed = 0;
+"135
 [e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 142: TRISB = 0b11111100;
-"142
+[; ;Main.c: 137: TRISB = 0b11111100;
+"137
 [e = _TRISB -> -> 252 `i `uc ]
-[; ;Main.c: 143: TRISC &= 0b10010000;
-"143
+[; ;Main.c: 138: TRISC &= 0b10010000;
+"138
 [e =& _TRISC -> -> 144 `i `uc ]
-[; ;Main.c: 146: SSPSTAT = 0b01000000;
-"146
+[; ;Main.c: 141: SSPSTAT = 0b01000000;
+"141
 [e = _SSPSTAT -> -> 64 `i `uc ]
-[; ;Main.c: 147: SSPCON = 0b10100001;
-"147
+[; ;Main.c: 142: SSPCON = 0b10100001;
+"142
 [e = _SSPCON -> -> 161 `i `uc ]
-[; ;Main.c: 150: OPTION_REG = 0b00000100;
-"150
+[; ;Main.c: 145: OPTION_REG = 0b00000100;
+"145
 [e = _OPTION_REG -> -> 4 `i `uc ]
-[; ;Main.c: 153: ser_init();
-"153
+[; ;Main.c: 148: ser_init();
+"148
 [e ( _ser_init ..  ]
-[; ;Main.c: 154: init_adc();
-"154
+[; ;Main.c: 149: init_adc();
+"149
 [e ( _init_adc ..  ]
-[; ;Main.c: 155: lcd_init();
-"155
+[; ;Main.c: 150: lcd_init();
+"150
 [e ( _lcd_init ..  ]
-[; ;Main.c: 156: robo_init();
-"156
+[; ;Main.c: 151: robo_init();
+"151
 [e ( _robo_init ..  ]
-[; ;Main.c: 160: TMR0IE = 1;
-"160
+[; ;Main.c: 155: TMR0IE = 1;
+"155
 [e = _TMR0IE -> -> 1 `i `b ]
-[; ;Main.c: 162: PEIE=1;
-"162
+[; ;Main.c: 157: PEIE=1;
+"157
 [e = _PEIE -> -> 1 `i `b ]
-[; ;Main.c: 164: (GIE = 1);
-"164
+[; ;Main.c: 159: (GIE = 1);
+"159
 [e = _GIE -> -> 1 `i `b ]
-[; ;Main.c: 165: }
-"165
+[; ;Main.c: 160: }
+"160
 [e :UE 111 ]
 }
-"172
+"167
 [v _main `(v  1 ef ]
 {
-[; ;Main.c: 171: void main(void)
-[; ;Main.c: 172: {
+[; ;Main.c: 166: void main(void)
+[; ;Main.c: 167: {
 [e :U _main ]
 [f ]
-"173
+"168
 [v _choice `uc  1 a ]
-[; ;Main.c: 173: unsigned char choice = 255;
+[; ;Main.c: 168: unsigned char choice = 255;
 [e = _choice -> -> 255 `i `uc ]
-[; ;Main.c: 174: followDir = 0;
-"174
+[; ;Main.c: 169: followDir = 0;
+"169
 [e = _followDir -> -> 0 `i `uc ]
-[; ;Main.c: 175: RobotPos = 0;
-"175
+[; ;Main.c: 170: RobotPos = 0;
+"170
 [e = _RobotPos -> -> 0 `i `uc ]
-[; ;Main.c: 176: currentMenu = 0;
-"176
+[; ;Main.c: 171: currentMenu = 0;
+"171
 [e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 178: init();
-"178
+[; ;Main.c: 173: init();
+"173
 [e ( _init ..  ]
-[; ;Main.c: 179: robotLoadSong();
-"179
+[; ;Main.c: 174: robotLoadSong();
+"174
 [e ( _robotLoadSong ..  ]
-[; ;Main.c: 181: while(1)
-"181
+[; ;Main.c: 176: while(1)
+"176
 [e :U 114 ]
-[; ;Main.c: 182: {
-"182
+[; ;Main.c: 177: {
+"177
 {
-[; ;Main.c: 183: if (RTC_FLAG_250MS == 1)
-"183
+[; ;Main.c: 178: if (RTC_FLAG_250MS == 1)
+"178
 [e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 116  ]
-[; ;Main.c: 184: {
-"184
+[; ;Main.c: 179: {
+"179
 {
-[; ;Main.c: 185: RTC_FLAG_250MS = 0;
-"185
+[; ;Main.c: 180: RTC_FLAG_250MS = 0;
+"180
 [e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 186: robot_read(2);
-"186
+[; ;Main.c: 181: robot_read(2);
+"181
 [e ( _robot_read (1 -> -> 2 `i `uc ]
-[; ;Main.c: 187: readAvgDistance();
-"187
+[; ;Main.c: 182: readAvgDistance();
+"182
 [e ( _readAvgDistance ..  ]
-[; ;Main.c: 188: Disp2 = RobotPos;
-"188
+[; ;Main.c: 183: Disp2 = RobotPos;
+"183
 [e = _Disp2 -> _RobotPos `i ]
-[; ;Main.c: 189: UpdateDisplay();
-"189
+[; ;Main.c: 184: UpdateDisplay();
+"184
 [e ( _UpdateDisplay ..  ]
-"190
+"185
 }
 [e :U 116 ]
-[; ;Main.c: 190: }
-[; ;Main.c: 191: if (buttonPressed)
-"191
+[; ;Main.c: 185: }
+[; ;Main.c: 186: if (buttonPressed)
+"186
 [e $ ! != -> _buttonPressed `i -> -> -> 0 `i `Vuc `i 117  ]
-[; ;Main.c: 193: {
-"193
+[; ;Main.c: 188: {
+"188
 {
-[; ;Main.c: 194: choice = Menu(buttonPressed);
-"194
+[; ;Main.c: 189: choice = Menu(buttonPressed);
+"189
 [e = _choice ( _Menu (1 _buttonPressed ]
-[; ;Main.c: 195: buttonPressed = 0;
-"195
+[; ;Main.c: 190: buttonPressed = 0;
+"190
 [e = _buttonPressed -> -> 0 `i `uc ]
-"196
+"191
 }
 [e :U 117 ]
-[; ;Main.c: 196: }
-[; ;Main.c: 200: switch (choice)
-"200
+[; ;Main.c: 191: }
+[; ;Main.c: 195: switch (choice)
+"195
 [e $U 119  ]
-[; ;Main.c: 201: {
-"201
+[; ;Main.c: 196: {
+"196
 {
-[; ;Main.c: 202: case 0:
-"202
+[; ;Main.c: 197: case 0:
+"197
 [e :U 120 ]
-[; ;Main.c: 203: calibrateIR();
-"203
+[; ;Main.c: 198: calibrateIR();
+"198
 [e ( _calibrateIR ..  ]
+[; ;Main.c: 199: break;
+"199
+[e $U 118  ]
+[; ;Main.c: 200: case 1:
+"200
+[e :U 121 ]
+[; ;Main.c: 201: RobotPos = 16;
+"201
+[e = _RobotPos -> -> 16 `i `uc ]
+[; ;Main.c: 202: Init_Follow_IR();
+"202
+[e ( _Init_Follow_IR ..  ]
+[; ;Main.c: 203: GoHome();
+"203
+[e ( _GoHome ..  ]
 [; ;Main.c: 204: break;
 "204
 [e $U 118  ]
-[; ;Main.c: 205: case 1:
+[; ;Main.c: 205: case 2:
 "205
-[e :U 121 ]
-[; ;Main.c: 206: RobotPos = 16;
-"206
-[e = _RobotPos -> -> 16 `i `uc ]
-[; ;Main.c: 207: Init_Follow_IR();
-"207
-[e ( _Init_Follow_IR ..  ]
-[; ;Main.c: 208: GoHome();
-"208
-[e ( _GoHome ..  ]
-[; ;Main.c: 209: break;
-"209
-[e $U 118  ]
-[; ;Main.c: 210: case 2:
-"210
 [e :U 122 ]
-[; ;Main.c: 211: RobotPos = 6;
-"211
+[; ;Main.c: 206: RobotPos = 6;
+"206
 [e = _RobotPos -> -> 6 `i `uc ]
-[; ;Main.c: 212: ser_putch(141);
-"212
-[e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;Main.c: 213: ser_putch(4);
-"213
-[e ( _ser_putch (1 -> -> 4 `i `uc ]
-[; ;Main.c: 214: break;
-"214
+[; ;Main.c: 207: break;
+"207
 [e $U 118  ]
-[; ;Main.c: 215: case 3:
-"215
+[; ;Main.c: 208: case 3:
+"208
 [e :U 123 ]
-[; ;Main.c: 217: RobotPos = 12;
-"217
+[; ;Main.c: 209: RobotPos = 12;
+"209
 [e = _RobotPos -> -> 12 `i `uc ]
-[; ;Main.c: 218: break;
-"218
+[; ;Main.c: 210: break;
+"210
 [e $U 118  ]
-[; ;Main.c: 219: case 4:
-"219
+[; ;Main.c: 211: case 4:
+"211
 [e :U 124 ]
-[; ;Main.c: 220: FoundVictim = 0;
-"220
+[; ;Main.c: 212: FoundVictim = 0;
+"212
 [e = _FoundVictim -> -> 0 `i `uc ]
-[; ;Main.c: 221: Init_Follow_IR();
-"221
+[; ;Main.c: 213: Init_Follow_IR();
+"213
 [e ( _Init_Follow_IR ..  ]
-[; ;Main.c: 222: currentMenu = 3;
-"222
+[; ;Main.c: 214: currentMenu = 3;
+"214
 [e = _currentMenu -> -> 3 `i `uc ]
-[; ;Main.c: 223: FindVictim();
-"223
+[; ;Main.c: 215: FindVictim();
+"215
 [e ( _FindVictim ..  ]
-[; ;Main.c: 224: if (FoundVictim)
-"224
+[; ;Main.c: 216: if (FoundVictim)
+"216
 [e $ ! != -> _FoundVictim `i -> -> -> 0 `i `uc `i 125  ]
-[; ;Main.c: 225: GoHome();
-"225
+[; ;Main.c: 217: GoHome();
+"217
 [e ( _GoHome ..  ]
 [e :U 125 ]
-[; ;Main.c: 226: ROBOTerror = 0;
-"226
+[; ;Main.c: 218: ROBOTerror = 0;
+"218
 [e = _ROBOTerror -> -> 0 `i `uc ]
+[; ;Main.c: 219: currentMenu = 0;
+"219
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 220: break;
+"220
+[e $U 118  ]
+[; ;Main.c: 222: case 5:
+"222
+[e :U 126 ]
+[; ;Main.c: 223: ChargeMode();
+"223
+[e ( _ChargeMode ..  ]
+[; ;Main.c: 224: break;
+"224
+[e $U 118  ]
+[; ;Main.c: 225: default:
+"225
+[e :U 127 ]
 [; ;Main.c: 227: break;
 "227
 [e $U 118  ]
-[; ;Main.c: 229: case 5:
-"229
-[e :U 126 ]
-[; ;Main.c: 230: ChargeMode();
-"230
-[e ( _ChargeMode ..  ]
-[; ;Main.c: 231: break;
-"231
-[e $U 118  ]
-[; ;Main.c: 232: default:
-"232
-[e :U 127 ]
-[; ;Main.c: 234: break;
-"234
-[e $U 118  ]
-"235
+"228
 }
-[; ;Main.c: 235: }
+[; ;Main.c: 228: }
 [e $U 118  ]
-"200
+"195
 [e :U 119 ]
 [e [\ _choice , $ -> -> 0 `i `uc 120
  , $ -> -> 1 `i `uc 121
@@ -2450,60 +2445,60 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 124
  , $ -> -> 5 `i `uc 126
  127 ]
-"235
+"228
 [e :U 118 ]
-[; ;Main.c: 236: choice = 255;
-"236
+[; ;Main.c: 229: choice = 255;
+"229
 [e = _choice -> -> 255 `i `uc ]
-"237
+"230
 }
 [e :U 113 ]
-"181
+"176
 [e $U 114  ]
 [e :U 115 ]
-[; ;Main.c: 237: }
-[; ;Main.c: 238: }
-"238
+[; ;Main.c: 230: }
+[; ;Main.c: 231: }
+"231
 [e :UE 112 ]
 }
-"241
+"236
 [v _Init_Follow_IR `(v  1 ef ]
 {
-[; ;Main.c: 240: void Init_Follow_IR(void)
-[; ;Main.c: 241: {
+[; ;Main.c: 235: void Init_Follow_IR(void)
+[; ;Main.c: 236: {
 [e :U _Init_Follow_IR ]
 [f ]
-[; ;Main.c: 242: calibrateIR();
-"242
+[; ;Main.c: 237: calibrateIR();
+"237
 [e ( _calibrateIR ..  ]
-[; ;Main.c: 243: _delay((unsigned long)((500)*(20000000/4000.0)));
-"243
+[; ;Main.c: 238: _delay((unsigned long)((500)*(20000000/4000.0)));
+"238
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 244: rotate(25, 0);
-"244
+[; ;Main.c: 239: rotate(25, 0);
+"239
 [e ( _rotate (2 , -> -> 25 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 245: }
-"245
+[; ;Main.c: 240: }
+"240
 [e :UE 128 ]
 }
-"248
+"246
 [v _GoHome `(v  1 ef ]
 {
-[; ;Main.c: 247: void GoHome(void)
-[; ;Main.c: 248: {
+[; ;Main.c: 245: void GoHome(void)
+[; ;Main.c: 246: {
 [e :U _GoHome ]
 [f ]
-[; ;Main.c: 249: switch (RobotPos)
-"249
+[; ;Main.c: 247: switch (RobotPos)
+"247
 [e $U 131  ]
-[; ;Main.c: 250: {
-"250
+[; ;Main.c: 248: {
+"248
 {
-[; ;Main.c: 251: case 7:
-"251
+[; ;Main.c: 249: case 7:
+"249
 [e :U 132 ]
-[; ;Main.c: 252: robotTurnSpeed(175,400);
-"252
+[; ;Main.c: 250: robotTurnSpeed(175,400);
+"250
 [e ( _robotTurnSpeed (2 , -> 175 `i -> 400 `i ]
 [; ;Main.c: 253: break;
 "253
@@ -2524,7 +2519,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [; ;Main.c: 258: }
 [e $U 130  ]
-"249
+"247
 [e :U 131 ]
 [e [\ _RobotPos , $ -> -> 7 `i `uc 132
  , $ -> -> 15 `i `uc 133
@@ -2665,44 +2660,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Main.c: 302: RobotPos++;
 "302
 [e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;Main.c: 309: if (followDir == 1)
-"309
+[; ;Main.c: 304: if (followDir == 1)
+"304
 [e $ ! == -> _followDir `i -> 1 `i 151  ]
-[; ;Main.c: 310: robot_turnInPlace();
-"310
+[; ;Main.c: 305: robot_turnInPlace();
+"305
 [e ( _robot_turnInPlace ..  ]
 [e :U 151 ]
-[; ;Main.c: 311: if (followDir == 0)
-"311
+[; ;Main.c: 306: if (followDir == 0)
+"306
 [e $ ! == -> _followDir `i -> 0 `i 152  ]
-[; ;Main.c: 312: robot_turnArc(200);
-"312
+[; ;Main.c: 307: robot_turnArc(200);
+"307
 [e ( _robot_turnArc (1 -> 200 `i ]
 [e :U 152 ]
-[; ;Main.c: 313: readAvgDistance();
-"313
+[; ;Main.c: 308: readAvgDistance();
+"308
 [e ( _readAvgDistance ..  ]
-[; ;Main.c: 314: robotFollow(200, adcVal);
-"314
+[; ;Main.c: 309: robotFollow(200, adcVal);
+"309
 [e ( _robotFollow (2 , -> 200 `i -> _adcVal `i ]
-[; ;Main.c: 315: break;
-"315
+[; ;Main.c: 310: break;
+"310
 [e $U 137  ]
-[; ;Main.c: 316: default:
-"316
+[; ;Main.c: 311: default:
+"311
 [e :U 153 ]
-[; ;Main.c: 317: readAvgDistance();
-"317
+[; ;Main.c: 312: readAvgDistance();
+"312
 [e ( _readAvgDistance ..  ]
-[; ;Main.c: 318: robotFollow(200, adcVal);
-"318
+[; ;Main.c: 313: robotFollow(200, adcVal);
+"313
 [e ( _robotFollow (2 , -> 200 `i -> _adcVal `i ]
-[; ;Main.c: 319: break;
-"319
+[; ;Main.c: 314: break;
+"314
 [e $U 137  ]
-"320
+"315
 }
-[; ;Main.c: 320: }
+[; ;Main.c: 315: }
 [e $U 137  ]
 "261
 [e :U 138 ]
@@ -2715,238 +2710,244 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 10 `i `uc 145
  , $ -> -> 11 `i `uc 150
  153 ]
-"320
+"315
 [e :U 137 ]
-"321
+"316
 }
 [e :U 134 ]
 "259
 [e $ != -> _ROBOTerror `i -> 9 `i 135  ]
 [e :U 136 ]
-[; ;Main.c: 321: }
-[; ;Main.c: 322: }
-"322
+[; ;Main.c: 316: }
+[; ;Main.c: 317: }
+"317
 [e :UE 129 ]
 }
-"325
+"322
 [v _FindVictim `(v  1 ef ]
 {
-[; ;Main.c: 324: void FindVictim(void)
-[; ;Main.c: 325: {
+[; ;Main.c: 321: void FindVictim(void)
+[; ;Main.c: 322: {
 [e :U _FindVictim ]
 [f ]
-[; ;Main.c: 326: while (ROBOTerror != 9)
-"326
+[; ;Main.c: 323: while (ROBOTerror != 9)
+"323
 [e $U 155  ]
 [e :U 156 ]
+[; ;Main.c: 324: {
+"324
+{
+[; ;Main.c: 326: switch (ROBOTerror)
+"326
+[e $U 159  ]
 [; ;Main.c: 327: {
 "327
 {
-[; ;Main.c: 329: switch (ROBOTerror)
-"329
-[e $U 159  ]
-[; ;Main.c: 330: {
-"330
-{
-[; ;Main.c: 331: case 0:
-"331
+[; ;Main.c: 328: case 0:
+"328
 [e :U 160 ]
-[; ;Main.c: 333: readAvgDistance();
-"333
+[; ;Main.c: 330: readAvgDistance();
+"330
 [e ( _readAvgDistance ..  ]
-[; ;Main.c: 334: robotFollow(200, adcVal);
-"334
+[; ;Main.c: 331: robotFollow(200, adcVal);
+"331
 [e ( _robotFollow (2 , -> 200 `i -> _adcVal `i ]
-[; ;Main.c: 335: break;
-"335
+[; ;Main.c: 332: break;
+"332
 [e $U 158  ]
-[; ;Main.c: 336: case 1:
-"336
+[; ;Main.c: 333: case 1:
+"333
 [e :U 161 ]
-[; ;Main.c: 337: if (RobotPos == 10)
-"337
+[; ;Main.c: 334: if (RobotPos == 10)
+"334
 [e $ ! == -> _RobotPos `i -> 10 `i 162  ]
-[; ;Main.c: 338: {
-"338
+[; ;Main.c: 335: {
+"335
 {
-[; ;Main.c: 339: RobotDrive(-200, 0x7FFF);
-"339
+[; ;Main.c: 336: RobotDrive(-200, 0x7FFF);
+"336
 [e ( _RobotDrive (2 , -U -> 200 `i -> 32767 `i ]
-[; ;Main.c: 340: _delay((unsigned long)((200)*(20000000/4000.0)));
-"340
+[; ;Main.c: 337: _delay((unsigned long)((200)*(20000000/4000.0)));
+"337
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 341: RobotPos++;
-"341
+[; ;Main.c: 338: RobotPos++;
+"338
 [e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;Main.c: 342: ROBOTerror = 0;
-"342
+[; ;Main.c: 339: ROBOTerror = 0;
+"339
 [e = _ROBOTerror -> -> 0 `i `uc ]
-[; ;Main.c: 343: robotTurnSpeed((-(angleTurned - 75)),400);
-"343
+[; ;Main.c: 340: robotTurnSpeed((-(angleTurned - 75)),400);
+"340
 [e ( _robotTurnSpeed (2 , -U - _angleTurned -> 75 `i -> 400 `i ]
-"344
+"341
 }
-[; ;Main.c: 344: }
+[; ;Main.c: 341: }
 [e $U 163  ]
-"345
+"342
 [e :U 162 ]
-[; ;Main.c: 345: else
-[; ;Main.c: 346: ROBOTerror = 9;
-"346
+[; ;Main.c: 342: else
+[; ;Main.c: 343: ROBOTerror = 9;
+"343
 [e = _ROBOTerror -> -> 9 `i `uc ]
 [e :U 163 ]
-[; ;Main.c: 347: break;
-"347
+[; ;Main.c: 344: break;
+"344
 [e $U 158  ]
-[; ;Main.c: 348: case 2:
-"348
+[; ;Main.c: 345: case 2:
+"345
 [e :U 164 ]
-[; ;Main.c: 349: ser_putch(141);
-"349
+[; ;Main.c: 346: ser_putch(141);
+"346
 [e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;Main.c: 350: ser_putch(0);
-"350
+[; ;Main.c: 347: ser_putch(0);
+"347
 [e ( _ser_putch (1 -> -> 0 `i `uc ]
-[; ;Main.c: 351: robotTurnSpeed((180),400);
-"351
+[; ;Main.c: 348: RobotDrive(-200, 0x7FFF);
+"348
+[e ( _RobotDrive (2 , -U -> 200 `i -> 32767 `i ]
+[; ;Main.c: 349: _delay((unsigned long)((200)*(20000000/4000.0)));
+"349
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 350: robotTurnSpeed((180),400);
+"350
 [e ( _robotTurnSpeed (2 , -> 180 `i -> 400 `i ]
-[; ;Main.c: 352: ROBOTerror = 0;
+[; ;Main.c: 351: ROBOTerror = 0;
+"351
+[e = _ROBOTerror -> -> 0 `i `uc ]
+[; ;Main.c: 352: break;
 "352
-[e = _ROBOTerror -> -> 0 `i `uc ]
-[; ;Main.c: 353: break;
+[e $U 158  ]
+[; ;Main.c: 353: case 3:
 "353
-[e $U 158  ]
-[; ;Main.c: 354: case 3:
-"354
 [e :U 165 ]
-[; ;Main.c: 355: RobotPos++;
+[; ;Main.c: 354: RobotPos++;
+"354
+[e ++ _RobotPos -> -> 1 `i `uc ]
+[; ;Main.c: 355: ROBOTerror = 0;
 "355
-[e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;Main.c: 356: ROBOTerror = 0;
-"356
 [e = _ROBOTerror -> -> 0 `i `uc ]
-[; ;Main.c: 358: _delay((unsigned long)((1000)*(20000000/4000.0)));
+[; ;Main.c: 357: _delay((unsigned long)((1000)*(20000000/4000.0)));
+"357
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;Main.c: 358: robotMoveSpeed(-200,-200);
 "358
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 359: robotMoveSpeed(-200,-200);
-"359
 [e ( _robotMoveSpeed (2 , -U -> 200 `i -U -> 200 `i ]
-[; ;Main.c: 360: robotTurnSpeed((-angleTurned-10),400);
-"360
+[; ;Main.c: 359: robotTurnSpeed((-angleTurned-10),400);
+"359
 [e ( _robotTurnSpeed (2 , - -U _angleTurned -> 10 `i -> 400 `i ]
-[; ;Main.c: 361: robotMoveSpeed(250,200);
-"361
+[; ;Main.c: 360: robotMoveSpeed(250,200);
+"360
 [e ( _robotMoveSpeed (2 , -> 250 `i -> 200 `i ]
-[; ;Main.c: 362: readAvgDistance();
+[; ;Main.c: 361: readAvgDistance();
+"361
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 362: robotFollow(200, adcVal - 10);
 "362
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 363: robotFollow(200, adcVal - 10);
+[e ( _robotFollow (2 , -> 200 `i -> - _adcVal -> -> 10 `i `ui `i ]
+[; ;Main.c: 363: break;
 "363
-[e ( _robotFollow (2 , -> 200 `i -> - _adcVal -> -> 10 `i `ui `i ]
-[; ;Main.c: 364: break;
+[e $U 158  ]
+[; ;Main.c: 364: case 4:
 "364
-[e $U 158  ]
-[; ;Main.c: 365: case 4:
-"365
 [e :U 166 ]
-[; ;Main.c: 366: RobotDrive(200, 0x7FFF);
-"366
+[; ;Main.c: 365: RobotDrive(200, 0x7FFF);
+"365
 [e ( _RobotDrive (2 , -> 200 `i -> 32767 `i ]
-[; ;Main.c: 367: _delay((unsigned long)((1000)*(20000000/4000.0)));
-"367
+[; ;Main.c: 366: _delay((unsigned long)((1000)*(20000000/4000.0)));
+"366
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;Main.c: 368: ser_putch(141);
+[; ;Main.c: 367: ser_putch(141);
+"367
+[e ( _ser_putch (1 -> -> 141 `i `uc ]
+[; ;Main.c: 368: ser_putch(4);
 "368
-[e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;Main.c: 369: ser_putch(4);
-"369
 [e ( _ser_putch (1 -> -> 4 `i `uc ]
-[; ;Main.c: 370: RobotPos++;
+[; ;Main.c: 369: RobotPos++;
+"369
+[e ++ _RobotPos -> -> 1 `i `uc ]
+[; ;Main.c: 370: FoundVictim = 1;
 "370
-[e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;Main.c: 371: FoundVictim = 1;
-"371
 [e = _FoundVictim -> -> 1 `i `uc ]
-[; ;Main.c: 372: ROBOTerror = 9;
+[; ;Main.c: 371: ROBOTerror = 9;
+"371
+[e = _ROBOTerror -> -> 9 `i `uc ]
+[; ;Main.c: 372: break;
 "372
-[e = _ROBOTerror -> -> 9 `i `uc ]
-[; ;Main.c: 373: break;
+[e $U 158  ]
+[; ;Main.c: 373: case 9:
 "373
-[e $U 158  ]
-[; ;Main.c: 374: case 9:
-"374
 [e :U 167 ]
-[; ;Main.c: 375: ROBOTerror = 9;
-"375
+[; ;Main.c: 374: ROBOTerror = 9;
+"374
 [e = _ROBOTerror -> -> 9 `i `uc ]
-[; ;Main.c: 376: break;
+[; ;Main.c: 375: break;
+"375
+[e $U 158  ]
+[; ;Main.c: 376: case 10:
 "376
-[e $U 158  ]
-[; ;Main.c: 377: case 10:
-"377
 [e :U 168 ]
-[; ;Main.c: 378: ser_putch(141);
+[; ;Main.c: 377: ser_putch(141);
+"377
+[e ( _ser_putch (1 -> -> 141 `i `uc ]
+[; ;Main.c: 378: ser_putch(2);
 "378
-[e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;Main.c: 379: ser_putch(2);
+[e ( _ser_putch (1 -> -> 2 `i `uc ]
+[; ;Main.c: 379: RobotPos++;
 "379
-[e ( _ser_putch (1 -> -> 2 `i `uc ]
-[; ;Main.c: 380: RobotPos++;
+[e ++ _RobotPos -> -> 1 `i `uc ]
+[; ;Main.c: 380: robot_turnInPlace();
 "380
-[e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;Main.c: 381: robot_turnInPlace();
-"381
 [e ( _robot_turnInPlace ..  ]
-[; ;Main.c: 382: readAvgDistance();
+[; ;Main.c: 381: readAvgDistance();
+"381
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 382: robotFollow(200, adcVal - 10);
 "382
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 383: robotFollow(200, adcVal - 10);
-"383
 [e ( _robotFollow (2 , -> 200 `i -> - _adcVal -> -> 10 `i `ui `i ]
-[; ;Main.c: 384: break;
+[; ;Main.c: 383: break;
+"383
+[e $U 158  ]
+[; ;Main.c: 384: case 11:
 "384
-[e $U 158  ]
-[; ;Main.c: 385: case 11:
-"385
 [e :U 169 ]
-[; ;Main.c: 386: ser_putch(141);
-"386
+[; ;Main.c: 385: ser_putch(141);
+"385
 [e ( _ser_putch (1 -> -> 141 `i `uc ]
-[; ;Main.c: 387: ser_putch(2);
-"387
+[; ;Main.c: 386: ser_putch(2);
+"386
 [e ( _ser_putch (1 -> -> 2 `i `uc ]
-[; ;Main.c: 388: RobotPos++;
-"388
+[; ;Main.c: 387: RobotPos++;
+"387
 [e ++ _RobotPos -> -> 1 `i `uc ]
-[; ;Main.c: 389: robot_turnArc(200);
-"389
+[; ;Main.c: 388: robot_turnArc(200);
+"388
 [e ( _robot_turnArc (1 -> 200 `i ]
-[; ;Main.c: 390: readAvgDistance();
+[; ;Main.c: 389: readAvgDistance();
+"389
+[e ( _readAvgDistance ..  ]
+[; ;Main.c: 390: robotFollow(200, adcVal);
 "390
-[e ( _readAvgDistance ..  ]
-[; ;Main.c: 391: robotFollow(200, adcVal);
-"391
 [e ( _robotFollow (2 , -> 200 `i -> _adcVal `i ]
-[; ;Main.c: 393: break;
+[; ;Main.c: 392: break;
+"392
+[e $U 158  ]
+[; ;Main.c: 393: default:
 "393
-[e $U 158  ]
-[; ;Main.c: 394: default:
-"394
 [e :U 170 ]
-[; ;Main.c: 395: readAvgDistance();
-"395
+[; ;Main.c: 394: readAvgDistance();
+"394
 [e ( _readAvgDistance ..  ]
-[; ;Main.c: 396: robotFollow(200, adcVal);
-"396
+[; ;Main.c: 395: robotFollow(200, adcVal);
+"395
 [e ( _robotFollow (2 , -> 200 `i -> _adcVal `i ]
-[; ;Main.c: 397: break;
-"397
+[; ;Main.c: 396: break;
+"396
 [e $U 158  ]
-"399
+"398
 }
-[; ;Main.c: 399: }
+[; ;Main.c: 398: }
 [e $U 158  ]
-"329
+"326
 [e :U 159 ]
 [e [\ _ROBOTerror , $ -> -> 0 `i `uc 160
  , $ -> -> 1 `i `uc 161
@@ -2957,131 +2958,131 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 10 `i `uc 168
  , $ -> -> 11 `i `uc 169
  170 ]
-"399
+"398
 [e :U 158 ]
-"400
+"399
 }
 [e :U 155 ]
-"326
+"323
 [e $ != -> _ROBOTerror `i -> 9 `i 156  ]
 [e :U 157 ]
+[; ;Main.c: 399: }
 [; ;Main.c: 400: }
-[; ;Main.c: 401: }
-"401
+"400
 [e :UE 154 ]
 }
-"407
+"406
 [v _calibrateIR `(v  1 ef ]
 {
-[; ;Main.c: 406: void calibrateIR(void)
-[; ;Main.c: 407: {
+[; ;Main.c: 405: void calibrateIR(void)
+[; ;Main.c: 406: {
 [e :U _calibrateIR ]
 [f ]
-[; ;Main.c: 408: currentMenu = 1;
-"408
+[; ;Main.c: 407: currentMenu = 1;
+"407
 [e = _currentMenu -> -> 1 `i `uc ]
-[; ;Main.c: 409: rotate(8, 0);
-"409
+[; ;Main.c: 408: rotate(8, 0);
+"408
 [e ( _rotate (2 , -> -> 8 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 410: rotate(8, 1);
-"410
+[; ;Main.c: 409: rotate(8, 1);
+"409
 [e ( _rotate (2 , -> -> 8 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 411: while (1)
-"411
+[; ;Main.c: 410: while (1)
+"410
 [e :U 173 ]
-[; ;Main.c: 412: {
+[; ;Main.c: 411: {
+"411
+{
+[; ;Main.c: 412: if (RTC_FLAG_250MS == 1)
 "412
-{
-[; ;Main.c: 413: if (RTC_FLAG_250MS == 1)
-"413
 [e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 175  ]
-[; ;Main.c: 414: {
-"414
+[; ;Main.c: 413: {
+"413
 {
-[; ;Main.c: 415: RTC_FLAG_250MS = 0;
-"415
+[; ;Main.c: 414: RTC_FLAG_250MS = 0;
+"414
 [e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 416: UpdateDisplay();
-"416
+[; ;Main.c: 415: UpdateDisplay();
+"415
 [e ( _UpdateDisplay ..  ]
-"417
+"416
 }
 [e :U 175 ]
-[; ;Main.c: 417: }
-[; ;Main.c: 418: switch (buttonPressed)
-"418
+[; ;Main.c: 416: }
+[; ;Main.c: 417: switch (buttonPressed)
+"417
 [e $U 177  ]
-[; ;Main.c: 419: {
-"419
-{
-[; ;Main.c: 420: case 1:
-"420
-[e :U 178 ]
-[; ;Main.c: 421: buttonPressed = 0;
-"421
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 422: break;
-"422
-[e $U 176  ]
-[; ;Main.c: 423: case 2:
-"423
-[e :U 179 ]
-[; ;Main.c: 424: buttonPressed = 0;
-"424
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 425: break;
-"425
-[e $U 176  ]
-[; ;Main.c: 426: case 3:
-"426
-[e :U 180 ]
-[; ;Main.c: 427: rotate(1, 1);
-"427
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
-[; ;Main.c: 428: buttonPressed = 0;
-"428
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 429: break;
-"429
-[e $U 176  ]
-[; ;Main.c: 430: case 4:
-"430
-[e :U 181 ]
-[; ;Main.c: 431: rotate(1, 0);
-"431
-[e ( _rotate (2 , -> -> 1 `i `ui -> -> 0 `i `uc ]
-[; ;Main.c: 432: buttonPressed = 0;
-"432
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 433: break;
-"433
-[e $U 176  ]
-[; ;Main.c: 434: case 5:
-"434
-[e :U 182 ]
-[; ;Main.c: 436: totalSteps = 0;
-"436
-[e = _totalSteps -> 0 `i ]
-[; ;Main.c: 437: buttonPressed = 0;
-"437
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 438: currentMenu = 0;
-"438
-[e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 439: return;
-"439
-[e $UE 171  ]
-[; ;Main.c: 440: default:
-"440
-[e :U 183 ]
-[; ;Main.c: 441: break;
-"441
-[e $U 176  ]
-"442
-}
-[; ;Main.c: 442: }
-[e $U 176  ]
+[; ;Main.c: 418: {
 "418
+{
+[; ;Main.c: 419: case 1:
+"419
+[e :U 178 ]
+[; ;Main.c: 420: buttonPressed = 0;
+"420
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 421: break;
+"421
+[e $U 176  ]
+[; ;Main.c: 422: case 2:
+"422
+[e :U 179 ]
+[; ;Main.c: 423: buttonPressed = 0;
+"423
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 424: break;
+"424
+[e $U 176  ]
+[; ;Main.c: 425: case 3:
+"425
+[e :U 180 ]
+[; ;Main.c: 426: rotate(1, 1);
+"426
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 1 `i `uc ]
+[; ;Main.c: 427: buttonPressed = 0;
+"427
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 428: break;
+"428
+[e $U 176  ]
+[; ;Main.c: 429: case 4:
+"429
+[e :U 181 ]
+[; ;Main.c: 430: rotate(1, 0);
+"430
+[e ( _rotate (2 , -> -> 1 `i `ui -> -> 0 `i `uc ]
+[; ;Main.c: 431: buttonPressed = 0;
+"431
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 432: break;
+"432
+[e $U 176  ]
+[; ;Main.c: 433: case 5:
+"433
+[e :U 182 ]
+[; ;Main.c: 435: totalSteps = 0;
+"435
+[e = _totalSteps -> 0 `i ]
+[; ;Main.c: 436: buttonPressed = 0;
+"436
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 437: currentMenu = 0;
+"437
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 438: return;
+"438
+[e $UE 171  ]
+[; ;Main.c: 439: default:
+"439
+[e :U 183 ]
+[; ;Main.c: 440: break;
+"440
+[e $U 176  ]
+"441
+}
+[; ;Main.c: 441: }
+[e $U 176  ]
+"417
 [e :U 177 ]
 [e [\ _buttonPressed , $ -> -> 1 `i `uc 178
  , $ -> -> 2 `i `uc 179
@@ -3089,128 +3090,128 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 181
  , $ -> -> 5 `i `uc 182
  183 ]
-"442
+"441
 [e :U 176 ]
-"443
+"442
 }
 [e :U 172 ]
-"411
+"410
 [e $U 173  ]
 [e :U 174 ]
+[; ;Main.c: 442: }
 [; ;Main.c: 443: }
-[; ;Main.c: 444: }
-"444
+"443
 [e :UE 171 ]
 }
-"449
+"448
 [v _ChargeMode `(v  1 ef ]
 {
-[; ;Main.c: 448: void ChargeMode(void)
-[; ;Main.c: 449: {
+[; ;Main.c: 447: void ChargeMode(void)
+[; ;Main.c: 448: {
 [e :U _ChargeMode ]
 [f ]
-[; ;Main.c: 451: currentMenu = 2;
-"451
+[; ;Main.c: 450: currentMenu = 2;
+"450
 [e = _currentMenu -> -> 2 `i `uc ]
-[; ;Main.c: 452: ser_putch(128);
-"452
+[; ;Main.c: 451: ser_putch(128);
+"451
 [e ( _ser_putch (1 -> -> 128 `i `uc ]
-[; ;Main.c: 454: while (1)
-"454
+[; ;Main.c: 453: while (1)
+"453
 [e :U 186 ]
-[; ;Main.c: 455: {
+[; ;Main.c: 454: {
+"454
+{
+[; ;Main.c: 455: if (RTC_FLAG_250MS == 1)
 "455
-{
-[; ;Main.c: 456: if (RTC_FLAG_250MS == 1)
-"456
 [e $ ! == -> _RTC_FLAG_250MS `i -> 1 `i 188  ]
-[; ;Main.c: 457: {
-"457
+[; ;Main.c: 456: {
+"456
 {
-[; ;Main.c: 458: RTC_FLAG_250MS = 0;
-"458
+[; ;Main.c: 457: RTC_FLAG_250MS = 0;
+"457
 [e = _RTC_FLAG_250MS -> -> 0 `i `b ]
-[; ;Main.c: 459: RobotBattRead();
-"459
+[; ;Main.c: 458: RobotBattRead();
+"458
 [e ( _RobotBattRead ..  ]
-[; ;Main.c: 460: UpdateDisplay();
-"460
+[; ;Main.c: 459: UpdateDisplay();
+"459
 [e ( _UpdateDisplay ..  ]
-"461
+"460
 }
 [e :U 188 ]
-[; ;Main.c: 461: }
-[; ;Main.c: 462: switch (buttonPressed)
-"462
+[; ;Main.c: 460: }
+[; ;Main.c: 461: switch (buttonPressed)
+"461
 [e $U 190  ]
-[; ;Main.c: 463: {
-"463
-{
-[; ;Main.c: 464: case 1:
-"464
-[e :U 191 ]
-[; ;Main.c: 465: buttonPressed = 0;
-"465
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 466: break;
-"466
-[e $U 189  ]
-[; ;Main.c: 467: case 2:
-"467
-[e :U 192 ]
-[; ;Main.c: 468: buttonPressed = 0;
-"468
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 469: break;
-"469
-[e $U 189  ]
-[; ;Main.c: 470: case 3:
-"470
-[e :U 193 ]
-[; ;Main.c: 471: buttonPressed = 0;
-"471
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 472: break;
-"472
-[e $U 189  ]
-[; ;Main.c: 473: case 4:
-"473
-[e :U 194 ]
-[; ;Main.c: 474: buttonPressed = 0;
-"474
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 475: break;
-"475
-[e $U 189  ]
-[; ;Main.c: 476: case 5:
-"476
-[e :U 195 ]
-[; ;Main.c: 477: ser_putch(132);
-"477
-[e ( _ser_putch (1 -> -> 132 `i `uc ]
-[; ;Main.c: 478: buttonPressed = 0;
-"478
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 479: currentMenu = 0;
-"479
-[e = _currentMenu -> -> 0 `i `uc ]
-[; ;Main.c: 480: return;
-"480
-[e $UE 184  ]
-[; ;Main.c: 481: default:
-"481
-[e :U 196 ]
-[; ;Main.c: 482: buttonPressed = 0;
-"482
-[e = _buttonPressed -> -> 0 `i `uc ]
-[; ;Main.c: 483: break;
-"483
-[e $U 189  ]
-"484
-}
-[; ;Main.c: 484: }
-[e $U 189  ]
+[; ;Main.c: 462: {
 "462
+{
+[; ;Main.c: 463: case 1:
+"463
+[e :U 191 ]
+[; ;Main.c: 464: buttonPressed = 0;
+"464
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 465: break;
+"465
+[e $U 189  ]
+[; ;Main.c: 466: case 2:
+"466
+[e :U 192 ]
+[; ;Main.c: 467: buttonPressed = 0;
+"467
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 468: break;
+"468
+[e $U 189  ]
+[; ;Main.c: 469: case 3:
+"469
+[e :U 193 ]
+[; ;Main.c: 470: buttonPressed = 0;
+"470
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 471: break;
+"471
+[e $U 189  ]
+[; ;Main.c: 472: case 4:
+"472
+[e :U 194 ]
+[; ;Main.c: 473: buttonPressed = 0;
+"473
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 474: break;
+"474
+[e $U 189  ]
+[; ;Main.c: 475: case 5:
+"475
+[e :U 195 ]
+[; ;Main.c: 476: ser_putch(132);
+"476
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;Main.c: 477: buttonPressed = 0;
+"477
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 478: currentMenu = 0;
+"478
+[e = _currentMenu -> -> 0 `i `uc ]
+[; ;Main.c: 479: return;
+"479
+[e $UE 184  ]
+[; ;Main.c: 480: default:
+"480
+[e :U 196 ]
+[; ;Main.c: 481: buttonPressed = 0;
+"481
+[e = _buttonPressed -> -> 0 `i `uc ]
+[; ;Main.c: 482: break;
+"482
+[e $U 189  ]
+"483
+}
+[; ;Main.c: 483: }
+[e $U 189  ]
+"461
 [e :U 190 ]
 [e [\ _buttonPressed , $ -> -> 1 `i `uc 191
  , $ -> -> 2 `i `uc 192
@@ -3218,16 +3219,16 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 194
  , $ -> -> 5 `i `uc 195
  196 ]
-"484
+"483
 [e :U 189 ]
-"485
+"484
 }
 [e :U 185 ]
-"454
+"453
 [e $U 186  ]
 [e :U 187 ]
+[; ;Main.c: 484: }
 [; ;Main.c: 485: }
-[; ;Main.c: 486: }
-"486
+"485
 [e :UE 184 ]
 }

@@ -1274,19 +1274,18 @@ unsigned int BattCharge = 0, BattState = 0;
 
 unsigned char highByte = 0, lowByte = 0, turnhighByte = 0, turnlowByte = 0, ROBOTerror = 0;
 
-# 52 "E:\Aldnoah.Zero\Assignment3\Main.c"
+# 51 "E:\Aldnoah.Zero\Assignment3\Main.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFE & 0xFFFB & 0xFFFF & 0xFFBF & 0xFFF7 & 0xFFFF & 0xFF7F & 0xFFFF");
 
-# 80
+# 79
 void calibrateIR(void);
-int scan360(void);
 void ChargeMode(void);
-void RightTurn(void);
 void Init_Follow_IR(void);
 void FindVictim(void);
 void GoHome(void);
 
-# 92
+
+
 volatile unsigned char buttonPressed;
 unsigned char FoundVictim = 0;
 
@@ -1362,7 +1361,7 @@ PEIE=1;
 (GIE = 1);
 }
 
-# 171
+# 166
 void main(void)
 {
 unsigned char choice = 255;
@@ -1404,11 +1403,8 @@ GoHome();
 break;
 case 2:
 RobotPos = 6;
-ser_putch(141);
-ser_putch(4);
 break;
 case 3:
-
 RobotPos = 12;
 break;
 case 4:
@@ -1419,6 +1415,7 @@ FindVictim();
 if (FoundVictim)
 GoHome();
 ROBOTerror = 0;
+currentMenu = 0;
 break;
 
 case 5:
@@ -1432,6 +1429,8 @@ choice = 255;
 }
 }
 
+
+
 void Init_Follow_IR(void)
 {
 calibrateIR();
@@ -1439,12 +1438,17 @@ _delay((unsigned long)((500)*(20000000/4000.0)));
 rotate(25, 0);
 }
 
+
+
+
 void GoHome(void)
 {
 switch (RobotPos)
 {
 case 7:
 robotTurnSpeed(175,400);
+
+
 break;
 case 15:
 robotTurnSpeed(175,400);
@@ -1496,7 +1500,6 @@ break;
 case 11:
 RobotPos++;
 
-# 309
 if (followDir == 1)
 robot_turnInPlace();
 if (followDir == 0)
@@ -1511,6 +1514,8 @@ break;
 }
 }
 }
+
+
 
 void FindVictim(void)
 {
@@ -1539,6 +1544,8 @@ break;
 case 2:
 ser_putch(141);
 ser_putch(0);
+RobotDrive(-200, 0x7FFF);
+_delay((unsigned long)((200)*(20000000/4000.0)));
 robotTurnSpeed((180),400);
 ROBOTerror = 0;
 break;
